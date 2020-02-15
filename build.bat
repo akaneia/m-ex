@@ -1,0 +1,1 @@
+gecko assemble -o codes.gct
