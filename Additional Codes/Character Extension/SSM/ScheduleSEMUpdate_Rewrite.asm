@@ -30,7 +30,7 @@ IncLoop:
   addi	REG_DisposableCopy, REG_DisposableCopy, 4
   addi	REG_PersistentOrig, REG_PersistentOrig, 4
   addi  REG_Count,REG_Count,1
-  cmpwi REG_Count, 55 + NumOfAddedChars
+  cmpwi REG_Count, 56 + NumOfAddedSSMs
   blt Loop
 #Go through all audio groups
   subic.  REG_AudioGroup,REG_AudioGroup,1

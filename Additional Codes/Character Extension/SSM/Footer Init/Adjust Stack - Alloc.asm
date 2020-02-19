@@ -7,7 +7,7 @@
 #628 / 0x274 = Persist Orig
 #852 / 0x354 = Persist Copy
 
-.set  StackSize,0x0100 + 0x4 + (NumOfAddedChars*4)
+.set  StackSize,0x0100 + 0x4 + (NumOfAddedSSMs*4)
 
 stwu	sp, -StackSize (sp)
 stw	r31, StackSize-4 (sp)

@@ -4,4 +4,4 @@
 
 # note to self, the + 1 is because of a bge
 
-cmpwi	r30, 50 + 1 + NumOfAddedChars
+cmpwi	r30, 50 + 1 + NumOfAddedEffects

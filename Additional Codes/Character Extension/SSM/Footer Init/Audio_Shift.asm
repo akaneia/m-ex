@@ -29,7 +29,7 @@
 */
 
 li  r29,0
-subfic	r4, r31, 55 + NumOfAddedChars
+subfic	r4, r31, 55 + NumOfAddedSSMs
 Loop:
   lwz r0,-0x4(r7)
   stw r0,0x0(r7)

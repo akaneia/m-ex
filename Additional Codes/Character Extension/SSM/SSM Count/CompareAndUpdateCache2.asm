@@ -2,4 +2,4 @@
 .include "../../../../Globals.s"
 .include "../../Header.s"
 
-subfic	r0, r5, 55 + NumOfAddedChars
+subfic	r0, r5, 55 + NumOfAddedSSMs

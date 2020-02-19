@@ -11,7 +11,7 @@ backup
 
 LoopStart:
 #Get icon data
-  lwz  REG_IconData,OFST_MnSlChrData(rtoc)
+  lwz  REG_IconData,OFST_MnSlChrIconData(rtoc)
   addi	REG_IconData, REG_IconData, 220
 #Init loop count
   li  REG_Count,0

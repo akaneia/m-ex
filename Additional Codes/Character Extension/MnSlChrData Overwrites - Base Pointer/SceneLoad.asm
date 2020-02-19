@@ -2,7 +2,7 @@
 .include "../../../Globals.s"
 .include "../Header.s"
 
-lwz r28,OFST_MnSlChrData(rtoc)
+lwz r28,OFST_MnSlChrIconData(rtoc)
 
 #check r20 after 802647e4
 #investigate 80264f24

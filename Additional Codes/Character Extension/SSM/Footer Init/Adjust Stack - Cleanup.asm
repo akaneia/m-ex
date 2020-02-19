@@ -8,7 +8,7 @@
 #852 / 0x354 = Persist Copy
 
 
-.set  StackSize,0x0100 + 0x4 + (NumOfAddedChars*4)
+.set  StackSize,0x0100 + 0x4 + (NumOfAddedSSMs*4)
 
 lwz	r31, StackSize-4 (sp)
 lwz	r30, StackSize-8 (sp)

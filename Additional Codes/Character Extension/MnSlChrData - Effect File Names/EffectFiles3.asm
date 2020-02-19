@@ -2,4 +2,4 @@
 .include "../../../Globals.s"
 .include "../Header.s"
 
-lwz  r6,OFST_MnSlChrEffectFiles(rtoc)
+lwz  r6,OFST_MnSlChrEffectFilesSymbols(rtoc)

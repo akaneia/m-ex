@@ -2,4 +2,4 @@
 .include "../../../../Globals.s"
 .include "../../Header.s"
 
-li	r3, 55 + NumOfAddedChars
+li	r3, 55 + NumOfAddedSSMs

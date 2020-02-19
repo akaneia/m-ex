@@ -5,7 +5,7 @@
 #Icon Data
   bl  MnSlChr_IconData
   mflr  r3
-  stw r3,OFST_MnSlChrData(rtoc)
+  stw r3,OFST_MnSlChrIconData(rtoc)
 
 
 #Name Text
@@ -25,7 +25,7 @@
   bl  MnSlChr_CharFiles
   mflr  r3
   bl  ConvertPointers
-  stw r3,OFST_MnSlChrCharFiles(rtoc)
+  stw r3,OFST_MnSlChrCharFileNames(rtoc)
 #Costume File Names
   bl  MnSlChr_CostumeFiles
   mflr  r3
@@ -35,12 +35,12 @@
   bl  ConvertPointers
   bl  MnSlChr_CostumeFiles
   mflr  r3
-  stw r3,OFST_MnSlChrCostumeFiles(rtoc)
+  stw r3,OFST_MnSlChrCostumeFileSymbols(rtoc)
 #Anim File Names
   bl  MnSlChr_AnimFiles
   mflr  r3
   bl  ConvertPointers
-  stw r3,OFST_MnSlChrAnimFiles(rtoc)
+  stw r3,OFST_MnSlChrAnimFileNames(rtoc)
 #Anim Count
   bl  MnSlChr_AnimCount
   mflr  r3
@@ -54,7 +54,7 @@
   bl  MnSlChr_EffectFiles
   mflr  r3
   bl  ConvertPointers
-  stw r3,OFST_MnSlChrEffectFiles(rtoc)
+  stw r3,OFST_MnSlChrEffectFilesSymbols(rtoc)
 #Effect File Names
   bl  Effect_AdditionalEffectStruct
   mflr  r3
@@ -65,7 +65,7 @@
   bl  GmRst_AnimFiles
   mflr  r3
   bl  ConvertPointers
-  stw r3,OFST_FtDemoAnimFiles(rtoc)
+  stw r3,OFST_GmRstAnimFileNames(rtoc)
 #Result Insignias
   bl  GmRst_InsigniaIDs
   mflr  r3
@@ -100,7 +100,7 @@
   bl  MnSlChr_SSMFiles
   mflr  r3
   bl  ConvertPointers
-  stw r3,OFST_MnSlChrSSMFiles(rtoc)
+  stw r3,OFST_MnSlChrSSMFileNames(rtoc)
 #SSM Struct
   bl  MnSlChr_SSMStruct
   mflr  r3
@@ -177,12 +177,12 @@
 #MnSlChr Costume IDs
   bl  MnSlChr_CostumeIDs
   mflr  r3
-  stw r3,OFST_MnSlChrCostumeCounts(rtoc)
+  stw r3,OFST_MnSlChrCostumeIDs(rtoc)
 #Fighter Costume IDs
   bl  Fighter_CostumeSymbolTable
   mflr  r3
   bl  ConvertPointers
-  stw r3,OFST_FighterCostumePointers(rtoc)
+  stw r3,OFST_Char_CostumeRuntimePointers(rtoc)
 
 #Items
   bl  Items_Data
@@ -3739,6 +3739,7 @@ GmRst_AnimFiles:
     .ascii "GmRstM"
     NewChar1_ShortName
     .ascii ".dat"
+    .byte 0
     .align 2
   GmRstAnimFile_MasterHand:
   .string "GmRstMMh.dat"
@@ -4539,9 +4540,9 @@ MnSlChr_DefineIDs:
   .byte 0xff #Subchar Internal ID
   .byte 0x0 #SubcharType
   #NewChar1
-  .byte 0x1B #Internal ID
-  .byte 0xff #Subchar Internal ID
-  .byte 0x0 #SubcharType
+  .byte NewChar1_InternalID         #Internal ID
+  .byte NewChar1_SubcharInternalID  #Subchar Internal ID
+  .byte NewChar1_SubcharType        #SubcharType
   #MasterHand
   .byte 0x1c #Internal ID
   .byte 0xff #Subchar Internal ID
@@ -5248,7 +5249,7 @@ SSM_IDDefinitions:
 
 SSM_BankSizes:
   blrl
-  #Originally located at
+  #Originally located at 0x803bc4e4
   #Main
   .long 0x1f3780   #Bank Size
   .long 0x0        #Unk

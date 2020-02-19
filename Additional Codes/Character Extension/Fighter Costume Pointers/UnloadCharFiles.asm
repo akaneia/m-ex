@@ -2,4 +2,4 @@
 .include "../../../Globals.s"
 .include "../Header.s"
 
-lwz  r8,OFST_FighterCostumePointers(rtoc)
+lwz  r8,OFST_Char_CostumeRuntimePointers(rtoc)

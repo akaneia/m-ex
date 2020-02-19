@@ -11,7 +11,7 @@ Loop:
   mulli r6,REG_Count,0xC
   stwx r4,r6,r3
   addi  REG_Count,REG_Count,1
-  cmpwi REG_Count,50 + NumOfAddedChars
+  cmpwi REG_Count,50 + NumOfAddedEffects
   ble Loop
 
 #im skipping 8005b6e0 because i think my loop accompishes it

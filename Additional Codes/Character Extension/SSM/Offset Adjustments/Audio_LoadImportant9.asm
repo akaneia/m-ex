@@ -8,4 +8,4 @@
 #852 / 0x354 = SSM_PersistentCopy_OFST
 #    / 0x424 = Footer
 
-stw	r3, SSM_PersistentOrig_OFST + 51*4 (r30)
+stw	r3, SSM_PersistentCopy_OFST + 51*4 (r30)

@@ -2,4 +2,4 @@
 .include "../../../../Globals.s"
 .include "../../Header.s"
 
-cmpwi	r5, 55 + NumOfAddedChars
+cmpwi	r5, 55 + NumOfAddedSSMs

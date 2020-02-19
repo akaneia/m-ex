@@ -2,4 +2,4 @@
 .include "../../../Globals.s"
 .include "../Header.s"
 
-lwz r23,OFST_MnSlChrData(rtoc)
+lwz r23,OFST_MnSlChrIconData(rtoc)

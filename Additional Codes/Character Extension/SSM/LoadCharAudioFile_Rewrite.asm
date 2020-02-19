@@ -28,7 +28,7 @@ IncLoop:
   addi	r6, r6, 4
   addi	r7, r7, 4
   addi  REG_Count,REG_Count,1
-  cmpwi REG_Count, 55 + NumOfAddedChars
+  cmpwi REG_Count, 56 + NumOfAddedSSMs
   blt Loop
 #Go through all audio groups
   subic.  r3,r3,1

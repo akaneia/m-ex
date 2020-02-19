@@ -15,7 +15,7 @@ Loop:
   addi  r29,r29,1
   addi  r5,r5,4
   addi  r7,r7,4
-  cmpwi r29,56 + NumOfAddedChars
+  cmpwi r29,56 + NumOfAddedSSMs
   blt Loop
 
   subi  r5,r5,4
