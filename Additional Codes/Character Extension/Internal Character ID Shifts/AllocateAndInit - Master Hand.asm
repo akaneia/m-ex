@@ -2,4 +2,6 @@
 .include "../../../Globals.s"
 .include "../Header.s"
 
-cmpwi	r0, 27 + NumOfAddedChars
+lwz r12,OFST_Metadata_InternalIDCount(r12)
+subi  r12,r12,6
+cmpw	r0, r12
