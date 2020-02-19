@@ -1,5 +1,6 @@
 #Constants
 .set  NumOfAddedChars,1
+
 .set  NumOfAddedSSMs,0
 .set  NumOfAddedEffects,0
 .set  NumOfAddedItems,0
