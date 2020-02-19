@@ -62,15 +62,15 @@ backup
   lwz r4,Arch_Metadata(r3)
   stw r4,OFST_Metadata(rtoc)
   lwz r5,Metadata_InternalIDCount(r4)
-  stw r4,OFST_Metadata_InternalIDCount(rtoc)
+  stw r5,OFST_Metadata_InternalIDCount(rtoc)
   lwz r5,Metadata_ExternalIDCount(r4)
-  stw r4,OFST_Metadata_ExternalIDCount(rtoc)
+  stw r5,OFST_Metadata_ExternalIDCount(rtoc)
   lwz r5,Metadata_CSSIconCount(r4)
-  stw r4,OFST_Metadata_CSSIconCount(rtoc)
+  stw r5,OFST_Metadata_CSSIconCount(rtoc)
   lwz r5,Metadata_SSMCount(r4)
-  stw r4,OFST_Metadata_SSMCount(rtoc)
+  stw r5,OFST_Metadata_SSMCount(rtoc)
   lwz r5,Metadata_EffectCount(r4)
-  stw r4,OFST_Metadata_EffectCount(rtoc)
+  stw r5,OFST_Metadata_EffectCount(rtoc)
 #Other
   lwz r4,Arch_MnSlChr_IconData(r3)
   stw r4,OFST_MnSlChrIconData(rtoc)
@@ -140,6 +140,18 @@ backup
   stw r4,OFST_SSMBankSizes(rtoc)
   lwz r4,Arch_AudioGroups(r3)
   stw r4,OFST_AudioGroups(rtoc)
+
+#Init preload table
+PreloadInit:
+  lwz r3,OFST_Metadata_ExternalIDCount(rtoc)
+  load  r4,0x803ba648
+  li  r5,0
+PreloadInit_Loop:
+  stw r3,0x0(r4)
+  addi  r4,r4,8
+  addi  r5,r5,1
+  cmpwi r5,8
+  blt PreloadInit_Loop
 
 #Flush instruction cache so code can be run from this file
   mr  r3,REG_File

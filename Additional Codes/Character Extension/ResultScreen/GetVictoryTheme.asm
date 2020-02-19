@@ -5,7 +5,8 @@
 backup
 
 #Check if over
-  cmpwi r3,33 + NumOfAddedChars
+  lwz r12,OFST_Metadata_ExternalIDCount(rtoc)
+  cmpw	r3, r12
   bgt Error
 #Get name SFX Definitions
   lwz r4,OFST_GmRstVictoryTheme(rtoc)

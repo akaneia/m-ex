@@ -2,4 +2,4 @@
 .include "../../../Globals.s"
 .include "../Header.s"
 
-li	r0, 33 + NumOfAddedChars
+lwz r0,OFST_Metadata_ExternalIDCount(rtoc)

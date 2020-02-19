@@ -2,4 +2,5 @@
 .include "../../../Globals.s"
 .include "../Header.s"
 
-cmplwi	r4, 25 + NumOfAddedChars
+lwz r12,OFST_Metadata_CSSIconCount(rtoc)
+cmpw	r4, r12

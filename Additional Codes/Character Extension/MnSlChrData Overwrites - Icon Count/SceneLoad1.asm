@@ -2,4 +2,4 @@
 .include "../../../Globals.s"
 .include "../Header.s"
 
-li	r3, 25 + NumOfAddedChars
+lwz r3,OFST_Metadata_CSSIconCount(rtoc)

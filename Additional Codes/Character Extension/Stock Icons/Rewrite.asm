@@ -2,26 +2,36 @@
 .include "../../../Globals.s"
 .include "../Header.s"
 
-#.set  NumOfAddedChars,0
+.set  REG_ExternalIDCount,12
 
 backup
 
+  lwz REG_ExternalIDCount,OFST_Metadata_ExternalIDCount(rtoc)
+  subi  r11,REG_ExternalIDCount,7
+
 #Check if a special character
-  cmpwi r3,0x1A + NumOfAddedChars
+  cmpw r3,r11
   blt NormalCharacter
-  cmpwi r3,0x1F + NumOfAddedChars
+  subi  r11,REG_ExternalIDCount,2
+  cmpw r3,r11
   bgt NormalCharacter
 
 SpecialCharacter:
-  subi  r3,r3,0x1A + NumOfAddedChars
+#Get the starting frame
+  subi  r11,REG_ExternalIDCount,7
+  sub r3,r3,r11
   bl  SpecialCharacterFrames
   mflr  r4
   lbzx  r3,r3,r4
+#is equal to starting frame + additional characters
+  subi  r4,REG_ExternalIDCount,33
+  add r3,r3,r4
   b StockIcon_CastToFloat
 
 NormalCharacter:
 #Check for Sopo
-  cmpwi r3,0x20 + NumOfAddedChars
+  subi  r11,REG_ExternalIDCount,1
+  cmpw r3,r11
   beq IsPopo
 #Check for Zelda/Sheik
   cmpwi r3,0x12
@@ -40,14 +50,16 @@ isZelda:
   li  r3,18
   b StockIcon_GetFrame
 isSheik:
-  li  r3,25 + NumOfAddedChars
+#is = totalnum-8
+  subi  r3,REG_ExternalIDCount,8
   b StockIcon_GetFrame
 IsPopo:
   li  r3,0xE
   b StockIcon_GetFrame
 
 StockIcon_GetFrame:
-  mulli	r0, r5, 30 + NumOfAddedChars
+  subi  r11,REG_ExternalIDCount,3
+  mullw	r0, r5, r11
   add	r3, r3, r0
 
 StockIcon_CastToFloat:
@@ -64,10 +76,11 @@ StockIcon_Exit:
 
 SpecialCharacterFrames:
 blrl
-.byte 28 + NumOfAddedChars  #master hand
-.byte 58 + NumOfAddedChars  #wire male
-.byte 58 + NumOfAddedChars  #wire female
-.byte 58 + NumOfAddedChars  #giga bowser
-.byte 27 + NumOfAddedChars  #crazy hand
-.byte 59 + NumOfAddedChars  #sandbag
+#do this number + (totalchars-33)
+.byte 28  #master hand
+.byte 58  #wire male
+.byte 58  #wire female
+.byte 58  #giga bowser
+.byte 27  #crazy hand
+.byte 59  #sandbag
 .align 2

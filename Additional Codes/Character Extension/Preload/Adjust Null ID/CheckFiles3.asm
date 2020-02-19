@@ -2,4 +2,5 @@
 .include "../../../../Globals.s"
 .include "../../Header.s"
 
-cmpwi	r0, 33 + NumOfAddedChars
+lwz r12,OFST_Metadata_ExternalIDCount(rtoc)
+cmpw	r0, r12

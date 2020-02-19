@@ -3,7 +3,9 @@
 .include "../Header.s"
 
 #Check if over
-  cmpwi r3,29 + NumOfAddedChars
+  lwz r12,OFST_Metadata_ExternalIDCount(rtoc)
+  subi  r12,r12,4
+  cmpw	r3, r12
   bgt Exit
 #Get name SFX Definitions
   lwz r4,OFST_SFXNameDef(rtoc)
