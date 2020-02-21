@@ -2,4 +2,7 @@
 .include "../../../../Globals.s"
 .include "../../Header.s"
 
-cmpwi	r28, 55 + NumOfAddedSSMs
+.set  REG_SSMTotal,12
+
+lwz REG_SSMTotal,OFST_Metadata_SSMCount(rtoc)
+cmpw	r28, REG_SSMTotal

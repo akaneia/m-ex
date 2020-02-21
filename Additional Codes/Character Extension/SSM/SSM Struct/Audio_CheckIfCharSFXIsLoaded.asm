@@ -4,5 +4,7 @@
 
 #orig pointer is 80433710, indicated by addi 14096
 
-lwz r4,OFST_SSMStruct(rtoc)
-addi  r0,r4,SSM_PersistentOrig_OFST
+.set  REG_Offset,4
+
+lwz REG_Offset,OFST_SSMStruct(rtoc)
+lwz r0,Arch_SSMRuntimeStruct_PersistentOrig(REG_Offset)

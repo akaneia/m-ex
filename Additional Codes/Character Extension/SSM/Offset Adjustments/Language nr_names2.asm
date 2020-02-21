@@ -7,4 +7,11 @@
 #628 / 0x274 = Persist Orig
 #852 / 0x354 = Persist Copy
 
-addi	r29, r30, SSM_PersistentOrig_OFST + 51*4
+.set  SSMID,51
+.set  REG_Struct,12
+.set  REG_Dest,29
+
+#Get persistent orig struct
+  lwz REG_Struct,OFST_SSMStruct(rtoc)
+  lwz REG_Struct,Arch_SSMRuntimeStruct_PersistentOrig(REG_Struct)
+  addi  REG_Dest,REG_Struct,SSMID*4

@@ -11,5 +11,5 @@
 
 
 lwz r6,OFST_SSMStruct(rtoc)
-addi  r5,r6,SSM_DisposableCopy_OFST
-addi  r6,r6,SSM_PersistentOrig_OFST
+lwz r5,Arch_SSMRuntimeStruct_DisposableCopy(r6)
+lwz r6,Arch_SSMRuntimeStruct_PersistentOrig(r6)

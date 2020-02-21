@@ -2,4 +2,7 @@
 .include "../../../../Globals.s"
 .include "../../Header.s"
 
-subfic	r0, r5, 55 + NumOfAddedSSMs
+.set  REG_SSMTotal,3
+
+lwz REG_SSMTotal,OFST_Metadata_SSMCount(rtoc)
+subfc	r0, r5, REG_SSMTotal

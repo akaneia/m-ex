@@ -7,12 +7,15 @@
 .set  REG_DisposableCopy,8
 .set  REG_PersistentOrig,9
 .set  REG_AudioGroup,10
+.set  REG_SSMTotal,11
 
 LoopStart:
   li  REG_Count,0
   mr  REG_DOLStruct,r6
   mr  REG_DisposableCopy,r5
   mr  REG_PersistentOrig,r4
+  lwz REG_SSMTotal,OFST_Metadata_SSMCount(rtoc)
+  addi  REG_SSMTotal,REG_SSMTotal,1
 Loop:
   lbz	r0, 0x0001 (REG_DOLStruct)   #get 0x1 of unk ssm struct
   extsb	r0, r0
@@ -30,7 +33,7 @@ IncLoop:
   addi	REG_DisposableCopy, REG_DisposableCopy, 4
   addi	REG_PersistentOrig, REG_PersistentOrig, 4
   addi  REG_Count,REG_Count,1
-  cmpwi REG_Count, 56 + NumOfAddedSSMs
+  cmpw REG_Count, REG_SSMTotal
   blt Loop
 #Go through all audio groups
   subic.  REG_AudioGroup,REG_AudioGroup,1

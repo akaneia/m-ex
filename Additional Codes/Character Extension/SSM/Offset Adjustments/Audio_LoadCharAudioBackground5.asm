@@ -8,4 +8,9 @@
 #852 / 0x354 = SSM_PersistentCopy_OFST
 #    / 0x424 = Footer
 
-stw	r3, SSM_PersistentCopy_OFST (r4)
+.set  REG_Struct,4
+
+#Get persistent orig struct
+  lwz REG_Struct,OFST_SSMStruct(rtoc)
+  lwz REG_Struct,Arch_SSMRuntimeStruct_PersistentCopy(REG_Struct)
+  stwx  r3,r29,REG_Struct   #store to ssms offset on struct

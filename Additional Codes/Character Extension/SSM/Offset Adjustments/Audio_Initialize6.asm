@@ -8,4 +8,10 @@
 #852 / 0x354 = Persist Copy
 #    / 0x424 = Footer
 
-lwz	r0, SSM_Footer_OFST (r30)
+.set  SSMID,0
+.set  REG_Offset,3
+
+#Get
+  lwz REG_Offset,OFST_SSMStruct(rtoc)
+  lwz REG_Offset,Arch_SSMRuntimeStruct_Footer(REG_Offset)
+  lwz r0,SSMID*4(REG_Offset)

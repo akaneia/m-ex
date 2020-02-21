@@ -8,4 +8,7 @@
 #852 / 0x354 = SSM_PersistentCopy_OFST
 #    / 0x424 = Footer
 
-addi	r28, r29, SSM_PersistentOrig_OFST
+.set  REG_Offset,28
+
+lwz REG_Offset,OFST_SSMStruct(rtoc)
+lwz REG_Offset,Arch_SSMRuntimeStruct_PersistentOrig(REG_Offset)

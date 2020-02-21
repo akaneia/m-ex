@@ -7,4 +7,9 @@
 #628 / 0x274 = Persist Orig
 #852 / 0x354 = Persist Copy
 
-stw	r3, SSM_PersistentCopy_OFST (r4)
+.set  REG_Struct,4
+
+#Get persistent orig struct
+  lwz REG_Struct,OFST_SSMStruct(rtoc)
+  lwz REG_Struct,Arch_SSMRuntimeStruct_PersistentCopy(REG_Struct)
+  stwx  r3,r29,REG_Struct   #store to ssms offset on struct

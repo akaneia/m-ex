@@ -3,12 +3,16 @@
 .include "../Header.s"
 
 .set  REG_Count,12
+.set  REG_SSMTotal,11
 
 LoopStart:
+  lwz REG_SSMTotal,OFST_Metadata_SSMCount(rtoc)
+  addi  REG_SSMTotal,REG_SSMTotal,1
   li  r4,0
   addi	r5, r31, 720
-  addi	r6, r30, SSM_DisposableCopy_OFST
-  addi	r7, r30, SSM_PersistentOrig_OFST
+  lwz r7,OFST_SSMStruct(rtoc)
+  lwz r6,Arch_SSMRuntimeStruct_DisposableCopy(r7)
+  lwz r7,Arch_SSMRuntimeStruct_PersistentOrig(r7)
   li  REG_Count,0
 Loop:
   lbz	r0, 0x0001 (r5)   #get 0x1 of unk ssm struct
@@ -28,7 +32,7 @@ IncLoop:
   addi	r6, r6, 4
   addi	r7, r7, 4
   addi  REG_Count,REG_Count,1
-  cmpwi REG_Count, 56 + NumOfAddedSSMs
+  cmpw REG_Count, REG_SSMTotal
   blt Loop
 #Go through all audio groups
   subic.  r3,r3,1

@@ -7,4 +7,7 @@
 #628 / 0x274 = Persist Orig
 #852 / 0x354 = Persist Copy
 
-addi	r4, r30, SSM_DisposableCopy_OFST
+.set  REG_Offset,4
+
+lwz REG_Offset,OFST_SSMStruct(rtoc)
+lwz REG_Offset,Arch_SSMRuntimeStruct_DisposableCopy(REG_Offset)

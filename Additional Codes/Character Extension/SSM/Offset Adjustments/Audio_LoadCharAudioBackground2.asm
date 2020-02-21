@@ -8,4 +8,13 @@
 #852 / 0x354 = SSM_PersistentCopy_OFST
 #    / 0x424 = Footer
 
-stw	r0, SSM_PersistentOrig_OFST (r3)
+.set  REG_Count,5
+.set  REG_Struct,3
+
+#Get persistent orig struct
+  lwz REG_Struct,OFST_SSMStruct(rtoc)
+  lwz REG_Struct,Arch_SSMRuntimeStruct_PersistentOrig(REG_Struct)
+
+#Get offset
+  mulli r4,REG_Count,4
+  stwx  r0,r4,REG_Struct

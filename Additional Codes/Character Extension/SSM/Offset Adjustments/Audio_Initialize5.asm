@@ -7,4 +7,10 @@
 #628 / 0x274 = Persist Orig
 #852 / 0x354 = Persist Copy
 
-lwz	r0, SSM_Footer_OFST + 3*4 (r30)
+.set  SSMID,3
+.set  REG_Offset,3
+
+#Get
+  lwz REG_Offset,OFST_SSMStruct(rtoc)
+  lwz REG_Offset,Arch_SSMRuntimeStruct_Footer(REG_Offset)
+  lwz r0,SSMID*4(REG_Offset)

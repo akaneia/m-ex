@@ -8,4 +8,7 @@
 #852 / 0x354 = Persist Copy
 #    / 0x424 = Footer
 
-addi	r6, r30, SSM_PersistentOrig_OFST
+.set  REG_Offset,6
+
+lwz REG_Offset,OFST_SSMStruct(rtoc)
+lwz REG_Offset,Arch_SSMRuntimeStruct_PersistentOrig(REG_Offset)

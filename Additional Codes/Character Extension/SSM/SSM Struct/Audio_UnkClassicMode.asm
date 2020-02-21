@@ -9,5 +9,5 @@
 #    / 0x424 = Footer
 
 lwz r29,OFST_SSMStruct(rtoc)
-addi  r30,r29,SSM_DisposableCopy_OFST
-addi  r29,r29,SSM_PersistentOrig_OFST
+lwz r30,Arch_SSMRuntimeStruct_DisposableCopy(r29)
+lwz r29,Arch_SSMRuntimeStruct_PersistentOrig(r29)

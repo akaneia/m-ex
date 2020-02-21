@@ -2,4 +2,6 @@
 .include "../../../../Globals.s"
 .include "../../Header.s"
 
-load  r0,SSM_MaxID
+lwz r6,OFST_Metadata_SSMCount(rtoc)
+addi  r6,r6,1
+mulli r0,r6,10000

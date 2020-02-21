@@ -4,4 +4,7 @@
 
 #orig pointer is 80433710, indicated by addi 14096
 
-lwz r31,OFST_SSMStruct(rtoc)
+.set  REG_Dest,31
+
+lwz REG_Dest,OFST_SSMStruct(rtoc)
+lwz REG_Dest,Arch_SSMRuntimeStruct_Header(REG_Dest)

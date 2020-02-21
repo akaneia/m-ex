@@ -1,7 +1,7 @@
 #Constants
 .set  NumOfAddedChars,1
-
 .set  NumOfAddedSSMs,0
+
 .set  NumOfAddedEffects,0
 .set  NumOfAddedItems,0
 
@@ -29,6 +29,12 @@
 .set  Arch_SSM_CharSSMFileIDs,0x44
 .set  Arch_SSMFiles,0x48
 .set  Arch_SSMRuntimeStruct,0x4C
+  .set  Arch_SSMRuntimeStruct_Header,0x0
+  .set  Arch_SSMRuntimeStruct_DisposableOrig,0x4
+  .set  Arch_SSMRuntimeStruct_DisposableCopy,0x8
+  .set  Arch_SSMRuntimeStruct_PersistentOrig,0xC
+  .set  Arch_SSMRuntimeStruct_PersistentCopy,0x10
+  .set  Arch_SSMRuntimeStruct_Footer,0x14
 .set  Arch_Fighter_OnLoad,0x50
 .set  Arch_Fighter_OnDeath,0x54
 .set  Arch_Fighter_OnUnk,0x58
