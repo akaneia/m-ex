@@ -11,13 +11,12 @@ backup
 
 #Get main dat file string
   lwz	REG_InternalID, 0x0004 (REG_PlayerData)
-  lwz r3,OFST_MnSlChrCharFileNames(rtoc)
-  mulli r0,REG_InternalID,8
-  lwzx  r3,r3,r0
-#Get header
-  branchl r12,0x8001819c
-  mr  REG_Header,r3
+  lwz  r3,OFST_ftDataPointers(rtoc)
+  mulli r4,REG_InternalID,ftDataPointers_Stride
+  add r3,r3,r4
+  lwz  REG_Header,0x4(r3)
 #Get symbol offset from file
+  mr  r3,REG_Header
   bl  SymbolName
   mflr  r4
   branchl r12,0x80380358

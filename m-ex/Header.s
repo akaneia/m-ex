@@ -9,48 +9,83 @@
 .set  SSM_MaxID,(54+1+NumOfAddedChars) * 10000
 
 #Archive Offsets
-  .set  Arch_Metadata,0x0
-  .set  Arch_MnSlChr_IconData,0x4
-  .set  Arch_MnSlChr_NameText,0x8
-  .set  Arch_Char_CharFiles,0xC
-  .set  Arch_Char_CostumeIDs,0x10
-  .set  Arch_Char_CostumeFileSymbols,0x14
-  .set  Arch_Char_AnimFiles,0x18
-  .set  Arch_Char_AnimCount,0x1C
-  .set  Arch_Char_EffectFiles,0x20
-  .set  Arch_Char_EffectIDs,0x24
-  .set  Arch_GmRst_AnimFiles,0x28
-  .set  Arch_InsigniaIDs,0x2C
-  .set  Arch_GmRst_Scale,0x30
-  .set  Arch_GmRst_VictoryTheme,0x34
-  .set  Arch_FtDemo_SymbolNames,0x38
-  .set  Arch_Char_DefineIDs,0x3C
-  .set  Arch_SFX_NameDef,0x40
-  .set  Arch_SSM_CharSSMFileIDs,0x44
-  .set  Arch_SSMFiles,0x48
-  .set  Arch_SSMRuntimeStruct,0x4C
+.set  Arch_Metadata,0x0
+  .set  Arch_Metadata_VersionMajor,0x0
+  .set  Arch_Metadata_VersionMinor,0x2
+  .set  Arch_Metadata_InternalIDCount,0x4
+  .set  Arch_Metadata_ExternalIDCount,0x8
+  .set  Arch_Metadata_CSSIconCount,0xC
+  .set  Arch_Metadata_SSMCount,0x10
+  .set  Arch_Metadata_BGMCount,0x14
+  .set  Arch_Metadata_EffectCount,0x18
+.set  Arch_MnSlChr,0x4
+.set  Arch_Fighter,0x8
+  .set  Arch_Fighter_NameText,0x0
+  .set  Arch_Fighter_CharFiles,0x4
+  .set  Arch_Fighter_InsigniaIDs,0x8
+  .set  Arch_Fighter_DefineIDs,0xC
+  .set  Arch_Fighter_CostumeIDs,0x10
+  .set  Arch_Fighter_CostumeFileSymbols,0x14
+  .set  Arch_Fighter_FtDemo_SymbolNames,0x18
+  .set  Arch_Fighter_AnimFiles,0x1C
+  .set  Arch_Fighter_AnimCounts,0x20
+  .set  Arch_Fighter_EffectFileIDs,0x24
+  .set  Arch_Fighter_GmRst_AnimFiles,0x28
+  .set  Arch_Fighter_GmRst_Scale,0x2C
+  .set  Arch_Fighter_GmRst_VictoryTheme,0x30
+  .set  Arch_Fighter_AnnouncerCall,0x34
+  .set  Arch_Fighter_SSMFileIDs,0x38
+  .set  Arch_Fighter_RuntimeCostumePointers,0x3C
+  .set  Arch_Fighter_ftDataPointers,0x40
+    .set  ftDataPointers_Stride,8
+.set  Arch_FighterFunc,0xC
+  .set  Arch_FighterFunc_onLoad,0x0
+  .set  Arch_FighterFunc_onDeath,0x4
+  .set  Arch_FighterFunc_onUnknown,0x8
+  .set  Arch_FighterFunc_MoveLogic,0xC
+  .set  Arch_FighterFunc_SpecialN,0x10
+  .set  Arch_FighterFunc_SpecialNAir,0x14
+  .set  Arch_FighterFunc_SpecialS,0x18
+  .set  Arch_FighterFunc_SpecialSAir,0x1C
+  .set  Arch_FighterFunc_SpecialHi,0x20
+  .set  Arch_FighterFunc_SpecialHiAir,0x24
+  .set  Arch_FighterFunc_SpecialLw,0x28
+  .set  Arch_FighterFunc_SpecialLwAir,0x2C
+  .set  Arch_FighterFunc_onAbsorb,0x30
+  .set  Arch_FighterFunc_onItemPickup,0x34
+  .set  Arch_FighterFunc_onMakeItemInvisible,0x38
+  .set  Arch_FighterFunc_onMakeItemVisible,0x3C
+  .set  Arch_FighterFunc_onItemDrop,0x40
+  .set  Arch_FighterFunc_onItemCatch,0x44
+  .set  Arch_FighterFunc_onUnknownItemRelated,0x48
+  .set  Arch_FighterFunc_onUnknownCharacterModelFlags1,0x4C
+  .set  Arch_FighterFunc_onUnknownCharacterModelFlags2,0x50
+  .set  Arch_FighterFunc_onHit,0x54
+  .set  Arch_FighterFunc_onUnknownEyeTextureRelated,0x58
+  .set  Arch_FighterFunc_onFrame,0x5C
+  .set  Arch_FighterFunc_onActionStateChange,0x60
+  .set  Arch_FighterFunc_onRespawn,0x64
+  .set  Arch_FighterFunc_onModelRender,0x68
+  .set  Arch_FighterFunc_onShadowRender,0x6C
+  .set  Arch_FighterFunc_onUnknownMultijump,0x70
+  .set  Arch_FighterFunc_onActionStateChangeWhileEyeTextureIsChanged,0x74
+  .set  Arch_FighterFunc_onTwoEntryTable,0x78
+.set  Arch_FGM,0x10
+  .set  Arch_FGM_Files,0x0
+  .set  Arch_FGM_Flags,0x4
+  .set  Arch_FGM_LookupTable,0x8
+  .set  Arch_FGM_RuntimeStruct,0xC
     .set  Arch_SSMRuntimeStruct_Header,0x0
     .set  Arch_SSMRuntimeStruct_DisposableOrig,0x4
     .set  Arch_SSMRuntimeStruct_DisposableCopy,0x8
     .set  Arch_SSMRuntimeStruct_PersistentOrig,0xC
     .set  Arch_SSMRuntimeStruct_PersistentCopy,0x10
     .set  Arch_SSMRuntimeStruct_Footer,0x14
-  .set  Arch_Fighter_OnLoad,0x50
-  .set  Arch_Fighter_OnDeath,0x54
-  .set  Arch_Fighter_OnUnk,0x58
-  .set  Arch_Fighter_MoveLogic,0x5C
-  .set  Arch_Fighter_SpecialN,0x60
-  .set  Arch_Fighter_SpecialAirN,0x64
-  .set  Arch_Fighter_SpecialHi,0x68
-  .set  Arch_Fighter_SpecialAirHi,0x6C
-  .set  Arch_Fighter_SpecialLw,0x70
-  .set  Arch_Fighter_SpecialAirLw,0x74
-  .set  Arch_Fighter_SpecialS,0x78
-  .set  Arch_Fighter_SpecialAirS,0x7C
-  .set  Arch_SSBMBanks,0x80
-  .set  Arch_Char_CostumeRuntimePointers,0x84
-  .set  Arch_AudioGroups,0x88
-  .set  Arch_BGMFileNames,0x8C
+.set  Arch_BGM,0x14
+  .set  Arch_BGM_Files,0x0
+  .set  Arch_BGM_MenuPlaylist,0x4
+  .set  Arch_BGM_MenuPlaylistNum,0x8
+.set  Arch_Effect,0x18
 
 #Offsets
 .set  OFST_MnSlChrIconData,0x0
@@ -91,19 +126,15 @@
 .set  OFST_ItemIndex,0x8C
 .set  OFST_AudioGroups,0x90
 .set  OFST_BGMFileNames,0x94
-.set  OFST_Metadata_InternalIDCount,0x98
-.set  OFST_Metadata_ExternalIDCount,0x9C
-.set  OFST_Metadata_CSSIconCount,0xA0
-.set  OFST_Metadata_SSMCount,0xA4
-.set  OFST_Metadata_BGMCount,0xA8
-.set  OFST_Metadata_EffectCount,0xAC
-.set  OFST_Metadata,0xB0
-  .set  Metadata_InternalIDCount,0x0
-  .set  Metadata_ExternalIDCount,0x4
-  .set  Metadata_CSSIconCount,0x8
-  .set  Metadata_SSMCount,0xC
-  .set  Metadata_BGMCount,0x10
-  .set  Metadata_EffectCount,0x14
+.set  OFST_ftDataPointers,0x98
+.set  OFST_Metadata_InternalIDCount,OFST_ftDataPointers+0x4
+.set  OFST_Metadata_ExternalIDCount,OFST_Metadata_InternalIDCount+0x4
+.set  OFST_Metadata_CSSIconCount,OFST_Metadata_ExternalIDCount+0x4
+.set  OFST_Metadata_SSMCount,OFST_Metadata_CSSIconCount+0x4
+.set  OFST_Metadata_BGMCount,OFST_Metadata_SSMCount+0x4
+.set  OFST_Metadata_EffectCount,OFST_Metadata_BGMCount+0x4
+.set  OFST_Metadata,OFST_Metadata_EffectCount+0x4
+.set  OFST_mexData,OFST_Metadata+0x4
 
 #SSM Struct Offsets
 #Header

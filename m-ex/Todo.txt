@@ -1,21 +1,12 @@
+at the end of the ftData pointer table, there are some bits that
+idk what they do. might have to modify this. codeline 800853dc interfaces w. this
+
 note to self, the struct that contains pointers to the
 ftDemo files has not been expanded! I believe
 its right here 800beb70
 
 psInitParticle table might need to be expanded.
 exists @ 804d0d58 and 804d0e5c. check notes for more info
-
-ftDataX pointer table @ 804598b8
-this might need to expanded too.
-func that ref are 8008573c, 800852c0, 80068b1c
-
-Classic Mode Audio thing needs to be changed 80027648
-also look into indexing the sem stuff, its very close
-
-to test laser
-  -index item on fighter load
-  -spawn function 297 or whatever, then enter into state 0
-
 
 wolf up b hitting walls enters rebound?, ground rebound enters fall?
 
