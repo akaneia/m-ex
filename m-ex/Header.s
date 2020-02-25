@@ -127,7 +127,16 @@
 .set  OFST_AudioGroups,0x90
 .set  OFST_BGMFileNames,0x94
 .set  OFST_ftDataPointers,0x98
-.set  OFST_Metadata_InternalIDCount,OFST_ftDataPointers+0x4
+.set  OFST_KirbyHatFileNames,0x9C
+.set  OFST_KirbyHatCostumeFileNames,0xA0
+.set  OFST_KirbyHatEffectFileIDs,0xA4
+.set  OFST_KirbyAbilityCostumeRuntimeStruct,0xA8
+.set  OFST_KirbyAbilityRuntimeStruct,0xAC
+.set  OFST_KirbyOnSwallow,0xB0
+.set  OFST_KirbySpecialN,0xB4
+.set  OFST_KirbySpecialNAir,0xB8
+.set  OFST_KirbyOnAbilityLose,0xBC
+.set  OFST_Metadata_InternalIDCount,OFST_KirbyOnAbilityLose+0x4
 .set  OFST_Metadata_ExternalIDCount,OFST_Metadata_InternalIDCount+0x4
 .set  OFST_Metadata_CSSIconCount,OFST_Metadata_ExternalIDCount+0x4
 .set  OFST_Metadata_SSMCount,OFST_Metadata_CSSIconCount+0x4

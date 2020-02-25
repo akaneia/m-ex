@@ -1,6 +1,8 @@
 at the end of the ftData pointer table, there are some bits that
 idk what they do. might have to modify this. codeline 800853dc interfaces w. this
 
+change all onSwallow references to OFST_KirbyAbilityRuntimeStruct, dk's is here 800f0ff8
+
 note to self, the struct that contains pointers to the
 ftDemo files has not been expanded! I believe
 its right here 800beb70

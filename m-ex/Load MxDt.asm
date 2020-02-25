@@ -176,6 +176,15 @@ rtocOffsets:
   .hword Arch_BGM,Arch_BGM_Files,-1
   .hword Arch_Fighter,Arch_Fighter_ftDataPointers,-1
   .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
+  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
+  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
+  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
+  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
+  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
+  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
+  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
+  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
+  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
   .hword Arch_Metadata,Arch_Metadata_ExternalIDCount,-1
   .hword Arch_Metadata,Arch_Metadata_CSSIconCount,-1
   .hword Arch_Metadata,Arch_Metadata_SSMCount,-1
