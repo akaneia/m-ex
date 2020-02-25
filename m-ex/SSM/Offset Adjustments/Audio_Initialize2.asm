@@ -8,7 +8,7 @@
 #852 / 0x354 = Persist Copy
 
 .set  SSMID,0
-.set  REG_Offset,3
+.set  REG_Offset,12
 
 #Get
   lwz REG_Offset,OFST_SSMStruct(rtoc)

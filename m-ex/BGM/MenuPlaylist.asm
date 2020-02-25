@@ -3,10 +3,10 @@
 .include "../Header.s"
 
 #Init count loop
-.set  REG_SongList,31
-.set  REG_LoopCount,30
-.set  REG_PercentTotal,29
-.set  REG_BGMNum,28
+.set  REG_SongList,30
+.set  REG_LoopCount,29
+.set  REG_PercentTotal,28
+.set  REG_BGMNum,27
   backup
   lwz r3,OFST_mexData(rtoc)
   lwz r3,Arch_BGM(r3)
@@ -18,10 +18,10 @@
   cmpwi REG_BGMNum,0
   bne CountPercents
   li  r3,52
-  b Injection_Exit
+  b StoreHPS
 CountPercents:
 #Get offset
-  mulli r3,REG_LoopCount,2
+  mulli r3,REG_LoopCount,4
   add r4,r3,REG_SongList
 #Increment percent total
   lhz r3,0x2(r4)
@@ -41,7 +41,7 @@ RollRNG:
   li  REG_PercentTotal,0
 CheckRNG:
 #Get offset
-  mulli r3,REG_LoopCount,2
+  mulli r3,REG_LoopCount,4
   add r4,r3,REG_SongList
 #Increment percent toal
   lhz r3,0x2(r4)
@@ -52,10 +52,13 @@ CheckRNG:
 #Get next
   addi  REG_LoopCount,REG_LoopCount,1
   cmpw REG_LoopCount,REG_BGMNum
-  blt CountPercents
+  blt CheckRNG
 
 CheckRNG_Found:
   lhz r3,0x0(r4)
+
+StoreHPS:
+  stb	r3, 0x0001 (r31)
   b Injection_Exit
 
 Injection_Exit:
