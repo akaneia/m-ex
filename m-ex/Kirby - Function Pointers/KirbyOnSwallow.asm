@@ -2,4 +2,4 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-lwz  r5,OFST_KirbyOnSwallow(rtoc)
+lwz  r0,OFST_KirbyOnAbilityFunc(rtoc)

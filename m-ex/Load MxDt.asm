@@ -175,15 +175,16 @@ rtocOffsets:
   .hword Arch_FGM,Arch_FGM_LookupTable,-1 #audio groups
   .hword Arch_BGM,Arch_BGM_Files,-1
   .hword Arch_Fighter,Arch_Fighter_ftDataPointers,-1
-  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
-  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
-  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
-  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
-  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
-  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
-  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
-  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
-  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
+  #Kirby
+  .hword Arch_Kirby,Arch_Kirby_AbilityFileNames,-1
+  .hword Arch_Kirby,Arch_Kirby_AbilityCostumeFileNames,-1
+  .hword Arch_Kirby,Arch_Kirby_EffectIDs,-1
+  .hword Arch_Kirby,Arch_Kirby_AbilityCostumeRuntimeStruct,-1
+  .hword Arch_Kirby,Arch_Kirby_AbilityRuntimeStruct,-1
+  .hword Arch_Kirby,Arch_Kirby_OnAbilityFunc,-1
+  .hword Arch_Kirby,Arch_Kirby_SpecialN,-1
+  .hword Arch_Kirby,Arch_Kirby_SpecialNAir,-1
+  #Metadata
   .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
   .hword Arch_Metadata,Arch_Metadata_ExternalIDCount,-1
   .hword Arch_Metadata,Arch_Metadata_CSSIconCount,-1

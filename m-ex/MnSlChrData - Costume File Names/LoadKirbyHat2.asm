@@ -2,4 +2,4 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-lwz  r5,OFST_MnSlChrCostumeFileSymbols(rtoc)
+lwz  r5,OFST_Char_CostumeRuntimePointers(rtoc)

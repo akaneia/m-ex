@@ -86,6 +86,15 @@
   .set  Arch_BGM_MenuPlaylist,0x4
   .set  Arch_BGM_MenuPlaylistNum,0x8
 .set  Arch_Effect,0x18
+.set  Arch_Kirby,0x1C
+  .set  Arch_Kirby_AbilityFileNames,0x0
+  .set  Arch_Kirby_AbilityRuntimeStruct,0x4
+  .set  Arch_Kirby_AbilityCostumeFileNames,0x8
+  .set  Arch_Kirby_AbilityCostumeRuntimeStruct,0xC
+  .set  Arch_Kirby_EffectIDs,0x10
+  .set  Arch_Kirby_OnAbilityFunc,0x14
+  .set  Arch_Kirby_SpecialN,0x18
+  .set  Arch_Kirby_SpecialNAir,0x1C
 
 #Offsets
 .set  OFST_MnSlChrIconData,0x0
@@ -132,11 +141,10 @@
 .set  OFST_KirbyHatEffectFileIDs,0xA4
 .set  OFST_KirbyAbilityCostumeRuntimeStruct,0xA8
 .set  OFST_KirbyAbilityRuntimeStruct,0xAC
-.set  OFST_KirbyOnSwallow,0xB0
+.set  OFST_KirbyOnAbilityFunc,0xB0
 .set  OFST_KirbySpecialN,0xB4
 .set  OFST_KirbySpecialNAir,0xB8
-.set  OFST_KirbyOnAbilityLose,0xBC
-.set  OFST_Metadata_InternalIDCount,OFST_KirbyOnAbilityLose+0x4
+.set  OFST_Metadata_InternalIDCount,OFST_KirbySpecialNAir+0x4
 .set  OFST_Metadata_ExternalIDCount,OFST_Metadata_InternalIDCount+0x4
 .set  OFST_Metadata_CSSIconCount,OFST_Metadata_ExternalIDCount+0x4
 .set  OFST_Metadata_SSMCount,OFST_Metadata_CSSIconCount+0x4
