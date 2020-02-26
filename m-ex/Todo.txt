@@ -11,10 +11,7 @@ MAYBE
 -at the end of the ftData pointer table, there are some bits that
 idk what they do. might have to modify this. codeline 800853dc interfaces w. this
 
-
 IDEAS
 -wolf up b hitting walls enters rebound?, ground rebound enters fall?
-
 -css use icon positions
-
 -investigate the queue effects function,s try to make char effects work
