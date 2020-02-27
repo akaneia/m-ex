@@ -89,20 +89,25 @@ InitPointers_IncLoop:
   bgt InitPointers_Loop
 
 #Copy function pointers - init
-.set  REG_CharOffset,12
+.set  REG_ThisOffset,12
 .set  REG_FuncPtrs,11
 .set  REG_Code,10
 .set  REG_FuncOffsets,9
 .set  REG_Count,8
-  mulli REG_CharOffset,REG_InternalID,4
   lwz REG_FuncPtrs,0x4(REG_ftFunction)
   lwz REG_Code,0x0(REG_ftFunction)
   bl  StoreFunctionPointer_Offsets
   mflr  REG_FuncOffsets
   li  REG_Count,0
-  cmpwi REG_Count,NumOfPointers
-  beq CopyPointers_Exit
 CopyPointers_Loop:
+#Get this offset
+  mulli REG_ThisOffset,REG_Count,4
+  add REG_ThisOffset,REG_ThisOffset,REG_FuncOffsets
+#Check if end
+  lhz r3,0x0(REG_ThisOffset)
+  extsh r3,r3
+  cmpwi r3,-1
+  beq CopyPointers_Exit
 #Get pointer to function
   mulli r3,REG_Count,4
   lwzx r3,r3,REG_FuncPtrs
@@ -112,16 +117,16 @@ CopyPointers_Loop:
 #Get ram address
   add r3,r3,REG_Code
 #Get offset of rtoc
-  mulli r4,REG_Count,2
-  lhzx r4,r4,REG_FuncOffsets
+  lhz r4,0x0(REG_ThisOffset)
 #Get pointer table addr
   lwzx  r4,r4,rtoc
 #Store to
-  stwx  r3,REG_CharOffset,r4
+  lhz r5,0x2(REG_ThisOffset)
+  mullw r5,REG_InternalID,r5
+  stwx  r3,r5,r4
 CopyPointers_IncLoop:
   addi  REG_Count,REG_Count,1
-  cmpwi REG_Count,NumOfPointers
-  blt CopyPointers_Loop
+  b CopyPointers_Loop
 CopyPointers_Exit:
 
 #Flush instruction cache so code can be run from this file
@@ -138,43 +143,42 @@ blrl
 
 StoreFunctionPointer_Offsets:
   blrl
-  .set  NumOfPointers,35
-  .hword  OFST_FighterOnLoad
-  .hword  OFST_FighterOnDeath
-  .hword  -4  #OFST_FighterOnUnk
-  .hword  OFST_FighterMoveLogic
-  .hword  OFST_FighterSpecialN
-  .hword  OFST_FighterSpecialNAir
-  .hword  OFST_FighterSpecialS
-  .hword  OFST_FighterSpecialSAir
-  .hword  OFST_FighterSpecialHi
-  .hword  OFST_FighterSpecialHiAir
-  .hword  OFST_FighterSpecialLw
-  .hword  OFST_FighterSpecialLwAir
-  .hword  -4  #OFST_FighterOnAbsorb
-  .hword  -4  #OFST_FighterOnItemPickup
-  .hword  -4  #OFST_FighterOnItemInvis
-  .hword  -4  #OFST_FighterOnItemVis
-  .hword  -4  #OFST_FighterOnItemDrop
-  .hword  -4  #OFST_FighterOnItemCatch
-  .hword  -4  #OFST_FighterOnItemUnk
-  .hword  -4  #OFST_FighterOnUnkModelFlags1
-  .hword  -4  #OFST_FighterOnUnkModelFlags2
-  .hword  -4  #OFST_FighterOnHit
-  .hword  -4  #OFST_FighterOnUnkEyeTexture
-  .hword  -4  #OFST_FighterOnFrame
-  .hword  -4  #OFST_FighterOnStateChange
-  .hword  -4  #OFST_FighterOnRespawn
-  .hword  -4  #OFST_FighterOnModelRender
-  .hword  -4  #OFST_FighterOnShadowRender
-  .hword  -4  #OFST_FighterOnMultiJump
-  .hword  -4  #OFST_FighterOnStateChangeWhileEyeChanged
-  .hword  -4  #OFST_FighterOnUnk2
-  .hword  -4  #OFST_FighterOnKirbySwallow
-  .hword  -4  #OFST_FighterOnKirbyLoseAbility
-  .hword  OFST_KirbySpecialN
-  .hword  OFST_KirbySpecialNAir
-
+  .hword  OFST_FighterOnLoad,4
+  .hword  OFST_FighterOnDeath,4
+  .hword  -4,4  #OFST_FighterOnUnk
+  .hword  OFST_FighterMoveLogic,4
+  .hword  OFST_FighterSpecialN,4
+  .hword  OFST_FighterSpecialNAir,4
+  .hword  OFST_FighterSpecialS,4
+  .hword  OFST_FighterSpecialSAir,4
+  .hword  OFST_FighterSpecialHi,4
+  .hword  OFST_FighterSpecialHiAir,4
+  .hword  OFST_FighterSpecialLw,4
+  .hword  OFST_FighterSpecialLwAir,4
+  .hword  -4,4  #OFST_FighterOnAbsorb
+  .hword  -4,4  #OFST_FighterOnItemPickup
+  .hword  -4,4  #OFST_FighterOnItemInvis
+  .hword  -4,4  #OFST_FighterOnItemVis
+  .hword  -4,4  #OFST_FighterOnItemDrop
+  .hword  -4,4  #OFST_FighterOnItemCatch
+  .hword  -4,4  #OFST_FighterOnItemUnk
+  .hword  -4,4  #OFST_FighterOnUnkModelFlags1
+  .hword  -4,4  #OFST_FighterOnUnkModelFlags2
+  .hword  -4,4  #OFST_FighterOnHit
+  .hword  -4,4  #OFST_FighterOnUnkEyeTexture
+  .hword  -4,4  #OFST_FighterOnFrame
+  .hword  -4,4  #OFST_FighterOnStateChange
+  .hword  -4,4  #OFST_FighterOnRespawn
+  .hword  -4,4  #OFST_FighterOnModelRender
+  .hword  -4,4  #OFST_FighterOnShadowRender
+  .hword  -4,4  #OFST_FighterOnMultiJump
+  .hword  -4,4  #OFST_FighterOnStateChangeWhileEyeChanged
+  .hword  -4,4  #OFST_FighterOnUnk2
+  .hword  OFST_KirbyOnAbilityFunc,8  #OFST_FighterOnKirbySwallow
+  .hword  OFST_KirbyOnAbilityFunc+0x4,8  #OFST_FighterOnKirbyLoseAbility
+  .hword  OFST_KirbySpecialN,4
+  .hword  OFST_KirbySpecialNAir,4
+  .hword  -1
   .align 2
 
 Exit:
