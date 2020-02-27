@@ -174,10 +174,12 @@ StoreFunctionPointer_Offsets:
   .hword  -4,4  #OFST_FighterOnMultiJump
   .hword  -4,4  #OFST_FighterOnStateChangeWhileEyeChanged
   .hword  -4,4  #OFST_FighterOnUnk2
-  .hword  OFST_KirbyOnAbilityFunc,8  #OFST_FighterOnKirbySwallow
+  .hword  OFST_KirbyOnAbilityFunc,8
   .hword  OFST_KirbyOnAbilityFunc+0x4,8  #OFST_FighterOnKirbyLoseAbility
   .hword  OFST_KirbySpecialN,4
   .hword  OFST_KirbySpecialNAir,4
+  .hword  OFST_KirbyOnAbilityTakeHit,4
+  .hword  OFST_KirbyInitItem,4
   .hword  -1
   .align 2
 

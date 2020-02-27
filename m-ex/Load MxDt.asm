@@ -182,6 +182,8 @@ rtocOffsets:
   .hword Arch_Kirby,Arch_Kirby_AbilityCostumeRuntimeStruct,-1
   .hword Arch_Kirby,Arch_Kirby_AbilityRuntimeStruct,-1
   .hword Arch_Kirby,Arch_Kirby_OnAbilityFunc,-1
+  .hword Arch_Kirby,Arch_Kirby_OnAbilityHit,-1
+  .hword Arch_Kirby,Arch_Kirby_InitItem,-1
   .hword Arch_Kirby,Arch_Kirby_SpecialN,-1
   .hword Arch_Kirby,Arch_Kirby_SpecialNAir,-1
   #Metadata
