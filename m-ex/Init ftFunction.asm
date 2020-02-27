@@ -138,19 +138,43 @@ blrl
 
 StoreFunctionPointer_Offsets:
   blrl
-  .set  NumOfPointers,12
+  .set  NumOfPointers,35
   .hword  OFST_FighterOnLoad
   .hword  OFST_FighterOnDeath
-  .hword  OFST_FighterOnUnk
+  .hword  -4  #OFST_FighterOnUnk
+  .hword  OFST_FighterMoveLogic
   .hword  OFST_FighterSpecialN
   .hword  OFST_FighterSpecialNAir
+  .hword  OFST_FighterSpecialS
+  .hword  OFST_FighterSpecialSAir
   .hword  OFST_FighterSpecialHi
   .hword  OFST_FighterSpecialHiAir
   .hword  OFST_FighterSpecialLw
   .hword  OFST_FighterSpecialLwAir
-  .hword  OFST_FighterSpecialS
-  .hword  OFST_FighterSpecialSAir
-  .hword  OFST_FighterMoveLogic
+  .hword  -4  #OFST_FighterOnAbsorb
+  .hword  -4  #OFST_FighterOnItemPickup
+  .hword  -4  #OFST_FighterOnItemInvis
+  .hword  -4  #OFST_FighterOnItemVis
+  .hword  -4  #OFST_FighterOnItemDrop
+  .hword  -4  #OFST_FighterOnItemCatch
+  .hword  -4  #OFST_FighterOnItemUnk
+  .hword  -4  #OFST_FighterOnUnkModelFlags1
+  .hword  -4  #OFST_FighterOnUnkModelFlags2
+  .hword  -4  #OFST_FighterOnHit
+  .hword  -4  #OFST_FighterOnUnkEyeTexture
+  .hword  -4  #OFST_FighterOnFrame
+  .hword  -4  #OFST_FighterOnStateChange
+  .hword  -4  #OFST_FighterOnRespawn
+  .hword  -4  #OFST_FighterOnModelRender
+  .hword  -4  #OFST_FighterOnShadowRender
+  .hword  -4  #OFST_FighterOnMultiJump
+  .hword  -4  #OFST_FighterOnStateChangeWhileEyeChanged
+  .hword  -4  #OFST_FighterOnUnk2
+  .hword  -4  #OFST_FighterOnKirbySwallow
+  .hword  -4  #OFST_FighterOnKirbyLoseAbility
+  .hword  OFST_KirbySpecialN
+  .hword  OFST_KirbySpecialNAir
+
   .align 2
 
 Exit:
