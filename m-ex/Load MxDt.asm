@@ -189,6 +189,8 @@ rtocOffsets:
   .hword Arch_Kirby,Arch_Kirby_OnAbilityFunc,-1
   .hword Arch_Kirby,Arch_Kirby_SpecialN,-1
   .hword Arch_Kirby,Arch_Kirby_SpecialNAir,-1
+  .hword Arch_Kirby,Arch_Kirby_OnHit,-1
+  .hword Arch_Kirby,Arch_Kirby_InitItem,-1
   #Metadata
   .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
   .hword Arch_Metadata,Arch_Metadata_ExternalIDCount,-1
@@ -197,6 +199,7 @@ rtocOffsets:
   .hword Arch_Metadata,Arch_Metadata_BGMCount,-1
   .hword Arch_Metadata,Arch_Metadata_EffectCount,-1
   .hword Arch_Metadata,-1
+
   .hword  -1
   .align 2
 

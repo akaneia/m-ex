@@ -15,8 +15,7 @@ lwz REG_PlayerData,0x2C(REG_PlayerGObj)
   fneg	f0,f0
   lfs	f1, 0x0624 (REG_PlayerData)
   fcmpo	cr0,f1,f0
-  cror	2, 1, 2
-  bne Failure
+  bgt Failure
 #Check X/Y
   lwz	r0, 0x065C (REG_PlayerData)
   rlwinm.	r0, r0, 0, 20, 21
@@ -35,14 +34,15 @@ CheckOnFloat:
 #Get characters onfloat function
   lwz r4,OFST_onFloat(rtoc)
   lwz r5,0x4(REG_PlayerData)
-  mullw r5,r5,4
+  mulli r5,r5,4
   lwzx  r12,r4,r5
   cmpwi r12,0
-  beq Exit
+  beq Failure
   mr  r3,REG_PlayerGObj
   li  r4,1
   mtctr r12
   bctrl
+  b Exit
 
 Success:
   mr  r3,REG_PlayerGObj

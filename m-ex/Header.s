@@ -100,6 +100,8 @@
   .set  Arch_Kirby_OnAbilityFunc,0x14
   .set  Arch_Kirby_SpecialN,0x18
   .set  Arch_Kirby_SpecialNAir,0x1C
+  .set  Arch_Kirby_OnHit,0x20
+  .set  Arch_Kirby_InitItem,0x24
 
 #Offsets
 .set  OFST_MnSlChrIconData,0x0
@@ -155,8 +157,10 @@
 .set  OFST_KirbyOnAbilityFunc,OFST_KirbyAbilityRuntimeStruct+0x4
 .set  OFST_KirbySpecialN,OFST_KirbyOnAbilityFunc+0x4
 .set  OFST_KirbySpecialNAir,OFST_KirbySpecialN+0x4
+.set  OFST_KirbyOnHit,OFST_KirbySpecialNAir+0x4
+.set  OFST_KirbyInitItem,OFST_KirbyOnHit+0x4
 #Metadata
-.set  OFST_Metadata_InternalIDCount,OFST_KirbySpecialNAir+0x4
+.set  OFST_Metadata_InternalIDCount,OFST_KirbyInitItem+0x4
 .set  OFST_Metadata_ExternalIDCount,OFST_Metadata_InternalIDCount+0x4
 .set  OFST_Metadata_CSSIconCount,OFST_Metadata_ExternalIDCount+0x4
 .set  OFST_Metadata_SSMCount,OFST_Metadata_CSSIconCount+0x4
