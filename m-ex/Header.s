@@ -70,6 +70,9 @@
   .set  Arch_FighterFunc_onUnknownMultijump,0x70
   .set  Arch_FighterFunc_onActionStateChangeWhileEyeTextureIsChanged,0x74
   .set  Arch_FighterFunc_onTwoEntryTable,0x78
+  .set  Arch_FighterFunc_onFloat,0x7C
+  .set  Arch_FighterFunc_onDoubleJump,0x80
+  .set  Arch_FighterFunc_onZair,0x84
 .set  Arch_FGM,0x10
   .set  Arch_FGM_Files,0x0
   .set  Arch_FGM_Flags,0x4
@@ -85,8 +88,10 @@
   .set  Arch_BGM_Files,0x0
   .set  Arch_BGM_MenuPlaylist,0x4
   .set  Arch_BGM_MenuPlaylistNum,0x8
-.set  Arch_Effect,0x18
-.set  Arch_Kirby,0x1C
+.set  Arch_EffectFiles,0x18
+.set  Arch_EffectAdded,0x1C
+.set  Arch_ItemsAdded,0x20
+.set  Arch_Kirby,0x24
   .set  Arch_Kirby_AbilityFileNames,0x0
   .set  Arch_Kirby_AbilityRuntimeStruct,0x4
   .set  Arch_Kirby_AbilityCostumeFileNames,0x8
@@ -95,8 +100,6 @@
   .set  Arch_Kirby_OnAbilityFunc,0x14
   .set  Arch_Kirby_SpecialN,0x18
   .set  Arch_Kirby_SpecialNAir,0x1C
-  .set  Arch_Kirby_OnAbilityHit,0x20
-  .set  Arch_Kirby_InitItem,0x24
 
 #Offsets
 .set  OFST_MnSlChrIconData,0x0
@@ -138,16 +141,21 @@
 .set  OFST_AudioGroups,0x90
 .set  OFST_BGMFileNames,0x94
 .set  OFST_ftDataPointers,0x98
-.set  OFST_KirbyHatFileNames,0x9C
-.set  OFST_KirbyHatCostumeFileNames,0xA0
-.set  OFST_KirbyHatEffectFileIDs,0xA4
-.set  OFST_KirbyAbilityCostumeRuntimeStruct,0xA8
-.set  OFST_KirbyAbilityRuntimeStruct,0xAC
-.set  OFST_KirbyOnAbilityFunc,0xB0
-.set  OFST_KirbyOnAbilityTakeHit,0xB4
-.set  OFST_KirbyInitItem,0xB8
-.set  OFST_KirbySpecialN,0xBC
-.set  OFST_KirbySpecialNAir,0xC0
+.set  OFST_EffectsAdded,0x9C
+.set  OFST_ItemsAdded,0xA0
+.set  OFST_onFloat,0xA4
+.set  OFST_onDoubleJump,0xA8
+.set  OFST_onZair,0xAC
+#Kirby
+.set  OFST_KirbyHatFileNames,OFST_onZair+0x4
+.set  OFST_KirbyHatCostumeFileNames,OFST_KirbyHatFileNames+0x4
+.set  OFST_KirbyHatEffectFileIDs,OFST_KirbyHatCostumeFileNames+0x4
+.set  OFST_KirbyAbilityCostumeRuntimeStruct,OFST_KirbyHatEffectFileIDs+0x4
+.set  OFST_KirbyAbilityRuntimeStruct,OFST_KirbyAbilityCostumeRuntimeStruct+0x4
+.set  OFST_KirbyOnAbilityFunc,OFST_KirbyAbilityRuntimeStruct+0x4
+.set  OFST_KirbySpecialN,OFST_KirbyOnAbilityFunc+0x4
+.set  OFST_KirbySpecialNAir,OFST_KirbySpecialN+0x4
+#Metadata
 .set  OFST_Metadata_InternalIDCount,OFST_KirbySpecialNAir+0x4
 .set  OFST_Metadata_ExternalIDCount,OFST_Metadata_InternalIDCount+0x4
 .set  OFST_Metadata_CSSIconCount,OFST_Metadata_ExternalIDCount+0x4

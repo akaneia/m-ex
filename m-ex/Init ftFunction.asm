@@ -143,6 +143,7 @@ blrl
 
 StoreFunctionPointer_Offsets:
   blrl
+  #indexed by order in ftFunction
   .hword  OFST_FighterOnLoad,4
   .hword  OFST_FighterOnDeath,4
   .hword  -4,4  #OFST_FighterOnUnk
@@ -180,6 +181,8 @@ StoreFunctionPointer_Offsets:
   .hword  OFST_KirbySpecialNAir,4
   .hword  OFST_KirbyOnAbilityTakeHit,4
   .hword  OFST_KirbyInitItem,4
+  .hword  OFST_onFloat,4
+  .hword  OFST_onDoubleJump,4
   .hword  -1
   .align 2
 

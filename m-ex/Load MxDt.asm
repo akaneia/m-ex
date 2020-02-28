@@ -143,7 +143,7 @@ rtocOffsets:
   .hword Arch_Fighter,Arch_Fighter_CharFiles,-1
   .hword Arch_Fighter,Arch_Fighter_AnimFiles,-1
   .hword Arch_Fighter,Arch_Fighter_EffectFileIDs,-1
-  .hword Arch_Effect,-1
+  .hword Arch_EffectFiles,-1
   .hword Arch_Fighter,Arch_Fighter_SSMFileIDs,-1
   .hword Arch_FGM,Arch_FGM_Files,-1
   .hword Arch_Fighter,Arch_Fighter_AnimCounts,-1
@@ -175,6 +175,11 @@ rtocOffsets:
   .hword Arch_FGM,Arch_FGM_LookupTable,-1 #audio groups
   .hword Arch_BGM,Arch_BGM_Files,-1
   .hword Arch_Fighter,Arch_Fighter_ftDataPointers,-1
+  .hword Arch_EffectAdded,-1
+  .hword Arch_ItemsAdded,-1
+  .hword Arch_FighterFunc,Arch_FighterFunc_onFloat,-1
+  .hword Arch_FighterFunc,Arch_FighterFunc_onDoubleJump,-1
+  .hword Arch_FighterFunc,Arch_FighterFunc_onZair,-1
   #Kirby
   .hword Arch_Kirby,Arch_Kirby_AbilityFileNames,-1
   .hword Arch_Kirby,Arch_Kirby_AbilityCostumeFileNames,-1
@@ -182,8 +187,6 @@ rtocOffsets:
   .hword Arch_Kirby,Arch_Kirby_AbilityCostumeRuntimeStruct,-1
   .hword Arch_Kirby,Arch_Kirby_AbilityRuntimeStruct,-1
   .hword Arch_Kirby,Arch_Kirby_OnAbilityFunc,-1
-  .hword Arch_Kirby,Arch_Kirby_OnAbilityHit,-1
-  .hword Arch_Kirby,Arch_Kirby_InitItem,-1
   .hword Arch_Kirby,Arch_Kirby_SpecialN,-1
   .hword Arch_Kirby,Arch_Kirby_SpecialNAir,-1
   #Metadata
