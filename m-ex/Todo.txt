@@ -6,6 +6,9 @@ ftDemo files has not been expanded! I believe
 its right here 800beb70
 -psInitParticle table might need to be expanded.
 exists @ 804d0d58 and 804d0e5c. check notes for more info
+-expand result screen size struct referenced during no contest @ 8017a8f4. each entry is 48 bytes...
+
+
 
 MAYBE
 -at the end of the ftData pointer table, there are some bits that
