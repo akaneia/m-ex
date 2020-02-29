@@ -2,6 +2,6 @@
 .include "../Common.s"
 .include "Header.s"
 
-.set  FreeKilobytes,0
+.set  FreeKilobytes,500#200
 
 .long 6599680 - FreeKilobytes*1000
