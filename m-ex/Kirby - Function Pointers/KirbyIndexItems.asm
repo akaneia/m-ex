@@ -13,7 +13,7 @@
   cmpwi r12,0
   beq Original
 #Call our custom function
-  lwzx  r3,r4,r5  #KbCpData
+  lwzx  r3,r5,r0  #KbCpData
   mtctr r12
   bctrl
   b Exit

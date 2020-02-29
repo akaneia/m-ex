@@ -9,7 +9,7 @@
 
 #Run OnHit
   mulli r4,r0,4
-  lwz  r3,OFST_KirbyOnAbilityTakeHit(rtoc)
+  lwz  r3,OFST_KirbyOnHit(rtoc)
   lwzx  r12,r3,r4
   cmpwi r12,0
   beq Original

@@ -72,6 +72,7 @@
   .set  Arch_FighterFunc_onFloat,0x7C
   .set  Arch_FighterFunc_onDoubleJump,0x80
   .set  Arch_FighterFunc_onZair,0x84
+  .set  Arch_FighterFunc_onLanding,0x88
 .set  Arch_FGM,0x10
   .set  Arch_FGM_Files,0x0
   .set  Arch_FGM_Flags,0x4
@@ -145,8 +146,9 @@
 .set  OFST_onFloat,0x9C
 .set  OFST_onDoubleJump,0xA0
 .set  OFST_onZair,0xA4
+.set  OFST_onLanding,0xA8
 #Kirby
-.set  OFST_KirbyHatFileNames,OFST_onZair+0x4
+.set  OFST_KirbyHatFileNames,OFST_onLanding+0x4
 .set  OFST_KirbyHatCostumeFileNames,OFST_KirbyHatFileNames+0x4
 .set  OFST_KirbyHatEffectFileIDs,OFST_KirbyHatCostumeFileNames+0x4
 .set  OFST_KirbyAbilityCostumeRuntimeStruct,OFST_KirbyHatEffectFileIDs+0x4

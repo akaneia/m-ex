@@ -183,6 +183,8 @@ StoreFunctionPointer_Offsets:
   .hword  OFST_KirbyInitItem,4
   .hword  OFST_onFloat,4
   .hword  OFST_onDoubleJump,4
+  .hword  OFST_onZair,4
+  #.hword  OFST_onLanding,4
   .hword  -1
   .align 2
 
