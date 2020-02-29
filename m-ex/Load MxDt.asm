@@ -169,14 +169,12 @@ rtocOffsets:
   .hword Arch_Fighter,Arch_Fighter_FtDemo_SymbolNames,-1
   .hword Arch_Fighter,Arch_Fighter_AnnouncerCall,-1
   .hword Arch_Fighter,Arch_Fighter_GmRst_VictoryTheme,-1
-  .hword Arch_Fighter,Arch_Fighter_AnnouncerCall,-1 #effect create, need to implement this
-  .hword Arch_Fighter,Arch_Fighter_AnnouncerCall,-1 #item functions, need to implement this
+  .hword Arch_EffectAdded,-1
+  .hword Arch_ItemsAdded,-1
   .hword Arch_Fighter,Arch_Fighter_AnnouncerCall,-1 #item index, need to implement this
   .hword Arch_FGM,Arch_FGM_LookupTable,-1 #audio groups
   .hword Arch_BGM,Arch_BGM_Files,-1
   .hword Arch_Fighter,Arch_Fighter_ftDataPointers,-1
-  .hword Arch_EffectAdded,-1
-  .hword Arch_ItemsAdded,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_onFloat,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_onDoubleJump,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_onZair,-1

@@ -1,12 +1,11 @@
 #Constants
-.set  NumOfAddedChars,1
-.set  NumOfAddedSSMs,0
+.set  CustomEffectStart,1400
 
-.set  NumOfAddedEffects,0
+.set  NumOfAddedEffects,1
 .set  NumOfAddedItems,0
 
 #Derived Constants
-.set  SSM_MaxID,(54+1+NumOfAddedChars) * 10000
+.set  SSM_MaxID,100 * 10000
 
 #Archive Offsets
 .set  Arch_Metadata,0x0
@@ -137,17 +136,15 @@
 .set  OFST_FtDemoSymbols,0x78
 .set  OFST_SFXNameDef,0x7C
 .set  OFST_GmRstVictoryTheme,0x80
-.set  OFST_EffectCreate,0x84
-.set  OFST_ItemFunctions,0x88
+.set  OFST_EffectsAdded,0x84
+.set  OFST_ItemsAdded,0x88
 .set  OFST_ItemIndex,0x8C
 .set  OFST_AudioGroups,0x90
 .set  OFST_BGMFileNames,0x94
 .set  OFST_ftDataPointers,0x98
-.set  OFST_EffectsAdded,0x9C
-.set  OFST_ItemsAdded,0xA0
-.set  OFST_onFloat,0xA4
-.set  OFST_onDoubleJump,0xA8
-.set  OFST_onZair,0xAC
+.set  OFST_onFloat,0x9C
+.set  OFST_onDoubleJump,0xA0
+.set  OFST_onZair,0xA4
 #Kirby
 .set  OFST_KirbyHatFileNames,OFST_onZair+0x4
 .set  OFST_KirbyHatCostumeFileNames,OFST_KirbyHatFileNames+0x4
@@ -169,6 +166,7 @@
 .set  OFST_Metadata,OFST_Metadata_EffectCount+0x4
 .set  OFST_mexData,OFST_Metadata+0x4
 
+/*
 #SSM Struct Offsets
 #Header
 .set  SSM_Header_OFST,0x0
@@ -188,3 +186,4 @@
 #Unk
 .set  SSM_Footer_OFST, SSM_PersistentCopy_OFST + SSM_PersistentCopy_Length
   .set  SSM_Footer_Length, (56 + NumOfAddedChars) * 4
+*/
