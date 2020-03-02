@@ -5,8 +5,7 @@
 .set  REG_ItemData,30
 
 #If under, return to injection site
-  subi	r0, r4, 208
-  cmpwi r0,29
+  cmpwi r4,CustomItemStart
   blt Injection_Exit
 
 backup
@@ -28,3 +27,4 @@ Exit:
   branch  r12,0x80268748
 
 Injection_Exit:
+  subi	r0, r4, 208

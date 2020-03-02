@@ -101,14 +101,6 @@ FirefoxTrajectory_isSpacie:
   beq FirefoxTrajectory_isFirefoxHold
   b FirefoxTrajectory_Exit
 FirefoxTrajectory_isFirefoxHold:
-#Check if spacie codes are enabled
-	li	r0,OSD.SpacieTech			#Fox Training Codes ID
-	lwz	r4,-0x77C0(r13)
-	lwz	r4,0x1F24(r4)
-	li	r3, 1
-	slw	r0, r3, r0
-	and.	r0, r0, r4
-	beq	FirefoxTrajectory_Exit
 
 #Get Floats
   bl  FirefoxTrajectory_Constants
@@ -419,12 +411,6 @@ DIDraw:
   stw r0, 0x4(r1)
   stwu	r1,-StackSize(r1)	# make space for 12 registers
   stmw  r20,Stack_BackedUpReg(r1)
-
-#CHECK IF ENABLED
-	lwz	r3,-0x77C0(r13)
-	lwz	r3,0x1F24(r3)
-  rlwinm. r0,r3,0,OSD.DIDraw
-	beq	DIDraw_Exit
 
 #Check for DI Draw
 	lbz	r3,0x221A(REG_PlayerData)			#Check If in Hitlag

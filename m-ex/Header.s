@@ -1,5 +1,6 @@
 #Constants
 .set  CustomEffectStart,1400
+.set  CustomItemStart,237
 
 .set  NumOfAddedEffects,1
 .set  NumOfAddedItems,0
@@ -37,6 +38,9 @@
   .set  Arch_Fighter_RuntimeCostumePointers,0x3C
   .set  Arch_Fighter_ftDataPointers,0x40
     .set  ftDataPointers_Stride,8
+  .set  Arch_Fighter_onWallJump,0x44
+  .set  Arch_Fighter_GmRstPointers,0x48
+    .set  GmRstPointers_Stride,8
 .set  Arch_FighterFunc,0xC
   .set  Arch_FighterFunc_onLoad,0x0
   .set  Arch_FighterFunc_onDeath,0x4
@@ -73,6 +77,9 @@
   .set  Arch_FighterFunc_onDoubleJump,0x80
   .set  Arch_FighterFunc_onZair,0x84
   .set  Arch_FighterFunc_onLanding,0x88
+  .set  Arch_FighterFunc_onFSmash,0x8C
+  .set  Arch_FighterFunc_onUSmash,0x90
+  .set  Arch_FighterFunc_onDSmash,0x94
 .set  Arch_FGM,0x10
   .set  Arch_FGM_Files,0x0
   .set  Arch_FGM_Flags,0x4
@@ -147,8 +154,13 @@
 .set  OFST_onDoubleJump,0xA0
 .set  OFST_onZair,0xA4
 .set  OFST_onLanding,0xA8
+.set  OFST_onWallJump,0xAC
+.set  OFST_GmRstPointers,0xB0
+.set  OFST_onFSmash,0xB4
+.set  OFST_onUSmash,0xB8
+.set  OFST_onDSmash,0xBC
 #Kirby
-.set  OFST_KirbyHatFileNames,OFST_onLanding+0x4
+.set  OFST_KirbyHatFileNames,OFST_onDSmash+0x4
 .set  OFST_KirbyHatCostumeFileNames,OFST_KirbyHatFileNames+0x4
 .set  OFST_KirbyHatEffectFileIDs,OFST_KirbyHatCostumeFileNames+0x4
 .set  OFST_KirbyAbilityCostumeRuntimeStruct,OFST_KirbyHatEffectFileIDs+0x4
@@ -167,6 +179,11 @@
 .set  OFST_Metadata_EffectCount,OFST_Metadata_BGMCount+0x4
 .set  OFST_Metadata,OFST_Metadata_EffectCount+0x4
 .set  OFST_mexData,OFST_Metadata+0x4
+
+
+#Playerdata offsets
+.set  PlayerDataSize,0x2500
+.set  PD_AnimOwner,PlayerDataSize-0x4
 
 /*
 #SSM Struct Offsets

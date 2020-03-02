@@ -7,8 +7,7 @@
 .set  REG_ItemData,29
 
 #If under, return to injection site
-  subi	r5, r3, 208
-  cmpwi r5,29
+  cmpwi r3,CustomItemStart
   blt Injection_Exit
 
 backup
@@ -16,7 +15,7 @@ backup
 #Get this items functions
   lwz r3,OFST_ItemFunctions(rtoc)
   lwz	r4, 0x0010 (REG_ItemGObjData)
-  subi  r4,r4,237
+  subi  r4,r4,CustomItemStart
   mulli r0,r4,0x4
   lwzx  REG_ItemFunctions,r3,r0
 #Get this items dat pointer
@@ -33,3 +32,4 @@ Exit:
   branch  r12,0x80267a88
 
 Injection_Exit:
+  subi	r5, r3, 208
