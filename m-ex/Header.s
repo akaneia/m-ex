@@ -41,6 +41,8 @@
   .set  Arch_Fighter_onWallJump,0x44
   .set  Arch_Fighter_GmRstPointers,0x48
     .set  GmRstPointers_Stride,8
+  .set  Arch_Fighter_MEXItemLookup,0x4C
+    .set  MEXItemLookup_Stride,8
 .set  Arch_FighterFunc,0xC
   .set  Arch_FighterFunc_onLoad,0x0
   .set  Arch_FighterFunc_onDeath,0x4
@@ -98,6 +100,12 @@
 .set  Arch_EffectFiles,0x18
 .set  Arch_EffectAdded,0x1C
 .set  Arch_ItemsAdded,0x20
+  .set  Arch_ItemsAdded_Common,0x0
+  .set  Arch_ItemsAdded_Fighter,0x4
+  .set  Arch_ItemsAdded_Pokemon,0x8
+  .set  Arch_ItemsAdded_Stages,0xC
+  .set  Arch_ItemsAdded_Custom,0x10
+  .set  Arch_ItemsAdded_RuntimeIndex,0x14
 .set  Arch_Kirby,0x24
   .set  Arch_Kirby_AbilityFileNames,0x0
   .set  Arch_Kirby_AbilityRuntimeStruct,0x4
@@ -146,7 +154,7 @@
 .set  OFST_GmRstVictoryTheme,0x80
 .set  OFST_EffectsAdded,0x84
 .set  OFST_ItemsAdded,0x88
-.set  OFST_ItemIndex,0x8C
+.set  OFST_ItemIndex,0x8C #unused
 .set  OFST_AudioGroups,0x90
 .set  OFST_BGMFileNames,0x94
 .set  OFST_ftDataPointers,0x98
