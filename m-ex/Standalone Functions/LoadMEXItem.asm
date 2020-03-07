@@ -36,7 +36,7 @@ Index:
   mulli r4,REG_ArticleID,2
   lhzx r3,r3,r4
 #Get runtime index
-  lwz r4,Arch_ItemsAdded(rtoc)
+  lwz r4,OFST_ItemsAdded(rtoc)
   lwz r4,Arch_ItemsAdded_RuntimeIndex(r4)
 #Correctly index item
   subi  r3,r3,CustomItemStart

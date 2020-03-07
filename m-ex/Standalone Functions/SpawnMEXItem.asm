@@ -11,8 +11,8 @@
 backup
 
 #Backup args
-  mr  REG_PlayerGObj,r3
-  mr  REG_ItemSpawnStruct,r4
+  mr  REG_ItemSpawnStruct,r3
+  mr  REG_PlayerGObj,r4
   lwz REG_ArticleID,0x8(REG_ItemSpawnStruct)
 
 #Get internal ID
@@ -32,13 +32,11 @@ backup
 SpawnItem:
 #Get external item ID from internal
   lwz r3,0x4(REG_MEXItemLookup)
-  lwz r4,0x4(REG_PlayerData)
   mulli r4,REG_ArticleID,2
   lhzx r3,r3,r4
-  sth r3,0x8(REG_ItemSpawnStruct)
+  stw r3,0x8(REG_ItemSpawnStruct)
 #Spawn Item
-  mr  r3,REG_PlayerGObj
-  mr  r4,REG_ItemSpawnStruct
+  mr  r3,REG_ItemSpawnStruct
   branchl r12,0x80268b18
   b Exit
 

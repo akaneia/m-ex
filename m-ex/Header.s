@@ -105,7 +105,8 @@
   .set  Arch_ItemsAdded_Pokemon,0x8
   .set  Arch_ItemsAdded_Stages,0xC
   .set  Arch_ItemsAdded_Custom,0x10
-  .set  Arch_ItemsAdded_RuntimeIndex,0x14
+  .set  Arch_ItemsAdded_Unk,0x14
+  .set  Arch_ItemsAdded_RuntimeIndex,0x18
 .set  Arch_Kirby,0x24
   .set  Arch_Kirby_AbilityFileNames,0x0
   .set  Arch_Kirby_AbilityRuntimeStruct,0x4

@@ -42,9 +42,8 @@ StageItems:
 CustomItems:
   subi  r3,r3,CustomItemStart
   lwz r4,Arch_ItemsAdded_Custom(r4)
-  lwz r5,OFST_mexData(rtoc)
-  lwz r5,Arch_Fighter(r5)
-  lwz r5,Arch_Fighter_MEXItemLookup(r5)
+  lwz r5,OFST_ItemsAdded(rtoc)
+  lwz r5,Arch_ItemsAdded_RuntimeIndex(r5)
   b InitItem
 
 InitItem:
