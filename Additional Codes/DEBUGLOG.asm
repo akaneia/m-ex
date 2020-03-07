@@ -83,43 +83,14 @@ lwz REG_GObjData,0x2C(r3)
   branchl r12,DevelopMode_Text_ResetCursorXY
 #*/
 
-#Get RenderMode struct
-  load  r20,0x804c1d80
+#Check heap
+  lwz	r3, -0x58A0 (r13)
+  branchl r12,0x80344168
+  mr  r5,r3
 #Display
   lwz  r3,0x0(REG_GObjData)
   bl  String
   mflr  r4
-  lwz r5,0x0(r20)
-  branchl r12,0x80302d4c#DevelopText_AddString
-#Display
-  lwz  r3,0x0(REG_GObjData)
-  bl  String
-  mflr  r4
-  lwz r5,0x4(r20)
-  branchl r12,0x80302d4c#DevelopText_AddString
-#Display
-  lwz  r3,0x0(REG_GObjData)
-  bl  String
-  mflr  r4
-  lwz r5,0x8(r20)
-  branchl r12,0x80302d4c#DevelopText_AddString
-#Display
-  lwz  r3,0x0(REG_GObjData)
-  bl  String
-  mflr  r4
-  lwz r5,0xC(r20)
-  branchl r12,0x80302d4c#DevelopText_AddString
-#Display
-  lwz  r3,0x0(REG_GObjData)
-  bl  String
-  mflr  r4
-  lwz r5,0x10(r20)
-  branchl r12,0x80302d4c#DevelopText_AddString
-#Display
-  lwz  r3,0x0(REG_GObjData)
-  bl  String
-  mflr  r4
-  lwz r5,0x14(r20)
   branchl r12,0x80302d4c#DevelopText_AddString
 
 DebugLogThink_Exit:
@@ -159,7 +130,7 @@ blr
 #########################################
 String:
 blrl
-.string "0x%08X\n"
+.string "%d\n bytes free" #08X\n
 .align 2
 
 Exit:
