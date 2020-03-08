@@ -3,69 +3,79 @@
 .include "../Header.s"
 
 .set  REG_ExternalIDCount,12
+.set  REG_ExternalID,3
+.set  REG_CostumeID,5
+
+.set  masterHand,7
+.set  wireMale,6
+.set  wireFemale,5
+.set  gigaBowser,4
+.set  crazyHand,3
+.set  sandbag,2
+.set  popo,1
 
 backup
 
   lwz REG_ExternalIDCount,OFST_Metadata_ExternalIDCount(rtoc)
-  subi  r11,REG_ExternalIDCount,7
 
 #Check if a special character
-  cmpw r3,r11
+  subi  r11,REG_ExternalIDCount,masterHand
+  cmpw REG_ExternalID,r11
   blt NormalCharacter
-  subi  r11,REG_ExternalIDCount,2
-  cmpw r3,r11
-  bgt NormalCharacter
+  subi  r11,REG_ExternalIDCount,popo
+  cmpw REG_ExternalID,r11
+  bge NormalCharacter
 
 SpecialCharacter:
 #Get the starting frame
-  subi  r11,REG_ExternalIDCount,7
-  sub r3,r3,r11
+  subi  r11,REG_ExternalIDCount,masterHand
+  sub REG_ExternalID,REG_ExternalID,r11
   bl  SpecialCharacterFrames
   mflr  r4
-  lbzx  r3,r3,r4
+  lbzx  REG_ExternalID,REG_ExternalID,r4
 #is equal to starting frame + additional characters
   subi  r4,REG_ExternalIDCount,33
-  add r3,r3,r4
+  add REG_ExternalID,REG_ExternalID,r4
   b StockIcon_CastToFloat
 
 NormalCharacter:
 #Check for Sopo
-  subi  r11,REG_ExternalIDCount,1
-  cmpw r3,r11
+  subi  r11,REG_ExternalIDCount,popo
+  cmpw REG_ExternalID,r11
   beq IsPopo
 #Check for Zelda/Sheik
-  cmpwi r3,0x12
+  cmpwi REG_ExternalID,0x12
   beq IsZeldaSheik
-  cmpwi r3,0x13
+  cmpwi REG_ExternalID,0x13
   beq IsZeldaSheik
 #If ID is above sheik, subtract 1
-  ble StockIcon_GetFrame
-  subi  r3,r3,1
+  #ble StockIcon_GetFrame
+  #subi  REG_ExternalID,REG_ExternalID,1
   b StockIcon_GetFrame
 
 IsZeldaSheik:
   cmpwi r4,7
   beq isSheik
 isZelda:
-  li  r3,18
+  li  REG_ExternalID,18
   b StockIcon_GetFrame
 isSheik:
 #is = totalnum-8
-  subi  r3,REG_ExternalIDCount,8
+  subi  REG_ExternalID,REG_ExternalIDCount,4
   b StockIcon_GetFrame
 IsPopo:
-  li  r3,0xE
+  li  REG_ExternalID,0xE
   b StockIcon_GetFrame
 
 StockIcon_GetFrame:
   subi  r11,REG_ExternalIDCount,3
-  mullw	r0, r5, r11
-  add	r3, r3, r0
+  mullw	r0, REG_CostumeID, r11
+  add	REG_ExternalID, REG_ExternalID, r0
 
 StockIcon_CastToFloat:
   lfd	f1, -0x57A0 (rtoc)
-  xoris	r3, r3, 0x8000
-  stw r3,0x84(sp)
+  xoris	REG_ExternalID, REG_ExternalID, 0x8000
+  stw REG_ExternalID,0x84(sp)
   lis r0,0x4330
   stw r0,0x80(sp)
   lfd	f0,0x80(sp)
