@@ -27,7 +27,7 @@ backup
 #Check if exists
   lwz r3,0x0(REG_MEXItemLookup)
   cmpw  REG_ArticleID,r3
-  bgt DoesNotExist
+  bge DoesNotExist
 
 SpawnItem:
 #Get external item ID from internal

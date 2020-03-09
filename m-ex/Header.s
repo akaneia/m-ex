@@ -1,5 +1,5 @@
 #Constants
-.set  CustomEffectStart,1400
+.set  CustomEffectStart,5000
 .set  CustomItemStart,237
 
 .set  NumOfAddedEffects,1
@@ -43,6 +43,8 @@
     .set  GmRstPointers_Stride,8
   .set  Arch_Fighter_MEXItemLookup,0x4C
     .set  MEXItemLookup_Stride,8
+  .set  Arch_Fighter_MEXEffectLookup,0x50
+    .set  MEXEffectLookup_Stride,8
 .set  Arch_FighterFunc,0xC
   .set  Arch_FighterFunc_onLoad,0x0
   .set  Arch_FighterFunc_onDeath,0x4
@@ -98,8 +100,7 @@
   .set  Arch_BGM_MenuPlaylist,0x4
   .set  Arch_BGM_MenuPlaylistNum,0x8
 .set  Arch_EffectFiles,0x18
-.set  Arch_EffectAdded,0x1C
-.set  Arch_ItemsAdded,0x20
+.set  Arch_ItemsAdded,0x1C
   .set  Arch_ItemsAdded_Common,0x0
   .set  Arch_ItemsAdded_Fighter,0x4
   .set  Arch_ItemsAdded_Pokemon,0x8
@@ -107,7 +108,7 @@
   .set  Arch_ItemsAdded_Custom,0x10
   .set  Arch_ItemsAdded_Unk,0x14
   .set  Arch_ItemsAdded_RuntimeIndex,0x18
-.set  Arch_Kirby,0x24
+.set  Arch_Kirby,0x20
   .set  Arch_Kirby_AbilityFileNames,0x0
   .set  Arch_Kirby_AbilityRuntimeStruct,0x4
   .set  Arch_Kirby_AbilityCostumeFileNames,0x8
@@ -153,7 +154,7 @@
 .set  OFST_FtDemoSymbols,0x78
 .set  OFST_SFXNameDef,0x7C
 .set  OFST_GmRstVictoryTheme,0x80
-.set  OFST_EffectsAdded,0x84
+.set  OFST_MEXEffectsLookup,0x84
 .set  OFST_ItemsAdded,0x88
 .set  OFST_ItemIndex,0x8C #unused
 .set  OFST_AudioGroups,0x90

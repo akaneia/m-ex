@@ -49,8 +49,8 @@ NormalCharacter:
   cmpwi REG_ExternalID,0x13
   beq IsZeldaSheik
 #If ID is above sheik, subtract 1
-  #ble StockIcon_GetFrame
-  #subi  REG_ExternalID,REG_ExternalID,1
+  ble StockIcon_GetFrame
+  subi  REG_ExternalID,REG_ExternalID,1
   b StockIcon_GetFrame
 
 IsZeldaSheik:
@@ -61,7 +61,7 @@ isZelda:
   b StockIcon_GetFrame
 isSheik:
 #is = totalnum-8
-  subi  REG_ExternalID,REG_ExternalIDCount,4
+  subi  REG_ExternalID,REG_ExternalIDCount,8
   b StockIcon_GetFrame
 IsPopo:
   li  REG_ExternalID,0xE

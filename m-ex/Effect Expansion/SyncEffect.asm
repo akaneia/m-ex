@@ -2,9 +2,12 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-.set  REG_EffectData,31
 .set  REG_PlayerGObj,30
 .set  REG_EffectID,28
+
+.set  REG_EffectIntID,22
+.set  REG_EffectType,21
+.set  REG_PlayerData,20
 
 #If under, return to injection site
   cmpwi r0,87
@@ -14,16 +17,32 @@
   cmpwi REG_EffectID,CustomEffectStart
   blt Injection_Exit
 
-backup
+#Init
+  backup
+  lwz REG_PlayerData,0x2C(REG_PlayerGObj)
+  subi  REG_EffectIntID,REG_EffectID,CustomEffectStart     #get char effect ID
 
-#Get expanded effect table
-  lwz r3,OFST_EffectsAdded(rtoc)
-  #bl  Test
-  #mflr  r3
+#Get final ID (efFileID*10000) + (externalID-1400)
+  lwz r3,OFST_MnSlChrEffectFileIDs(rtoc)
+  lwz r4,0x4(REG_PlayerData)
+  lbzx  r3,r3,r4
+  mulli r3,r3,1000
+  add REG_EffectID,r3,REG_EffectIntID
+
+#Get effect type
+  lwz r3,OFST_MEXEffectsLookup(rtoc)
+  lwz r4,0x4(REG_PlayerData)
+  mulli r4,r4,MEXEffectLookup_Stride
+  add r4,r3,r4
+#Get effect type from internal
+  lwz r3,0x4(r4)
+  lbzx REG_EffectType,r3,REG_EffectIntID
+#Check if exists
+  lwz r3,0x0(r4)
+  cmpw  REG_EffectIntID,r3
+  bge DoesNotExist
+
 #Get this effects data
-  subi  r0,r28,CustomEffectStart
-  mulli r0,r0,0x8
-  add  REG_EffectData,r3,r0
   bl  SkipJumpTable
 
 #*****************************#
@@ -37,10 +56,9 @@ bl  Effect_FollowJointPos_GroundOrientation
 
 SkipJumpTable:
 #Get effect type
-  lwz r3,0x4(REG_EffectData)
   mflr	r4		#Jump Table Start in r4
 #Get Current Page
-  mulli	r5,r3,0x4		#Each Pointer is 0x4 Long
+  mulli	r5,REG_EffectType,0x4		#Each Pointer is 0x4 Long
   add	r4,r4,r5		#Get Event's Pointer Address
   lwz	r5,0x0(r4)		#Get bl Instruction
   rlwinm	r5,r5,0,6,29		#Mask Bits 6-29 (the offset)
@@ -57,7 +75,7 @@ Effect_Particle:
 #Create Effect
   lwz r6,0x0(r3)
   li  r3,0
-  lwz r5,0x0(REG_EffectData)
+  mr  r5,REG_EffectID
 #Get effect file ID from effect ID
   load  r4,0x10624dd3
   mulhw  r4,r4,r5
@@ -72,7 +90,7 @@ Effect_UseJointPos:
   branchl r12,0x80322620
 #Create Effect
   lwz r5,0x0(r3)
-  lwz r3,0x0(REG_EffectData)
+  mr  r3,REG_EffectID
   mr  r4,REG_PlayerGObj
   branchl r12,0x8005c814
   b Exit
@@ -86,7 +104,7 @@ Effect_UseJointPos_GroundOrientation:
   branchl r12,0x80322620
 #Create Effect
   lwz r5,0x0(r3)
-  lwz r3,0x0(REG_EffectData)
+  mr  r3,REG_EffectID
   mr  r4,REG_PlayerGObj
   branchl r12,0x8005c814
   mr. REG_EffectObj,r3
@@ -97,7 +115,7 @@ Effect_UseJointPos_GroundOrientation:
 
 #Pop some arg off the va_list
   addi	r3, sp, 508 + 0x100
-  li  r4,1
+  li  r4,2
   branchl r12,0x80322620
   lwz r3,0x0(r3)
 #Get roll rotation
@@ -113,7 +131,7 @@ Effect_FollowJointPos:
   branchl r12,0x80322620
 #Create Effect
   lwz r5,0x0(r3)
-  lwz r3,0x0(REG_EffectData)
+  mr  r3,REG_EffectID
   mr  r4,REG_PlayerGObj
   branchl r12,0x8005c3dc
   b Exit
@@ -125,7 +143,7 @@ Effect_FollowJointPosRot:
   branchl r12,0x80322620
 #Create Effect
   lwz r5,0x0(r3)
-  lwz r3,0x0(REG_EffectData)
+  mr  r3,REG_EffectID
   mr  r4,REG_PlayerGObj
   branchl r12,0x8005c5c4
   b Exit
@@ -139,7 +157,7 @@ Effect_FollowJointPos_GroundOrientation:
   branchl r12,0x80322620
 #Create Effect
   lwz r5,0x0(r3)
-  lwz r3,0x0(REG_EffectData)
+  mr  r3,REG_EffectID
   mr  r4,REG_PlayerGObj
   branchl r12,0x8005c1b4
   mr. REG_EffectObj,r3
@@ -178,18 +196,30 @@ Effect_FollowJointPos_GroundOrientation:
   b Exit
 
 ###################################################
+DoesNotExist:
+#OSReport
+  bl  ErrorString
+  mflr  r3
+  mr  r4,REG_EffectIntID
+  branchl r12,0x803456a8
+#Assert
+  bl  Assert_Name
+  mflr  r3
+  li  r4,0
+  load  r5,0x804d3940
+  branchl r12,0x80388220
+Assert_Name:
+  blrl
+  .string "m-ex"
+  .align 2
+ErrorString:
+  blrl
+  .string "Error: Fighter does not have effect ID %d\n"
+  .align 2
+###############################################
 
 Exit:
   restore
   branch  r12,0x80061d08
-
-Test:
-blrl
-#firefox
-.long 51009
-.long 0
-#falcon punch
-.long 51002
-.long 3
 
 Injection_Exit:
