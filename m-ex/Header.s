@@ -84,6 +84,8 @@
   .set  Arch_FighterFunc_onFSmash,0x8C
   .set  Arch_FighterFunc_onUSmash,0x90
   .set  Arch_FighterFunc_onDSmash,0x94
+  .set  Arch_FighterFunc_OnItemPickup,0x98
+  .set  Arch_FighterFunc_OnItemRelease,0x9C
 .set  Arch_FGM,0x10
   .set  Arch_FGM_Files,0x0
   .set  Arch_FGM_Flags,0x4
@@ -169,8 +171,10 @@
 .set  OFST_onFSmash,0xB4
 .set  OFST_onUSmash,0xB8
 .set  OFST_onDSmash,0xBC
+.set  OFST_FighterOnItemPickup,0xC0
+.set  OFST_FighterOnItemRelease,0xC4
 #Kirby
-.set  OFST_KirbyHatFileNames,OFST_onDSmash+0x4
+.set  OFST_KirbyHatFileNames,OFST_FighterOnItemRelease+0x4
 .set  OFST_KirbyHatCostumeFileNames,OFST_KirbyHatFileNames+0x4
 .set  OFST_KirbyHatEffectFileIDs,OFST_KirbyHatCostumeFileNames+0x4
 .set  OFST_KirbyAbilityCostumeRuntimeStruct,OFST_KirbyHatEffectFileIDs+0x4

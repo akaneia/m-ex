@@ -184,6 +184,8 @@ rtocOffsets:
   .hword Arch_FighterFunc,Arch_FighterFunc_onFSmash,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_onUSmash,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_onDSmash,-1
+  .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup,-1
+  .hword Arch_FighterFunc,Arch_FighterFunc_OnItemRelease,-1
   #Kirby
   .hword Arch_Kirby,Arch_Kirby_AbilityFileNames,-1
   .hword Arch_Kirby,Arch_Kirby_AbilityCostumeFileNames,-1
