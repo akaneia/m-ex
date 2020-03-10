@@ -22,8 +22,7 @@ backup
   li  r3,0x348
   branchl r12,HSD_MemAlloc
   mr  r8,r3
-  li  r3,6
-  li  r4,0
+  li  r3,6  li  r4,0
   li  r5,0
   li  r6,20
   li  r7,7
