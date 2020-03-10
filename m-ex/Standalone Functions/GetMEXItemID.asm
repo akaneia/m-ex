@@ -1,27 +1,20 @@
-#To be inserted @ 80268b34
+#To be inserted @ 803d7064
 .include "../../Globals.s"
 .include "../Header.s"
 
-.set  REG_PlayerGObj,30
-.set  REG_ItemSpawnStruct,31
+.set  REG_PlayerGObj,31
+.set  REG_ArticleID,30
 .set  REG_PlayerData,29
 .set  REG_MEXItemLookup,28
-.set  REG_ArticleID,27
 
 backup
 
-#Check if article >=5000
-  lwz REG_ArticleID,0x8(REG_ItemSpawnStruct)
-  cmpwi REG_ArticleID,5000
-  blt Exit
-#Is a custom item, check if a player gobj was passed in
-  lwz REG_PlayerGObj,0x0(REG_ItemSpawnStruct)
-  cmpwi REG_PlayerGObj,0
-  beq Exit
-#Get player data and adjust item ID
-  lwz REG_PlayerData,0x2C(REG_PlayerGObj)
-  subi  REG_ArticleID,REG_ArticleID,5000
+#Backup args
+  mr  REG_PlayerGObj,r3
+  mr  REG_ArticleID,r4
 
+#Get internal ID
+  lwz REG_PlayerData,0x2C(REG_PlayerGObj)
 #Get table from mxdt
   lwz r3,OFST_mexData(rtoc)
   lwz r3,Arch_Fighter(r3)
@@ -32,14 +25,12 @@ backup
 #Check if exists
   lwz r3,0x0(REG_MEXItemLookup)
   cmpw  REG_ArticleID,r3
-  bge DoesNotExist
-
-SpawnItem:
+  bgt DoesNotExist
 #Get external item ID from internal
   lwz r3,0x4(REG_MEXItemLookup)
+  lwz r4,0x4(REG_PlayerData)
   mulli r4,REG_ArticleID,2
   lhzx r3,r3,r4
-  stw r3,0x8(REG_ItemSpawnStruct)
   b Exit
 
 #############################################
@@ -66,6 +57,5 @@ blrl
 ###############################################
 
 Exit:
-  mr  r3,REG_ItemSpawnStruct
   restore
-  li	r0, 0
+  blr
