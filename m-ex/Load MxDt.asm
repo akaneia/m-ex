@@ -185,6 +185,7 @@ rtocOffsets:
   .hword Arch_FighterFunc,Arch_FighterFunc_onUSmash,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_onDSmash,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup,-1
+  .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup2,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemRelease,-1
   #Kirby
   .hword Arch_Kirby,Arch_Kirby_AbilityFileNames,-1
@@ -192,11 +193,12 @@ rtocOffsets:
   .hword Arch_Kirby,Arch_Kirby_EffectIDs,-1
   .hword Arch_Kirby,Arch_Kirby_AbilityCostumeRuntimeStruct,-1
   .hword Arch_Kirby,Arch_Kirby_AbilityRuntimeStruct,-1
-  .hword Arch_Kirby,Arch_Kirby_OnAbilityFunc,-1
-  .hword Arch_Kirby,Arch_Kirby_SpecialN,-1
-  .hword Arch_Kirby,Arch_Kirby_SpecialNAir,-1
-  .hword Arch_Kirby,Arch_Kirby_OnHit,-1
-  .hword Arch_Kirby,Arch_Kirby_InitItem,-1
+  .hword Arch_KirbyFunction,Arch_KirbyFunction_OnAbilityGain,-1
+  .hword Arch_KirbyFunction,Arch_KirbyFunction_OnAbilityLose,-1
+  .hword Arch_KirbyFunction,Arch_Kirby_SpecialN,-1
+  .hword Arch_KirbyFunction,Arch_Kirby_SpecialNAir,-1
+  .hword Arch_KirbyFunction,Arch_Kirby_OnHit,-1
+  .hword Arch_KirbyFunction,Arch_Kirby_InitItem,-1
   #Metadata
   .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
   .hword Arch_Metadata,Arch_Metadata_ExternalIDCount,-1

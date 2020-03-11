@@ -59,11 +59,11 @@
   .set  Arch_FighterFunc_SpecialLw,0x28
   .set  Arch_FighterFunc_SpecialLwAir,0x2C
   .set  Arch_FighterFunc_onAbsorb,0x30
-  .set  Arch_FighterFunc_onItemPickup,0x34
+  .set  Arch_FighterFunc_OnItemPickup,0x34
   .set  Arch_FighterFunc_onMakeItemInvisible,0x38
   .set  Arch_FighterFunc_onMakeItemVisible,0x3C
-  .set  Arch_FighterFunc_onItemDrop,0x40
-  .set  Arch_FighterFunc_onItemCatch,0x44
+  .set  Arch_FighterFunc_OnItemRelease,0x40
+  .set  Arch_FighterFunc_OnItemPickup2,0x44
   .set  Arch_FighterFunc_onUnknownItemRelated,0x48
   .set  Arch_FighterFunc_onUnknownCharacterModelFlags1,0x4C
   .set  Arch_FighterFunc_onUnknownCharacterModelFlags2,0x50
@@ -84,8 +84,6 @@
   .set  Arch_FighterFunc_onFSmash,0x8C
   .set  Arch_FighterFunc_onUSmash,0x90
   .set  Arch_FighterFunc_onDSmash,0x94
-  .set  Arch_FighterFunc_OnItemPickup,0x98
-  .set  Arch_FighterFunc_OnItemRelease,0x9C
 .set  Arch_FGM,0x10
   .set  Arch_FGM_Files,0x0
   .set  Arch_FGM_Flags,0x4
@@ -116,11 +114,13 @@
   .set  Arch_Kirby_AbilityCostumeFileNames,0x8
   .set  Arch_Kirby_AbilityCostumeRuntimeStruct,0xC
   .set  Arch_Kirby_EffectIDs,0x10
-  .set  Arch_Kirby_OnAbilityFunc,0x14
-  .set  Arch_Kirby_SpecialN,0x18
-  .set  Arch_Kirby_SpecialNAir,0x1C
-  .set  Arch_Kirby_OnHit,0x20
-  .set  Arch_Kirby_InitItem,0x24
+.set  Arch_KirbyFunction,0x24
+  .set  Arch_KirbyFunction_OnAbilityGain,0x0
+  .set  Arch_KirbyFunction_OnAbilityLose,0x4
+  .set  Arch_Kirby_SpecialN,0x8
+  .set  Arch_Kirby_SpecialNAir,0xC
+  .set  Arch_Kirby_OnHit,0x10
+  .set  Arch_Kirby_InitItem,0x14
 
 #Offsets
 .set  OFST_MnSlChrIconData,0x0
@@ -172,15 +172,17 @@
 .set  OFST_onUSmash,0xB8
 .set  OFST_onDSmash,0xBC
 .set  OFST_FighterOnItemPickup,0xC0
-.set  OFST_FighterOnItemRelease,0xC4
+.set  OFST_FighterOnItemPickup2,0xC4
+.set  OFST_FighterOnItemRelease,0xC8
 #Kirby
 .set  OFST_KirbyHatFileNames,OFST_FighterOnItemRelease+0x4
 .set  OFST_KirbyHatCostumeFileNames,OFST_KirbyHatFileNames+0x4
 .set  OFST_KirbyHatEffectFileIDs,OFST_KirbyHatCostumeFileNames+0x4
 .set  OFST_KirbyAbilityCostumeRuntimeStruct,OFST_KirbyHatEffectFileIDs+0x4
 .set  OFST_KirbyAbilityRuntimeStruct,OFST_KirbyAbilityCostumeRuntimeStruct+0x4
-.set  OFST_KirbyOnAbilityFunc,OFST_KirbyAbilityRuntimeStruct+0x4
-.set  OFST_KirbySpecialN,OFST_KirbyOnAbilityFunc+0x4
+.set  OFST_KirbyOnAbilityGain,OFST_KirbyAbilityRuntimeStruct+0x4
+.set  OFST_KirbyOnAbilityLose,OFST_KirbyOnAbilityGain+0x4
+.set  OFST_KirbySpecialN,OFST_KirbyOnAbilityLose+0x4
 .set  OFST_KirbySpecialNAir,OFST_KirbySpecialN+0x4
 .set  OFST_KirbyOnHit,OFST_KirbySpecialNAir+0x4
 .set  OFST_KirbyInitItem,OFST_KirbyOnHit+0x4
