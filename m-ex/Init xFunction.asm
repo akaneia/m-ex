@@ -159,7 +159,7 @@ kbFunction_Skip:
   mflr  r4
   branchl r12,0x80380358
   mr.  REG_kbFunction,r3
-  beq kbFunction_Skip
+  beq mexPatch_Skip
 #Reloc
   lwz r3,ftX_InstructionRelocTableCount(REG_kbFunction)  #count
   lwz r4,ftX_Code(REG_kbFunction)                        #code
@@ -222,8 +222,8 @@ Reloc_Loop:
   beq Reloc_LoadAddress
   b Reloc_IncLoop
 Reloc_StaticAddress:
-  lwz r3,0x0(REG_FuncPointer)
-  stw r3,0x0(REG_CodePointer)
+  #lwz r3,0x0(REG_FuncPointer)
+  stw r8,0x0(REG_CodePointer)
   b Reloc_IncLoop
 Reloc_LoadAddress:
 #Now check if the low bits are signed

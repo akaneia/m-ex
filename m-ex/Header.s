@@ -2,11 +2,11 @@
 .set  CustomEffectStart,5000
 .set  CustomItemStart,237
 
-.set  NumOfAddedEffects,1
-.set  NumOfAddedItems,0
-
 #Derived Constants
 .set  SSM_MaxID,100 * 10000
+
+#Custom Functions
+.set Audio_RequestSSMLoad,0x803d705C
 
 #Archive Offsets
 .set  Arch_Metadata,0x0
