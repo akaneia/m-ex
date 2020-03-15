@@ -18,7 +18,9 @@
   .set  Arch_Metadata_SSMCount,0x10
   .set  Arch_Metadata_BGMCount,0x14
   .set  Arch_Metadata_EffectCount,0x18
-.set  Arch_MnSlChr,0x4
+.set  Arch_Menu,0x4
+  .set  Arch_Menu_CSS,0x0
+  .set  Arch_Menu_SSS,0x4
 .set  Arch_Fighter,0x8
   .set  Arch_Fighter_NameText,0x0
   .set  Arch_Fighter_CharFiles,0x4
@@ -121,6 +123,10 @@
   .set  Arch_Kirby_SpecialNAir,0xC
   .set  Arch_Kirby_OnHit,0x10
   .set  Arch_Kirby_InitItem,0x14
+.set  Arch_Map,0x28
+  .set  Arch_Map_StageIDs,0x0
+  .set  Arch_Map_Audio,0x4
+.set  Arch_grFunction,0x2C
 
 #Offsets
 .set  OFST_MnSlChrIconData,0x0
@@ -174,8 +180,14 @@
 .set  OFST_FighterOnItemPickup,0xC0
 .set  OFST_FighterOnItemPickup2,0xC4
 .set  OFST_FighterOnItemRelease,0xC8
+.set  OFST_FighterOnItemRelease,0xC8
+#Map
+.set  OFST_Menu_SSS,OFST_FighterOnItemRelease+0x4
+.set  OFST_Map_StageIDs,OFST_Menu_SSS+0x4
+.set  OFST_Map_Audio,OFST_Map_StageIDs+0x4
+.set  OFST_grFunction,OFST_Map_Audio+0x4
 #Kirby
-.set  OFST_KirbyHatFileNames,OFST_FighterOnItemRelease+0x4
+.set  OFST_KirbyHatFileNames,OFST_grFunction+0x4
 .set  OFST_KirbyHatCostumeFileNames,OFST_KirbyHatFileNames+0x4
 .set  OFST_KirbyHatEffectFileIDs,OFST_KirbyHatCostumeFileNames+0x4
 .set  OFST_KirbyAbilityCostumeRuntimeStruct,OFST_KirbyHatEffectFileIDs+0x4

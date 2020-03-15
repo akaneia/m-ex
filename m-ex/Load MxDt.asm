@@ -136,7 +136,7 @@ blrl
 rtocOffsets:
   blrl
   #indexed by rtoc order
-  .hword Arch_MnSlChr,-1
+  .hword Arch_Menu,Arch_Menu_CSS,-1
   .hword Arch_Fighter,Arch_Fighter_NameText,-1
   .hword Arch_Fighter,Arch_Fighter_DefineIDs,-1
   .hword Arch_Fighter,Arch_Fighter_CostumeFileSymbols,-1
@@ -187,6 +187,11 @@ rtocOffsets:
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup2,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemRelease,-1
+  #Map
+  .hword  Arch_Menu,Arch_Menu_SSS,-1
+  .hword  Arch_Map,Arch_Map_StageIDs,-1
+  .hword  Arch_Map,Arch_Map_Audio,-1
+  .hword  Arch_grFunction,-1
   #Kirby
   .hword Arch_Kirby,Arch_Kirby_AbilityFileNames,-1
   .hword Arch_Kirby,Arch_Kirby_AbilityCostumeFileNames,-1
