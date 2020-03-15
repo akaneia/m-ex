@@ -7,6 +7,10 @@
 .set  REG_MatchInfo,31
 .set  REG_Count,28
 
+#Reset cache?
+  li  r3,20
+  branchl r12,0x80026f2c
+
 Loop:
   lbz	r3, 0x0070 (REG_MatchInfo)
 #Check if exits
@@ -22,10 +26,6 @@ LoopInc:
   addi  REG_MatchInfo,REG_MatchInfo,36
   cmpwi REG_Count,6
   blt Loop
-
-#Reset cache?
-  li  r3,20
-  branchl r12,0x80026f2c
 
 #Exit
   branch  r12,Addr_Exit
