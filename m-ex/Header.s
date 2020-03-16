@@ -15,12 +15,14 @@
   .set  Arch_Metadata_InternalIDCount,0x4
   .set  Arch_Metadata_ExternalIDCount,0x8
   .set  Arch_Metadata_CSSIconCount,0xC
-  .set  Arch_Metadata_SSMCount,0x10
-  .set  Arch_Metadata_BGMCount,0x14
-  .set  Arch_Metadata_EffectCount,0x18
+  .set  Arch_Metadata_SSSIconCount,0x10
+  .set  Arch_Metadata_SSMCount,0x14
+  .set  Arch_Metadata_BGMCount,0x18
+  .set  Arch_Metadata_EffectCount,0x1C
 .set  Arch_Menu,0x4
   .set  Arch_Menu_CSS,0x0
   .set  Arch_Menu_SSS,0x4
+    .set  SSS_Stride,0x20
 .set  Arch_Fighter,0x8
   .set  Arch_Fighter_NameText,0x0
   .set  Arch_Fighter_CharFiles,0x4
@@ -180,7 +182,6 @@
 .set  OFST_FighterOnItemPickup,0xC0
 .set  OFST_FighterOnItemPickup2,0xC4
 .set  OFST_FighterOnItemRelease,0xC8
-.set  OFST_FighterOnItemRelease,0xC8
 #Map
 .set  OFST_Menu_SSS,OFST_FighterOnItemRelease+0x4
 .set  OFST_Map_StageIDs,OFST_Menu_SSS+0x4
@@ -202,7 +203,8 @@
 .set  OFST_Metadata_InternalIDCount,OFST_KirbyInitItem+0x4
 .set  OFST_Metadata_ExternalIDCount,OFST_Metadata_InternalIDCount+0x4
 .set  OFST_Metadata_CSSIconCount,OFST_Metadata_ExternalIDCount+0x4
-.set  OFST_Metadata_SSMCount,OFST_Metadata_CSSIconCount+0x4
+.set  OFST_Metadata_SSSIconCount,OFST_Metadata_CSSIconCount+0x4
+.set  OFST_Metadata_SSMCount,OFST_Metadata_SSSIconCount+0x4
 .set  OFST_Metadata_BGMCount,OFST_Metadata_SSMCount+0x4
 .set  OFST_Metadata_EffectCount,OFST_Metadata_BGMCount+0x4
 .set  OFST_Metadata,OFST_Metadata_EffectCount+0x4

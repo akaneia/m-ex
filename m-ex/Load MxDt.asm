@@ -208,6 +208,7 @@ rtocOffsets:
   .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
   .hword Arch_Metadata,Arch_Metadata_ExternalIDCount,-1
   .hword Arch_Metadata,Arch_Metadata_CSSIconCount,-1
+  .hword Arch_Metadata,Arch_Metadata_SSSIconCount,-1
   .hword Arch_Metadata,Arch_Metadata_SSMCount,-1
   .hword Arch_Metadata,Arch_Metadata_BGMCount,-1
   .hword Arch_Metadata,Arch_Metadata_EffectCount,-1
