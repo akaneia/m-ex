@@ -192,6 +192,7 @@ rtocOffsets:
   .hword  Arch_Map,Arch_Map_StageIDs,-1
   .hword  Arch_Map,Arch_Map_Audio,-1
   .hword  Arch_grFunction,-1
+  .hword  Arch_Map,Arch_Map_LineTypeData,-1
   #Kirby
   .hword Arch_Kirby,Arch_Kirby_AbilityFileNames,-1
   .hword Arch_Kirby,Arch_Kirby_AbilityCostumeFileNames,-1
