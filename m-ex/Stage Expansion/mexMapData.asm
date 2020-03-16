@@ -111,8 +111,8 @@ InitIconsModel:
   lwz REG_ThisPosJoint,0x10(REG_PositionsJObj)
   InitIconsModel_Loop:
   #Skip random icon
-    cmpwi REG_Count,RandomIconID
-    beq InitIconsModel_IncLoop
+    #cmpwi REG_Count,RandomIconID
+    #beq InitIconsModel_IncLoop
   #Create GObj
     li  r3,4
     li  r4,5
@@ -148,7 +148,7 @@ InitIconsModel:
   #Attach JObj to nth position model jobj
     mr  r3,REG_JObj
     mr  r4,REG_ThisPosJoint
-    branchl r12,0x8000c1c0
+    branchl r12,0x8000c2f8
   #Store to icon data
     stw REG_JObj,0x0(REG_IconData)
   #Animate based on icon status
