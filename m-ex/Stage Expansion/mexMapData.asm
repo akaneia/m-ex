@@ -148,7 +148,7 @@ InitIconsModel:
   #Attach JObj to nth position model jobj
     mr  r3,REG_JObj
     mr  r4,REG_ThisPosJoint
-    branchl r12,0x8000c2f8
+    bl  JOBjAttach
   #Store to icon data
     stw REG_JObj,0x0(REG_IconData)
   #Animate based on icon status
@@ -254,7 +254,7 @@ InitRandomIcon:
   #Attach
     mr  r3,REG_JObj
     lwz r4,0x80(sp)
-    branchl r12,0x8000c1c0
+    bl  JOBjAttach
   #Anim
     mr  r3,REG_JObj
     lfs	f1, -0x3640 (rtoc)
@@ -287,6 +287,33 @@ mexMapData:
 blrl
 .string "mexMapData"
 .align 2
+
+JOBjAttach:
+.set  REG_ToAttach,31
+.set  REG_AttachTo,30
+#Init
+  backup
+  mr  REG_ToAttach,r3
+  mr  REG_AttachTo,r4
+#Attach rotation and position
+  branchl r12,0x8000c2f8
+
+#Attach Scale
+.set  REG_RObj,29
+  branchl r12,0x8037C444    #alloc robj
+  mr	REG_RObj, r3
+  load  r4,0x90000008
+  branchl r12,0x8037AE90    #set flags
+  addi	r3, REG_RObj, 0
+  addi	r4, REG_AttachTo, 0
+  branchl r12,0x8037CC90
+  addi	r3, REG_ToAttach, 0
+  addi	r4, REG_RObj, 0
+  branchl r12,0x80371C68
+
+JOBjAttach_Exit:
+  restore
+  blr
 
 Original:
   li	r3, 4

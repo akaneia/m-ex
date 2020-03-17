@@ -16,3 +16,5 @@ IDEAS
 -wolf up b hitting walls enters rebound?, ground rebound enters fall?
 -css use icon positions
 -investigate the queue effects function,s try to make char effects work
+
+look into how when holding an item, ragdoll bones snap into place
