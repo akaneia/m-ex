@@ -2,6 +2,7 @@
 .set  CustomEffectStart,5000
 .set  CustomItemStart,237
 .set  RandomIconID,30
+.set  OFST_mexMapData,-0x49F0
 
 #Derived Constants
 .set  SSM_MaxID,100 * 10000

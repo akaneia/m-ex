@@ -1,7 +1,6 @@
 #To be inserted @ 8025aca0
-.include "../../Globals.s"
-.include "../Header.s"
-
+.include "../../../Globals.s"
+.include "../../Header.s"
 #Check for mexMapData
   lwz	r3, -0x4A0C (r13)
   bl  mexMapData
@@ -9,6 +8,8 @@
   branchl r12,0x80380358
   cmpwi r3,0
   beq Original
+#Store pointer
+  stw r3,OFST_mexMapData(r13)
 
 /*
 plan is to go
@@ -247,7 +248,8 @@ InitRandomIcon:
   #Get 28th position model jobj
     mr  r3,REG_PositionsJObj
     addi  r4,sp,0x80
-    li  r5,RandomIconID
+    lwz r5,OFST_Metadata_SSSIconCount(rtoc)
+    #li  r5,7
     li  r6,-1
     crclr 6
     branchl r12,0x80011e24
@@ -316,4 +318,8 @@ JOBjAttach_Exit:
   blr
 
 Original:
+#Store null pointer to mexMapData
+  li  r3,0
+  stw r3,OFST_mexMapData(r13)
+#Orig codeline
   li	r3, 4
