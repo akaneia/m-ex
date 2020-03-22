@@ -112,8 +112,10 @@ InitIconsModel:
   lwz REG_ThisPosJoint,0x10(REG_PositionsJObj)
   InitIconsModel_Loop:
   #Skip random icon
-    #cmpwi REG_Count,RandomIconID
-    #beq InitIconsModel_IncLoop
+    lwz r3,OFST_Metadata_SSSIconCount(rtoc)
+    subi  r3,r3,1
+    cmpw REG_Count,r3
+    beq InitIconsModel_IncLoop
   #Create GObj
     li  r3,4
     li  r4,5
@@ -245,7 +247,7 @@ InitRandomIcon:
     li  r5,0
     li  r6,0
     branchl r12,0x8036fb5c
-  #Get 28th position model jobj
+  #Get last position model jobj
     mr  r3,REG_PositionsJObj
     addi  r4,sp,0x80
     lwz r5,OFST_Metadata_SSSIconCount(rtoc)
@@ -279,7 +281,10 @@ InitRandomIcon:
     branchl r12,0x80364c08
   #Store joint to icon data
     lwz r3,OFST_Menu_SSS(rtoc)
-    stw REG_JObj,SSS_Stride*29(r3)
+    lwz r4,OFST_Metadata_SSSIconCount(rtoc)
+    subi  r4,r4,1
+    mulli r4,r4,SSS_Stride
+    stwx REG_JObj,r4,r3
 
 #Skip original icon init
   restore
