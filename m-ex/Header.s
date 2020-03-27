@@ -9,6 +9,7 @@
 
 #Custom Functions
 .set Audio_RequestSSMLoad,0x803d705C
+.set  GetGrFunction,0x803d7068
 
 #Archive Offsets
 .set  Arch_Metadata,0x0
