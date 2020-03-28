@@ -14,19 +14,31 @@ backup
   lwz REG_ArticleID,0x8(REG_ItemSpawnStruct)
   cmpwi REG_ArticleID,5000
   blt Exit
+#Index
+  subi  REG_ArticleID,REG_ArticleID,5000
 #Is a custom item, check if a player gobj was passed in
   lwz REG_PlayerGObj,0x0(REG_ItemSpawnStruct)
   cmpwi REG_PlayerGObj,0
-  beq Exit
-#Get player data and adjust item ID
-  lwz REG_PlayerData,0x2C(REG_PlayerGObj)
-  subi  REG_ArticleID,REG_ArticleID,5000
-
-#Get table from mxdt
+  beq IsStageItem
+IsFighterItem:
+#Get Fighter MEX Item Lookup
   lwz r3,OFST_mexData(rtoc)
   lwz r3,Arch_Fighter(r3)
   lwz r3,Arch_Fighter_MEXItemLookup(r3)
-  lwz r4,0x4(REG_PlayerData)
+#Get index (fighter internal ID)
+  lwz r4,0x2C(REG_PlayerGObj)
+  lwz r4,0x4(r4)
+  b GetMEXItemID
+IsStageItem:
+#Get index (fighter internal ID)
+  lwz r3,OFST_mexData(rtoc)
+  lwz r3,Arch_Map(r3)
+  lwz r3,Arch_Map_StageItemLookup(r3)
+#No player gobj passed in, assuming this is a stage item
+  load  r4,0x8049e6c8
+  lwz r4,0x88(r4)
+GetMEXItemID:
+#Get table from mxdt
   mulli r4,r4,MEXItemLookup_Stride
   add REG_MEXItemLookup,r3,r4
 #Check if exists

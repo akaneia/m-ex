@@ -132,6 +132,9 @@
   .set  Arch_Map_StageIDs,0x0
   .set  Arch_Map_Audio,0x4
   .set  Arch_Map_LineTypeData,0x8
+  .set  Arch_Map_StageItemLookup,0xC
+    .set  StageItemLookup_Stride,0x8
+  .set  Arch_Map_StageEffectLookup,0x10
 .set  Arch_grFunction,0x2C
 
 #Offsets
