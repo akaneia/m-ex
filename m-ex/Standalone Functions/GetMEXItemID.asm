@@ -2,25 +2,46 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-.set  REG_PlayerGObj,31
+.set  REG_GObj,31
 .set  REG_ArticleID,30
-.set  REG_PlayerData,29
+.set  REG_ID,29
 .set  REG_MEXItemLookup,28
 
 backup
 
 #Backup args
-  mr  REG_PlayerGObj,r3
+  mr  REG_GObj,r3
   mr  REG_ArticleID,r4
 
+#Check if player or stage
+  lhz r3,0x0(REG_GObj)
+  cmpwi r3,4
+  beq isPlayer
+  cmpwi r3,3
+  beq isStage
+  b Unsupported
+
+isPlayer:
 #Get internal ID
-  lwz REG_PlayerData,0x2C(REG_PlayerGObj)
+  lwz r3,0x2C(REG_GObj)
+  lwz REG_ID,0x4(r3)
 #Get table from mxdt
   lwz r3,OFST_mexData(rtoc)
   lwz r3,Arch_Fighter(r3)
   lwz r3,Arch_Fighter_MEXItemLookup(r3)
-  lwz r4,0x4(REG_PlayerData)
-  mulli r4,r4,MEXItemLookup_Stride
+  b Continue
+
+isStage:
+  load  r3,0x8049e6c8
+  lwz REG_ID,0x88(r3)
+#Get table from mxdt
+  lwz r3,OFST_mexData(rtoc)
+  lwz r3,Arch_Map(r3)
+  lwz r3,Arch_Map_StageItemLookup(r3)
+  b Continue
+
+Continue:
+  mulli r4,REG_ID,MEXItemLookup_Stride
   add REG_MEXItemLookup,r3,r4
 #Check if exists
   lwz r3,0x0(REG_MEXItemLookup)
@@ -28,7 +49,6 @@ backup
   bgt DoesNotExist
 #Get external item ID from internal
   lwz r3,0x4(REG_MEXItemLookup)
-  lwz r4,0x4(REG_PlayerData)
   mulli r4,REG_ArticleID,2
   lhzx r3,r3,r4
   b Exit
@@ -55,6 +75,9 @@ blrl
 .string "error: fighter does not have article ID %d\n"
 .align 2
 ###############################################
+
+Unsupported:
+  li  r3,-1
 
 Exit:
   restore

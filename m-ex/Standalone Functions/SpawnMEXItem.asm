@@ -1,9 +1,9 @@
-#To be inserted @ 80268b34
+#To be inserted @ 80268648
 .include "../../Globals.s"
 .include "../Header.s"
 
-.set  REG_PlayerGObj,30
-.set  REG_ItemSpawnStruct,31
+.set  REG_GObj,31
+.set  REG_ItemSpawnStruct,30
 .set  REG_PlayerData,29
 .set  REG_MEXItemLookup,28
 .set  REG_ArticleID,27
@@ -16,21 +16,28 @@ backup
   blt Exit
 #Index
   subi  REG_ArticleID,REG_ArticleID,5000
-#Is a custom item, check if a player gobj was passed in
-  lwz REG_PlayerGObj,0x0(REG_ItemSpawnStruct)
-  cmpwi REG_PlayerGObj,0
+#Check if player or stage
+  lwz REG_GObj,0x0(REG_ItemSpawnStruct)
+  cmpwi REG_GObj,0
   beq IsStageItem
+  lhz r3,0x0(REG_GObj)
+  cmpwi r3,4
+  beq IsFighterItem
+  cmpwi r3,3
+  beq IsStageItem
+  b Unsupported
+
 IsFighterItem:
 #Get Fighter MEX Item Lookup
   lwz r3,OFST_mexData(rtoc)
   lwz r3,Arch_Fighter(r3)
   lwz r3,Arch_Fighter_MEXItemLookup(r3)
 #Get index (fighter internal ID)
-  lwz r4,0x2C(REG_PlayerGObj)
+  lwz r4,0x2C(REG_GObj)
   lwz r4,0x4(r4)
   b GetMEXItemID
 IsStageItem:
-#Get index (fighter internal ID)
+#Get index (stage internal ID)
   lwz r3,OFST_mexData(rtoc)
   lwz r3,Arch_Map(r3)
   lwz r3,Arch_Map_StageItemLookup(r3)
@@ -73,11 +80,11 @@ blrl
 .align 2
 ErrorString:
 blrl
-.string "error: fighter does not have article ID %d\n"
+.string "error: file does not have article ID %d\n"
 .align 2
 ###############################################
+Unsupported:
 
 Exit:
-  mr  r3,REG_ItemSpawnStruct
   restore
-  li	r0, 0
+  lwz	r3, 0x000C (r30)
