@@ -122,6 +122,8 @@ Effect_UseJointPos_GroundOrientation:
   lfs f1,0x0(r3)
 #Store roll rotation
   stfs	f1, 0x0024 (REG_EffectJObj)
+
+  mr  r3,REG_EffectObj
   b Exit
 
 Effect_FollowJointPos:
@@ -193,6 +195,8 @@ Effect_FollowJointPos_GroundOrientation:
   lfs f1,0x0(r3)
 #Store roll rotation
   stfs	f1, 0x0024 (REG_EffectJObj)
+
+  mr  r3,REG_EffectObj
   b Exit
 
 ###################################################
@@ -220,6 +224,7 @@ ErrorString:
 
 Exit:
   restore
+  mr  r31,r3
   branch  r12,0x80061d08
 
 Injection_Exit:
