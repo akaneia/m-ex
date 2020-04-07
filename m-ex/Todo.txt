@@ -18,3 +18,12 @@ IDEAS
 -investigate the queue effects function,s try to make char effects work
 
 look into how when holding an item, ragdoll bones snap into place
+
+
+
+
+Brainstorming how to easily clone fighters with their effects and items.
+- function responsible for creating model effects is 8005be88(gxfID, fighter, position)
+- function responsible for creating particle effects is 8039f05c(unk, effectfile, gxfID)
+maybe i can inject on this functions and swap out the ids. particles will be tricky because there
+are no references to the fighter passed in...
