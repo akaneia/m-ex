@@ -137,6 +137,8 @@
   .set  Arch_Map_StageItemLookup,0xC
     .set  StageItemLookup_Stride,0x8
   .set  Arch_Map_StageEffectLookup,0x10
+  .set  Arch_Map_Playlists,0x14
+    .set  Playlists_Stride,0x8
 .set  Arch_grFunction,0x2C
 
 #Offsets

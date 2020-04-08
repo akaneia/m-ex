@@ -35,7 +35,7 @@ RollRNG:
   mr  r3,REG_PercentTotal
   branchl r12,HSD_Randi
 #Init count loop
-.set  REG_RNG,27
+.set  REG_RNG,26
   mr  REG_RNG,r3
   li  REG_LoopCount,0
   li  REG_PercentTotal,0
