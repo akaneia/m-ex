@@ -34,13 +34,13 @@
   lwz r4,0x4(REG_PlayerData)
   mulli r4,r4,MEXEffectLookup_Stride
   add r4,r3,r4
-#Get effect type from internal
-  lwz r3,0x4(r4)
-  lbzx REG_EffectType,r3,REG_EffectIntID
 #Check if exists
   lwz r3,0x0(r4)
   cmpw  REG_EffectIntID,r3
   bge DoesNotExist
+#Get effect type from internal
+  lwz r3,0x4(r4)
+  lbzx REG_EffectType,r3,REG_EffectIntID
 
 #Get this effects data
   bl  SkipJumpTable
