@@ -80,7 +80,7 @@ blrl
 .align 2
 ErrorString:
 blrl
-.string "error: file does not have article ID %d\n"
+.string "error: MxDt does not have article ID %d\n"
 .align 2
 ###############################################
 Unsupported:
