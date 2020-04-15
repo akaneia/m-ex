@@ -49,6 +49,7 @@ DoesNotExist:
 #OSReport
   bl  ErrorString
   mflr  r3
+  mr  r4,REG_ArticleID
   branchl r12,0x803456a8
 #Assert
   bl  Assert_Name
@@ -62,7 +63,7 @@ blrl
 .align 2
 ErrorString:
 blrl
-.string "Error: MxDt.dat not found on disc\n"
+.string "error: file does not have article ID %d\n"
 .align 2
 ###############################################
 
