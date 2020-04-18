@@ -3,6 +3,7 @@
 .set  CustomItemStart,237
 .set  RandomIconID,30
 .set  OFST_mexMapData,-0x49F0
+.set  OFST_mexSelectChr,-0x4A0C
 
 #Derived Constants
 .set  SSM_MaxID,100 * 10000
@@ -12,6 +13,13 @@
 .set  GetGrFunction,0x803d7068
 .set itFunctionInit,0x803d7070
 .set Reloc,0x803d7074
+
+#mexSelectChr Offsets
+.set  OFST_mexSelectChr,-0x4A0C
+.set  OFST_mexSelectChr_IconJoint,-0x4A10
+.set  SlChr_IconModel,0x0
+.set  SlChr_IconAnimJoint,0x4
+.set  SlChr_IconMatAnim,0x8
 
 #Archive Offsets
 .set  Arch_Metadata,0x0
@@ -54,6 +62,7 @@
     .set  MEXItemLookup_Stride,8
   .set  Arch_Fighter_MEXEffectLookup,0x50
     .set  MEXEffectLookup_Stride,8
+  .set  Arch_Fighter_TargetStage,0x54    
 .set  Arch_FighterFunc,0xC
   .set  Arch_FighterFunc_onLoad,0x0
   .set  Arch_FighterFunc_onDeath,0x4
