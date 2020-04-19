@@ -42,6 +42,7 @@ Loop:
   mulli r3,REG_Count,28
   add REG_ThisIcon,r3,REG_IconData
 
+/*
 #Get this icons joint
   lwz	r3, OFST_mexSelectChr_IconJoint (r13)
   addi  r4,sp,0x80
@@ -50,18 +51,28 @@ Loop:
   crclr	6
   branchl r12,0x80011e24
   lwz  REG_ThisIconJObj,0x80(sp)
+*/
 
+/*
 #Offset definitions
 .set  OFST_X,0xC
 .set  OFST_Width,0x10
 .set  OFST_Y,0x14
 .set  OFST_Height,0x18
+*/
+
+#Offset definitions
+.set  OFST_LeftBound,0xC
+.set  OFST_RightBound,0x10
+.set  OFST_TopBound,0x14
+.set  OFST_BottomBound,0x18
 
 #Get all floats
 .set  REG_LeftBound,9
 .set  REG_RightBound,8
 .set  REG_BottomBound,7
 .set  REG_TopBound,6
+/*
 #Determine left bound
   lfs f1,0x38(REG_ThisIconJObj)
   lfs f2,OFST_X(REG_ThisIcon)
@@ -76,6 +87,13 @@ Loop:
 #Determine top bound
   lfs f1,OFST_Height(REG_ThisIcon)
   fadds REG_TopBound,REG_BottomBound,f1
+*/
+
+#Load boundaries
+  lfs REG_LeftBound,OFST_LeftBound(REG_ThisIcon)
+  lfs REG_RightBound,OFST_RightBound(REG_ThisIcon)
+  lfs REG_TopBound,OFST_TopBound(REG_ThisIcon)
+  lfs REG_BottomBound,OFST_BottomBound(REG_ThisIcon)
 
 #Check if cursor is within bounds of it
 #Check if to the right of the left bound
