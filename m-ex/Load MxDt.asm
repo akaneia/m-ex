@@ -187,6 +187,8 @@ rtocOffsets:
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup2,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemRelease,-1
+  #CSS
+  .hword  Arch_Menu,Arch_Menu_MenuParam,-1
   #Map
   .hword  Arch_Menu,Arch_Menu_SSS,-1
   .hword  Arch_Map,Arch_Map_StageIDs,-1

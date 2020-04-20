@@ -25,11 +25,19 @@ LoopStart:
   li  REG_Count,0
 #Get icon count
   lwz REG_NumOfIcons,OFST_Metadata_CSSIconCount(rtoc)
-#Adjust cursor position
+
+#Get scalar
+  lwz r3,OFST_Menu_Param(rtoc)
+  lfs f3,Arch_Menu_MenuParam(r3)
+#Get offset
   bl  Floats
   mflr  r3
   lfs f1,0x4(r3)
   lfs f2,0x8(r3)
+#Mult scale
+  #fmuls f1,f1,f3
+  #fmuls f2,f2,f3
+#Add
   lfs REG_CursorX,0x0C(REG_CursorData)     #get cursor X pos
   lfs REG_CursorY,0x10(REG_CursorData)     #get cursor Y pos
   fadds REG_CursorX,REG_CursorX,f1
@@ -135,8 +143,8 @@ NotFound:
 Floats:
 blrl
 .float 2         #2
-.float 2      #X offset
-.float -1.25      #Y offset
+.float 2.2    #X offset
+.float -2.5 #Y offset
 .align 2
 
 Original:

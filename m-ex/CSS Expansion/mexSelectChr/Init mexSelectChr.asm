@@ -7,6 +7,24 @@
   cmpwi r3,0
   beq Original
 
+#Get floats
+  lwz r3,OFST_Menu_Param(rtoc)
+  lfs f2,Arch_Menu_MenuParam(r3)
+  bl  Floats
+  mflr  r3
+
+#Scale puck collision radius
+  lfs f1,0x0(r3)
+  fmuls f1,f1,f2
+  stfs  f1,-0x34AC(rtoc)
+#Scale puck pickup radius
+  lfs f1,0x4(r3)
+  fmuls f1,f1,f2
+  stfs  f1,-0x34CC(rtoc)
+#Scale puck icon bound radius
+  lfs f1,0x8(r3)
+  fmuls f1,f1,f2
+  stfs  f1,-0x35CC(rtoc)
 
 .set REG_IconData,31
 .set REG_LoopCount,30
@@ -111,6 +129,12 @@ InitPositionsModel:
 #Skip Original Code
   restore
   branch  r12,0x80264924
+
+Floats:
+blrl
+.float 8      #puck collision radius
+.float  9     #puck pickup radius
+.float  1.5     #icon boundary radius
 
 Original:
   addi	r20, r20, 220

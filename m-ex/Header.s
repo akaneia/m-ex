@@ -33,7 +33,8 @@
   .set  Arch_Metadata_BGMCount,0x18
   .set  Arch_Metadata_EffectCount,0x1C
 .set  Arch_Menu,0x4
-  .set  Arch_Menu_Param,0x0
+  .set  Arch_Menu_MenuParam,0x0
+    .set  MenuParam_HandScale,0x0
   .set  Arch_Menu_CSS,0x4
   .set  Arch_Menu_SSS,0x8
     .set  SSS_Stride,0x20
@@ -203,8 +204,10 @@
 .set  OFST_FighterOnItemPickup,0xC0
 .set  OFST_FighterOnItemPickup2,0xC4
 .set  OFST_FighterOnItemRelease,0xC8
+#Chr
+.set  OFST_Menu_Param,OFST_FighterOnItemRelease+0x4
 #Map
-.set  OFST_Menu_SSS,OFST_FighterOnItemRelease+0x4
+.set  OFST_Menu_SSS,OFST_Menu_Param+0x4
 .set  OFST_Map_StageIDs,OFST_Menu_SSS+0x4
 .set  OFST_Map_Audio,OFST_Map_StageIDs+0x4
 .set  OFST_grFunction,OFST_Map_Audio+0x4
