@@ -143,8 +143,8 @@ NotFound:
 Floats:
 blrl
 .float 2         #2
-.float 2.2    #X offset
-.float -2.5 #Y offset
+.float 2.7      #X offset
+.float -2       #Y offset
 .align 2
 
 Original:

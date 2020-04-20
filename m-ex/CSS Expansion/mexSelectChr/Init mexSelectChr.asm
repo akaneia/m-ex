@@ -25,6 +25,10 @@
   lfs f1,0x8(r3)
   fmuls f1,f1,f2
   stfs  f1,-0x35CC(rtoc)
+#Scale cursor speed
+  lfs f1,0xC(r3)
+  fmuls f1,f1,f2
+  stfs  f1,-0x3560(rtoc)
 
 .set REG_IconData,31
 .set REG_LoopCount,30
@@ -135,6 +139,7 @@ blrl
 .float 8      #puck collision radius
 .float  9     #puck pickup radius
 .float  1.5     #icon boundary radius
+.float 0.0002   #cursor speed
 
 Original:
   addi	r20, r20, 220
