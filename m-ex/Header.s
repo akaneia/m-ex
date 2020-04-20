@@ -33,8 +33,9 @@
   .set  Arch_Metadata_BGMCount,0x18
   .set  Arch_Metadata_EffectCount,0x1C
 .set  Arch_Menu,0x4
-  .set  Arch_Menu_CSS,0x0
-  .set  Arch_Menu_SSS,0x4
+  .set  Arch_Menu_Param,0x0
+  .set  Arch_Menu_CSS,0x4
+  .set  Arch_Menu_SSS,0x8
     .set  SSS_Stride,0x20
 .set  Arch_Fighter,0x8
   .set  Arch_Fighter_NameText,0x0
@@ -62,7 +63,7 @@
     .set  MEXItemLookup_Stride,8
   .set  Arch_Fighter_MEXEffectLookup,0x50
     .set  MEXEffectLookup_Stride,8
-  .set  Arch_Fighter_TargetStage,0x54    
+  .set  Arch_Fighter_TargetStage,0x54
 .set  Arch_FighterFunc,0xC
   .set  Arch_FighterFunc_onLoad,0x0
   .set  Arch_FighterFunc_onDeath,0x4
