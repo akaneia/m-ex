@@ -8,7 +8,7 @@
   beq Original
 
 #Skip Original Code
-  branch  r12,0x802647d0
+  branch  r12,0x802647fc
 
 Original:
   li	r3, 7
