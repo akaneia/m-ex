@@ -30,6 +30,31 @@
   fmuls f1,f1,f2
   stfs  f1,-0x3560(rtoc)
 
+#Store PlayerCard->IconGrid Y boundary
+  #stfs  f1,-0x353C(rtoc)
+
+#Store rules X left boundary (y is checked at 802616f0)
+  #stfs  f1,-0x3510(rtoc)
+#Store rules X right boundary (y is checked at 802616f0)
+  #stfs  f1,-0x3568(rtoc)
+
+#Store back X left boundary (y is checked at 8026128c)
+  #stfs  f1,-0x3518(rtoc)
+
+#Store Teams X right boundary (y is checked at 8026177c)
+  #stfs  f1,-0x350C(rtoc)
+
+#Store Nametag Scale XY
+  #stfs  f1,-0x3430(rtoc)
+  #stfs  f1,-0x342C(rtoc)
+
+#Store Nametag XY Shift
+  #stfs  f1,-0x3580(rtoc)
+  #stfs  f1,-0x3418(rtoc)
+
+#Store Rules Y bottom boundary (used for all rules Y requirement)
+  #stfs  f1,-0x3514(rtoc)
+
 .set REG_IconData,31
 .set REG_LoopCount,30
 .set REG_mexIconData,29
@@ -105,14 +130,13 @@ InitPositionsModel:
     lwz r5,SlChr_IconMatAnim(REG_mexSelectChr)
     li  r6,0
     branchl r12,0x8036fb5c
-  /*
+
   #Play animation
     mr  r3,REG_IconsJObj
     lfs	f1, -0x3640 (rtoc)
     branchl r12,0x8036f8bc
     mr  r3,REG_IconsJObj
     branchl r12,0x80370928
-  */
   /*
   #Store pointer to all children
   .set  REG_ThisJObj,22
