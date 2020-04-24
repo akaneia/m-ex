@@ -68,7 +68,7 @@ IsPopo:
   b StockIcon_GetFrame
 
 StockIcon_GetFrame:
-  subi  r11,REG_ExternalIDCount,3
+  subi  r11,REG_ExternalIDCount,HUD_Stride
   mullw	r0, REG_CostumeID, r11
   add	REG_ExternalID, REG_ExternalID, r0
 

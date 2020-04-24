@@ -8,6 +8,6 @@
 
 StockIcon_GetFrame:
   lwz REG_ExternalIDCount,OFST_Metadata_ExternalIDCount(rtoc)
-  subi  r4,REG_ExternalIDCount,3
+  subi  r4,REG_ExternalIDCount,HUD_Stride 
   mullw	r0, REG_CostumeID, r4
   add	REG_ExternalID, REG_ExternalID, r0

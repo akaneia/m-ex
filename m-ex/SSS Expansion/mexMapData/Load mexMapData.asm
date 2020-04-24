@@ -326,5 +326,15 @@ Original:
 #Store null pointer to mexMapData
   li  r3,0
   stw r3,OFST_mexMapData(r13)
+
+/*
+# Use original SSS Struct
+  load  r3,0x803f06d0
+  stw r3,OFST_Menu_SSS(rtoc)
+# Use original Stage Icon count
+  load  r3,29
+  stw r3,OFST_Metadata_SSSIconCount(rtoc)
+*/
+
 #Orig codeline
   li	r3, 4

@@ -166,4 +166,13 @@ blrl
 .float 0.0002   #cursor speed
 
 Original:
+/*
+# Use original Icon Struct
+  load  r3,0x803f0b24
+  stw r3,OFST_MnSlChrIconData(rtoc)
+# Use original Icon count
+  li  r3,26
+  stw r3,OFST_Metadata_CSSIconCount(rtoc)
+*/
+# Original code
   addi	r20, r20, 220
