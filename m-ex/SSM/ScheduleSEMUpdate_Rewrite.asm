@@ -17,16 +17,20 @@ LoopStart:
   lwz REG_SSMTotal,OFST_Metadata_SSMCount(rtoc)
   addi  REG_SSMTotal,REG_SSMTotal,1
 Loop:
+# check if this ssm belongs to the current audio group
   lbz	r0, 0x0001 (REG_DOLStruct)   #get 0x1 of unk ssm struct
   extsb	r0, r0
   cmpw	REG_AudioGroup, r0
   bne IncLoop
+# check if this ssm should be loaded
   lwz	r0, 0 (REG_DisposableCopy)
   cmpwi	r0, 1
   bne IncLoop
+# check if this ssm is NOT loaded
   lwz	r0, 0 (REG_PersistentOrig)
   cmpwi	r0, -1
   bne IncLoop
+# exit
   blr
 IncLoop:
   addi  REG_DOLStruct,REG_DOLStruct,4

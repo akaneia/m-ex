@@ -15,16 +15,20 @@ LoopStart:
   lwz r7,Arch_SSMRuntimeStruct_PersistentOrig(r7)
   li  REG_Count,0
 Loop:
+# check if this ssm belongs to the current audio group
   lbz	r0, 0x0001 (r5)   #get 0x1 of unk ssm struct
   extsb	r0, r0
   cmpw	r3, r0
   bne IncLoop
+# check if this ssm should be loaded
   lwz	r0, 0 (r6)
   cmpwi	r0, 1
   bne IncLoop
+# check if this ssm is NOT loaded
   lwz	r0, 0 (r7)
   cmpwi	r0, -1
   bne IncLoop
+# load this ssm
   branch  r12,0x80026df8
 IncLoop:
   addi  r4,r4,1
