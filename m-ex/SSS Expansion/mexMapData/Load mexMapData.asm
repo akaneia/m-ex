@@ -97,8 +97,8 @@ InitStageUnlock:
   #Inc Loop
     addi  REG_IconData,REG_IconData,SSS_Stride
     addi  REG_Count,REG_Count,1
-    #lwz r3,OFST_Metadata_SSSIconCount(rtoc)
-    cmpwi REG_Count,29
+    lwz r3,OFST_Metadata_SSSIconCount(rtoc)
+    cmpw REG_Count,r3
     blt InitStageUnlock_Loop
 
 InitIconsModel:
