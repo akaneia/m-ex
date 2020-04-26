@@ -14,6 +14,7 @@
 .set  GetGrFunction,0x803d7068
 .set itFunctionInit,0x803d7070
 .set Reloc,0x803d7074
+.set  SFX_PlayStageSFX,0x803d7078
 
 #mexSelectChr Offsets
 .set  OFST_mexSelectChr,-0x4A0C
