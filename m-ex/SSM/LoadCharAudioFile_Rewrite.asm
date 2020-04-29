@@ -9,7 +9,7 @@ LoopStart:
   lwz REG_SSMTotal,OFST_Metadata_SSMCount(rtoc)
   addi  REG_SSMTotal,REG_SSMTotal,1
   li  r4,0
-  addi	r5, r31, 720
+  lwz r5,OFST_AudioGroups(rtoc)
   lwz r7,OFST_SSMStruct(rtoc)
   lwz r6,Arch_SSMRuntimeStruct_DisposableCopy(r7)
   lwz r7,Arch_SSMRuntimeStruct_PersistentOrig(r7)

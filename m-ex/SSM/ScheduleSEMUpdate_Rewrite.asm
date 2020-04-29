@@ -11,7 +11,7 @@
 
 LoopStart:
   li  REG_Count,0
-  mr  REG_DOLStruct,r6
+  lwz REG_DOLStruct,OFST_AudioGroups(rtoc)
   mr  REG_DisposableCopy,r5
   mr  REG_PersistentOrig,r4
   lwz REG_SSMTotal,OFST_Metadata_SSMCount(rtoc)

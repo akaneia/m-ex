@@ -2,6 +2,11 @@
 .include "../../../Globals.s"
 .include "../../Header.s"
 
+#804337c4
+#804338a4
+#80433984
+#80433a64
+
 #180 / 0xB4 = SSM_DisposableOrig_OFST
 #404 / 0x194 = SSM_DisposableCopy_OFST
 #628 / 0x274 = SSM_PersistentOrig_OFST
