@@ -7,4 +7,4 @@
 .set  REG_Offset,31
 
 lwz REG_Offset,OFST_SSMStruct(rtoc)
-lwz REG_Offset,Arch_SSMRuntimeStruct_DisposableOrig(REG_Offset)
+lwz REG_Offset,Arch_SSMRuntimeStruct_ToLoadOrig(REG_Offset)

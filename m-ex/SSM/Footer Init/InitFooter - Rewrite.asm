@@ -2,7 +2,7 @@
 .include "../../../Globals.s"
 .include "../../Header.s"
 
-#180 / 0xB4 = DisposableOrig
+#180 / 0xB4 = ToLoadOrig
 #404 / 0x194 = Disposable Copy
 #628 / 0x274 = Persist Orig
 #852 / 0x354 = Persist Copy
@@ -79,6 +79,7 @@ AudioGroup_LoopInit:
   mr  REG_TempStruct,REG_MemAlloc
   lwz REG_BankSizes,OFST_SSMBankSizes(rtoc)
 AudioGroup_Loop:
+# check if this ssm is in the current group
   lbz r0,0(REG_AudioGroups)
   extsb r0,r0
   cmpw  REG_CurrAudioGroup,r0
@@ -87,7 +88,8 @@ AudioGroup_Loop:
   lwz r0,0x0(REG_TempStruct)
   cmpwi r0,0
   bne AudioGroup_LoopInc
-#compare banksize[i] with banksize[footer[i]]
+# compare banksize[i] with banksize[footer[i]]
+# check if this ssm banksize is greater than the tempstructs' ssm banksize
   lwz r0,0(REG_BankSizes)
   lwz r3,0(REG_FooterCurr)
   rlwinm	r3, r3, 3, 0, 28
@@ -96,6 +98,7 @@ AudioGroup_Loop:
   cmplw r3,r0
   bge AudioGroup_LoopInc
 
+# insert this ssm above it
 #Shift stuff around now
 AudioGroup_ShiftInit:
 .set  REG_ShiftCount,12

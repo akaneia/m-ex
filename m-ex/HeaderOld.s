@@ -90,17 +90,17 @@ NewChar1:
 .set  SSM_Header_OFST,0x0
   .set  SSM_Header_Length,45*4
 #Disposable Orig
-.set  SSM_DisposableOrig_OFST, SSM_Header_OFST + SSM_Header_Length
-  .set  SSM_DisposableOrig_Length, (55 + NumOfAddedChars) * 4
+.set  SSM_ToLoadOrig_OFST, SSM_Header_OFST + SSM_Header_Length
+  .set  SSM_ToLoadOrig_Length, (55 + NumOfAddedChars) * 4
 #Disposable Copy
-.set  SSM_DisposableCopy_OFST, SSM_DisposableOrig_OFST + SSM_DisposableOrig_Length
-  .set  SSM_DisposableCopy_Length, (55 + NumOfAddedChars) * 4
+.set  SSM_ToLoadCopy_OFST, SSM_ToLoadOrig_OFST + SSM_ToLoadOrig_Length
+  .set  SSM_ToLoadCopy_Length, (55 + NumOfAddedChars) * 4
 #Persist Orig
-.set  SSM_PersistentOrig_OFST, SSM_DisposableCopy_OFST + SSM_DisposableCopy_Length
-  .set  SSM_PersistentOrig_Length, (55 + NumOfAddedChars) * 4
+.set  SSM_IsLoadedOrig_OFST, SSM_ToLoadCopy_OFST + SSM_ToLoadCopy_Length
+  .set  SSM_IsLoadedOrig_Length, (55 + NumOfAddedChars) * 4
 #Persist Copy
-.set  SSM_PersistentCopy_OFST, SSM_PersistentOrig_OFST + SSM_PersistentOrig_Length
-  .set  SSM_PersistentCopy_Length, (55 + NumOfAddedChars) * 4
+.set  SSM_IsLoadedCopy_OFST, SSM_IsLoadedOrig_OFST + SSM_IsLoadedOrig_Length
+  .set  SSM_IsLoadedCopy_Length, (55 + NumOfAddedChars) * 4
 #Unk
-.set  SSM_Footer_OFST, SSM_PersistentCopy_OFST + SSM_PersistentCopy_Length
+.set  SSM_Footer_OFST, SSM_IsLoadedCopy_OFST + SSM_IsLoadedCopy_Length
   .set  SSM_Footer_Length, (56 + NumOfAddedChars) * 4

@@ -2,7 +2,7 @@
 .include "../../../Globals.s"
 .include "../../Header.s"
 
-#180 = DisposableOrig
+#180 = ToLoadOrig
 #404 = Disposable Copy
 #628 = Persist Orig
 #852 = Persist Copy
@@ -17,10 +17,10 @@
 
 #Init Loop
   lwz r12,OFST_SSMStruct(rtoc)
-  lwz REG_PersCopy,Arch_SSMRuntimeStruct_PersistentCopy(r12)
-  lwz REG_DispOrig,Arch_SSMRuntimeStruct_DisposableOrig(r12)
-  lwz REG_DispCopy,Arch_SSMRuntimeStruct_DisposableCopy(r12)
-  lwz REG_PersOrig,Arch_SSMRuntimeStruct_PersistentOrig(r12)
+  lwz REG_PersCopy,Arch_SSMRuntimeStruct_IsLoadedCopy(r12)
+  lwz REG_DispOrig,Arch_SSMRuntimeStruct_ToLoadOrig(r12)
+  lwz REG_DispCopy,Arch_SSMRuntimeStruct_ToLoadCopy(r12)
+  lwz REG_PersOrig,Arch_SSMRuntimeStruct_IsLoadedOrig(r12)
   li  REG_Count,0
   li  r0,-1
   lwz REG_TotalSSM,OFST_Metadata_SSMCount(rtoc)

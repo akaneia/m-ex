@@ -2,7 +2,7 @@
 .include "../../../Globals.s"
 .include "../../Header.s"
 
-#180 = DisposableOrig
+#180 = ToLoadOrig
 #404 = Disposable Copy
 #628 = Persist Orig
 #852 = Persist Copy
@@ -12,5 +12,5 @@
 
 #Get persistent orig struct
   lwz REG_Struct,OFST_SSMStruct(rtoc)
-  lwz REG_Struct,Arch_SSMRuntimeStruct_PersistentOrig(REG_Struct)
+  lwz REG_Struct,Arch_SSMRuntimeStruct_IsLoadedOrig(REG_Struct)
   stw	r3, SSMID*4 (REG_Struct)

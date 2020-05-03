@@ -11,8 +11,8 @@ LoopStart:
   li  r4,0
   lwz r5,OFST_AudioGroups(rtoc)
   lwz r7,OFST_SSMStruct(rtoc)
-  lwz r6,Arch_SSMRuntimeStruct_DisposableCopy(r7)
-  lwz r7,Arch_SSMRuntimeStruct_PersistentOrig(r7)
+  lwz r6,Arch_SSMRuntimeStruct_ToLoadCopy(r7)
+  lwz r7,Arch_SSMRuntimeStruct_IsLoadedOrig(r7)
   li  REG_Count,0
 Loop:
 # check if this ssm belongs to the current audio group

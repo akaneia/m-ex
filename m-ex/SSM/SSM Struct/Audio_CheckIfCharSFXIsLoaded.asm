@@ -7,4 +7,4 @@
 .set  REG_Offset,4
 
 lwz REG_Offset,OFST_SSMStruct(rtoc)
-lwz r0,Arch_SSMRuntimeStruct_PersistentOrig(REG_Offset)
+lwz r0,Arch_SSMRuntimeStruct_IsLoadedOrig(REG_Offset)

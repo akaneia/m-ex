@@ -4,16 +4,16 @@
 
 .set  REG_Count,3
 .set  REG_DOLStruct,7
-.set  REG_DisposableCopy,8
-.set  REG_PersistentOrig,9
+.set  REG_ToLoadCopy,8
+.set  REG_IsLoadedOrig,9
 .set  REG_AudioGroup,10
 .set  REG_SSMTotal,11
 
 LoopStart:
   li  REG_Count,0
   lwz REG_DOLStruct,OFST_AudioGroups(rtoc)
-  mr  REG_DisposableCopy,r5
-  mr  REG_PersistentOrig,r4
+  mr  REG_ToLoadCopy,r5
+  mr  REG_IsLoadedOrig,r4
   lwz REG_SSMTotal,OFST_Metadata_SSMCount(rtoc)
   addi  REG_SSMTotal,REG_SSMTotal,1
 Loop:
@@ -23,19 +23,19 @@ Loop:
   cmpw	REG_AudioGroup, r0
   bne IncLoop
 # check if this ssm should be loaded
-  lwz	r0, 0 (REG_DisposableCopy)
+  lwz	r0, 0 (REG_ToLoadCopy)
   cmpwi	r0, 1
   bne IncLoop
 # check if this ssm is NOT loaded
-  lwz	r0, 0 (REG_PersistentOrig)
+  lwz	r0, 0 (REG_IsLoadedOrig)
   cmpwi	r0, -1
   bne IncLoop
 # exit
   blr
 IncLoop:
   addi  REG_DOLStruct,REG_DOLStruct,4
-  addi	REG_DisposableCopy, REG_DisposableCopy, 4
-  addi	REG_PersistentOrig, REG_PersistentOrig, 4
+  addi	REG_ToLoadCopy, REG_ToLoadCopy, 4
+  addi	REG_IsLoadedOrig, REG_IsLoadedOrig, 4
   addi  REG_Count,REG_Count,1
   cmpw REG_Count, REG_SSMTotal
   blt Loop

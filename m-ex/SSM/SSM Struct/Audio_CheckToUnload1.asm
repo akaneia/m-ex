@@ -6,5 +6,5 @@
 
 
 lwz r6,OFST_SSMStruct(rtoc)
-lwz r5,Arch_SSMRuntimeStruct_DisposableCopy(r6)
-lwz r6,Arch_SSMRuntimeStruct_PersistentOrig(r6)
+lwz r5,Arch_SSMRuntimeStruct_ToLoadCopy(r6)
+lwz r6,Arch_SSMRuntimeStruct_IsLoadedOrig(r6)

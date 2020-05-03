@@ -3,8 +3,8 @@
 .include "../Header.s"
 
 .set  REG_Count,5
-.set  REG_DisposableOrig,3
-.set  REG_DisposableCopy,4
+.set  REG_ToLoadOrig,3
+.set  REG_ToLoadCopy,4
 .set  REG_SSMTotal,12
 
 LoopStart:
@@ -12,11 +12,11 @@ LoopStart:
   lwz REG_SSMTotal,OFST_Metadata_SSMCount(rtoc)
   addi  REG_SSMTotal,REG_SSMTotal,1
 Loop:
-  lwz r0,0x0(REG_DisposableOrig)
-  stw r0,0x0(REG_DisposableCopy)
+  lwz r0,0x0(REG_ToLoadOrig)
+  stw r0,0x0(REG_ToLoadCopy)
 IncLoop:
-  addi	REG_DisposableOrig, REG_DisposableOrig, 4
-  addi	REG_DisposableCopy, REG_DisposableCopy, 4
+  addi	REG_ToLoadOrig, REG_ToLoadOrig, 4
+  addi	REG_ToLoadCopy, REG_ToLoadCopy, 4
   addi  REG_Count,REG_Count,1
   cmpw REG_Count, REG_SSMTotal
   blt Loop

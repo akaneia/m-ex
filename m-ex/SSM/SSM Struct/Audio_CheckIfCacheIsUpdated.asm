@@ -5,5 +5,5 @@
 #orig pointer is 80433710, indicated by addi 14096
 
 lwz r4,OFST_SSMStruct(rtoc)
-lwz r5,Arch_SSMRuntimeStruct_DisposableCopy(r4)
-lwz r4,Arch_SSMRuntimeStruct_PersistentOrig(r4)
+lwz r5,Arch_SSMRuntimeStruct_ToLoadCopy(r4)
+lwz r4,Arch_SSMRuntimeStruct_IsLoadedOrig(r4)
