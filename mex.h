@@ -389,27 +389,31 @@ struct CollData
     int x140;                // 0x140
     int x144;                // 0x144
     int x148;                // 0x148
-    int x14c;                // 0x14c
-    int x150;                // 0x150
-    int x154;                // 0x154
-    int x158;                // 0x158
-    int x15c;                // 0x15c
-    int x160;                // 0x160
-    int x164;                // 0x164
-    int x168;                // 0x168
-    int x16c;                // 0x16c
-    int x170;                // 0x170
-    int x174;                // 0x174
-    int x178;                // 0x178
-    int x17c;                // 0x17c
-    int x180;                // 0x180
-    int x184;                // 0x184
-    int x188;                // 0x188
-    int x18c;                // 0x18c
-    int x190;                // 0x190
-    int x194;                // 0x194
-    int x198;                // 0x198
-    int x19c;                // 0x19c
+    int ground_index;        // 0x14c, ground
+    u8 ground_info;          // 0x150
+    u8 ground_unk;           // 0x151
+    u8 ground_type;          // 0x152, platform/ledgegrab
+    u8 ground_mat;           // 0x153, grass/ice etc
+    Vec3 ground_slope;       // 0x154
+    int rightwall_index;     // 0x160
+    u8 rightwall_info;       // 0x164
+    u8 rightwall_unk;        // 0x165
+    u8 rightwall_type;       // 0x166, platform/ledgegrab
+    u8 rightwall_mat;        // 0x167, grass/ice etc
+    Vec3 rightwall_slope;    // 0x168
+    int leftwall_index;      // 0x174
+    u8 leftwall_info;        // 0x178
+    u8 leftwall_unk;         // 0x179
+    u8 leftwall_type;        // 0x17A, platform/ledgegrab
+    u8 leftwall_mat;         // 0x17B, grass/ice etc
+    Vec3 leftwall_slope;     // 0x17C
+    int ceil_index;          // 0x188
+    u8 ceil_info;            // 0x18C
+    u8 ceil_unk;             // 0x18D
+    u8 ceil_type;            // 0x18E, platform/ledgegrab
+    u8 ceil_mat;             // 0x18F, grass/ice etc
+    Vec3 ceil_slope;         // 0x190
+    int ecb_lock;            // 0x19c
 };
 struct Hitbox
 {
@@ -5858,6 +5862,7 @@ void (*MTXLookAt)(Mtx *dest, Vec3 *eye, Vec3 *up, Vec3 *target) = (void *)0x8034
 void (*VECNormalize)(Vec3 *src, Vec3 *dest) = (void *)0x80342db8;
 void (*VECAdd)(Vec3 *a, Vec3 *b, Vec3 *ab) = (void *)0x80342d54;
 void (*VECSubtract)(Vec3 *a, Vec3 *b, Vec3 *a_b) = (void *)0x80342d78;
+void (*VECMultAndAdd)(Vec3 *a, Vec3 *b) = (void *)0x8000dc6c;
 float (*VECDotProduct)(Vec3 *a, Vec3 *b) = (void *)0x80342e38;
 void (*VECCrossProduct)(Vec3 *a, Vec3 *b, Vec3 *axb) = (void *)0x80342e58;
 void (*MTXQuat)(Vec4 *dest, Mtx *m) = (void *)0x80342690;
@@ -5893,7 +5898,7 @@ void (*GObj_AddProc)(GOBJ *gobj, void *callback, int priority) = (void *)0x8038f
 void (*GObj_AddObject)(GOBJ *gobj, u8 unk, void *object) = (void *)0x80390a70;
 void (*GObj_FreeObject)(GOBJ *gobj) = (void *)0x80390b0c;
 void (*GObj_AddUserData)(GOBJ *gobj, int userDataKind, void *destructor, void *userData) = (void *)0x80390b68;
-DevText *(*DevelopText_CreateDataTable)(int unk1, int unk2, int unk3, int width, int height, void *alloc) = (void *)0x80302834;
+DevText *(*DevelopText_CreateDataTable)(int unk1, int x, int y, int width, int height, void *alloc) = (void *)0x80302834;
 void (*DevelopText_Activate)(void *unk, DevText *text) = (void *)0x80302810;
 void (*DevelopText_AddString)(DevText *text, ...) = (void *)0x80302d4c;
 void (*DevelopText_EraseAllText)(DevText *text) = (void *)0x80302bb0;
