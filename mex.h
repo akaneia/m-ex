@@ -2239,11 +2239,11 @@ struct ItemData
     int x18;                        // 0x18
     int x1c;                        // 0x1c
     int x20;                        // 0x20
-    int x24;                        // 0x24
-    int stateID;                    // 0x28
+    int stateID;                    // 0x24
+    int x28;                        // 0x28
     float facing_direction;         // 0x2c
     int x30;                        // 0x30
-    int x34;                        // 0x34
+    float spinUnk;                  // 0x34
     float scale;                    // 0x38
     int x3c;                        // 0x3c
     Vec3 selfVel;                   // 0x40
@@ -2270,7 +2270,7 @@ struct ItemData
     int xb4;                        // 0xb4
     int xb8;                        // 0xb8
     ItemState *itemStates;          // 0xbc
-    int xc0;                        // 0xc0
+    int isRotate;                   // 0xc0
     itData *itData;                 // 0xc4
     int jobj;                       // 0xc8
     itCommonAttr *itemAttributes;   // 0xcc
@@ -2966,7 +2966,7 @@ struct ItemData
     int xd30;                       // 0xd30
     void *grabbedFighter_OnItem;    // 0xd34
     void *grabbedFighter_OnFighter; // 0xd38
-    int xd3c;                       // 0xd3c
+    float rotateSpeed;              // 0xd3c
     int xd40;                       // 0xd40
     int xd44;                       // 0xd44
     int xd48;                       // 0xd48
@@ -3001,36 +3001,39 @@ struct ItemData
     int xdbc;                       // 0xdbc
     int xdc0;                       // 0xdc0
     int xdc4;                       // 0xdc4
-    int xdc8;                       // 0xdc8
-    int flags;                      // 0xdcc
-    int xdd0;                       // 0xdd0
-    int itemVar1;                   // 0xdd4
-    int itemVar2;                   // 0xdd8
-    int itemVar3;                   // 0xddc
-    int itemVar4;                   // 0xde0
-    int itemVar5;                   // 0xde4
-    int itemVar6;                   // 0xde8
-    int itemVar7;                   // 0xdec
-    int itemVar8;                   // 0xdf0
-    int itemVar9;                   // 0xdf4
-    int itemVar10;                  // 0xdf8
-    int itemVar11;                  // 0xdfc
-    int itemVar12;                  // 0xe00
-    int xe04;                       // 0xe04
-    int xe08;                       // 0xe08
-    int xe0c;                       // 0xe0c
-    int xe10;                       // 0xe10
-    int xe14;                       // 0xe14
-    int xe18;                       // 0xe18
-    int xe1c;                       // 0xe1c
-    int xe20;                       // 0xe20
-    int xe24;                       // 0xe24
-    int xe28;                       // 0xe28
-    int xe2c;                       // 0xe2c
-    int xe30;                       // 0xe30
-    int xe34;                       // 0xe34
-    int xe38;                       // 0xe38
-    int xe3c;                       // 0xe3c
+    u16 flags1 : 16;                // 0xdc8
+    u16 flags2 : 7;                 // 0xdca
+    u16 rotateAxis : 3;
+    u16 flags4 : 6;
+    int flags;     // 0xdcc
+    int xdd0;      // 0xdd0
+    int itemVar1;  // 0xdd4
+    int itemVar2;  // 0xdd8
+    int itemVar3;  // 0xddc
+    int itemVar4;  // 0xde0
+    int itemVar5;  // 0xde4
+    int itemVar6;  // 0xde8
+    int itemVar7;  // 0xdec
+    int itemVar8;  // 0xdf0
+    int itemVar9;  // 0xdf4
+    int itemVar10; // 0xdf8
+    int itemVar11; // 0xdfc
+    int itemVar12; // 0xe00
+    int xe04;      // 0xe04
+    int xe08;      // 0xe08
+    int xe0c;      // 0xe0c
+    int xe10;      // 0xe10
+    int xe14;      // 0xe14
+    int xe18;      // 0xe18
+    int xe1c;      // 0xe1c
+    int xe20;      // 0xe20
+    int xe24;      // 0xe24
+    int xe28;      // 0xe28
+    int xe2c;      // 0xe2c
+    int xe30;      // 0xe30
+    int xe34;      // 0xe34
+    int xe38;      // 0xe38
+    int xe3c;      // 0xe3c
 };
 struct map_gobjData
 {
@@ -3094,8 +3097,8 @@ struct map_gobjData
     int mapVar1;         // 0xe4
     int mapVar2;         // 0xe8
     int mapVar3;         // 0xec
-    int xf0;             // 0xf0
-    int xf4;             // 0xf4
+    int mapVar4;         // 0xf0
+    int mapVar5;         // 0xf4
     int xf8;             // 0xf8
     int xfc;             // 0xfc
     int x100;            // 0x100
@@ -6002,6 +6005,7 @@ void (*Items_StoreTimeout)(GOBJ *item, float timeout) = (void *)0x80275158;
 GOBJ *(*CreateItem)(SpawnItem *item_spawn) = (void *)0x80268b18;
 GOBJ *(*CreateItem2)(SpawnItem *item_spawn) = (void *)0x80268b5c;
 GOBJ *(*CreateItem3)(SpawnItem *item_spawn) = (void *)0x80268b9c;
+void (*Item_Destroy)(GOBJ *item) = (void *)0x8026a8ec;
 int (*Item_CollGround_PassLedge)(GOBJ *item, void *callback) = (void *)0x8026d62c;
 int (*Item_CollGround_StopLedge)(GOBJ *item, void *callback) = (void *)0x8026d8a4;
 int (*Item_CollAir)(GOBJ *item, void *callback) = (void *)0x8026e15c;
@@ -6014,7 +6018,10 @@ void (*Item_ResetAllHitPlayers)(ItemData *item) = (void *)0x8027146c;
 int (*Item_CountActiveItems)(int itemID) = (void *)0x8026b3c0;
 void (*Item_CopyDevelopState)(GOBJ *item, GOBJ *fighter) = (void *)0x80225dd8;
 int (*Items_DecLife)(GOBJ *item) = (void *)0x80273130;
-void *(*GXLink_Item)(GOBJ *gobj, int pass) = (void *)0x8026eecc;
+void (*GXLink_Item)(GOBJ *gobj, int pass) = (void *)0x8026eecc;
+void (*Item_UpdateSpin)(GOBJ *item, float unk) = (void *)0x80274658;
+void (*Item_EnableSpin)(GOBJ *item) = (void *)0x802762bc;
+void (*Item_DisableSpin)(GOBJ *item) = (void *)0x802762b0;
 
 // Map Functions
 void (*MapStateChange)(GOBJ *map, int stateID, int animID) = (void *)0x801c8138;
