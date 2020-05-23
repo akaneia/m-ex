@@ -62,6 +62,7 @@ typedef struct DynamicBoneset DynamicBoneset;
 typedef struct Effect Effect;
 typedef struct Reflect Reflect;
 typedef struct PRIM PRIM;
+typedef struct ColorOverlay ColorOverlay;
 struct Vec2
 {
     float X;
@@ -303,6 +304,48 @@ struct map_gobjDesc
     void *onFrame;
     void *onUnk;
     int flags;
+};
+struct ColorOverlay
+{
+    int timer;                // 0x0
+    int x4;                   // 0x4
+    int *ptr1;                // 0x8
+    int loop;                 // 0xc
+    int *ptr2;                // 0x10
+    int x14;                  // 0x14
+    int *alloc;               // 0x18
+    int x1c;                  // 0x1c
+    int x20;                  // 0x20
+    int x24;                  // 0x24
+    int x28;                  // 0x28
+    GXColor hex;              // 0x2C
+    float red;                // 0x34
+    float blue;               // 0x34
+    float green;              // 0x38
+    float alpha;              // 0x3C
+    float redblink;           // 0x40
+    float blueblink;          // 0x44
+    float greenblink;         // 0x48
+    float alphablink;         // 0x4C
+    int x50;                  // 0x50
+    int x54;                  // 0x54
+    int x58;                  // 0x58
+    int x5c;                  // 0x5c
+    int x60;                  // 0x60
+    int x64;                  // 0x64
+    int x68;                  // 0x68
+    int x6c;                  // 0x6c
+    int x70;                  // 0x70
+    int x74;                  // 0x74
+    int x78;                  // 0x78
+    unsigned char enable : 1; // 0x7c
+    unsigned char flag2 : 1;  // 0x7c
+    unsigned char flag3 : 1;  // 0x7c
+    unsigned char flag4 : 1;  // 0x7c
+    unsigned char flag5 : 1;  // 0x7c
+    unsigned char flag6 : 1;  // 0x7c
+    unsigned char flag7 : 1;  // 0x7c
+    unsigned char flag8 : 1;  // 0x7c
 };
 struct CollData
 {
@@ -873,71 +916,8 @@ struct FighterData
     int unknown47C;                                        // 0x47C
     int unknown480;                                        // 0x480
     int unknown484;                                        // 0x484
-    int unknown488;                                        // 0x488
-    int unknown48C;                                        // 0x48C
-    int unknown490;                                        // 0x490
-    int unknown494;                                        // 0x494
-    int unknown498;                                        // 0x498
-    int pointer_to_0x4b0__color_blend_pointer;             // 0x49C
-    int unknown4A0;                                        // 0x4A0
-    int unknown4A4;                                        // 0x4A4
-    int unknown4A8;                                        // 0x4A8
-    int unknown4AC;                                        // 0x4AC
-    int unknown4B0;                                        // 0x4B0
-    int rrggbbaa_color;                                    // 0x4B4
-    int red_value;                                         // 0x4B8
-    int green_value;                                       // 0x4BC
-    int blue_value;                                        // 0x4C0
-    int alpha_value;                                       // 0x4C4
-    int red_blink_rate;                                    // 0x4C8
-    int green_blink_rate;                                  // 0x4CC
-    int blue_blink_rate;                                   // 0x4D0
-    int alpha_blink_rate;                                  // 0x4D4
-    int unknown4D8;                                        // 0x4D8
-    int unknown4DC;                                        // 0x4DC
-    int unknown4E0;                                        // 0x4E0
-    int unknown4E4;                                        // 0x4E4
-    int unknown4E8;                                        // 0x4E8
-    int unknown4EC;                                        // 0x4EC
-    int unknown4F0;                                        // 0x4F0
-    int unknown4F4;                                        // 0x4F4
-    int unknown4F8;                                        // 0x4F8
-    int unknown4FC;                                        // 0x4FC
-    int unknown500;                                        // 0x500
-    int color_tint_onoff;                                  // 0x504
-    int unknown508;                                        // 0x508
-    int unknown50C;                                        // 0x50C
-    int unknown510;                                        // 0x510
-    int unknown514;                                        // 0x514
-    int unknown518;                                        // 0x518
-    int unknown51C;                                        // 0x51C
-    int unknown520;                                        // 0x520
-    int unknown524;                                        // 0x524
-    int unknown528;                                        // 0x528
-    int unknown52C;                                        // 0x52C
-    int unknown530;                                        // 0x530
-    int unknown534;                                        // 0x534
-    int unknown538;                                        // 0x538
-    int unknown53C;                                        // 0x53C
-    int unknown540;                                        // 0x540
-    int unknown544;                                        // 0x544
-    int unknown548;                                        // 0x548
-    int unknown54C;                                        // 0x54C
-    int unknown550;                                        // 0x550
-    int unknown554;                                        // 0x554
-    int unknown558;                                        // 0x558
-    int unknown55C;                                        // 0x55C
-    int unknown560;                                        // 0x560
-    int unknown564;                                        // 0x564
-    int unknown568;                                        // 0x568
-    int unknown56C;                                        // 0x56C
-    int unknown570;                                        // 0x570
-    int unknown574;                                        // 0x574
-    int unknown578;                                        // 0x578
-    int unknown57C;                                        // 0x57C
-    int unknown580;                                        // 0x580
-    int unknown584;                                        // 0x584
-    int unknown588;                                        // 0x588
+    ColorOverlay color[2];                                 // 0x488
+    int *LObj;                                             // 0x588
     int anim_num;                                          // 0x58C
     int *anim_curr_flags_ptr;                              // 0x590
     int anim_curr_flags;                                   // 0x594
@@ -2457,38 +2437,7 @@ struct ItemData
     int x53c;                       // 0x53c
     int x540;                       // 0x540
     int x544;                       // 0x544
-    int x548;                       // 0x548
-    int x54c;                       // 0x54c
-    int x550;                       // 0x550
-    int x554;                       // 0x554
-    int x558;                       // 0x558
-    int x55c;                       // 0x55c
-    int x560;                       // 0x560
-    int x564;                       // 0x564
-    int x568;                       // 0x568
-    int x56c;                       // 0x56c
-    int x570;                       // 0x570
-    int x574;                       // 0x574
-    int x578;                       // 0x578
-    int x57c;                       // 0x57c
-    int x580;                       // 0x580
-    int x584;                       // 0x584
-    int x588;                       // 0x588
-    int x58c;                       // 0x58c
-    int x590;                       // 0x590
-    int x594;                       // 0x594
-    int x598;                       // 0x598
-    int x59c;                       // 0x59c
-    int x5a0;                       // 0x5a0
-    int x5a4;                       // 0x5a4
-    int x5a8;                       // 0x5a8
-    int x5ac;                       // 0x5ac
-    int x5b0;                       // 0x5b0
-    int x5b4;                       // 0x5b4
-    int x5b8;                       // 0x5b8
-    int x5bc;                       // 0x5bc
-    int x5c0;                       // 0x5c0
-    int x5c4;                       // 0x5c4
+    ColorOverlay color;             // 0x548
     int x5c8;                       // 0x5c8
     int x5cc;                       // 0x5cc
     int x5d0;                       // 0x5d0
