@@ -585,26 +585,26 @@ struct itData
 };
 struct CameraBox
 {
-    GOBJ *item;          // 0x0
-    int x4;              // 0x4
-    int x8;              // 0x8
-    int xC;              // 0xC
-    int itemID;          // 0x10
-    int x14;             // 0x14
-    int x18;             // 0x18
-    int x1c;             // 0x1c
-    int x20;             // 0x20
-    int x24;             // 0x24
-    int stateID;         // 0x28
-    int facingDirection; // 0x2c
-    int x30;             // 0x30
-    int x34;             // 0x34
-    float scale;         // 0x38
-    int x3c;             // 0x3c
-    float boundleft;     // 0x40
-    float boundright;    // 0x44
-    float boundwidth;    // 0x48
-    float boundunk;      // 0x4c
+    GOBJ *item;             // 0x0
+    int x4;                 // 0x4
+    int x8;                 // 0x8
+    int xC;                 // 0xC
+    int itemID;             // 0x10
+    int x14;                // 0x14
+    int x18;                // 0x18
+    int x1c;                // 0x1c
+    int x20;                // 0x20
+    int x24;                // 0x24
+    int stateID;            // 0x28
+    float boundleftTween;   // 0x2C
+    float boundrightTween;  // 0x30
+    float boundtopTween;    // 0x34
+    float boundbottomTween; // 0x38
+    float scale;            // 0x3c
+    float boundleft;        // 0x40
+    float boundright;       // 0x44
+    float boundtop;         // 0x48
+    float boundbottom;      // 0x4c
 };
 struct GOBJProc
 {
@@ -5876,13 +5876,22 @@ void (*MTXRotRad)(Mtx m, char axis, f32 rad) = (void *)0x80342418;
 
 // Useful functions
 void (*OSReport)(char *, ...) = (void *)0x803456A8;
-int (*JOBJ_CopyPosition)(JOBJ *source, int unk, Vec3 *dest) = (void *)0x8000b1cc;
+int (*JOBJ_CopyPosition)(JOBJ *source, Vec3 *add, Vec3 *dest) = (void *)0x8000b1cc;
 void (*HSD_JObjSetMtxDirtySub)(JOBJ *jobj) = (void *)0x803732e8;
 JOBJ *(*JOBJ_LoadJoint)(JOBJDesc *joint) = (void *)0x80370e44;
 void (*JOBJ_RemoveAll)(JOBJ *joint) = (void *)0x80371590;
-void (*JOBJ_GetChild)(JOBJ *joint, int ptr, int index, int type, ...) = (void *)0x80011e24;
+void (*JOBJ_GetChild)(JOBJ *joint, int ptr, int index, ...) = (void *)0x80011e24;
 void (*JOBJ_AddChild)(JOBJ *parent, JOBJ *child) = (void *)0x803717a8;
 void (*JOBJ_BillBoard)(JOBJ *joint, Mtx *m, Mtx *mx) = (void *)0x803740e8;
+void (*JOBJ_PlayAnim)(JOBJ *joint, int unk, u16 flags, void *cb, int unk2, ...) = (void *)0x80364c08; // flags: 0x400 matanim, 0x20 jointanim
+void (*JOBJ_Anim)(JOBJ *joint) = (void *)0x80370780;
+void (*JOBJ_AnimAll)(JOBJ *joint) = (void *)0x80370928;
+void (*JOBJ_ReqAnim)(JOBJ *joint, float unk) = (void *)0x8036f934;
+void (*JOBJ_ReqAnimByFlags)(JOBJ *joint, int flags, float unk) = (void *)0x8036f718;
+void (*JOBJ_ReqAnimAll)(JOBJ *joint, float unk) = (void *)0x8036f8bc;
+void (*JOBJ_ReqAnimAllByFlags)(JOBJ *joint, int flags, float frame) = (void *)0x8036f7b0;
+void (*AOBJ_ReqAnim)(int *aobj, float unk) = (void *)0x8036410c;
+void (*AOBJ_StopAnim)(JOBJ *jobj, int flags, int flags2) = (void *)0x8036414c;
 void (*memcpy)(void *dest, void *source, int size) = (void *)0x800031f4;
 void (*memset)(void *dest, int fill, int size) = (void *)0x80003100;
 void (*blr)() = (void *)0x80005358;
