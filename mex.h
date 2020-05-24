@@ -3048,8 +3048,8 @@ struct map_gobjData
     int mapVar3;         // 0xec
     int mapVar4;         // 0xf0
     int mapVar5;         // 0xf4
-    int xf8;             // 0xf8
-    int xfc;             // 0xfc
+    int mapVar6;         // 0xf8
+    int mapVar7;         // 0xfc
     int x100;            // 0x100
     int x104;            // 0x104
     int x108;            // 0x108
@@ -5850,6 +5850,7 @@ void *(*HSD_MemAlloc)(int size) = (void *)0x8037f1e4;
 void (*HSD_Free)(void *ptr) = (void *)0x8037f1b0;
 void (*SFX_Play)(int sfxID) = (void *)0x801c53ec;
 void (*SFX_PlayCommon)(int sfxID) = (void *)0x80024030;
+void (*SFX_PlayCrowd)(int sfxID) = (void *)0x8002411c;
 void (*Music_Play)(int hpsID) = (void *)0x80023f28;
 GOBJ *(*GObj_Create)(int type, int subclass, int flags) = (void *)0x803901f0;
 void (*GObj_Destroy)(GOBJ *gobj) = (void *)0x80390228;
