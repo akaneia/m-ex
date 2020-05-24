@@ -63,6 +63,7 @@ typedef struct Effect Effect;
 typedef struct Reflect Reflect;
 typedef struct PRIM PRIM;
 typedef struct ColorOverlay ColorOverlay;
+typedef struct Playerblock Playerblock;
 struct Vec2
 {
     float X;
@@ -296,6 +297,51 @@ struct Reflect
     float damage_mult;
     float velocity_mult;
     int flags;
+};
+struct Playerblock
+{
+    int state;           // 0x00 = not present, 0x02 = HMN, 0x03 = CPU
+    int ft_kind;         // external ID
+    int type;            // (0x00 is HMN, 0x01 is CPU, 0x02 is Demo, 0x03 n/a)
+    u8 isTransformed[2]; // 1 indicates the fighter that is active
+    int flags;
+    Vec3 tagPos;
+    Vec3 spawnPos;
+    Vec3 respawnPos;
+    int x34;
+    int x38;
+    int x3c;
+    float initialFacing;
+    u8 costume;
+    u8 x45;
+    u8 tint;
+    u8 team;
+    u8 controller;
+    u8 cpuLv;
+    u8 cpuKind;
+    u8 handicap;
+    float x50;
+    float attack;
+    float defense;
+    float scale;
+    u16 damage;
+    u16 initialDamage;
+    u16 stamina;
+    int falls[2];
+    int ko[6];
+    int x88;
+    u16 selfDestructs;
+    u8 stocks;
+    int coins_curr;
+    int coins_total;
+    int x98;
+    int x9c;
+    int stickSmashes[2];
+    int tag;
+    u8 flags2;
+    u8 flags3;
+    GOBJ *fighterData;
+    GOBJ *fighterDataSub;
 };
 struct map_gobjDesc
 {
@@ -2077,136 +2123,143 @@ struct FighterData
     char flags_hitstun;                           // 0x221c
     char flags_221D;                              // 0x221d
     char flags_221E;                              // 0x221e
-    char flags_221F;                              // 0x221f
-    char flags_2220;                              // 0x2220
-    char flags_2221;                              // 0x2221
-    char flags_2222;                              // 0x2222
-    char flags_2223;                              // 0x2223
-    char flags_2224;                              // 0x2224
-    char flags_2225;                              // 0x2225
-    char flags_2226;                              // 0x2226
-    char flags_2227;                              // 0x2227
-    char flags_2228;                              // 0x2228
-    char flags_2229;                              // 0x2229
-    char flags_222A;                              // 0x222A
-    char flags_222B;                              // 0x222B
-    int charVar1;                                 // 0x222c
-    int charVar2;                                 // 0x2230
-    int charVar3;                                 // 0x2234
-    int charVar4;                                 // 0x2238
-    int charVar5;                                 // 0x223c
-    int charVar6;                                 // 0x2240
-    int charVar7;                                 // 0x2244
-    int charVar8;                                 // 0x2248
-    int charVar9;                                 // 0x224c
-    int charVar10;                                // 0x2250
-    int charVar11;                                // 0x2254
-    int charVar12;                                // 0x2258
-    int charVar13;                                // 0x225c
-    int charVar14;                                // 0x2260
-    int charVar15;                                // 0x2264
-    int charVar16;                                // 0x2268
-    int charVar17;                                // 0x226c
-    int charVar18;                                // 0x2270
-    int charVar19;                                // 0x2274
-    int charVar20;                                // 0x2278
-    int charVar21;                                // 0x227c
-    int charVar22;                                // 0x2280
-    int charVar23;                                // 0x2284
-    int charVar24;                                // 0x2288
-    int charVar25;                                // 0x228c
-    int charVar26;                                // 0x2290
-    int charVar27;                                // 0x2294
-    int charVar28;                                // 0x2298
-    int charVar29;                                // 0x229c
-    int charVar30;                                // 0x22a0
-    int charVar31;                                // 0x22a4
-    int charVar32;                                // 0x22a8
-    int charVar33;                                // 0x22ac
-    int charVar34;                                // 0x22b0
-    int charVar35;                                // 0x22b4
-    int charVar36;                                // 0x22b8
-    int charVar37;                                // 0x22bc
-    int charVar38;                                // 0x22c0
-    int charVar39;                                // 0x22c4
-    int charVar40;                                // 0x22c8
-    int charVar41;                                // 0x22cc
-    int charVar42;                                // 0x22d0
-    int charVar43;                                // 0x22d4
-    int charVar44;                                // 0x22d8
-    int charVar45;                                // 0x22dc
-    int charVar46;                                // 0x22e0
-    int charVar47;                                // 0x22e4
-    int charVar48;                                // 0x22e8
-    int charVar49;                                // 0x22ec
-    int charVar50;                                // 0x22f0
-    int charVar51;                                // 0x22f4
-    int charVar52;                                // 0x22f8
-    int x22fc;                                    // 0x22fc
-    int x2300;                                    // 0x2300
-    int x2304;                                    // 0x2304
-    int x2308;                                    // 0x2308
-    int x230c;                                    // 0x230c
-    int x2310;                                    // 0x2310
-    int x2314;                                    // 0x2314
-    int x2318;                                    // 0x2318
-    int x231c;                                    // 0x231c
-    int x2320;                                    // 0x2320
-    int x2324;                                    // 0x2324
-    int x2328;                                    // 0x2328
-    int x232c;                                    // 0x232c
-    int x2330;                                    // 0x2330
-    int x2334;                                    // 0x2334
-    int x2338;                                    // 0x2338
-    int x233c;                                    // 0x233c
-    int stateVar1;                                // 0x2340
-    int stateVar2;                                // 0x2344
-    int stateVar3;                                // 0x2348
-    int stateVar4;                                // 0x234c
-    int stateVar5;                                // 0x2350
-    int stateVar6;                                // 0x2354
-    int stateVar7;                                // 0x2358
-    int stateVar8;                                // 0x235c
-    int stateVar9;                                // 0x2360
-    int stateVar10;                               // 0x2364
-    int stateVar11;                               // 0x2368
-    int stateVar12;                               // 0x236c
-    int stateVar13;                               // 0x2370
-    int stateVar14;                               // 0x2374
-    int stateVar15;                               // 0x2378
-    int stateVar16;                               // 0x237c
-    int stateVar17;                               // 0x2380
-    int stateVar18;                               // 0x2384
-    int x2388;                                    // 0x2388
-    int x238c;                                    // 0x238c
-    int x2390;                                    // 0x2390
-    int x2394;                                    // 0x2394
-    int x2398;                                    // 0x2398
-    int x239c;                                    // 0x239c
-    int x23a0;                                    // 0x23a0
-    int x23a4;                                    // 0x23a4
-    int x23a8;                                    // 0x23a8
-    int x23ac;                                    // 0x23ac
-    int x23b0;                                    // 0x23b0
-    int x23b4;                                    // 0x23b4
-    int x23b8;                                    // 0x23b8
-    int x23bc;                                    // 0x23bc
-    int x23c0;                                    // 0x23c0
-    int x23c4;                                    // 0x23c4
-    int x23c8;                                    // 0x23c8
-    int x23cc;                                    // 0x23cc
-    int x23d0;                                    // 0x23d0
-    int x23d4;                                    // 0x23d4
-    int x23d8;                                    // 0x23d8
-    int x23dc;                                    // 0x23dc
-    int x23e0;                                    // 0x23e0
-    int x23e4;                                    // 0x23e4
-    int x23e8;                                    // 0x23e8
-    int x23ec;                                    // 0x23ec
-    int x23f0;                                    // 0x23f0
-    int x23f4;                                    // 0x23f4
-    int x23f8;                                    // 0x23f8
-    int x23fc;                                    // 0x23fc
+    unsigned char x221f_1 : 1;
+    unsigned char x221f_2 : 1;
+    unsigned char x221f_3 : 1;
+    unsigned char x221f_4 : 1;
+    unsigned char ms : 1; // ms = master/slave. is 1 when the player is a slave
+    unsigned char x221f_6 : 1;
+    unsigned char x221f_7 : 1;
+    unsigned char x221f_8 : 1;
+    char flags_2220; // 0x2220
+    char flags_2221; // 0x2221
+    char flags_2222; // 0x2222
+    char flags_2223; // 0x2223
+    char flags_2224; // 0x2224
+    char flags_2225; // 0x2225
+    char flags_2226; // 0x2226
+    char flags_2227; // 0x2227
+    char flags_2228; // 0x2228
+    char flags_2229; // 0x2229
+    char flags_222A; // 0x222A
+    char flags_222B; // 0x222B
+    int charVar1;    // 0x222c
+    int charVar2;    // 0x2230
+    int charVar3;    // 0x2234
+    int charVar4;    // 0x2238
+    int charVar5;    // 0x223c
+    int charVar6;    // 0x2240
+    int charVar7;    // 0x2244
+    int charVar8;    // 0x2248
+    int charVar9;    // 0x224c
+    int charVar10;   // 0x2250
+    int charVar11;   // 0x2254
+    int charVar12;   // 0x2258
+    int charVar13;   // 0x225c
+    int charVar14;   // 0x2260
+    int charVar15;   // 0x2264
+    int charVar16;   // 0x2268
+    int charVar17;   // 0x226c
+    int charVar18;   // 0x2270
+    int charVar19;   // 0x2274
+    int charVar20;   // 0x2278
+    int charVar21;   // 0x227c
+    int charVar22;   // 0x2280
+    int charVar23;   // 0x2284
+    int charVar24;   // 0x2288
+    int charVar25;   // 0x228c
+    int charVar26;   // 0x2290
+    int charVar27;   // 0x2294
+    int charVar28;   // 0x2298
+    int charVar29;   // 0x229c
+    int charVar30;   // 0x22a0
+    int charVar31;   // 0x22a4
+    int charVar32;   // 0x22a8
+    int charVar33;   // 0x22ac
+    int charVar34;   // 0x22b0
+    int charVar35;   // 0x22b4
+    int charVar36;   // 0x22b8
+    int charVar37;   // 0x22bc
+    int charVar38;   // 0x22c0
+    int charVar39;   // 0x22c4
+    int charVar40;   // 0x22c8
+    int charVar41;   // 0x22cc
+    int charVar42;   // 0x22d0
+    int charVar43;   // 0x22d4
+    int charVar44;   // 0x22d8
+    int charVar45;   // 0x22dc
+    int charVar46;   // 0x22e0
+    int charVar47;   // 0x22e4
+    int charVar48;   // 0x22e8
+    int charVar49;   // 0x22ec
+    int charVar50;   // 0x22f0
+    int charVar51;   // 0x22f4
+    int charVar52;   // 0x22f8
+    int x22fc;       // 0x22fc
+    int x2300;       // 0x2300
+    int x2304;       // 0x2304
+    int x2308;       // 0x2308
+    int x230c;       // 0x230c
+    int x2310;       // 0x2310
+    int x2314;       // 0x2314
+    int x2318;       // 0x2318
+    int x231c;       // 0x231c
+    int x2320;       // 0x2320
+    int x2324;       // 0x2324
+    int x2328;       // 0x2328
+    int x232c;       // 0x232c
+    int x2330;       // 0x2330
+    int x2334;       // 0x2334
+    int x2338;       // 0x2338
+    int x233c;       // 0x233c
+    int stateVar1;   // 0x2340
+    int stateVar2;   // 0x2344
+    int stateVar3;   // 0x2348
+    int stateVar4;   // 0x234c
+    int stateVar5;   // 0x2350
+    int stateVar6;   // 0x2354
+    int stateVar7;   // 0x2358
+    int stateVar8;   // 0x235c
+    int stateVar9;   // 0x2360
+    int stateVar10;  // 0x2364
+    int stateVar11;  // 0x2368
+    int stateVar12;  // 0x236c
+    int stateVar13;  // 0x2370
+    int stateVar14;  // 0x2374
+    int stateVar15;  // 0x2378
+    int stateVar16;  // 0x237c
+    int stateVar17;  // 0x2380
+    int stateVar18;  // 0x2384
+    int x2388;       // 0x2388
+    int x238c;       // 0x238c
+    int x2390;       // 0x2390
+    int x2394;       // 0x2394
+    int x2398;       // 0x2398
+    int x239c;       // 0x239c
+    int x23a0;       // 0x23a0
+    int x23a4;       // 0x23a4
+    int x23a8;       // 0x23a8
+    int x23ac;       // 0x23ac
+    int x23b0;       // 0x23b0
+    int x23b4;       // 0x23b4
+    int x23b8;       // 0x23b8
+    int x23bc;       // 0x23bc
+    int x23c0;       // 0x23c0
+    int x23c4;       // 0x23c4
+    int x23c8;       // 0x23c8
+    int x23cc;       // 0x23cc
+    int x23d0;       // 0x23d0
+    int x23d4;       // 0x23d4
+    int x23d8;       // 0x23d8
+    int x23dc;       // 0x23dc
+    int x23e0;       // 0x23e0
+    int x23e4;       // 0x23e4
+    int x23e8;       // 0x23e8
+    int x23ec;       // 0x23ec
+    int x23f0;       // 0x23f0
+    int x23f4;       // 0x23f4
+    int x23f8;       // 0x23f8
+    int x23fc;       // 0x23fc
 };
 struct ItemData
 {
@@ -5901,7 +5954,8 @@ void (*KOCount_Update)(int KOs) = (void *)0x802fa2d0;
 void (*Stage_CameraLimitInitialization)() = (void *)0x801c39c0;
 void (*Stage_BlastzoneInitialization)() = (void *)0x801c3bb4;
 void (*Match_SetEndGraphic)(int graphic) = (void *)0x8016b33c;
-void (*Match_EndGame)() = (void *)0x8016b328;
+void (*Match_EndImmediate)() = (void *)0x8016b328;
+void (*Match_EndVS)() = (void *)0x8016c7f0;
 void (*Match_FadeScreen)(int time) = (void *)0x8002063c;
 
 // Fighter Functions
@@ -5919,11 +5973,13 @@ void (*Fighter_EnterSpecialLanding)(GOBJ *fighter, int unk, float state_length) 
 GOBJ *(*Fighter_GetGObj)(int fighterindex) = (void *)0x80034110;
 void (*Fighter_ApplyIntang)(GOBJ *fighter, int duration) = (void *)0x8007b760;
 int (*Fighter_GetSlotType)(int index) = (void *)0x8003241c;
+void (*Fighter_SetFallNum)(int index, int ms, int falls) = (void *)0x80034e8c;
 void (*Fighter_EnableECBBottomUpdate)(FighterData *fighter) = (void *)0x8007d5bc;
 void (*Fighter_EnterDamageState)(GOBJ *fighter, int stateID, float frame) = (void *)0x8008dce0;
 int (*Fighter_BoneLookup)(FighterData *fighter, int boneID) = (void *)0x8007500c;
 void (*Fighter_ApplyDamage)(FighterData *fighter, float damage) = (void *)0x8006cc7c;
 void (*Fighter_RunOnHitCallbacks)(GOBJ *fighter) = (void *)0x8007db58;
+void (*Fighter_SetStocks)(int ply, int stocks) = (void *)0x80033c60;
 int (*FrameTimerCheck)(GOBJ *fighter) = (void *)0x8006f238;
 void (*Fighter_EnterMiscPassState)(float start_frame, GOBJ *fighter, int state, int flags) = (void *)0x8009a184;
 int (*Fighter_CollGround_PassLedge)(GOBJ *fighter) = (void *)0x80082708;
@@ -6119,9 +6175,11 @@ HSD_Pad *PadGet(int playerIndex, int padType)
 
     return (&pads->pad[playerIndex]);
 }
+
 // Offsets
 #define STAGE_CONST -0x4C08 // this is an offset used on dreamland, should be safe to use for custom stages
 #define MEMCARD -0x77C0
+#define GOBJLIST -0x3E74
 
 // Math
 #define M_PI 3.14159265358979323846
