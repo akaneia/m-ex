@@ -65,6 +65,7 @@ typedef struct PRIM PRIM;
 typedef struct ColorOverlay ColorOverlay;
 typedef struct Playerblock Playerblock;
 typedef struct ftCommonData ftCommonData;
+typedef struct Translation Translation;
 struct Vec2
 {
     float X;
@@ -4163,6 +4164,11 @@ struct ftCommonData
     float x80c;           // 0x80c
     float x810;           // 0x810
 };
+struct Translation
+{
+    float frame;
+    float value;
+};
 typedef struct
 {
     // byte 0x0
@@ -6566,6 +6572,10 @@ GOBJ *(*Stage_CreateMapGObj)(int mapgobjID) = (void *)0x80223908;
 void *(*GXLink_Stage)(GOBJ *gobj, int pass) = (void *)0x801c5db0;
 GOBJ *(*Stage_GetMapGObj)(int mapgobjID) = (void *)0x801c2ba4;
 JOBJ *(*Stage_GetMapGObjJObj)(GOBJ *mapgobj, int jointIndex) = (void *)0x801c3fa4;
+void (*Stage_SetGroundCallback)(int line, void *userdata, void *callback) = (void *)0x800580c8;
+void (*Stage_SetCeilingCallback)(int line, void *userdata, void *callback) = (void *)0x800581a4;
+void (*Stage_InitMovingColl)(JOBJ *mapjoint, int mapgobjID) = (void *)0x801c2ed0;
+void (*Stage_UpdateMovingColl)(GOBJ *mapgobj) = (void *)0x801c2fe0;
 
 // MEX functions
 void (*LoadMEXItem)(GOBJ *player_gobj, int article_pointer, int item_id) = (void *)0x803d7058;
@@ -6695,6 +6705,31 @@ HSD_Pad *PadGet(int playerIndex, int padType)
         pads = 0x804c21cc;
 
     return (&pads->pad[playerIndex]);
+}
+float lerp(Translation *anim, float currFrame)
+{
+
+    float prevFrame, prevPos, nextFrame, nextPos, amt;
+
+    // get prev and next keyframes
+    int i = 0;
+    prevFrame = anim[i].frame;
+    prevPos = anim[i].value;
+    nextFrame = anim[i + 1].frame;
+    nextPos = anim[i + 1].value;
+    while ((currFrame < prevFrame) | (currFrame > nextFrame))
+    {
+        i++;
+        prevFrame = anim[i].frame;
+        prevPos = anim[i].value;
+        nextFrame = anim[i + 1].frame;
+        nextPos = anim[i + 1].value;
+    }
+
+    // get amt
+    amt = (currFrame - prevFrame) / (nextFrame - prevFrame);
+
+    return prevPos + amt * (nextPos - prevPos);
 }
 
 // Offsets
