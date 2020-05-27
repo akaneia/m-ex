@@ -121,7 +121,15 @@
   .set  Arch_BGM_Files,0x0
   .set  Arch_BGM_MenuPlaylist,0x4
   .set  Arch_BGM_MenuPlaylistNum,0x8
-.set  Arch_EffectFiles,0x18
+.set  Arch_Effect,0x18
+  .set  Effect_Files,0x0
+  .set  Effect_RuntimeUnk1,0x4
+  .set  Effect_RuntimeUnk3,0x8
+  .set  Effect_RuntimeTexGrNum,0xC
+  .set  Effect_RuntimeTexGrData,0x10
+  .set  Effect_RuntimeUnk4,0x14
+  .set  Effect_RuntimePtclLast,0x18
+  .set  Effect_RuntimePtclData,0x1C
 .set  Arch_ItemsAdded,0x1C
   .set  Arch_ItemsAdded_Common,0x0
   .set  Arch_ItemsAdded_Fighter,0x4
@@ -206,8 +214,15 @@
 .set  OFST_FighterOnItemPickup,0xC0
 .set  OFST_FighterOnItemPickup2,0xC4
 .set  OFST_FighterOnItemRelease,0xC8
+.set  OFST_PtclRuntime1, OFST_FighterOnItemRelease + 0x4
+.set  OFST_PtclRuntime3, OFST_PtclRuntime1 + 0x4
+.set  OFST_PtclRuntimeTexGrNum, OFST_PtclRuntime3 + 0x4
+.set  OFST_PtclRuntimeTexGrData, OFST_PtclRuntimeTexGrNum + 0x4
+.set  OFST_PtclRuntime4, OFST_PtclRuntimeTexGrData + 0x4
+.set  OFST_PtclRuntimePtclLast, OFST_PtclRuntime4 + 0x4
+.set  OFST_PtclRuntimePtclData, OFST_PtclRuntimePtclLast + 0x4
 #Chr
-.set  OFST_Menu_Param,OFST_FighterOnItemRelease+0x4
+.set  OFST_Menu_Param,OFST_PtclRuntimePtclData+0x4
 #Map
 .set  OFST_Menu_SSS,OFST_Menu_Param+0x4
 .set  OFST_Map_StageIDs,OFST_Menu_SSS+0x4

@@ -143,7 +143,7 @@ rtocOffsets:
   .hword Arch_Fighter,Arch_Fighter_CharFiles,-1
   .hword Arch_Fighter,Arch_Fighter_AnimFiles,-1
   .hword Arch_Fighter,Arch_Fighter_EffectFileIDs,-1
-  .hword Arch_EffectFiles,-1
+  .hword Arch_Effect, Effect_Files, -1
   .hword Arch_Fighter,Arch_Fighter_SSMFileIDs,-1
   .hword Arch_FGM,Arch_FGM_Files,-1
   .hword Arch_Fighter,Arch_Fighter_AnimCounts,-1
@@ -187,6 +187,13 @@ rtocOffsets:
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup2,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemRelease,-1
+  .hword Arch_Effect,Effect_RuntimeUnk1,-1
+  .hword Arch_Effect,Effect_RuntimeUnk3,-1
+  .hword Arch_Effect,Effect_RuntimeTexGrNum,-1
+  .hword Arch_Effect,Effect_RuntimeTexGrData,-1
+  .hword Arch_Effect,Effect_RuntimeUnk4,-1
+  .hword Arch_Effect,Effect_RuntimePtclLast,-1
+  .hword Arch_Effect,Effect_RuntimePtclData,-1
   #CSS
   .hword  Arch_Menu,Arch_Menu_MenuParam,-1
   #Map
