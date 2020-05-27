@@ -3042,7 +3042,7 @@ struct ItemData
 struct map_gobjData
 {
     int x0;              // 0x0
-    int x4;              // 0x4
+    GOBJ *gobj;          // 0x4
     int x8;              // 0x8
     int xC;              // 0xC
     int flags;           // 0x10
@@ -6415,8 +6415,8 @@ void (*JOBJ_BillBoard)(JOBJ *joint, Mtx *m, Mtx *mx) = (void *)0x803740e8;
 void (*JOBJ_PlayAnim)(JOBJ *joint, int unk, u16 flags, void *cb, int unk2, ...) = (void *)0x80364c08; // flags: 0x400 matanim, 0x20 jointanim
 void (*JOBJ_Anim)(JOBJ *joint) = (void *)0x80370780;
 void (*JOBJ_AnimAll)(JOBJ *joint) = (void *)0x80370928;
-void (*JOBJ_ReqAnim)(JOBJ *joint, float unk) = (void *)0x8036f934;
-void (*JOBJ_ReqAnimByFlags)(JOBJ *joint, int flags, float unk) = (void *)0x8036f718;
+void (*JOBJ_ReqAnim)(JOBJ *joint, float frame) = (void *)0x8036f934;
+void (*JOBJ_ReqAnimByFlags)(JOBJ *joint, int flags, float frame) = (void *)0x8036f718;
 void (*JOBJ_ReqAnimAll)(JOBJ *joint, float unk) = (void *)0x8036f8bc;
 void (*JOBJ_ReqAnimAllByFlags)(JOBJ *joint, int flags, float frame) = (void *)0x8036f7b0;
 void (*AOBJ_ReqAnim)(int *aobj, float unk) = (void *)0x8036410c;
@@ -6711,7 +6711,7 @@ float lerp(Translation *anim, float currFrame)
 
     float prevFrame, prevPos, nextFrame, nextPos, amt;
 
-    // get prev and next keyframes
+    // get previous threshold
     int i = 0;
     prevFrame = anim[i].frame;
     prevPos = anim[i].value;
@@ -6729,7 +6729,7 @@ float lerp(Translation *anim, float currFrame)
     // get amt
     amt = (currFrame - prevFrame) / (nextFrame - prevFrame);
 
-    return prevPos + amt * (nextPos - prevPos);
+    return amt * (nextPos - prevPos);
 }
 
 // Offsets
