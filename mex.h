@@ -397,114 +397,106 @@ struct ColorOverlay
 };
 struct CollData
 {
-    GOBJ *gobj;              // 0x0
-    float topN_CurrX;        // 0x4
-    float topN_CurrY;        // 0x8
-    float topN_CurrZ;        // 0xc
-    float topN_CurrCorrectX; // 0x10
-    float topN_CurrCorrectY; // 0x14
-    float topN_CurrCorrectZ; // 0x18
-    float topN_PrevX;        // 0x1c
-    float topN_PrevY;        // 0x20
-    float topN_PrevZ;        // 0x24
-    float topN_ProjX;        // 0x28
-    float topN_ProjY;        // 0x2C
-    float topN_ProjZ;        // 0x30
-    int flags1;              // 0x34
-    int coll_test;           // 0x38, is the ID of the most recent collision test for this object
-    int ignore_line;         // 0x3c, ignores this line ID during collision
-    int x40;                 // 0x40
-    int x44;                 // 0x44
-    int ignore_group;        // 0x48  ignores this line group during collision
-    int check_group;         // 0x4c  checks only this line group during collision
-    int x50;                 // 0x50
-    int x54;                 // 0x54
-    int x58;                 // 0x58
-    int x5c;                 // 0x5c
-    int x60;                 // 0x60
-    int x64;                 // 0x64
-    int x68;                 // 0x68
-    int x6c;                 // 0x6c
-    int x70;                 // 0x70
-    int x74;                 // 0x74
-    int x78;                 // 0x78
-    int x7c;                 // 0x7c
-    int x80;                 // 0x80
-    int x84;                 // 0x84
-    int x88;                 // 0x88
-    int x8c;                 // 0x8c
-    int x90;                 // 0x90
-    int x94;                 // 0x94
-    int x98;                 // 0x98
-    int x9c;                 // 0x9c
-    int xa0;                 // 0xa0
-    int xa4;                 // 0xa4
-    int xa8;                 // 0xa8
-    int xac;                 // 0xac
-    int xb0;                 // 0xb0
-    int xb4;                 // 0xb4
-    int xb8;                 // 0xb8
-    int xbc;                 // 0xbc
-    int xc0;                 // 0xc0
-    int xc4;                 // 0xc4
-    int xc8;                 // 0xc8
-    int xcc;                 // 0xcc
-    int xd0;                 // 0xd0
-    int xd4;                 // 0xd4
-    int xd8;                 // 0xd8
-    int xdc;                 // 0xdc
-    int xe0;                 // 0xe0
-    int xe4;                 // 0xe4
-    int xe8;                 // 0xe8
-    int xec;                 // 0xec
-    int xf0;                 // 0xf0
-    int xf4;                 // 0xf4
-    int xf8;                 // 0xf8
-    int xfc;                 // 0xfc
-    int x100;                // 0x100
-    int x104;                // 0x104
-    int x108;                // 0x108
-    int x10c;                // 0x10c
-    int x110;                // 0x110
-    int x114;                // 0x114
-    int x118;                // 0x118
-    int x11c;                // 0x11c
-    int x120;                // 0x120
-    int x124;                // 0x124
-    int x128;                // 0x128
-    int x12c;                // 0x12c
-    int flags;               // 0x130
-    int envFlags;            // 0x134
-    int x138;                // 0x138
-    int x13c;                // 0x13c
-    int x140;                // 0x140
-    int x144;                // 0x144
-    int x148;                // 0x148
-    int ground_index;        // 0x14c, ground
-    u8 ground_info;          // 0x150
-    u8 ground_unk;           // 0x151
-    u8 ground_type;          // 0x152, platform/ledgegrab
-    u8 ground_mat;           // 0x153, grass/ice etc
-    Vec3 ground_slope;       // 0x154
-    int rightwall_index;     // 0x160
-    u8 rightwall_info;       // 0x164
-    u8 rightwall_unk;        // 0x165
-    u8 rightwall_type;       // 0x166, platform/ledgegrab
-    u8 rightwall_mat;        // 0x167, grass/ice etc
-    Vec3 rightwall_slope;    // 0x168
-    int leftwall_index;      // 0x174
-    u8 leftwall_info;        // 0x178
-    u8 leftwall_unk;         // 0x179
-    u8 leftwall_type;        // 0x17A, platform/ledgegrab
-    u8 leftwall_mat;         // 0x17B, grass/ice etc
-    Vec3 leftwall_slope;     // 0x17C
-    int ceil_index;          // 0x188
-    u8 ceil_info;            // 0x18C
-    u8 ceil_unk;             // 0x18D
-    u8 ceil_type;            // 0x18E, platform/ledgegrab
-    u8 ceil_mat;             // 0x18F, grass/ice etc
-    Vec3 ceil_slope;         // 0x190
-    int ecb_lock;            // 0x19c
+    GOBJ *gobj;            // 0x0
+    Vec3 topN_Curr;        // 0x4
+    Vec3 topN_CurrCorrect; // 0x10
+    Vec3 topN_Prev;        // 0x1c
+    Vec3 topN_Proj;        // 0x28
+    int flags1;            // 0x34
+    int coll_test;         // 0x38, is the ID of the most recent collision test for this object
+    int ignore_line;       // 0x3c, ignores this line ID during collision
+    int x40;               // 0x40
+    int x44;               // 0x44
+    int ignore_group;      // 0x48  ignores this line group during collision
+    int check_group;       // 0x4c  checks only this line group during collision
+    int x50;               // 0x50
+    int x54;               // 0x54
+    int x58;               // 0x58
+    int x5c;               // 0x5c
+    int x60;               // 0x60
+    int x64;               // 0x64
+    int x68;               // 0x68
+    int x6c;               // 0x6c
+    int x70;               // 0x70
+    int x74;               // 0x74
+    int x78;               // 0x78
+    int x7c;               // 0x7c
+    int x80;               // 0x80
+    int x84;               // 0x84
+    int x88;               // 0x88
+    int x8c;               // 0x8c
+    int x90;               // 0x90
+    int x94;               // 0x94
+    int x98;               // 0x98
+    int x9c;               // 0x9c
+    int xa0;               // 0xa0
+    int xa4;               // 0xa4
+    int xa8;               // 0xa8
+    int xac;               // 0xac
+    int xb0;               // 0xb0
+    int xb4;               // 0xb4
+    int xb8;               // 0xb8
+    int xbc;               // 0xbc
+    int xc0;               // 0xc0
+    int xc4;               // 0xc4
+    int xc8;               // 0xc8
+    int xcc;               // 0xcc
+    int xd0;               // 0xd0
+    int xd4;               // 0xd4
+    int xd8;               // 0xd8
+    int xdc;               // 0xdc
+    int xe0;               // 0xe0
+    int xe4;               // 0xe4
+    int xe8;               // 0xe8
+    int xec;               // 0xec
+    int xf0;               // 0xf0
+    int xf4;               // 0xf4
+    int xf8;               // 0xf8
+    int xfc;               // 0xfc
+    int x100;              // 0x100
+    int x104;              // 0x104
+    int x108;              // 0x108
+    int x10c;              // 0x10c
+    int x110;              // 0x110
+    int x114;              // 0x114
+    int x118;              // 0x118
+    int x11c;              // 0x11c
+    int x120;              // 0x120
+    int x124;              // 0x124
+    int x128;              // 0x128
+    int x12c;              // 0x12c
+    int flags;             // 0x130
+    int envFlags;          // 0x134
+    int x138;              // 0x138
+    int x13c;              // 0x13c
+    int x140;              // 0x140
+    int x144;              // 0x144
+    int x148;              // 0x148
+    int ground_index;      // 0x14c, ground
+    u8 ground_info;        // 0x150
+    u8 ground_unk;         // 0x151
+    u8 ground_type;        // 0x152, platform/ledgegrab
+    u8 ground_mat;         // 0x153, grass/ice etc
+    Vec3 ground_slope;     // 0x154
+    int rightwall_index;   // 0x160
+    u8 rightwall_info;     // 0x164
+    u8 rightwall_unk;      // 0x165
+    u8 rightwall_type;     // 0x166, platform/ledgegrab
+    u8 rightwall_mat;      // 0x167, grass/ice etc
+    Vec3 rightwall_slope;  // 0x168
+    int leftwall_index;    // 0x174
+    u8 leftwall_info;      // 0x178
+    u8 leftwall_unk;       // 0x179
+    u8 leftwall_type;      // 0x17A, platform/ledgegrab
+    u8 leftwall_mat;       // 0x17B, grass/ice etc
+    Vec3 leftwall_slope;   // 0x17C
+    int ceil_index;        // 0x188
+    u8 ceil_info;          // 0x18C
+    u8 ceil_unk;           // 0x18D
+    u8 ceil_type;          // 0x18E, platform/ledgegrab
+    u8 ceil_mat;           // 0x18F, grass/ice etc
+    Vec3 ceil_slope;       // 0x190
+    int ecb_lock;          // 0x19c
 };
 struct Hitbox
 {
@@ -6576,6 +6568,9 @@ void (*Stage_SetGroundCallback)(int line, void *userdata, void *callback) = (voi
 void (*Stage_SetCeilingCallback)(int line, void *userdata, void *callback) = (void *)0x800581a4;
 void (*Stage_InitMovingColl)(JOBJ *mapjoint, int mapgobjID) = (void *)0x801c2ed0;
 void (*Stage_UpdateMovingColl)(GOBJ *mapgobj) = (void *)0x801c2fe0;
+void (*Stage_SpawnEffectPos)(int gfxID, int efFileID, Vec3 *pos) = (void *)0x801c96f8;
+void (*Stage_SpawnEffectJointPos)(int gfxID, int efFileID, JOBJ *pos) = (void *)0x801c97dc;
+void (*Stage_SpawnEffectJointPos2)(int gfxID, int efFileID, JOBJ *pos) = (void *)0x801c9808;
 
 // MEX functions
 void (*LoadMEXItem)(GOBJ *player_gobj, int article_pointer, int item_id) = (void *)0x803d7058;
