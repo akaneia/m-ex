@@ -60,6 +60,7 @@ typedef struct Vec3 Vec3;
 typedef struct Vec4 Vec4;
 typedef struct DynamicBoneset DynamicBoneset;
 typedef struct Effect Effect;
+typedef struct Particle Particle;
 typedef struct Reflect Reflect;
 typedef struct PRIM PRIM;
 typedef struct ColorOverlay ColorOverlay;
@@ -181,6 +182,31 @@ struct Effect
     char x27;
     char x28;
     char x29;
+};
+struct Particle
+{
+    int x0;
+    int x4;
+    int x8;
+    int xc;
+    int x10;
+    int x14;
+    int x18;
+    int x1c;
+    int x20;
+    int x24;
+    int x28;
+    int x2c;
+    int x30;
+    int x34;
+    int x38;
+    int x3c;
+    int x40;
+    int x44;
+    int x48;
+    int x4c;
+    int x50;
+    float *properties;
 };
 struct DynamicBoneset
 {
@@ -2890,10 +2916,10 @@ struct ItemData
     int xc10;                       // 0xc10
     int xc14;                       // 0xc14
     int xc18;                       // 0xc18
-    int xc1c;                       // 0xc1c
-    int xc20;                       // 0xc20
-    int xc24;                       // 0xc24
-    int xc28;                       // 0xc28
+    float ecb_top;                  // 0xc1c
+    float ecb_bottom;               // 0xc20
+    float ecb_right;                // 0xc24
+    float ecb_left;                 // 0xc28
     int xc2c;                       // 0xc2c
     int xc30;                       // 0xc30
     int xc34;                       // 0xc34
@@ -6568,9 +6594,9 @@ void (*Stage_SetGroundCallback)(int line, void *userdata, void *callback) = (voi
 void (*Stage_SetCeilingCallback)(int line, void *userdata, void *callback) = (void *)0x800581a4;
 void (*Stage_InitMovingColl)(JOBJ *mapjoint, int mapgobjID) = (void *)0x801c2ed0;
 void (*Stage_UpdateMovingColl)(GOBJ *mapgobj) = (void *)0x801c2fe0;
-void (*Stage_SpawnEffectPos)(int gfxID, int efFileID, Vec3 *pos) = (void *)0x801c96f8;
-void (*Stage_SpawnEffectJointPos)(int gfxID, int efFileID, JOBJ *pos) = (void *)0x801c97dc;
-void (*Stage_SpawnEffectJointPos2)(int gfxID, int efFileID, JOBJ *pos) = (void *)0x801c9808;
+Particle *(*Stage_SpawnEffectPos)(int gfxID, int efFileID, Vec3 *pos) = (void *)0x801c96f8;
+Particle *(*Stage_SpawnEffectJointPos)(int gfxID, int efFileID, JOBJ *pos) = (void *)0x801c97dc;
+Particle *(*Stage_SpawnEffectJointPos2)(int gfxID, int efFileID, JOBJ *pos) = (void *)0x801c9808;
 
 // MEX functions
 void (*LoadMEXItem)(GOBJ *player_gobj, int article_pointer, int item_id) = (void *)0x803d7058;
