@@ -41,3 +41,7 @@ particle tables
     0x36C - array of unk. (is == 0 when 803984f4.r7 == 0), indexed by effect file ID
     0x470 - array of ParticleLast (ParticleIDStart + ParticleCount), indexed by effect file ID
     0x574 - array of pointers to Particles Data (0x4 of Particles in effect file), indexed by effect file ID
+
+804d0f60 - directly referenced @ 80398c10
+    0x000 - int32, unk
+    0x004 - pointer to some obj
