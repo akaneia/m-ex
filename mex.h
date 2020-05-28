@@ -252,6 +252,7 @@ typedef struct
     u8 x4f;
     int x50;
     GOBJ *gobj;               // 0x54
+    void *callback;           // 0x58, read at 803a878c
     u8 *textAlloc;            // 0x5C
     u8 *textAlloc2;           // 0x60
     TextAllocInfo *allocInfo; // 0x64
