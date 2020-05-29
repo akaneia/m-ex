@@ -1,4 +1,4 @@
-#To be inserted at 800908f0
+#To be inserted at 800908f4
 .include "../../Globals.s"
 
   .set REG_PlayerData,31
