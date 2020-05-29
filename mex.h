@@ -1023,9 +1023,7 @@ struct FighterData
     char player_controller_number;                         // 0x618
     char costume_id;                                       // 0x619
     char color_overlay_id;                                 // 0x61A
-    char team_id_red;                                      // 0x61B
-    char team_id_blue;                                     // 0x61C
-    char team_id_green;                                    // 0x61D
+    u8 team;                                               // 0x61B
     char unknown61E;                                       // 0x61E
     char unknown61F;                                       // 0x61F
 
@@ -2037,7 +2035,7 @@ struct FighterData
     int x207c;                                    // 0x207c
     int x2080;                                    // 0x2080
     int x2084;                                    // 0x2084
-    int x2088;                                    // 0x2088
+    u16 moveID;                                   // 0x2088
     int x208c;                                    // 0x208c
     int x2090;                                    // 0x2090
     int x2094;                                    // 0x2094
@@ -2969,8 +2967,8 @@ struct ItemData
     int xce0;                       // 0xce0
     int xce4;                       // 0xce4
     int xce8;                       // 0xce8
-    GOBJ *dmg_source;               // 0xcec
-    int xcf0;                       // 0xcf0
+    GOBJ *dmgsource_fighter;        // 0xcec
+    GOBJ *dmgsource_item;           // 0xcf0
     int xcf4;                       // 0xcf4
     int xcf8;                       // 0xcf8
     int xcfc;                       // 0xcfc
@@ -6505,6 +6503,7 @@ void (*Match_SetEndGraphic)(int graphic) = (void *)0x8016b33c;
 void (*Match_EndImmediate)() = (void *)0x8016b328;
 void (*Match_EndVS)() = (void *)0x8016c7f0;
 void (*Match_FadeScreen)(int time) = (void *)0x8002063c;
+int (*Match_CheckIfTeams)() = (void *)0x8016b168;
 
 // Fighter Functions
 void (*ActionStateChange)(float startFrame, float animSpeed, float animBlend, GOBJ *fighter, int stateID, int flags1, int flags2) = (void *)0x800693ac;
