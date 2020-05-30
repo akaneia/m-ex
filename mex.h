@@ -2041,7 +2041,7 @@ struct FighterData
     int x2094;                                    // 0x2094
     int x2098;                                    // 0x2098
     int x209c;                                    // 0x209c
-    int x20a0;                                    // 0x20a0
+    JOBJ *accessory;                              // 0x20a0
     int x20a4;                                    // 0x20a4
     int x20a8;                                    // 0x20a8
     int x20ac;                                    // 0x20ac
