@@ -6475,6 +6475,8 @@ void (*Effect_ResumeAll)(GOBJ *fighter) = (void *)0x8005bac4;
 void (*Wind_Create)(Vec3 *pos, int radius, float x, float y, float z) = (void *)0x800119dc;
 void *(*GXLink_Common)(GOBJ *gobj, int pass) = (void *)0x80391070;
 int (*Pause_CheckStatus)(int type) = (void *)0x801a45e8;
+void (*Wind_StageCreate)(Vec3 *pos, int duration, float radius, float lifetime, float angle) = (void *)0x80011a50;
+void (*Wind_FighterCreate)(Vec3 *pos, int duration, float radius, float lifetime, float angle) = (void *)0x800119dc;
 
 // Text Functions
 int (*Text_CreateCanvas)(int unk, GOBJ *gobj, int gobjType, int gobjSubclass, int gobjBehavior, int GXRenderType, int GXLinkPri, int COBJUnk) = (void *)0x803a611c;
@@ -6504,6 +6506,7 @@ void (*Match_EndImmediate)() = (void *)0x8016b328;
 void (*Match_EndVS)() = (void *)0x8016c7f0;
 void (*Match_FadeScreen)(int time) = (void *)0x8002063c;
 int (*Match_CheckIfTeams)() = (void *)0x8016b168;
+void (*Match_SetPostMatchSFX)(int sfx) = (void *)0x8016b364;
 
 // Fighter Functions
 void (*ActionStateChange)(float startFrame, float animSpeed, float animBlend, GOBJ *fighter, int stateID, int flags1, int flags2) = (void *)0x800693ac;
