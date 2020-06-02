@@ -43,13 +43,17 @@ CheckRNG:
 #Get offset
   mulli r3,REG_LoopCount,4
   add r4,r3,REG_SongList
-#Increment percent toal
+#Check if 0 chance
   lhz r3,0x2(r4)
+  cmpwi r3,0
+  beq CheckRNG_Skip
+#Increment percent toal
   add REG_PercentTotal,REG_PercentTotal,r3
   subi  r3,REG_PercentTotal,1
   cmpw REG_RNG,r3
   ble CheckRNG_Found
 #Get next
+CheckRNG_Skip:
   addi  REG_LoopCount,REG_LoopCount,1
   cmpw REG_LoopCount,REG_BGMNum
   blt CheckRNG
