@@ -48,6 +48,8 @@ typedef struct ftData ftData;
 typedef struct itData itData;
 typedef struct JOBJ JOBJ;
 typedef struct DOBJ DOBJ;
+typedef struct TOBJ TOBJ;
+typedef struct AOBJ AOBJ;
 typedef struct CameraBox CameraBox;
 typedef struct Stage Stage;
 typedef struct itCommonAttr itCommonAttr;
@@ -67,6 +69,7 @@ typedef struct ColorOverlay ColorOverlay;
 typedef struct Playerblock Playerblock;
 typedef struct ftCommonData ftCommonData;
 typedef struct Translation Translation;
+typedef struct MEXPlaylist MEXPlaylist;
 struct Vec2
 {
     float X;
@@ -92,6 +95,46 @@ typedef struct
     u8 b;
     u8 a;
 } GXColor;
+typedef struct AOBJ
+{
+    u32 flags;
+    f32 curr_frame;
+    f32 rewind_frame;
+    f32 end_frame;
+    f32 framerate;
+    struct _HSD_FObj *fobj;
+    struct _HSD_Obj *hsd_obj;
+} AOBJ;
+typedef struct TOBJ
+{
+    int *parent;
+    int x4;
+    TOBJ *next;
+    u32 id;                           //GXTexMapID
+    u32 src;                          //GXTexGenSrc 0x10
+    u32 mtxid;                        // 0x14
+    Vec4 rotate;                      // 0x18
+    Vec3 scale;                       // 0x28
+    Vec3 translate;                   // 0x34
+    u32 wrap_s;                       // 0x40 GXTexWrapMode
+    u32 wrap_t;                       // 0x44 GXTexWrapMode
+    u8 repeat_s;                      // 0x48
+    u8 repeat_t;                      // 0x49
+    u16 anim_id;                      // 0x4A
+    u32 flags;                        // 0x4C
+    f32 blending;                     // 0x50
+    u32 magFilt;                      // 0x54 GXTexFilter
+    struct _HSD_ImageDesc *imagedesc; // 0x58
+    struct _HSD_Tlut *tlut;           // 0x5C
+    struct _HSD_TexLODDesc *lod;      // 0x60
+    AOBJ *aobj;                       // 0x64
+    struct _HSD_ImageDesc **imagetbl;
+    struct _HSD_Tlut **tluttbl;
+    u8 tlut_no;
+    Mtx mtx;
+    u32 coord; //GXTexCoordID
+    struct _HSD_TObjTev *tev;
+} TOBJ;
 typedef struct
 {
     GXColor ambient;
@@ -102,12 +145,12 @@ typedef struct
 } HSD_Material;
 typedef struct
 {
-    int parent;
+    int *parent;
     u32 rendermode;
-    struct _HSD_TObj *tobj;
+    TOBJ *tobj;
     HSD_Material *mat;
     struct _HSD_PEDesc *pe;
-    struct _HSD_AObj *aobj;
+    AOBJ *aobj;
     /*
     struct _HSD_TObj *ambient_tobj;
     struct _HSD_TObj *specular_tobj;
@@ -143,7 +186,7 @@ struct DOBJ
     DOBJ *next; //0x04
     MOBJ *mobj; //0x08
     int *pobj;  //0x0C
-    int *aobj;  //0x10
+    AOBJ *aobj; //0x10
     u32 flags;  //0x14
     u32 unk;
 };
@@ -162,7 +205,7 @@ struct JOBJ
     Mtx rotMtx;
     Vec3 *VEC;
     Mtx *MTX;
-    int *AObj;
+    AOBJ *aobj;
     int *RObj;
     JOBJDesc *desc;
 };
@@ -2043,7 +2086,7 @@ struct FighterData
     int x209c;                                    // 0x209c
     JOBJ *accessory;                              // 0x20a0
     int x20a4;                                    // 0x20a4
-    int x20a8;                                    // 0x20a8
+    int *shadow;                                  // 0x20a8
     int x20ac;                                    // 0x20ac
     int x20b0;                                    // 0x20b0
     int x20b4;                                    // 0x20b4
@@ -4185,6 +4228,11 @@ struct Translation
 {
     float frame;
     float value;
+};
+struct MEXPlaylist
+{
+    u16 bgm;
+    u16 chance;
 };
 typedef struct
 {
@@ -6428,6 +6476,7 @@ JOBJ *(*JOBJ_LoadJoint)(JOBJDesc *joint) = (void *)0x80370e44;
 void (*JOBJ_RemoveAll)(JOBJ *joint) = (void *)0x80371590;
 void (*JOBJ_GetChild)(JOBJ *joint, int ptr, int index, ...) = (void *)0x80011e24;
 void (*JOBJ_AddChild)(JOBJ *parent, JOBJ *child) = (void *)0x803717a8;
+float (*JOBJ_GetCurrentMatAnimFrame)(JOBJ *joint) = (void *)0x8022f298;
 void (*JOBJ_SetFlags)(JOBJ *joint, int flags) = (void *)0x80371d00;
 void (*JOBJ_SetFlagsAll)(JOBJ *joint, int flags) = (void *)0x80371d9c;
 void (*JOBJ_BillBoard)(JOBJ *joint, Mtx *m, Mtx *mx) = (void *)0x803740e8;
@@ -6477,6 +6526,7 @@ void *(*GXLink_Common)(GOBJ *gobj, int pass) = (void *)0x80391070;
 int (*Pause_CheckStatus)(int type) = (void *)0x801a45e8;
 void (*Wind_StageCreate)(Vec3 *pos, int duration, float radius, float lifetime, float angle) = (void *)0x80011a50;
 void (*Wind_FighterCreate)(Vec3 *pos, int duration, float radius, float lifetime, float angle) = (void *)0x800119dc;
+void (*BGM_Play)(int hpsID) = (void *)0x80023f28;
 
 // Text Functions
 int (*Text_CreateCanvas)(int unk, GOBJ *gobj, int gobjType, int gobjSubclass, int gobjBehavior, int GXRenderType, int GXLinkPri, int COBJUnk) = (void *)0x803a611c;
@@ -6615,6 +6665,7 @@ void (*SFX_PlayStageSFX)(int sfx_id) = (void *)0x803d7078;
 void *(*calloc)(int size) = (void *)0x803d706C;
 PRIM *(*PRIM_NEW)(int vert_count, int params1, int params2) = (void *)0x804DD84C;
 void (*PRIM_CLOSE)() = (void *)0x804DD848;
+MEXPlaylist *(*MEX_GetPlaylist)() = (void *)0x803d707C;
 
 // Macros
 #define RTOC_PTR(offset) *(void **)(0x804df9e0 + offset)
@@ -6761,11 +6812,116 @@ float lerp(Translation *anim, float currFrame)
 
     return amt * (nextPos - prevPos);
 }
+float JOBJ_GetAnimFrame(JOBJ *joint)
+{
+
+    // check for AOBJ in jobj
+    JOBJ *jobj;
+    jobj = joint;
+    while (jobj != 0)
+    {
+        if (jobj->aobj != 0)
+        {
+            return jobj->aobj->curr_frame;
+        }
+
+        // check for AOBJ in dobj
+        DOBJ *dobj;
+        dobj = jobj->dobj;
+        while (dobj != 0)
+        {
+            if (dobj->aobj != 0)
+            {
+                return dobj->aobj->curr_frame;
+            }
+
+            // check for AOBJ in mobj
+            MOBJ *mobj;
+            mobj = dobj->mobj;
+            if (mobj->aobj != 0)
+            {
+                return mobj->aobj->curr_frame;
+            }
+
+            // check for AOBJ in tobj
+            TOBJ *tobj;
+            tobj = mobj->tobj;
+            while (tobj != 0)
+            {
+                if (tobj->aobj != 0)
+                {
+                    return tobj->aobj->curr_frame;
+                }
+                tobj = tobj->next;
+            }
+
+            dobj = dobj->next;
+        }
+
+        jobj = jobj->child;
+    }
+
+    // no aobj found, return -1
+    return -1;
+}
+AOBJ *JOBJ_GetAOBJ(JOBJ *joint)
+{
+
+    // check for AOBJ in jobj
+    JOBJ *jobj;
+    jobj = joint;
+    while (jobj != 0)
+    {
+        if (jobj->aobj != 0)
+        {
+            return jobj->aobj;
+        }
+
+        // check for AOBJ in dobj
+        DOBJ *dobj;
+        dobj = jobj->dobj;
+        while (dobj != 0)
+        {
+            if (dobj->aobj != 0)
+            {
+                return dobj->aobj;
+            }
+
+            // check for AOBJ in mobj
+            MOBJ *mobj;
+            mobj = dobj->mobj;
+            if (mobj->aobj != 0)
+            {
+                return mobj->aobj;
+            }
+
+            // check for AOBJ in tobj
+            TOBJ *tobj;
+            tobj = mobj->tobj;
+            while (tobj != 0)
+            {
+                if (tobj->aobj != 0)
+                {
+                    return tobj->aobj;
+                }
+                tobj = tobj->next;
+            }
+
+            dobj = dobj->next;
+        }
+
+        jobj = jobj->child;
+    }
+
+    // no aobj found, return -1
+    return -1;
+}
 
 // Offsets
 #define STAGE_CONST -0x4C08 // this is an offset used on dreamland, should be safe to use for custom stages
 #define MEMCARD -0x77C0
 #define GOBJLIST -0x3E74
+#define PLCO_SHIELDCOLORS -0x5190
 #define STAGE 0x8049e6c8 // this is the static stage struct, labelled Stage in this file
 
 // Math
