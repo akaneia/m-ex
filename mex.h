@@ -2188,8 +2188,8 @@ struct FighterData
     unsigned char x221f_1 : 1;
     unsigned char x221f_2 : 1;
     unsigned char x221f_3 : 1;
-    unsigned char x221f_4 : 1;
-    unsigned char ms : 1; // ms = master/slave. is 1 when the player is a slave
+    unsigned char sleep : 1; // 0x10
+    unsigned char ms : 1;    // ms = master/slave. is 1 when the player is a slave
     unsigned char x221f_6 : 1;
     unsigned char x221f_7 : 1;
     unsigned char x221f_8 : 1;
