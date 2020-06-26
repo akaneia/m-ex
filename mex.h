@@ -4234,7 +4234,7 @@ struct MEXPlaylist
     u16 bgm;
     u16 chance;
 };
-typedef struct
+typedef struct PlayerData
 {
     // byte 0x0
     u8 kind;
@@ -4262,7 +4262,7 @@ typedef struct
     float defense;
     float scale;
 } PlayerData;
-typedef struct
+typedef struct MatchData
 {
     // byte 0x0
     unsigned char matchType : 3;
@@ -4329,37 +4329,37 @@ typedef struct
     u8 timerSubSeconds; // 0xFF
     //0x18
     int unk17; // 0xFFFFFFFF
-    //byte 0x1C
+    //0x1C
     unsigned long long itemSwitch : 64; // 0xFFFFFFFF FFFFFFFF
-    //byte 0x20
+    //byte 0x24
     int unk18; // 0xFFFFFFFF
-    //0x24
-    float cameraShakeMult;
     //0x28
-    float unk19;
+    float cameraShakeMult;
     //0x2C
-    float unk20;
+    float unk19;
     //0x30
-    int x34;
+    float unk20;
     //0x34
-    int x38;
+    int x34;
     //0x38
+    int x38;
+    //0x3C
     int x3c;
-    //0x40
-    void *onStartMelee;
     //0x44
-    int unk21;
+    void *onStartMelee;
     //0x48
-    void *onCheckPause;
+    int unk21;
     //0x4C
-    int unk22;
+    void *onCheckPause;
     //0x50
-    void *onMatchFrame1;
+    int unk22;
     //0x54
-    void *onMatchFrame2;
+    void *onMatchFrame1;
     //0x58
-    void *onMatchEnd;
+    void *onMatchFrame2;
     //0x5C
+    void *onMatchEnd;
+    //0x60
     /*
        int unk23;
        //0x60
@@ -4370,12 +4370,12 @@ typedef struct
     // player data
     PlayerData playerData[4];
 } MatchData;
-typedef struct
+typedef struct PreloadChar
 {
     int kind;
     u8 costume;
 } PreloadChar;
-typedef struct
+typedef struct Preload
 {
     int unk1;
     int unk2;
