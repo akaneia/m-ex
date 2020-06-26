@@ -17,8 +17,8 @@
 .set  SFX_PlayStageSFX,0x803d7078
 
 #mexSelectChr Offsets
-.set  OFST_mexSelectChr,-0x4A0C
-.set  OFST_mexSelectChr_IconJoint,-0x4A10
+.set  OFST_mexSelectChr,-0x472C
+.set  OFST_mexSelectChr_IconJoint,-0x4728 #originally SceneLoad_Adventure mode static pointers (8031dea0)
 .set  SlChr_IconModel,0x0
 .set  SlChr_IconAnimJoint,0x4
 .set  SlChr_IconMatAnim,0x8
