@@ -539,7 +539,7 @@ struct Playerblock
 };
 struct map_gobjDesc
 {
-    void *onCreation;
+    void *(*onCreation)(GOBJ *map);
     void *onDeletion;
     void *onFrame;
     void *onUnk;
@@ -2464,7 +2464,7 @@ struct FighterData
     int x2318;                            // 0x2318
     int x231c;                            // 0x231c
     int x2320;                            // 0x2320
-    int x2324;                            // 0x2324
+    int stage_internal;                   // 0x2324 so stupid, used for decrementing hazard immunity
     int x2328;                            // 0x2328
     int x232c;                            // 0x232c
     int x2330;                            // 0x2330
@@ -3354,79 +3354,82 @@ struct map_gobjData
     int xd4;             // 0xd4
     int xd8;             // 0xd8
     int xdc;             // 0xdc
-    int mapVar0;         // 0xe0
-    int mapVar1;         // 0xe4
-    int mapVar2;         // 0xe8
-    int mapVar3;         // 0xec
-    int mapVar4;         // 0xf0
-    int mapVar5;         // 0xf4
-    int mapVar6;         // 0xf8
-    int mapVar7;         // 0xfc
-    int x100;            // 0x100
-    int x104;            // 0x104
-    int x108;            // 0x108
-    int x10c;            // 0x10c
-    int x110;            // 0x110
-    int x114;            // 0x114
-    int x118;            // 0x118
-    int x11c;            // 0x11c
-    int x120;            // 0x120
-    int x124;            // 0x124
-    int x128;            // 0x128
-    int x12c;            // 0x12c
-    int x130;            // 0x130
-    int x134;            // 0x134
-    int x138;            // 0x138
-    int x13c;            // 0x13c
-    int x140;            // 0x140
-    int x144;            // 0x144
-    int x148;            // 0x148
-    int x14c;            // 0x14c
-    int x150;            // 0x150
-    int x154;            // 0x154
-    int x158;            // 0x158
-    int x15c;            // 0x15c
-    int x160;            // 0x160
-    int x164;            // 0x164
-    int x168;            // 0x168
-    int x16c;            // 0x16c
-    int x170;            // 0x170
-    int x174;            // 0x174
-    int x178;            // 0x178
-    int x17c;            // 0x17c
-    int x180;            // 0x180
-    int x184;            // 0x184
-    int x188;            // 0x188
-    int x18c;            // 0x18c
-    int x190;            // 0x190
-    int x194;            // 0x194
-    int x198;            // 0x198
-    int x19c;            // 0x19c
-    int x1a0;            // 0x1a0
-    int x1a4;            // 0x1a4
-    int x1a8;            // 0x1a8
-    int x1ac;            // 0x1ac
-    int x1b0;            // 0x1b0
-    int x1b4;            // 0x1b4
-    int x1b8;            // 0x1b8
-    int x1bc;            // 0x1bc
-    int x1c0;            // 0x1c0
-    int x1c4;            // 0x1c4
-    int x1c8;            // 0x1c8
-    int x1cc;            // 0x1cc
-    int x1d0;            // 0x1d0
-    int x1d4;            // 0x1d4
-    int x1d8;            // 0x1d8
-    int x1dc;            // 0x1dc
-    int x1e0;            // 0x1e0
-    int x1e4;            // 0x1e4
-    int x1e8;            // 0x1e8
-    int x1ec;            // 0x1ec
-    int x1f0;            // 0x1f0
-    int x1f4;            // 0x1f4
-    int x1f8;            // 0x1f8
-    int x1fc;            // 0x1fc
-    int x200;            // 0x200
+    struct
+    {
+        int mapVar0; // 0xe0
+        int mapVar1; // 0xe4
+        int mapVar2; // 0xe8
+        int mapVar3; // 0xec
+        int mapVar4; // 0xf0
+        int mapVar5; // 0xf4
+        int mapVar6; // 0xf8
+        int mapVar7; // 0xfc
+        int x100;    // 0x100
+        int x104;    // 0x104
+        int x108;    // 0x108
+        int x10c;    // 0x10c
+        int x110;    // 0x110
+        int x114;    // 0x114
+        int x118;    // 0x118
+        int x11c;    // 0x11c
+        int x120;    // 0x120
+        int x124;    // 0x124
+        int x128;    // 0x128
+        int x12c;    // 0x12c
+        int x130;    // 0x130
+        int x134;    // 0x134
+        int x138;    // 0x138
+        int x13c;    // 0x13c
+        int x140;    // 0x140
+        int x144;    // 0x144
+        int x148;    // 0x148
+        int x14c;    // 0x14c
+        int x150;    // 0x150
+        int x154;    // 0x154
+        int x158;    // 0x158
+        int x15c;    // 0x15c
+        int x160;    // 0x160
+        int x164;    // 0x164
+        int x168;    // 0x168
+        int x16c;    // 0x16c
+        int x170;    // 0x170
+        int x174;    // 0x174
+        int x178;    // 0x178
+        int x17c;    // 0x17c
+        int x180;    // 0x180
+        int x184;    // 0x184
+        int x188;    // 0x188
+        int x18c;    // 0x18c
+        int x190;    // 0x190
+        int x194;    // 0x194
+        int x198;    // 0x198
+        int x19c;    // 0x19c
+        int x1a0;    // 0x1a0
+        int x1a4;    // 0x1a4
+        int x1a8;    // 0x1a8
+        int x1ac;    // 0x1ac
+        int x1b0;    // 0x1b0
+        int x1b4;    // 0x1b4
+        int x1b8;    // 0x1b8
+        int x1bc;    // 0x1bc
+        int x1c0;    // 0x1c0
+        int x1c4;    // 0x1c4
+        int x1c8;    // 0x1c8
+        int x1cc;    // 0x1cc
+        int x1d0;    // 0x1d0
+        int x1d4;    // 0x1d4
+        int x1d8;    // 0x1d8
+        int x1dc;    // 0x1dc
+        int x1e0;    // 0x1e0
+        int x1e4;    // 0x1e4
+        int x1e8;    // 0x1e8
+        int x1ec;    // 0x1ec
+        int x1f0;    // 0x1f0
+        int x1f4;    // 0x1f4
+        int x1f8;    // 0x1f8
+        int x1fc;    // 0x1fc
+        int x200;    // 0x200
+    } map_struct;
 };
 struct SpawnItem
 {
@@ -9346,6 +9349,33 @@ typedef struct Match // static match struct
     int x24c4;       // 0x24c4
     MatchData match; // 0x24c8
 } Match;
+typedef struct ftChkDevice // 80459a68
+{
+    int x0;
+    int x4;
+    int x8;
+    int xc;
+    int x10;
+    int x14;
+    int x18;
+    int x1c;
+    int x20;
+    GOBJ *gobj;
+    int hazard_kind;
+    void *check;
+} ftChkDevice;
+typedef struct DmgHazard
+{
+    int x0;
+    int dmg;
+    int angle;
+    int kb_growth;
+    int x10;
+    int kb_base;
+    int element;
+    int x1c;
+    int sfx;
+} DmgHazard;
 
 // Math Functions
 float (*atan2)(float y, float x) = (void *)0x80022c30;
@@ -9595,6 +9625,9 @@ void (*ECB_CollAir)(CollData *ecb, ECBBones *bones) = (void *)0x800475f4;
 
 // Map Functions
 Stage *(*Stage_GetStageInfo)() = (void *)0x801c6324;
+void (*Stage_AddFtChkDevice)(GOBJ *map, int hazard_kind, void *check) = (void *)0x800c07f8;
+void (*Stage_SetChkDevicePos)(float y_pos) = (void *)0x801c438c;
+void (*Stage_GetChkDevicePos)(float *y_pos, float *y_delta) = (void *)0x801c4368;
 int *(*Stage_GetYakumonoParam)() = (void *)0x801c49f8;
 void (*MapStateChange)(GOBJ *map, int stateID, int animID) = (void *)0x801c8138;
 void (*Dynamics_DecayWind)() = (void *)0x800115f4;
