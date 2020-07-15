@@ -9645,6 +9645,7 @@ Stage *(*Stage_GetStageInfo)() = (void *)0x801c6324;
 void (*Stage_AddFtChkDevice)(GOBJ *map, int hazard_kind, void *check) = (void *)0x800c07f8;
 void (*Stage_SetChkDevicePos)(float y_pos) = (void *)0x801c438c;
 void (*Stage_GetChkDevicePos)(float *y_pos, float *y_delta) = (void *)0x801c4368;
+float (*Stage_GetScale)() = (void *)0x801c0498;
 int *(*Stage_GetYakumonoParam)() = (void *)0x801c49f8;
 void (*Stage_MapStateChange)(GOBJ *map, int map_gobjID, int anim_id) = (void *)0x801c8138;
 void (*Dynamics_DecayWind)() = (void *)0x800115f4;
