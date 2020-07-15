@@ -3298,11 +3298,26 @@ struct ItemData
 };
 struct map_gobjData
 {
-    int x0;              // 0x0
-    GOBJ *gobj;          // 0x4
-    int x8;              // 0x8
-    int xC;              // 0xC
-    int flags;           // 0x10
+    int x0;                    // 0x0
+    GOBJ *gobj;                // 0x4
+    int x8;                    // 0x8
+    int xC;                    // 0xC
+    unsigned char flagx80 : 1; //  0x80
+    unsigned char flagx40 : 1; //  0x40
+    unsigned char isFog : 1;   //  0x20, checked @ 801c5e80 and 801c5f10
+    unsigned char flagx10 : 1; //  0x10
+    unsigned char flagx8 : 1;  //  0x08
+    unsigned char gx_unk1 : 1; //  0x04, checked @ 801c5e9c
+    unsigned char flagx2 : 1;  //  0x02
+    unsigned char flagx1 : 1;  //  0x01
+
+    unsigned char gx_unk2 : 3;  //  0x80
+    unsigned char flag2x10 : 1; //  0x10
+    unsigned char flag2x08 : 1; //  0x08
+    unsigned char flag2x04 : 1; //  0x04, checked @ 801c5e9c
+    unsigned char flag2x02 : 1; //  0x02
+    unsigned char flag2x01 : 1; //  0x01
+
     int map_gobjID;      // 0x14
     int x18;             // 0x18
     int onUnk;           // 0x1c
@@ -9418,6 +9433,7 @@ void (*JOBJ_ReqAnimAll)(JOBJ *joint, float unk) = (void *)0x8036f8bc;
 void (*JOBJ_ReqAnimAllByFlags)(JOBJ *joint, int flags, float frame) = (void *)0x8036f7b0;
 float (*JOBJ_GetJointAnimFrameTotal)(JOBJ *joint) = (void *)0x8000be40;
 float (*JOBJ_GetJointAnimNextFrame)(JOBJ *joint) = (void *)0x8000bdb4;
+void (*JOBJ_SetAllMOBJFlags)(JOBJ *joint, int flags) = (void *)0x801c8858;
 void (*AOBJ_ReqAnim)(int *aobj, float unk) = (void *)0x8036410c;
 void (*AOBJ_StopAnim)(JOBJ *jobj, int flags, int flags2) = (void *)0x8036414c;
 void (*DOBJ_SetFlags)(DOBJ *dobj, int flags) = (void *)0x8035ddb8;
@@ -9630,7 +9646,7 @@ void (*Stage_AddFtChkDevice)(GOBJ *map, int hazard_kind, void *check) = (void *)
 void (*Stage_SetChkDevicePos)(float y_pos) = (void *)0x801c438c;
 void (*Stage_GetChkDevicePos)(float *y_pos, float *y_delta) = (void *)0x801c4368;
 int *(*Stage_GetYakumonoParam)() = (void *)0x801c49f8;
-void (*MapStateChange)(GOBJ *map, int stateID, int animID) = (void *)0x801c8138;
+void (*Stage_MapStateChange)(GOBJ *map, int map_gobjID, int anim_id) = (void *)0x801c8138;
 void (*Dynamics_DecayWind)() = (void *)0x800115f4;
 GOBJ *(*Stage_CreateMapGObj)(int mapgobjID) = (void *)0x80223908;
 void *(*GXLink_Stage)(GOBJ *gobj, int pass) = (void *)0x801c5db0;
