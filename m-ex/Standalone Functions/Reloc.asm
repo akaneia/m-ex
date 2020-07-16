@@ -29,6 +29,8 @@ Reloc_Loop:
   beq Reloc_LoadAddress
   cmpwi REG_Flag,10
   beq Reloc_Branch
+  cmpwi REG_Flag,26
+  beq Reloc_Relative32Bit
   b Reloc_IncLoop
 Reloc_StaticAddress:
   #lwz r3,0x0(REG_FuncPointer)
@@ -72,6 +74,13 @@ Reloc_Branch:
   rlwinm  r3,r3,0,6,29                  #extract bits for offset
   lwz r4,0x0(REG_CodePointer)         #place branch instruction
   or  r3,r3,r4
+  stw r3,0x0(REG_CodePointer)         #place branch instruction
+  b Reloc_IncLoop
+############################################
+Reloc_Relative32Bit:
+#Store offset?
+#Store branch to this code
+  sub r3,REG_FuncPointer,REG_CodePointer                          #Difference relative to branch addr
   stw r3,0x0(REG_CodePointer)         #place branch instruction
   b Reloc_IncLoop
 ############################################
