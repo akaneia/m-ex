@@ -1,0 +1,132 @@
+#ifndef MEX_H_ST_HSD
+#define MEX_H_ST_HSD
+
+#include "structs.h"
+#include "datatypes.h"
+#include "color.h"
+
+// button bits
+#define PAD_BUTTON_LEFT 0x40000
+#define PAD_BUTTON_RIGHT 0x80000
+#define PAD_BUTTON_DOWN 0x20000
+#define PAD_BUTTON_UP 0x10000
+#define PAD_BUTTON_DPAD_LEFT 0x0001
+#define PAD_BUTTON_DPAD_RIGHT 0x0002
+#define PAD_BUTTON_DPAD_DOWN 0x0004
+#define PAD_BUTTON_DPAD_UP 0x0008
+#define PAD_TRIGGER_Z 0x0010
+#define PAD_TRIGGER_R 0x0020
+#define PAD_TRIGGER_L 0x0040
+#define PAD_BUTTON_A 0x0100
+#define PAD_BUTTON_B 0x0200
+#define PAD_BUTTON_X 0x0400
+#define PAD_BUTTON_Y 0x0800
+#define PAD_BUTTON_START 0x1000
+
+#define HSD_BUTTON_DPAD_LEFT 0x0001
+#define HSD_BUTTON_DPAD_RIGHT 0x0002
+#define HSD_BUTTON_DPAD_DOWN 0x0004
+#define HSD_BUTTON_DPAD_UP 0x0008
+#define HSD_TRIGGER_Z 0x0010
+#define HSD_TRIGGER_R 0x0020
+#define HSD_TRIGGER_L 0x0040
+#define HSD_BUTTON_A 0x0100
+#define HSD_BUTTON_B 0x0200
+#define HSD_BUTTON_X 0x0400
+#define HSD_BUTTON_Y 0x0800
+#define HSD_BUTTON_START 0x1000
+#define HSD_BUTTON_UP 0x10000
+#define HSD_BUTTON_DOWN 0x20000
+#define HSD_BUTTON_LEFT 0x40000
+#define HSD_BUTTON_RIGHT 0x80000
+
+struct HSD_Material
+{
+    GXColor ambient;
+    GXColor diffuse;
+    GXColor specular;
+    float alpha;
+    float shininess;
+};
+
+struct HSD_Pad
+{
+    int held;
+    int heldPrev;
+    int down;
+    int rapidFire;
+    int up;
+    int rapidTimer;
+    s8 stickX;
+    s8 stickY;
+    s8 substickX;
+    s8 substickY;
+    u8 triggerLeft;
+    u8 triggerRight;
+    float fstickX;
+    float fstickY;
+    float fsubstickX;
+    float fsubstickY;
+    float ftriggerLeft;
+    float ftriggerRight;
+    float x38;
+    float x3c;
+    u8 x40;
+    u8 isPlugged;
+};
+
+struct HSD_Pads
+{
+    HSD_Pad pad[4];
+};
+
+struct HSD_Update
+{
+    // 0x80479d58
+    u32 sys_frames_pre;                   //0x0
+    u32 sys_frames_post;                  //0x4
+    u32 engine_frames;                    //0x8
+    u32 change_scene;                     //0xC
+    unsigned char flag1 : 1;              //0x10 - 0x80
+    unsigned char flag2 : 1;              //0x10 - 0x40
+    unsigned char flag3 : 1;              //0x10 - 0x20
+    unsigned char flag4 : 1;              //0x10 - 0x10
+    unsigned char flag5 : 1;              //0x10 - 0x08
+    unsigned char flag6 : 1;              //0x10 - 0x04
+    unsigned char pause_game : 1;         //0x10 - 0x02
+    unsigned char pause_develop : 1;      //0x10 - 0x01
+    unsigned char flag9 : 1;              //0x11 - 0x80
+    unsigned char flag10 : 1;             //0x11 - 0x40
+    unsigned char flag11 : 1;             //0x11 - 0x20
+    unsigned char flag12 : 1;             //0x11 - 0x10
+    unsigned char flag13 : 1;             //0x11 - 0x08
+    unsigned char flag14 : 1;             //0x11 - 0x04
+    unsigned char pause_game_prev : 1;    //0x11 - 0x02
+    unsigned char pause_develop_prev : 1; //0x11 - 0x01
+    unsigned char flag17 : 1;             //0x12 - 0x80
+    unsigned char flag18 : 1;             //0x12 - 0x40
+    unsigned char flag19 : 1;             //0x12 - 0x20
+    unsigned char flag20 : 1;             //0x12 - 0x10
+    unsigned char flag21 : 1;             //0x12 - 0x08
+    unsigned char flag22 : 1;             //0x12 - 0x04
+    unsigned char flag23 : 1;             //0x12 - 0x02
+    unsigned char advance : 1;            //0x12 - 0x01
+    unsigned char flag24 : 1;             //0x12 - 0x80
+    unsigned char flag25 : 1;             //0x12 - 0x40
+    unsigned char flag26 : 1;             //0x12 - 0x20
+    unsigned char flag27 : 1;             //0x12 - 0x10
+    unsigned char flag28 : 1;             //0x12 - 0x08
+    unsigned char flag29 : 1;             //0x12 - 0x04
+    unsigned char flag30 : 1;             //0x12 - 0x02
+    unsigned char advance_prev : 1;       //0x12 - 0x01
+    int (*checkPause)();                  //0x14 returns 1 when toggling pause
+    int (*checkAdvance)();                //0x18 returns 1 when advancing frame
+    u32 x1c;                              //0x1C
+    u32 x20;
+    u32 x24;
+    u32 x28;
+    u32 x2c;
+    void (*onFrame)(); //0x30
+};
+
+#endif
