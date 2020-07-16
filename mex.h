@@ -25,6 +25,10 @@ typedef double f64;
 typedef float Mtx[3][4];
 typedef float (*MtxPtr)[4];
 
+// Math
+#define M_PI 3.14159265358979323846
+#define M_1DEGREE 0.0174533
+
 // Ghidrish
 #define undefined8 long
 #define undefined4 int
@@ -2332,7 +2336,7 @@ struct FighterData
     unsigned char x2219_3 : 1;                      // 0x20 - 0x2219
     unsigned char x2219_4 : 1;                      // 0x10 - 0x2219
     unsigned char x2219_5 : 1;                      // 0x8 - 0x2219
-    unsigned char x2219_6 : 1;                      // 0x4 - 0x2219
+    unsigned char freeze : 1;                       // 0x4 - 0x2219
     unsigned char x2219_7 : 1;                      // 0x2 - 0x2219
     unsigned char x2219_8 : 1;                      // 0x1 - 0x2219
     unsigned char x221a_1 : 1;                      // 0x80 - 0x221a
@@ -9393,6 +9397,7 @@ typedef struct DmgHazard
 } DmgHazard;
 
 // Math Functions
+float (*atan)(float in) = (void *)0x80022e68;
 float (*atan2)(float y, float x) = (void *)0x80022c30;
 float (*sin)(float x) = (void *)0x803263d4;
 float (*cos)(float x) = (void *)0x80326240;
@@ -9478,6 +9483,7 @@ Effect *(*Effect_SpawnSync)(int gfx_id, ...) = (void *)0x8005fddc;
 void (*Effect_SpawnAsync)(GOBJ *fighter, Effect *ptr, int type, int gfx_id, ...) = (void *)0x800676f0;
 void (*Effect_PauseAll)(GOBJ *fighter) = (void *)0x8005ba40;
 void (*Effect_ResumeAll)(GOBJ *fighter) = (void *)0x8005bac4;
+void (*Effect_DestroyAll)(GOBJ *fighter) = (void *)0x8005b880;
 void (*Wind_Create)(Vec3 *pos, int radius, float x, float y, float z) = (void *)0x800119dc;
 void (*GXLink_Common)(GOBJ *gobj, int pass) = (void *)0x80391070;
 int (*Pause_CheckStatus)(int type) = (void *)0x801a45e8;
@@ -9940,10 +9946,31 @@ AOBJ *JOBJ_GetAOBJ(JOBJ *joint)
     // no aobj found, return -1
     return -1;
 }
+float Math_Vec2Angle(Vec2 *a, Vec2 *b)
+{
+    // get angle
 
-// Math
-#define M_PI 3.14159265358979323846
-#define M_1DEGREE 0.0174533
+    //float angle = atan((b->Y - a->Y) / (b->X - a->X));
+    float angle = atan2((b->Y - a->Y), (b->X - a->X));
+
+    /*
+    //Ensure above 0 and below 6.28319
+    while (angle < 0)
+    {
+        angle += M_PI;
+    }
+    while (angle > M_PI * 2)
+    {
+        angle -= M_PI;
+    }
+    */
+
+    return angle;
+}
+float Math_Vec2Distance(Vec2 *a, Vec2 *b)
+{
+    return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2));
+}
 
 // JObj Flags
 #define JOBJ_SKELETON (1 << 0)
