@@ -1304,7 +1304,9 @@ struct FighterData
     u16 *dynamics_data;                               // 0x28
     float facing_direction;                           // 0x2C
     float facing_direction_repeated;                  // 0x30
-    Vec3 scale;                                       // 0x3C
+    float scale1;                                     // 0x34
+    float scale2;                                     // 0x38
+    float scale3;                                     // 0x3C
     int pointer_to_next_linked_list;                  // 0x40
     int pointer_to_0x40__pointer_to_prev_linked_list; // 0x44
     int length_of_linked_list;                        // 0x48
@@ -1409,7 +1411,7 @@ struct FighterData
     float wall_jump_horizontal_velocity;                   // 0x214
     float wall_jump_vertical_velocity;                     // 0x218
     int unknown21C;                                        // 0x21C
-    int unknown220;                                        // 0x220
+    float trophy_scale;                                    // 0x220
     int unknown224;                                        // 0x224
     int unknown228;                                        // 0x228
     int unknown22C;                                        // 0x22C
@@ -2371,14 +2373,14 @@ struct FighterData
     unsigned char nudge_disable : 1;                // 0x4 - 0x221d
     unsigned char ground_ignore : 1;                // 0x2 - 0x221d
     unsigned char x221d_8 : 1;                      // 0x1 - 0x221d
-    unsigned char x221e_1 : 1;                      // 0x80 - 0x221e
+    unsigned char invisible : 1;                    // 0x80 - 0x221e
     unsigned char x221e_2 : 1;                      // 0x40 - 0x221e
     unsigned char x221e_3 : 1;                      // 0x20 - 0x221e
     unsigned char x221e_4 : 1;                      // 0x10 - 0x221e
     unsigned char x221e_5 : 1;                      // 0x8 - 0x221e
     unsigned char x221e_6 : 1;                      // 0x4 - 0x221e
     unsigned char x221e_7 : 1;                      // 0x2 - 0x221e
-    unsigned char visible : 1;                      // 0x1 - 0x221e
+    unsigned char x221e_8 : 1;                      // 0x1 - 0x221e
     unsigned char mag_glass : 1;                    // 0x80 - 0x221f
     unsigned char dead : 1;                         // 0x40 - 0x221f
     unsigned char x221f_3 : 1;                      // 0x20 - 0x221f
@@ -9611,6 +9613,10 @@ void (*Fighter_ZeroCPUInputs)(FighterData *fighter_data) = (void *)0x800b4a78;
 void (*Fighter_CreateShieldGFX)(GOBJ *fighter) = (void *)0x800921dc;
 void (*Fighter_UpdateShieldGFX)(GOBJ *fighter, float size) = (void *)0x80091e78;
 int (*Fighter_GetShieldColorIndex)(int ply) = (void *)0x80036538;
+void (*Fighter_SetScale)(GOBJ *fighter, float scale) = (void *)0x800866a4;
+void (*Fighter_InitDynamics)(FighterData *fighter_data) = (void *)0x8009cf84;
+void (*Fighter_ProcDynamics)(GOBJ *fighter) = (void *)0x8009e0a8;
+
 //void (*Fighter_SetGrounded)(FighterData *fighter_data) = (void *)0x8007d6a4;
 
 // Item Functions
