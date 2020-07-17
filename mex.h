@@ -1,6 +1,8 @@
 #ifndef MEX_H
 #define MEX_H
 
+#define DB_FLAG 0
+
 // Data types
 typedef signed char s8;
 typedef signed short s16;
