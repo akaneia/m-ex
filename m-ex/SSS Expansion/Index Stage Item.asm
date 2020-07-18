@@ -65,7 +65,7 @@ blrl
 .align 2
 ErrorString:
 blrl
-.string "Error: stageitem %d not found\n"
+.string "Error: stageitem %d not found in MxDt\n"
 .align 2
 ###############################################
 
