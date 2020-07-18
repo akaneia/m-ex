@@ -1,5 +1,5 @@
-#ifndef MEX_H_ST_COLLISION
-#define MEX_H_ST_COLLISION
+#ifndef MEX_H_COLLISION
+#define MEX_H_COLLISION
 
 #include "structs.h"
 #include "datatypes.h"
@@ -16,6 +16,8 @@
 #define LINE_CEIL 2
 #define LINE_WALLRIGHT 4
 #define LINE_WALLLEFT 8
+
+/*** Structs ***/
 
 struct ECBBones
 {
@@ -125,5 +127,12 @@ struct CollData
     Vec3 ceil_slope;           // 0x190
     int ecb_lock;              // 0x19c
 };
+
+/*** Functions ***/
+
+void (*Coll_ECBCurrToPrev)(CollData *collData) = (void *)0x80041c8c;
+void (*Coll_InitECB)(CollData *collData) = (void *)0x80041ee4;
+int (*ECB_CollGround_PassLedge)(CollData *ecb, ECBBones *bones) = (void *)0x8004b21c; // returns is touching ground bool
+void (*ECB_CollAir)(CollData *ecb, ECBBones *bones) = (void *)0x800475f4;
 
 #endif

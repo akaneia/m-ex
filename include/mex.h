@@ -1,5 +1,30 @@
-#ifndef MEX_H_FN_MEX
-#define MEX_H_FN_MEX
+#ifndef MEX_H_MEX
+#define MEX_H_MEX
+
+#include "structs.h"
+#include "datatypes.h"
+#include "obj.h"
+
+/*** Structs ***/
+
+struct PRIM
+{
+    int data;
+};
+
+struct Translation
+{
+    float frame;
+    float value;
+};
+
+struct MEXPlaylist
+{
+    u16 bgm;
+    u16 chance;
+};
+
+/*** Functions ***/
 
 void (*LoadMEXItem)(GOBJ *player_gobj, int article_pointer, int item_id) = (void *)0x803d7058;
 void (*SpawnMEXEffect)(int effectID, int fighter, int arg1, int arg2, int arg3, int arg4, int arg5) = (void *)0x803d7060;

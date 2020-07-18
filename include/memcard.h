@@ -1,9 +1,11 @@
-#ifndef MEX_H_ST_MEMCARD
-#define MEX_H_ST_MEMCARD
+#ifndef MEX_H_MEMCARD
+#define MEX_H_MEMCARD
 
 #include "structs.h"
 #include "datatypes.h"
 #include "css.h"
+
+/*** Structs ***/
 
 struct Memcard
 {

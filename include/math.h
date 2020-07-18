@@ -1,5 +1,13 @@
-#ifndef MEX_H_FN_MATH
-#define MEX_H_FN_MATH
+#ifndef MEX_H_MATH
+#define MEX_H_MATH
+
+#include "structs.h"
+#include "datatypes.h"
+
+#define M_PI 3.14159265358979323846
+#define M_1DEGREE 0.0174533
+
+/*** Functions ***/
 
 float (*atan2)(float y, float x) = (void *)0x80022c30;
 float (*sin)(float x) = (void *)0x803263d4;

@@ -1,5 +1,5 @@
-#ifndef MEX_H_ST_STRUCTS
-#define MEX_H_ST_STRUCTS
+#ifndef MEX_H_STRUCTS
+#define MEX_H_STRUCTS
 
 /* 
  *  defines typedefs for structs used throughout m-ex

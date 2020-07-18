@@ -1,8 +1,11 @@
-#ifndef MEX_H_ST_CSS
-#define MEX_H_ST_CSS
+#ifndef MEX_H_CSS
+#define MEX_H_CSS
 
 #include "structs.h"
 #include "datatypes.h"
+#include "figter.h"
+
+/*** Structs ***/
 
 struct PreloadChar
 {
@@ -35,5 +38,10 @@ struct CSSBackup
     u8 x9;           //0x9
     u8 xA;           //0xA
 };
+
+/*** Functions ***/
+
+int (*CSS_GetNametagRumble)(int player, u8 tag) = (void *)0x801677f8;
+void (*CSS_InitPlayerData)(PlayerData *player) = (void *)0x8016795c;
 
 #endif

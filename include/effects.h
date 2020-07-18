@@ -1,9 +1,11 @@
-#ifndef MEX_H_ST_EFFECTS
-#define MEX_H_ST_EFFECTS
+#ifndef MEX_H_EFFECTS
+#define MEX_H_EFFECTS
 
 #include "structs.h"
 #include "datatypes.h"
 #include "obj.h"
+
+/*** Structs ***/
 
 struct Effect
 {
@@ -79,5 +81,12 @@ struct Particle2 // created at 80398c90. dont feel like labelling this, offsets 
     float x48;
     float x4c;
 };
+
+/*** Functions ***/
+
+Effect *(*Effect_SpawnSync)(int gfx_id, ...) = (void *)0x8005fddc;
+void (*Effect_SpawnAsync)(GOBJ *fighter, Effect *ptr, int type, int gfx_id, ...) = (void *)0x800676f0;
+void (*Effect_PauseAll)(GOBJ *fighter) = (void *)0x8005ba40;
+void (*Effect_ResumeAll)(GOBJ *fighter) = (void *)0x8005bac4;
 
 #endif

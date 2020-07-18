@@ -1,7 +1,9 @@
-#ifndef MEX_H_ST_BONESET
-#define MEX_H_ST_BONESET
+#ifndef MEX_H_BONESET
+#define MEX_H_BONESET
 
 #include "structs.h"
+
+/*** Structs ***/
 
 struct DynamicBoneset
 {

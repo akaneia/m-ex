@@ -1,12 +1,15 @@
 #ifndef MEX_H_INLINE
 #define MEX_H_INLINE
 
-#include "structs/fighter.h"
-#include "structs/obj.h"
-#include "structs/mex.h"
-#include "structs/datatypes.h"
-#include "structs/hsd.h"
+#include "structs.h"
+#include "fighter.h"
+#include "obj.h"
+#include "mex.h"
+#include "datatypes.h"
+#include "hsd.h"
 #include "macros.h"
+
+/*** Functions ***/
 
 static float fabs(float x)
 {

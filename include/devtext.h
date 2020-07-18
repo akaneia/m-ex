@@ -1,7 +1,9 @@
-#ifndef MEX_H_ST_DEVTEXT
-#define MEX_H_ST_DEVTEXT
+#ifndef MEX_H_DEVTEXT
+#define MEX_H_DEVTEXT
 
 #include "structs.h"
+
+/*** Structs ***/
 
 struct DevText
 {
@@ -33,5 +35,16 @@ struct DevText
     int x58;          // 0x58
     int x5c;          // 0x5c
 };
+
+/*** Functions ***/
+
+DevText *(*DevelopText_CreateDataTable)(int unk1, int x, int y, int width, int height, void *alloc) = (void *)0x80302834;
+void (*DevelopText_Activate)(void *unk, DevText *text) = (void *)0x80302810;
+void (*DevelopText_AddString)(DevText *text, ...) = (void *)0x80302d4c;
+void (*DevelopText_EraseAllText)(DevText *text) = (void *)0x80302bb0;
+void (*DevelopText_StoreBGColor)(DevText *text, u8 *RGBA) = (void *)0x80302b90;
+void (*DevelopText_HideText)(DevText *text) = (void *)0x80302b00;
+void (*DevelopText_HideBG)(DevText *text) = (void *)0x80302ae0;
+void (*DevelopText_StoreTextScale)(DevText *text, float x, float y) = (void *)0x80302b10;
 
 #endif

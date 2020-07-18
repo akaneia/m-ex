@@ -1,5 +1,5 @@
-#ifndef MEX_H_ST_HSD
-#define MEX_H_ST_HSD
+#ifndef MEX_H_HSD
+#define MEX_H_HSD
 
 #include "structs.h"
 #include "datatypes.h"
@@ -39,6 +39,8 @@
 #define HSD_BUTTON_DOWN 0x20000
 #define HSD_BUTTON_LEFT 0x40000
 #define HSD_BUTTON_RIGHT 0x80000
+
+/*** Structs ***/
 
 struct HSD_Material
 {
@@ -128,5 +130,12 @@ struct HSD_Update
     u32 x2c;
     void (*onFrame)(); //0x30
 };
+
+/*** Functions ***/
+
+int (*HSD_Randi)(int max) = (void *)0x80380580;
+float (*HSD_Randf)() = (float *)0x80380528;
+void *(*HSD_MemAlloc)(int size) = (void *)0x8037f1e4;
+void (*HSD_Free)(void *ptr) = (void *)0x8037f1b0;
 
 #endif

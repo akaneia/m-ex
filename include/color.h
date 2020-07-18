@@ -1,8 +1,10 @@
-#ifndef MEX_H_ST_COLOR
-#define MEX_H_ST_COLOR
+#ifndef MEX_H_COLOR
+#define MEX_H_COLOR
 
 #include "structs.h"
 #include "datatypes.h"
+
+/*** Structs ***/
 
 struct GXColor
 {

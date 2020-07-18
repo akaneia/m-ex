@@ -1,7 +1,8 @@
-#ifndef MEX_H_ST_DATATYPES
-#define MEX_H_ST_DATATYPES
+#ifndef MEX_H_DATATYPES
+#define MEX_H_DATATYPES
 
 #include "structs.h"
+#include "offsets.h"
 
 // Data types
 typedef signed char s8;
@@ -33,9 +34,19 @@ typedef float (*MtxPtr)[4];
 #define true 1
 #define false 0
 
-// Math
-#define M_PI 3.14159265358979323846
-#define M_1DEGREE 0.0174533
+// Other Macros
+#define RTOC_PTR(offset) *(void **)(0x804df9e0 + offset)
+#define R13_PTR(offset) *(void **)(R13 + offset)
+#define R13_INT(offset) *(int *)(R13 + offset)
+#define R13_U8(offset) *(u8 *)(R13 + offset)
+#define R13_FLOAT(offset) *(float *)(R13 + offset)
+#define AS_FLOAT(num) *(float *)&num
+#define AS_INT(num) *(int *)&num
+#define ACCESS_INT(addr) *(int *)(addr)
+#define ACCESS_U8(addr) *(u8 *)(addr)
+#define ACCESS_PTR(addr) *(void **)(addr)
+
+/*** Structs ***/
 
 struct Vec2
 {
