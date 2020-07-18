@@ -9420,7 +9420,7 @@ void (*MTXRotRad)(Mtx m, char axis, f32 rad) = (void *)0x80342418;
 
 // Useful functions
 void (*OSReport)(char *, ...) = (void *)0x803456A8;
-int (*JOBJ_CopyPosition)(JOBJ *source, Vec3 *add, Vec3 *dest) = (void *)0x8000b1cc;
+int (*JOBJ_GetWorldPosition)(JOBJ *source, Vec3 *add, Vec3 *dest) = (void *)0x8000b1cc;
 void (*JOBJ_SetMtxDirtySub)(JOBJ *jobj) = (void *)0x803732e8;
 JOBJ *(*JOBJ_LoadJoint)(JOBJDesc *joint) = (void *)0x80370e44;
 void (*JOBJ_RemoveAll)(JOBJ *joint) = (void *)0x80371590;
@@ -9677,11 +9677,13 @@ Particle *(*Stage_SpawnEffectPos)(int gfxID, int efFileID, Vec3 *pos) = (void *)
 Particle *(*Stage_SpawnEffectJointPos)(int gfxID, int efFileID, JOBJ *pos) = (void *)0x801c97dc;
 Particle *(*Stage_SpawnEffectJointPos2)(int gfxID, int efFileID, JOBJ *pos) = (void *)0x801c9808;
 int (*Stage_RaycastGround)(Vec3 *coll_pos, int *line_index, int *line_kind, Vec3 *unk1, Vec3 *unk2, Vec3 *unk3, Vec3 *unk4, void *cb, float fromX, float fromY, float toX, float toY, float unk5) = (void *)0x8004f008; // make unk5 = 0 and the other unk's = -1
+GOBJ *(*Zako_CreateMapItem)(int item_id, Vec3 *pos, JOBJ *jobj, Vec3 *velocity, int isMovingItem) = (void *)0x8027b5b0;
 
 // MEX functions
-void (*LoadMEXItem)(GOBJ *player_gobj, int article_pointer, int item_id) = (void *)0x803d7058;
+//void (*LoadMEXItem)(GOBJ *player_gobj, int article_pointer, int item_id) = (void *)0x803d7058;
 void (*SpawnMEXEffect)(int effectID, int fighter, int arg1, int arg2, int arg3, int arg4, int arg5) = (void *)0x803d7060;
-int (*MEX_GetItemExtID)(GOBJ *player_gobj, int item_id) = (void *)0x803d7064;
+int (*MEX_GetItemExtID)(GOBJ *gobj, int item_id) = (void *)0x803d7064; // gobj can be fighter or stage
+int (*MEX_GetStageItemExtID)(int item_id) = (void *)0x803d7064;
 void (*SFX_PlayStageSFX)(int sfx_id) = (void *)0x803d7078;
 void *(*calloc)(int size) = (void *)0x803d706C;
 PRIM *(*PRIM_NEW)(int vert_count, int params1, int params2) = (void *)0x804DD84C;
