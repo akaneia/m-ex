@@ -5,6 +5,7 @@
 #include "include/datatypes.h"
 
 #include "include/boneset.h"
+#include "include/match.h"
 #include "include/collision.h"
 #include "include/color.h"
 #include "include/css.h"
@@ -14,7 +15,6 @@
 #include "include/hsd.h"
 #include "include/inline.h"
 #include "include/item.h"
-#include "include/match.h"
 #include "include/math.h"
 #include "include/memcard.h"
 #include "include/mex.h"
