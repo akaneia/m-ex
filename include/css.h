@@ -3,7 +3,7 @@
 
 #include "structs.h"
 #include "datatypes.h"
-#include "figter.h"
+#include "fighter.h"
 
 /*** Structs ***/
 
