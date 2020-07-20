@@ -85,6 +85,7 @@ struct Particle2 // created at 80398c90. dont feel like labelling this, offsets 
 /*** Functions ***/
 
 Effect *(*Effect_SpawnSync)(int gfx_id, ...) = (void *)0x8005fddc;
+void (*Effect_DestroyAll)(GOBJ *fighter) = (void *)0x8005b880;
 void (*Effect_SpawnAsync)(GOBJ *fighter, Effect *ptr, int type, int gfx_id, ...) = (void *)0x800676f0;
 void (*Effect_PauseAll)(GOBJ *fighter) = (void *)0x8005ba40;
 void (*Effect_ResumeAll)(GOBJ *fighter) = (void *)0x8005bac4;

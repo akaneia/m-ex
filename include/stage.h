@@ -597,5 +597,12 @@ Particle *(*Stage_SpawnEffectPos)(int gfxID, int efFileID, Vec3 *pos) = (void *)
 Particle *(*Stage_SpawnEffectJointPos)(int gfxID, int efFileID, JOBJ *pos) = (void *)0x801c97dc;
 Particle *(*Stage_SpawnEffectJointPos2)(int gfxID, int efFileID, JOBJ *pos) = (void *)0x801c9808;
 int (*Stage_RaycastGround)(Vec3 *coll_pos, int *line_index, int *line_kind, Vec3 *unk1, Vec3 *unk2, Vec3 *unk3, Vec3 *unk4, void *cb, float fromX, float fromY, float toX, float toY, float unk5) = (void *)0x8004f008; // make unk5 = 0 and the other unk's = -1
+GOBJ *(*Zako_Create)(int item_id, Vec3 *pos, JOBJ *jobj, Vec3 *velocity, int isMovingItem) = (void *)0x8027b5b0;
+GOBJ *(*Stage_CreateMapItem)(map_gobjData *map_data, int takeDamageSFXKind, int state, JOBJ *joint, Vec3 *pos, int unk_bool, void *onGiveDamage, void *onTakeDamage) = (void *)0x802e6aec; // this function creates an item of id 0xA0, its a generic ID used across multiple stages. its mainly used for giving a joint a hurtbox/hitbox and an onTakeDamage callback.
+int (*Stage_CheckForNearbyFighters)(Vec3 *pos, float radius) = (void *)0x801c9ee8;
+float (*Stage_GetBlastzoneRight)() = (void *)0x80224b38;
+float (*Stage_GetBlastzoneLeft)() = (void *)0x80224b50;
+float (*Stage_GetBlastzoneTop)() = (void *)0x80224b68;
+float (*Stage_GetBlastzoneBottom)() = (void *)0x80224b80;
 
 #endif

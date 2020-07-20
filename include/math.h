@@ -9,6 +9,7 @@
 
 /*** Functions ***/
 
+float (*atan)(float in) = (void *)0x80022e68;
 float (*atan2)(float y, float x) = (void *)0x80022c30;
 float (*sin)(float x) = (void *)0x803263d4;
 float (*cos)(float x) = (void *)0x80326240;

@@ -8,6 +8,7 @@
 #include "datatypes.h"
 #include "hsd.h"
 #include "macros.h"
+#include "math.h"
 
 /*** Functions ***/
 
@@ -255,6 +256,38 @@ static AOBJ *JOBJ_GetAOBJ(JOBJ *joint)
 
     // no aobj found, return -1
     return -1;
+}
+
+static float Math_Vec2Angle(Vec2 *a, Vec2 *b)
+{
+    // get angle
+    // float angle = atan((b->Y - a->Y) / (b->X - a->X));
+    float angle = atan2((b->Y - a->Y), (b->X - a->X));
+
+    /*
+    //Ensure above 0 and below 6.28319
+    while (angle < 0)
+    {
+        angle += M_PI;
+    }
+    while (angle > M_PI * 2)
+    {
+        angle -= M_PI;
+    }
+    */
+
+    return angle;
+}
+
+static float Math_Vec2Distance(Vec2 *a, Vec2 *b)
+{
+    return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2));
+}
+
+
+static float Math_Vec3Distance(Vec3 *a, Vec3 *b)
+{
+    return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2));
 }
 
 #endif

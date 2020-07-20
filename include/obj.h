@@ -368,7 +368,7 @@ struct COBJ
 
 /*** Functions ***/
 
-int (*JOBJ_CopyPosition)(JOBJ *source, Vec3 *add, Vec3 *dest) = (void *)0x8000b1cc;
+int (*JOBJ_GetWorldPosition)(JOBJ *source, Vec3 *add, Vec3 *dest) = (void *)0x8000b1cc;
 void (*JOBJ_SetMtxDirtySub)(JOBJ *jobj) = (void *)0x803732e8;
 JOBJ *(*JOBJ_LoadJoint)(JOBJDesc *joint) = (void *)0x80370e44;
 void (*JOBJ_RemoveAll)(JOBJ *joint) = (void *)0x80371590;
