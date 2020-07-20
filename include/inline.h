@@ -7,7 +7,6 @@
 #include "mex.h"
 #include "datatypes.h"
 #include "hsd.h"
-#include "macros.h"
 #include "math.h"
 
 /*** Functions ***/
