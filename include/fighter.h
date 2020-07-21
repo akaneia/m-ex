@@ -545,84 +545,94 @@ struct Reflect
 
 struct Hitbox
 {
-    int x0;   // 0x0
-    int x4;   // 0x4
-    int x8;   // 0x8
-    int xc;   // 0xc
-    int x10;  // 0x10
-    int x14;  // 0x14
-    int x18;  // 0x18
-    int x1c;  // 0x1c
-    int x20;  // 0x20
-    int x24;  // 0x24
-    int x28;  // 0x28
-    int x2c;  // 0x2c
-    int x30;  // 0x30
-    int x34;  // 0x34
-    int x38;  // 0x38
-    int x3c;  // 0x3c
-    int x40;  // 0x40
-    int x44;  // 0x44
-    int x48;  // 0x48
-    int x4c;  // 0x4c
-    int x50;  // 0x50
-    int x54;  // 0x54
-    int x58;  // 0x58
-    int x5c;  // 0x5c
-    int x60;  // 0x60
-    int x64;  // 0x64
-    int x68;  // 0x68
-    int x6c;  // 0x6c
-    int x70;  // 0x70
-    int x74;  // 0x74
-    int x78;  // 0x78
-    int x7c;  // 0x7c
-    int x80;  // 0x80
-    int x84;  // 0x84
-    int x88;  // 0x88
-    int x8c;  // 0x8c
-    int x90;  // 0x90
-    int x94;  // 0x94
-    int x98;  // 0x98
-    int x9c;  // 0x9c
-    int xa0;  // 0xa0
-    int xa4;  // 0xa4
-    int xa8;  // 0xa8
-    int xac;  // 0xac
-    int xb0;  // 0xb0
-    int xb4;  // 0xb4
-    int xb8;  // 0xb8
-    int xbc;  // 0xbc
-    int xc0;  // 0xc0
-    int xc4;  // 0xc4
-    int xc8;  // 0xc8
-    int xcc;  // 0xcc
-    int xd0;  // 0xd0
-    int xd4;  // 0xd4
-    int xd8;  // 0xd8
-    int xdc;  // 0xdc
-    int xe0;  // 0xe0
-    int xe4;  // 0xe4
-    int xe8;  // 0xe8
-    int xec;  // 0xec
-    int xf0;  // 0xf0
-    int xf4;  // 0xf4
-    int xf8;  // 0xf8
-    int xfc;  // 0xfc
-    int x100; // 0x100
-    int x104; // 0x104
-    int x108; // 0x108
-    int x10c; // 0x10c
-    int x110; // 0x110
-    int x114; // 0x114
-    int x118; // 0x118
-    int x11c; // 0x11c
-    int x120; // 0x120
-    int x124; // 0x124
-    int x128; // 0x128
-    int x12c; // 0x12c
-    int x130; // 0x130
-    int x134; // 0x134
+    int x0;                    // 0x0
+    int x4;                    // 0x4
+    int x8;                    // 0x8
+    int xc;                    // 0xc
+    int x10;                   // 0x10
+    int x14;                   // 0x14
+    int x18;                   // 0x18
+    int x1c;                   // 0x1c
+    int x20;                   // 0x20
+    int x24;                   // 0x24
+    int x28;                   // 0x28
+    int x2c;                   // 0x2c
+    int x30;                   // 0x30
+    int x34;                   // 0x34
+    int x38;                   // 0x38
+    int x3c;                   // 0x3c
+    char x40;                  // 0x40
+    char x41;                  // 0x41
+    char x42;                  // 0x42
+    unsigned char x431 : 1;    // 0x43 0x80
+    unsigned char x432 : 1;    // 0x43 0x40
+    unsigned char hit_all : 1; // 0x43 0x20
+    unsigned char x434 : 1;    // 0x43 0x10
+    unsigned char x435 : 1;    // 0x43 0x08
+    unsigned char x436 : 1;    // 0x43 0x04
+    unsigned char x437 : 1;    // 0x43 0x02
+    unsigned char x438 : 1;    // 0x43 0x01
+    int x44;                   // 0x44
+    int x48;                   // 0x48
+    int x4c;                   // 0x4c
+    int x50;                   // 0x50
+    int x54;                   // 0x54
+    int x58;                   // 0x58
+    int x5c;                   // 0x5c
+    int x60;                   // 0x60
+    int x64;                   // 0x64
+    int x68;                   // 0x68
+    int x6c;                   // 0x6c
+    int x70;                   // 0x70
+    int x74;                   // 0x74
+    int x78;                   // 0x78
+    int x7c;                   // 0x7c
+    int x80;                   // 0x80
+    int x84;                   // 0x84
+    int x88;                   // 0x88
+    int x8c;                   // 0x8c
+    int x90;                   // 0x90
+    int x94;                   // 0x94
+    int x98;                   // 0x98
+    int x9c;                   // 0x9c
+    int xa0;                   // 0xa0
+    int xa4;                   // 0xa4
+    int xa8;                   // 0xa8
+    int xac;                   // 0xac
+    int xb0;                   // 0xb0
+    int xb4;                   // 0xb4
+    int xb8;                   // 0xb8
+    int xbc;                   // 0xbc
+    int xc0;                   // 0xc0
+    int xc4;                   // 0xc4
+    int xc8;                   // 0xc8
+    int xcc;                   // 0xcc
+    int xd0;                   // 0xd0
+    int xd4;                   // 0xd4
+    int xd8;                   // 0xd8
+    int xdc;                   // 0xdc
+    int xe0;                   // 0xe0
+    int xe4;                   // 0xe4
+    int xe8;                   // 0xe8
+    int xec;                   // 0xec
+    int xf0;                   // 0xf0
+    int xf4;                   // 0xf4
+    int xf8;                   // 0xf8
+    int xfc;                   // 0xfc
+    int x100;                  // 0x100
+    int x104;                  // 0x104
+    int x108;                  // 0x108
+    int x10c;                  // 0x10c
+    int x110;                  // 0x110
+    int x114;                  // 0x114
+    int x118;                  // 0x118
+    int x11c;                  // 0x11c
+    int x120;                  // 0x120
+    int x124;                  // 0x124
+    int x128;                  // 0x128
+    int x12c;                  // 0x12c
+    int x130;                  // 0x130
+    int x134;                  // 0x134
 };
 
 struct Hurtbox
@@ -1538,7 +1548,8 @@ struct FighterData
     float facing_direction_repeated;                  // 0x30
     float scale1;                                     // 0x34
     float scale2;                                     // 0x38
-    float scale3;                                     // 0x3C    int pointer_to_next_linked_list;                  // 0x40
+    float scale3;                                     // 0x3C
+    int pointer_to_next_linked_list;                  // 0x40
     int pointer_to_0x40__pointer_to_prev_linked_list; // 0x44
     int length_of_linked_list;                        // 0x48
     int unknown4C;                                    // 0x4C

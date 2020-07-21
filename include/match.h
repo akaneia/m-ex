@@ -2841,6 +2841,6 @@ void (*DevCam_AdjustRotate)(COBJ *cobj, Vec3 *wobjpos, Vec3 *rotate, float stick
 void (*DevCam_AdjustPan)(COBJ *cobj, float stickX, float stickY) = (void *)0x80227fe0;
 void (*DevCam_AdjustZoom)(COBJ *cobj, float stickY) = (void *)0x80227cac;
 void (*ScreenFlash_Create)(int kind, int unk) = (void *)0x80021c48;
-void (*ScreenRumble_Execute)(int kind, int unk) = (void *)0x80030e44;
+void (*ScreenRumble_Execute)(int kind, Vec3 *pos) = (void *)0x80030e44;
 
 #endif
