@@ -318,9 +318,28 @@ struct Stage
     int x72C;                  // 0x728
 };
 
+struct MapHead
+{
+    int *general_points;
+    int general_points_num;
+    int *map_gobjs; // pointer to array of map_gobjs
+    int map_gobj_num;
+    int *splines;
+    int splines_num;
+    int *lights;
+    int lights_num;
+};
+
+struct StageFile
+{
+    ArchiveInfo *archive_info;
+    MapHead *map_head;
+};
+
 /*** Functions ***/
 
-Stage *(*Stage_GetStageInfo)() = (void *)0x801c6324;
+StageFile *(*Stage_GetStageFiles)() = (void *)0x801c6324;                 // returns an array of StageFiles
+StageFile *(*Stage_GetStageFile)(int mapgobj_index) = (void *)0x801c6330; // returns the StageFile the ID belongs to
 void (*Stage_AddFtChkDevice)(GOBJ *map, int hazard_kind, void *check) = (void *)0x800c07f8;
 void (*Stage_SetChkDevicePos)(float y_pos) = (void *)0x801c438c;
 void (*Stage_GetChkDevicePos)(float *y_pos, float *y_delta) = (void *)0x801c4368;

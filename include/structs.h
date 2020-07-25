@@ -25,10 +25,15 @@ typedef struct WOBJ WOBJ;
 typedef struct COBJ COBJ;
 typedef struct COBJDesc COBJDesc;
 
+// Archive
+typedef struct ArchiveInfo ArchiveInfo;
+typedef struct MapHead MapHead;
+
 // Stage
 typedef struct Stage Stage;
 typedef struct map_gobjData map_gobjData;
 typedef struct map_gobjDesc map_gobjDesc;
+typedef struct StageFile StageFile;
 
 // Match
 typedef struct Match Match;

@@ -33,8 +33,4 @@ void (*Wind_StageCreate)(Vec3 *pos, int duration, float radius, float lifetime, 
 void (*Wind_FighterCreate)(Vec3 *pos, int duration, float radius, float lifetime, float angle) = (void *)0x800119dc;
 
 int (*Pause_CheckStatus)(int type) = (void *)0x801a45e8;
-
-void (*File_LoadInitReturnSymbol)(char *filename, void *ptr, ...) = (void *)0x80016c64; // input each symbol name pointer sequentially and terminate with 0;
-void *(*File_GetSymbol)(void *archive, char *symbol) = (void *)0x80380358;
-
 #endif
