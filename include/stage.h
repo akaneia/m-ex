@@ -350,5 +350,7 @@ float (*Stage_GetBlastzoneLeft)() = (void *)0x80224b50;
 float (*Stage_GetBlastzoneTop)() = (void *)0x80224b68;
 float (*Stage_GetBlastzoneBottom)() = (void *)0x80224b80;
 void (*Stage_GetGeneralPoint)(int index, Vec3 *pos) = (void *)0x801c2d24;
+void (*Stage_EnableLineGroup)(int index) = (void *)0x80057638;
+void (*Stage_DisableLineGroup)(int index) = (void *)0x80057bc0;
 
 #endif
