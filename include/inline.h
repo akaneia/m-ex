@@ -205,56 +205,65 @@ static float JOBJ_GetAnimFrame(JOBJ *joint)
     return -1;
 }
 
-static AOBJ *JOBJ_GetAOBJ(JOBJ *joint)
+static AOBJ *JOBJ_GetAOBJ(JOBJ *jobj)
 {
-    // check for AOBJ in jobj
-    JOBJ *jobj;
-    jobj = joint;
-    while (jobj != 0)
+    // check for AOBJ in this jobj
+
+    if (jobj->aobj != 0)
     {
-        if (jobj->aobj != 0)
+        return jobj->aobj;
+    }
+    // check for AOBJ in dobj
+    DOBJ *dobj;
+    dobj = jobj->dobj;
+    while (dobj != 0)
+    {
+        if (dobj->aobj != 0)
         {
-            return jobj->aobj;
+            return dobj->aobj;
         }
 
-        // check for AOBJ in dobj
-        DOBJ *dobj;
-        dobj = jobj->dobj;
-        while (dobj != 0)
+        // check for AOBJ in mobj
+        MOBJ *mobj;
+        mobj = dobj->mobj;
+        if (mobj->aobj != 0)
         {
-            if (dobj->aobj != 0)
-            {
-                return dobj->aobj;
-            }
-
-            // check for AOBJ in mobj
-            MOBJ *mobj;
-            mobj = dobj->mobj;
-            if (mobj->aobj != 0)
-            {
-                return mobj->aobj;
-            }
-
-            // check for AOBJ in tobj
-            TOBJ *tobj;
-            tobj = mobj->tobj;
-            while (tobj != 0)
-            {
-                if (tobj->aobj != 0)
-                {
-                    return tobj->aobj;
-                }
-                tobj = tobj->next;
-            }
-
-            dobj = dobj->next;
+            return mobj->aobj;
         }
 
-        jobj = jobj->child;
+        // check for AOBJ in tobj
+        TOBJ *tobj;
+        tobj = mobj->tobj;
+        while (tobj != 0)
+        {
+            if (tobj->aobj != 0)
+            {
+                return tobj->aobj;
+            }
+            tobj = tobj->next;
+        }
+
+        dobj = dobj->next;
     }
 
-    // no aobj found, return -1
-    return -1;
+    // this jobj doesnt have an aobj, check the child
+    if (jobj->child != 0)
+    {
+        AOBJ *aobj = JOBJ_GetAOBJ(jobj->child);
+        if (aobj != 0)
+            return aobj;
+    }
+
+    // child did not have an aobj, check the sibling
+    if (jobj->sibling != 0)
+    {
+        AOBJ *aobj = JOBJ_GetAOBJ(jobj->sibling);
+        if (aobj != 0)
+            return aobj;
+    }
+
+    // no aobj found, return 0
+    return 0;
 }
 
 static float Math_Vec2Angle(Vec2 *a, Vec2 *b)
@@ -282,7 +291,6 @@ static float Math_Vec2Distance(Vec2 *a, Vec2 *b)
 {
     return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2));
 }
-
 
 static float Math_Vec3Distance(Vec3 *a, Vec3 *b)
 {

@@ -253,6 +253,7 @@
 // ItemStateChange Flags
 #define ITEMSTATE_UPDATEANIM 0x2
 #define ITEMSTATE_GRAB 0x4
+#define ITEMSTATE_KEEPHIT 0x10 // dont remove hitboxes on state change
 
 /*** Structs ***/
 
