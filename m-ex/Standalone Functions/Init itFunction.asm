@@ -130,6 +130,10 @@ Item_GetItemTableFromInternal_GetID:
   mulli r4,REG_Index,MEXItemLookup_Stride
   add r3,r3,r4
   lwz r3,0x4(r3)
+#Ensure item table exists
+  cmpwi r3,0
+  beq DoesNotExist
+#Get item ID
   mulli r4,REG_ArticleID,2
   lhzx r3,r3,r4
 #Get item's table
@@ -168,6 +172,48 @@ GetTable:
   add  r3,r3,r4
   blr
 ###########################################
+
+DoesNotExist:
+
+#Get Object Kind string
+  cmpwi REG_Type, 1
+  beq DoesNotExist_Stage
+DoesNotExist_Fighter:
+  bl  ErrorString_Fighter
+  mflr r4
+  b DoesNotExist_OSReport
+DoesNotExist_Stage:
+  bl  ErrorString_Stage
+  mflr r4
+  b DoesNotExist_OSReport
+DoesNotExist_OSReport:
+  bl  ErrorString
+  mflr  r3
+  mr  r5,REG_Index
+  branchl r12,0x803456a8
+#Assert
+  bl  Assert_Name
+  mflr  r3
+  li  r4,0
+  load  r5,0x804d3940
+  branchl r12,0x80388220
+Assert_Name:
+blrl
+.string "m-ex"
+.align 2
+ErrorString:
+blrl
+.string "error: MxDt does not contain any items for %s %d\n"
+.align 2
+ErrorString_Fighter:
+blrl
+.string "fighter"
+.align 2
+ErrorString_Stage:
+blrl
+.string "stage"
+.align 2
+###############################################
 
 Exit:
   restore

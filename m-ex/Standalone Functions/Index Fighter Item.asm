@@ -24,7 +24,7 @@ backup
   lwz r4,0x4(REG_PlayerData)
   mulli r4,r4,MEXItemLookup_Stride
   add REG_MEXItemLookup,r3,r4
-#Check if exists
+#Check if MxDt has an entry for this item
   lwz r3,0x0(REG_MEXItemLookup)
   cmpw  REG_ArticleID,r3
   bge DoesNotExist
@@ -47,9 +47,10 @@ Index:
 #############################################
 DoesNotExist:
 #OSReport
-  bl  ErrorString
+  bl  ErrorString_NoItem
   mflr  r3
   mr  r4,REG_ArticleID
+  lwz r5,0x4(REG_PlayerData)
   branchl r12,0x803456a8
 #Assert
   bl  Assert_Name
@@ -61,9 +62,9 @@ Assert_Name:
 blrl
 .string "m-ex"
 .align 2
-ErrorString:
+ErrorString_NoItem:
 blrl
-.string "error: MxDt does not have article ID %d\n"
+.string "error: MxDt does not contain item %d for fighter %d\n"
 .align 2
 ###############################################
 

@@ -52,6 +52,7 @@ DoesNotExist:
   bl  ErrorString
   mflr  r3
   mr  r4,REG_ArticleID
+  mr  r5,REG_StageID
   branchl r12,0x803456a8
 #Assert
   bl  Assert_Name
@@ -65,7 +66,7 @@ blrl
 .align 2
 ErrorString:
 blrl
-.string "Error: stageitem %d not found in MxDt\n"
+.string "Error: MxDt does not contain item %d for stage %d\n"
 .align 2
 ###############################################
 

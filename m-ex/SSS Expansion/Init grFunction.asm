@@ -61,58 +61,6 @@ blrl
 .string "grFunction"
 .align 2
 
-####################################################
-Item_GetItemTableFromInternal:
-.set  REG_ArticleID,12
-.set  REG_PlayerData,11
-#Init
-  mr  REG_PlayerData,r3
-  mr  REG_ArticleID,r4
-#Get external item ID from internal
-  lwz r3,OFST_mexData(rtoc)
-  lwz r3,Arch_Fighter(r3)
-  lwz r3,Arch_Fighter_MEXItemLookup(r3)
-  lwz r4,0x4(REG_PlayerData)
-  mulli r4,r4,MEXItemLookup_Stride
-  add r3,r3,r4
-  lwz r3,0x4(r3)
-  mulli r4,REG_ArticleID,2
-  lhzx r3,r3,r4
-#Get item's table
-  lwz r4,OFST_ItemsAdded(rtoc)
-  cmpwi r3,43
-  blt CommonItems
-  cmpwi r3,161
-  blt FighterItems
-  cmpwi r3,208
-  blt PokemonItems
-  cmpwi r3,CustomItemStart
-  blt StageItems
-  b CustomItems
-CommonItems:
-  lwz r4,Arch_ItemsAdded_Common(r4)
-  b GetTable
-FighterItems:
-  subi  r3,r3,43
-  lwz r4,Arch_ItemsAdded_Fighter(r4)
-  b GetTable
-PokemonItems:
-  subi  r3,r3,161
-  lwz r4,Arch_ItemsAdded_Pokemon(r4)
-  b GetTable
-StageItems:
-  subi  r3,r3,208
-  lwz r4,Arch_ItemsAdded_Stages(r4)
-  b GetTable
-CustomItems:
-  subi  r3,r3,CustomItemStart
-  lwz r4,Arch_ItemsAdded_Custom(r4)
-  b GetTable
-
-GetTable:
-  mulli r3,r3,0x3C
-  add  r3,r3,r4
-  blr
 ###########################################
 Overload:
 # r3 = ftX
