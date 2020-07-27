@@ -64,6 +64,7 @@ typedef struct ItemState ItemState;
 typedef struct SpawnItem SpawnItem;
 typedef struct itData itData;
 typedef struct itCommonAttr itCommonAttr;
+typedef struct itHit itHit;
 
 // Boneset
 typedef struct DynamicBoneset DynamicBoneset;
@@ -75,7 +76,7 @@ typedef struct Playerblock Playerblock;
 typedef struct PlayerData PlayerData;
 typedef struct MoveLogic MoveLogic;
 typedef struct SubactionHeader SubactionHeader;
-typedef struct Hitbox Hitbox;
+typedef struct ftHit ftHit;
 typedef struct Hurtbox Hurtbox;
 typedef struct Reflect Reflect;
 typedef struct CPU CPU;

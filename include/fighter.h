@@ -543,96 +543,95 @@ struct Reflect
     int flags;
 };
 
-struct Hitbox
+struct ftHit
 {
-    int x0;                    // 0x0
-    int x4;                    // 0x4
-    int x8;                    // 0x8
-    int xc;                    // 0xc
-    int x10;                   // 0x10
-    int x14;                   // 0x14
-    int x18;                   // 0x18
-    int x1c;                   // 0x1c
-    int x20;                   // 0x20
-    int x24;                   // 0x24
-    int x28;                   // 0x28
-    int x2c;                   // 0x2c
-    int x30;                   // 0x30
-    int x34;                   // 0x34
-    int x38;                   // 0x38
-    int x3c;                   // 0x3c
-    char x40;                  // 0x40
-    char x41;                  // 0x41
-    char x42;                  // 0x42
-    unsigned char x431 : 1;    // 0x43 0x80
-    unsigned char x432 : 1;    // 0x43 0x40
-    unsigned char hit_all : 1; // 0x43 0x20
-    unsigned char x434 : 1;    // 0x43 0x10
-    unsigned char x435 : 1;    // 0x43 0x08
-    unsigned char x436 : 1;    // 0x43 0x04
-    unsigned char x437 : 1;    // 0x43 0x02
-    unsigned char x438 : 1;    // 0x43 0x01
-    int x44;                   // 0x44
-    int x48;                   // 0x48
-    int x4c;                   // 0x4c
-    int x50;                   // 0x50
-    int x54;                   // 0x54
-    int x58;                   // 0x58
-    int x5c;                   // 0x5c
-    int x60;                   // 0x60
-    int x64;                   // 0x64
-    int x68;                   // 0x68
-    int x6c;                   // 0x6c
-    int x70;                   // 0x70
-    int x74;                   // 0x74
-    int x78;                   // 0x78
-    int x7c;                   // 0x7c
-    int x80;                   // 0x80
-    int x84;                   // 0x84
-    int x88;                   // 0x88
-    int x8c;                   // 0x8c
-    int x90;                   // 0x90
-    int x94;                   // 0x94
-    int x98;                   // 0x98
-    int x9c;                   // 0x9c
-    int xa0;                   // 0xa0
-    int xa4;                   // 0xa4
-    int xa8;                   // 0xa8
-    int xac;                   // 0xac
-    int xb0;                   // 0xb0
-    int xb4;                   // 0xb4
-    int xb8;                   // 0xb8
-    int xbc;                   // 0xbc
-    int xc0;                   // 0xc0
-    int xc4;                   // 0xc4
-    int xc8;                   // 0xc8
-    int xcc;                   // 0xcc
-    int xd0;                   // 0xd0
-    int xd4;                   // 0xd4
-    int xd8;                   // 0xd8
-    int xdc;                   // 0xdc
-    int xe0;                   // 0xe0
-    int xe4;                   // 0xe4
-    int xe8;                   // 0xe8
-    int xec;                   // 0xec
-    int xf0;                   // 0xf0
-    int xf4;                   // 0xf4
-    int xf8;                   // 0xf8
-    int xfc;                   // 0xfc
-    int x100;                  // 0x100
-    int x104;                  // 0x104
-    int x108;                  // 0x108
-    int x10c;                  // 0x10c
-    int x110;                  // 0x110
-    int x114;                  // 0x114
-    int x118;                  // 0x118
-    int x11c;                  // 0x11c
-    int x120;                  // 0x120
-    int x124;                  // 0x124
-    int x128;                  // 0x128
-    int x12c;                  // 0x12c
-    int x130;                  // 0x130
-    int x134;                  // 0x134
+    int active;                   // 0x0
+    int x4;                       // 0x4
+    int dmg;                      // 0x8
+    float dmg_f;                  // 0xc
+    Vec3 offset;                  // 0x10
+    float size;                   // 0x1c
+    int angle;                    // 0x20
+    int kb_growth;                // 0x24
+    int wdsk;                     // 0x28
+    int kb;                       // 0x2c
+    int attribute;                // 0x30
+    int shield_dmg;               // 0x34
+    int hit_kind;                 // 0x38. hitbox interaction. 0 = none, 1 = grounded, 2 = aerial, 3 = both
+    int x3c;                      // 0x3c
+    char x40;                     // 0x40
+    char x41;                     // 0x41
+    unsigned char x421 : 1;       // 0x42 0x80
+    unsigned char x422 : 1;       // 0x42 0x40
+    unsigned char x423 : 1;       // 0x42 0x20
+    unsigned char x424 : 1;       // 0x42 0x10
+    unsigned char no_hurt : 1;    // 0x42 0x08      ignore hurtbox
+    unsigned char no_reflect : 1; // 0x42 0x04      ignore reflect?
+    unsigned char x427 : 1;       // 0x42 0x02
+    unsigned char x428 : 1;       // 0x42 0x01
+    unsigned char x431 : 1;       // 0x43 0x80
+    unsigned char x432 : 1;       // 0x43 0x40
+    unsigned char hit_all : 1;    // 0x43 0x20
+    unsigned char x434 : 1;       // 0x43 0x10
+    unsigned char x435 : 1;       // 0x43 0x08
+    unsigned char x436 : 1;       // 0x43 0x04
+    unsigned char x437 : 1;       // 0x43 0x02
+    unsigned char x438 : 1;       // 0x43 0x01
+    int x44;                      // 0x44
+    JOBJ *bone;                   // 0x48
+    Vec3 pos;                     // 0x4c
+    Vec3 pos_prev;                // 0x58
+    Vec3 pos_coll;                // 0x64   position of hurt collision
+    float coll_distance;          // 0x70   Distance From Collding Hurtbox (Used for phantom hit collision calculation)
+    GOBJ *victim;                 // 0x74
+    int x78;                      // 0x78
+    int x7c;                      // 0x7c
+    int x80;                      // 0x80
+    int x84;                      // 0x84
+    int x88;                      // 0x88
+    int x8c;                      // 0x8c
+    int x90;                      // 0x90
+    int x94;                      // 0x94
+    int x98;                      // 0x98
+    int x9c;                      // 0x9c
+    int xa0;                      // 0xa0
+    int xa4;                      // 0xa4
+    int xa8;                      // 0xa8
+    int xac;                      // 0xac
+    int xb0;                      // 0xb0
+    int xb4;                      // 0xb4
+    int xb8;                      // 0xb8
+    int xbc;                      // 0xbc
+    int xc0;                      // 0xc0
+    int xc4;                      // 0xc4
+    int xc8;                      // 0xc8
+    int xcc;                      // 0xcc
+    int xd0;                      // 0xd0
+    int xd4;                      // 0xd4
+    int xd8;                      // 0xd8
+    int xdc;                      // 0xdc
+    int xe0;                      // 0xe0
+    int xe4;                      // 0xe4
+    int xe8;                      // 0xe8
+    int xec;                      // 0xec
+    int xf0;                      // 0xf0
+    int xf4;                      // 0xf4
+    int xf8;                      // 0xf8
+    int xfc;                      // 0xfc
+    int x100;                     // 0x100
+    int x104;                     // 0x104
+    int x108;                     // 0x108
+    int x10c;                     // 0x10c
+    int x110;                     // 0x110
+    int x114;                     // 0x114
+    int x118;                     // 0x118
+    int x11c;                     // 0x11c
+    int x120;                     // 0x120
+    int x124;                     // 0x124
+    int x128;                     // 0x128
+    int x12c;                     // 0x12c
+    int x130;                     // 0x130
+    int x134;                     // 0x134
 };
 
 struct Hurtbox
@@ -1903,7 +1902,7 @@ struct FighterData
     int x908;                                       // 0x908
     int x90c;                                       // 0x90c
     int x910;                                       // 0x910
-    Hitbox hitbox[4];                               //0x914
+    ftHit hitbox[4];                                //0x914
     int xdf4;                                       // 0xdf4
     int xdf8;                                       // 0xdf8
     int xdfc;                                       // 0xdfc

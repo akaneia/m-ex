@@ -3,8 +3,8 @@
 
 #include "structs.h"
 #include "datatypes.h"
-#include "obj.h"
 #include "hsd.h"
+#include "obj.h"
 
 // map_gobjDesc Flags
 #define map_isBG 0x40000000
@@ -348,6 +348,7 @@ int *(*Stage_GetYakumonoParam)() = (void *)0x801c49f8;
 void (*Stage_MapStateChange)(GOBJ *map, int map_gobjID, int anim_id) = (void *)0x801c8138;
 void (*Dynamics_DecayWind)() = (void *)0x800115f4;
 GOBJ *(*Stage_CreateMapGObj)(int mapgobjID) = (void *)0x80223908;
+void (*Stage_DestroyMapGObj)(GOBJ *map_gobj) = (void *)0x801c4a08;
 void *(*GXLink_Stage)(GOBJ *gobj, int pass) = (void *)0x801c5db0;
 GOBJ *(*Stage_GetMapGObj)(int mapgobjID) = (void *)0x801c2ba4;
 JOBJ *(*Stage_GetMapGObjJObj)(GOBJ *mapgobj, int jointIndex) = (void *)0x801c3fa4;
