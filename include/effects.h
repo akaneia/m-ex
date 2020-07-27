@@ -90,6 +90,7 @@ void (*Effect_SpawnFtEffectLookup)(GOBJ *gobj, int gfx_id, int bone, int unk, in
 void (*Effect_SpawnItEffectLookup)(GOBJ *gobj, int gfx_id, ...) = (void *)0x80278800;
 void (*Effect_SpawnItEffect)(GOBJ *gobj, int gfx_id) = (void *)0x802787b4;
 void (*Effect_DestroyAll)(GOBJ *fighter) = (void *)0x8005b880;
+void (*Particle_DestroyAll)(JOBJ *jobj) = (void *)0x8039d5dc;
 void (*Effect_PauseAll)(GOBJ *fighter) = (void *)0x8005ba40;
 void (*Effect_ResumeAll)(GOBJ *fighter) = (void *)0x8005bac4;
 
