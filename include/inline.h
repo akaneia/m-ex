@@ -205,7 +205,7 @@ static float JOBJ_GetAnimFrame(JOBJ *joint)
     return -1;
 }
 
-static AOBJ *JOBJ_GetAOBJ(JOBJ *jobj)
+static AOBJ *JOBJ_GetFirstAOBJ(JOBJ *jobj)
 {
     // check for AOBJ in this jobj
 
@@ -249,7 +249,7 @@ static AOBJ *JOBJ_GetAOBJ(JOBJ *jobj)
     // this jobj doesnt have an aobj, check the child
     if (jobj->child != 0)
     {
-        AOBJ *aobj = JOBJ_GetAOBJ(jobj->child);
+        AOBJ *aobj = JOBJ_GetFirstAOBJ(jobj->child);
         if (aobj != 0)
             return aobj;
     }
@@ -257,7 +257,36 @@ static AOBJ *JOBJ_GetAOBJ(JOBJ *jobj)
     // child did not have an aobj, check the sibling
     if (jobj->sibling != 0)
     {
-        AOBJ *aobj = JOBJ_GetAOBJ(jobj->sibling);
+        AOBJ *aobj = JOBJ_GetFirstAOBJ(jobj->sibling);
+        if (aobj != 0)
+            return aobj;
+    }
+
+    // no aobj found, return 0
+    return 0;
+}
+
+static AOBJ *JOBJ_GetJointAOBJ(JOBJ *jobj)
+{
+    // check for AOBJ in this jobj
+
+    if (jobj->aobj != 0)
+    {
+        return jobj->aobj;
+    }
+
+    // this jobj doesnt have an aobj, check the child
+    if (jobj->child != 0)
+    {
+        AOBJ *aobj = JOBJ_GetJointAOBJ(jobj->child);
+        if (aobj != 0)
+            return aobj;
+    }
+
+    // child did not have an aobj, check the sibling
+    if (jobj->sibling != 0)
+    {
+        AOBJ *aobj = JOBJ_GetJointAOBJ(jobj->sibling);
         if (aobj != 0)
             return aobj;
     }
