@@ -2796,6 +2796,7 @@ void (*Fighter_EnableECBBottomUpdate)(FighterData *fighter) = (void *)0x8007d5bc
 void (*Fighter_EnterDamageState)(GOBJ *fighter, int stateID, float frame) = (void *)0x8008dce0;
 int (*Fighter_BoneLookup)(FighterData *fighter, int boneID) = (void *)0x8007500c;
 void (*Fighter_GiveDamage)(FighterData *fighter, float damage) = (void *)0x8006cc7c;
+void (*Fighter_GiveHeal)(FighterData *fighter, int heal) = (void *)0x8006cf5c;
 void (*Fighter_SetHUDDamage)(int player, u16 damage) = (void *)0x80034330;
 void (*Fighter_RunOnHitCallbacks)(GOBJ *fighter) = (void *)0x8007db58;
 void (*Fighter_SetStocks)(int ply, int stocks) = (void *)0x80033c60;

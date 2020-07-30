@@ -5,7 +5,7 @@
 #include "datatypes.h"
 #include "obj.h"
 
-#define DB_FLAG 1
+#define DB_FLAG 0
 
 /*** Structs ***/
 

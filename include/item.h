@@ -255,6 +255,11 @@
 #define ITEMSTATE_GRAB 0x4
 #define ITEMSTATE_KEEPHIT 0x10 // dont remove hitboxes on state change
 
+// Item hold_kind definitions
+#define ITHOLD_HAND 0  // held item, like a capsule
+#define ITHOLD_HEAVY 1 // overhead item, like a crate
+#define ITHOLD_NONE 8  // unable to be held
+
 /*** Structs ***/
 
 struct itData
@@ -296,39 +301,39 @@ struct itCommonAttr
     float fallSpeed;
     float maxFallSpeed;
     float x18;
-    float x1C; //collision related
-    int x20;   // 0x20
-    int x24;   // 0x24
-    int x28;   // 0x28
-    int x2c;   // 0x2c
-    int x30;   // 0x30
-    int x34;   // 0x34
-    int x38;   // 0x38
-    int x3c;   // 0x3c
-    int x40;   // 0x40
-    int x44;   // 0x44
-    int x48;   // 0x48
-    int x4c;   // 0x4c
-    int x50;   // 0x50
-    int x54;   // 0x54
-    int x58;   // 0x58
-    int x5c;   // 0x5c
-    int x60;   // 0x60
-    int x64;   // 0x64
-    int x68;   // 0x68
-    int x6c;   // 0x6c
-    int x70;   // 0x70
-    int x74;   // 0x74
-    int x78;   // 0x78
-    int x7c;   // 0x7c
-    int x80;   // 0x80
-    int x84;   // 0x84
-    int x88;   // 0x88
-    int x8c;   // 0x8c
-    int x90;   // 0x90
-    int x94;   // 0x94
-    int x98;   // 0x98
-    int x9c;   // 0x9c
+    float x1C;       //collision related
+    int x20;         // 0x20
+    int x24;         // 0x24
+    int x28;         // 0x28
+    int x2c;         // 0x2c
+    int x30;         // 0x30
+    int x34;         // 0x34
+    int x38;         // 0x38
+    int x3c;         // 0x3c
+    float ecb_top;   // 0x40
+    float ecb_bot;   // 0x44
+    float ecb_right; // 0x48
+    float ecb_left;  // 0x4c
+    int x50;         // 0x50
+    int x54;         // 0x54
+    int x58;         // 0x58
+    int x5c;         // 0x5c
+    int x60;         // 0x60
+    int x64;         // 0x64
+    int x68;         // 0x68
+    int x6c;         // 0x6c
+    int x70;         // 0x70
+    int x74;         // 0x74
+    int x78;         // 0x78
+    int x7c;         // 0x7c
+    int x80;         // 0x80
+    int x84;         // 0x84
+    int x88;         // 0x88
+    int x8c;         // 0x8c
+    int x90;         // 0x90
+    int x94;         // 0x94
+    int x98;         // 0x98
+    int x9c;         // 0x9c
 };
 
 struct ItemState
@@ -341,111 +346,119 @@ struct ItemState
 
 struct SpawnItem
 {
-    GOBJ *parent_gobj;
-    GOBJ *parent_gobj2;
-    int item_id;
-    int unk1;
-    int unk2;
-    Vec3 pos;
-    Vec3 pos2;
-    Vec3 vel;
-    float facing_direction;
-    short damage;
-    short unk5;
-    int unk6;  // 1 = correct initial position
-    char unk7; //0x80 = perform initial collision check
+    GOBJ *parent_gobj;      // 0x0
+    GOBJ *parent_gobj2;     // 0x4
+    int it_kind;            // 0x8, id of the item to spawn
+    int hold_kind;          // 0xC, defines the behavior of the item, such as thrown and pickup. 0 = capsule
+    int unk2;               // 0x10
+    Vec3 pos;               // 0x14
+    Vec3 pos2;              // 0x20
+    Vec3 vel;               // 0x2C
+    float facing_direction; // 0x38
+    short damage;           // 0x3C
+    short unk5;             // 0x3E
+    int unk6;               // 0x40, 1 = correct initial position
+    char unk7;              // 0x44, 0x80 = perform initial collision check
+    int is_spin;            // 0x48, enables item spinning
 };
 
 struct itHit
 {
-    int active;                      // 0x0
-    int x4;                          // 0x4, depends on
-    int dmg;                         // 0x8
-    float dmg_f;                     // 0xc
-    Vec3 offset;                     // 0x10
-    float size;                      // 0x1c
-    int angle;                       // 0x20
-    int kb_growth;                   // 0x24
-    int wdsk;                        // 0x28
-    int kb;                          // 0x2c
-    int attribute;                   // 0x30
-    int shield_dmg;                  // 0x34
-    int hitsound_severity;           // 0x38. hurtbox interaction. 0 = none, 1 = grounded, 2 = aerial, 3 = both
-    int hitsound_kind;               // 0x3c
-    char x40;                        // 0x40
-    char x41;                        // 0x41
-    unsigned char x421 : 1;          // 0x42 0x80
-    unsigned char x422 : 1;          // 0x42 0x40
-    unsigned char x423 : 1;          // 0x42 0x20
-    unsigned char x424 : 1;          // 0x42 0x10
-    unsigned char no_hurt : 1;       // 0x42 0x08      ignore hurtbox
-    unsigned char no_reflect : 1;    // 0x42 0x04      ignore reflect?
-    unsigned char x427 : 1;          // 0x42 0x02
-    unsigned char x428 : 1;          // 0x42 0x01
-    unsigned char x431 : 1;          // 0x43 0x80
-    unsigned char x432 : 1;          // 0x43 0x40
-    unsigned char ignore_ground : 1; // 0x43 0x20 (802793a0)
-    unsigned char ignore_air : 1;    // 0x43 0x10 (802793b4)
-    unsigned char x435 : 1;          // 0x43 0x08
-    unsigned char x436 : 1;          // 0x43 0x04
-    unsigned char x437 : 1;          // 0x43 0x02
-    unsigned char x438 : 1;          // 0x43 0x01
-    int x44;                         // 0x44
-    JOBJ *bone;                      // 0x48
-    Vec3 pos;                        // 0x4c
-    Vec3 pos_prev;                   // 0x58
-    Vec3 pos_coll;                   // 0x64   position of hurt collision
-    float coll_distance;             // 0x70   Distance From Collding Hurtbox (Used for phantom hit collision calculation)
-    GOBJ *victim;                    // 0x74
-    int x78;                         // 0x78
-    int x7c;                         // 0x7c
-    int x80;                         // 0x80
-    int x84;                         // 0x84
-    int x88;                         // 0x88
-    int x8c;                         // 0x8c
-    int x90;                         // 0x90
-    int x94;                         // 0x94
-    int x98;                         // 0x98
-    int x9c;                         // 0x9c
-    int xa0;                         // 0xa0
-    int xa4;                         // 0xa4
-    int xa8;                         // 0xa8
-    int xac;                         // 0xac
-    int xb0;                         // 0xb0
-    int xb4;                         // 0xb4
-    int xb8;                         // 0xb8
-    int xbc;                         // 0xbc
-    int xc0;                         // 0xc0
-    int xc4;                         // 0xc4
-    int xc8;                         // 0xc8
-    int xcc;                         // 0xcc
-    int xd0;                         // 0xd0
-    int xd4;                         // 0xd4
-    int xd8;                         // 0xd8
-    int xdc;                         // 0xdc
-    int xe0;                         // 0xe0
-    int xe4;                         // 0xe4
-    int xe8;                         // 0xe8
-    int xec;                         // 0xec
-    int xf0;                         // 0xf0
-    int xf4;                         // 0xf4
-    int xf8;                         // 0xf8
-    int xfc;                         // 0xfc
-    int x100;                        // 0x100
-    int x104;                        // 0x104
-    int x108;                        // 0x108
-    int x10c;                        // 0x10c
-    int x110;                        // 0x110
-    int x114;                        // 0x114
-    int x118;                        // 0x118
-    int x11c;                        // 0x11c
-    int x120;                        // 0x120
-    int x124;                        // 0x124
-    int x128;                        // 0x128
-    int x12c;                        // 0x12c
-    int x130;                        // 0x130
-    int x134;                        // 0x134
-    int x138;                        // 0x138
+    int active;                   // 0x0
+    int x4;                       // 0x4, depends on
+    int dmg;                      // 0x8
+    float dmg_f;                  // 0xc
+    Vec3 offset;                  // 0x10
+    float size;                   // 0x1c
+    int angle;                    // 0x20
+    int kb_growth;                // 0x24
+    int wdsk;                     // 0x28
+    int kb;                       // 0x2c
+    int attribute;                // 0x30
+    int shield_dmg;               // 0x34
+    int hitsound_severity;        // 0x38. hurtbox interaction. 0 = none, 1 = grounded, 2 = aerial, 3 = both
+    int hitsound_kind;            // 0x3c
+    unsigned char x401 : 1;       // 0x40 0x80
+    unsigned char x402 : 1;       // 0x40 0x40
+    unsigned char hit_air : 1;    // 0x40 0x20. bool to check against aerial fighters
+    unsigned char hit_ground : 1; // 0x40 0x10. bool to check against grounded fighters
+    unsigned char x405 : 1;       // 0x40 0x08
+    unsigned char x406 : 1;       // 0x40 0x04
+    unsigned char x407 : 1;       // 0x40 0x02
+    unsigned char x408 : 1;       // 0x40 0x01
+    char x41;                     // 0x41
+    unsigned char x421 : 1;       // 0x42 0x80
+    unsigned char x422 : 1;       // 0x42 0x40
+    unsigned char hit_facing : 1; // 0x42 0x20. bool to only hit fighters facing the item
+    unsigned char x424 : 1;       // 0x42 0x10
+    unsigned char no_hurt : 1;    // 0x42 0x08      ignore hurtbox
+    unsigned char no_reflect : 1; // 0x42 0x04      ignore reflect?
+    unsigned char x427 : 1;       // 0x42 0x02
+    unsigned char x428 : 1;       // 0x42 0x01
+    unsigned char x431 : 1;       // 0x43 0x80
+    unsigned char x432 : 1;       // 0x43 0x40
+    unsigned char hit_all : 1;    // 0x43 0x20
+    unsigned char x434 : 1;       // 0x43 0x10
+    unsigned char x435 : 1;       // 0x43 0x08
+    unsigned char x436 : 1;       // 0x43 0x04
+    unsigned char x437 : 1;       // 0x43 0x02
+    unsigned char x438 : 1;       // 0x43 0x01
+    int x44;                      // 0x44
+    JOBJ *bone;                   // 0x48
+    Vec3 pos;                     // 0x4c
+    Vec3 pos_prev;                // 0x58
+    Vec3 pos_coll;                // 0x64   position of hurt collision
+    float coll_distance;          // 0x70   Distance From Collding Hurtbox (Used for phantom hit collision calculation)
+    GOBJ *victim;                 // 0x74
+    int x78;                      // 0x78
+    int x7c;                      // 0x7c
+    int x80;                      // 0x80
+    int x84;                      // 0x84
+    int x88;                      // 0x88
+    int x8c;                      // 0x8c
+    int x90;                      // 0x90
+    int x94;                      // 0x94
+    int x98;                      // 0x98
+    int x9c;                      // 0x9c
+    int xa0;                      // 0xa0
+    int xa4;                      // 0xa4
+    int xa8;                      // 0xa8
+    int xac;                      // 0xac
+    int xb0;                      // 0xb0
+    int xb4;                      // 0xb4
+    int xb8;                      // 0xb8
+    int xbc;                      // 0xbc
+    int xc0;                      // 0xc0
+    int xc4;                      // 0xc4
+    int xc8;                      // 0xc8
+    int xcc;                      // 0xcc
+    int xd0;                      // 0xd0
+    int xd4;                      // 0xd4
+    int xd8;                      // 0xd8
+    int xdc;                      // 0xdc
+    int xe0;                      // 0xe0
+    int xe4;                      // 0xe4
+    int xe8;                      // 0xe8
+    int xec;                      // 0xec
+    int xf0;                      // 0xf0
+    int xf4;                      // 0xf4
+    int xf8;                      // 0xf8
+    int xfc;                      // 0xfc
+    int x100;                     // 0x100
+    int x104;                     // 0x104
+    int x108;                     // 0x108
+    int x10c;                     // 0x10c
+    int x110;                     // 0x110
+    int x114;                     // 0x114
+    int x118;                     // 0x118
+    int x11c;                     // 0x11c
+    int x120;                     // 0x120
+    int x124;                     // 0x124
+    int x128;                     // 0x128
+    int x12c;                     // 0x12c
+    int x130;                     // 0x130
+    int x134;                     // 0x134
+    int x138;                     // 0x138
 };
 
 struct ItemData
@@ -934,7 +947,8 @@ void (*Item_Catch)(GOBJ *fighter, int unk) = (void *)0x80094818;
 void (*Items_StoreItemDataToCharItemTable)(undefined4, int) = (void *)0x8026B3F8;
 void (*Items_StoreItemDataToCharItemTable2)(int articleData, int articleID) = (void *)0x8026B3F8;
 void (*Items_StoreTimeout)(GOBJ *item, float timeout) = (void *)0x80275158;
-GOBJ *(*Item_CreateItem)(SpawnItem *item_spawn) = (void *)0x80268b18;
+GOBJ *(*Item_CreateItem)(SpawnItem *item_spawn) = (void *)0x8026862c; // sorry for confusion, use this one for best results
+GOBJ *(*Item_CreateItem1)(SpawnItem *item_spawn) = (void *)0x80268b18;
 GOBJ *(*Item_CreateItem2)(SpawnItem *item_spawn) = (void *)0x80268b5c;
 GOBJ *(*Item_CreateItem3)(SpawnItem *item_spawn) = (void *)0x80268b9c;
 void (*Item_Destroy)(GOBJ *item) = (void *)0x8026a8ec;
@@ -956,5 +970,7 @@ void (*Item_EnableSpin)(GOBJ *item) = (void *)0x802762bc;
 void (*Item_DisableSpin)(GOBJ *item) = (void *)0x802762b0;
 void (*Item_SetLifeTimer)(GOBJ *item, float lifetime) = (void *)0x80275158; // sets frames until item is destroyed
 int (*Item_DecLifeTimer)(GOBJ *item) = (void *)0x80273130;                  // returns isEnd bool
+JOBJ *(*Item_GetBoneJOBJ)(GOBJ *item, int bone_index) = (void *)0x80272cc0;
+int (*Item_CheckIfEnabled)() = (void *)0x80266f3c; // returns bool regarding if items are enabled for this match
 
 #endif
