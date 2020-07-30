@@ -910,6 +910,30 @@ struct ItemData
     unsigned char isCheckLeftBlastzone : 1;  // 0xdcc, 0x04
     unsigned char isCheckUpBlastzone : 1;    // 0xdcc, 0x02
     unsigned char isCheckDownBlastzone : 1;  // 0xdcc, 0x01
+    unsigned char xdcd1 : 1;                 // 0xdcd, 0x80
+    unsigned char update_cam : 1;            // 0xdcd, 0x40. indicates this item has a camera box
+    unsigned char xdcd3 : 1;                 // 0xdcd, 0x20
+    unsigned char xdcd4 : 1;                 // 0xdcd, 0x10
+    unsigned char xdcd5 : 1;                 // 0xdcd, 0x08
+    unsigned char xdcd6 : 1;                 // 0xdcd, 0x04
+    unsigned char xdcd7 : 1;                 // 0xdcd, 0x02
+    unsigned char xdcd8 : 1;                 // 0xdcd, 0x01
+    unsigned char xdce1 : 1;                 // 0xdce, 0x80
+    unsigned char xdce2 : 1;                 // 0xdce, 0x40
+    unsigned char xdce3 : 1;                 // 0xdce, 0x20
+    unsigned char xdce4 : 1;                 // 0xdce, 0x10
+    unsigned char xdce5 : 1;                 // 0xdce, 0x08
+    unsigned char xdce6 : 1;                 // 0xdce, 0x04
+    unsigned char xdce7 : 1;                 // 0xdce, 0x02
+    unsigned char xdce8 : 1;                 // 0xdce, 0x01
+    unsigned char xdcf1 : 1;                 // 0xdcf, 0x80
+    unsigned char xdcf2 : 1;                 // 0xdcf, 0x40
+    unsigned char xdcf3 : 1;                 // 0xdcf, 0x20
+    unsigned char xdcf4 : 1;                 // 0xdcf, 0x10
+    unsigned char xdcf5 : 1;                 // 0xdcf, 0x08
+    unsigned char xdcf6 : 1;                 // 0xdcf, 0x04
+    unsigned char xdcf7 : 1;                 // 0xdcf, 0x02
+    unsigned char xdcf8 : 1;                 // 0xdcf, 0x01
     int xdd0;                                // 0xdd0
     int itemVar1;                            // 0xdd4
     int itemVar2;                            // 0xdd8
