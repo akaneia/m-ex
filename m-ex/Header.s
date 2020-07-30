@@ -3,7 +3,7 @@
 .set  CustomItemStart,237
 .set  RandomIconID,30
 .set  HUD_Stride,2  #3  im changing this from 3 because 2 seems to work with hsdraw
-.set  OFST_mexMapData,-0x49F0
+.set  OFST_mexMapData,--0x4A08
 .set  OFST_mexSelectChr,-0x4A0C
 
 #Derived Constants
