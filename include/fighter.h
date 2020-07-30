@@ -2837,6 +2837,7 @@ void (*Fighter_ZeroCPUInputs)(FighterData *fighter_data) = (void *)0x800b4a78;
 void (*Fighter_CreateShieldGFX)(GOBJ *fighter) = (void *)0x800921dc;
 void (*Fighter_UpdateShieldGFX)(GOBJ *fighter, float size) = (void *)0x80091e78;
 int (*Fighter_GetShieldColorIndex)(int ply) = (void *)0x80036538;
+float (*Fighter_GetBaseScale)(FighterData *fighter) = (void *)0x8007f694;
 void (*Fighter_SetScale)(GOBJ *fighter, float scale) = (void *)0x800866a4;
 void (*Fighter_InitDynamics)(FighterData *fighter_data) = (void *)0x8009cf84;
 void (*Fighter_ProcDynamics)(GOBJ *fighter) = (void *)0x8009e0a8;
