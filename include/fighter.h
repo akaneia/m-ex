@@ -2636,7 +2636,14 @@ struct FighterData
     char flags_2223;                      // 0x2223
     char flags_2224;                      // 0x2224
     char flags_2225;                      // 0x2225
-    char flags_2226;                      // 0x2226
+    unsigned char x2226_1 : 1;            // 0x80 - 0x2226
+    unsigned char x2226_2 : 1;            // 0x40 - 0x2226
+    unsigned char is_thrown : 1;          // 0x20 - 0x2226
+    unsigned char x2226_4 : 1;            // 0x10 - 0x2226
+    unsigned char x2226_5 : 1;            // 0x8 - 0x2226
+    unsigned char x2226_6 : 1;            // 0x4 - 0x2226
+    unsigned char x2226_7 : 1;            // 0x2 - 0x2226
+    unsigned char x2226_8 : 1;            // 0x1 - 0x2226
     char flags_2227;                      // 0x2227
     char flags_2228;                      // 0x2228
     unsigned char x2229_1 : 1;            // 0x80 - 0x2229
