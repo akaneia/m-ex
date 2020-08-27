@@ -32,7 +32,7 @@
   cmpw  REG_EffectIntID,r3
   bge DoesNotExist
 #Get effect type from internal ID
-  lwz r3,0x4(r4)
+  lwz r3,0x4(REG_effBehaviorTable)
   lbzx REG_EffectType,r3,REG_EffectIntID
 
 CustomEffect:
