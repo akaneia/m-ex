@@ -27,7 +27,6 @@
 #Get this fighters effect file ID
   lwz r3,OFST_MnSlChrEffectFileIDs(rtoc)
   lwz r4,0x4(REG_PlayerData)
-  mulli r4,r4,0x4
   lbzx  REG_EffectFileID,r3,r4
 
 #Get final ID (efFileID*10000) + (externalID-1400)
