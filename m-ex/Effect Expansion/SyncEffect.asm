@@ -5,6 +5,8 @@
 .set  REG_PlayerGObj,30
 .set  REG_EffectID,28
 
+.set  REG_EffectFileID,24
+.set  REG_effBehaviorTable,23
 .set  REG_EffectIntID,22
 .set  REG_EffectType,21
 .set  REG_PlayerData,20
@@ -20,25 +22,27 @@
 #Init
   backup
   lwz REG_PlayerData,0x2C(REG_PlayerGObj)
-  subi  REG_EffectIntID,REG_EffectID,CustomEffectStart     #get char effect ID
+  subi  REG_EffectIntID,REG_EffectID,CustomEffectStart     #get local char effect ID
 
-#Get final ID (efFileID*10000) + (externalID-1400)
+#Get this fighters effect file ID
   lwz r3,OFST_MnSlChrEffectFileIDs(rtoc)
   lwz r4,0x4(REG_PlayerData)
-  lbzx  r3,r3,r4
-  mulli r3,r3,1000
+  mulli r4,r4,0x4
+  lbzx  REG_EffectFileID,r3,r4
+
+#Get final ID (efFileID*10000) + (externalID-1400)
+  mulli r3,REG_EffectFileID,1000
   add REG_EffectID,r3,REG_EffectIntID
 
-#Get effect type
-  lwz r3,OFST_MEXEffectsLookup(rtoc)
-  lwz r4,0x4(REG_PlayerData)
-  mulli r4,r4,MEXEffectLookup_Stride
-  add r4,r3,r4
-#Check if exists
-  lwz r3,0x0(r4)
+#Get this effect file ID's effBehaviorTable pointer
+  lwz r4,OFST_effBehaviorTable(rtoc)
+  mulli r3,REG_EffectFileID,0x4
+  lwzx  REG_effBehaviorTable,r3,r4
+#Check if this effect exists
+  lwz r3,0x0(REG_effBehaviorTable)    #effect num
   cmpw  REG_EffectIntID,r3
   bge DoesNotExist
-#Get effect type from internal
+#Get effect type from internal ID
   lwz r3,0x4(r4)
   lbzx REG_EffectType,r3,REG_EffectIntID
 
@@ -276,7 +280,8 @@ DoesNotExist:
 #OSReport
   bl  ErrorString
   mflr  r3
-  mr  r4,REG_EffectIntID
+  lwz r4,0x4(REG_PlayerData)
+  mr  r5,REG_EffectIntID
   branchl r12,0x803456a8
 #Assert
   bl  Assert_Name
@@ -290,9 +295,8 @@ Assert_Name:
   .align 2
 ErrorString:
   blrl
-  .string "Error: Fighter does not have effect ID %d\n"
+  .string "Error: fighter %d does not have effect %d\n"
   .align 2
-###############################################
 
 Exit:
   restore

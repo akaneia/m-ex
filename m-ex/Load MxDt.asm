@@ -169,7 +169,7 @@ rtocOffsets:
   .hword Arch_Fighter,Arch_Fighter_FtDemo_SymbolNames,-1
   .hword Arch_Fighter,Arch_Fighter_AnnouncerCall,-1
   .hword Arch_Fighter,Arch_Fighter_GmRst_VictoryTheme,-1
-  .hword Arch_Fighter,Arch_Fighter_MEXEffectLookup,-1
+  .hword Arch_Effect,Effect_effBehaviorTable,-1
   .hword Arch_ItemsAdded,-1
   .hword Arch_Fighter,-1 #item index, need to implement this
   .hword Arch_FGM,Arch_FGM_LookupTable,-1 #audio groups

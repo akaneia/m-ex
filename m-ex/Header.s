@@ -64,9 +64,7 @@
     .set  GmRstPointers_Stride,8
   .set  Arch_Fighter_MEXItemLookup,0x4C
     .set  MEXItemLookup_Stride,8
-  .set  Arch_Fighter_MEXEffectLookup,0x50
-    .set  MEXEffectLookup_Stride,8
-  .set  Arch_Fighter_TargetStage,0x54
+  .set  Arch_Fighter_TargetStage, 0x50
 .set  Arch_FighterFunc,0xC
   .set  Arch_FighterFunc_onLoad,0x0
   .set  Arch_FighterFunc_onDeath,0x4
@@ -130,6 +128,7 @@
   .set  Effect_RuntimeUnk4,0x14
   .set  Effect_RuntimePtclLast,0x18
   .set  Effect_RuntimePtclData,0x1C
+  .set  Effect_effBehaviorTable,0x20    #indexed by fighter ID, points to their effBehaviorTable symbol
 .set  Arch_ItemsAdded,0x1C
   .set  Arch_ItemsAdded_Common,0x0
   .set  Arch_ItemsAdded_Fighter,0x4
@@ -196,7 +195,7 @@
 .set  OFST_FtDemoSymbols,0x78
 .set  OFST_SFXNameDef,0x7C
 .set  OFST_GmRstVictoryTheme,0x80
-.set  OFST_MEXEffectsLookup,0x84
+.set  OFST_effBehaviorTable,0x84
 .set  OFST_ItemsAdded,0x88
 .set  OFST_ItemIndex,0x8C #unused
 .set  OFST_AudioGroups,0x90
