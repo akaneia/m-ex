@@ -179,7 +179,7 @@ Effect_FollowJointPosRot:
   lwz r5,0x0(r3)
   mr  r3,REG_EffectID
   mr  r4,REG_PlayerGObj
-  branchl r12,0x8005c814
+  branchl r12,0x8005c5c4 #0x8005c814
   b Exit
 
 Effect_UseJointPos_GroundOrientation:
