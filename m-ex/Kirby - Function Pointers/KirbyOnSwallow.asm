@@ -3,6 +3,7 @@
 .include "../Header.s"
 
 .set REG_FighterData,31
+.set REG_Fighter,29
 
   lwz  r0,OFST_KirbyOnAbilityGain(rtoc)
   mulli r4,r4,4
@@ -11,6 +12,7 @@
   beq Exit
 #Branch to function
   mtctr r12
+  mr  r3,REG_Fighter
   bctrl
 
 Exit:
