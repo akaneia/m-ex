@@ -2574,10 +2574,10 @@ struct FighterData
     int subactionFlag4;                             // 0x2210
     int x2214;                                      // 0x2214
     char flags_iasa;                                // 0x2218
-    unsigned char shield : 1;                       // is shielding bool. 0x80 - 0x2219
+    unsigned char gfx_active : 1;                   // is shielding bool. 0x80 - 0x2219
     unsigned char x2219_2 : 1;                      // 0x40 - 0x2219
     unsigned char x2219_3 : 1;                      // 0x20 - 0x2219
-    unsigned char x2219_4 : 1;                      // 0x10 - 0x2219
+    unsigned char hitbox_active : 1;                // 0x10 - 0x2219
     unsigned char x2219_5 : 1;                      // 0x8 - 0x2219
     unsigned char freeze : 1;                       // 0x4 - 0x2219
     unsigned char x2219_7 : 1;                      // 0x2 - 0x2219
