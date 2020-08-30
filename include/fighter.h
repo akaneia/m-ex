@@ -2768,11 +2768,6 @@ struct FighterData
     int x23e0;                            // 0x23e0
     int x23e4;                            // 0x23e4
     int x23e8;                            // 0x23e8
-    int x23ec;                            // 0x23ec
-    int x23f0;                            // 0x23f0
-    int x23f4;                            // 0x23f4
-    int x23f8;                            // 0x23f8
-    int x23fc;                            // 0x23fc
     struct mex
     {
         int anim_owner;

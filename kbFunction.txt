@@ -1,6 +1,6 @@
 onkirbyswallow
 onkirbyloseability
 kirbyspecialn
-kirbyspecialnair
+kirbyspecialairn
 kirbyonhit
 kirbyoniteminit
