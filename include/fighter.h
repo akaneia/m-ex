@@ -2773,6 +2773,11 @@ struct FighterData
     int x23f4;                            // 0x23f4
     int x23f8;                            // 0x23f8
     int x23fc;                            // 0x23fc
+    struct mex
+    {
+        int anim_owner;
+        GOBJ *kb_abilitysource;
+    } mex;
 };
 
 /*** Functions ***/
