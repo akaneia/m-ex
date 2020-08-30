@@ -37,6 +37,9 @@
   lwz r4,OFST_effBehaviorTable(rtoc)
   mulli r3,REG_EffectFileID,0x4
   lwzx  REG_effBehaviorTable,r3,r4
+#Check if this symbol was indexed
+  cmpwi REG_effBehaviorTable,0
+  beq NoSymbol
 #Check if this effect exists
   lwz r3,0x0(REG_effBehaviorTable)    #effect num
   cmpw  REG_EffectIntID,r3
@@ -296,6 +299,26 @@ ErrorString:
   blrl
   .string "Error: fighter %d does not have effect %d\n"
   .align 2
+#####################################################
+NoSymbol:
+#OSReport
+  bl  ErrorString_Symbol
+  mflr  r3
+  lwz r4,0x4(REG_PlayerData)
+  mr  r5,REG_EffectIntID
+  branchl r12,0x803456a8
+#Assert
+  bl  Assert_Name
+  mflr  r3
+  li  r4,0
+  load  r5,0x804d3940
+  branchl r12,0x80388220
+ErrorString_Symbol:
+  blrl
+  .string "Error: fighter %d does not have effBehaviorTable\n"
+  .align 2
+###############################################
+
 
 Exit:
   restore
