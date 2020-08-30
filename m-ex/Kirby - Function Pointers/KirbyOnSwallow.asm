@@ -2,7 +2,8 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-#runs when a non original tether character is detected
+.set REG_FighterData,31
+
   lwz  r0,OFST_KirbyOnAbilityGain(rtoc)
   mulli r4,r4,4
   lwzx  r12,r4,r0

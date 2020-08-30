@@ -252,9 +252,23 @@
 .set  OFST_mexData,OFST_Metadata+0x4
 
 
-#Playerdata offsets
-.set  PlayerDataSize,0x2500
-.set  PD_AnimOwner,PlayerDataSize-0x4
+# Fighter Data Sizes
+.set  FighterDataOrigSize, 0x23ec
+.set  MEX_FighterDataSize, 0xC       # mex needs additional X bytes
+.set  FighterDataTotalSize, FighterDataOrigSize + MEX_FighterDataSize
+
+# Fighter Data Start
+.set FighterDataStart, 0x0
+.set MEX_FighterDataStart, FighterDataStart + FighterDataOrigSize
+
+# Fighter Data Vairables
+#MEX
+.set  MEX_AnimOwner,MEX_FighterDataStart + 0x0  #4 bytes
+.set  MEX_kbAbilitySource,MEX_AnimOwner + 0x4  #4 bytes
+.set  MEX_UCFCurrX, MEX_AnimOwner + 0x4   #1 byte
+.set  MEX_UCFPrevX, MEX_UCFCurrX + 0x1   #1 byte
+.set  MEX_UCF2fX, MEX_UCFPrevX + 0x1   #1 byte
+.set  MEX_align, MEX_UCF2fX + 0x1   #1 byte
 
 /*
 #SSM Struct Offsets

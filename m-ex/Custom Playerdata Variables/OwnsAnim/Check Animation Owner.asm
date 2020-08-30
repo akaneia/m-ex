@@ -5,5 +5,5 @@
 .set  REG_PlayerData,3
 
 #Check if anim is coming from opponent
-  lwz r0,PD_AnimOwner(REG_PlayerData)
+  lwz r0,MEX_AnimOwner(REG_PlayerData)
   cmpwi r0,0

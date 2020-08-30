@@ -11,11 +11,11 @@
 
 NoOwnsAnim:
   li  r3,1
-  stw r3,PD_AnimOwner(REG_PlayerData)
+  stw r3,MEX_AnimOwner(REG_PlayerData)
   b Exit
 OwnsAnim:
   li  r3,0
-  stw r3,PD_AnimOwner(REG_PlayerData)
+  stw r3,MEX_AnimOwner(REG_PlayerData)
 
 Exit:
   cmplwi	r23, 0

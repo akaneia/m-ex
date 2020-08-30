@@ -2,4 +2,4 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-li	r4, PlayerBlockSize
+li	r4, FighterDataTotalSize
