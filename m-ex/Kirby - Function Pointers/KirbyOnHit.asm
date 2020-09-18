@@ -12,7 +12,7 @@
   lwz  r3,OFST_KirbyOnHit(rtoc)
   lwzx  r12,r3,r4
   cmpwi r12,0
-  beq Original
+  beq Exit
   mr  r3,r31
   mtctr r12
   bctrl
