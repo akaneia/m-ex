@@ -20,6 +20,7 @@
 #define ASC_400000 0x400000
 #define ASC_4000000 0x4000000
 #define ASC_8000000 0x8000000
+#define ASC_NOANIM 0x20000000
 
 // fighter data 0x2218 flags
 #define IASAFLAG_ISREFLECT 0x10

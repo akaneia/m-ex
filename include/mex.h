@@ -37,5 +37,6 @@ PRIM *(*PRIM_NEW)(int vert_count, int params1, int params2) = (void *)0x804DD84C
 void (*PRIM_CLOSE)() = (void *)0x804DD848;
 MEXPlaylist *(*MEX_GetPlaylist)() = (void *)0x803d707C;
 int (*MEX_GetStageItemExtID)(int item_id) = (void *)0x803d7064;
+void (*KirbyStateChange)(GOBJ *fighter, int state, GOBJ *ability_source, float startFrame, float animSpeed, float animBlend) = 0x803d7080;
 
 #endif
