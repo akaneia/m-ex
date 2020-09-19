@@ -47,11 +47,29 @@
   fmr f3,REG_Blend
   branchl r12,ActionStateChange
 
+# Spoof anim ID as not -1
+  li  r3,0
+  stw r3,0x14(REG_FighterData)
+
+# Spoof state as ItemScopeFire
+  li  r3,0xA0
+  stw r3,0x10(REG_FighterData)
+
+# Spoof current anim offset as -1 (will always result in a cache miss)
+  li  r3,0
+  stw r3,0x5A4(REG_FighterData)
+
 # Load animation data from source  
   mr  r3, REG_FighterData         # anim dest
   mr  r4, REG_AbilityGObjData     # anim source
   lwz r5,0x0(REG_StateMoveLogic)  # anim ID
   branchl r12,0x80085cd8
+
+/*
+# memcpy animation data to the fighters animation allocation
+
+  branchl r12,memcpy
+*/
 
 # Store subaction pointer
   lwz r3,0x0(REG_StateMoveLogic)    # anim ID
