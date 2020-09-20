@@ -2772,7 +2772,6 @@ struct FighterData
     struct mex
     {
         int anim_owner;
-        GOBJ *kb_abilitysource;
     } mex;
 };
 

@@ -2,5 +2,6 @@ onkirbyswallow
 onkirbyloseability
 kirbyspecialn
 kirbyspecialairn
-kirbyonhit
-kirbyoniteminit
+onkirbyhurt
+initcopyitems
+move_logic
