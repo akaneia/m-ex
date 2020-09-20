@@ -143,6 +143,7 @@
   .set  Arch_Kirby_AbilityCostumeFileNames,0x8
   .set  Arch_Kirby_AbilityCostumeRuntimeStruct,0xC
   .set  Arch_Kirby_EffectIDs,0x10
+  .set  Arch_Kirby_FtCmdRuntime,0x14
 .set  Arch_KirbyFunction,0x24
   .set  Arch_KirbyFunction_OnAbilityGain,0x0
   .set  Arch_KirbyFunction_OnAbilityLose,0x4
@@ -150,6 +151,7 @@
   .set  Arch_Kirby_SpecialNAir,0xC
   .set  Arch_Kirby_OnHit,0x10
   .set  Arch_Kirby_InitItem,0x14
+  .set  Arch_Kirby_MoveLogicRuntime,0x18
 .set  Arch_Map,0x28
   .set  Arch_Map_StageIDs,0x0
   .set  Arch_Map_Audio,0x4
@@ -234,14 +236,16 @@
 .set  OFST_KirbyHatEffectFileIDs,OFST_KirbyHatCostumeFileNames+0x4
 .set  OFST_KirbyAbilityCostumeRuntimeStruct,OFST_KirbyHatEffectFileIDs+0x4
 .set  OFST_KirbyAbilityRuntimeStruct,OFST_KirbyAbilityCostumeRuntimeStruct+0x4
-.set  OFST_KirbyOnAbilityGain,OFST_KirbyAbilityRuntimeStruct+0x4
+.set  OFST_KirbyFtCmdRuntime, OFST_KirbyAbilityRuntimeStruct + 0x4
+.set  OFST_KirbyOnAbilityGain,OFST_KirbyFtCmdRuntime+0x4
 .set  OFST_KirbyOnAbilityLose,OFST_KirbyOnAbilityGain+0x4
 .set  OFST_KirbySpecialN,OFST_KirbyOnAbilityLose+0x4
 .set  OFST_KirbySpecialNAir,OFST_KirbySpecialN+0x4
 .set  OFST_KirbyOnHit,OFST_KirbySpecialNAir+0x4
 .set  OFST_KirbyInitItem,OFST_KirbyOnHit+0x4
+.set  OFST_KirbyMoveLogicRuntime, OFST_KirbyInitItem + 0x4
 #Metadata
-.set  OFST_Metadata_InternalIDCount,OFST_KirbyInitItem+0x4
+.set  OFST_Metadata_InternalIDCount,OFST_KirbyMoveLogicRuntime+0x4
 .set  OFST_Metadata_ExternalIDCount,OFST_Metadata_InternalIDCount+0x4
 .set  OFST_Metadata_CSSIconCount,OFST_Metadata_ExternalIDCount+0x4
 .set  OFST_Metadata_SSSIconCount,OFST_Metadata_CSSIconCount+0x4
@@ -264,7 +268,6 @@
 # Fighter Data Vairables
 #MEX
 .set  MEX_AnimOwner,MEX_FighterDataStart + 0x0  #4 bytes
-.set  MEX_kbAbilitySource,MEX_AnimOwner + 0x4  #4 bytes
 .set  MEX_UCFCurrX, MEX_AnimOwner + 0x4   #1 byte
 .set  MEX_UCFPrevX, MEX_UCFCurrX + 0x1   #1 byte
 .set  MEX_UCF2fX, MEX_UCFPrevX + 0x1   #1 byte

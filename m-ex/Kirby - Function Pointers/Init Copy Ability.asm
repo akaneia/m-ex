@@ -1,6 +1,6 @@
-#To be inserted at 80068b40
-.include "../Globals.s"
-.include "Header.s"
+#To be inserted @ 800eee80
+.include "../../Globals.s"
+.include "../Header.s"
 
 #ftX struct
   .set  ftX_Code,0x0
@@ -12,66 +12,70 @@
   .set  ftX_FunctionRelocTableCount,0x10
 
 .set  REG_PlayerData,31
-.set  REG_Header,29
-.set  REG_InternalID,28
-.set  REG_ftFunction,27
-.set  REG_itFunction,27
+.set  REG_InternalID,30
+.set  REG_Archive,29
+.set  REG_ftcmd,28
 .set  REG_kbFunction,27
 .set  REG_clearCache,26
 
 backup
 
-#Init reg
-  li  REG_clearCache,0
+# Get copy file string
+  lwz   r3,OFST_KirbyHatFileNames(rtoc)
+  mulli r4,REG_InternalID,8
+  add   r3,r3,r4
+  lwz   r3,0x0(r3)
+  cmpwi r3,0
+  beq  CheckToFlushCache
+# Get archive info pointer
+  branchl r12,0x8001819c
+  mr REG_Archive,r3
 
-#Get main dat file string
-  lwz	REG_InternalID, 0x0004 (REG_PlayerData)
-  lwz  r3,OFST_ftDataPointers(rtoc)
-  mulli r4,REG_InternalID,ftDataPointers_Stride
-  add r3,r3,r4
-  lwz  REG_Header,0x4(r3)
 #Get symbol offset from file
-  mr  r3,REG_Header
-  bl  ftFunctionString
+  mr  r3,REG_Archive
+  bl  kbFunctionString
   mflr  r4
   branchl r12,0x80380358
-  mr.  REG_ftFunction,r3
-  beq ftFunction_Skip
-
+  mr.  REG_kbFunction,r3
+  beq kbFunction_Skip
 #Reloc
-  lwz r3,ftX_InstructionRelocTableCount(REG_ftFunction)  #count
-  lwz r4,ftX_Code(REG_ftFunction)                        #code
-  lwz r5,ftX_InstructionRelocTable(REG_ftFunction)       #reloc table
+  lwz r3,ftX_InstructionRelocTableCount(REG_kbFunction)  #count
+  lwz r4,ftX_Code(REG_kbFunction)                        #code
+  lwz r5,ftX_InstructionRelocTable(REG_kbFunction)       #reloc table
   branchl r12,Reloc
 #Overload
-  mr  r3,REG_ftFunction
+  mr  r3,REG_kbFunction
   lwz r4,OFST_mexData(rtoc)
-  lwz r4,Arch_FighterFunc(r4)
+  lwz r4,Arch_KirbyFunction(r4)
   mr  r5,REG_InternalID
   bl  Overload
   li  REG_clearCache,1
-ftFunction_Skip:
+kbFunction_Skip:
 
+# Init ftcmd pointer
 #Get symbol offset from file
-  mr  r3,REG_Header
-  mr  r4,REG_InternalID
-  li  r5,0    #fighter
-  branchl r12,itFunctionInit
-  or  REG_clearCache,REG_clearCache,r3
+  mr  r3,REG_Archive
+  bl  ftcmdString
+  mflr  r4
+  branchl r12,0x80380358
+  mr.  REG_ftcmd,r3
+  beq ftcmd_Skip
+# Store pointer
+  lwz r3,OFST_KirbyFtCmdRuntime(rtoc)
+  mulli r4,REG_InternalID,4
+  stwx  REG_ftcmd,r3,r4
+ftcmd_Skip:
 
   b CheckToFlushCache
 
-ftFunctionString:
-blrl
-.string "ftFunction"
-.align 2
 kbFunctionString:
 blrl
 .string "kbFunction"
 .align 2
-mexPatchString:
+
+ftcmdString:
 blrl
-.string "mexPatch"
+.string "kirbyFtCmd"
 .align 2
 
 ###########################################
@@ -104,6 +108,7 @@ Overload_Loop:
   rlwinm. r0,r3,0,0x80000000
   bne Overload_FuncAddr
 
+####################################
 Overload_TableIndex:
 #Get the table whose entry we are overloading
   mulli r3,r3,4
@@ -135,14 +140,18 @@ Overload_CheckLoop:
 Overload_Exit:
   blr
 ############################################
+
+
 CheckToFlushCache:
-  cmpwi REG_ftFunction,0
-  beq Exit
+  cmpwi REG_clearCache,0
+  beq   Exit
 FlushCache:
 #Flush instruction cache so code can be run from this file
-  lwz r3,0x40(REG_Header)
-  lwz r4,0x0(REG_Header)
+  lwz r3,0x40(REG_Archive)
+  lwz r4,0x0(REG_Archive)
   branchl r12,0x80328f50
+
 Exit:
-  restore
-  li	r0, 0
+  restore 
+  lwz	r0, 0x0024 (sp)
+

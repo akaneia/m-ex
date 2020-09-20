@@ -2,14 +2,14 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-# void KirbyStateChange(GOBJ *fighter, int state, GOBJ *ability_source, float startFrame, float animSpeed, float animBlend)
+# void KirbyStateChange(GOBJ *fighter, int state, float startFrame, float animSpeed, float animBlend)
 
 .set  REG_GObj,31
 .set  REG_State,30
-.set  REG_AbilityGObj,29
-.set  REG_FighterData,28
-.set  REG_AbilityGObjData,27
-.set  REG_StateMoveLogic,26
+.set  REG_FighterData,29
+.set  REG_StateMoveLogic,28
+.set  REG_FtCmd,27
+.set  REG_AbilityID,26
 .set  REG_Frame,31
 .set  REG_Speed,30
 .set  REG_Blend,29
@@ -21,21 +21,32 @@
   stfs  REG_State,0x88(sp)
   mr  REG_GObj,r3
   mr  REG_State,r4
-  mr  REG_AbilityGObj,r5
   fmr  REG_Frame,f1
   fmr  REG_Speed,f2
   fmr  REG_Blend,f3
-  lwz REG_AbilityGObjData,0x2C(REG_AbilityGObj)
   lwz REG_FighterData,0x2C(REG_GObj)
-  
-# Get move logic
-  lwz r3,0x18(REG_AbilityGObjData)
-  cmpw  REG_State,r3    # check if state is a special state
-  blt Error
-  sub r3,REG_State,r3
-  mulli r3,r3,0x20
-  lwz r4,0x20(REG_AbilityGObjData)  # fighters special move logic
+
+# Get current ability ID
+  lwz REG_AbilityID,0x2238(REG_FighterData)  
+
+# Get this states move logic
+  lwz r3,OFST_KirbyMoveLogicRuntime(rtoc)
+  mulli r4,REG_AbilityID,0x4
+  lwzx  r3,r3,r4    # get this abilities move logic pointer
+  cmpwi r3,0
+  beq Error
+  mulli r4,REG_State,0x20   # get this states move logic
   add REG_StateMoveLogic,r3,r4
+
+# Get this states ftcmd
+  lwz r3,OFST_KirbyFtCmdRuntime(rtoc)
+  mulli r4,REG_AbilityID,0x4
+  lwzx  r3,r3,r4    # get this abilities ftcmd pointer
+  cmpwi r3,0
+  beq Error
+  lwz r4,0x0(REG_StateMoveLogic)  # get this states animation
+  mulli r4,r4,0x18   # get this states ftcmd
+  add REG_FtCmd,r3,r4
 
 # Enter Dummy State
   mr  r3,REG_GObj 
@@ -47,7 +58,7 @@
   fmr f3,REG_Blend
   branchl r12,ActionStateChange
 
-# Spoof anim ID as not -1
+# Spoof anim ID as not -1 (so the animation is updated each frame)
   li  r3,0
   stw r3,0x14(REG_FighterData)
 
@@ -55,28 +66,25 @@
   li  r3,0xA0
   stw r3,0x10(REG_FighterData)
 
-# Spoof current anim offset as -1 (will always result in a cache miss)
-  li  r3,0
+# Spoof current anim offset as -1 (will always result in a cache miss for the next anim load)
+  li  r3,-1
   stw r3,0x5A4(REG_FighterData)
 
+# Store pointer to figatree animation symbol
+  lwz r3,0x4(REG_FtCmd)
+  stw r3,0x590(REG_FighterData)
+
+
+/*
 # Load animation data from source  
   mr  r3, REG_FighterData         # anim dest
   mr  r4, REG_AbilityGObjData     # anim source
   lwz r5,0x0(REG_StateMoveLogic)  # anim ID
   branchl r12,0x80085cd8
-
-/*
-# memcpy animation data to the fighters animation allocation
-
-  branchl r12,memcpy
 */
 
 # Store subaction pointer
-  lwz r3,0x0(REG_StateMoveLogic)    # anim ID
-  mulli	r3, r3, 24
-  lwz r4,0x24(REG_AbilityGObjData)  # ftcmd pointer
-  add r3,r3,r4                      # this states ftcmd
-  lwz r3,0xC(r3)                    # script data
+  lwz r3,0xC(REG_FtCmd)                    # script data
   stw r3,0x3EC(REG_FighterData)
 
 # Enter animation 
@@ -127,7 +135,7 @@ SubactionEnd:
   b Exit
 
 Error:
-
+  b 0x0
 
 Exit:
   lfs  REG_Speed,0x80(sp)
