@@ -2636,7 +2636,14 @@ struct FighterData
     char flags_2222;                      // 0x2222
     char flags_2223;                      // 0x2223
     char flags_2224;                      // 0x2224
-    char flags_2225;                      // 0x2225
+    unsigned char x2225_1 : 1;            // 0x80 - 0x2225
+    unsigned char x2225_2 : 1;            // 0x40 - 0x2225
+    unsigned char is_kbcp : 1;            // 0x20 - 0x2225  bool for if kirby has a copy ability?
+    unsigned char x2225_4 : 1;            // 0x10 - 0x2225
+    unsigned char x2225_5 : 1;            // 0x8 - 0x2225
+    unsigned char x2225_6 : 1;            // 0x4 - 0x2225
+    unsigned char x2225_7 : 1;            // 0x2 - 0x2225
+    unsigned char x2225_8 : 1;            // 0x1 - 0x2225
     unsigned char x2226_1 : 1;            // 0x80 - 0x2226
     unsigned char x2226_2 : 1;            // 0x40 - 0x2226
     unsigned char is_thrown : 1;          // 0x20 - 0x2226
@@ -2775,6 +2782,52 @@ struct FighterData
     } mex;
 };
 
+struct FtParts // is in the fighter data
+{
+    int num;     // 0x2240
+    DOBJ **dobj; // 0x2244   array of dobjs for the ftpar
+    void *x8;    // 0x2248
+    void *xc;    // 0x224C
+};
+
+struct FtPartsDesc
+{
+    int model_num; // 0x2250
+    FtPartsLookup *lookups;
+};
+
+struct FtDOBJUnk3
+{
+    int num;
+    FtDOBJUnk2 *x4; // pointer to u8 array
+};
+
+struct FtDOBJUnk2
+{
+    int num;
+    u8 *id; // pointer to u8 array
+};
+
+struct FtPartsLookup
+{
+    FtDOBJUnk3 *x0;
+    void *x4;
+    void *x8;
+    void *xc;
+    void *x10;
+};
+
+struct FtDOBJUnk // is in the fighter data
+{
+    int num;  // 0x2250
+    u8 x4[5]; // array of bools?
+    FtDOBJUnk3 *xc;
+    void *x10;
+    void *x14;
+    void *x18;
+    void *x1c;
+};
+
 /*** Functions ***/
 
 void (*ActionStateChange)(float startFrame, float animSpeed, float animBlend, GOBJ *fighter, int stateID, int flags1, int flags2) = (void *)0x800693ac;
@@ -2849,6 +2902,10 @@ float (*Fighter_GetBaseScale)(FighterData *fighter) = (void *)0x8007f694;
 void (*Fighter_SetScale)(GOBJ *fighter, float scale) = (void *)0x800866a4;
 void (*Fighter_InitDynamics)(FighterData *fighter_data) = (void *)0x8009cf84;
 void (*Fighter_ProcDynamics)(GOBJ *fighter) = (void *)0x8009e0a8;
+void (*Fighter_InitPObj)() = 0x80074148;
+void (*Fighter_InitPObj2)() = 0x80074170;
+void (*Fighter_IndexFtPartsDObjs)(GOBJ *fighter, JOBJ *copy_model, FtParts *ftparts) = 0x80075650; // inits the dobj array in ftpartsmodel
+void (*Fighter_InitFtPartsModel)(FtPartsDesc *ftpartsdesc, FtDOBJUnk *unk, int index, FtParts *ftparts, FtParts *ftparts2) = 0x8007487c;
 //void (*Fighter_SetGrounded)(FighterData *fighter_data) = (void *)0x8007d6a4;
 
 #endif

@@ -42,6 +42,21 @@
 
 /*** Structs ***/
 
+struct HSD_ObjAllocData
+{
+    u32 flags;                     //0x00 - Technically 2 diff flags
+    void *freehead;                //0x04
+    u32 used;                      //0x08
+    u32 free;                      //0x0C
+    u32 peak;                      //0x10
+    u32 num_limit;                 //0x14
+    u32 heap_limit_size;           //0x18
+    u32 heap_limit_num;            //0x1C
+    u32 size;                      //0x20
+    u32 align;                     //0x24
+    struct HSD_ObjAllocData *next; //0x28
+};
+
 struct HSD_Material
 {
     GXColor ambient;
@@ -137,5 +152,6 @@ int (*HSD_Randi)(int max) = (void *)0x80380580;
 float (*HSD_Randf)() = (float *)0x80380528;
 void *(*HSD_MemAlloc)(int size) = (void *)0x8037f1e4;
 void (*HSD_Free)(void *ptr) = (void *)0x8037f1b0;
-
+void *(*HSD_ObjAlloc)(HSD_ObjAllocData *obj_def) = 0x8037abc8;
+void (*HSD_ObjFree)(HSD_ObjAllocData *obj_def, void *obj) = 0x8037ad20;
 #endif

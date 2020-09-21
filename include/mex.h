@@ -38,5 +38,5 @@ void (*PRIM_CLOSE)() = (void *)0x804DD848;
 MEXPlaylist *(*MEX_GetPlaylist)() = (void *)0x803d707C;
 int (*MEX_GetStageItemExtID)(int item_id) = (void *)0x803d7064;
 void (*KirbyStateChange)(GOBJ *fighter, int state, float startFrame, float animSpeed, float animBlend) = 0x803d7080;
-
+void *(*MEX_GetKirbyCpData)(int ability_id) = 0x803d7084;
 #endif

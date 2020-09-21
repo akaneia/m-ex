@@ -84,6 +84,12 @@ typedef struct CPU CPU;
 typedef struct ftData ftData;
 typedef struct ftCommonData ftCommonData;
 typedef struct ftChkDevice ftChkDevice;
+typedef struct FtParts FtParts;
+typedef struct FtPartsDesc FtPartsDesc;
+typedef struct FtDOBJUnk FtDOBJUnk;
+typedef struct FtPartsLookup FtPartsLookup;
+typedef struct FtDOBJUnk2 FtDOBJUnk2;
+typedef struct FtDOBJUnk3 FtDOBJUnk3;
 
 // CSS
 typedef struct Preload Preload;
@@ -103,6 +109,10 @@ typedef struct HSD_Material HSD_Material;
 typedef struct HSD_Pad HSD_Pad;
 typedef struct HSD_Pads HSD_Pads;
 typedef struct HSD_Update HSD_Update;
+typedef struct HSD_ObjAllocData HSD_ObjAllocData;
+
+// Kirby
+typedef struct FtVarKirby FtVarKirby;
 
 // Custom
 typedef struct PRIM PRIM;
