@@ -52,6 +52,16 @@ backup
   li  REG_clearCache,1
 kbFunction_Skip:
 
+#Init items if exists
+  mr  r3,REG_Archive
+  mr  r4, REG_InternalID
+  li  r5,0  # fighter
+  branchl r12,itFunctionInit
+  cmpwi r3,0 
+  beq itFunction_Skip
+  li  REG_clearCache,1
+itFunction_Skip:
+
 # Init ftcmd pointer
 #Get symbol offset from file
   mr  r3,REG_Archive
