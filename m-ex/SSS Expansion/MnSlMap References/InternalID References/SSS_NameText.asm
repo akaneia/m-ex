@@ -2,4 +2,4 @@
 .include "../../../../Globals.s"
 .include "../../../Header.s"
 
-lwz	r0, 0x1C (r3)
+lbz	r0, 0x9 (r3)
