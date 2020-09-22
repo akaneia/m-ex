@@ -22,7 +22,7 @@ backup
 #Check if exists
   lwz r3,0x0(REG_MEXItemLookup)
   cmpw  REG_ArticleID,r3
-  bgt DoesNotExist
+  bge DoesNotExist
 #Get external item ID from internal
   lwz r3,0x4(REG_MEXItemLookup)
   mulli r4,REG_ArticleID,2

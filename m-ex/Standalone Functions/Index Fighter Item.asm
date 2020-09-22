@@ -2,27 +2,23 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-.set  REG_PlayerGObj,31
+.set  REG_FighterID,31
 .set  REG_ArticleData,30
 .set  REG_ArticleID,29
-.set  REG_PlayerData,28
 .set  REG_MEXItemLookup,27
 
 backup
 
 #Backup args
-  mr  REG_PlayerGObj,r3
+  mr  REG_FighterID,r3
   mr  REG_ArticleData,r4
   mr  REG_ArticleID,r5
 
-#Get internal ID
-  lwz REG_PlayerData,0x2C(REG_PlayerGObj)
 #Get table from mxdt
   lwz r3,OFST_mexData(rtoc)
   lwz r3,Arch_Fighter(r3)
   lwz r3,Arch_Fighter_MEXItemLookup(r3)
-  lwz r4,0x4(REG_PlayerData)
-  mulli r4,r4,MEXItemLookup_Stride
+  mulli r4,REG_FighterID,MEXItemLookup_Stride
   add REG_MEXItemLookup,r3,r4
 #Check if MxDt has an entry for this item
   lwz r3,0x0(REG_MEXItemLookup)
@@ -50,7 +46,7 @@ DoesNotExist:
   bl  ErrorString_NoItem
   mflr  r3
   mr  r4,REG_ArticleID
-  lwz r5,0x4(REG_PlayerData)
+  mr  r5,REG_FighterID
   branchl r12,0x803456a8
 #Assert
   bl  Assert_Name
