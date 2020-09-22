@@ -13,16 +13,31 @@
 .set  REG_EffectData,6
 
 #Check for custom gfx
-  cmpwi	REG_EffectID, CustomEffectStart
+  cmpwi	REG_EffectID, PersonalEffectStart
   blt Original
-  subi  REG_EffectIntID,REG_EffectID,CustomEffectStart
+  cmpwi REG_EffectID, CopyEffectStart
+  blt PersonalEffect
+  cmpwi REG_EffectID, CopyEffectEnd
+  blt CopyEffect
+  b Original
 
+CopyEffect:
+  subi  REG_EffectIntID,REG_EffectID,CopyEffectStart
+#Get the copy effect file ID
+  lwz r3,OFST_KirbyHatEffectFileIDs(rtoc)
+  lwz r4,0x2238(REG_PlayerData)
+  lbzx  REG_EffectFileID,r3,r4
+  b GetBehavior
+
+PersonalEffect:
+  subi  REG_EffectIntID,REG_EffectID,PersonalEffectStart
 #Get this fighters effect file ID
   lwz r3,OFST_MnSlChrEffectFileIDs(rtoc)
   lwz r4,0x4(REG_PlayerData)
-  mulli r4,r4,0x4
   lbzx  REG_EffectFileID,r3,r4
+  b GetBehavior
 
+GetBehavior:
 #Get this effect file ID's effBehaviorTable pointer
   lwz r4,OFST_effBehaviorTable(rtoc)
   mulli r3,REG_EffectFileID,0x4

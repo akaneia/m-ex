@@ -16,7 +16,7 @@
 backup
 
 #effect id = 5000 + charEffectID
-  addi  r3,r3,CustomEffectStart
+  addi  r3,r3,PersonalEffectStart
   branchl r12,0x8005fddc
 
 Exit:

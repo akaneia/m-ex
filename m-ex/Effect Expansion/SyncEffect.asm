@@ -1,4 +1,4 @@
-#To be inserted @ 8005ff40
+#To be inserted @ 8005ff38
 .include "../../Globals.s"
 .include "../Header.s"
 
@@ -11,24 +11,41 @@
 .set  REG_EffectType,21
 .set  REG_PlayerData,20
 
+  backup
+
+  lwz REG_PlayerData,0x2C(REG_PlayerGObj)
+
 #If under, return to injection site
+  subi	r0, r28, 1211
   cmpwi r0,87
   ble Injection_Exit
 
-#Check if using a custom effect
-  cmpwi REG_EffectID,CustomEffectStart
+#Check for custom gfx
+  cmpwi	REG_EffectID, PersonalEffectStart
   blt Injection_Exit
+  cmpwi REG_EffectID, CopyEffectStart
+  blt PersonalEffect
+  cmpwi REG_EffectID, CopyEffectEnd
+  blt CopyEffect
+  b Injection_Exit
 
-#Init
-  backup
-  lwz REG_PlayerData,0x2C(REG_PlayerGObj)
-  subi  REG_EffectIntID,REG_EffectID,CustomEffectStart     #get local char effect ID
+CopyEffect:
+  subi  REG_EffectIntID,REG_EffectID,CopyEffectStart
+#Get the copy effect file ID
+  lwz r3,OFST_KirbyHatEffectFileIDs(rtoc)
+  lwz r4,0x2238(REG_PlayerData)
+  lbzx  REG_EffectFileID,r3,r4
+  b GetBehavior
 
+PersonalEffect:
+  subi  REG_EffectIntID,REG_EffectID,PersonalEffectStart
 #Get this fighters effect file ID
   lwz r3,OFST_MnSlChrEffectFileIDs(rtoc)
   lwz r4,0x4(REG_PlayerData)
   lbzx  REG_EffectFileID,r3,r4
+  b GetBehavior
 
+GetBehavior:
 #Get final ID (efFileID*10000) + (externalID-1400)
   mulli r3,REG_EffectFileID,1000
   add REG_EffectID,r3,REG_EffectIntID
@@ -326,3 +343,5 @@ Exit:
   branch  r12,0x80061d08
 
 Injection_Exit:
+  restore
+  subi	r0, r28, 1211

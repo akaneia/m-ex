@@ -8,14 +8,14 @@
 .set  REG_StageItemLookup,27
 
 #Is this a custom stage item?
-  cmpwi r4,CustomEffectStart
+  cmpwi r4,PersonalEffectStart
   blt Original
 
 backup
 
 #Backup args
   mr  REG_ArticleData,r3
-  subi  REG_ArticleID,r4,CustomEffectStart
+  subi  REG_ArticleID,r4,PersonalEffectStart
 
 #Get internal ID
   load  r3,0x8049e6c8

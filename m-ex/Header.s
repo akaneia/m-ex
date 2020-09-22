@@ -1,5 +1,7 @@
 #Constants
-.set  CustomEffectStart,5000
+.set  PersonalEffectStart,5000
+.set  CopyEffectStart,6000
+.set  CopyEffectEnd,7000
 .set  CustomItemStart,237
 .set  RandomIconID,30
 .set  HUD_Stride,3   #im changing this from 3 because 2 seems to work with hsdraw
