@@ -28,7 +28,7 @@ struct MEXPlaylist
 
 /*** Functions ***/
 
-void (*MEX_IndexFighterItem)(GOBJ *player_gobj, int article_pointer, int item_id) = (void *)0x803d7058;
+void (*MEX_IndexFighterItem)(int fighter_kind, void *itemdata, int item_id) = (void *)0x803d7058;
 void (*SpawnMEXEffect)(int effectID, int fighter, int arg1, int arg2, int arg3, int arg4, int arg5) = (void *)0x803d7060;
 int (*MEX_GetItemExtID)(GOBJ *gobj, int item_id) = (void *)0x803d7064; // gobj can be fighter or stage
 int (*MEX_GetFtItemID)(int ft_kind, int item_id) = (void *)0x803d7088; // gobj can be fighter or stage
