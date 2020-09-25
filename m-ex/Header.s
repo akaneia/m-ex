@@ -67,6 +67,8 @@
   .set  Arch_Fighter_MEXItemLookup,0x4C
     .set  MEXItemLookup_Stride,8
   .set  Arch_Fighter_TargetStage, 0x50
+  .set  Arch_Fighter_BGM, 0x54
+  .set  Arch_Fighter_ViWaitFileNames, 0x58
 .set  Arch_FighterFunc,0xC
   .set  Arch_FighterFunc_onLoad,0x0
   .set  Arch_FighterFunc_onDeath,0x4
@@ -217,7 +219,9 @@
 .set  OFST_FighterOnItemPickup,0xC0
 .set  OFST_FighterOnItemPickup2,0xC4
 .set  OFST_FighterOnItemRelease,0xC8
-.set  OFST_PtclRuntime1, OFST_FighterOnItemRelease + 0x4
+.set  OFST_FighterBGM,0xD0
+.set  OFST_FighterViWaitFileNames,0xD4
+.set  OFST_PtclRuntime1, OFST_FighterViWaitFileNames + 0x4
 .set  OFST_PtclRuntime3, OFST_PtclRuntime1 + 0x4
 .set  OFST_PtclRuntimeTexGrNum, OFST_PtclRuntime3 + 0x4
 .set  OFST_PtclRuntimeTexGrData, OFST_PtclRuntimeTexGrNum + 0x4

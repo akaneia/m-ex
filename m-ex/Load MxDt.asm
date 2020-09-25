@@ -187,6 +187,8 @@ rtocOffsets:
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup2,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemRelease,-1
+  .hword Arch_Fighter,Arch_Fighter_BGM,-1
+  .hword Arch_Fighter,Arch_Fighter_ViWaitFileNames,-1
   .hword Arch_Effect,Effect_RuntimeUnk1,-1
   .hword Arch_Effect,Effect_RuntimeUnk3,-1
   .hword Arch_Effect,Effect_RuntimeTexGrNum,-1
