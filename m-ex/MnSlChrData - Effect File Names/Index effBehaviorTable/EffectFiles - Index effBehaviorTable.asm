@@ -1,12 +1,13 @@
 #To be inserted @ 80067430
-.include "../../Globals.s"
-.include "../Header.s"
+.include "../../../Globals.s"
+.include "../../Header.s"
 
 .set REG_EfFileID, 30
 
 # orignal line
   stw	r0, 0x0008 (r31)
 
+/*
 # attempt to get effect archive
   lwz  r3,OFST_MnSlChrEffectFilesSymbols(rtoc)
   mulli r4,REG_EfFileID,12
@@ -15,8 +16,10 @@
   branchl r12,0x8001819c
   cmpwi r3,0
   beq DoesNotExist
+*/
 
 # get symbol
+  lwz    r3,0x18(sp)
   bl  effBehaviorTable_Symbol
   mflr  r4
   branchl r12,0x80380358
