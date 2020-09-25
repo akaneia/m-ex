@@ -150,7 +150,7 @@ static float lerp(Translation *anim, float currFrame)
     // get amt
     amt = (currFrame - prevFrame) / (nextFrame - prevFrame);
 
-    return amt * (nextPos - prevPos);
+    return amt * (nextPos - prevPos) + prevPos;
 }
 
 static float JOBJ_GetAnimFrame(JOBJ *joint)
