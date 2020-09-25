@@ -85,7 +85,7 @@ blrl
 
 ftcmdString:
 blrl
-.string "kbFtCmd"
+.string "ftcmd"
 .align 2
 
 ###########################################

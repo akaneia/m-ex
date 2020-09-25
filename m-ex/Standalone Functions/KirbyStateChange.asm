@@ -34,7 +34,7 @@
   mulli r4,REG_AbilityID,0x4
   lwzx  r3,r3,r4    # get this abilities move logic pointer
   cmpwi r3,0
-  beq Error
+  beq NoMoveLogic
   mulli r4,REG_State,0x20   # get this states move logic
   add REG_StateMoveLogic,r3,r4
 
@@ -43,7 +43,7 @@
   mulli r4,REG_AbilityID,0x4
   lwzx  r3,r3,r4    # get this abilities ftcmd pointer
   cmpwi r3,0
-  beq Error
+  beq NoFtCmd
   lwz r4,0x0(REG_StateMoveLogic)  # get this states animation
   mulli r4,r4,0x18   # get this states ftcmd
   add REG_FtCmd,r3,r4
@@ -72,8 +72,9 @@
 
 # Store pointer to figatree animation symbol
   lwz r3,0x4(REG_FtCmd)
+  cmpwi r3,0
+  beq NoAnim
   stw r3,0x590(REG_FighterData)
-
 
 /*
 # Load animation data from source  
@@ -89,8 +90,6 @@
 
 # Enter animation 
   lwz r3,0x590(REG_FighterData)
-  cmpwi r3,0
-  beq Error
   mr  r3,REG_GObj
   fmr f1,REG_Frame
   fmr f2,REG_Speed
@@ -133,6 +132,66 @@ SubactionEnd:
   stw r3,0x21AC(REG_FighterData)
 
   b Exit
+
+#############################################
+NoMoveLogic:
+#OSReport
+  bl  NoMoveLogicString
+  mflr  r3
+  lwz r4,OFST_KirbyHatFileNames(rtoc)
+  mulli r5,REG_AbilityID,8
+  lwzx  r4,r4,r5
+  branchl r12,0x803456a8
+  b Assert
+NoMoveLogicString:
+blrl
+.string "error: kbfunction in %s missing move_logic table\n"
+.align 2
+###############################################
+
+NoFtCmd:
+#OSReport
+  bl  NoFtCmdString
+  mflr  r3
+  lwz r4,OFST_KirbyHatFileNames(rtoc)
+  mulli r5,REG_AbilityID,8
+  lwzx  r4,r4,r5
+  branchl r12,0x803456a8
+  b Assert
+NoFtCmdString:
+blrl
+.string "error: %s missing ftcmd symbol\n"
+.align 2
+
+###############################################
+
+NoAnim:
+#OSReport
+  bl  NoAnimString
+  mflr  r3
+  lwz r4,OFST_KirbyHatFileNames(rtoc)
+  mulli r5,REG_AbilityID,8
+  lwzx  r4,r4,r5
+  mr  r5,REG_State
+  branchl r12,0x803456a8
+  b Assert
+NoAnimString:
+blrl
+.string "error: ftcmd in %s missing animation for state %d\n"
+.align 2
+
+###############################################
+Assert:
+  bl  Assert_Name
+  mflr  r3
+  li  r4,0
+  load  r5,0x804d3940
+  branchl r12,0x80388220
+Assert_Name:
+blrl
+.string "m-ex"
+.align 2
+###############################################
 
 Error:
   b 0x0
