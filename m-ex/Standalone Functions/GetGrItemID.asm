@@ -18,7 +18,9 @@ backup
 #Get table from mxdt
   lwz r3,OFST_mexData(rtoc)
   lwz r3,Arch_Map(r3)
-  lwz REG_MEXItemLookup,Arch_Map_StageItemLookup(r3)
+  lwz r3,Arch_Map_StageItemLookup(r3)
+  mulli r4,REG_ID,MEXItemLookup_Stride
+  add REG_MEXItemLookup,r3,r4
 #Check if exists
   lwz r3,0x0(REG_MEXItemLookup)
   cmpw  REG_ArticleID,r3
