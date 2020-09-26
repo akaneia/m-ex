@@ -219,8 +219,8 @@
 .set  OFST_FighterOnItemPickup,0xC0
 .set  OFST_FighterOnItemPickup2,0xC4
 .set  OFST_FighterOnItemRelease,0xC8
-.set  OFST_FighterBGM,0xD0
-.set  OFST_FighterViWaitFileNames,0xD4
+.set  OFST_FighterBGM,0xCC
+.set  OFST_FighterViWaitFileNames,0xD0
 .set  OFST_PtclRuntime1, OFST_FighterViWaitFileNames + 0x4
 .set  OFST_PtclRuntime3, OFST_PtclRuntime1 + 0x4
 .set  OFST_PtclRuntimeTexGrNum, OFST_PtclRuntime3 + 0x4

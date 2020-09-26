@@ -1,6 +1,6 @@
 #To be inserted @ 800eee80
-.include "../../Globals.s"
-.include "../Header.s"
+.include "../../../Globals.s"
+.include "../../Header.s"
 
 #ftX struct
   .set  ftX_Code,0x0
@@ -18,18 +18,9 @@
 .set  REG_kbFunction,27
 .set  REG_clearCache,26
 
-backup
+  lwz REG_Archive,0x20(sp)
 
-# Get copy file string
-  lwz   r3,OFST_KirbyHatFileNames(rtoc)
-  mulli r4,REG_InternalID,8
-  add   r3,r3,r4
-  lwz   r3,0x0(r3)
-  cmpwi r3,0
-  beq  CheckToFlushCache
-# Get archive info pointer
-  branchl r12,0x8001819c
-  mr REG_Archive,r3
+backup
 
 #Get symbol offset from file
   mr  r3,REG_Archive
@@ -163,5 +154,5 @@ FlushCache:
 
 Exit:
   restore 
-  lwz	r0, 0x0024 (sp)
+  lwz	r0, 0x0024 + 4 (sp)
 
