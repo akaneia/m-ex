@@ -156,8 +156,7 @@ struct GXList
 
 struct TOBJ
 {
-    int *parent;
-    int x4;
+    u64 parent;
     TOBJ *next;
     u32 id;                           //GXTexMapID
     u32 src;                          //GXTexGenSrc 0x10
@@ -177,8 +176,8 @@ struct TOBJ
     struct _HSD_Tlut *tlut;           // 0x5C
     struct _HSD_TexLODDesc *lod;      // 0x60
     AOBJ *aobj;                       // 0x64
-    struct _HSD_ImageDesc **imagetbl;
-    struct _HSD_Tlut **tluttbl;
+    struct _HSD_ImageDesc **imagetbl; // 0x68
+    struct _HSD_Tlut **tluttbl;       // 0x6C
     u8 tlut_no;
     Mtx mtx;
     u32 coord; //GXTexCoordID
@@ -198,23 +197,23 @@ struct AOBJ
 
 struct MOBJ
 {
-    int *parent;
-    u32 rendermode;
-    TOBJ *tobj;
-    HSD_Material *mat;
-    struct _HSD_PEDesc *pe;
-    AOBJ *aobj;
+    int *parent;            // 0x0
+    u32 rendermode;         // 0x4
+    TOBJ *tobj;             // 0x8
+    HSD_Material *mat;      // 0xC
+    struct _HSD_PEDesc *pe; // 0x10
+    AOBJ *aobj;             // 0x14
     /*
     struct _HSD_TObj *ambient_tobj;
     struct _HSD_TObj *specular_tobj;
     */
-    struct _HSD_TExpTevDesc *tevdesc;
-    union _HSD_TExp *texp;
+    struct _HSD_TExpTevDesc *tevdesc; // 0x18
+    union _HSD_TExp *texp;            // 0x1C
 
-    struct _HSD_TObj *tobj_toon;
-    struct _HSD_TObj *tobj_gradation;
-    struct _HSD_TObj *tobj_backlight;
-    f32 z_offset;
+    struct _HSD_TObj *tobj_toon;      // 0x20
+    struct _HSD_TObj *tobj_gradation; // 0x24
+    struct _HSD_TObj *tobj_backlight; // 0x28
+    f32 z_offset;                     // 0x2C
 };
 
 struct JOBJDesc
@@ -223,7 +222,8 @@ struct JOBJDesc
     u32 flags;              //0x04
     struct JOBJDesc *child; //0x08
     struct JOBJDesc *next;  //0x0C
-    union {
+    union
+    {
         struct _HSD_DObjDesc *dobjdesc;
         struct _HSD_Spline *spline;
         struct _HSD_SList *ptcl;
@@ -252,7 +252,8 @@ struct COBJDesc
     Vec3 *vector;                        //0x24
     f32 near;                            //0x28
     f32 far;                             //0x2C
-    union {
+    union
+    {
         struct
         {
             f32 fov;
@@ -290,8 +291,8 @@ struct DOBJ
 
 struct JOBJ
 {
-    int hsd_info;     //0x0
-    int class_parent; //0x4
+    int hsd_info;     //0x00
+    int class_parent; //0x04
     JOBJ *sibling;    //0x08
     JOBJ *parent;     //0x0C
     JOBJ *child;      //0x10
@@ -331,13 +332,15 @@ struct COBJ
     u16 scissor_bottom;  //0x22
     WOBJ *eye_position;  //0x24
     WOBJ *interest;      //0x28
-    union {
+    union
+    {
         f32 roll; //0x2C
         Vec3 up;  //0x2C - 0x34
     } u;
     f32 near; //0x38
     f32 far;  //0x3C
-    union {
+    union
+    {
         struct
         {
             f32 fov;
