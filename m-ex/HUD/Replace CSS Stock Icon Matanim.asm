@@ -20,8 +20,9 @@ backup
   mflr r4
   branchl r12,0x80380358
 # check if exists
-  mr. REG_MatAnimJoint,r3
+  cmpwi r3,0
   beq Exit
+  lwz REG_MatAnimJoint,0x4(r3)
 
 # get stock icon jobjs
   li  REG_Count,0
@@ -40,26 +41,6 @@ Loop:
   li  r6,0
   branchl r12,0x8036fb5c
 
-/*
-# jobj -> dobj -> mobj -> tobj
-  lwz r3,0x80(sp)             # jobj
-  lwz r3,0x18(r3)             # dobj
-  lwz r3,0x8(r3)              # mobj
-  lwz REG_StockTOBJ,0x8(r3)    # tobj
-
-# replace aobj
-  lwz r3,0x8(REG_TextureAnim)
-  stw r3,0x64(REG_StockTOBJ)
-
-# replace imagetbl
-  lwz r3,0xC(REG_TextureAnim)
-  stw r3,0x68(REG_StockTOBJ)
-
-# replace tluttbl
-  lwz r3,0x10(REG_TextureAnim)
-  stw r3,0x6C(REG_StockTOBJ)
-*/
-
 IncLoop:
   addi  REG_Count,REG_Count,1
   cmpwi REG_Count,5
@@ -69,7 +50,7 @@ IncLoop:
 
 SymbolName:
 blrl
-.string "mexIconAnim"
+.string "Stc_icns"
 .align 2
 
 Exit:

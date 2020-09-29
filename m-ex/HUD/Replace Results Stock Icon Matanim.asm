@@ -16,8 +16,9 @@ backup
   mflr r4
   branchl r12,0x80380358
 # check if exists
-  mr. REG_MatAnimJoint,r3
+  cmpwi r3,0
   beq Exit
+  lwz REG_MatAnimJoint,0x4(r3)
 
 # get stock icon jobjs
   li  REG_Count,0
@@ -48,7 +49,7 @@ IncLoop:
 
 SymbolName:
 blrl
-.string "mexIconAnim"
+.string "Stc_icns"
 .align 2
 
 Exit:

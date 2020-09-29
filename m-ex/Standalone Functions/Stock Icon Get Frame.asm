@@ -1,0 +1,76 @@
+#To be inserted @ 803d7060
+.include "../../Globals.s"
+.include "../Header.s"
+
+.set  REG_ExternalID,31
+.set  REG_CostumeID,30
+.set  REG_StcIcons,29
+.set  REG_ExternalIDCount,28
+
+.set  masterHand,7
+.set  wireMale,6
+.set  wireFemale,5
+.set  gigaBowser,4
+.set  crazyHand,3
+.set  sandbag,2
+.set  popo,1
+
+
+# init
+  backup
+  mr  REG_ExternalID,r3
+  mr  REG_CostumeID,r4
+
+# Check if custom symbol exists
+  lwz REG_StcIcons,OFST_stc_icons(r13)
+  cmpwi REG_StcIcons,0
+  beq Exit
+
+#Check if a special character
+  lwz REG_ExternalIDCount,OFST_Metadata_ExternalIDCount(rtoc)
+  subi  r3,REG_ExternalIDCount,masterHand
+  cmpw REG_ExternalID,r3
+  blt NormalCharacter
+  subi  r3,REG_ExternalIDCount,popo
+  cmpw REG_ExternalID,r3
+  bge NormalCharacter
+# get special fighter frame
+  subi  r3,REG_ExternalIDCount,masterHand
+  sub r13,REG_ExternalID,r3
+  bl  SpecialCharacterFrames
+  mflr  r4
+  lbzx  r3,r3,r4
+  b  CastToFloat
+
+# stock frame = reserved + costume * stride + extID
+NormalCharacter:
+  lhz r3,StcIcons_ReservedFrames(REG_StcIcons)
+  lhz r4,StcIcons_Stride(REG_StcIcons)
+  mullw r4,r4,REG_CostumeID
+  add r3,r3,r4
+  add r3,r3,REG_ExternalID
+
+# cast to float
+CastToFloat:
+  xoris r3,r3,0x8000
+  lfd	f1, -0x35F8 (rtoc)
+  stw r3,0x84(sp)
+  lis r3,0x4330
+  stw r3,0x80(sp)
+  lfd f2,0x80(sp)
+  fsubs f1,f2,f1
+  b Exit
+
+SpecialCharacterFrames:
+blrl
+.byte 3  #master hand
+.byte 1  #wire male
+.byte 1  #wire female
+.byte 5  #giga bowser
+.byte 2  #crazy hand
+.byte 6  #sandbag
+.align 2
+
+Exit:
+  restore
+  blr

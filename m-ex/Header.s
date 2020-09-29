@@ -17,13 +17,20 @@
 .set itFunctionInit,0x803d7070
 .set Reloc,0x803d7074
 .set  SFX_PlayStageSFX,0x803d7078
+.set  GetStockFrame,0x803d7060
 
 #mexSelectChr Offsets
 .set  OFST_mexSelectChr,-0x472C
 .set  OFST_mexSelectChr_IconJoint,-0x4728 #originally SceneLoad_Adventure mode static pointers (8031dea0)
+.set  OFST_stc_icons,-0x4724 
 .set  SlChr_IconModel,0x0
 .set  SlChr_IconAnimJoint,0x4
 .set  SlChr_IconMatAnim,0x8
+
+#Stc_icon Offsets
+.set  StcIcons_ReservedFrames,0x0
+.set  StcIcons_Stride,0x2
+.set  StcIcons_MatAnimJoint,0x4
 
 #Archive Offsets
 .set  Arch_Metadata,0x0
