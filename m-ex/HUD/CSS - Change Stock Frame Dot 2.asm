@@ -38,15 +38,24 @@ Loop:
   branchl r12,0x80011e24
 
 # change stock frame
-  lwz r3,0x80(sp)
-  li  r4,6
-  li  r5,0x400
-  load  r6,0x8036410c
-  li  r7,1
+  lwz r3,0x80(sp)   # jobj
+  lwz r3,0x18(r3)   # dobj
+  lwz r3,0x8(r3)   # mobj
+  lwz r3,0x8(r3)   # tobj
   lfs  f1,0x84(sp)
-  crset 6
-  branchl r12,0x80364c08
-  lwz r3,0x80(sp)
+  branchl r12,0x8035e800
+
+# set rate
+  lwz r3,0x80(sp)   # jobj
+  lwz r3,0x18(r3)   # dobj
+  lwz r3,0x8(r3)   # mobj
+  lwz r3,0x8(r3)   # tobj
+  lwz r3,0x64(r3)   # aobj
+  lfs	f1, -0x1F20 (rtoc)
+  branchl r12,0x8036530c
+
+# anim all
+  lwz r3,0x80(sp)   # jobj
   branchl r12,0x80370928
 
 IncLoop:
