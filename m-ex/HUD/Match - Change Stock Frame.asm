@@ -2,93 +2,22 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-.set  REG_ExternalIDCount,12
-.set  REG_ExternalID,3
-.set  REG_CostumeID,5
+.set  REG_ExternalID,31
+.set  REG_InternalID,30
+.set  REG_CostumeID,29
 
-.set  masterHand,7
-.set  wireMale,6
-.set  wireFemale,5
-.set  gigaBowser,4
-.set  crazyHand,3
-.set  sandbag,2
-.set  popo,1
+# init
+  backup
+  mr  REG_ExternalID,r3
+  mr  REG_InternalID,r4
+  mr  REG_CostumeID,r5
 
-backup
+# Get frame
+  mr  r3,REG_InternalID
+  mr  r4,REG_CostumeID
+  branchl r12,GetStockFrame
 
-  lwz REG_ExternalIDCount,OFST_Metadata_ExternalIDCount(rtoc)
-
-#Check if a special character
-  subi  r11,REG_ExternalIDCount,masterHand
-  cmpw REG_ExternalID,r11
-  blt NormalCharacter
-  subi  r11,REG_ExternalIDCount,popo
-  cmpw REG_ExternalID,r11
-  bge NormalCharacter
-
-SpecialCharacter:
-#Get the starting frame
-  subi  r11,REG_ExternalIDCount,masterHand
-  sub REG_ExternalID,REG_ExternalID,r11
-  bl  SpecialCharacterFrames
-  mflr  r4
-  lbzx  REG_ExternalID,REG_ExternalID,r4
-#is equal to starting frame + additional characters
-  subi  r4,REG_ExternalIDCount,33
-  add REG_ExternalID,REG_ExternalID,r4
-# cast to float
-  lfd	f1, -0x57A0 (rtoc)
-  xoris	REG_ExternalID, REG_ExternalID, 0x8000
-  stw REG_ExternalID,0x84(sp)
-  lis r0,0x4330
-  stw r0,0x80(sp)
-  lfd	f0,0x80(sp)
-  fsubs	f1,f0,f1
-
-NormalCharacter:
-#Check for Sopo
-  subi  r11,REG_ExternalIDCount,popo
-  cmpw REG_ExternalID,r11
-  beq IsPopo
-#Check for Zelda/Sheik
-  cmpwi REG_ExternalID,0x12
-  beq IsZeldaSheik
-  cmpwi REG_ExternalID,0x13
-  beq IsZeldaSheik
-#If ID is above sheik, subtract 1
-  ble StockIcon_GetFrame
-  subi  REG_ExternalID,REG_ExternalID,1
-  b StockIcon_GetFrame
-
-IsZeldaSheik:
-  cmpwi r4,7
-  beq isSheik
-isZelda:
-  li  REG_ExternalID,18
-  b StockIcon_GetFrame
-isSheik:
-#is = totalnum-8
-  subi  REG_ExternalID,REG_ExternalIDCount,8
-  b StockIcon_GetFrame
-IsPopo:
-  li  REG_ExternalID,0xE
-  b StockIcon_GetFrame
-
-StockIcon_GetFrame:
-  subi  r11,REG_ExternalIDCount,HUD_Stride
-  mullw	r0, REG_CostumeID, r11
-  add	REG_ExternalID, REG_ExternalID, r0
-
-StockIcon_Exit:
+Exit:
   restore
   blr
 
-SpecialCharacterFrames:
-blrl
-.byte 3  #master hand
-.byte 1  #wire male
-.byte 1  #wire female
-.byte 5  #giga bowser
-.byte 2  #crazy hand
-.byte 6  #sandbag
-.align 2

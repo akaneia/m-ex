@@ -13,14 +13,16 @@ TODO:
 THIS HAPPENS EVERY DEATH / STOCK CREATION, MAYBE STORE
 A POINTER TO THIS SYMBOL TO AVOID DOING STRCMP's DURING GAMES?
 */
-
+/*
 # get symbol from ifall
   load  r3,0x804d6d5c
   lwz r3,0x0(r3)
   bl  SymbolName
   mflr r4
   branchl r12,0x80380358
+*/
 # check if exists
+  lwz r3,OFST_stc_icons(r13)
   cmpwi r3,0
   beq Exit
   lwz REG_MatAnimJoint,0x4(r3)

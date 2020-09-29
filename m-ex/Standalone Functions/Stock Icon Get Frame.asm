@@ -2,23 +2,22 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-.set  REG_ExternalID,31
+.set  REG_InternalID,31
 .set  REG_CostumeID,30
 .set  REG_StcIcons,29
-.set  REG_ExternalIDCount,28
+.set  REG_InternalIDCount,28
 
-.set  masterHand,7
-.set  wireMale,6
-.set  wireFemale,5
-.set  gigaBowser,4
-.set  crazyHand,3
-.set  sandbag,2
-.set  popo,1
+.set  masterHand,6
+.set  crazyHand,5
+.set  wireMale,4
+.set  wireFemale,3
+.set  gigabowser,2
+.set  sandbag,1
 
 
 # init
   backup
-  mr  REG_ExternalID,r3
+  mr  REG_InternalID,r3
   mr  REG_CostumeID,r4
 
 # Check if custom symbol exists
@@ -27,16 +26,16 @@
   beq Exit
 
 #Check if a special character
-  lwz REG_ExternalIDCount,OFST_Metadata_ExternalIDCount(rtoc)
-  subi  r3,REG_ExternalIDCount,masterHand
-  cmpw REG_ExternalID,r3
+  lwz REG_InternalIDCount,OFST_Metadata_InternalIDCount(rtoc)
+  subi  r3,REG_InternalIDCount,masterHand
+  cmpw REG_InternalID,r3
   blt NormalCharacter
-  subi  r3,REG_ExternalIDCount,popo
-  cmpw REG_ExternalID,r3
+  subi  r3,REG_InternalIDCount,sandbag
+  cmpw REG_InternalID,r3
   bge NormalCharacter
 # get special fighter frame
-  subi  r3,REG_ExternalIDCount,masterHand
-  sub r13,REG_ExternalID,r3
+  subi  r3,REG_InternalIDCount,masterHand
+  sub r13,REG_InternalID,r3
   bl  SpecialCharacterFrames
   mflr  r4
   lbzx  r3,r3,r4
@@ -48,7 +47,7 @@ NormalCharacter:
   lhz r4,StcIcons_Stride(REG_StcIcons)
   mullw r4,r4,REG_CostumeID
   add r3,r3,r4
-  add r3,r3,REG_ExternalID
+  add r3,r3,REG_InternalID
 
 # cast to float
 CastToFloat:

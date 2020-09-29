@@ -61,6 +61,8 @@ IncLoop:
   addi  REG_Count,REG_Count,1
   cmpwi REG_Count,5
   blt Loop
+  b Exit
+
 
 Exit:
   restore
