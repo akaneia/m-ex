@@ -1,6 +1,6 @@
 #To be inserted @ 8025ee60
-.include "../../Globals.s"
-.include "../Header.s"
+.include "../../../Globals.s"
+.include "../../Header.s"
 
 .set  REG_ExternalIDCount,3
 .set  REG_ExternalID,20

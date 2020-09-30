@@ -22,7 +22,8 @@
 #mexSelectChr Offsets
 .set  OFST_mexSelectChr,-0x472C
 .set  OFST_mexSelectChr_IconJoint,-0x4728 #originally SceneLoad_Adventure mode static pointers (8031dea0)
-.set  OFST_stc_icons,-0x4724 
+.set  OFST_stc_icons,-0x4724            # TODO: THIS WILL BREAK STUFF, FIND A BETTER SPOT
+.set  OFST_eblm_matanimjoint,-0x4720    # TODO: THIS WILL BREAK STUFF, FIND A BETTER SPOT 
 .set  SlChr_IconModel,0x0
 .set  SlChr_IconAnimJoint,0x4
 .set  SlChr_IconMatAnim,0x8

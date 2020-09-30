@@ -1,6 +1,6 @@
-#To be inserted @ 8025db80
-.include "../../Globals.s"
-.include "../Header.s"
+#To be inserted @ 80260db4
+.include "../../../Globals.s"
+.include "../../Header.s"
 
 .set  REG_Count,31
 
@@ -65,4 +65,4 @@ IncLoop:
 
 Exit:
   restore
-  mulli	r0, r31, 12
+  mulli	r0, r19, 12

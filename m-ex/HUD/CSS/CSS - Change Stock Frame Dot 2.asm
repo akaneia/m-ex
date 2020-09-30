@@ -1,8 +1,6 @@
-#To be inserted @ 8025ee70
-.include "../../Globals.s"
-.include "../Header.s"
-
-branchl r12,0x8025d5ac
+#To be inserted @ 8025db80
+.include "../../../Globals.s"
+.include "../../Header.s"
 
 .set  REG_Count,31
 
@@ -18,21 +16,15 @@ backup
   cmpwi r3,0
   beq Exit
 
-# get internal ID
-  add	r4, r30, r29
-  lbz	r3, 0x03C2 (r4)   # icon hovered over
-  mulli	r3, r3, 28
-  lwz  r5,OFST_MnSlChrIconData(rtoc)
-  add r3,r5,r3
-  lbz r3,0xDD(r3)   # icons external ID
-  lwz  r0,OFST_MnSlChrDefineIDs(rtoc)
-  mulli r3,r3,3
-  lbzx  r3,r3,r0
-
-# get stock frame
-  add	r4, r30, r29
-  lbz	r4, 0x03C1 (r4)
-  branchl r12,GetStockFrame
+# cast to float
+  li  r3,7      # the beloved red dot
+  xoris r3,r3,0x8000
+  lfd	f1, -0x35F8 (rtoc)
+  stw r3,0x84(sp)
+  lis r3,0x4330
+  stw r3,0x80(sp)
+  lfd f2,0x80(sp)
+  fsubs f1,f2,f1
   stfs  f1,0x84(sp)
 
 # get stock icon jobjs
@@ -70,8 +62,7 @@ IncLoop:
   addi  REG_Count,REG_Count,1
   cmpwi REG_Count,5
   blt Loop
-  b Exit
-
 
 Exit:
   restore
+  mulli	r0, r31, 12
