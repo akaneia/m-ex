@@ -37,7 +37,7 @@ struct Text
     u8 x4c;
     u8 hidden; // 0x4D
     u8 x4e;
-    u8 x4f;
+    u8 sis_id; // 0x4F, id of the premade text file to use
     int x50;
     GOBJ *gobj;               // 0x54
     void *callback;           // 0x58, read at 803a878c
