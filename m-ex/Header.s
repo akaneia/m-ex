@@ -24,9 +24,15 @@
 .set  OFST_mexSelectChr_IconJoint,-0x4728 #originally SceneLoad_Adventure mode static pointers (8031dea0)
 .set  OFST_stc_icons,-0x4724            # TODO: THIS WILL BREAK STUFF, FIND A BETTER SPOT
 .set  OFST_eblm_matanimjoint,-0x4720    # TODO: THIS WILL BREAK STUFF, FIND A BETTER SPOT 
+.set  OFST_mexMenu,-0x4720 
 .set  SlChr_IconModel,0x0
 .set  SlChr_IconAnimJoint,0x4
 .set  SlChr_IconMatAnim,0x8
+
+#mexMenu Offsets
+.set  mexMenu_MenuNameFrames,0x0
+.set  mexMenu_MenuDef,0x4
+.set  mexMenu_MatAnimJoint,0x8
 
 #Stc_icon Offsets
 .set  StcIcons_ReservedFrames,0x0
