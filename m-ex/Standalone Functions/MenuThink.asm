@@ -48,8 +48,8 @@ SkipLockoutDec:
 # Store Input Lockout
   li  r3,5
   sth r3,-0x4AD8(r13)
-# Store unk
-  li  r3,0
+# Store menu leave animation direction
+  li  r3,1
   stb	r3, 0x0011 (REG_MenuData)
 # Get this option
   lhz	r3, 0x2 (REG_MenuData)  # current cursor
@@ -64,6 +64,24 @@ SkipLockoutDec:
   b Exit
 
 Enter_Menu:
+# Check if event mode...
+  lbz r3,OptDef_ID(REG_ThisOpt)
+  cmpwi r3,7
+  bne Enter_MenuNoSpecial
+# Handle event mode
+  lwz r12,OptDef_Callback(REG_ThisOpt)
+  cmpwi r12,0
+  beq Enter_MenuNoCB
+  mtctr r12
+  li  r3,0
+  li  r4,1
+  bctrl
+# Delete this menu gobj
+  mr  r3,REG_GObj
+  branchl r12,0x80390228
+  b Exit
+
+Enter_MenuNoSpecial:
 # check for custom callback
   lwz r3,OptDef_Callback(REG_ThisOpt)
   cmpwi r3,0
@@ -74,8 +92,8 @@ Enter_Menu:
   mr  r3,REG_GObj
   branchl r12,0x80390228
   b Exit
-
 Enter_MenuNoCB:
+
 # set prev menu
   lbz	r3, 0x0 (REG_MenuData)
   stb	r3, 0x1 (REG_MenuData)
@@ -132,6 +150,25 @@ NoA:
 # SFX
   li	r3, 0
   branchl r12,0x80024030
+
+# Check for title screen
+  lbz r3,MenuDef_PrevMenu(REG_MenuDef)
+  extsb r3,r3
+  cmpwi r3,-1
+  bne Return_NoTitle
+# Get scene data
+  branchl r12,0x801a4b9c
+# Store scene ID
+  li  r0,0
+  stb r0,0x0(r3)
+# Change minor
+  branchl r12,0x801a4b60
+  b Exit
+Return_NoTitle:
+
+# Store menu leave animation direction
+  li  r3,0
+  stb	r3, 0x0011 (REG_MenuData)
 
 # set prev menu
   lbz	r3, 0x0 (REG_MenuData)
@@ -210,17 +247,27 @@ NoB:
 # SFX
   li	r3, 2
   branchl r12,0x80024030
+CursorUpInitLoop:
+.set  REG_TempCursor, 20
+  lhz	REG_TempCursor, 0x2 (REG_MenuData)  # current cursor
+CursorUpLoop:
 # Move cursor
-  lhz	r3, 0x2 (REG_MenuData)  # current cursor
-  subi  r3,r3,1
-  extsh r3,r3
-  cmpwi r3,-1
+  subi  REG_TempCursor,REG_TempCursor,1
+  extsh r0,REG_TempCursor
+  cmpwi r0,-1
   bgt CursorUp_NoAdjust
 # Get last option
   lbz r3,MenuDef_OptNum(REG_MenuDef)
-  subi  r3,r3,1
+  subi  REG_TempCursor,r3,1
 CursorUp_NoAdjust:
-  sth	r3, 0x2 (REG_MenuData)  # current cursor
+# Check if option exists
+  lbz	r3, 0x0 (REG_MenuData)
+  mr  r4,REG_TempCursor
+  branchl r12,0x80229938
+  cmpwi r3,0
+  beq CursorUpLoop
+CursorUp_Store:
+  sth	REG_TempCursor, 0x2 (REG_MenuData)  # current cursor
   b Exit
 NoUp:
 
@@ -230,15 +277,26 @@ NoUp:
 # SFX
   li	r3, 2
   branchl r12,0x80024030
+CursorDownInitLoop:
+.set  REG_TempCursor, 20
+  lhz	REG_TempCursor, 0x2 (REG_MenuData)  # current cursor
+CursorDownLoop:
 # Move cursor
-  lhz	r3, 0x2 (REG_MenuData)  # current cursor
-  addi  r3,r3,1
+  addi  REG_TempCursor,REG_TempCursor,1
   lbz r4,MenuDef_OptNum(REG_MenuDef)
-  cmpw r3,r4
+  cmpw REG_TempCursor,r4
   blt CursorDown_NoAdjust
-  li  r3,0  
+# Get first option
+  li  REG_TempCursor,0  
 CursorDown_NoAdjust:
-  sth	r3, 0x2 (REG_MenuData)  # current cursor
+# Check if option exists
+  lbz	r3, 0x0 (REG_MenuData)
+  mr  r4,REG_TempCursor
+  branchl r12,0x80229938
+  cmpwi r3,0
+  beq CursorDownLoop
+CursorDown_Store:
+  sth	REG_TempCursor, 0x2 (REG_MenuData)  # current cursor
   b Exit
 NoDown:
 
