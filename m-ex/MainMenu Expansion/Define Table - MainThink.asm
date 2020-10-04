@@ -10,7 +10,7 @@
   cmpwi r12,0
   beq Original
   lwz REG_MenuDef,mexMenu_MenuDef(r12)
-  addi  REG_MenuDef,REG_MenuDef, MenuID * 0x14
+  addi  REG_MenuDef,REG_MenuDef, MenuID * MenuDefStride
   b Exit
 
 Original:

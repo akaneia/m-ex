@@ -14,6 +14,6 @@
 
 
 Original:
-  subi	REG_Dest, r5, 20888
+  subi	REG_Dest, r4, 20888
 
 Exit:

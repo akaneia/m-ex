@@ -8,7 +8,7 @@
   beq Original
   lwz r12,mexMenu_MenuDef(r12)
   lbz	r3, 0 (r31)
-  mulli	r3, r3, 20
+  mulli	r3, r3, MenuDefStride
   add r12,r12,r3
   lfs	f2, 0x4 (r12)
   b Exit

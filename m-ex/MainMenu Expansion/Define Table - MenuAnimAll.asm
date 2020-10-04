@@ -9,6 +9,8 @@
   cmpwi r12,0
   beq Original
   lwz r3,mexMenu_MenuDef(r12)
+  lbz	r0, 0 (r28)
+  mulli	r0, r0, MenuDefStride
   add r3,r3,r0
   lbz	REG_OptionNum, 0xC (r3)
   b Exit

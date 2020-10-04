@@ -11,7 +11,7 @@
   cmpwi r12,0
   beq Original
   lwz r5,mexMenu_MenuDef(r12)
-  mulli r3,r21,20
+  mulli r3,r21,MenuDefStride
   add r3,r3,r5
   lwz REG_Frames,0x0(r3)
   lbz	REG_OptionNum, 0xC (r3)

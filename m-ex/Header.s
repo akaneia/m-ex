@@ -18,6 +18,7 @@
 .set Reloc,0x803d7074
 .set  SFX_PlayStageSFX,0x803d7078
 .set  GetStockFrame,0x803d7060
+.set  MenuThink,0x803d7090
 
 #mexSelectChr Offsets
 .set  OFST_mexSelectChr,-0x472C
@@ -32,7 +33,24 @@
 #mexMenu Offsets
 .set  mexMenu_MenuNameFrames,0x0
 .set  mexMenu_MenuDef,0x4
-.set  mexMenu_MatAnimJoint,0x8
+  .set  MenuDefStride,20
+  .set  MenuDef_PreviewFrames, 0x0
+  .set  MenuDef_Unused, 0x4
+  .set  MenuDef_OptDef, 0x8
+    .set  OptDefStride,8
+    .set  OptDef_Kind, 0x0      # byte
+    .set  OptDef_ID, 0x1        # byte
+    .set  OptDef_NameFrame,0x2  # byte
+    .set  OptDef_Text,0x3       # byte
+    .set  OptDef_Callback,0x4   # word
+  .set  MenuDef_OptNum, 0xC # byte
+  .set  MenuDef_PrevMenu, 0xD # byte
+  .set  MenuDef_NameFrame, 0xE  # short
+  .set  MenuDef_ThinkFunc, 0x10
+.set  mexMenu_MnOptMatAnimJoint,0x8
+.set  mexMenu_MnNameMatAnimJoint,0xC
+.set  mexMenu_DescSis,0x10
+  .set  OptDef_TextSisID, 1
 
 #Stc_icon Offsets
 .set  StcIcons_ReservedFrames,0x0

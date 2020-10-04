@@ -11,7 +11,7 @@ backup
   lwz r3,OFST_mexMenu(r13)
   cmpwi r3,0
   beq Exit
-  lwz REG_MatAnimJoint,mexMenu_MatAnimJoint(r3)
+  lwz REG_MatAnimJoint,mexMenu_MnOptMatAnimJoint(r3)
 
 # Get jobj
   mr  r3,REG_JObj

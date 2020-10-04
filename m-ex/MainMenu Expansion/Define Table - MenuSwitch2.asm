@@ -7,6 +7,8 @@
   cmpwi r12,0
   beq Original
   lwz r12,mexMenu_MenuDef(r12)
+  lbz	r0, 0 (r30)
+  mulli	r0, r0, MenuDefStride
   add r12,r12,r0
   lfs	f1, 0x4 (r12)
   b Exit
