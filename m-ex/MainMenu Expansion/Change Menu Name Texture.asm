@@ -1,4 +1,4 @@
-#To be inserted @ 80229c6c
+#To be inserted @ 80229da0
 .include "../../Globals.s"
 .include "../Header.s"
 
@@ -40,24 +40,8 @@ backup
 
 # change name frame
   lwz r3,0x80(sp)   # jobj
-  lwz r3,0x18(r3)   # dobj
-  lwz r3,0x8(r3)   # mobj
-  lwz r3,0x8(r3)   # tobj
-  branchl r12,0x8035e800
-
-# set rate
-  lwz r3,0x80(sp)   # jobj
-  lwz r3,0x18(r3)   # dobj
-  lwz r3,0x8(r3)   # mobj
-  lwz r3,0x8(r3)   # tobj
-  lwz r3,0x64(r3)   # aobj
-  lfs	f1, -0x1F20 (rtoc)
-  branchl r12,0x8036530c
-
-# anim all
-  lwz r3,0x80(sp)   # jobj
-  branchl r12,0x80370928
+  branchl r12,0x8036f934
 
 Exit:
   restore
-  lbz	r0, 0 (r29)
+  lwz	r0, 0x003C (sp)

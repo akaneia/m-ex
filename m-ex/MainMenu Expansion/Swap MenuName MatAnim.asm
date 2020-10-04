@@ -101,43 +101,6 @@ ExitNameBorderLoop:
   lwz r3,0x80(sp)
   stfs  f1,0x2C(r3)
 
-# Get menu ID
-  load  r3,0x804a04f0
-  lbz r3,0x0(r3)
-# get menu def
-  lwz r12,mexMenu_MenuDef(REG_mexMenu)
-  mulli r3,r3,MenuDefStride
-  add  r3,r12, r3
-  lhz r3,MenuDef_NameFrame(r3)
-# cast
-  xoris r3,r3,0x8000
-  lfd	f1, -0x35F8 (rtoc)
-  stw r3,0x94(sp)
-  lis r3,0x4330
-  stw r3,0x90(sp)
-  lfd f2,0x90(sp)
-  fsubs f1,f2,f1
-
-# change name frame
-  lwz r3,0x80(sp)   # jobj
-  lwz r3,0x18(r3)   # dobj
-  lwz r3,0x8(r3)   # mobj
-  lwz r3,0x8(r3)   # tobj
-  branchl r12,0x8035e800
-
-# set rate
-  lwz r3,0x80(sp)   # jobj
-  lwz r3,0x18(r3)   # dobj
-  lwz r3,0x8(r3)   # mobj
-  lwz r3,0x8(r3)   # tobj
-  lwz r3,0x64(r3)   # aobj
-  lfs	f1, -0x1F20 (rtoc)
-  branchl r12,0x8036530c
-
-# anim all
-  lwz r3,0x80(sp)   # jobj
-  branchl r12,0x80370928
-
   b Exit
 
 NameJObjs:
