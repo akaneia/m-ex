@@ -42,6 +42,10 @@ backup
   lwz r3,0x80(sp)   # jobj
   branchl r12,0x8036f934
 
+# anim
+  lwz r3,0x80(sp)   # jobj
+  branchl r12,0x80370780
+
 Exit:
   restore
   lwz	r0, 0x003C (sp)
