@@ -113,6 +113,11 @@ PreloadInit_Loop:
   mr  r4,REG_FileSize
   branchl r12,0x80328f50
 
+# TEMP #
+# set last major num
+  li  r3,45
+  stw r3,OFST_MetaData_MajorNum(rtoc)
+
   b Exit
 
 FileName:
@@ -189,6 +194,8 @@ rtocOffsets:
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemRelease,-1
   .hword Arch_Fighter,Arch_Fighter_BGM,-1
   .hword Arch_Fighter,Arch_Fighter_ViWaitFileNames,-1
+  .hword Arch_Scene,Scene_Major,-1
+  .hword Arch_Scene,Scene_Minor,-1
   .hword Arch_Effect,Effect_RuntimeUnk1,-1
   .hword Arch_Effect,Effect_RuntimeUnk3,-1
   .hword Arch_Effect,Effect_RuntimeTexGrNum,-1
@@ -226,8 +233,8 @@ rtocOffsets:
   .hword Arch_Metadata,Arch_Metadata_SSMCount,-1
   .hword Arch_Metadata,Arch_Metadata_BGMCount,-1
   .hword Arch_Metadata,Arch_Metadata_EffectCount,-1
+  .hword Arch_Metadata,Arch_Metadata_MajorNum,-1
   .hword Arch_Metadata,-1
-
   .hword  -1
   .align 2
 

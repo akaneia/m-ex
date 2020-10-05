@@ -58,6 +58,10 @@
 .set  StcIcons_Stride,0x2
 .set  StcIcons_MatAnimJoint,0x4
 
+#Scene Data
+.set  MajorStride,0x18
+.set  MinorStride,0x0
+
 #Archive Offsets
 .set  Arch_Metadata,0x0
   .set  Arch_Metadata_VersionMajor,0x0
@@ -69,6 +73,7 @@
   .set  Arch_Metadata_SSMCount,0x14
   .set  Arch_Metadata_BGMCount,0x18
   .set  Arch_Metadata_EffectCount,0x1C
+  .set  Arch_Metadata_MajorNum,0x20
 .set  Arch_Menu,0x4
   .set  Arch_Menu_MenuParam,0x0
     .set  MenuParam_HandScale,0x0
@@ -199,6 +204,9 @@
   .set  Arch_Map_Playlists,0x14
     .set  Playlists_Stride,0x8
 .set  Arch_grFunction,0x2C
+.set  Arch_Scene,0x30
+  .set  Scene_Major,0x0
+  .set  Scene_Minor,0x4
 
 #Offsets
 .set  OFST_MnSlChrIconData,0x0
@@ -254,7 +262,9 @@
 .set  OFST_FighterOnItemRelease,0xC8
 .set  OFST_FighterBGM,0xCC
 .set  OFST_FighterViWaitFileNames,0xD0
-.set  OFST_PtclRuntime1, OFST_FighterViWaitFileNames + 0x4
+.set  OFST_MajorScenes,0xD4
+.set  OFST_MinorScenes,0xD8
+.set  OFST_PtclRuntime1, OFST_MinorScenes + 0x4
 .set  OFST_PtclRuntime3, OFST_PtclRuntime1 + 0x4
 .set  OFST_PtclRuntimeTexGrNum, OFST_PtclRuntime3 + 0x4
 .set  OFST_PtclRuntimeTexGrData, OFST_PtclRuntimeTexGrNum + 0x4
@@ -291,7 +301,8 @@
 .set  OFST_Metadata_SSMCount,OFST_Metadata_SSSIconCount+0x4
 .set  OFST_Metadata_BGMCount,OFST_Metadata_SSMCount+0x4
 .set  OFST_Metadata_EffectCount,OFST_Metadata_BGMCount+0x4
-.set  OFST_Metadata,OFST_Metadata_EffectCount+0x4
+.set  OFST_MetaData_MajorNum,OFST_Metadata_EffectCount + 0x4
+.set  OFST_Metadata,OFST_MetaData_MajorNum+0x4
 .set  OFST_mexData,OFST_Metadata+0x4
 
 
