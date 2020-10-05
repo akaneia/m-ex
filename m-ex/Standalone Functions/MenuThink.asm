@@ -8,6 +8,7 @@
 .set  REG_MenuDef,28
 .set  REG_OptDef,27
 .set  REG_ThisOpt,26
+.set  REG_ThisMenu,25
 
 # init
   backup
@@ -64,12 +65,19 @@ SkipLockoutDec:
   b Exit
 
 Enter_Menu:
+# Get this menu
+  lwz r3,OFST_mexMenu(r13)
+  lwz r3,mexMenu_MenuDef(r3)
+  lbz	r0, OptDef_ID (REG_ThisOpt)
+  mulli	r0, r0, MenuDefStride
+  add REG_ThisMenu,r3,r0
+
 # Check if event mode...
   lbz r3,OptDef_ID(REG_ThisOpt)
   cmpwi r3,7
   bne Enter_MenuNoSpecial
 # Handle event mode
-  lwz r12,OptDef_Callback(REG_ThisOpt)
+  lwz r12,MenuDef_Callback(REG_ThisMenu)
   cmpwi r12,0
   beq Enter_MenuNoCB
   mtctr r12
@@ -83,7 +91,7 @@ Enter_Menu:
 
 Enter_MenuNoSpecial:
 # check for custom callback
-  lwz r3,OptDef_Callback(REG_ThisOpt)
+  lwz r3,MenuDef_Callback(REG_ThisMenu)
   cmpwi r3,0
   beq Enter_MenuNoCB
   mtctr r3

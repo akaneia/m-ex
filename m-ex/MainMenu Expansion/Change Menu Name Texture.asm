@@ -28,7 +28,7 @@ backup
   lwz r12,mexMenu_MenuDef(REG_mexMenu)
   mulli r3,r3,MenuDefStride
   add  r3,r12, r3
-  lhz r3,MenuDef_NameFrame(r3)
+  lbz r3,MenuDef_NameFrame(r3)
 # cast
   xoris r3,r3,0x8000
   lfd	f1, -0x35F8 (rtoc)

@@ -33,24 +33,25 @@
 #mexMenu Offsets
 .set  mexMenu_MenuNameFrames,0x0
 .set  mexMenu_MenuDef,0x4
-  .set  MenuDefStride,20
+  .set  MenuDefStride,0x14
   .set  MenuDef_PreviewFrames, 0x0
   .set  MenuDef_Unused, 0x4
   .set  MenuDef_OptDef, 0x8
     .set  OptDefStride,8
     .set  OptDef_Kind, 0x0      # byte
     .set  OptDef_ID, 0x1        # byte
-    .set  OptDef_NameFrame,0x2  # byte
-    .set  OptDef_Text,0x3       # byte
-    .set  OptDef_Callback,0x4   # word
+    .set  OptDef_Text,0x2       # byte
+    .set  OptDef_NameFrame,0x3  # byte
+    .set  OptDef_PreviewFrame,0x4  # byte
   .set  MenuDef_OptNum, 0xC # byte
   .set  MenuDef_PrevMenu, 0xD # byte
-  .set  MenuDef_NameFrame, 0xE  # short
-  .set  MenuDef_ThinkFunc, 0x10
-.set  mexMenu_MnOptMatAnimJoint,0x8
-.set  mexMenu_MnNameMatAnimJoint,0xC
-.set  mexMenu_DescSis,0x10
+  .set  MenuDef_NameFrame, 0xE  # byte
+  .set  MenuDef_HueIndex, 0xF  # byte
+  .set  MenuDef_Callback, 0x10
+.set  mexMenu_DescSis,0x8
   .set  OptDef_TextSisID, 1
+.set  mexMenu_MnOptMatAnimJoint,0xC
+.set  mexMenu_MnNameMatAnimJoint,0x10
 
 #Stc_icon Offsets
 .set  StcIcons_ReservedFrames,0x0
