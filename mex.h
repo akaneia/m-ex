@@ -25,5 +25,6 @@
 #include "include/stage.h"
 #include "include/text.h"
 #include "include/useful.h"
+#include "include/scene.h"
 
 #endif

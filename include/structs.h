@@ -111,6 +111,10 @@ typedef struct HSD_Pads HSD_Pads;
 typedef struct HSD_Update HSD_Update;
 typedef struct HSD_ObjAllocData HSD_ObjAllocData;
 
+// Scene
+typedef struct MajorScene MajorScene;
+typedef struct MinorScene MinorScene;
+
 // Kirby
 typedef struct FtVarKirby FtVarKirby;
 
