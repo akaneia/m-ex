@@ -21,8 +21,7 @@
 .set  MenuThink,0x803d7090
 
 #Custom Static Variables
-.set  PersistHeapNum, 7
-
+.set  PersistHeapNum, 5 + 2
 
 #mexSelectChr Offsets
 .set  OFST_mexSelectChr,-0x472C

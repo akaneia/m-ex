@@ -33,7 +33,7 @@ blrl
 .long 6     # heap priority
 .long 0x96c800     # heap size
 
-# ifall clone
+# CUSTOM scene file heap
 .long 6     # heap ID
 .long 1     # heap location
 .long 3     # heap to start after

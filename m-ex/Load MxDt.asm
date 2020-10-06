@@ -132,7 +132,7 @@ blrl
 .long 0
 .long 0
 
-.rept (PersistHeapNum + 1)
+.rept (PersistHeapNum)
 .long -1    
 .long -1    # pointer to runtime struct
 .long 0     # start address for this heap
