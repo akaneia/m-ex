@@ -20,6 +20,10 @@
 .set  GetStockFrame,0x803d7060
 .set  MenuThink,0x803d7090
 
+#Custom Static Variables
+.set  PersistHeapNum, 7
+
+
 #mexSelectChr Offsets
 .set  OFST_mexSelectChr,-0x472C
 .set  OFST_mexSelectChr_IconJoint,-0x4728 #originally SceneLoad_Adventure mode static pointers (8031dea0)
@@ -305,6 +309,7 @@
 .set  OFST_Metadata,OFST_MetaData_MajorNum+0x4
 .set  OFST_mexData,OFST_Metadata+0x4
 
+.set  OFST_HeapRuntime,OFST_mexData + 0x4
 
 # Fighter Data Sizes
 .set  FighterDataOrigSize, 0x23ec

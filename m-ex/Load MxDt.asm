@@ -118,7 +118,29 @@ PreloadInit_Loop:
   li  r3,45
   stw r3,OFST_MetaData_MajorNum(rtoc)
 
+# persistent file reloc
+  bl  tempalloc
+  mflr  r3
+  stw r3,OFST_HeapRuntime(rtoc)
+
   b Exit
+
+tempalloc:
+blrl
+.long 0
+.long 0
+.long 0
+.long 0
+
+.rept (PersistHeapNum + 1)
+.long -1    
+.long -1    # pointer to runtime struct
+.long 0     # start address for this heap
+.long 0     # heap size
+.long 1     # unk
+.long 1     # isDisable, creates the heap when this is 0
+.long 1     # bool, is set to 0 after heap is created
+.endr
 
 FileName:
 blrl
