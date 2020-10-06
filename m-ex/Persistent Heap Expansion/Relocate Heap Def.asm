@@ -37,7 +37,7 @@ blrl
 .long 6     # heap ID
 .long 1     # heap location
 .long 3     # heap to start after
-.long 0x280     # heap size
+.long 0x20     # heap size
 
 # terminator
 .long PersistHeapNum     # heap ID
