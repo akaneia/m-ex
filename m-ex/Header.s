@@ -72,13 +72,14 @@
   .set  Arch_Metadata_FtIntNum,0x4
   .set  Arch_Metadata_FtExtNum,0x8
   .set  Arch_Metadata_CSSIconCount,0xC
-  .set  Arch_Metadata_SSSIconCount,0x10
-  .set  Arch_Metadata_SSMCount,0x14
-  .set  Arch_Metadata_BGMCount,0x18
-  .set  Arch_Metadata_EffectCount,0x1C
-  .set  Arch_Metadata_TermMajor,0x20
-  .set  Arch_Metadata_GrIntNum,0x24
-  .set  Arch_Metadata_GrExtNum,0x28
+  .set  Arch_Metadata_GrIntNum,0x10
+  .set  Arch_Metadata_GrExtNum,0x14
+  .set  Arch_Metadata_SSSIconCount,0x18
+  .set  Arch_Metadata_SSMCount,0x1C
+  .set  Arch_Metadata_BGMCount,0x20
+  .set  Arch_Metadata_EffectCount,0x24
+  .set  Arch_Metadata_BootScene,0x28
+  .set  Arch_Metadata_TermMajor,0x2C
 .set  Arch_Menu,0x4
   .set  Arch_Menu_MenuParam,0x0
     .set  MenuParam_HandScale,0x0
