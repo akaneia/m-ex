@@ -34,7 +34,7 @@
 
 /*** Structs ***/
 
-struct MatchData
+struct MatchInit
 {
     // byte 0x0
     unsigned char matchType : 3;
@@ -132,15 +132,13 @@ struct MatchData
     //0x58
     void *onMatchEnd;
     //0x5C
-    /*
-       int unk23;
-       //0x60
-       int isMultiSpawn;
-       //0x64
-       int unk24;
-     */
+    int x5c;
+    //0x60
+    int x60;
+    //0x64
+    int x64;
     // player data
-    PlayerData playerData[4];
+    PlayerData playerData[6];
 };
 
 struct MatchHUD
@@ -2809,7 +2807,7 @@ struct Match // static match struct
     int x24bc;       // 0x24bc
     int x24c0;       // 0x24c0
     int x24c4;       // 0x24c4
-    MatchData match; // 0x24c8
+    MatchInit match; // 0x24c8
 };
 
 /*** Functions ***/

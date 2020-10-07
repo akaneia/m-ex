@@ -7,23 +7,6 @@
 
 /*** Structs ***/
 
-struct PreloadChar
-{
-    int kind;
-    u8 costume;
-};
-
-struct Preload
-{
-    int unk1;
-    int unk2;
-    int unk3;
-    u8 unk4;
-    int stage;
-    PreloadChar fighters[8];
-    int defragNum;
-};
-
 struct CSSBackup
 {
     u8 fighter_prev; //0x0

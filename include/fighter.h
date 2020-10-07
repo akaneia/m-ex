@@ -437,26 +437,30 @@ struct PlayerData
     u8 status;
     u8 stocks;
     u8 costume;
+    // 0x4
     u8 portNumberOverride;
     u8 spawnPointOverride;
     u8 facingDirection;
     u8 subcolor;
+    // 0x8
     u8 handicap;
     u8 team;
     u8 nametag;
     u8 unk;
+    // 0xC
     unsigned char isRumble : 1;
     unsigned char isEntry : 1;
     unsigned char unk2 : 6;
     unsigned char unk3 : 8;
     u8 cpuKind;
     u8 cpuLevel;
+    // 0x10
     u16 damageStart;
     u16 damageSpawn;
-    u16 staminaStart;
-    float attack;
-    float defense;
-    float scale;
+    u16 staminaStart; // 0x14
+    float attack;     // 0x18
+    float defense;    // 0x1C
+    float scale;      // 0x20
 };
 
 struct FighterBone

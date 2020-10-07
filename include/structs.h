@@ -36,11 +36,11 @@ typedef struct map_gobjDesc map_gobjDesc;
 typedef struct StageFile StageFile;
 
 // Match
+typedef struct MatchInit MatchInit;
 typedef struct Match Match;
 typedef struct MatchHUD MatchHUD;
 typedef struct MatchCamera MatchCamera;
 typedef struct CameraBox CameraBox;
-typedef struct MatchData MatchData;
 
 // Text
 typedef struct Text Text;
@@ -92,8 +92,6 @@ typedef struct FtDOBJUnk2 FtDOBJUnk2;
 typedef struct FtDOBJUnk3 FtDOBJUnk3;
 
 // CSS
-typedef struct Preload Preload;
-typedef struct PreloadChar PreloadChar;
 typedef struct CSSBackup CSSBackup;
 
 // Memcard
@@ -114,6 +112,11 @@ typedef struct HSD_ObjAllocData HSD_ObjAllocData;
 // Scene
 typedef struct MajorScene MajorScene;
 typedef struct MinorScene MinorScene;
+typedef struct VSData VSData;
+
+// Preload
+typedef struct Preload Preload;
+typedef struct PreloadChar PreloadChar;
 
 // Kirby
 typedef struct FtVarKirby FtVarKirby;

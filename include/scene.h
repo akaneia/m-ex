@@ -3,7 +3,9 @@
 
 #include "structs.h"
 #include "datatypes.h"
+#include "match.h"
 
+// Scene Enums
 enum HEAP_KIND
 {
     HEAPKIND_UNK0,
@@ -12,7 +14,6 @@ enum HEAP_KIND
     HEAPKIND_UNK3,
     HEAPKIND_UNK4,
 };
-
 enum MINOR_KIND
 {
     MNRKIND_TITLE,     // Title Screen
@@ -71,7 +72,6 @@ struct MajorScene
     void *onBoot;
     void *MinorScene; // array of minor scenes
 };
-
 struct MinorScene
 {
     u8 minor_id;        // is 255 for last entry
@@ -83,4 +83,21 @@ struct MinorScene
     void *data2;        // points to static data used throughout this minor. other minors may use the same pointer to exchange data between minors
 };
 
+struct VSData
+{
+    u8 x8;
+    u8 x9;
+    u8 xa;
+    int xc;
+    MatchInit match_init;
+};
+
+void (*Scene_EnterMajor)(int major_id) = 0x801a42f8;
+void (*CSS_DecideNext)(MinorScene *minor_scene, VSData *css_data) = 0x801a5680;
+void (*CSS_ResetKOStars)() = 0x801a55c4;
+void (*CSS_InitMajorData)(VSData *major_data) = 0x80167b50;
+void (*CSS_InitMinorData)(MinorScene *minor_scene, VSData *major_data, int css_kind) = 0x801a5618;
+void (*SSS_InitMinorData)(MinorScene *minor_scene, VSData *major_data) = 0x801a5754;
+void (*Match_InitMinorData)(MinorScene *minor_scene, VSData *major_data, void *init_cb, void *startmelee_cb) = 0x801a583c;
+void (*Match_SetNametags)(MatchInit *match_init) = 0x8016f088;
 #endif
