@@ -11,7 +11,7 @@
 .set  popo,1
 
 #Check for MH and CH
-  lwz r12,OFST_Metadata_ExternalIDCount(rtoc)
+  lwz r12,OFST_Metadata_FtExtNum(rtoc)
   subi  r3,r12,masterHand
   cmpw	r28, r3
   beq isHand

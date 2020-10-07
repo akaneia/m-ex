@@ -2,4 +2,4 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-lwz r29,OFST_Metadata_ExternalIDCount(rtoc)
+lwz r29,OFST_Metadata_FtExtNum(rtoc)

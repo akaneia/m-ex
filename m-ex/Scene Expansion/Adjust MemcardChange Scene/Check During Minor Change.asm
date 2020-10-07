@@ -2,6 +2,6 @@
 .include "../../../Globals.s"
 .include "../../Header.s"
 
-lwz r12,OFST_MetaData_MajorNum(rtoc)
+lwz r12,OFST_MetaData_TermMajor(rtoc)
 #subi    r12,r12,1
 cmplw	r27, r12

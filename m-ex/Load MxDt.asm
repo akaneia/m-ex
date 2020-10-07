@@ -98,7 +98,7 @@ CopyPointers_Exit:
 
 #Init preload table
 PreloadInit:
-  lwz r3,OFST_Metadata_ExternalIDCount(rtoc)
+  lwz r3,OFST_Metadata_FtExtNum(rtoc)
   load  r4,0x803ba648
   li  r5,0
 PreloadInit_Loop:
@@ -116,7 +116,7 @@ PreloadInit_Loop:
 # TEMP #
 # set last major num
   li  r3,45
-  stw r3,OFST_MetaData_MajorNum(rtoc)
+  stw r3,OFST_MetaData_TermMajor(rtoc)
 
 # persistent file reloc
   bl  tempalloc
@@ -248,14 +248,16 @@ rtocOffsets:
   .hword Arch_KirbyFunction,Arch_Kirby_InitItem,-1
   .hword Arch_KirbyFunction,Arch_Kirby_MoveLogicRuntime,-1
   #Metadata
-  .hword Arch_Metadata,Arch_Metadata_InternalIDCount,-1
-  .hword Arch_Metadata,Arch_Metadata_ExternalIDCount,-1
+  .hword Arch_Metadata,Arch_Metadata_FtIntNum,-1
+  .hword Arch_Metadata,Arch_Metadata_FtExtNum,-1
   .hword Arch_Metadata,Arch_Metadata_CSSIconCount,-1
   .hword Arch_Metadata,Arch_Metadata_SSSIconCount,-1
   .hword Arch_Metadata,Arch_Metadata_SSMCount,-1
   .hword Arch_Metadata,Arch_Metadata_BGMCount,-1
   .hword Arch_Metadata,Arch_Metadata_EffectCount,-1
-  .hword Arch_Metadata,Arch_Metadata_MajorNum,-1
+  .hword Arch_Metadata,Arch_Metadata_TermMajor,-1
+  .hword Arch_Metadata,Arch_Metadata_GrIntNum,-1
+  .hword Arch_Metadata,Arch_Metadata_GrExtNum,-1
   .hword Arch_Metadata,-1
   .hword  -1
   .align 2

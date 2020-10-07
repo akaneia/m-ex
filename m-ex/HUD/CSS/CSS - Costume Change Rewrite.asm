@@ -39,7 +39,7 @@ SinglePlayerCPU:
   branchl r12,0x80011e24
 
 # get this CSP's frame
-  lwz r3,OFST_Metadata_ExternalIDCount(rtoc)
+  lwz r3,OFST_Metadata_FtExtNum(rtoc)
   subi  r3,r3,HUD_Stride 
   mullw	r0, REG_CostumeID, r3
   add	r4, REG_ExternalID, r0
@@ -82,7 +82,7 @@ SinglePlayerP1:
   branchl r12,0x80011e24
 
 # get this CSP's frame
-  lwz r3,OFST_Metadata_ExternalIDCount(rtoc)
+  lwz r3,OFST_Metadata_FtExtNum(rtoc)
   subi  r3,r3,HUD_Stride 
   mullw	r0, REG_CostumeID, r3
   add	r4, REG_ExternalID, r0
@@ -190,7 +190,7 @@ isVS:
   branchl r12,0x80011e24
 
 # get this CSP's frame
-  lwz r3,OFST_Metadata_ExternalIDCount(rtoc)
+  lwz r3,OFST_Metadata_FtExtNum(rtoc)
   subi  r3,r3,HUD_Stride 
   mullw	r0, REG_CostumeID, r3
   add	r4, REG_ExternalID, r0

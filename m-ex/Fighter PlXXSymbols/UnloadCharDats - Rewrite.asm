@@ -48,7 +48,7 @@ IncLoop:
   addi  REG_ftData,REG_ftData,ftDataPointers_Stride
   addi  REG_resultsAnimData,REG_resultsAnimData,GmRstPointers_Stride
   addi  REG_Count,REG_Count,1
-  lwz r3,OFST_Metadata_InternalIDCount(rtoc)
+  lwz r3,OFST_Metadata_FtIntNum(rtoc)
   cmpw REG_Count,r3
   blt Loop
 

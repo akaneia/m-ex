@@ -8,7 +8,7 @@
 backup
 
 # Get fighter num
-  lwz REG_FighterNum,OFST_Metadata_InternalIDCount(rtoc)
+  lwz REG_FighterNum,OFST_Metadata_FtIntNum(rtoc)
 
 # Init loop
   li  REG_Count,0

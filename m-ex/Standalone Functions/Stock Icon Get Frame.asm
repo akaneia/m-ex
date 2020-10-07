@@ -26,7 +26,7 @@
   beq Exit
 
 #Check if a special character
-  lwz REG_InternalIDCount,OFST_Metadata_InternalIDCount(rtoc)
+  lwz REG_InternalIDCount,OFST_Metadata_FtIntNum(rtoc)
   subi  r3,REG_InternalIDCount,masterHand
   cmpw REG_InternalID,r3
   blt NormalCharacter

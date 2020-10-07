@@ -68,15 +68,17 @@
 #Archive Offsets
 .set  Arch_Metadata,0x0
   .set  Arch_Metadata_VersionMajor,0x0
-  .set  Arch_Metadata_VersionMinor,0x2
-  .set  Arch_Metadata_InternalIDCount,0x4
-  .set  Arch_Metadata_ExternalIDCount,0x8
+  .set  Arch_Metadata_VersionMinor,0x1
+  .set  Arch_Metadata_FtIntNum,0x4
+  .set  Arch_Metadata_FtExtNum,0x8
   .set  Arch_Metadata_CSSIconCount,0xC
   .set  Arch_Metadata_SSSIconCount,0x10
   .set  Arch_Metadata_SSMCount,0x14
   .set  Arch_Metadata_BGMCount,0x18
   .set  Arch_Metadata_EffectCount,0x1C
-  .set  Arch_Metadata_MajorNum,0x20
+  .set  Arch_Metadata_TermMajor,0x20
+  .set  Arch_Metadata_GrIntNum,0x24
+  .set  Arch_Metadata_GrExtNum,0x28
 .set  Arch_Menu,0x4
   .set  Arch_Menu_MenuParam,0x0
     .set  MenuParam_HandScale,0x0
@@ -297,15 +299,17 @@
 .set  OFST_KirbyInitItem,OFST_KirbyOnHit+0x4
 .set  OFST_KirbyMoveLogicRuntime, OFST_KirbyInitItem + 0x4
 #Metadata
-.set  OFST_Metadata_InternalIDCount,OFST_KirbyMoveLogicRuntime+0x4
-.set  OFST_Metadata_ExternalIDCount,OFST_Metadata_InternalIDCount+0x4
-.set  OFST_Metadata_CSSIconCount,OFST_Metadata_ExternalIDCount+0x4
+.set  OFST_Metadata_FtIntNum,OFST_KirbyMoveLogicRuntime+0x4
+.set  OFST_Metadata_FtExtNum,OFST_Metadata_FtIntNum+0x4
+.set  OFST_Metadata_CSSIconCount,OFST_Metadata_FtExtNum+0x4
 .set  OFST_Metadata_SSSIconCount,OFST_Metadata_CSSIconCount+0x4
 .set  OFST_Metadata_SSMCount,OFST_Metadata_SSSIconCount+0x4
 .set  OFST_Metadata_BGMCount,OFST_Metadata_SSMCount+0x4
 .set  OFST_Metadata_EffectCount,OFST_Metadata_BGMCount+0x4
-.set  OFST_MetaData_MajorNum,OFST_Metadata_EffectCount + 0x4
-.set  OFST_Metadata,OFST_MetaData_MajorNum+0x4
+.set  OFST_MetaData_TermMajor,OFST_Metadata_EffectCount + 0x4
+.set  OFST_MetaData_GrIntNum,OFST_MetaData_TermMajor+0x4
+.set  OFST_MetaData_GrExtNum,OFST_MetaData_GrIntNum+0x4
+.set  OFST_Metadata,OFST_MetaData_GrExtNum+0x4
 .set  OFST_mexData,OFST_Metadata+0x4
 
 .set  OFST_HeapRuntime,OFST_mexData + 0x4

@@ -3,7 +3,7 @@
 .include "../Header.s"
 
 #Check if a nonspecial character
-  lwz r4,OFST_Metadata_InternalIDCount(rtoc)
+  lwz r4,OFST_Metadata_FtIntNum(rtoc)
   cmplw	r0, r4
   bgt Exit
 

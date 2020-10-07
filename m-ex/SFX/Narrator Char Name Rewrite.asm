@@ -3,7 +3,7 @@
 .include "../Header.s"
 
 #Check if over
-  lwz r12,OFST_Metadata_ExternalIDCount(rtoc)
+  lwz r12,OFST_Metadata_FtExtNum(rtoc)
   subi  r12,r12,4
   cmpw	r3, r12
   bgt Exit

@@ -16,7 +16,7 @@ Multispawn:
 # load player one's external ID
   li  r3,0
   branchl r12,0x80032330
-  lwz r4,OFST_Metadata_ExternalIDCount(rtoc)
+  lwz r4,OFST_Metadata_FtExtNum(rtoc)
   cmpw  r3,r4
   bgt LoadFighterSSMs
 # load this fighter's ssm
@@ -31,7 +31,7 @@ Multispawn_Loop:
 # get this multispawners ext ID
   mr  r3,REG_Count
   branchl r12,0x80169370
-  lwz r4,OFST_Metadata_ExternalIDCount(rtoc)
+  lwz r4,OFST_Metadata_FtExtNum(rtoc)
   cmpw  r3,r4
   bgt Multispawn_IncLoop
 # load this fighter's ssm
@@ -60,7 +60,7 @@ LoadFighterSSMs_Loop:
   mr  r3,REG_Count
   branchl r12,0x80032330
 # check if exists
-  lwz r4,OFST_Metadata_ExternalIDCount(rtoc)
+  lwz r4,OFST_Metadata_FtExtNum(rtoc)
   cmpw  r3,r4
   bgt LoadFighterSSMs_IncLoop
 # load their ssm
