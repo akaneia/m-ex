@@ -79,11 +79,11 @@ struct MinorScene
     void *minor_prep;   // inits data for this minor (major exclusive)
     void *minor_decide; // decides next minor scene
     u8 minor_kind;      // index for a re-useable list of scene functions. contains a load, think, and leave function.
-    void *data;         // points to static data used throughout this minor. other minors may use the same pointer to exchange data between minors
-    void *data2;        // points to static data used throughout this minor. other minors may use the same pointer to exchange data between minors
+    void *load_data;    // points to static data used throughout this minor. other minors may use the same pointer to exchange data between minors
+    void *unload_data;  // points to static data used throughout this minor. other minors may use the same pointer to exchange data between minors
 };
 
-struct VSData
+struct ScDataVS
 {
     u8 x8;
     u8 x9;
@@ -92,12 +92,21 @@ struct VSData
     MatchInit match_init;
 };
 
+struct ScDataRst
+{
+    int x0;
+    int x4;
+    int x8;
+    int xc;
+    RstInit rst_init;
+};
+
 void (*Scene_EnterMajor)(int major_id) = 0x801a42f8;
-void (*CSS_DecideNext)(MinorScene *minor_scene, VSData *css_data) = 0x801a5680;
+void (*CSS_DecideNext)(MinorScene *minor_scene, ScDataVS *css_data) = 0x801a5680;
 void (*CSS_ResetKOStars)() = 0x801a55c4;
-void (*CSS_InitMajorData)(VSData *major_data) = 0x80167b50;
-void (*CSS_InitMinorData)(MinorScene *minor_scene, VSData *major_data, int css_kind) = 0x801a5618;
-void (*SSS_InitMinorData)(MinorScene *minor_scene, VSData *major_data) = 0x801a5754;
-void (*Match_InitMinorData)(MinorScene *minor_scene, VSData *major_data, void *init_cb, void *startmelee_cb) = 0x801a583c;
+void (*CSS_InitMajorData)(ScDataVS *major_data) = 0x80167b50;
+void (*CSS_InitMinorData)(MinorScene *minor_scene, ScDataVS *major_data, int css_kind) = 0x801a5618;
+void (*SSS_InitMinorData)(MinorScene *minor_scene, ScDataVS *major_data) = 0x801a5754;
+void (*Match_InitMinorData)(MinorScene *minor_scene, ScDataVS *major_data, void *init_cb, void *startmelee_cb) = 0x801a583c;
 void (*Match_SetNametags)(MatchInit *match_init) = 0x8016f088;
 #endif

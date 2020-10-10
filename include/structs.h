@@ -112,7 +112,12 @@ typedef struct HSD_ObjAllocData HSD_ObjAllocData;
 // Scene
 typedef struct MajorScene MajorScene;
 typedef struct MinorScene MinorScene;
-typedef struct VSData VSData;
+typedef struct ScDataVS ScDataVS;
+typedef struct ScDataRst ScDataRst;
+
+// Results
+typedef struct RstPlayer RstPlayer;
+typedef struct RstInit RstInit;
 
 // Preload
 typedef struct Preload Preload;

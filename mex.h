@@ -23,6 +23,7 @@
 #include "include/obj.h"
 #include "include/offsets.h"
 #include "include/preload.h"
+#include "include/result.h"
 #include "include/scene.h"
 #include "include/stage.h"
 #include "include/text.h"
