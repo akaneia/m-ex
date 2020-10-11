@@ -199,7 +199,7 @@ Overload_Exit:
 
 SymbolName:
 blrl
-.string "scFunction"
+.string "mjFunction"
 .align 2
 
 NoFile:

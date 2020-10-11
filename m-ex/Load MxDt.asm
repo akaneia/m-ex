@@ -256,6 +256,7 @@ rtocOffsets:
   .hword Arch_Metadata,Arch_Metadata_BGMCount,-1
   .hword Arch_Metadata,Arch_Metadata_EffectCount,-1
   .hword Arch_Metadata,Arch_Metadata_TermMajor,-1
+  .hword Arch_Metadata,Arch_Metadata_TermMinor,-1
   .hword Arch_Metadata,Arch_Metadata_GrIntNum,-1
   .hword Arch_Metadata,Arch_Metadata_GrExtNum,-1
   .hword Arch_Metadata,-1

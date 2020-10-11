@@ -63,7 +63,7 @@
 
 #Scene Data
 .set  MajorStride,0x18
-.set  MinorStride,0x0
+.set  MinorTypeStride,0x14
 
 #Archive Offsets
 .set  Arch_Metadata,0x0
@@ -80,6 +80,7 @@
   .set  Arch_Metadata_EffectCount,0x24
   .set  Arch_Metadata_BootScene,0x28
   .set  Arch_Metadata_TermMajor,0x2C
+  .set  Arch_Metadata_TermMinor,0x30
 .set  Arch_Menu,0x4
   .set  Arch_Menu_MenuParam,0x0
     .set  MenuParam_HandScale,0x0
@@ -308,7 +309,8 @@
 .set  OFST_Metadata_BGMCount,OFST_Metadata_SSMCount+0x4
 .set  OFST_Metadata_EffectCount,OFST_Metadata_BGMCount+0x4
 .set  OFST_MetaData_TermMajor,OFST_Metadata_EffectCount + 0x4
-.set  OFST_MetaData_GrIntNum,OFST_MetaData_TermMajor+0x4
+.set  OFST_MetaData_TermMinor,OFST_MetaData_TermMajor + 0x4
+.set  OFST_MetaData_GrIntNum,OFST_MetaData_TermMinor+0x4
 .set  OFST_MetaData_GrExtNum,OFST_MetaData_GrIntNum+0x4
 .set  OFST_Metadata,OFST_MetaData_GrExtNum+0x4
 .set  OFST_mexData,OFST_Metadata+0x4
