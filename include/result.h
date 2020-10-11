@@ -12,7 +12,6 @@ struct RstPlayer
     u8 costume : 6;    // x3 costume id
     u8 is_rumble : 1;  // x3 rumble flag
     u8 is_stamina : 1; // x3 stamina flag
-    u8 costume;        // x3 costume id
     u8 nametag;        // x4 nametag index
     u8 x5;             // x5
     u8 x6;             // x6

@@ -7,6 +7,18 @@
 
 #define DB_FLAG 0
 
+enum MEX_GETDATA
+{
+    MXDT_FTINTNUM,
+    MXDT_FTEXTNUM,
+    MXDT_FTICONNUM,
+    MXDT_FTICONDATA,
+    MXDT_GRINTNUM,
+    MXDT_GREXTNUM,
+    MXDT_GRICONNUM,
+    MXDT_GRICONDATA,
+};
+
 /*** Structs ***/
 
 struct PRIM
@@ -42,4 +54,5 @@ int (*MEX_GetStageItemExtID)(int item_id) = (void *)0x803d7064;
 void (*KirbyStateChange)(GOBJ *fighter, int state, float startFrame, float animSpeed, float animBlend) = 0x803d7080;
 void *(*MEX_GetKirbyCpData)(int copy_id) = 0x803d7084;
 int (*MEX_GetCopyItemExtID)(int copy_id, int item_id) = 0x803d7088;
+void *(*MEX_GetData)(int index) = 0x803d7094;
 #endif
