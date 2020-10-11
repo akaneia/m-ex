@@ -3,6 +3,7 @@
 
 #include "structs.h"
 #include "datatypes.h"
+#include "color.h"
 
 // JObj Flags
 #define JOBJ_SKELETON (1 << 0)
@@ -369,6 +370,85 @@ struct COBJ
     Mtx proj_mtx;       //0x88
 };
 
+struct _HSD_LightPoint
+{
+    f32 cutoff;
+    u8 point_func;
+    f32 ref_br;
+    f32 ref_dist;
+    u8 dist_func;
+};
+
+struct _HSD_LightPointDesc
+{
+    f32 cutoff;
+    u8 point_func;
+    f32 ref_br;
+    f32 ref_dist;
+    u8 dist_func;
+};
+
+struct _HSD_LightSpot
+{
+    f32 cutoff;
+    u8 spot_func;
+    f32 ref_br;
+    f32 ref_dist;
+    u8 dist_func;
+};
+
+struct _HSD_LightSpotDesc
+{
+    f32 cutoff;
+    u8 spot_func;
+    f32 ref_br;
+    f32 ref_dist;
+    u8 dist_func;
+};
+
+struct _HSD_LightAttn
+{
+    f32 a0;
+    f32 a1;
+    f32 a2;
+    f32 k0;
+    f32 k1;
+    f32 k2;
+};
+
+struct LOBJ
+{
+    u64 parent;        //0x00
+    u16 flags;         //0x08
+    u16 priority;      //0x0A
+    struct LOBJ *next; //0x0C
+    GXColor color;     //0x10
+    GXColor hw_color;  //0x14
+    WOBJ *position;    //0x18
+    WOBJ *interest;    //0x1C
+    union
+    {
+        _HSD_LightPoint point;
+        _HSD_LightSpot spot;
+        _HSD_LightAttn attn;
+    } u;
+    f32 shininess;
+    Vec3 lvec;
+    struct AOBJ *aobj;
+    u32 id; //GXLightID
+    //GXLightObj lightobj;      //0x50
+    u32 spec_id; //0x90 GXLightID
+    //GXLightObj spec_lightobj; //0x94
+};
+
+struct JOBJAnimSet
+{
+    JOBJDesc *jobj;
+    void *animjoint;
+    void *matanimjoint;
+    void *shapeaninjoint;
+};
+
 /*** Functions ***/
 
 int (*JOBJ_GetWorldPosition)(JOBJ *source, Vec3 *add, Vec3 *dest) = (void *)0x8000b1cc;
@@ -387,6 +467,7 @@ void (*JOBJ_BillBoard)(JOBJ *joint, Mtx *m, Mtx *mx) = (void *)0x803740e8;
 void (*JOBJ_PlayAnim)(JOBJ *joint, int unk, u16 flags, void *cb, int unk2, ...) = (void *)0x80364c08; // flags: 0x400 matanim, 0x20 jointanim
 void (*JOBJ_Anim)(JOBJ *joint) = (void *)0x80370780;
 void (*JOBJ_AnimAll)(JOBJ *joint) = (void *)0x80370928;
+void (*JOBJ_AddAnimAll)(JOBJ *joint, void *animjoint, void *matanimjoint, void *shapeanimjoint) = 0x8036fb5c;
 void (*JOBJ_ReqAnim)(JOBJ *joint, float frame) = (void *)0x8036f934;
 void (*JOBJ_ReqAnimByFlags)(JOBJ *joint, int flags, float frame) = (void *)0x8036f718;
 void (*JOBJ_ReqAnimAll)(JOBJ *joint, float unk) = (void *)0x8036f8bc;
@@ -412,5 +493,8 @@ void (*GObj_FreeObject)(GOBJ *gobj) = (void *)0x80390b0c;
 void (*GObj_AddUserData)(GOBJ *gobj, int userDataKind, void *destructor, void *userData) = (void *)0x80390b68;
 void (*GOBJ_InitCamera)(GOBJ *gobj, void *cb, int gx_pri) = (void *)0x8039075c;
 void (*GXLink_Common)(GOBJ *gobj, int pass) = (void *)0x80391070;
-
+void (*GXLink_LObj)(GOBJ *gobj, int pass) = 0x80391044;
+void (*GXLink_Fog)(GOBJ *gobj, int pass) = 0x8026407c;
+void *(*LObj_LoadDesc)(void *lobjdesc) = 0x803672dc;
+void *(*Fog_LoadDesc)(void *fogdesc) = 0x8037dc38;
 #endif

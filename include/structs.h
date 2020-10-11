@@ -24,6 +24,13 @@ typedef struct MOBJ MOBJ;
 typedef struct WOBJ WOBJ;
 typedef struct COBJ COBJ;
 typedef struct COBJDesc COBJDesc;
+typedef struct _HSD_LightPoint _HSD_LightPoint;
+typedef struct _HSD_LightPointDesc _HSD_LightPointDesc;
+typedef struct _HSD_LightSpot _HSD_LightSpot;
+typedef struct _HSD_LightSpotDesc _HSD_LightSpotDesc;
+typedef struct _HSD_LightAttn _HSD_LightAttn;
+typedef struct LOBJ LOBJ;
+typedef struct JOBJAnimSet JOBJAnimSet;
 
 // Archive
 typedef struct ArchiveInfo ArchiveInfo;
@@ -93,6 +100,7 @@ typedef struct FtDOBJUnk3 FtDOBJUnk3;
 
 // CSS
 typedef struct CSSBackup CSSBackup;
+typedef struct MnSelectChrDataTable MnSelectChrDataTable;
 
 // Memcard
 typedef struct Memcard Memcard;
