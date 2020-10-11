@@ -107,7 +107,7 @@ WaitForFile:
 # zero return struct
   addi  r3,sp,0x80   # return struct
   li r4,0
-  li r5, 3 * 4
+  li r5, 5 * 4
   branchl r12,0x80003100
 
 #Overload
@@ -138,6 +138,14 @@ SkipMajorLoad:
 # Overload major_unload
   stw r3,0x8(REG_MajorScene)
 SkipMajorUnload:
+
+# load css_load
+  lwz r3,0x80 + 3 * 4(sp)
+  stw r3,OFST_scCSSLoad(rtoc)
+
+# load sss_load
+  lwz r3,0x80 + 4 * 4(sp)
+  stw r3,OFST_scSSSLoad(rtoc)
 
 #Flush instruction cache so code can be run from this file
   lwz  r3,0x20(REG_Archive)   # file start
@@ -174,7 +182,8 @@ Overload_TableIndex:
   lwz r3,FunctionRelocTable_ReplaceWith(REG_ThisElement)
   add r3,r3,REG_Code
 #Update table
-  mulli r4,REG_Count,4
+  lwz r4,FunctionRelocTable_ReplaceThis(REG_ThisElement)
+  mulli r4,r4,4
   stwx  r3,r4,REG_OverloadTable
   b Overload_IncLoop
 

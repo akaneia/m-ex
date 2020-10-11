@@ -115,8 +115,8 @@ PreloadInit_Loop:
 
 # TEMP #
 # set last major num
-  li  r3,45
-  stw r3,OFST_MetaData_TermMajor(rtoc)
+  #li  r3,45
+  #stw r3,OFST_MetaData_TermMajor(rtoc)
 
 # persistent file reloc
   bl  tempalloc

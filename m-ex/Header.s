@@ -313,7 +313,10 @@
 .set  OFST_Metadata,OFST_MetaData_GrExtNum+0x4
 .set  OFST_mexData,OFST_Metadata+0x4
 
+#Gross bullshit I don't want here
 .set  OFST_HeapRuntime,OFST_mexData + 0x4
+.set  OFST_scCSSLoad,OFST_HeapRuntime + 0x4
+.set  OFST_scSSSLoad,OFST_scCSSLoad + 0x4
 
 # Fighter Data Sizes
 .set  FighterDataOrigSize, 0x23ec
