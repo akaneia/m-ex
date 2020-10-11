@@ -18,8 +18,19 @@ Reloc_Loop:
   rlwinm  REG_Flag,r3,8,0x000000FF            #get flag
   rlwinm  r3,r3,0,0x00FFFFFF
   add REG_CodePointer,r3,REG_Code             #get code offset
+
+#First check if a bl to an dol address
   lwz r3,0x4(REG_RelocTable)
+  rlwinm  r0,r3,8,0x000000F0
+  cmpwi r0,0x80 
+  beq Reloc_DOLAddr
+Reloc_CodeAddr:
   add REG_FuncPointer,r3,REG_Code             #get func offset
+  b Reloc_CheckType
+Reloc_DOLAddr:
+  lwz REG_FuncPointer,0x4(REG_RelocTable)             #get func offset
+
+Reloc_CheckType:
 #Check flag type
   cmpwi REG_Flag,1
   beq Reloc_StaticAddress
@@ -34,7 +45,7 @@ Reloc_Loop:
   b Reloc_IncLoop
 Reloc_StaticAddress:
   #lwz r3,0x0(REG_FuncPointer)
-  stw r8,0x0(REG_CodePointer)
+  stw REG_FuncPointer,0x0(REG_CodePointer)
   b Reloc_IncLoop
 ############################################
 Reloc_LoadAddress:
