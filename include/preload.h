@@ -22,7 +22,7 @@ struct Preload
 
 /*** Functions ***/
 
-void (*Preload_Update)() = 0x80018254;       // checks for new files to preload and begins loading them synchronously
-Preload *(*Preload_GetTable)() = 0x8001822c; // gets preload table
+void Preload_Update();       // checks for new files to preload and begins loading them synchronously
+Preload *Preload_GetTable(); // gets preload table
 
 #endif

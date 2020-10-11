@@ -101,12 +101,12 @@ struct ScDataRst
     RstInit rst_init;
 };
 
-void (*Scene_EnterMajor)(int major_id) = 0x801a42f8;
-void (*CSS_DecideNext)(MinorScene *minor_scene, ScDataVS *css_data) = 0x801a5680;
-void (*CSS_ResetKOStars)() = 0x801a55c4;
-void (*CSS_InitMajorData)(ScDataVS *major_data) = 0x80167b50;
-void (*CSS_InitMinorData)(MinorScene *minor_scene, ScDataVS *major_data, int css_kind) = 0x801a5618;
-void (*SSS_InitMinorData)(MinorScene *minor_scene, ScDataVS *major_data) = 0x801a5754;
-void (*Match_InitMinorData)(MinorScene *minor_scene, ScDataVS *major_data, void *init_cb, void *startmelee_cb) = 0x801a583c;
-void (*Match_SetNametags)(MatchInit *match_init) = 0x8016f088;
+void Scene_EnterMajor(int major_id);
+void CSS_DecideNext(MinorScene *minor_scene, ScDataVS *css_data);
+void CSS_ResetKOStars();
+void CSS_InitMajorData(ScDataVS *major_data);
+void CSS_InitMinorData(MinorScene *minor_scene, ScDataVS *major_data, int css_kind);
+void SSS_InitMinorData(MinorScene *minor_scene, ScDataVS *major_data);
+void Match_InitMinorData(MinorScene *minor_scene, ScDataVS *major_data, void *init_cb, void *startmelee_cb);
+void Match_SetNametags(MatchInit *match_init);
 #endif

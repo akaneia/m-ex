@@ -338,39 +338,39 @@ struct StageFile
 
 /*** Functions ***/
 
-StageFile *(*Stage_GetStageFiles)() = (void *)0x801c6324;                 // returns an array of StageFiles
-StageFile *(*Stage_GetStageFile)(int mapgobj_index) = (void *)0x801c6330; // returns the StageFile the ID belongs to
-void (*Stage_AddFtChkDevice)(GOBJ *map, int hazard_kind, void *check) = (void *)0x800c07f8;
-void (*Stage_SetChkDevicePos)(float y_pos) = (void *)0x801c438c;
-void (*Stage_GetChkDevicePos)(float *y_pos, float *y_delta) = (void *)0x801c4368;
-float (*Stage_GetScale)() = (void *)0x801c0498;
-int *(*Stage_GetYakumonoParam)() = (void *)0x801c49f8;
-void (*Stage_MapStateChange)(GOBJ *map, int map_gobjID, int anim_id) = (void *)0x801c8138;
-void (*Dynamics_DecayWind)() = (void *)0x800115f4;
-GOBJ *(*Stage_CreateMapGObj)(int mapgobjID) = (void *)0x80223908;
-void (*Stage_DestroyMapGObj)(GOBJ *map_gobj) = (void *)0x801c4a08;
-void *(*GXLink_Stage)(GOBJ *gobj, int pass) = (void *)0x801c5db0;
-GOBJ *(*Stage_GetMapGObj)(int mapgobjID) = (void *)0x801c2ba4;
-JOBJ *(*Stage_GetMapGObjJObj)(GOBJ *mapgobj, int jointIndex) = (void *)0x801c3fa4;
-int (*Stage_GetLinesGroup)(int line) = (void *)0x80056b6c;
-int (*Stage_GetLinesDirection)(int line) = (void *)0x80054c6c;
-void (*Stage_SetGroundCallback)(int line, void *userdata, void *callback) = (void *)0x800580c8;
-void (*Stage_SetCeilingCallback)(int line, void *userdata, void *callback) = (void *)0x800581a4;
-void (*Stage_InitMovingColl)(JOBJ *mapjoint, int mapgobjID) = (void *)0x801c2ed0;
-void (*Stage_UpdateMovingColl)(GOBJ *mapgobj) = (void *)0x801c2fe0;
-Particle *(*Stage_SpawnEffectPos)(int gfxID, int efFileID, Vec3 *pos) = (void *)0x801c96f8;
-Particle *(*Stage_SpawnEffectJointPos)(int gfxID, int efFileID, JOBJ *pos) = (void *)0x801c97dc;
-Particle *(*Stage_SpawnEffectJointPos2)(int gfxID, int efFileID, JOBJ *pos) = (void *)0x801c9808;
-int (*Stage_RaycastGround)(Vec3 *coll_pos, int *line_index, int *line_kind, Vec3 *unk1, Vec3 *unk2, Vec3 *unk3, Vec3 *unk4, void *cb, float fromX, float fromY, float toX, float toY, float unk5) = (void *)0x8004f008; // make unk5 = 0 and the other unk's = -1
-GOBJ *(*Zako_Create)(int item_id, Vec3 *pos, JOBJ *jobj, Vec3 *velocity, int isMovingItem) = (void *)0x8027b5b0;
-GOBJ *(*Stage_CreateMapItem)(map_gobjData *map_data, int takeDamageSFXKind, int state, JOBJ *joint, Vec3 *pos, int unk_bool, void *onGiveDamage, void *onTakeDamage) = (void *)0x802e6aec; // this function creates an item of id 0xA0, its a generic ID used across multiple stages. its mainly used for giving a joint a hurtbox/hitbox and an onTakeDamage callback.
-int (*Stage_CheckForNearbyFighters)(Vec3 *pos, float radius) = (void *)0x801c9ee8;
-float (*Stage_GetBlastzoneRight)() = (void *)0x80224b38;
-float (*Stage_GetBlastzoneLeft)() = (void *)0x80224b50;
-float (*Stage_GetBlastzoneTop)() = (void *)0x80224b68;
-float (*Stage_GetBlastzoneBottom)() = (void *)0x80224b80;
-void (*Stage_GetGeneralPoint)(int index, Vec3 *pos) = (void *)0x801c2d24;
-void (*Stage_EnableLineGroup)(int index) = (void *)0x80057638;
-void (*Stage_DisableLineGroup)(int index) = (void *)0x80057bc0;
+StageFile *Stage_GetStageFiles();                 // returns an array of StageFiles
+StageFile *Stage_GetStageFile(int mapgobj_index); // returns the StageFile the ID belongs to
+void Stage_AddFtChkDevice(GOBJ *map, int hazard_kind, void *check);
+void Stage_SetChkDevicePos(float y_pos);
+void Stage_GetChkDevicePos(float *y_pos, float *y_delta);
+float Stage_GetScale();
+int *Stage_GetYakumonoParam();
+void Stage_MapStateChange(GOBJ *map, int map_gobjID, int anim_id);
+void Dynamics_DecayWind();
+GOBJ *Stage_CreateMapGObj(int mapgobjID);
+void Stage_DestroyMapGObj(GOBJ *map_gobj);
+void *GXLink_Stage(GOBJ *gobj, int pass);
+GOBJ *Stage_GetMapGObj(int mapgobjID);
+JOBJ *Stage_GetMapGObjJObj(GOBJ *mapgobj, int jointIndex);
+int Stage_GetLinesGroup(int line);
+int Stage_GetLinesDirection(int line);
+void Stage_SetGroundCallback(int line, void *userdata, void *callback);
+void Stage_SetCeilingCallback(int line, void *userdata, void *callback);
+void Stage_InitMovingColl(JOBJ *mapjoint, int mapgobjID);
+void Stage_UpdateMovingColl(GOBJ *mapgobj);
+Particle *Stage_SpawnEffectPos(int gfxID, int efFileID, Vec3 *pos);
+Particle *Stage_SpawnEffectJointPos(int gfxID, int efFileID, JOBJ *pos);
+Particle *Stage_SpawnEffectJointPos2(int gfxID, int efFileID, JOBJ *pos);
+int Stage_RaycastGround(Vec3 *coll_pos, int *line_index, int *line_kind, Vec3 *unk1, Vec3 *unk2, Vec3 *unk3, Vec3 *unk4, void *cb, float fromX, float fromY, float toX, float toY, float unk5); // make unk5
+GOBJ *Zako_Create(int item_id, Vec3 *pos, JOBJ *jobj, Vec3 *velocity, int isMovingItem);
+GOBJ *Stage_CreateMapItem(map_gobjData *map_data, int takeDamageSFXKind, int state, JOBJ *joint, Vec3 *pos, int unk_bool, void *onGiveDamage, void *onTakeDamage); // this function creates an item of id 0xA0, its a generic ID used across multiple stages. its mainly used for giving a joint a hurtbox/hitbox and an onTakeDamage callback.
+int Stage_CheckForNearbyFighters(Vec3 *pos, float radius);
+float Stage_GetBlastzoneRight();
+float Stage_GetBlastzoneLeft();
+float Stage_GetBlastzoneTop();
+float Stage_GetBlastzoneBottom();
+void Stage_GetGeneralPoint(int index, Vec3 *pos);
+void Stage_EnableLineGroup(int index);
+void Stage_DisableLineGroup(int index);
 
 #endif

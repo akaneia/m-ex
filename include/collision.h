@@ -130,9 +130,9 @@ struct CollData
 
 /*** Functions ***/
 
-void (*Coll_ECBCurrToPrev)(CollData *collData) = (void *)0x80041c8c;
-void (*Coll_InitECB)(CollData *collData) = (void *)0x80041ee4;
-int (*ECB_CollGround_PassLedge)(CollData *ecb, ECBBones *bones) = (void *)0x8004b21c; // returns is touching ground bool
-void (*ECB_CollAir)(CollData *ecb, ECBBones *bones) = (void *)0x800475f4;
+void Coll_ECBCurrToPrev(CollData *collData);
+void Coll_InitECB(CollData *collData);
+int ECB_CollGround_PassLedge(CollData *ecb, ECBBones *bones); // returns is touching ground bool
+void ECB_CollAir(CollData *ecb, ECBBones *bones);
 
 #endif

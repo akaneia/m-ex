@@ -66,8 +66,8 @@ static COBJDesc **stc_css_cobjdesc = R13 + (-0x4ADC);
 static GOBJ **stc_css_camgobj = R13 + (-0x49E8);
 
 /*** Functions ***/
-int (*CSS_GetNametagRumble)(int player, u8 tag) = (void *)0x801677f8;
-void (*CSS_InitPlayerData)(PlayerData *player) = (void *)0x8016795c;
-void (*CSS_CameraRotateThink)(GOBJ *gobj) = (void *)0x8022ba1c;
+int CSS_GetNametagRumble(int player, u8 tag);
+void CSS_InitPlayerData(PlayerData *player);
+void CSS_CameraRotateThink(GOBJ *gobj);
 
 #endif

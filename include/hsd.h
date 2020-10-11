@@ -148,10 +148,10 @@ struct HSD_Update
 
 /*** Functions ***/
 
-int (*HSD_Randi)(int max) = (void *)0x80380580;
-float (*HSD_Randf)() = (float *)0x80380528;
-void *(*HSD_MemAlloc)(int size) = (void *)0x8037f1e4;
-void (*HSD_Free)(void *ptr) = (void *)0x8037f1b0;
-void *(*HSD_ObjAlloc)(HSD_ObjAllocData *obj_def) = 0x8037abc8;
-void (*HSD_ObjFree)(HSD_ObjAllocData *obj_def, void *obj) = 0x8037ad20;
+int HSD_Randi(int max);
+float HSD_Randf();
+void *HSD_MemAlloc(int size);
+void HSD_Free(void *ptr);
+void *HSD_ObjAlloc(HSD_ObjAllocData *obj_def);
+void HSD_ObjFree(HSD_ObjAllocData *obj_def, void *obj);
 #endif

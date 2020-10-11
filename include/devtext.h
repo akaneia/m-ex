@@ -38,13 +38,13 @@ struct DevText
 
 /*** Functions ***/
 
-DevText *(*DevelopText_CreateDataTable)(int unk1, int x, int y, int width, int height, void *alloc) = (void *)0x80302834;
-void (*DevelopText_Activate)(void *unk, DevText *text) = (void *)0x80302810;
-void (*DevelopText_AddString)(DevText *text, ...) = (void *)0x80302d4c;
-void (*DevelopText_EraseAllText)(DevText *text) = (void *)0x80302bb0;
-void (*DevelopText_StoreBGColor)(DevText *text, u8 *RGBA) = (void *)0x80302b90;
-void (*DevelopText_HideText)(DevText *text) = (void *)0x80302b00;
-void (*DevelopText_HideBG)(DevText *text) = (void *)0x80302ae0;
-void (*DevelopText_StoreTextScale)(DevText *text, float x, float y) = (void *)0x80302b10;
+DevText *DevelopText_CreateDataTable(int unk1, int x, int y, int width, int height, void *alloc);
+void DevelopText_Activate(void *unk, DevText *text);
+void DevelopText_AddString(DevText *text, ...);
+void DevelopText_EraseAllText(DevText *text);
+void DevelopText_StoreBGColor(DevText *text, u8 *RGBA);
+void DevelopText_HideText(DevText *text);
+void DevelopText_HideBG(DevText *text);
+void DevelopText_StoreTextScale(DevText *text, float x, float y);
 
 #endif

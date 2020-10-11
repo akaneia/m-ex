@@ -128,14 +128,14 @@ struct Particle2 // created at 80398c90. dont feel like labelling this, offsets 
 
 /*** Functions ***/
 
-Effect *(*Effect_SpawnSync)(int gfx_id, ...) = (void *)0x8005fddc;
-void (*Effect_SpawnAsync)(GOBJ *fighter, Effect *ptr, int type, int gfx_id, ...) = (void *)0x800676f0;
-void (*Effect_SpawnFtEffectLookup)(GOBJ *gobj, int gfx_id, int bone, int unk, int destroy_on_leave, ...) = (void *)0x8009f834;
-void (*Effect_SpawnItEffectLookup)(GOBJ *gobj, int gfx_id, int bone, Vec3 *offset, Vec3 *scatter, int unk3) = (void *)0x80278800;
-void (*Effect_SpawnItEffect)(GOBJ *gobj, int gfx_id) = (void *)0x802787b4;
-void (*Effect_DestroyAll)(GOBJ *fighter) = (void *)0x8005b880;
-void (*Particle_DestroyAll)(JOBJ *jobj) = (void *)0x8039d5dc;
-void (*Effect_PauseAll)(GOBJ *fighter) = (void *)0x8005ba40;
-void (*Effect_ResumeAll)(GOBJ *fighter) = (void *)0x8005bac4;
+Effect *Effect_SpawnSync(int gfx_id, ...);
+void Effect_SpawnAsync(GOBJ *fighter, Effect *ptr, int type, int gfx_id, ...);
+void Effect_SpawnFtEffectLookup(GOBJ *gobj, int gfx_id, int bone, int unk, int destroy_on_leave, ...);
+void Effect_SpawnItEffectLookup(GOBJ *gobj, int gfx_id, int bone, Vec3 *offset, Vec3 *scatter, int unk3);
+void Effect_SpawnItEffect(GOBJ *gobj, int gfx_id);
+void Effect_DestroyAll(GOBJ *fighter);
+void Particle_DestroyAll(JOBJ *jobj);
+void Effect_PauseAll(GOBJ *fighter);
+void Effect_ResumeAll(GOBJ *fighter);
 
 #endif
