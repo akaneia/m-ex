@@ -139,14 +139,6 @@ SkipMajorLoad:
   stw r3,0x8(REG_MajorScene)
 SkipMajorUnload:
 
-# load css_load
-  lwz r3,0x80 + 3 * 4(sp)
-  stw r3,OFST_scCSSLoad(rtoc)
-
-# load sss_load
-  lwz r3,0x80 + 4 * 4(sp)
-  stw r3,OFST_scSSSLoad(rtoc)
-
 #Flush instruction cache so code can be run from this file
   lwz  r3,0x20(REG_Archive)   # file start
   lwz  r4,0x0(REG_Archive)   # file size 
