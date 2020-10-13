@@ -2059,4 +2059,25 @@ struct Memcard
     int unk2047;           //0x1FFC
 };
 
+struct Rules1
+{
+    u8 x0;
+    u8 x1;
+    u8 x2;
+    u8 x3;
+    u8 x4;
+    u8 handicap;
+    u8 x6;
+    u8 x7;
+    u8 x8;
+    u8 x9;
+    u8 xa;
+    u8 xb;
+    u8 xc;
+};
+
+void Memcard_InitWorkArea();
+void Memcard_LoadAssets(int unk);
+Rules1 *Memcard_GetRules1();
+
 #endif

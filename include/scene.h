@@ -4,6 +4,7 @@
 #include "structs.h"
 #include "datatypes.h"
 #include "match.h"
+#include "result.h"
 
 // Scene Enums
 enum HEAP_KIND

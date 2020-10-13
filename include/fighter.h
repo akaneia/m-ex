@@ -446,7 +446,7 @@ struct PlayerData
     u8 handicap;
     u8 team;
     u8 nametag;
-    u8 unk;
+    u8 xb;
     // 0xC
     unsigned char isRumble : 1;
     unsigned char isEntry : 1;
@@ -2910,6 +2910,6 @@ void Fighter_InitPObj();
 void Fighter_InitPObj2();
 void Fighter_IndexFtPartsDObjs(GOBJ *fighter, JOBJ *copy_model, FtParts *ftparts); // inits the dobj array in ftpartsmodel
 void Fighter_InitFtPartsModel(FtPartsDesc *ftpartsdesc, FtDOBJUnk *unk, int index, FtParts *ftparts, FtParts *ftparts2);
-//void Fighter_SetGrounded(FighterData *fighter_data);
+int Fighter_CheckUnlocked(int ext_id);
 
 #endif

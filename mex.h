@@ -4,6 +4,7 @@
 #include "include/structs.h"
 #include "include/datatypes.h"
 
+#include "include/audio.h"
 #include "include/archive.h"
 #include "include/boneset.h"
 #include "include/match.h"

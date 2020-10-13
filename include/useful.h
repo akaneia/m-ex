@@ -23,7 +23,6 @@ void SFX_PlayCrowd(int sfxID);
 void SFX_StopCrowd();
 void SFX_StopAllFighterSFX(FighterData *fighter_data);
 void Music_Play(int hpsID);
-void BGM_Play(int hpsID);
 
 void DevelopMode_ResetCursorXY(DevText *text, int x, int y);
 void Develop_UpdateMatchHotkeys();

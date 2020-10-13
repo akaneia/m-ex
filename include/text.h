@@ -49,7 +49,8 @@ struct Text
 /*** Functions ***/
 
 int Text_CreateCanvas(int unk, GOBJ *gobj, int text_gobjkind, int text_gobjsubclass, int text_gobjflags, int text_gxlink, int text_gxpri, int cobj_gxpri); // the optional gobj and cobj_gxlink are used to create a cobj as well. set gobj
-Text *Text_CreateText(int unk, int canvasID);
+Text *Text_CreateText(int SisIndex, int canvasID);
+Text *Text_CreateText2(int SisIndex, int canvasID, float pos_x, float pos_y, float pos_z, float limit_x, float limit_y);
 void Text_FreeText(Text *text);
 int Text_AddSubtext(Text *text, float xPos, float yPos, char *string, ...);
 void Text_SetScale(Text *text, int subtext, float x, float y);
@@ -62,5 +63,7 @@ void Text_DestroyAlloc(u8 *alloc);
 void Text_DestroyAllAlloc(Text *text);
 int Text_StringToMenuText(u8 *out, char *in);
 void Text_GX(GOBJ *gobj, int pass);
+void Text_LoadSdFile(int index, char *filename, char *symbol);
+void Text_SetSisText(Text *text, int text_index);
 
 #endif

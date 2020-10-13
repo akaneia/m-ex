@@ -101,9 +101,19 @@ typedef struct FtDOBJUnk3 FtDOBJUnk3;
 // CSS
 typedef struct CSSBackup CSSBackup;
 typedef struct MnSelectChrDataTable MnSelectChrDataTable;
+typedef struct VSMinorData VSMinorData;
+typedef struct CSSCursor CSSCursor;
+typedef struct CSSPuck CSSPuck;
+typedef struct MnSlChrData MnSlChrData;
+typedef struct MnSlChrIcon MnSlChrIcon;
+typedef struct MnSlChrDoor MnSlChrDoor;
+typedef struct MnSlChrTag MnSlChrTag;
+typedef struct MnSlChrTagData MnSlChrTagData;
+typedef struct MnSlChrKOStar MnSlChrKOStar;
 
 // Memcard
 typedef struct Memcard Memcard;
+typedef struct Rules1 Rules1;
 
 // Collision
 typedef struct CollData CollData;

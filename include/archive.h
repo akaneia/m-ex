@@ -22,6 +22,7 @@ struct ArchiveInfo
     int *file_start;     //pointer to the header of the dat
 };
 
+ArchiveInfo *File_Load(char *filename);
 void File_LoadInitReturnSymbol(char *filename, void *ptr, ...); // input each symbol name pointer sequentially and terminate with 0;
 void *File_GetSymbol(void *archive, char *symbol);
 
