@@ -65,6 +65,11 @@
 .set  MajorStride,0x18
 .set  MinorTypeStride,0x14
 
+#Easter egg enum
+.set  Egg_Furby,0
+.set  Egg_Dog,1
+.set  Egg_Kabi,2
+
 #Archive Offsets
 .set  Arch_Metadata,0x0
   .set  Arch_Metadata_VersionMajor,0x0
@@ -316,7 +321,9 @@
 .set  OFST_mexData,OFST_Metadata+0x4
 
 #Gross bullshit I don't want here
-.set  OFST_HeapRuntime,OFST_mexData + 0x4
+.set  OFST_EasterEgg,OFST_mexData + 0x4
+.set  OFST_HeapRuntime,OFST_EasterEgg + 0x8
+
 
 # Fighter Data Sizes
 .set  FighterDataOrigSize, 0x23ec
