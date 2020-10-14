@@ -8,6 +8,8 @@
 .set REG_Eggs,11
 .set REG_PadID,10
 
+# use function 8023754c to check nametag text
+
 # init easter egg value to -1
   addi  REG_Eggs,rtoc,OFST_EasterEgg
   li  r3,-1 
