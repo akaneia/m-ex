@@ -68,28 +68,28 @@ struct HSD_Material
 
 struct HSD_Pad
 {
-    int held;
-    int heldPrev;
-    int down;
-    int rapidFire;
-    int up;
-    int rapidTimer;
-    s8 stickX;
-    s8 stickY;
-    s8 substickX;
-    s8 substickY;
-    u8 triggerLeft;
-    u8 triggerRight;
-    float fstickX;
-    float fstickY;
-    float fsubstickX;
-    float fsubstickY;
-    float ftriggerLeft;
-    float ftriggerRight;
-    float x38;
-    float x3c;
-    u8 x40;
-    u8 isPlugged;
+    int held;            // 0x0
+    int heldPrev;        // 0x4
+    int down;            // 0x8
+    int rapidFire;       // 0xc
+    int up;              // 0x10
+    int rapidTimer;      // 0x14
+    s8 stickX;           // 0x18
+    s8 stickY;           // 0x19
+    s8 substickX;        // 0x1a
+    s8 substickY;        // 0x1b
+    u8 triggerLeft;      // 0x1c
+    u8 triggerRight;     // 0x1d
+    float fstickX;       // 0x20
+    float fstickY;       // 0x24
+    float fsubstickX;    // 0x28
+    float fsubstickY;    // 0x2c
+    float ftriggerLeft;  // 0x30
+    float ftriggerRight; // 0x34
+    float x38;           // 0x38
+    float x3c;           // 0x3c
+    u8 x40;              // 0x40
+    u8 status;           // 0x41   0 = plugged, -1 = unplugged
 };
 
 struct HSD_Pads

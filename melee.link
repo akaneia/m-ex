@@ -341,3 +341,13 @@
 8025ee8c:CSS_SetModeTexture
 8015ecb0:BGM_GetMenuBGM
 8015cc34:Memcard_GetRules1
+80371bec:JOBJ_GetDObj
+80363c2c:MOBJ_SetAlpha
+8025fdec:CSS_ReturnPuck
+8025fb50:CSS_SetRandomFighter
+8025db34:CSS_UpdateCSP
+80169238:CSS_GetCostumeNum
+803909d8:GObj_CopyGXPri
+80168c5c:CSS_PlayFighterName
+80260094:CSS_CostumeChange
+8025d5ac:CSS_UpdateCSPTexture

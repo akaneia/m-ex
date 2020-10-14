@@ -453,7 +453,7 @@ struct PlayerData
     unsigned char unk2 : 6;
     unsigned char unk3 : 8;
     u8 cpuKind;
-    u8 cpuLevel;
+    u8 cpuLevel; // 0xf
     // 0x10
     u16 damageStart;
     u16 damageSpawn;
@@ -2911,5 +2911,4 @@ void Fighter_InitPObj2();
 void Fighter_IndexFtPartsDObjs(GOBJ *fighter, JOBJ *copy_model, FtParts *ftparts); // inits the dobj array in ftpartsmodel
 void Fighter_InitFtPartsModel(FtPartsDesc *ftpartsdesc, FtDOBJUnk *unk, int index, FtParts *ftparts, FtParts *ftparts2);
 int Fighter_CheckUnlocked(int ext_id);
-
 #endif

@@ -497,4 +497,7 @@ void GXLink_LObj(GOBJ *gobj, int pass);
 void GXLink_Fog(GOBJ *gobj, int pass);
 void *LObj_LoadDesc(void *lobjdesc);
 void *Fog_LoadDesc(void *fogdesc);
+DOBJ *JOBJ_GetDObj(JOBJ *jobj);
+void *MOBJ_SetAlpha(DOBJ *dobj);
+void GObj_CopyGXPri(GOBJ *target, GOBJ *source);
 #endif

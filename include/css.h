@@ -39,6 +39,13 @@ struct MnSelectChrDataTable
     JOBJAnimSet cpudoor;
 };
 
+enum CSSCursorState
+{
+    SLCHRCUR_POINT,
+    SLCHRCUR_HOLD,
+    SLCHRCUR_OPEN,
+    SLCHRCUR_HIDDEN,
+};
 struct CSSCursor
 {
     GOBJ *gobj;
@@ -47,8 +54,8 @@ struct CSSCursor
     u8 puck;  // 0x6, puck index being held
     u8 x7;    // 0x7,
     u16 x8;
-    u16 xa;
-    Vec2 pos;
+    u16 exit_timer; // 0xa, frames held B
+    Vec2 pos;       // 0xc-0x10
 };
 
 struct CSSPuck
@@ -65,38 +72,45 @@ struct CSSPuck
 struct MnSlChrIcon
 {
     u8 ft_hudindex; // used for getting combo count @ 8025c0c4
-    u8 ft_index;    // icons external ID
+    u8 ft_kind;     // icons external ID
     u8 state;       // Dictates whether icon can be chosen. 0x0 = Not Unlocked, 0x1 = Unlocked (temp value), 0x2 = Unlocked and Displayed
-    u8 anim_state;  // is made to be 0xC when the character is chosen.
-    u8 x4;
-    u8 joint_id;   // used to icons JObj pointer
-    int sfx;       // 0x8,
-    float bound_l; // 0xC
-    float bound_r; // 0x10
-    float bound_u; // 0x14
-    float bound_d; // 0x18
+    u8 anim_timer;  // is made to be 0xC when the character is chosen.
+    u8 joint_id;    // icon background jobj ID
+    u8 joint2_id;   // used to icons JObj pointer
+    int sfx;        // 0x8,
+    float bound_l;  // 0xC
+    float bound_r;  // 0x10
+    float bound_u;  // 0x14
+    float bound_d;  // 0x18
 };
 
+enum DoorState
+{
+    DOOR_HMN,
+    DOOR_CPU,
+    DOOR_UNK,
+    DOOR_CLOSED,
+};
 struct MnSlChrDoor
 {
     u8 x0;
-    u8 x1;
+    u8 csp_joint;
     u8 x2;
-    u8 x3;
+    u8 joint_id; // 0x3
     u8 x4;
-    u8 x5;
+    u8 x5; // nametag window joint id
     u8 x6;
-    u8 cpuslider_joint;
-    u8 slider2_joint;
+    u8 cpuslider_joint; // 0x7
+    u8 slider2_joint;   //0x8
     u8 x9;
-    u8 xa;
-    u8 state; // 0x0 = HMN, 0x1 = CPU, 0x3 = Closed
+    u8 dooranim_timer; // 0xa
+    u8 state;          // 0x0 = HMN, 0x1 = CPU, 0x3 = Closed
     u8 xc;
     u8 costume;  // 0xd
     u8 sel_icon; // 0xe, icon this player has selected
     u8 xf;
     u8 x10;
-    u8 x11;
+    u8 slideranim_timer;
     u8 x12;
     u8 x13;
     float button_l; // HMN button bound
@@ -115,7 +129,7 @@ struct MnSlChrTagData
     int timer;          // x14, state timer
     u8 next_tag;        // 0x18, index of next empty tag
     u8 port;
-    u8 is_open; // 0x1a, is nametag window open bool
+    u8 state;   // 0x1a, is nametag window open bool
     u8 use_tag; // 0x1b, is using a nametag bool
 };
 
@@ -205,12 +219,15 @@ static int *stc_css_49c0 = R13 + (-0x49c0);
 static int *stc_css_49c4 = R13 + (-0x49c4);
 static int *stc_css_49b8 = R13 + (-0x49b8);
 static int *stc_css_49bc = R13 + (-0x49bc);
-static u8 *stc_css_49ad = R13 + (-0x49ad);
-static u8 *stc_css_leavekind = R13 + (-0x49aa);
+static int *stc_css_bgtimer = R13 + (-0x49b4);
+static u8 *stc_css_hasreleasedb = R13 + (-0x49ad);
+static u8 *stc_css_exitkind = R13 + (-0x49aa);
 static u8 *stc_css_49a9 = R13 + (-0x49a9);
 static MnSelectChrDataTable **stc_css_datatable = R13 + (-0x49EC);
 static COBJDesc **stc_css_cobjdesc = R13 + (-0x4ADC);
 static GOBJ **stc_css_camgobj = R13 + (-0x49E8);
+static HSD_Pad *stc_css_pad = 0x804c20bc;
+static u8 *stc_css_unkarr = 0x804d50c8;
 
 /*** Functions ***/
 int CSS_GetNametagRumble(int player, u8 tag);
@@ -225,5 +242,11 @@ void CSS_UpdateKOStars(int ply, int unk);
 void CSS_StartThink(GOBJ *gobj);
 int CSS_GetHandicapValue(int ply, int nametag_id);
 void CSS_SetModeTexture(int css_kind);
-
+int CSS_ReturnPuck(int ply);
+int CSS_SetRandomFighter(int ply, int unk);
+void CSS_UpdateCSP(int ply);
+int CSS_GetCostumeNum(int ext_id);
+void CSS_PlayFighterName()int ext_id);
+void CSS_CostumeChange(int port, int button_down);
+void CSS_UpdateCSPTexture(int port, int costume, int is_none);
 #endif
