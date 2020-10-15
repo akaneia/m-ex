@@ -1,7 +1,8 @@
-#To be inserted @ 8016d950
+#To be inserted @ 8016e7bc
 .include "../../Globals.s"
 .include "../Header.s"
 
+.set REG_MatchInit, 31
 .set REG_PlayerData, 29
 .set REG_Player, 28
 .set REG_StcIcons,27
@@ -10,17 +11,7 @@
 
   backup
 
-# init easter egg value to -1
-  addi  r4,rtoc,OFST_EasterEgg
-  li  r3,-1 
-  stbx r3,r4,REG_Player
-
-# check if human
-  lbz r0,0x1(REG_PlayerData)
-  cmpwi r0,0
-  bne Exit
-
-## SHIT CODE, BUT ASSEMBLY IS TEDIOUS AND IM LAZY ##
+PlayerLoop_Init:
 # get ifall archive info
   load  r3,0x804d5780
   branchl r12,0x8001819c
@@ -30,6 +21,25 @@
   branchl r12,0x80380358
   mr. REG_StcIcons,r3
   beq Exit
+
+  li REG_Player,0
+  b PlayerLoop_Check
+
+PlayerLoop:
+# Get PlayerData
+  mulli r0,REG_Player,36
+  addi r3,REG_MatchInit,96
+  add REG_PlayerData,r3,r0
+
+# init easter egg value to -1
+  addi  r4,rtoc,OFST_EasterEgg
+  li  r3,-1 
+  stbx r3,r4,REG_Player
+
+# check if human
+  lbz r0,0x1(REG_PlayerData)
+  cmpwi r0,0
+  bne PlayerLoop_Inc
 
 # get controller index
   mr r3,REG_Player
@@ -84,7 +94,7 @@ Loop_SkipName:
 # save stock ID
   addi  r3,rtoc,OFST_EasterEgg
   stbx REG_Count,r3,REG_Player
-  b Exit
+  b PlayerLoop_Inc
 
 Loop_Inc:
   addi REG_Count,REG_Count,1
@@ -92,6 +102,11 @@ Loop_Check:
   cmpw REG_Count,REG_EggNum
   blt Loop
 
+PlayerLoop_Inc:
+  addi REG_Player,REG_Player,1
+PlayerLoop_Check:
+  cmpwi REG_Player,6
+  blt PlayerLoop
 
  b Exit
 
@@ -102,4 +117,4 @@ blrl
 
 Exit:
   restore
-  lbz	r0, 0x0001 (r29)
+  mr	r3, r31
