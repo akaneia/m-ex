@@ -22,6 +22,10 @@
 
 backup
 
+#If archive exists
+  cmpwi REG_Archive,0
+  beq Exit
+
 #Get symbol offset from file
   mr  r3,REG_Archive
   bl  kbFunctionString
