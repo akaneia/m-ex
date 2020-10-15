@@ -62,15 +62,19 @@
 .set  StcIcons_ReservedFrames,0x0
 .set  StcIcons_Stride,0x2
 .set  StcIcons_MatAnimJoint,0x4
+.set  StcIcons_EggNum,0x8
+.set  StcIcons_Eggs,0xC
+
+#Eggs
+.set Eggs_Stride, 0x8
+.set Eggs_StockID,0x0
+.set Eggs_Input,0x1
+.set Eggs_Name,0x4
+
 
 #Scene Data
 .set  MajorStride,0x18
 .set  MinorTypeStride,0x14
-
-#Easter egg enum
-.set  Egg_Furby,0
-.set  Egg_Dog,1
-.set  Egg_Kabi,2
 
 #Archive Offsets
 .set  Arch_Metadata,0x0

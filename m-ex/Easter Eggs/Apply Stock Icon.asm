@@ -18,10 +18,12 @@ Original:
 
 backup
 
-# easter egg active, get the stock icon for it
-  bl  StockIDs
-  mflr  r4
-  lbzx  r3,r3,r4
+# get stock icon ID
+  lwz r4,OFST_stc_icons(r13)
+  lwz r4,StcIcons_Eggs(r4)
+  mulli r3,r3,Eggs_Stride
+  add r3,r3,r4
+  lbz r3,Eggs_StockID(r3)
 
 CastToFloat:
  xoris r3,r3,0x8000
