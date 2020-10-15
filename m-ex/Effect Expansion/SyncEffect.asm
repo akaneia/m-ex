@@ -13,8 +13,6 @@
 
   backup
 
-  lwz REG_PlayerData,0x2C(REG_PlayerGObj)
-
 #If under, return to injection site
   subi	r0, r28, 1211
   cmpwi r0,87
@@ -30,6 +28,7 @@
   b Injection_Exit
 
 CopyEffect:
+  lwz REG_PlayerData,0x2C(REG_PlayerGObj)
   subi  REG_EffectIntID,REG_EffectID,CopyEffectStart
 #Get the copy effect file ID
   lwz r3,OFST_KirbyHatEffectFileIDs(rtoc)
@@ -38,6 +37,7 @@ CopyEffect:
   b GetBehavior
 
 PersonalEffect:
+  lwz REG_PlayerData,0x2C(REG_PlayerGObj)
   subi  REG_EffectIntID,REG_EffectID,PersonalEffectStart
 #Get this fighters effect file ID
   lwz r3,OFST_MnSlChrEffectFileIDs(rtoc)
