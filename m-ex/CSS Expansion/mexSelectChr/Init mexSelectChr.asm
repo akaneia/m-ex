@@ -131,12 +131,26 @@ InitPositionsModel:
     li  r6,0
     branchl r12,0x8036fb5c
 
+/*
   #Play animation
     mr  r3,REG_IconsJObj
     lfs	f1, -0x3640 (rtoc)
     branchl r12,0x8036f8bc
     mr  r3,REG_IconsJObj
     branchl r12,0x80370928
+*/
+
+  #Play animation
+  mr  r3,REG_IconsJObj
+  li r4,6
+  li r5,0x20
+  load r6,0x8036410c
+  li r7,1
+  branchl r12,0x80364c08
+  mr  r3,REG_IconsJObj
+  branchl r12,0x80370928
+
+
   /*
   #Store pointer to all children
   .set  REG_ThisJObj,22
