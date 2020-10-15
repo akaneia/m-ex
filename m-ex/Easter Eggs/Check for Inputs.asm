@@ -89,7 +89,7 @@ Loop_SkipName:
 Loop_Inc:
   addi REG_Count,REG_Count,1
 Loop_Check:
-  cmpwi REG_Count,REG_EggNum
+  cmpw REG_Count,REG_EggNum
   blt Loop
 
 
