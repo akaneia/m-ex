@@ -32,6 +32,8 @@
 .set  SlChr_IconModel,0x0
 .set  SlChr_IconAnimJoint,0x4
 .set  SlChr_IconMatAnim,0x8
+.set  SlChr_CSPMatAnim,0xC
+.set  SlChr_CSPStride,0x10
 
 #mexMenu Offsets
 .set  mexMenu_MenuNameFrames,0x0
