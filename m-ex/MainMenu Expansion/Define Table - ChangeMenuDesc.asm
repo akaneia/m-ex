@@ -11,7 +11,8 @@
   beq Original
 # get menu def
   lwz r12,mexMenu_MenuDef(r12)
-  mulli r0,REG_MenuID,MenuDefStride
+  lbz r11,0x0(r29)
+  mulli r0,r11,MenuDefStride
   add  r12,r12, r0
 
 # get option def
