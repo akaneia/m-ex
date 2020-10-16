@@ -188,9 +188,9 @@ struct TOBJ
 struct AOBJ
 {
     u32 flags;
-    f32 curr_frame;
+    f32 curr_frame; // 0x4
     f32 rewind_frame;
-    f32 end_frame;
+    f32 end_frame; // 0xC
     f32 framerate;
     struct _HSD_FObj *fobj;
     struct _HSD_Obj *hsd_obj;
@@ -305,7 +305,7 @@ struct JOBJ
     Mtx rotMtx;
     Vec3 *VEC;
     Mtx *MTX;
-    AOBJ *aobj;
+    AOBJ *aobj; // 0x7C
     int *RObj;
     JOBJDesc *desc;
 };
