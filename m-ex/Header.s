@@ -71,6 +71,9 @@
 .set Eggs_Input,0x1
 .set Eggs_Name,0x4
 
+#BGM in IfAll
+.set BGMBG_Joint,0x0
+.set BMGBG_AnimJoint,0x4
 
 #Scene Data
 .set  MajorStride,0x18
@@ -179,6 +182,7 @@
   .set  Arch_BGM_Files,0x0
   .set  Arch_BGM_MenuPlaylist,0x4
   .set  Arch_BGM_MenuPlaylistNum,0x8
+  .set  Arch_BGM_Labels,0xC
 .set  Arch_Effect,0x18
   .set  Effect_Files,0x0
   .set  Effect_RuntimeUnk1,0x4
