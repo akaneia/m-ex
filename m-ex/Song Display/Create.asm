@@ -260,11 +260,6 @@ blrl
 # BG Model X Offset w/ widescreen
 .float -14 # 0x20
 
-DummyText:
-blrl
-.string "A Song From Super Smash Bros."
-.align 2
-
 BGMSymbol:
 blrl
 .string "bgm"
