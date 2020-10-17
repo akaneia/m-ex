@@ -72,8 +72,9 @@ GetBehavior:
 bl  Effect_Particle
 bl  Effect_DefinePosRot
 bl  Effect_UseJointPos
-bl  Effect_UseJointPosRot
 bl  Effect_UseJointPos_GroundOrientation
+bl  Effect_UseJointPosRot
+bl  Effect_UseJointPosFtDir
 bl  Effect_FollowJointPos
 bl  Effect_FollowJointPosRot
 bl  Effect_FollowJointPos_GroundOrientation
@@ -155,6 +156,36 @@ Effect_UseJointPos:
   branchl r12,0x8005c814
   b Exit
 
+Effect_UseJointPos_GroundOrientation:
+.set  REG_EffectObj,29
+.set  REG_EffectJObj,28
+#Pop some arg off the va_list
+  addi	r3, sp, 508 + 0x100
+  li  r4,1
+  branchl r12,0x80322620
+#Create Effect
+  lwz r5,0x0(r3)
+  mr  r3,REG_EffectID
+  mr  r4,REG_PlayerGObj
+  branchl r12,0x8005c814
+  mr. REG_EffectObj,r3
+  beq Exit
+#Get effect jobj
+  lwz r3,0x4(REG_EffectObj)
+  lwz REG_EffectJObj,0x28(r3)
+#Pop some arg off the va_list
+  addi	r3, sp, 508 + 0x100
+  li  r4,2
+  branchl r12,0x80322620
+  lwz r3,0x0(r3)
+#Get roll rotation
+  lfs f1,0x0(r3)
+#Store roll rotation
+  stfs	f1, 0x0024 (REG_EffectJObj)
+#Exit
+  mr  r3,REG_EffectObj
+  b Exit
+
 Effect_UseJointPosRot:
 #Effect_SpawnSync(ID,gobj,jobj)
 .set  REG_EffectObj,29
@@ -190,7 +221,51 @@ Effect_UseJointPosRot:
   mr  r3,REG_EffectObj
   b Exit
 
+Effect_UseJointPosFtDir:
+#Effect_SpawnSync(ID,gobj,jobj)
+.set  REG_EffectObj,29
+.set  REG_EffectJObj,28
+.set  REG_ParentJObj,27
+#Pop the jobj off the va_list
+  addi	r3, sp, 508 + 0x100
+  li  r4,1
+  branchl r12,0x80322620
+  lwz REG_ParentJObj,0x0(r3)
+#Get jobj world coordinates
+  mr  r3,REG_ParentJObj
+  li  r4,0
+  addi  r5,sp,0x80
+  branchl r12,0x8000b1cc
+#Create Effect
+  mr  r3,REG_EffectID
+  mr  r4,REG_PlayerGObj
+  addi  r5,sp,0x80        # position
+  branchl r12,0x8005c814
+  mr. REG_EffectObj,r3
+  beq Exit
+#Get effect jobj
+  lwz r3,0x4(REG_EffectObj)
+  lwz REG_EffectJObj,0x28(r3)
+#Get facing direction
+  lwz r3,0x2C(REG_PlayerGObj)
+  lfs f1,0x2C(r3)
+#Determine pitch rotation from facing direction
+  lfs	f0, -0x77D0 (rtoc)
+  fcmpo	cr0,f1,f0
+  bge 0xC
+  lfd	f0, -0x77B8 (rtoc)
+  b 0x8
+  lfd	f0, -0x77B0 (rtoc)
+  frsp	f1,f0
+#Store pitch rotation
+  stfs	f1, 0x0020 (REG_EffectJObj)
+
+#Exit
+  mr  r3,REG_EffectObj
+  b Exit
+
 Effect_FollowJointPosRot:
+#Effect_SpawnSync(ID,gobj,jobj)
 #Pop the JOBJ of the va_list
   addi	r3, sp, 508 + 0x100
   li  r4,1
@@ -200,37 +275,6 @@ Effect_FollowJointPosRot:
   mr  r3,REG_EffectID
   mr  r4,REG_PlayerGObj
   branchl r12,0x8005c5c4 #0x8005c814
-  b Exit
-
-Effect_UseJointPos_GroundOrientation:
-.set  REG_EffectObj,29
-.set  REG_EffectJObj,28
-#Pop some arg off the va_list
-  addi	r3, sp, 508 + 0x100
-  li  r4,1
-  branchl r12,0x80322620
-#Create Effect
-  lwz r5,0x0(r3)
-  mr  r3,REG_EffectID
-  mr  r4,REG_PlayerGObj
-  branchl r12,0x8005c814
-  mr. REG_EffectObj,r3
-  beq Exit
-#Get effect jobj
-  lwz r3,0x4(REG_EffectObj)
-  lwz REG_EffectJObj,0x28(r3)
-
-#Pop some arg off the va_list
-  addi	r3, sp, 508 + 0x100
-  li  r4,2
-  branchl r12,0x80322620
-  lwz r3,0x0(r3)
-#Get roll rotation
-  lfs f1,0x0(r3)
-#Store roll rotation
-  stfs	f1, 0x0024 (REG_EffectJObj)
-
-  mr  r3,REG_EffectObj
   b Exit
 
 Effect_FollowJointPos:
