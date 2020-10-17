@@ -59,11 +59,11 @@ CustomEffect:
 .long 0x8009fb00       #Effect_Particle
 .long 0 #0x8009fec0    #Effect_DefinePosRot, not needed?
 .long 0x8009ffdc       #Effect_UseJointPos
-.long 0x8009fc6c #0x8009ffdc    #Effect_UseJointPosRot 8009fc6c
+.long 0x8009fc6c       #Effect_UseJointPosRot 8009fc6c
 .long 0x800a0010       #Effect_UseJointPos_GroundOrientation
 .long 0x8009fc6c       #Effect_FollowJointPos
 .long 0x8009fc6c       #Effect_FollowJointPosRot
-.long 0 #0x8009fc6c    #Effect_FollowJointPos_GroundOrientation
+.long 0x8009fc6c       #Effect_FollowJointPos_GroundOrientation
 #*****************************#
 SkipJumpTable:
 #Get effect type
