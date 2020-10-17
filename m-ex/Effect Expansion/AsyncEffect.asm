@@ -56,14 +56,14 @@ GetBehavior:
 CustomEffect:
   bl  SkipJumpTable
 #*****************************#
-.long 0x8009fb00    #Effect_Particle
-.long 0x8009fec0    #Effect_DefinePosRot
-.long 0x8009ffdc    #Effect_UseJointPos
-.long 0x8009ffdc    #Effect_UseJointPosRot 8009ffac
-.long 0x800a0010    #Effect_UseJointPos_GroundOrientation
-.long 0x8009fc6c    #Effect_FollowJointPos
-.long 0x8009fc6c    #Effect_FollowJointPosRot
-.long 0x8009fc6c    #Effect_FollowJointPos_GroundOrientation
+.long 0x8009fb00       #Effect_Particle
+.long 0 #0x8009fec0    #Effect_DefinePosRot, not needed?
+.long 0x8009ffdc       #Effect_UseJointPos
+.long 0x8009fc6c #0x8009ffdc    #Effect_UseJointPosRot 8009fc6c
+.long 0x800a0010       #Effect_UseJointPos_GroundOrientation
+.long 0x8009fc6c       #Effect_FollowJointPos
+.long 0x8009fc6c       #Effect_FollowJointPosRot
+.long 0 #0x8009fc6c    #Effect_FollowJointPos_GroundOrientation
 #*****************************#
 SkipJumpTable:
 #Get effect type
@@ -71,6 +71,8 @@ SkipJumpTable:
 #Get Current Page
   mulli	r5,REG_EffectType,0x4		#Each Pointer is 0x4 Long
   lwzx	r4,r4,r5		#Get Pointer Address
+  cmpwi r4,0
+  beq Original
   mtctr  r4
   bctr
 
