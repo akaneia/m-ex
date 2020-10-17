@@ -246,7 +246,7 @@ int CSS_ReturnPuck(int ply);
 int CSS_SetRandomFighter(int ply, int unk);
 void CSS_UpdateCSP(int ply);
 int CSS_GetCostumeNum(int ext_id);
-void CSS_PlayFighterName()int ext_id);
+void CSS_PlayFighterName(int ext_id);
 void CSS_CostumeChange(int port, int button_down);
 void CSS_UpdateCSPTexture(int port, int costume, int is_none);
 #endif
