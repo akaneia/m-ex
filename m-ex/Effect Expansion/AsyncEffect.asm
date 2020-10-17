@@ -59,6 +59,7 @@ CustomEffect:
 .long 0x8009fb00    #Effect_Particle
 .long 0x8009fec0    #Effect_DefinePosRot
 .long 0x8009ffdc    #Effect_UseJointPos
+.long 0x8009ffdc    #Effect_UseJointPosRot 8009ffac
 .long 0x800a0010    #Effect_UseJointPos_GroundOrientation
 .long 0x8009fc6c    #Effect_FollowJointPos
 .long 0x8009fc6c    #Effect_FollowJointPosRot
