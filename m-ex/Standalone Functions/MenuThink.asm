@@ -2,6 +2,9 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
+# slippi hack
+.set OFST_R13_SWITCH_TO_ONLINE_SUBMENU,-0x49ec # Function used to switch
+
 .set  REG_GObj,31
 .set  REG_MenuData,30
 .set  REG_Inputs,29
@@ -75,7 +78,7 @@ Enter_Menu:
 # Check if event mode...
   lbz r3,OptDef_ID(REG_ThisOpt)
   cmpwi r3,7
-  bne Enter_MenuNoSpecial
+  bne Enter_MenuNoEvent
 # Handle event mode
   lwz r12,MenuDef_Callback(REG_ThisMenu)
   cmpwi r12,0
@@ -88,6 +91,19 @@ Enter_Menu:
   mr  r3,REG_GObj
   branchl r12,0x80390228
   b Exit
+Enter_MenuNoEvent:
+
+# Check if slippi menu...
+  lbz r3,OptDef_ID(REG_ThisOpt)
+  cmpwi r3,8
+  bne Enter_MenuNoSlippi
+# Handle slippi menu init
+  lwz r12,OFST_R13_SWITCH_TO_ONLINE_SUBMENU(r13)
+  mtctr r12
+  bctrl
+  b Exit
+Enter_MenuNoSlippi:
+
 
 Enter_MenuNoSpecial:
 # check for custom callback
@@ -108,9 +124,33 @@ Enter_MenuNoCB:
 # new curr menu
   lbz r3,OptDef_ID(REG_ThisOpt)
   stb	r3, 0x0 (REG_MenuData)
-# init cursor
-  li  r3,0
-  sth	r3, 0x2 (REG_MenuData)  # current cursor
+
+# determine cursor value for next menu
+  .set  REG_Count,20
+  .set  REG_OptNum,11
+  li  REG_Count,0
+  lwz r3,OFST_mexMenu(r13)
+  lwz r3,mexMenu_MenuDef(r3)
+  lbz	r0, 0 (REG_MenuData)
+  mulli	r0, r0, MenuDefStride
+  add r3,r3,r0
+  lbz REG_OptNum,MenuDef_OptNum(r3)
+SearchNextCursor__Loop:
+# check if unlocked
+  lbz	r3, 0 (REG_MenuData)
+  mr r4,REG_Count  # option ID
+  branchl r12,0x80229938
+  cmpwi r3,0
+  beq SearchNextCursor__IncLoop
+# set cursor
+  sth	REG_Count, 0x2 (REG_MenuData)  # current cursor
+  b SearchNextCursor__Exit
+SearchNextCursor__IncLoop:
+  addi  REG_Count,REG_Count,1
+  cmpw  REG_Count,REG_OptNum
+  blt SearchNextCursor__Loop
+SearchNextCursor__Exit:
+
 # Switch menu 
   li  r3,1    # forward
   branchl r12,0x8022b3a0
@@ -200,26 +240,26 @@ Return_NoTitle:
   add r3,r3,r0
   lbz REG_OptNum,MenuDef_OptNum(r3)
   lwz REG_OptDef,MenuDef_OptDef(r3)
-SearchCursor_Loop:
+SearchPrevCursor_Loop:
 # Get this optdef
   mulli r0,REG_Count,OptDefStride
   add r3,REG_OptDef,r0
 # check if menu
   lbz r0,OptDef_Kind(r3)
   cmpwi r0,0
-  bne SearchCursor_IncLoop
+  bne SearchPrevCursor_IncLoop
 # get menu ID
   lbz r0,OptDef_ID(r3)
   cmpw r0,REG_PrevMenuID
-  bne SearchCursor_IncLoop
+  bne SearchPrevCursor_IncLoop
 # set cursor
   sth	REG_Count, 0x2 (REG_MenuData)  # current cursor
-  b SearchCursor_Exit
-SearchCursor_IncLoop:
+  b SearchPrevCursor_Exit
+SearchPrevCursor_IncLoop:
   addi  REG_Count,REG_Count,1
   cmpw  REG_Count,REG_OptNum
-  blt SearchCursor_Loop
-SearchCursor_Exit:
+  blt SearchPrevCursor_Loop
+SearchPrevCursor_Exit:
 
 # Switch menu 
   li  r3,3    # backward
