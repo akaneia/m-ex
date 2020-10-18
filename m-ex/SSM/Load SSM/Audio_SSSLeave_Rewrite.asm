@@ -23,8 +23,9 @@
   add r3,r3,r4
   lbz r3,0x0(r3)
 #Check if null ID
-  lwz r12,OFST_Metadata_SSMCount(rtoc)
-  cmpw  r3,r12
+  #lwz r12,OFST_Metadata_SSMCount(rtoc)
+  #cmpw  r3,r12
+  cmpwi  r3,55
   beq Exit
 #Load ssm
   branchl r12,Audio_RequestSSMLoad
