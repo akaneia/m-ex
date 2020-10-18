@@ -150,11 +150,11 @@
   .set  Arch_FighterFunc_onUnknownItemRelated,0x48
   .set  Arch_FighterFunc_onUnknownCharacterModelFlags1,0x4C
   .set  Arch_FighterFunc_onUnknownCharacterModelFlags2,0x50
-  .set  Arch_FighterFunc_onHit,0x54
+  .set  Arch_FighterFunc_onKnockback,0x54
   .set  Arch_FighterFunc_onUnknownEyeTextureRelated,0x58
   .set  Arch_FighterFunc_onFrame,0x5C
   .set  Arch_FighterFunc_onActionStateChange,0x60
-  .set  Arch_FighterFunc_onRespawn,0x64
+  .set  Arch_FighterFunc_onReapplyAttr,0x64
   .set  Arch_FighterFunc_onModelRender,0x68
   .set  Arch_FighterFunc_onShadowRender,0x6C
   .set  Arch_FighterFunc_onUnknownMultijump,0x70
@@ -282,10 +282,10 @@
 .set  OFST_FighterOnItemPickup,0xC0
 .set  OFST_FighterOnItemPickup2,0xC4
 .set  OFST_FighterOnItemRelease,0xC8
-.set  OFST_FighterBGM,0xCC
-.set  OFST_FighterViWaitFileNames,0xD0
-.set  OFST_MajorScenes,0xD4
-.set  OFST_MinorScenes,0xD8
+.set  OFST_FighterBGM, OFST_FighterOnItemRelease + 0x4
+.set  OFST_FighterViWaitFileNames, OFST_FighterBGM + 0x4
+.set  OFST_MajorScenes, OFST_FighterViWaitFileNames + 0x4
+.set  OFST_MinorScenes, OFST_MajorScenes + 0x4
 .set  OFST_PtclRuntime1, OFST_MinorScenes + 0x4
 .set  OFST_PtclRuntime3, OFST_PtclRuntime1 + 0x4
 .set  OFST_PtclRuntimeTexGrNum, OFST_PtclRuntime3 + 0x4

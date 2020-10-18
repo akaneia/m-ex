@@ -1,6 +1,6 @@
 #To be inserted @ 801b99fc
-.include "../../Globals.s"
-.include "../Header.s"
+.include "../../../Globals.s"
+.include "../../Header.s"
 
 lwz r3,OFST_Metadata_FtIntNum(rtoc)
 subi  r0,r3,2

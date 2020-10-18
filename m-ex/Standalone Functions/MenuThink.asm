@@ -104,6 +104,18 @@ Enter_MenuNoEvent:
   b Exit
 Enter_MenuNoSlippi:
 
+# Check if multiman menu...
+  lbz r3,OptDef_ID(REG_ThisOpt)
+  cmpwi r3,33
+  bne Enter_MenuNoMultiman
+# Handle multiman menu init
+  li r3,0
+  branchl r12,0x8024cd64
+# Delete this menu gobj
+  mr  r3,REG_GObj
+  branchl r12,0x80390228
+  b Exit
+Enter_MenuNoMultiman:
 
 Enter_MenuNoSpecial:
 # check for custom callback

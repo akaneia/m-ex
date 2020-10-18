@@ -139,8 +139,8 @@ LoadStageSSM:
 #Check if null ID
   #lwz r12,OFST_Metadata_SSMCount(rtoc)
   #cmpw  r3,r12
-  cmpwi  r3,55
-  beq AsyncLoad
+  #cmpwi  r3,55
+  #beq AsyncLoad
 #Load ssm
   branchl r12,Audio_RequestSSMLoad
 

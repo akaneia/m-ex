@@ -25,8 +25,8 @@
 #Check if null ID
   #lwz r12,OFST_Metadata_SSMCount(rtoc)
   #cmpw  r3,r12
-  cmpwi  r3,55
-  beq Exit
+  #cmpwi  r3,55
+  #beq Exit
 #Load ssm
   branchl r12,Audio_RequestSSMLoad
 
