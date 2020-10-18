@@ -34,8 +34,8 @@
   cmpw REG_InternalID,r3
   bge NormalCharacter
 # get special fighter frame
-  subi  r3,REG_InternalIDCount,masterHand
-  sub r13,REG_InternalID,r3
+  subi  r3,REG_InternalIDCount,masterHand - 1
+  sub r3,REG_InternalID,r3
   bl  SpecialCharacterFrames
   mflr  r4
   lbzx  r3,r3,r4
