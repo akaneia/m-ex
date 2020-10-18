@@ -150,8 +150,8 @@
   .set  Arch_FighterFunc_onUnknownItemRelated,0x48
   .set  Arch_FighterFunc_onUnknownCharacterModelFlags1,0x4C
   .set  Arch_FighterFunc_onUnknownCharacterModelFlags2,0x50
-  .set  Arch_FighterFunc_onKnockback,0x54
-  .set  Arch_FighterFunc_onUnknownEyeTextureRelated,0x58
+  .set  Arch_FighterFunc_onKnockbackEnter,0x54
+  .set  Arch_FighterFunc_onKnockbackExit,0x58
   .set  Arch_FighterFunc_onFrame,0x5C
   .set  Arch_FighterFunc_onActionStateChange,0x60
   .set  Arch_FighterFunc_onReapplyAttr,0x64
