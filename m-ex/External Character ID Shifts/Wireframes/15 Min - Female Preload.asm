@@ -1,6 +1,6 @@
-#To be inserted @ 801b99fc
+#To be inserted @ 801b7bdc
 .include "../../../Globals.s"
 .include "../../Header.s"
 
 lwz r3,OFST_Metadata_FtExtNum(rtoc)
-subi  r0,r3,2
+subi  r3,r3,5
