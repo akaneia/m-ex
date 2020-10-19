@@ -246,9 +246,12 @@ Effect_UseJointPosFtDir:
 #Get effect jobj
   lwz r3,0x4(REG_EffectObj)
   lwz REG_EffectJObj,0x28(r3)
-#Get facing direction
-  lwz r3,0x2C(REG_PlayerGObj)
-  lfs f1,0x2C(r3)
+#Pop the facing direction off the va_list
+  addi	r3, sp, 508 + 0x100
+  li  r4,1
+  branchl r12,0x80322620
+  lwz r3,0x0(r3)
+  lfs f1,0x0(r3)
 #Determine pitch rotation from facing direction
   lfs	f0, -0x77D0 (rtoc)
   fcmpo	cr0,f1,f0

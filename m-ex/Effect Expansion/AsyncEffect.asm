@@ -61,7 +61,7 @@ CustomEffect:
 .long 0x8009ffdc       #Effect_UseJointPos
 .long 0x800a0010       #Effect_UseJointPos_GroundOrientation
 .long 0x8009fc6c       #Effect_UseJointPosRot
-.long 0x8009fc6c       #Effect_UseJointPosFtDir
+.long 0x8009ffdc       #Effect_UseJointPosFtDir
 .long 0x8009fc6c       #Effect_FollowJointPos
 .long 0x8009fc6c       #Effect_FollowJointPosRot
 .long 0x8009fc6c       #Effect_FollowJointPos_GroundOrientation
