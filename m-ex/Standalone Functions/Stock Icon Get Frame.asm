@@ -32,9 +32,9 @@
   blt NormalCharacter
   subi  r3,REG_InternalIDCount,sandbag
   cmpw REG_InternalID,r3
-  bge NormalCharacter
+  bgt NormalCharacter
 # get special fighter frame
-  subi  r3,REG_InternalIDCount,masterHand - 1
+  subi  r3,REG_InternalIDCount,masterHand
   sub r3,REG_InternalID,r3
   bl  SpecialCharacterFrames
   mflr  r4
@@ -63,10 +63,10 @@ CastToFloat:
 SpecialCharacterFrames:
 blrl
 .byte 3  #master hand
-.byte 1  #wire male
+.byte 2  #crazy hand
+.byte 1  #wire male male
 .byte 1  #wire female
 .byte 5  #giga bowser
-.byte 2  #crazy hand
 .byte 6  #sandbag
 .align 2
 
