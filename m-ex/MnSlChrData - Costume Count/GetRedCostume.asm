@@ -3,4 +3,4 @@
 .include "../Header.s"
 
 lwz  r3,OFST_MnSlChrCostumeIDs(rtoc)
-add	r3, r3, r4
+add	r3, r3, r0
