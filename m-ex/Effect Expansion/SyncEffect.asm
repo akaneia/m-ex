@@ -225,21 +225,16 @@ Effect_UseJointPosFtDir:
 #Effect_SpawnSync(ID,gobj,jobj)
 .set  REG_EffectObj,29
 .set  REG_EffectJObj,28
-.set  REG_ParentJObj,27
+.set  REG_Pos,27
 #Pop the jobj off the va_list
   addi	r3, sp, 508 + 0x100
   li  r4,1
   branchl r12,0x80322620
-  lwz REG_ParentJObj,0x0(r3)
-#Get jobj world coordinates
-  mr  r3,REG_ParentJObj
-  li  r4,0
-  addi  r5,sp,0x80
-  branchl r12,0x8000b1cc
+  lwz REG_Pos,0x0(r3)
 #Create Effect
   mr  r3,REG_EffectID
   mr  r4,REG_PlayerGObj
-  addi  r5,sp,0x80        # position
+  mr  r5,REG_Pos        # position
   branchl r12,0x8005c814
   mr. REG_EffectObj,r3
   beq Exit
