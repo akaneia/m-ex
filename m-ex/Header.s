@@ -128,6 +128,10 @@
   .set  Arch_Fighter_TargetStage, 0x50
   .set  Arch_Fighter_BGM, 0x54
   .set  Arch_Fighter_ViWaitFileNames, 0x58
+  .set  Arch_Fighter_EndClassic, 0x5C
+  .set  Arch_Fighter_EndAdventure, 0x60
+  .set  Arch_Fighter_EndAllStar, 0x64
+  .set  Arch_Fighter_EndMovie, 0x68
 .set  Arch_FighterFunc,0xC
   .set  Arch_FighterFunc_onLoad,0x0
   .set  Arch_FighterFunc_onDeath,0x4
