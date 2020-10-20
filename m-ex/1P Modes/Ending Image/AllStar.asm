@@ -8,5 +8,5 @@
   lwz r3,Arch_Fighter_EndAllStar(r3)
 
 # get fighters string
-  mulli r4,r30,4
+  mulli r4,r31,4
   lwzx r3,r3,r4
