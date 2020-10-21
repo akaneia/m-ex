@@ -21,6 +21,45 @@ backup
   mr. REG_Symbol,r3
   beq Exit
 
+/*
+#Create CObj
+  li  r3,19
+  li  r4,20
+  li  r5,0
+  branchl r12,GObj_Create
+  mr  REG_GObj,r3
+#Get CObjDesc
+  load r3,0x804d6d5c
+  lwz r3,0x0(r3)
+  load r4,0x803f94d0
+  branchl r12,0x80013b14
+#Create CObj
+  lwz r3,0x4(r3)
+  lwz r3,0x0(r3)
+  branchl r12,0x80013b14
+#Add object
+  mr r5,r3
+  lbz	r4, -0x3E55 (r13)
+  mr r3,REG_GObj
+  branchl r12,0x8039075c
+#Init Camera
+  mr r3,REG_GObj
+  load r4,0x802f36b8
+  li r5,12
+  branchl r12,0x8039075c
+
+#Create Text Canvas on this CObj
+  li r3,2
+  mr r4,REG_GObj
+  li r5,14
+  li r6,15
+  li r7,0
+  li r8,11
+  li r9,0
+  li r10,19
+  branchl r12,0x803a611c
+*/
+
 #Create GObj
   li  r3,14
   li  r4,14
@@ -53,8 +92,9 @@ backup
 
 #Create text
   li r3,2
-  load r4,0x804a1f58
-  lwz r4,0x0(r4)
+  #load r4,0x804a1f58
+  #lwz r4,0x0(r4)
+  li r4,1     # shit code, cause i dont want to store a static variable
   branchl r12,0x803a6754
   mr REG_Text,r3
   stw REG_Text,0x0(REG_Userdata)
@@ -94,7 +134,7 @@ backup
 # Add gx link
   mr r3,REG_GObj
   load r4,0x80391070
-  li r5,11
+  li r5,15
   li r6,0
   branchl r12,0x8039069c
 # Add anim
