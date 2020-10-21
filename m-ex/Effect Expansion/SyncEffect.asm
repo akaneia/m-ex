@@ -257,6 +257,14 @@ Effect_UseJointPosFtDir:
   frsp	f1,f0
 #Store pitch rotation
   stfs	f1, 0x0020 (REG_EffectJObj)
+#Copy Player GOBJ Scale
+  lwz   r3, 0x0028 (REG_PlayerGObj)
+  lfs	  f1, 0x002C (r3)
+  stfs	f1, 0x002C (REG_EffectJObj)
+  lfs	  f1, 0x0030 (r3)
+  stfs	f1, 0x0030 (REG_EffectJObj)
+  lfs	  f1, 0x0034 (r3)
+  stfs	f1, 0x0034 (REG_EffectJObj)
 
 #Exit
   mr  r3,REG_EffectObj
