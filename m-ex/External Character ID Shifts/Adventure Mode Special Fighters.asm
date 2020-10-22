@@ -49,7 +49,7 @@ TableLoop:
   # get m-ex special fighter ID
     add  REG_ExtID,REG_SpecialFtStart,r3
   # store back
-    stb REG_ExtID,0x2(r4)
+    stb REG_ExtID,0xA(r4)
   NormalCharacter:
   FtLoop_Inc:
     addi REG_FtCount, REG_FtCount, 1
