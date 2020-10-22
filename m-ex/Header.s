@@ -173,7 +173,7 @@
   .set  Arch_FighterFunc_onDSmash,0x94
   .set  Arch_FighterFunc_onGetExtResultAnim,0x98
   .set  Arch_FighterFunc_onIndexExtResultAnim,0x9C
-  .set  Arch_FighterFunc_MoveLogicDemo,0x100
+  .set  Arch_FighterFunc_MoveLogicDemo,0xA0
 .set  Arch_FGM,0x10
   .set  Arch_FGM_Files,0x0
   .set  Arch_FGM_Flags,0x4
