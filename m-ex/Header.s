@@ -133,6 +133,8 @@
   .set  Arch_Fighter_EndAdventure, 0x60
   .set  Arch_Fighter_EndAllStar, 0x64
   .set  Arch_Fighter_EndMovie, 0x68
+  .set  Arch_Fighter_RaceTimes, 0x6C
+    .set RaceTimes_Stride,0x4
 .set  Arch_FighterFunc,0xC
   .set  Arch_FighterFunc_onLoad,0x0
   .set  Arch_FighterFunc_onDeath,0x4
