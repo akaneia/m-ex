@@ -127,6 +127,7 @@
     .set  MEXItemLookup_Stride,8
   .set  Arch_Fighter_TargetStage, 0x50
   .set  Arch_Fighter_BGM, 0x54
+    .set BGM_Stride, 0x4
   .set  Arch_Fighter_ViWaitFileNames, 0x58
   .set  Arch_Fighter_EndClassic, 0x5C
   .set  Arch_Fighter_EndAdventure, 0x60
