@@ -51,6 +51,32 @@ struct Particle
     GeneratorAppSRT *param;
 };
 
+struct ptclGen // allocated at 8039d9c8
+{
+    struct ptclGen *next; // 0x0
+    int kind;             // x4
+    float random;         // x8
+    float xc;             // xc
+    JOBJ *joint;          // x10
+    u16 genlife;          // x14
+    u16 type;             // x16
+    u8 ef_file;           // x18
+    u8 x19;               // x19, r3 for 8039f05c
+    u8 tex_group;         // x1a
+    u8 x1b;               // x1b
+    u16 instance;         // x1c
+    u16 life;             // x1e
+    void *track;          // x20, pointer to track data
+    Vec3 pos;             // x24
+    Vec3 vel;             // x30
+    float gravity;        // x3c
+    float friction;       // x40
+    float size;           // x44
+    float radius;         // x48
+    float angle;          // x4c
+    int timer;            // x50
+};
+
 struct GeneratorAppSRT // allocated at 803a42b0
 {
     int x0;     //x0
@@ -97,34 +123,105 @@ struct GeneratorAppSRT // allocated at 803a42b0
 
 struct Particle2 // created at 80398c90. dont feel like labelling this, offsets are @ 80398de4
 {
-    int x0;
-    int x4;
-    u8 x8;
-    u8 x9;
-    u8 xa;
-    u8 xb;
-    int xc;
-    int x10;
-    int x14;
-    u8 x18;
-    u8 x19;
-    u16 x1a;
-    u8 x1c;
-    u8 x1d;
-    int x20;
-    int x24;
-    u16 x28;
-    u16 x2a;
-    float x2c;
-    float x30;
-    float x34;
-    float x38;
-    float x3c;
-    float x40;
-    float x44;
-    float x48;
-    float x4c;
+    struct _particle *next; // 0x0
+    u32 kind;               // 0x4
+    u8 bank;                // 0x8
+    u8 texGroup;            // 0x9
+    u8 poseNum;             // 0xa
+    u8 palNum;              // 0xb
+    u16 sizeCount;          // 0xc
+    u16 primColCount;       // 0xe
+    u16 envColCount;        // 0x10
+    u8 primCol[4];          // 0x12
+    u8 envCol[4];           // 0x16
+    u16 cmdWait;            // 0x1a
+    u8 loopCount;           // 0x1c
+    u8 linkNo;              // 0x1d
+    u16 idnum;              // 0x1e
+    void *cmdList;          // 0x20
+    u16 cmdPtr;             // 0x24
+    u16 cmdMarkPtr;         // 0x26
+    u16 cmdLoopPtr;         // 0x28
+    u16 life;               // 0x2a
+    Vec3 v;                 // 0x2C
+    float grav;             // 0x38
+    float fric;             // 0x3C
+    Vec3 pos;               // 0x40
+    float size;             // 0x4C
+    float rotate;           // 0x50
+    u16 aCmpCount;          // 0x54
+    u8 aCmpMode;            // 0x56
+    u8 aCmpParam1;          // 0x57
+    u8 aCmpParam2;          // 0x58
+    // theres more but i got bored, rest are here courtesy of psilupan: https://pastebin.com/raw/yQdjypW0
 };
+
+typedef struct _particle
+{
+    struct _particle *next;
+    u32 kind;
+    u8 bank;
+    u8 texGroup;
+    u8 poseNum;
+    u8 palNum;
+    u16 sizeCount;
+    u16 primColCount;
+    u16 envColCount;
+    ? primCol;
+    ? envCol;
+    u16 cmdWait;
+    u8 loopCount;
+    u8 linkNo;
+    u16 idnum;
+    u8 *cmdList;
+    u16 cmdPtr;
+    u16 cmdMarkPtr;
+    u16 cmdLoopPtr;
+    u16 life;
+    f32 vx;
+    f32 vy;
+    f32 vz;
+    f32 grav;
+    f32 fric;
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 size;
+    f32 rotate;
+    u16 aCmpCount;
+    u8 aCmpMode;
+    u8 aCmpParam1;
+    u8 aCmpParam2;
+    u8 pJObjOfs;
+    u16 matColCount;
+    u16 ambColCount;
+    u16 rotateCount;
+    f32 sizeTarget;
+    f32 rotateTarget;
+    f32 rotateAcc;
+    u16 primColRemain;
+    u16 envColRemain;
+    ? primColTarget;
+    ? envColTarget;
+    u16 matColRemain;
+    u16 ambColRemain;
+    u16 aCmpRemain;
+    u8 aCmpParam1Target;
+    u8 aCmpParam2Target;
+    u8 matRGB;
+    u8 matA;
+    u8 ambRGB;
+    u8 ambA;
+    u8 matRGBTarget;
+    u8 matATarget;
+    u8 ambRGBTarget;
+    u8 ambATarget;
+    f32 trail;
+    ? *gen;
+    ? *appsrt;
+    f32 *userdata;
+    ? *callback;
+} Particle;
 
 /*** Functions ***/
 
