@@ -562,8 +562,8 @@ struct ftHit
     int kb;                       // 0x2c
     int attribute;                // 0x30
     int shield_dmg;               // 0x34
-    int hit_kind;                 // 0x38. hitbox interaction. 0 = none, 1 = grounded, 2 = aerial, 3 = both
-    int x3c;                      // 0x3c
+    int hitsound_severity;        // 0x38. hurtbox interaction. 0 = none, 1 = grounded, 2 = aerial, 3 = both
+    int hitsound_kind;            // 0x3c
     char x40;                     // 0x40
     char x41;                     // 0x41
     unsigned char x421 : 1;       // 0x42 0x80
