@@ -72,7 +72,7 @@
 8007cf58:Fighter_PhysAir_LimitVelocity
 80085134:Fighter_Phys_UseAnimPos
 80085154:Fighter_Phys_UseAnimPosAndStick
-8007d7fc:Fighter_SetGrounded
+8007d7fc:Fighter_SetGrounded2
 8007d5d4:Fighter_SetAirborne
 8007e2fc:Fighter_KillAllVelocity
 8006eba4:Fighter_AdvanceScript
