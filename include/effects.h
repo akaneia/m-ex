@@ -75,6 +75,7 @@ struct ptclGen // allocated at 8039d9c8
     float radius;         // x48
     float angle;          // x4c
     int timer;            // x50
+    void *mtx;            // x54, points to an SRT mtx used for transforming the generator while attached to a joint
 };
 
 struct GeneratorAppSRT // allocated at 803a42b0
