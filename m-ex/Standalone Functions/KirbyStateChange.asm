@@ -26,6 +26,11 @@
   fmr  REG_Blend,f3
   lwz REG_FighterData,0x2C(REG_GObj)
 
+# Check if Kirby
+  lwz r3,0x4(REG_FighterData)
+  cmpwi r3,4
+  bne NotKirby
+
 # Get current ability ID
   lwz REG_AbilityID,0x2238(REG_FighterData)  
 
@@ -181,6 +186,20 @@ blrl
 .align 2
 
 ###############################################
+
+NotKirby:
+#OSReport
+  bl  NotKirbyString
+  mflr  r3
+  lwz r4,0x4(REG_FighterData)
+  branchl r12,0x803456a8
+  b Assert
+NotKirbyString:
+blrl
+.string "error: fighter %d is not kirby\n"
+.align 2
+###############################################
+
 Assert:
   bl  Assert_Name
   mflr  r3
