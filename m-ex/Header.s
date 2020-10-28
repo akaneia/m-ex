@@ -1,7 +1,11 @@
 #Constants
-.set  PersonalEffectStart,5000
-.set  CopyEffectStart,6000
-.set  CopyEffectEnd,7000
+.set  PersonalEffectStart,5000  # used for stage effects, need to rework this?
+.set  EffMdlStart,5000
+.set  PtclGenStart,6000
+.set  CpEffMdlStart,7000
+.set  CpPtclGenStart,8000
+.set  MEXEffectEnd,9000
+
 .set  CustomItemStart,237
 .set  RandomIconID,30
 .set  HUD_Stride,3   #im changing this from 3 because 2 seems to work with hsdraw
@@ -74,6 +78,14 @@
 #BGM in IfAll
 .set BGMBG_Joint,0x0
 .set BMGBG_AnimJoint,0x4
+
+#effBehaviorTable
+.set effBhv_ptclGenNum,0x8
+.set effBhv_ptclGenBhv,0xC
+  .set effMdlBhv_Stride,0x1
+.set effBhv_effMdlNum,0x0
+.set effBhv_effMdlBhv,0x4
+  .set effMdlBhv_Stride,0x1
 
 #Scene Data
 .set  MajorStride,0x18
