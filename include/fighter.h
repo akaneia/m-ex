@@ -662,6 +662,12 @@ struct Hurtbox
     int x48; // 0x48
 };
 
+struct FtAfterImageKey
+{
+    Vec3 pos;
+    Vec3 rot;
+} FtAfterImageKey;
+
 struct CPU
 {
     int held;   // 0x0
@@ -2481,27 +2487,14 @@ struct FighterData
     int x20a4;                                      // 0x20a4
     int *shadow;                                    // 0x20a8
     int x20ac;                                      // 0x20ac
-    int x20b0;                                      // 0x20b0
-    int x20b4;                                      // 0x20b4
-    int x20b8;                                      // 0x20b8
-    int x20bc;                                      // 0x20bc
-    int x20c0;                                      // 0x20c0
-    int x20c4;                                      // 0x20c4
-    int x20c8;                                      // 0x20c8
-    int x20cc;                                      // 0x20cc
-    int x20d0;                                      // 0x20d0
-    int x20d4;                                      // 0x20d4
-    int x20d8;                                      // 0x20d8
-    int x20dc;                                      // 0x20dc
-    int x20e0;                                      // 0x20e0
-    int x20e4;                                      // 0x20e4
-    int x20e8;                                      // 0x20e8
-    int x20ec;                                      // 0x20ec
-    int x20f0;                                      // 0x20f0
-    int x20f4;                                      // 0x20f4
-    int x20f8;                                      // 0x20f8
-    int x20fc;                                      // 0x20fc
-    int x2100;                                      // 0x2100
+    struct afterimage                               // 0x20b0
+    {                                               //
+        struct FtAfterImageKey afterimage[3];       // 0x20b0
+        float afterimage_bottom;                    // 0x20f8
+        float afterimage_top;                       // 0x20fc
+        u8 afterimage_state;                        // 0x2100
+        unsigned char afterimage_num : 7;           // 0x2101
+    } afterimage;                                   //
     int x2104;                                      // 0x2104
     int x2108;                                      // 0x2108
     int x210c;                                      // 0x210c
