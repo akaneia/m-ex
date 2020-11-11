@@ -106,25 +106,56 @@ MgrColl_FtLoop:
   rlwinm. r0,r3,0,0x80
   bne MgrColl_FtInc
 
-# Get player pos
-  lfs f1,0xB0(REG_FighterData)
-  stfs f1,0x70(sp)
-  lfs f1,0xB4(REG_FighterData)
-  lfs f2,0x20C(REG_FighterData)
-  lfs f3,0x1C(REG_Floats)
-  #fdivs f2,f2,f3
-  #fsubs f1,f1,f2
-  stfs f1,0x74(sp)
-  lfs f1,0xB8(REG_FighterData)
-  stfs f1,0x78(sp)
+# Get player box
+# Boxes go Up, Down, Left, Right
+  lfs f1,0x6F0 + 0x8 (REG_FighterData)
+  lfs f2,0x6F0 + 0x88 (REG_FighterData)
+  fadds f2,f1,f2
+  stfs f2,0x80(sp)    # up
+  lfs f2,0x6F0 + 0x90 (REG_FighterData)
+  fadds f2,f1,f2
+  stfs f2,0x84(sp)    # down
+  lfs f1,0x6F0 + 0x4 (REG_FighterData)
+  lfs f2,0x6F0 + 0x9C (REG_FighterData)
+  fadds f2,f1,f2
+  stfs f2,0x88(sp)    # left
+  lfs f2,0x6F0 + 0x94 (REG_FighterData)
+  fadds f2,f1,f2
+  stfs f2,0x8C(sp)    # right
   
-# Get players screen coords
+# Convert these coords to screen
   branchl r12,0x80030a50
-  lwz	r3, 0x0028 (r3)
-  addi r4,sp,0x70   # fighter position
-  addi r5,sp,0x80
+  lwz	r29, 0x0028 (r3)
+  li r3,0
+  stw r3,0x6C(sp) # Z
+# Top Left
+  lfs f1,0x88(sp)
+  stfs f1,0x60(sp)
+  lfs f1,0x80(sp)
+  stfs f1,0x64(sp)
+  mr r3,r29
+  addi r4,sp,0x60   # point position
+  addi r5,sp,0x70
   li r6,0
   branchl r12,0x8000e210
+  lfs f1,0x70(sp)    # left
+  stfs f1,0x88(sp)
+  lfs f1,0x74(sp)     # bottom
+  stfs f1,0x80(sp)
+# Bot Right
+  lfs f1,0x8C(sp)
+  stfs f1,0x60(sp)
+  lfs f1,0x84(sp)
+  stfs f1,0x64(sp)
+  mr r3,r29
+  addi r4,sp,0x60   # point position
+  addi r5,sp,0x70
+  li r6,0
+  branchl r12,0x8000e210
+  lfs f1,0x70(sp)    # right
+  stfs f1,0x8C(sp)
+  lfs f1,0x74(sp)     # bottom
+  stfs f1,0x84(sp)
 
   # Check if colliding with any HUD
   .set REG_Count,22
@@ -143,30 +174,35 @@ MgrColl_FtLoop:
     li r6,0
     branchl r12,0x8000e210
   # Check if fighter is within this HUDs area
+  # Boxes go Up, Down, Left, Right
+  # ft.left < hud.right
     lfs f1,0x90(sp)    # hud X
     lfs f2,0x14(REG_Floats)   # width
     fadds f1,f1,f2
-    lfs f2,0x80(sp)  # fighter X
+    lfs f2,0x88(sp)
     fcmpo cr0,f2,f1
-    bgt MgrColl_HUDInc
+    bge MgrColl_HUDInc
+  # ft.right > hud.left
     lfs f1,0x90(sp)    # hud X
     lfs f2,0x14(REG_Floats)   # width
     fsubs f1,f1,f2
-    lfs f2,0x80(sp)  # fighter X
+    lfs f2,0x8C(sp)
     fcmpo cr0,f2,f1
-    blt MgrColl_HUDInc
-    lfs f1,0x94(sp)    # hud Y
-    lfs f2,0x18(REG_Floats)   # height
-    fadds f1,f1,f2
-    lfs f2,0x84(sp)  # fighter Y
-    fcmpo cr0,f2,f1
-    bgt MgrColl_HUDInc
+    ble MgrColl_HUDInc
+  # ft.top > hud.bottom
     lfs f1,0x94(sp)    # hud Y
     lfs f2,0x18(REG_Floats)   # height
     fsubs f1,f1,f2
-    lfs f2,0x84(sp)  # fighter Y
+    lfs f2,0x84(sp)
     fcmpo cr0,f2,f1
-    blt MgrColl_HUDInc
+    ble MgrColl_HUDInc
+  # ft.bottom < hud.top
+    lfs f1,0x94(sp)    # hud Y
+    lfs f2,0x18(REG_Floats)   # height
+    fadds f1,f1,f2
+    lfs f2,0x80(sp)
+    fcmpo cr0,f2,f1
+    bge MgrColl_HUDInc
   # is within, set new transparency 
     mulli r3,REG_Count,mgr_size
     add r3,r3,REG_MgrData
@@ -356,8 +392,8 @@ blrl
 .float 0.999 # Stock Default Transparency
 .float 0.699 # Insignia Default Transparency
 .float 0.999 # Percent Default Transparency
-.float 50     # HUD Collision Width
-.float 50     # HUD Collision Height
+.float 65     # HUD Collision Width
+.float 65     # HUD Collision Height
 
 .float 2     # Fighter Position Divisor
 
