@@ -127,7 +127,7 @@ MgrColl_FtLoop:
   branchl r12,0x80030a50
   lwz	r29, 0x0028 (r3)
   li r3,0
-  stw r3,0x6C(sp) # Z
+  stw r3,0x68(sp) # Z
 # Top Left
   lfs f1,0x88(sp)
   stfs f1,0x60(sp)
