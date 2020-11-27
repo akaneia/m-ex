@@ -128,6 +128,31 @@ struct CollData
     int ecb_lock;              // 0x19c
 };
 
+struct CollLineInfo
+{
+    u16 vert_left;
+    u16 vert_right;
+    u16 x4;
+    u16 x6;
+    u16 x8;
+    u16 xa;
+    u16 xc;
+    u16 type; //
+};
+
+struct CollLine
+{
+    CollLineInfo *info;
+    int flags;
+};
+
+struct CollVert
+{
+    Vec2 pos_orig;
+    Vec2 pos_curr;
+    Vec2 pos_prev;
+};
+
 /*** Functions ***/
 
 void Coll_ECBCurrToPrev(CollData *collData);

@@ -119,6 +119,9 @@ typedef struct Rules1 Rules1;
 typedef struct CollData CollData;
 typedef struct ECBBones ECBBones;
 typedef struct DmgHazard DmgHazard;
+typedef struct CollLineInfo CollLineInfo;
+typedef struct CollLine CollLine;
+typedef struct CollVert CollVert;
 
 // HSD
 typedef struct HSD_Material HSD_Material;
