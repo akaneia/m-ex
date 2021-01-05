@@ -346,6 +346,8 @@ void Stage_GetChkDevicePos(float *y_pos, float *y_delta);
 float Stage_GetScale();
 int *Stage_GetYakumonoParam();
 void Stage_MapStateChange(GOBJ *map, int map_gobjID, int anim_id);
+int Stage_CheckAnimEnd(GOBJ *map, int jobj_index, int flags);  // 0x1 = unk aobj, 0x2 = material aobj, 0x4 = unk aobj
+int Stage_CheckAnimEnd2(GOBJ *map, int jobj_index, int flags); // 0x1 = unk aobj, 0x2 = material aobj, 0x4 = unk aobj
 void Dynamics_DecayWind();
 GOBJ *Stage_CreateMapGObj(int mapgobjID);
 void Stage_DestroyMapGObj(GOBJ *map_gobj);

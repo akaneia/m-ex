@@ -97,6 +97,15 @@ typedef struct FtDOBJUnk FtDOBJUnk;
 typedef struct FtPartsLookup FtPartsLookup;
 typedef struct FtDOBJUnk2 FtDOBJUnk2;
 typedef struct FtDOBJUnk3 FtDOBJUnk3;
+typedef struct FtSymbolLookup FtSymbolLookup;
+typedef struct FtSymbols FtSymbols;
+typedef struct FtDynamicBoneset FtDynamicBoneset;
+typedef struct FtDynamicRoot FtDynamicRoot;
+typedef struct FtDynamicHit FtDynamicHit;
+typedef struct DynamicsDesc DynamicsDesc;
+typedef struct DynamicsHitDesc DynamicsHitDesc;
+typedef struct DynamicsBehave DynamicsBehave;
+typedef struct ftDynamics ftDynamics;
 
 // CSS
 typedef struct CSSBackup CSSBackup;

@@ -301,8 +301,8 @@ struct JOBJ
     DOBJ *dobj;       //0x18
     Vec4 rot;         //0x1C 0x20 0x24 0x28
     Vec3 scale;       //0x2C
-    Vec3 trans;
-    Mtx rotMtx;
+    Vec3 trans;       // 0x38
+    Mtx rotMtx;       // 0x44
     Vec3 *VEC;
     Mtx *MTX;
     AOBJ *aobj; // 0x7C
@@ -475,6 +475,8 @@ void JOBJ_ReqAnimAllByFlags(JOBJ *joint, int flags, float frame);
 float JOBJ_GetJointAnimFrameTotal(JOBJ *joint);
 float JOBJ_GetJointAnimNextFrame(JOBJ *joint);
 void JOBJ_SetAllMOBJFlags(JOBJ *joint, int flags);
+int JOBJ_CheckAObjEnd(JOBJ *joint);
+void JObj_DispAll(JOBJ *joint, Mtx *vmtx, int flags, int rendermode);
 void AOBJ_ReqAnim(int *aobj, float unk);
 void AOBJ_StopAnim(JOBJ *jobj, int flags, int flags2);
 void DOBJ_SetFlags(DOBJ *dobj, int flags);
@@ -493,6 +495,7 @@ void GObj_FreeObject(GOBJ *gobj);
 void GObj_AddUserData(GOBJ *gobj, int userDataKind, void *destructor, void *userData);
 void GOBJ_InitCamera(GOBJ *gobj, void *cb, int gx_pri);
 void GXLink_Common(GOBJ *gobj, int pass);
+int GX_LookupRenderPass(int pass);
 void GXLink_LObj(GOBJ *gobj, int pass);
 void GXLink_Fog(GOBJ *gobj, int pass);
 void *LObj_LoadDesc(void *lobjdesc);

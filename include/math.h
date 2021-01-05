@@ -16,13 +16,18 @@ float cos(float x);
 void MTXLookAt(Mtx *dest, Vec3 *eye, Vec3 *up, Vec3 *target);
 void VECNormalize(Vec3 *src, Vec3 *dest);
 void VECAdd(Vec3 *a, Vec3 *b, Vec3 *ab);
+void PSMTXCopy(Mtx *src, Mtx *dest);
 void VECSubtract(Vec3 *a, Vec3 *b, Vec3 *a_b);
 void VECMultAndAdd(Vec3 *a, Vec3 *b);
 float VECDotProduct(Vec3 *a, Vec3 *b);
 void VECCrossProduct(Vec3 *a, Vec3 *b, Vec3 *axb);
-void MTXQuat(Vec4 *dest, Mtx *m);
+//void MTXQuat(Mtx *m, Vec4 *dest);           // quat to matrix
+void HSD_MkRotationMtx(Mtx *dest, Vec4 *v); // quat to rot matrix
+void HSD_MtxGetScale(Mtx *m, Vec3 *dest);
 void HSD_MtxGetRotation(Mtx *m, Vec3 *dest);
-void MatToQuat(Mtx *m, Vec3 *dest);
+void HSD_MtxGetTranslate(Mtx *m, Vec3 *dest);
+void HSD_MtxSRT(Mtx *m, Vec3 *scale, Vec3 *rot, Vec3 *trans, int unk);
+void MatToQuat(Mtx *m, Vec3 *dest); // matrix to quat
 float sqrtf(float num);
 void MTXRotRad(Mtx m, char axis, f32 rad);
 

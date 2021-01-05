@@ -100,7 +100,11 @@
 80074170:Fighter_InitPObj2
 80075650:Fighter_IndexFtPartsDObjs
 8007487c:Fighter_InitFtPartsModel
+80074ca0:Fighter_UpdateDObjFlags
+80074d7c:Fighter_UpdateDObjFlags2
 8007d6a4:Fighter_SetGrounded
+8000fd48:Fighter_CreateDynamicsBoneset
+80011710:Fighter_InitDynamicsBoneset
 80380580:HSD_Randi
 80380528:HSD_Randf
 8037f1e4:HSD_MemAlloc
@@ -178,7 +182,13 @@
 80342e38:VECDotProduct
 80342e58:VECCrossProduct
 80342690:MTXQuat
+803421d0:PSMTXCopy
 80379c24:HSD_MtxGetRotation
+8037a120:HSD_MkRotationMtx
+80379f88:HSD_MtxGetScale
+80379c24:HSD_MtxGetRotation
+80379f6c:HSD_MtxGetTranslate
+8037a250:HSD_MtxSRT
 8037e708:MatToQuat
 8000d5bc:sqrtf
 80342418:MTXRotRad
@@ -221,6 +231,7 @@
 8000be40:JOBJ_GetJointAnimFrameTotal
 8000bdb4:JOBJ_GetJointAnimNextFrame
 801c8858:JOBJ_SetAllMOBJFlags
+8000b09c:JOBJ_CheckAObjEnd
 8036410c:AOBJ_ReqAnim
 8036414c:AOBJ_StopAnim
 8035ddb8:DOBJ_SetFlags
@@ -239,6 +250,8 @@
 80390b68:GObj_AddUserData
 8039075c:GOBJ_InitCamera
 80391070:GXLink_Common
+80390eb8:GX_LookupRenderPass
+803709dc:JObj_DispAll
 80391044:GXLink_LObj
 8026407c:GXLink_Fog
 803672dc:LObj_LoadDesc
@@ -261,6 +274,8 @@
 801c0498:Stage_GetScale
 801c49f8:Stage_GetYakumonoParam
 801c8138:Stage_MapStateChange
+801c83d0:Stage_CheckAnimEnd
+801c84a4:Stage_CheckAnimEnd2
 800115f4:Dynamics_DecayWind
 80223908:Stage_CreateMapGObj
 801c4a08:Stage_DestroyMapGObj
@@ -305,6 +320,7 @@
 800031f4:memcpy
 80003100:memset
 80005358:blr
+8021b2d8:bp
 801c53ec:SFX_Play
 80024030:SFX_PlayCommon
 8002411c:SFX_PlayCrowd

@@ -471,28 +471,112 @@ struct FighterBone
     int flags2;
 };
 
+struct DynamicsDesc
+{
+    int root_bone; // bone index;
+    void *params;  // dynamics params;
+    int num;       // number of children bones to make dynamic
+    float xc;
+    float x10;
+    float x14;
+};
+
+struct DynamicsHitDesc
+{
+    int bone; // bone index
+    int x4;   // unk
+    Vec3 x8;  // unk
+};
+
+struct DynamicsBehave
+{
+    int num; // number of dynamic bones to animate in the boneset
+};
+
+struct ftDynamics
+{
+    int dynamics_num;                   // number of dynamic bonesets for this fighter
+    DynamicsDesc *dynamics_desc;        // boneset data array (one for each boneset)
+    int dynamics_hit_num;               // (no collide bubbles), max is 11
+    DynamicsHitDesc *dynamics_hit_desc; // dynamic hit data array (one for each dynamic hit)
+    DynamicsBehave **dynamics_behave;   // pointer to an array of dynamics behavior pointers.
+};
+
+struct FtDynamicBoneset
+{
+    int apply_phys_num; // if this is 256, dyanmics are not processed
+    void *unk_ptr;      // is stored @ 8000fdd4, comes from a nonstandard heap @ -0x52fc(r13)
+    int bone_num;       // number of bones in this boneset
+    float xc;           // stored @ 80011718, 0x8 of dynamicdesc
+    float x10;          // stored @ 80011720, 0xC of dynamicdesc
+    float x14;          // stored @ 80011728, 0x10 of dynamicdesc
+};
+
+struct FtDynamicRoot
+{
+    JOBJ *jobj;          // 0x0
+    Vec4 rot;            // 0x4 quaternion
+    Vec3 trans;          // 0x14
+    Vec3 scale;          // 0x20
+    Vec3 rot_global;     // 0x2C, copied from 0x50, 0x60, 0x70 of jobj
+    float x38;           // 0x38, initialized to 1 @ 8000ff30
+    float x3c;           // 0x3c, initialized to 0 @ 8000ff34
+    float x40;           // 0x40, initialized to 0 @ 8000ff38
+    float x44;           // 0x44, initialized to 0 @ 8000ff3c
+    float x48;           // x48, initialized to 0 @ 8000ff44
+    float x4c;           // x4c, THIS IS THE START OF A STRUCTURE, bunch of floats from the dynamicdesc. stored @ 80011744
+    float x50;           // 0x3c
+    float x54;           // 0x40
+    float x58;           // 0x44
+    float x5c;           // x048
+    float x60;           // 0x38
+    float x64;           // 0x3c
+    float x68;           // 0x40
+    float x6c;           // 0x44
+    float x70;           // x048
+    float x74;           // 0x38
+    float x78;           // 0x3c
+    float x7c;           // 0x40
+    float x80;           // 0x44
+    float x84;           // x048
+    float x88;           // 0x38
+    float x8c;           // 0x3c
+    FtDynamicRoot *next; // 0x90
+    float x94;           // 0x44
+};
+
+struct FtDynamicHit
+{
+    int x0;         // 0x1670
+    Vec3 x4;        // 0x1674
+    JOBJ *bone;     // 0x1680
+    int x14;        // 0x1684
+    Vec3 pos;       // 0x1688
+    int bone_index; // 0x1694
+};
+
 struct ftData
 {
     char footBoneL;
     char footBoneR;
-    int *charAttributes;
-    u8 *modelLookup;
-    int animFlags;
-    int animDynamics;
+    int *charAttributes; // 0x4
+    u8 *modelLookup;     // 0x8
+    int animFlags;       // 0xC
+    int animDynamics;    // 0x10
     int x14;
     int x18;
     int x1C;
     int x20;
     int x24;
     int x28;
-    int dynamics;
+    ftDynamics *dynamics; // 0x2C
     int hurtbox;
     int *center_bubble;
     int x38;
     int x3C;
     int x40;
     int coll;
-    int *items;
+    void *items;
     int *x4C;
     int x50;
     int x54;
@@ -1715,60 +1799,21 @@ struct FighterData
     int unknown2E4;                                        // 0x2E4
     int unknown2E8;                                        // 0x2E8
     int unknown2EC;                                        // 0x2EC
-    DynamicBoneset dynamics_boneset[5];                    //0x2f0
-    int unknown3B8;                                        // 0x3B8
-    int unknown3BC;                                        // 0x3BC
-    int unknown3C0;                                        // 0x3C0
-    int unknown3C4;                                        // 0x3C4
-    int unknown3C8;                                        // 0x3C8
-    int unknown3CC;                                        // 0x3CC
-    int unknown3D0;                                        // 0x3D0
-    int unknown3D4;                                        // 0x3D4
-    int unknown3D8;                                        // 0x3D8
-    int unknown3DC;                                        // 0x3DC
-    int dynamic_boneset_num;                               // 0x3E0
-    int script_event_timer;                                // 0x3E4
-    int script_frame_timer;                                // 0x3E8
-    int *script_current;                                   // 0x3EC
-    int script_loop_num;                                   // 0x3F0
-    int *script_return;                                    // 0x3F4
+    FtDynamicBoneset dynamics_boneset[10];                 // 0x2f0
+    int dynamics_num;                                      // 0x3E0
+    struct script                                          //  0x3E4
+    {                                                      //
+        float script_event_timer;                          // 0x3E4
+        float script_frame_timer;                          // 0x3E8
+        int *script_current;                               // 0x3EC
+        int script_loop_num;                               // 0x3F0
+        int *script_return;                                // 0x3F4
+    } script;                                              //
     int unk;                                               // 0x3F8
     int unk3FC;                                            // 0x3FC
     int pointer_to_0x460;                                  // 0x400
     int pointer_to_0x3c0;                                  // 0x404
-    int unknown408;                                        // 0x408
-    int unknown40C;                                        // 0x40C
-    int unknown410;                                        // 0x410
-    int unknown414;                                        // 0x414
-    int unknown418;                                        // 0x418
-    int unknown41C;                                        // 0x41C
-    int unknown420;                                        // 0x420
-    int unknown424;                                        // 0x424
-    int unknown428;                                        // 0x428
-    int unknown42C;                                        // 0x42C
-    int unknown430;                                        // 0x430
-    int unknown434;                                        // 0x434
-    int unknown438;                                        // 0x438
-    int unknown43C;                                        // 0x43C
-    int unknown440;                                        // 0x440
-    int unknown444;                                        // 0x444
-    int unknown448;                                        // 0x448
-    int unknown44C;                                        // 0x44C
-    int unknown450;                                        // 0x450
-    int unknown454;                                        // 0x454
-    int unknown458;                                        // 0x458
-    int unknown45C;                                        // 0x45C
-    int unknown460;                                        // 0x460
-    int unknown464;                                        // 0x464
-    int unknown468;                                        // 0x468
-    int unknown46C;                                        // 0x46C
-    int unknown470;                                        // 0x470
-    int unknown474;                                        // 0x474
-    int unknown478;                                        // 0x478
-    int unknown47C;                                        // 0x47C
-    int unknown480;                                        // 0x480
-    int unknown484;                                        // 0x484
-    ColorOverlay color[2];                                 // 0x488
+    ColorOverlay color[3];                                 // 0x408
     int *LObj;                                             // 0x588
     int anim_num;                                          // 0x58C
     int *anim_curr_flags_ptr;                              // 0x590
@@ -2630,12 +2675,19 @@ struct FighterData
     unsigned char x221f_8 : 1;
     char flags_2220;                      // 0x2220
     char flags_2221;                      // 0x2221
-    char flags_2222;                      // 0x2222
+    unsigned char x2222_1 : 1;            // 0x80 - 0x2222
+    unsigned char is_multijump : 1;       // 0x40 - 0x2222
+    unsigned char x2222_3 : 1;            // 0x20 - 0x2222
+    unsigned char x2222_4 : 1;            // 0x10
+    unsigned char x2222_5 : 1;            // 0x08
+    unsigned char x2222_6 : 1;            // 0x04
+    unsigned char x2222_7 : 1;            // 0x02
+    unsigned char x2222_8 : 1;            // 0x01
     char flags_2223;                      // 0x2223
     char flags_2224;                      // 0x2224
     unsigned char x2225_1 : 1;            // 0x80 - 0x2225
     unsigned char x2225_2 : 1;            // 0x40 - 0x2225
-    unsigned char is_kbcp : 1;            // 0x20 - 0x2225  bool for if kirby has a copy ability?
+    unsigned char has_model_addition : 1; // 0x20 - 0x2225  bool for if fighter has a model addition, like kirby copy ability and puff hat
     unsigned char x2225_4 : 1;            // 0x10 - 0x2225
     unsigned char x2225_5 : 1;            // 0x8 - 0x2225
     unsigned char x2225_6 : 1;            // 0x4 - 0x2225
@@ -2819,10 +2871,26 @@ struct FtDOBJUnk // is in the fighter data
     int num;  // 0x2250
     u8 x4[5]; // array of bools?
     FtDOBJUnk3 *xc;
-    void *x10;
-    void *x14;
-    void *x18;
-    void *x1c;
+    void *highpoly_table;
+    void *lowpoly_table;
+    void *metalpoly_table;
+    void *metalmain_table;
+};
+
+struct FtSymbolLookup
+{
+    FtSymbols *archives;
+    u8 num;
+};
+
+struct FtSymbols
+{
+    JOBJ *joint;         // 0x0
+    void *matanim_joint; // 0x4
+    void *x8;            // 0x8
+    void *xc;            // 0xc
+    void *x10;           // 0x10
+    ArchiveInfo *costume // 0x14
 };
 
 /*** Functions ***/
@@ -2904,5 +2972,9 @@ void Fighter_InitPObj();
 void Fighter_InitPObj2();
 void Fighter_IndexFtPartsDObjs(GOBJ *fighter, JOBJ *copy_model, FtParts *ftparts); // inits the dobj array in ftpartsmodel
 void Fighter_InitFtPartsModel(FtPartsDesc *ftpartsdesc, FtDOBJUnk *unk, int index, FtParts *ftparts, FtParts *ftparts2);
+void Fighter_UpdateDObjFlags(void *ftparts1, int r4, void *ftparts2);
+void Fighter_UpdateDObjFlags2(void *ftparts1, int r4, void *ftparts2);
+void Fighter_CreateDynamicsBoneset(JOBJ *joint, FtDynamicBoneset *boneset, int bone_num);
+void Fighter_InitDynamicsBoneset(void *dyn_desc_params, FtDynamicBoneset *boneset);
 int Fighter_CheckUnlocked(int ext_id);
 #endif
