@@ -5,7 +5,7 @@
 backup
 
 # check if over
-  cmpwi  r3,8
+  cmpwi  r3,9
   bge Assert
 
 # get jump table
@@ -19,6 +19,7 @@ bl  GrIntNum
 bl  GrExtNum
 bl  GrIconNum
 bl  MnSlMpIcon
+bl  CostumeSymbol
 #*****************************#
 SkipJumpTable:
 #Get effect type
@@ -56,6 +57,9 @@ GrIconNum:
   b Exit
 MnSlMpIcon:
   lwz r3,OFST_Menu_SSS(rtoc)
+  b Exit
+CostumeSymbol:
+  lwz r3,OFST_Char_CostumeRuntimePointers(rtoc)
   b Exit
 
 #############################################
