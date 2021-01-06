@@ -121,6 +121,10 @@
   .set  Arch_Fighter_CostumeIDs,0x10
   .set  Arch_Fighter_CostumeFileSymbols,0x14
     .set  CostumeFileSymbols_Stride,0x10
+    .set  CostumeFileSymbols_FileName,0x0
+    .set  CostumeFileSymbols_JointSym,0x4
+    .set  CostumeFileSymbols_MatAnimSym,0x8
+    .set  CostumeFileSymbols_VisibilityIndex,0xC # used to grab a visibility index from the PlXX file
   .set  Arch_Fighter_FtDemo_SymbolNames,0x18
   .set  Arch_Fighter_AnimFiles,0x1C
   .set  Arch_Fighter_AnimCounts,0x20
@@ -131,6 +135,8 @@
   .set  Arch_Fighter_AnnouncerCall,0x34
   .set  Arch_Fighter_SSMFileIDs,0x38
   .set  Arch_Fighter_RuntimeCostumePointers,0x3C
+    .set  RuntimeCostumePointers_Stride,0x8
+          .set  RuntimeCostumePointersSub_Stride,0x18
   .set  Arch_Fighter_ftDataPointers,0x40
     .set  ftDataPointers_Stride,8
   .set  Arch_Fighter_onWallJump,0x44
