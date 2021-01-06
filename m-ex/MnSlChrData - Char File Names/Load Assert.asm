@@ -20,7 +20,7 @@ DoesNotExist:
   branchl r12,0x80388220
 Assert_Name:
 blrl
-.string "m-ex"
+.string "lbfile"
 .align 2
 ErrorString:
 blrl

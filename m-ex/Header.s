@@ -120,6 +120,7 @@
   .set  Arch_Fighter_DefineIDs,0xC
   .set  Arch_Fighter_CostumeIDs,0x10
   .set  Arch_Fighter_CostumeFileSymbols,0x14
+    .set  CostumeFileSymbols_Stride,0x10
   .set  Arch_Fighter_FtDemo_SymbolNames,0x18
   .set  Arch_Fighter_AnimFiles,0x1C
   .set  Arch_Fighter_AnimCounts,0x20
