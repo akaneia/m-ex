@@ -475,7 +475,7 @@ struct DynamicsDesc
 {
     int root_bone; // bone index;
     void *params;  // dynamics params;
-    int num;       // number of children bones to make dynamic
+    int num;       // 0xC, number of children bones to make dynamic
     float xc;
     float x10;
     float x14;
@@ -1823,14 +1823,7 @@ struct FighterData
     int *anim_cache_persist;                               // 0x5A0
     int *anim_curr_ARAM;                                   // 0x5A4
     int *anim_persist_ARAM;                                // 0x5A8
-    int dobj_toggle_num;                                   // 0x5AC
-    int unknown5B0;                                        // 0x5B0
-    int unknown5B4;                                        // 0x5B4
-    int unknown5B8;                                        // 0x5B8
-    int unknown5BC;                                        // 0x5BC
-    int unknown5C0;                                        // 0x5C0
-    int unknown5C4;                                        // 0x5C4
-    int unknown5C8;                                        // 0x5C8
+    FtPartsVis ftparts_vis;                                // 0x5AC
     int unknown5CC;                                        // 0x5CC
     int unknown5D0;                                        // 0x5D0
     int unknown5D4;                                        // 0x5D4
@@ -2831,12 +2824,10 @@ struct FighterData
     } mex;
 };
 
-struct FtParts // is in the fighter data
+struct FtDObjLookup // is in the fighter data
 {
     int num;     // 0x2240
-    DOBJ **dobj; // 0x2244   array of dobjs for the ftpar
-    void *x8;    // 0x2248
-    void *xc;    // 0x224C
+    DOBJ **dobj; // 0x2244   array of dobjs
 };
 
 struct FtPartsDesc
@@ -2845,7 +2836,7 @@ struct FtPartsDesc
     FtPartsLookup *lookups;
 };
 
-struct FtDOBJUnk3
+struct FtPartsVisLookup
 {
     int num;
     FtDOBJUnk2 *x4; // pointer to u8 array
@@ -2859,22 +2850,22 @@ struct FtDOBJUnk2
 
 struct FtPartsLookup
 {
-    FtDOBJUnk3 *x0;
+    FtPartsVisLookup *x0;
     void *x4;
     void *x8;
     void *xc;
     void *x10;
 };
 
-struct FtDOBJUnk // is in the fighter data
+struct FtPartsVis // is in the fighter data
 {
-    int num;  // 0x2250
-    u8 x4[5]; // array of bools?
-    FtDOBJUnk3 *xc;
-    void *highpoly_table;
-    void *lowpoly_table;
-    void *metalpoly_table;
-    void *metalmain_table;
+    int num;                           // 0x0
+    u8 x4[5];                          // 0x4 array of bools?
+    FtPartsVisLookup *highpoly_table;  // 0x0C
+    FtPartsVisLookup *lowpoly_table;   // 0x10
+    FtPartsVisLookup *metalpoly_table; // 0x14
+    FtPartsVisLookup *metalmain_table; // 0x18
+    FtPartsVisLookup *x1C;             // 0x1C
 };
 
 struct FtSymbolLookup
@@ -2971,9 +2962,9 @@ void Fighter_ProcDynamics(GOBJ *fighter);
 void Fighter_InitPObj();
 void Fighter_InitPObj2();
 void Fighter_IndexFtPartsDObjs(GOBJ *fighter, JOBJ *copy_model, FtParts *ftparts); // inits the dobj array in ftpartsmodel
-void Fighter_InitFtPartsModel(FtPartsDesc *ftpartsdesc, FtDOBJUnk *unk, int index, FtParts *ftparts, FtParts *ftparts2);
-void Fighter_UpdateDObjFlags(void *ftparts1, int r4, void *ftparts2);
-void Fighter_UpdateDObjFlags2(void *ftparts1, int r4, void *ftparts2);
+void Fighter_InitFtPartsModel(FtPartsDesc *ftpartsdesc, FtPartsVis *parts_vis, int index, void *bone_info, void *bone_info2);
+void Fighter_UpdateDObjFlags(void *ftparts1, int r4, void *bone_info);
+void Fighter_UpdateDObjFlags2(void *ftparts1, int r4, void *bone_info);
 void Fighter_CreateDynamicsBoneset(JOBJ *joint, FtDynamicBoneset *boneset, int bone_num);
 void Fighter_InitDynamicsBoneset(void *dyn_desc_params, FtDynamicBoneset *boneset);
 int Fighter_CheckUnlocked(int ext_id);

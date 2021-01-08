@@ -17,7 +17,7 @@ struct FtVarKirby
     int copy_index;        // 0x2238
     JOBJ *copy_jobj;       // 0x223c
     FtParts ftparts_model; // 0x2240
-    FtDOBJUnk ftdobj_unk;  // 0x2250
+    FtPartsVis ftdobj_unk; // 0x2250
 };
 
 #endif
