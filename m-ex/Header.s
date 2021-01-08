@@ -23,6 +23,7 @@
 .set  SFX_PlayStageSFX,0x803d7078
 .set  GetStockFrame,0x803d7060
 .set  MenuThink,0x803d7090
+.set  FtModelAdd_DObjToggle,0x803d7098
 
 #Custom Static Variables
 .set  PersistHeapNum, 5 + 2
@@ -86,6 +87,28 @@
 .set effBhv_effMdlNum,0x0
 .set effBhv_effMdlBhv,0x4
   .set effMdlBhv_Stride,0x1
+
+#ModelAddDescArr
+.set mdAddDescArr_num, 0x0
+.set mdAddDescArr_ptr, 0x4
+
+#ModelAddDesc
+.set mdAddDesc_JOBJ, 0x0
+.set mdAddDesc_attachbone,0x4
+.set mdAddDesc_dynamicsnum, 0x8
+.set mdAddDesc_dynamicsdesc, 0xc
+.set mdAddDesc_modelvisdesc, 0x10
+  .set mdAddDesc_modelvisdesc_num, 0x0
+  .set mdAddDesc_modelvisdesc_table, 0x4
+
+#FtModelAdd
+.set mdAdd_size, 0x30
+.set mdAdd_JOBJ, 0x0
+.set mdAdd_attachbone, 0x4
+.set mdAdd_DOBJLookup, 0x8
+  .set mdAdd_bonenum, 0x0
+  .set mdAdd_dobjarr, 0x4
+.set mdAdd_ftpartsvis, 0x10
 
 #Scene Data
 .set  MajorStride,0x18
@@ -366,7 +389,7 @@
 
 # Fighter Data Sizes
 .set  FighterDataOrigSize, 0x23ec
-.set  MEX_FighterDataSize, 0xC       # mex needs additional X bytes
+.set  MEX_FighterDataSize, 0x10       # mex needs additional X bytes
 .set  FighterDataTotalSize, FighterDataOrigSize + MEX_FighterDataSize
 
 # Fighter Data Start
@@ -380,7 +403,8 @@
 .set  MEX_UCFPrevX, MEX_UCFCurrX + 0x1   #1 byte
 .set  MEX_UCF2fX, MEX_UCFPrevX + 0x1   #1 byte
 .set  MEX_align, MEX_UCF2fX + 0x1   #1 byte
-
+.set  MEX_FtModelAdd_num, MEX_align + 0x1   #4 bytes
+.set  MEX_FtModelAdd_ptr, MEX_FtModelAdd_num + 0x4   #4 bytes
 /*
 #SSM Struct Offsets
 #Header
