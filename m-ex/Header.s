@@ -281,6 +281,8 @@
 .set  Arch_Scene,0x30
   .set  Scene_Major,0x0
   .set  Scene_Minor,0x4
+.set  Arch_Misc,0x34
+  .set  Misc_GawColors,0x0
 
 #Offsets
 .set  OFST_MnSlChrIconData,0x0
