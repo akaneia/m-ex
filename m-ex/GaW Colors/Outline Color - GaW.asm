@@ -15,3 +15,5 @@
   lwz r4,0x4(r4)
   stw r4,0x2434(REG_FighterData)
   stw r4,0x614(REG_FighterData)
+
+lwz	r0, 0x001C (sp)
