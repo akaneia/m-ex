@@ -33,6 +33,18 @@ backup
   add r3,r3,r0
   lwz REG_CostumeArchive,0x14(r3)
 
+############################
+## ModelAdd Symbol Check ##
+############################
+
+# Get custom string name
+  mr r3,REG_CostumeArchive
+  bl ModelAddDescArr_Symbol
+  mflr r4
+  branch r12,0x8013c3a8
+  cmpwi r3,0
+  bne Hat_NoExist
+
 ##############
 ## HAT JOBJ ##
 ##############
@@ -146,6 +158,11 @@ blrl
 Custom_VisSymbol:
 blrl
 .string "PlyPurinHat_VisLookup"
+.align 2
+
+ModelAddDescArr_Symbol:
+blrl
+.string "ModelAddDescArr"
 .align 2
 
 /*
