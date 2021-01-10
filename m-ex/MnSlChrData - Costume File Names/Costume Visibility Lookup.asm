@@ -44,6 +44,9 @@ UseCustom:
 # Use n'th table from PlXX
 UsePlXX:
   lwz	r3, 0x010C (r31)
+  addi	r4, r31, 1452
+  li r5,0             # use costume 0 index
+  branch r12,0x800749f4
   b Exit
 
 Table_Symbol:
