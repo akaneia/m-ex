@@ -3,7 +3,7 @@
 .include "../Header.s"
 
 # Get this costumes visibility index from MEX_GetData
-  lbz	r0, 0x04 (r31)
+  lwz	r0, 0x04 (r31)
   lwz  r3,OFST_MnSlChrCostumeFileSymbols(rtoc)
   mulli r0,r0,4
   lwzx r3,r3,r0
