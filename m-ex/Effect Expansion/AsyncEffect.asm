@@ -298,5 +298,4 @@ ErrorString_Symbol:
 ###############################################
 
 Original:
-  restore
   lis	r3, 0x803C

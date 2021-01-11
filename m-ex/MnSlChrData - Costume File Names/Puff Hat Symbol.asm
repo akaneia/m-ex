@@ -41,7 +41,7 @@ backup
   mr r3,REG_CostumeArchive
   bl ModelAddDescArr_Symbol
   mflr r4
-  branch r12,0x8013c3a8
+  branchl r12,0x80380358
   cmpwi r3,0
   bne Hat_NoExist
 
@@ -58,7 +58,7 @@ Hat_UseCustom:
   mr r3,REG_CostumeArchive
   bl Custom_HatSymbol
   mflr r4
-  branch r12,0x8013c3a8
+  branchl r12,0x80380358
   mr. REG_HatSymbol, r3
   beq Hat_UseDOL
   b CheckHat
