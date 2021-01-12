@@ -39,7 +39,7 @@ backup
 
 # Get custom string name
   mr r3,REG_CostumeArchive
-  bl ModelAddDescArr_Symbol
+  bl mexCostume_Symbol
   mflr r4
   branchl r12,0x80380358
   cmpwi r3,0
@@ -49,6 +49,7 @@ backup
 ## HAT JOBJ ##
 ##############
 
+/*
 # If 0, first check for custom before using the 0th table
   cmpwi REG_Index,0
   bne Hat_UseDOL
@@ -62,11 +63,12 @@ Hat_UseCustom:
   mr. REG_HatSymbol, r3
   beq Hat_UseDOL
   b CheckHat
+*/
 
 Hat_UseDOL:
   load r3,0x803d05b4
-  lbz	r0, 0x0619 (REG_FighterData)
-  mulli r0,r0,4
+  #lbz	r0, 0x0619 (REG_FighterData)
+  mulli r0,REG_Index,4
   lwzx REG_HatSymbol,r3,r0
   
 CheckHat:
@@ -84,6 +86,7 @@ GetHatJObj:
 ## HAT VIS ##
 #############
 
+/*
 # if index 0, check for custom vis
   cmpwi REG_Index,0
   bne Vis_UsePlXX
@@ -97,6 +100,7 @@ Vis_UseCustom:
   mr. REG_VisSymbol, r3
   beq Vis_UsePlXX
   b CreateHat
+*/
 
 Vis_UsePlXX:
   lwz	r3, 0x010C (REG_FighterData)
@@ -150,6 +154,7 @@ b Exit
 
 ####################################
 
+/*
 Custom_HatSymbol:
 blrl
 .string "PlyPurinHat_TopN_Joint"
@@ -159,10 +164,11 @@ Custom_VisSymbol:
 blrl
 .string "PlyPurinHat_VisLookup"
 .align 2
+*/
 
-ModelAddDescArr_Symbol:
+mexCostume_Symbol:
 blrl
-.string "ModelAddDescArr"
+.string "mexCostume"
 .align 2
 
 /*

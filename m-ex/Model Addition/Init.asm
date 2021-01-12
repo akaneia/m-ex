@@ -30,10 +30,16 @@ backup
 ModelAddDescArr_Check:
 # Get custom string name
   mr r3,REG_CostumeArchive
-  bl ModelAddDescArr_Symbol
+  bl mexCostume_Symbol
   mflr r4
   branchl r12,0x80380358
-  mr. REG_ModelAddDescArr, r3
+# Check if costume has an mexCostume symbol
+  cmpwi r3,0
+  beq NoModelAdd
+# Check if costume has a modelAdd node
+  addi REG_ModelAddDescArr,r3,mexCostume_modeladd
+  lwz r0,mdAddDescArr_num(REG_ModelAddDescArr)
+  cmpwi r0,0
   beq NoModelAdd
 
 # Copy modeladd_num
@@ -165,9 +171,9 @@ ModelAddDescArr_LoopCheck:
 
 b Exit
 
-ModelAddDescArr_Symbol:
+mexCostume_Symbol:
 blrl
-.string "ModelAddDescArr"
+.string "mexCostume"
 .align 2
 
 #############################################

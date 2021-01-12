@@ -2,6 +2,10 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
+.set REG_Index,20
+
+backup
+
 # Get this costumes visibility index from MEX_GetData
   lwz	r0, 0x04 (r31)
   lwz  r3,OFST_MnSlChrCostumeFileSymbols(rtoc)
@@ -10,10 +14,10 @@
   lbz	r0, 0x0619 (r31)
   mulli r0,r0,CostumeFileSymbols_Stride
   add r3,r3,r0
-  lwz r3,CostumeFileSymbols_VisibilityIndex(r3)
+  lwz REG_Index,CostumeFileSymbols_VisibilityIndex(r3)
 
 # If 0, first check for custom before using the 0th Arch_FighterFunc_onTwoEntryTable
-  cmpwi r3,0
+  cmpwi REG_Index,0
   bne UsePlXX
 
 UseCustom:
@@ -30,21 +34,27 @@ UseCustom:
   bl Table_Symbol
   mflr r4
   branchl r12,0x80380358
+# Check if costume has an mexCostume symbol
   cmpwi r3,0
   beq UsePlXX
-
-# Get Mat lookup table
-  lwz r0,0x8(r3)
+# Check if costume has a mat lookup
+  lwz r3,mexCostume_mat(r3)
+  cmpwi r3,0
+  beq UsePlXX
+# Exit using this data
+  lwz r3,0x0(r3)
+  restore
+  mr r0,r3
   branch r12,0x800703b8
 
 # Use n'th table from PlXX
 UsePlXX:
-  mr r0,r3
+  mr r3,REG_Index
   b Exit
 
 Table_Symbol:
 blrl
-.string "VisMatLookup"
+.string "mexCostume"
 .align 2
 
 /*
@@ -80,3 +90,5 @@ blrl
 */
 
 Exit:
+  restore
+  mr r0,r3

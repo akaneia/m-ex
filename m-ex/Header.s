@@ -88,6 +88,11 @@
 .set effBhv_effMdlBhv,0x4
   .set effMdlBhv_Stride,0x1
 
+#mexCostume
+.set mexCostume_vis, 0x0
+.set mexCostume_mat, 0x4
+.set mexCostume_modeladd, 0x8
+
 #ModelAddDescArr
 .set mdAddDescArr_num, 0x0
 .set mdAddDescArr_ptr, 0x4
