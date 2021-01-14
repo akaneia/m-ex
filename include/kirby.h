@@ -11,13 +11,13 @@
 
 struct FtVarKirby
 {
-    int charVar1;          // 0x222c
-    int charVar2;          // 0x2230
-    int charVar3;          // 0x2234
-    int copy_index;        // 0x2238
-    JOBJ *copy_jobj;       // 0x223c
-    FtParts ftparts_model; // 0x2240
-    FtPartsVis ftdobj_unk; // 0x2250
+    int charVar1;             // 0x222c
+    int charVar2;             // 0x2230
+    int charVar3;             // 0x2234
+    int copy_index;           // 0x2238
+    JOBJ *copy_jobj;          // 0x223c
+    FtPartsVis ftparts_model; // 0x2240
+    FtPartsVis ftdobj_unk;    // 0x2250
 };
 
 #endif

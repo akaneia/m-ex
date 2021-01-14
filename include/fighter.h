@@ -1622,6 +1622,66 @@ struct ftCommonData
     float x810;           // 0x810
 };
 
+struct FtDObjLookup // is in the fighter data
+{
+    int num;     // 0x2240
+    DOBJ **dobj; // 0x2244   array of dobjs
+};
+
+struct FtPartsDesc
+{
+    int model_num; // 0x2250
+    FtPartsLookup *lookups;
+};
+
+struct FtPartsVisLookup
+{
+    int num;
+    FtDOBJUnk2 *x4; // pointer to u8 array
+};
+
+struct FtDOBJUnk2
+{
+    int num;
+    u8 *id; // pointer to u8 array
+};
+
+struct FtPartsLookup
+{
+    FtPartsVisLookup *x0;
+    void *x4;
+    void *x8;
+    void *xc;
+    void *x10;
+};
+
+struct FtPartsVis // is in the fighter data
+{
+    int num;                           // 0x0
+    u8 x4[5];                          // 0x4 array of bools?
+    FtPartsVisLookup *highpoly_table;  // 0x0C
+    FtPartsVisLookup *lowpoly_table;   // 0x10
+    FtPartsVisLookup *metalpoly_table; // 0x14
+    FtPartsVisLookup *metalmain_table; // 0x18
+    FtPartsVisLookup *x1C;             // 0x1C
+};
+
+struct FtSymbolLookup
+{
+    FtSymbols *archives;
+    u8 num;
+};
+
+struct FtSymbols
+{
+    JOBJ *joint;         // 0x0
+    void *matanim_joint; // 0x4
+    void *x8;            // 0x8
+    void *xc;            // 0xc
+    void *x10;           // 0x10
+    ArchiveInfo *costume // 0x14
+};
+
 struct FighterData
 {
     GOBJ *fighter;                                    // 0x0
@@ -1880,14 +1940,14 @@ struct FighterData
     char x67B;                       // 0x67B
     char inputtimer_a;               // 0x67C
     char inputtimer_b;               // 0x67D
-    char inputtimer_xy;              // 0x67E
+    char inputtimer_x67e;            // 0x67E
     char inputtimer_z;               // 0x67F
     char input_sinceLR;              // 0x680
     char inputtimer_padup;           // 0x681
     char inputtimer_paddown;         // 0x682
     char timer_item_release;         // 0x683
     char input_sinceRapidLR;         // 0x684
-    char timer_unk2;                 // 0x685
+    char inputtimer_xy;              // 0x685
     char timer_unk3;                 // 0x686
     char timer_unk4;                 // 0x687
     char inputtimer_sideb;           // 0x688
@@ -2824,66 +2884,6 @@ struct FighterData
     } mex;
 };
 
-struct FtDObjLookup // is in the fighter data
-{
-    int num;     // 0x2240
-    DOBJ **dobj; // 0x2244   array of dobjs
-};
-
-struct FtPartsDesc
-{
-    int model_num; // 0x2250
-    FtPartsLookup *lookups;
-};
-
-struct FtPartsVisLookup
-{
-    int num;
-    FtDOBJUnk2 *x4; // pointer to u8 array
-};
-
-struct FtDOBJUnk2
-{
-    int num;
-    u8 *id; // pointer to u8 array
-};
-
-struct FtPartsLookup
-{
-    FtPartsVisLookup *x0;
-    void *x4;
-    void *x8;
-    void *xc;
-    void *x10;
-};
-
-struct FtPartsVis // is in the fighter data
-{
-    int num;                           // 0x0
-    u8 x4[5];                          // 0x4 array of bools?
-    FtPartsVisLookup *highpoly_table;  // 0x0C
-    FtPartsVisLookup *lowpoly_table;   // 0x10
-    FtPartsVisLookup *metalpoly_table; // 0x14
-    FtPartsVisLookup *metalmain_table; // 0x18
-    FtPartsVisLookup *x1C;             // 0x1C
-};
-
-struct FtSymbolLookup
-{
-    FtSymbols *archives;
-    u8 num;
-};
-
-struct FtSymbols
-{
-    JOBJ *joint;         // 0x0
-    void *matanim_joint; // 0x4
-    void *x8;            // 0x8
-    void *xc;            // 0xc
-    void *x10;           // 0x10
-    ArchiveInfo *costume // 0x14
-};
-
 /*** Functions ***/
 
 void ActionStateChange(float startFrame, float animSpeed, float animBlend, GOBJ *fighter, int stateID, int flags1, int flags2);
@@ -2961,7 +2961,7 @@ void Fighter_InitDynamics(FighterData *fighter_data);
 void Fighter_ProcDynamics(GOBJ *fighter);
 void Fighter_InitPObj();
 void Fighter_InitPObj2();
-void Fighter_IndexFtPartsDObjs(GOBJ *fighter, JOBJ *copy_model, FtParts *ftparts); // inits the dobj array in ftpartsmodel
+void Fighter_IndexFtPartsDObjs(GOBJ *fighter, JOBJ *copy_model, FtPartsVis *ftparts); // inits the dobj array in ftpartsmodel
 void Fighter_InitFtPartsModel(FtPartsDesc *ftpartsdesc, FtPartsVis *parts_vis, int index, void *bone_info, void *bone_info2);
 void Fighter_UpdateDObjFlags(void *ftparts1, int r4, void *bone_info);
 void Fighter_UpdateDObjFlags2(void *ftparts1, int r4, void *bone_info);
