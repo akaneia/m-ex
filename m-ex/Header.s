@@ -262,6 +262,11 @@
   .set  Arch_Kirby_AbilityFileNames,0x0
   .set  Arch_Kirby_AbilityRuntimeStruct,0x4
   .set  Arch_Kirby_AbilityCostumeFileNames,0x8
+    .set  Kirby_AbilityCostumeFileNames_Stride,0x10
+    .set  Kirby_AbilityCostumeFileNames_FileName,0x0
+    .set  Kirby_AbilityCostumeFileNames_JointSym,0x4
+    .set  Kirby_AbilityCostumeFileNames_MatAnimSym,0x8
+    .set  Kirby_AbilityCostumeFileNames_VisibilityIndex,0xC # used to grab a visibility index from the PlXX file
   .set  Arch_Kirby_AbilityCostumeRuntimeStruct,0xC
   .set  Arch_Kirby_EffectIDs,0x10
   .set  Arch_Kirby_FtCmdRuntime,0x14
