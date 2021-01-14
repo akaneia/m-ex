@@ -138,6 +138,7 @@
 .set  Arch_Menu,0x4
   .set  Arch_Menu_MenuParam,0x0
     .set  MenuParam_HandScale,0x0
+    .set  MenuParam_SSSCursorPos,0x4
   .set  Arch_Menu_CSS,0x4
   .set  Arch_Menu_SSS,0x8
     .set  SSS_Stride,0x20
