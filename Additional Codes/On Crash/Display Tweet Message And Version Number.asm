@@ -87,7 +87,7 @@ blrl
 
 ResetCombo:
 blrl
-.string "##  TWEET A PICTURE OF THIS MESSAGE TO @Melee_EX   ##\n##   After submitting, PRESS LRA-START to reboot   ##\n"
+.string "## TWEET A PICTURE OF THIS MESSAGE TO @TeamAkaneia ##\n##   After submitting, PRESS LRA-START to reboot   ##\n"
 .align 2
 
 #########################################################
