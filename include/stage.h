@@ -336,6 +336,30 @@ struct StageFile
     MapHead *map_head;
 };
 
+struct GrDesc
+{
+    int internal_id;
+    void *map_gobj_functions;
+    char *filename;
+    void *onInit;
+    void *x10;
+    void *onLoad;
+    void *onGo;
+    void *x1c;
+    void *line_damage_check;
+    void *x24;
+    int x28;
+    void *x2c;
+    int x30;
+};
+
+struct GrExtLookup
+{
+    int internal_id;
+    int x4;
+    int x8;
+};
+
 /*** Functions ***/
 
 StageFile *Stage_GetStageFiles();                 // returns an array of StageFiles

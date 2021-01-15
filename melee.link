@@ -367,3 +367,13 @@
 80168c5c:CSS_PlayFighterName
 80260094:CSS_CostumeChange
 8025d5ac:CSS_UpdateCSPTexture
+80323cf4:sprintf
+80323dc8:_vsprintf
+80325b04:strlen
+80325878:strchr
+803258e8:strcmp
+803258a8:strncmp
+80325a50:strcpy
+80325a0c:strncpy
+80325b24:strtoul
+80388220:__assert
