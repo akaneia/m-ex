@@ -5,7 +5,7 @@
 backup
 
 # check if over
-  cmpwi  r3,9
+  cmpwi  r3,11
   bge Assert
 
 # get jump table
@@ -20,6 +20,8 @@ bl  GrExtNum
 bl  GrIconNum
 bl  MnSlMpIcon
 bl  CostumeSymbol
+bl  GrDesc
+bl  GrExternalLookup
 #*****************************#
 SkipJumpTable:
 #Get effect type
@@ -60,6 +62,14 @@ MnSlMpIcon:
   b Exit
 CostumeSymbol:
   lwz r3,OFST_Char_CostumeRuntimePointers(rtoc)
+  b Exit
+GrDesc:
+  lwz r3,OFST_grFunction(rtoc)
+  b Exit
+GrExternalLookup:
+  lwz r3,OFST_mexData(rtoc)
+  lwz r3,Arch_Map(r3)
+  lwz r3,Arch_Map_StageIDs(r3)
   b Exit
 
 #############################################
