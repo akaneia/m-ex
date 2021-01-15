@@ -5,8 +5,6 @@
 #include "datatypes.h"
 #include "obj.h"
 
-#define DB_FLAG 0
-
 enum MEX_GETDATA
 {
     MXDT_FTINTNUM,
