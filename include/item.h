@@ -467,7 +467,7 @@ struct ItemData
     int x4;                                  // 0x4
     int x8;                                  // 0x8
     int spawnType;                           // 0xC
-    int itemID;                              // 0x10
+    int kind;                                // 0x10
     int x14;                                 // 0x14
     int x18;                                 // 0x18
     int x1c;                                 // 0x1c
@@ -985,7 +985,7 @@ void Item_PlaceOnGroundBelow(GOBJ *item);
 int Item_CheckIfTouchingWall(GOBJ *item, float *unk[]);
 void Item_InitGrab(ItemData *item, int unk, void *OnItem, void *OnFighter);
 void Item_ResetAllHitPlayers(ItemData *item);
-int Item_CountActiveItems(int itemID);
+int Item_CountActiveItems(int kind);
 void Item_CopyDevelopState(GOBJ *item, GOBJ *fighter);
 int Items_DecLife(GOBJ *item);
 void GXLink_Item(GOBJ *gobj, int pass);

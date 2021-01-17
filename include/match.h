@@ -174,7 +174,7 @@ struct CameraBox
     int x4;                 // 0x4
     int x8;                 // 0x8
     int xC;                 // 0xC
-    int itemID;             // 0x10
+    int kind;             // 0x10
     int x14;                // 0x14
     int x18;                // 0x18
     int x1c;                // 0x1c
