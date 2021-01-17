@@ -283,8 +283,8 @@ struct Stage
     int x6a0;                  // 0x6a0
     int x6a4;                  // 0x6a4
     int *itemData;             // 0x6a8
-    int *coll_data;            // 0x6ac
-    int *grGroundParam;        // 0x6b0
+    void *coll_data;           // 0x6ac
+    void *grGroundParam;       // 0x6b0
     int *ALDYakuAll;           // 0x6b4
     int *map_ptcl;             // 0x6b8
     int *map_texg;             // 0x6bc
@@ -360,6 +360,11 @@ struct GrExtLookup
     int x8;
 };
 
+Stage *stc_stage = 0x8049e6c8;
+int *ftchkdevice_windnum = R13 + (-0x5128);
+int *ftchkdevice_grabnum = R13 + (-0x512C);
+int *ftchkdevice_dmgnum = R13 + (-0x5130);
+
 /*** Functions ***/
 
 StageFile *Stage_GetStageFiles();                 // returns an array of StageFiles
@@ -398,5 +403,6 @@ float Stage_GetBlastzoneBottom();
 void Stage_GetGeneralPoint(int index, Vec3 *pos);
 void Stage_EnableLineGroup(int index);
 void Stage_DisableLineGroup(int index);
+void Stage_InitLines(void *coll_data);
 
 #endif

@@ -302,6 +302,7 @@
 801c2d24:Stage_GetGeneralPoint
 80057638:Stage_EnableLineGroup
 80057bc0:Stage_DisableLineGroup
+8004d288:Stage_InitLines
 803a611c:Text_CreateCanvas
 803a6754:Text_CreateText
 803a5cc4:Text_FreeText
