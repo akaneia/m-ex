@@ -1,8 +1,7 @@
-#To be inserted @ 8013c388
+#To be inserted @ 8013c384
 .include "../../Globals.s"
 .include "../Header.s"
 
-backup
 
 .set REG_VisSymbol,24
 .set REG_CostumeArchive,25
@@ -11,7 +10,22 @@ backup
 .set REG_FighterGObj,28
 .set REG_FighterData,30
 
+  mr	REG_FighterGObj, r3
   lwz REG_FighterData,0x2C(REG_FighterGObj)
+
+# check if over max costume
+  lbz r3,0xC(REG_FighterData)
+  branchl r12,0x80032330
+  branchl r12,0x80169238
+  lbz r4,0x619(REG_FighterData)
+  cmpw r4,r3
+  bge Skip
+  b HasCostume
+Skip:
+  branch r12,0x8013c46c
+HasCostume:
+
+  backup
 
 # Get this costumes visibility index from MEX_GetData
   lbz	r0, 0x04 (REG_FighterData)
