@@ -10,6 +10,11 @@
 
 backup
 
+# Skip when watching Slippi replays
+  branchl r12,0x801a4310
+  cmpwi r3,0xE
+  beq Injection_Exit
+
   bl  Floats
   mflr  REG_Floats
 
