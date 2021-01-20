@@ -50,7 +50,7 @@ Loop_Inc:
   addi REG_KbCpAbilityIndex,REG_KbCpAbilityIndex,4
   addi REG_KbCpCostumeIndex,REG_KbCpCostumeIndex,8
 Loop_Check:
-  cmpw REG_LoopCount,REG_KbCostumeNum
+  cmpw REG_LoopCount,REG_FtExtNum
   blt Loop
 
 
