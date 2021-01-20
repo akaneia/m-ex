@@ -160,9 +160,6 @@ ParsePtclGenLookup:
 #Get effect type from internal ID
   lwz r3,effBhv_ptclGenBhv(REG_effBehaviorTable)
   lbzx REG_EffectType,r3,REG_EffectIntID
-#Get effect type from internal ID
-  lwz r3,effBhv_ptclGenBhv(REG_effBehaviorTable)
-  lbzx REG_EffectType,r3,REG_EffectIntID
   bl  SkipPtclGenTable
 #*****************************#
 bl PtclGen_UseJointPos
