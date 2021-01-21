@@ -8,7 +8,7 @@ ongivedamage
 ontakedamage
 onenterair
 onreflect
-onunk1
+onclank
 onunk2
 onhitshieldbounce
 onhitshielddeterminedestroy
