@@ -449,8 +449,11 @@ struct JOBJAnimSet
     void *shapeaninjoint;
 };
 
-/*** Functions ***/
+/*** Static Variables ***/
+GOBJList **stc_gobj_list = R13 + (-0x3E74);
+u8 *obj_kind = R13 + -(0x3E55);
 
+/*** Functions ***/
 int JOBJ_GetWorldPosition(JOBJ *source, Vec3 *add, Vec3 *dest);
 void JOBJ_SetMtxDirtySub(JOBJ *jobj);
 JOBJ *JOBJ_LoadJoint(JOBJDesc *joint);
