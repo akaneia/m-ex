@@ -46,6 +46,28 @@ SkipLockoutDec:
 # Check for A
   rlwinm. r0,REG_Inputs,0,0x10
   beq NoA
+
+# Always Store Singleplayer port
+.set REG_Count, 20
+  li REG_Count,0
+  b SinglePort_CheckLoop
+SinglePort_Loop:
+  mr r3,REG_Count
+  branchl r12,0x801a36a0
+  rlwinm. r0,r3,0,0xFF
+  beq SinglePort_IncLoop
+# Store Port
+  mr r3,REG_Count
+  branchl r12,0x801677e8
+  b SinglePort_Exit
+
+SinglePort_IncLoop:
+  addi REG_Count,REG_Count,1
+SinglePort_CheckLoop:
+  cmpwi REG_Count,4
+  blt SinglePort_Loop
+SinglePort_Exit:
+
 # SFX
   li	r3, 1
   branchl r12,0x80024030
