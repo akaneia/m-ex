@@ -105,6 +105,8 @@
 8007d6a4:Fighter_SetGrounded
 8000fd48:Fighter_CreateDynamicsBoneset
 80011710:Fighter_InitDynamicsBoneset
+8000acfc:Hitbox_CheckIfPreviouslyHit
+80008688:Hitbox_SetAsPreviouslyHit
 80380580:HSD_Randi
 80380528:HSD_Randf
 8037f1e4:HSD_MemAlloc

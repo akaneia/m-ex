@@ -632,6 +632,12 @@ struct Reflect
     int flags;
 };
 
+struct HitVictim
+{
+    GOBJ *victim_gobj; // the gobj that was hit
+    int unk;           // not sure, is set to 0 when hitting them
+};
+
 struct ftHit
 {
     int active;                   // 0x0
@@ -666,61 +672,15 @@ struct ftHit
     unsigned char x436 : 1;       // 0x43 0x04
     unsigned char x437 : 1;       // 0x43 0x02
     unsigned char x438 : 1;       // 0x43 0x01
-    int x44;                      // 0x44
+    u8 x44;                       // 0x44
+    u8 victim_num;                // 0x45
     JOBJ *bone;                   // 0x48
     Vec3 pos;                     // 0x4c
     Vec3 pos_prev;                // 0x58
     Vec3 pos_coll;                // 0x64   position of hurt collision
-    float coll_distance;          // 0x70   Distance From Collding Hurtbox (Used for phantom hit collision calculation)
-    GOBJ *victim;                 // 0x74
-    int x78;                      // 0x78
-    int x7c;                      // 0x7c
-    int x80;                      // 0x80
-    int x84;                      // 0x84
-    int x88;                      // 0x88
-    int x8c;                      // 0x8c
-    int x90;                      // 0x90
-    int x94;                      // 0x94
-    int x98;                      // 0x98
-    int x9c;                      // 0x9c
-    int xa0;                      // 0xa0
-    int xa4;                      // 0xa4
-    int xa8;                      // 0xa8
-    int xac;                      // 0xac
-    int xb0;                      // 0xb0
-    int xb4;                      // 0xb4
-    int xb8;                      // 0xb8
-    int xbc;                      // 0xbc
-    int xc0;                      // 0xc0
-    int xc4;                      // 0xc4
-    int xc8;                      // 0xc8
-    int xcc;                      // 0xcc
-    int xd0;                      // 0xd0
-    int xd4;                      // 0xd4
-    int xd8;                      // 0xd8
-    int xdc;                      // 0xdc
-    int xe0;                      // 0xe0
-    int xe4;                      // 0xe4
-    int xe8;                      // 0xe8
-    int xec;                      // 0xec
-    int xf0;                      // 0xf0
-    int xf4;                      // 0xf4
-    int xf8;                      // 0xf8
-    int xfc;                      // 0xfc
-    int x100;                     // 0x100
-    int x104;                     // 0x104
-    int x108;                     // 0x108
-    int x10c;                     // 0x10c
-    int x110;                     // 0x110
-    int x114;                     // 0x114
-    int x118;                     // 0x118
-    int x11c;                     // 0x11c
-    int x120;                     // 0x120
-    int x124;                     // 0x124
-    int x128;                     // 0x128
-    int x12c;                     // 0x12c
-    int x130;                     // 0x130
-    int x134;                     // 0x134
+    float coll_distance;          // 0x70   Distance From Collding FtHurt (Used for phantom hit collision calculation)
+    HitVictim victims[24];        // 0x74
+    int x134;                     // 0x134, flags of some sort
 };
 
 struct Hurtbox
@@ -2968,4 +2928,6 @@ void Fighter_UpdateDObjFlags2(void *ftparts1, int r4, void *bone_info);
 void Fighter_CreateDynamicsBoneset(JOBJ *joint, FtDynamicBoneset *boneset, int bone_num);
 void Fighter_InitDynamicsBoneset(void *dyn_desc_params, FtDynamicBoneset *boneset);
 int Fighter_CheckUnlocked(int ext_id);
+int Hitbox_CheckIfPreviouslyHit(void *victim_data, ftHit *hitbox);
+void Hitbox_SetAsPreviouslyHit(ftHit *hitbox, int unk, void *victim_data);
 #endif

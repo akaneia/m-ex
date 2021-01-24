@@ -87,6 +87,7 @@ typedef struct PlayerData PlayerData;
 typedef struct MoveLogic MoveLogic;
 typedef struct SubactionHeader SubactionHeader;
 typedef struct ftHit ftHit;
+typedef struct HitVictim HitVictim;
 typedef struct Hurtbox Hurtbox;
 typedef struct Reflect Reflect;
 typedef struct CPU CPU;
