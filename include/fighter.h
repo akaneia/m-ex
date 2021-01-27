@@ -2696,7 +2696,14 @@ struct FighterData
     unsigned char x2222_6 : 1;            // 0x04
     unsigned char x2222_7 : 1;            // 0x02
     unsigned char x2222_8 : 1;            // 0x01
-    char flags_2223;                      // 0x2223
+    unsigned char x2223_1 : 1;            // 0x80 - 0x2223
+    unsigned char x2223_2 : 1;            // 0x40 - 0x2223
+    unsigned char x2223_3 : 1;            // 0x20 - 0x2223
+    unsigned char x2223_4 : 1;            // 0x10
+    unsigned char x2223_5 : 1;            // 0x08
+    unsigned char x2223_6 : 1;            // 0x04
+    unsigned char x2223_7 : 1;            // 0x02
+    unsigned char x2223_8 : 1;            // 0x01
     char flags_2224;                      // 0x2224
     unsigned char x2225_1 : 1;            // 0x80 - 0x2225
     unsigned char x2225_2 : 1;            // 0x40 - 0x2225
@@ -2890,13 +2897,18 @@ int Fighter_IASACheck_JumpF(GOBJ *fighter);
 int Fighter_IASACheck_PassConditions(GOBJ *fighter);
 int Fighter_IASACheck_Turn(GOBJ *fighter);
 void Fighter_PhysGround_ApplyFriction(GOBJ *fighter);
+void Fighter_PhysGround_ApplyCustomFriction(FighterData *fighter, float friction);
+void Fighter_PhysGround_UnkFriction(GOBJ *fighter);
 void Fighter_PhysAir_ApplyGravity(FighterData *fighter, float gravity, float limit);
+void Fighter_PhysAir_DecayXVelocity(FighterData *fighter, float unk);
 void Fighter_PhysAir_LimitVelocity(FighterData *fighter);
+void Fighter_Phys_UseAnimYVelocity(GOBJ *fighter);
 void Fighter_Phys_UseAnimPos(FighterData *fighter);
 void Fighter_Phys_UseAnimPosAndStick(FighterData *fighter);
 void Fighter_SetGrounded(FighterData *fighter);
 void Fighter_SetGrounded2(FighterData *fighter);
 void Fighter_SetAirborne(FighterData *fighter);
+void Fighter_SetAirborneNoJumps(FighterData *fighter_data);
 void Fighter_KillAllVelocity(GOBJ *fighter);
 void Fighter_AdvanceScript(GOBJ *fighter);
 void Fighter_GFXRemoveAll(GOBJ *fighter);
@@ -2928,6 +2940,8 @@ void Fighter_UpdateDObjFlags2(void *ftparts1, int r4, void *bone_info);
 void Fighter_CreateDynamicsBoneset(JOBJ *joint, FtDynamicBoneset *boneset, int bone_num);
 void Fighter_InitDynamicsBoneset(void *dyn_desc_params, FtDynamicBoneset *boneset);
 int Fighter_CheckUnlocked(int ext_id);
+void Fighter_SetFacingToStickDirection(FighterData *fighter_data);
+int Fighter_CheckToIgnorePlatform(GOBJ *fighter);
 int Hitbox_CheckIfPreviouslyHit(void *victim_data, ftHit *hitbox);
 void Hitbox_SetAsPreviouslyHit(ftHit *hitbox, int unk, void *victim_data);
 #endif

@@ -66,14 +66,21 @@
 800cb870:Fighter_IASACheck_JumpAerial
 800caed0:Fighter_IASACheck_JumpF
 80099f1c:Fighter_IASACheck_PassConditions
+8009a134:Fighter_CheckToIgnorePlatform
 800c97a8:Fighter_IASACheck_Turn
 80084f3c:Fighter_PhysGround_ApplyFriction
+8007c930:Fighter_PhysGround_ApplyCustomFriction
+8007cb74:Fighter_PhysGround_UnkFriction
 8007d494:Fighter_PhysAir_ApplyGravity
+8007ce94:Fighter_PhysAir_DecayXVelocity
 8007cf58:Fighter_PhysAir_LimitVelocity
+80084db0:Fighter_PhysAir_ApplyGravityAndFastfall
 80085134:Fighter_Phys_UseAnimPos
+800851c0:Fighter_Phys_UseAnimYVelocity
 80085154:Fighter_Phys_UseAnimPosAndStick
 8007d7fc:Fighter_SetGrounded2
 8007d5d4:Fighter_SetAirborne
+8007d60c:Fighter_SetAirborneNoJumps
 8007e2fc:Fighter_KillAllVelocity
 8006eba4:Fighter_AdvanceScript
 8007db24:Fighter_GFXRemoveAll
@@ -105,6 +112,7 @@
 8007d6a4:Fighter_SetGrounded
 8000fd48:Fighter_CreateDynamicsBoneset
 80011710:Fighter_InitDynamicsBoneset
+8007d9fc:Fighter_SetFacingToStickDirection
 8000acfc:Hitbox_CheckIfPreviouslyHit
 80008688:Hitbox_SetAsPreviouslyHit
 80380580:HSD_Randi
@@ -194,6 +202,7 @@
 8037e708:MatToQuat
 8000d5bc:sqrtf
 80342418:MTXRotRad
+8000d790:Math_Unk
 803d7058:MEX_IndexFighterItem
 803d7060:SpawnMEXEffect
 803d7064:MEX_GetItemExtID

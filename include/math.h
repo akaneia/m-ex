@@ -30,5 +30,6 @@ void HSD_MtxSRT(Mtx *m, Vec3 *scale, Vec3 *rot, Vec3 *trans, int unk);
 void MatToQuat(Mtx *m, Vec3 *dest); // matrix to quat
 float sqrtf(float num);
 void MTXRotRad(Mtx m, char axis, f32 rad);
+float Math_Unk(Vec3 *a, Vec3 *b);
 
 #endif
