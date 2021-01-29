@@ -2867,6 +2867,7 @@ void Fighter_EnterSpecialFall(GOBJ *fighter, int can_fastfall, int can_not_noimp
 void Fighter_EnterLanding(GOBJ *fighter);
 void Fighter_EnterSpecialLanding(GOBJ *fighter, int unk, float state_length);
 void Fighter_EnterSleep(GOBJ *fighter, int ms);
+void Fighter_EnterEntry(GOBJ *fighter);
 GOBJ *Fighter_GetGObj(int ply);
 GOBJ *Fighter_GetSubcharGObj(int ply, int ms);
 Playerblock *Fighter_GetPlayerblock(int ply);
@@ -2944,4 +2945,6 @@ void Fighter_SetFacingToStickDirection(FighterData *fighter_data);
 int Fighter_CheckToIgnorePlatform(GOBJ *fighter);
 int Hitbox_CheckIfPreviouslyHit(void *victim_data, ftHit *hitbox);
 void Hitbox_SetAsPreviouslyHit(ftHit *hitbox, int unk, void *victim_data);
+int Fighter_CountPlayers();
+void Fighter_InitData();
 #endif

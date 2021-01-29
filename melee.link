@@ -38,6 +38,7 @@
 80082b1c:Fighter_EnterLanding
 800d5cb0:Fighter_EnterSpecialLanding
 800d4f24:Fighter_EnterSleep
+800c61b0:Fighter_EnterEntry
 80034110:Fighter_GetGObj
 8003418c:Fighter_GetSubcharGObj
 80031724:Fighter_GetPlayerblock
@@ -113,6 +114,8 @@
 8000fd48:Fighter_CreateDynamicsBoneset
 80011710:Fighter_InitDynamicsBoneset
 8007d9fc:Fighter_SetFacingToStickDirection
+8016b558:Fighter_CountPlayers
+80068354:Fighter_InitData
 8000acfc:Hitbox_CheckIfPreviouslyHit
 80008688:Hitbox_SetAsPreviouslyHit
 80380580:HSD_Randi
