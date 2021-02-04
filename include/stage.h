@@ -10,6 +10,48 @@
 #define map_isBG 0x40000000
 #define map_isUnk 0x80000000
 
+enum GrInternal
+{
+    GR_DUMMY,
+    GR_TEST,
+    GR_CASTLE,
+    GR_RCRUISE,
+    GR_KONGO,
+    GR_GARDEN,
+    GR_GREATBAY,
+    GR_SHRINE,
+    GR_ZEBES,
+    GR_KRAID,
+    GR_STORY,
+    GR_YOSTER,
+    GR_IZUMI,
+    GR_GREENS,
+    GR_CORNERIA,
+    GR_VENOM,
+    GR_PSTAD,
+    GR_PURA,
+    GR_MUTECITY,
+    GR_BIGBLUE,
+    GR_ONETT,
+    GR_FOURSIDE,
+    GR_ICEMT,
+    GR_ICETOP,
+    GR_MK1,
+    GR_MK2,
+    GR_AKANEIA,
+    GR_FLATZONE,
+    GR_OLDPU,
+    GR_OLDSTORY,
+    GR_OLDKONGO,
+    GR_ADVKRAID,
+    GR_ADVSHRINE,
+    GR_ADVZR,
+    GR_ADVBR,
+    GR_ADVTE,
+    GR_BATTLE,
+    GR_FD,
+};
+
 /*** Structs ***/
 
 struct map_gobjDesc
@@ -87,7 +129,10 @@ struct map_gobjData
     int xb8;             // 0xb8
     int xbc;             // 0xbc
     int xc0;             // 0xc0
-    int xc4;             // 0xc4
+    u8 xc4;              // 0xc4
+    u8 xc5;              // 0xc5
+    u8 xc6;              // 0xc6
+    u8 xc7;              // 0xc7
     int xc8;             // 0xc8
     int xcc;             // 0xcc
     int xd0;             // 0xd0
@@ -172,6 +217,13 @@ struct map_gobjData
     } map_struct;
 };
 
+struct StageOnGO
+{
+    StageOnGO *next;
+    GOBJ *map_gobj;
+    void *cb;
+};
+
 struct Stage
 {
     float cam_LeftBound;   // 0x0
@@ -182,12 +234,12 @@ struct Stage
     float crowdReactStart; // 0x14, begins checking for crowd gasps below this position
     float fov_d;           // 0x18
     float fov_u;           // 0x1c
-    float fov_r;           // 0x20
+    float fov_r;           // 0x20, actually horizontal rotation?
     float fov_l;           // 0x24
     float x28;             // 0x28
     float x2c;             // 0x2c
     float x30;             // 0x30
-    float x34;             // 0x34
+    float x34;             // 0x34, camera distance min
     float x38;             // 0x38
     float x3c;             // 0x3c
     float x40;             // 0x40
@@ -281,17 +333,17 @@ struct Stage
     int x698;                  // 0x698
     int x69c;                  // 0x69c
     int x6a0;                  // 0x6a0
-    int x6a4;                  // 0x6a4
+    StageOnGO *on_go;          // 0x6a4
     int *itemData;             // 0x6a8
-    void *coll_data;           // 0x6ac
-    void *grGroundParam;       // 0x6b0
+    int *coll_data;            // 0x6ac
+    int *grGroundParam;        // 0x6b0
     int *ALDYakuAll;           // 0x6b4
     int *map_ptcl;             // 0x6b8
     int *map_texg;             // 0x6bc
     int *yakumono_param;       // 0x6c0
     int *map_plit;             // 0x6c4
     int *x6c8;                 // 0x6c8
-    int *quake_model_set;      // 0x6cc
+    void *quake_model_set;     // 0x6cc
     int *x6d0;                 // 0x6d0
     int *targetsRemaining;     // 0x6d4
     int x6d8;                  // 0x6d8
@@ -392,7 +444,7 @@ void Stage_UpdateMovingColl(GOBJ *mapgobj);
 Particle *Stage_SpawnEffectPos(int gfxID, int efFileID, Vec3 *pos);
 Particle *Stage_SpawnEffectJointPos(int gfxID, int efFileID, JOBJ *pos);
 Particle *Stage_SpawnEffectJointPos2(int gfxID, int efFileID, JOBJ *pos);
-int Stage_RaycastGround(Vec3 *coll_pos, int *line_index, int *line_kind, Vec3 *unk1, Vec3 *unk2, Vec3 *unk3, Vec3 *unk4, void *cb, float fromX, float fromY, float toX, float toY, float unk5); // make unk5
+int GrColl_RaycastGround(Vec3 *coll_pos, int *line_index, int *line_kind, Vec3 *unk1, Vec3 *unk2, Vec3 *unk3, Vec3 *unk4, void *cb, float fromX, float fromY, float toX, float toY, float unk5); // make unk5
 GOBJ *Zako_Create(int item_id, Vec3 *pos, JOBJ *jobj, Vec3 *velocity, int isMovingItem);
 GOBJ *Stage_CreateMapItem(map_gobjData *map_data, int takeDamageSFXKind, int state, JOBJ *joint, Vec3 *pos, int unk_bool, void *onGiveDamage, void *onTakeDamage); // this function creates an item of id 0xA0, its a generic ID used across multiple stages. its mainly used for giving a joint a hurtbox/hitbox and an onTakeDamage callback.
 int Stage_CheckForNearbyFighters(Vec3 *pos, float radius);
@@ -400,9 +452,14 @@ float Stage_GetBlastzoneRight();
 float Stage_GetBlastzoneLeft();
 float Stage_GetBlastzoneTop();
 float Stage_GetBlastzoneBottom();
+float Stage_GetCameraRight();
+float Stage_GetCameraLeft();
+float Stage_GetCameraTop();
+float Stage_GetCameraBottom();
 void Stage_GetGeneralPoint(int index, Vec3 *pos);
 void Stage_EnableLineGroup(int index);
 void Stage_DisableLineGroup(int index);
 void Stage_InitLines(void *coll_data);
-
+int Stage_GetExternalID();
+int Stage_ExternalToInternal(int ext_id);
 #endif

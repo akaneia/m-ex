@@ -5,6 +5,8 @@
 #include "datatypes.h"
 #include "obj.h"
 
+#define PTCL_LINKMAX 16
+
 /*** Structs ***/
 
 struct Effect
@@ -61,7 +63,7 @@ struct ptclGen // allocated at 8039d9c8
     u16 genlife;          // x14
     u16 type;             // x16
     u8 ef_file;           // x18
-    u8 x19;               // x19, r3 for 8039f05c
+    u8 link_no;           // x19, r3 for 8039f05c
     u8 tex_group;         // x1a
     u8 x1b;               // x1b
     u16 instance;         // x1c
@@ -124,7 +126,7 @@ struct GeneratorAppSRT // allocated at 803a42b0
 
 struct Particle2 // created at 80398c90. dont feel like labelling this, offsets are @ 80398de4
 {
-    struct _particle *next; // 0x0
+    struct Particle2 *next; // 0x0
     u32 kind;               // 0x4
     u8 bank;                // 0x8
     u8 texGroup;            // 0x9
@@ -154,6 +156,20 @@ struct Particle2 // created at 80398c90. dont feel like labelling this, offsets 
     u8 aCmpMode;            // 0x56
     u8 aCmpParam1;          // 0x57
     u8 aCmpParam2;          // 0x58
+    void *x5c;
+    void *x60;
+    void *x64;
+    void *x68;
+    void *x6c;
+    void *x70;
+    void *x74;
+    void *x78;
+    void *x7c;
+    void *x80;
+    void *x84;
+    void *x88;
+    void *gen;
+    void *x90;
     // theres more but i got bored, rest are here courtesy of psilupan: https://pastebin.com/raw/yQdjypW0
 };
 
@@ -168,5 +184,14 @@ void Effect_DestroyAll(GOBJ *fighter);
 void Particle_DestroyAll(JOBJ *jobj);
 void Effect_PauseAll(GOBJ *fighter);
 void Effect_ResumeAll(GOBJ *fighter);
+int psRemoveParticleAppSRT(Particle2 *ptcl);
+void psDeletePntJObjwithParticle(Particle2 *ptcl);
+ptclGen *psKillGenerator(ptclGen *gen, ptclGen *unk);
+
+u16 *stc_ptclnum = R13 + (-0x3DBE);      // number of pctls alive
+Particle2 **stc_ptcl = 0x804d0908;       // last created ptcl
+ptclGen **stc_ptclgen = R13 + (-0x3DA4); // last created gen
+ptclGen **stc_ptclgencurr = R13 + (-0x3DA8);
+u16 *stc_ptclgennum = R13 + (-0x3DC0);
 
 #endif

@@ -16,9 +16,7 @@ struct FtVarKirby
     int charVar3;             // 0x2234
     int copy_index;           // 0x2238
     JOBJ *copy_jobj;          // 0x223c
-    FtDObjLookup dobj_lookup; // 0x2240
-    void *x2248;              // 0x2248
-    void *x224c;              // 0x224C
+    FtParts dobj_lookup;      // 0x2240
     FtPartsVis ftparts_vis;   // 0x2250
 };
 
