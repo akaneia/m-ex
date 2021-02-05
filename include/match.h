@@ -174,7 +174,7 @@ struct CameraBox
     int x4;                 // 0x4
     int x8;                 // 0x8
     int xC;                 // 0xC
-    int kind;             // 0x10
+    int kind;               // 0x10
     int x14;                // 0x14
     int x18;                // 0x18
     int x1c;                // 0x1c
@@ -449,6 +449,17 @@ struct MatchCamera
     int x3f4;         // 0x3f4
     int x3f8;         // 0x3f8
     int x3fc;         // 0x3fc
+};
+
+struct MatchOffscreen
+{
+    void *x0;
+    void *x4;
+    void *x8;
+    unsigned char is_offscreen : 1;     // 0xC, 0x80
+    unsigned char ignore_offscreen : 1; // 0xC, 0x40
+    unsigned char x3f : 6;              // 0xC, 0x3f
+    void *x10;
 };
 
 struct Match // static match struct
@@ -2810,6 +2821,11 @@ struct Match // static match struct
     MatchInit match; // 0x24c8
 };
 
+Match *stc_match = 0x8046b6a0;
+MatchCamera *stc_matchcam = 0x80452c68;
+MatchHUD *stc_matchhud = 0x804a10c8;
+MatchOffscreen *stc_match_offscreen = 0x804a1df0;
+
 /*** Functions ***/
 
 CameraBox *CameraBox_Alloc();
@@ -2829,6 +2845,8 @@ void Match_UnfreezeGame(int freeze_kind);
 void Match_CreateHUD(int ply);
 void Match_HideHUD();
 void Match_ShowHUD();
+void Match_HidePercents();
+void Match_ShowPercents();
 void Match_CorrectCamera();
 void Match_SetNormalCamera();
 void Match_SetFreeCamera(int unk, int unk2);

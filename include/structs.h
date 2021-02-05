@@ -47,6 +47,7 @@ typedef struct GrExtLookup GrExtLookup;
 // Match
 typedef struct MatchInit MatchInit;
 typedef struct Match Match;
+typedef struct MatchOffscreen MatchOffscreen;
 typedef struct MatchHUD MatchHUD;
 typedef struct MatchCamera MatchCamera;
 typedef struct CameraBox CameraBox;

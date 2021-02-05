@@ -7,6 +7,7 @@
 #include "obj.h"
 
 // map_gobjDesc Flags
+#define map_isCObj 0x20000000
 #define map_isBG 0x40000000
 #define map_isUnk 0x80000000
 
@@ -19,6 +20,9 @@ struct map_gobjDesc
     void *onFrame;
     void *onUnk;
     int flags;
+    //unsigned char is_unk : 1;        //  0x80
+    //unsigned char is_foreground : 1; //  0x40
+    //unsigned char is_cobj : 1;       //  0x20
 };
 
 struct map_gobjData
