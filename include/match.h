@@ -451,7 +451,6 @@ struct MatchCamera
 };
 
 struct MatchOffscreen
-<<<<<<< HEAD
 {
     void *x0;
     void *x4;
@@ -461,21 +460,6 @@ struct MatchOffscreen
     unsigned char x3f : 6;              // 0xC, 0x3f
     void *x10;
 };
-
-struct Match // static match struct
-    == == ==
-    =
->>>>>>> 5dd6dbd05fe2595de28f15913e3379d53ca3b33a
-        {
-            void * x0;
-void *x4;
-void *x8;
-unsigned char is_offscreen : 1;     // 0xC, 0x80
-unsigned char ignore_offscreen : 1; // 0xC, 0x40
-unsigned char x3f : 6;              // 0xC, 0x3f
-void *x10;
-}
-;
 
 struct Match // static match struct @ 8046b6a0
 {
