@@ -16,7 +16,7 @@
 .set  SSM_MaxID,100 * 10000
 
 #Custom Functions
-.set Audio_RequestSSMLoad,0x803d705C
+.set Audio_RequestSSMLoad,0x800056a8  # this is so far away because is overwrites a slippi function
 .set  GetGrFunction,0x803d7068
 .set itFunctionInit,0x803d7070
 .set Reloc,0x803d7074
