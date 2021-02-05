@@ -3,25 +3,26 @@
 
 #include "structs.h"
 #include "datatypes.h"
+#include "obj.h"
 #include "color.h"
 
 // button bits
+#define PAD_BUTTON_DPAD_LEFT 0x1
+#define PAD_BUTTON_DPAD_RIGHT 0x2
+#define PAD_BUTTON_DPAD_DOWN 0x4
+#define PAD_BUTTON_DPAD_UP 0x8
+#define PAD_TRIGGER_Z 0x10
+#define PAD_TRIGGER_R 0x20
+#define PAD_TRIGGER_L 0x40
+#define PAD_BUTTON_A 0x100
+#define PAD_BUTTON_B 0x200
+#define PAD_BUTTON_X 0x400
+#define PAD_BUTTON_Y 0x800
+#define PAD_BUTTON_START 0x1000
+#define PAD_BUTTON_UP 0x10000
+#define PAD_BUTTON_DOWN 0x20000
 #define PAD_BUTTON_LEFT 0x40000
 #define PAD_BUTTON_RIGHT 0x80000
-#define PAD_BUTTON_DOWN 0x20000
-#define PAD_BUTTON_UP 0x10000
-#define PAD_BUTTON_DPAD_LEFT 0x0001
-#define PAD_BUTTON_DPAD_RIGHT 0x0002
-#define PAD_BUTTON_DPAD_DOWN 0x0004
-#define PAD_BUTTON_DPAD_UP 0x0008
-#define PAD_TRIGGER_Z 0x0010
-#define PAD_TRIGGER_R 0x0020
-#define PAD_TRIGGER_L 0x0040
-#define PAD_BUTTON_A 0x0100
-#define PAD_BUTTON_B 0x0200
-#define PAD_BUTTON_X 0x0400
-#define PAD_BUTTON_Y 0x0800
-#define PAD_BUTTON_START 0x1000
 
 #define HSD_BUTTON_DPAD_LEFT 0x0001
 #define HSD_BUTTON_DPAD_RIGHT 0x0002
@@ -146,6 +147,16 @@ struct HSD_Update
     void (*onFrame)(); //0x30
 };
 
+struct HSD_VI
+{
+    int x0;
+    int x4;
+    int is_prog;
+};
+
+/*** Static Variables ***/
+static HSD_VI *stc_HSD_VI = 0x8046b0f0;
+
 /*** Functions ***/
 
 int HSD_Randi(int max);
@@ -154,4 +165,10 @@ void *HSD_MemAlloc(int size);
 void HSD_Free(void *ptr);
 void *HSD_ObjAlloc(HSD_ObjAllocData *obj_def);
 void HSD_ObjFree(HSD_ObjAllocData *obj_def, void *obj);
+void HSD_ImageDescCopyFromEFB(_HSD_ImageDesc *image_desc, int left, int top, int z_flag);     // must be called from a cobj callback!
+void GX_AllocImageData(_HSD_ImageDesc *image_desc, int width, int height, int fmt, int size); // image data buffer is stored to the image_desc
+void GXTexModeSync();
+void GXPixModeSync();
+void GXInvalidateTexAll();
+u64 Pad_GetRapidHeld(int pad);
 #endif

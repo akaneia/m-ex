@@ -8,6 +8,7 @@
 #include "datatypes.h"
 #include "hsd.h"
 #include "math.h"
+#include "useful.h"
 
 /*** Functions ***/
 
@@ -34,14 +35,14 @@ static void enterKnockback(GOBJ *fighter, int angle, float mag)
     FighterData *fighter_data = ((FighterData *)fighter->userdata);
 
     // store damage variables
-    fighter_data->damage_ForceApplied = mag;
-    fighter_data->damage_KBAngle = angle;
-    fighter_data->damage_Direction = fighter_data->facing_direction;
-    fighter_data->damage_DamagedHurtbox = 0;
-    fighter_data->damage_Dealt = 0;
-    fighter_data->damage_CollisionX = fighter_data->pos.X;
-    fighter_data->damage_CollisionY = fighter_data->pos.Y;
-    fighter_data->damage_CollisionZ = fighter_data->pos.Z;
+    fighter_data->dmg.force_applied = mag;
+    fighter_data->dmg.kb_angle = angle;
+    fighter_data->dmg.direction = fighter_data->facing_direction;
+    fighter_data->dmg.damaged_hurtbox = 0;
+    fighter_data->dmg.dealt = 0;
+    fighter_data->dmg.collpos.X = fighter_data->phys.pos.X;
+    fighter_data->dmg.collpos.Y = fighter_data->phys.pos.Y;
+    fighter_data->dmg.collpos.Z = fighter_data->phys.pos.Z;
 
     Fighter_EnterDamageState(fighter, -1, 0);
 
@@ -293,6 +294,26 @@ static AOBJ *JOBJ_GetJointAOBJ(JOBJ *jobj)
 
     // no aobj found, return 0
     return 0;
+}
+
+static DOBJ *JOBJ_GetDObjChild(JOBJ *joint, int dobj_index)
+{
+
+    int count = 0;
+    DOBJ *dobj = joint->dobj;
+
+    while (count < dobj_index)
+    {
+        if (dobj->next == 0)
+            assert("dobj not found!");
+
+        else
+            dobj = dobj->next;
+
+        count++;
+    }
+
+    return dobj;
 }
 
 static float Math_Vec2Angle(Vec2 *a, Vec2 *b)

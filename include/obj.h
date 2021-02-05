@@ -109,9 +109,9 @@ struct GOBJ
     GOBJ *previous;          // 0xC
     GOBJ *nextOrdered;       // 0x10
     GOBJ *previousOrdered;   // 0x14
-    GOBJProc *gobj_proc;     // 0x18
+    GOBJProc *proc;          // 0x18
     void *gx_cb;             // 0x1C
-    u64 cobj_id;             // 0x20. this is used to know which cobj to render to
+    u64 cobj_links;          // 0x20. this is used to know which cobj to render to
     void *hsd_object;        // 0x28
     void *userdata;          // 0x2C
     int destructor_function; // 0x30
@@ -132,20 +132,26 @@ struct GOBJProc
 struct GOBJList
 {
     // pointed to @ -0x3e74(r13)
+    // indexed by p_link
     GOBJ *x0;
     GOBJ *x4;
     GOBJ *x8;
     GOBJ *xc;
     GOBJ *x10;
-    GOBJ *camera;
+    GOBJ *cobj;
     GOBJ *x18;
     GOBJ *x1c;
     GOBJ *fighter;
     GOBJ *item;
     GOBJ *x28;
-    GOBJ *effect;
-    GOBJ *ptcl;
+    GOBJ *effect; // 0x2c
+    GOBJ *ptcl;   // 0x30, used for blastzone effect
     GOBJ *x34;
+    GOBJ *x38;
+    GOBJ *x3c;
+    GOBJ *x40;
+    GOBJ *x44;
+    GOBJ *match_cam; // 0x48, used for the match camera and shake gobjs
 };
 
 struct GXList
@@ -157,7 +163,8 @@ struct GXList
 
 struct TOBJ
 {
-    u64 parent;
+    int *parent;
+    int x4;
     TOBJ *next;
     u32 id;                           //GXTexMapID
     u32 src;                          //GXTexGenSrc 0x10
@@ -177,8 +184,8 @@ struct TOBJ
     struct _HSD_Tlut *tlut;           // 0x5C
     struct _HSD_TexLODDesc *lod;      // 0x60
     AOBJ *aobj;                       // 0x64
-    struct _HSD_ImageDesc **imagetbl; // 0x68
-    struct _HSD_Tlut **tluttbl;       // 0x6C
+    struct _HSD_ImageDesc **imagetbl;
+    struct _HSD_Tlut **tluttbl;
     u8 tlut_no;
     Mtx mtx;
     u32 coord; //GXTexCoordID
@@ -188,9 +195,9 @@ struct TOBJ
 struct AOBJ
 {
     u32 flags;
-    f32 curr_frame; // 0x4
+    f32 curr_frame;
     f32 rewind_frame;
-    f32 end_frame; // 0xC
+    f32 end_frame;
     f32 framerate;
     struct _HSD_FObj *fobj;
     struct _HSD_Obj *hsd_obj;
@@ -198,23 +205,23 @@ struct AOBJ
 
 struct MOBJ
 {
-    int *parent;            // 0x0
-    u32 rendermode;         // 0x4
-    TOBJ *tobj;             // 0x8
-    HSD_Material *mat;      // 0xC
-    struct _HSD_PEDesc *pe; // 0x10
-    AOBJ *aobj;             // 0x14
+    int *parent;
+    u32 rendermode;
+    TOBJ *tobj;
+    HSD_Material *mat;
+    struct _HSD_PEDesc *pe;
+    AOBJ *aobj;
     /*
     struct _HSD_TObj *ambient_tobj;
     struct _HSD_TObj *specular_tobj;
     */
-    struct _HSD_TExpTevDesc *tevdesc; // 0x18
-    union _HSD_TExp *texp;            // 0x1C
+    struct _HSD_TExpTevDesc *tevdesc;
+    union _HSD_TExp *texp;
 
-    struct _HSD_TObj *tobj_toon;      // 0x20
-    struct _HSD_TObj *tobj_gradation; // 0x24
-    struct _HSD_TObj *tobj_backlight; // 0x28
-    f32 z_offset;                     // 0x2C
+    struct _HSD_TObj *tobj_toon;
+    struct _HSD_TObj *tobj_gradation;
+    struct _HSD_TObj *tobj_backlight;
+    f32 z_offset;
 };
 
 struct JOBJDesc
@@ -292,8 +299,8 @@ struct DOBJ
 
 struct JOBJ
 {
-    int hsd_info;     //0x00
-    int class_parent; //0x04
+    int hsd_info;     //0x0
+    int class_parent; //0x4
     JOBJ *sibling;    //0x08
     JOBJ *parent;     //0x0C
     JOBJ *child;      //0x10
@@ -301,11 +308,11 @@ struct JOBJ
     DOBJ *dobj;       //0x18
     Vec4 rot;         //0x1C 0x20 0x24 0x28
     Vec3 scale;       //0x2C
-    Vec3 trans;       // 0x38
-    Mtx rotMtx;       // 0x44
+    Vec3 trans;
+    Mtx rotMtx;
     Vec3 *VEC;
     Mtx *MTX;
-    AOBJ *aobj; // 0x7C
+    AOBJ *aobj;
     int *RObj;
     JOBJDesc *desc;
 };
@@ -321,7 +328,7 @@ struct WOBJ
 
 struct COBJ
 {
-    void *parent;
+    u64 parent;          // 0x0
     u32 flags;           //0x08
     f32 viewport_left;   //0x0C
     f32 viewport_right;  //0x10
@@ -335,11 +342,11 @@ struct COBJ
     WOBJ *interest;      //0x28
     union
     {
-        f32 roll; //0x2C
-        Vec3 up;  //0x2C - 0x34
+        f32 roll; //0x28
+        Vec3 up;  //0x2C - 0x38
     } u;
-    f32 near; //0x38
-    f32 far;  //0x3C
+    f32 near; //0x3C
+    f32 far;  //0x40
     union
     {
         struct
@@ -368,6 +375,17 @@ struct COBJ
     Mtx view_mtx;       //0x54
     AOBJ *aobj;         //0x84
     Mtx proj_mtx;       //0x88
+};
+
+struct _HSD_ImageDesc
+{
+    void *img_ptr;
+    u16 width;
+    u16 height;
+    u32 format;
+    u32 mipmap;
+    f32 minLOD;
+    f32 maxLOD;
 };
 
 struct _HSD_LightPoint
@@ -456,6 +474,7 @@ u8 *obj_kind = R13 + -(0x3E55);
 /*** Functions ***/
 int JOBJ_GetWorldPosition(JOBJ *source, Vec3 *add, Vec3 *dest);
 void JOBJ_SetMtxDirtySub(JOBJ *jobj);
+void JOBJ_MakeMatrix(JOBJ *jobj);
 JOBJ *JOBJ_LoadJoint(JOBJDesc *joint);
 void JOBJ_RemoveAll(JOBJ *joint);
 void JOBJ_Remove(JOBJ *joint);
@@ -467,10 +486,11 @@ void JOBJ_SetFlagsAll(JOBJ *joint, int flags);
 void JOBJ_ClearFlags(JOBJ *joint, int flags);
 void JOBJ_ClearFlagsAll(JOBJ *joint, int flags);
 void JOBJ_BillBoard(JOBJ *joint, Mtx *m, Mtx *mx);
-void JOBJ_PlayAnim(JOBJ *joint, int unk, u16 flags, void *cb, int unk2, ...); // flags: 0x400 matanim, 0x20 jointanim
+void JOBJ_PlayAnim(JOBJ *joint, int unk, u16 flags, void *cb, int argkind, ...); // flags: 0x400 matanim, 0x20 jointanim, argkind specifies how to pop args off the va_list
 void JOBJ_Anim(JOBJ *joint);
 void JOBJ_AnimAll(JOBJ *joint);
 void JOBJ_AddAnimAll(JOBJ *joint, void *animjoint, void *matanimjoint, void *shapeanimjoint);
+void JOBJ_RemoveAnimAll(JOBJ *joint);
 void JOBJ_ReqAnim(JOBJ *joint, float frame);
 void JOBJ_ReqAnimByFlags(JOBJ *joint, int flags, float frame);
 void JOBJ_ReqAnimAll(JOBJ *joint, float unk);
@@ -482,10 +502,11 @@ int JOBJ_CheckAObjEnd(JOBJ *joint);
 void JObj_DispAll(JOBJ *joint, Mtx *vmtx, int flags, int rendermode);
 void AOBJ_ReqAnim(int *aobj, float unk);
 void AOBJ_StopAnim(JOBJ *jobj, int flags, int flags2);
+void AOBJ_SetRate(AOBJ *aobj, float rate);
 void DOBJ_SetFlags(DOBJ *dobj, int flags);
 void DOBJ_ClearFlags(DOBJ *dobj, int flags);
 COBJ *COBJ_LoadDesc(COBJDesc *cobj);
-COBJ *COBJ_GetMatchCamera();
+COBJ *COBJ_LoadDescSetScissor(COBJDesc *cobj);
 void CObjThink_Common(GOBJ *gobj);
 GOBJ *GObj_Create(int type, int subclass, int flags);
 void GObj_Destroy(GOBJ *gobj);
@@ -493,6 +514,7 @@ void GObj_AddGXLink(GOBJ *gobj, void *cb, int gx_link, int gx_pri);
 void GObj_DestroyGXLink(GOBJ *gobj);
 void GObj_GXReorder(GOBJ *gobj, int unk);
 void GObj_AddProc(GOBJ *gobj, void *callback, int priority);
+void GObj_RemoveProc(GOBJ *gobj);
 void GObj_AddObject(GOBJ *gobj, u8 unk, void *object);
 void GObj_FreeObject(GOBJ *gobj);
 void GObj_AddUserData(GOBJ *gobj, int userDataKind, void *destructor, void *userData);
@@ -506,4 +528,5 @@ void *Fog_LoadDesc(void *fogdesc);
 DOBJ *JOBJ_GetDObj(JOBJ *jobj);
 void *MOBJ_SetAlpha(DOBJ *dobj);
 void GObj_CopyGXPri(GOBJ *target, GOBJ *source);
+
 #endif

@@ -50,8 +50,8 @@ struct CollData
     int flags1;                // 0x34
     int coll_test;             // 0x38, is the ID of the most recent collision test for this object
     int ignore_line;           // 0x3c, ignores this line ID during collision
-    int x40;                   // 0x40
-    int x44;                   // 0x44
+    int ledge_left;            // 0x40, ledge ID in contact with
+    int ledge_right;           // 0x44, ledge ID in contact with
     int ignore_group;          // 0x48  ignores this line group during collision
     int check_group;           // 0x4c  checks only this line group during collision
     int x50;                   // 0x50
@@ -128,22 +128,87 @@ struct CollData
     int ecb_lock;              // 0x19c
 };
 
+struct CollGroupDesc // exists in stage file
+{
+    u16 floor_start;
+    u16 floor_num;
+    u16 ceil_start;
+    u16 ceil_num;
+    u16 rwall_start;
+    u16 rwall_num;
+    u16 lwall_start;
+    u16 lwall_num;
+    u16 dyn_start;
+    u16 dyn_num;
+    Vec2 area_min; // 0x10
+    Vec2 area_max; // 0x18
+    u16 vert_start;
+    u16 vert_num;
+};
+
+struct CollGroup // exists in heap
+{
+    CollGroup *next;
+    CollGroupDesc *desc;
+    int x8;               // flags
+    u16 ray_id;           // id of the last raycast
+    u16 xe;               // flags
+    Vec2 area_min;        // 0x10
+    Vec2 area_max;        // 0x18
+    JOBJ *jobj;           // 0x20
+    void *cb_floor;       // 0x24
+    void *map_data_floor; // 0x28
+    void *cb_ceil;        // 0x2C
+    void *map_data_ceil;  // 0x30
+    int x34;              // 0x34
+};
+
 struct CollLineInfo
 {
-    u16 vert_left;
-    u16 vert_right;
-    u16 x4;
-    u16 x6;
-    u16 x8;
-    u16 xa;
-    u16 xc;
-    u16 type; //
+    s16 vert_prev;          // 0x0
+    s16 vert_next;          // 0x2
+    s16 line_prev;          // 0x4
+    s16 line_next;          // 0x6
+    s16 line_prev_altgroup; // 0x8
+    s16 line_next_altgroup; // 0xA
+    u8 xc;
+    u8 xd_1 : 1;     // 0xD, 0x8000
+    u8 xd_2 : 1;     // 0xD, 0x8000
+    u8 xd_3 : 1;     // 0xD, 0x8000
+    u8 disabled : 1; // 0xD, 0x8000
+    u8 is_left : 1;  // 0xD, 0x8000
+    u8 is_right : 1; // 0xD, 0x8000
+    u8 is_ceil : 1;  // 0xD, 0x0200
+    u8 is_floor : 1; // 0xD, 0x8000
+    u8 xe_1 : 1;     // 0xE, 0x8000
+    u8 xe_2 : 1;     // 0xE, 0x8000
+    u8 xe_3 : 1;     // 0xE, 0x8000
+    u8 xe_4 : 1;     // 0xE, 0x8000
+    u8 xe_5 : 1;     // 0xE, 0x8000
+    u8 is_drop : 1;  // 0xE, 0x8000
+    u8 is_ledge : 1; // 0xE, 0x0200
+    u8 is_unk : 1;   // 0xE, 0x8000
+    u8 material;
 };
 
 struct CollLine
 {
     CollLineInfo *info;
-    int flags;
+    u8 x4;             // 0x4
+    u8 x5_1 : 1;       // 0x5
+    u8 x5_2 : 1;       // 0x5
+    u8 x5_3 : 1;       // 0x5
+    u8 x5_4 : 1;       // 0x5
+    u8 x5_5 : 1;       // 0x5
+    u8 x5_6 : 1;       // 0x5
+    u8 x5_7 : 1;       // 0x5
+    u8 is_enabled : 1; // 0x5
+    u8 x6;             // 0x6
+    u8 x7 : 4;         // 0x7
+    u8 is_rwall : 1;   // 0x7, 0x8
+    u8 is_lwall : 1;   // 0x7, 0x4
+    u8 is_ceil : 1;    // 0x7, 0x2
+    u8 is_floor : 1;   // 0x7, 0x1
 };
 
 struct CollVert
@@ -153,11 +218,47 @@ struct CollVert
     Vec2 pos_prev;
 };
 
-/*** Functions ***/
+struct CollDataStage
+{
+    void *verts;
+    int vert_num;
+    void *lines;
+    int line_num;
+    u16 floor_start;
+    u16 floor_num;
+    u16 ceil_start;
+    u16 ceil_num;
+    u16 rwall_start;
+    u16 rwall_num;
+    u16 lwall_start;
+    u16 lwall_num;
+    u16 dyn_start;
+    u16 dyn_num;
+    void *groups;
+    int group_num;
+};
 
-void Coll_ECBCurrToPrev(CollData *collData);
-void Coll_InitECB(CollData *collData);
+/*** Functions ***/
+void Coll_ECBCurrToPrev(CollData *coll_data);
+void Coll_InitECB(CollData *coll_data);
 int ECB_CollGround_PassLedge(CollData *ecb, ECBBones *bones); // returns is touching ground bool
 void ECB_CollAir(CollData *ecb, ECBBones *bones);
+void GrColl_GetLedgeLeft(int floor_index, Vec3 *pos);                                                                                                                                            // this functon will crawl along the entire line sequence and find the end of the ledge
+void GrColl_GetLedgeRight(int floor_index, Vec3 *pos);                                                                                                                                           // this functon will crawl along the entire line sequence and find the end of the ledge
+void GrColl_GetLedgeLeft2(int floor_index, Vec3 *pos);                                                                                                                                           // this functon will crawl along the entire line sequence and find the end of the ledge
+void GrColl_GetLedgeRight2(int floor_index, Vec3 *pos);                                                                                                                                          // this functon will crawl along the entire line sequence and find the end of the ledge
+int GrColl_RaycastGround(Vec3 *coll_pos, int *line_index, int *line_kind, Vec3 *unk1, Vec3 *unk2, Vec3 *unk3, Vec3 *unk4, void *cb, float fromX, float fromY, float toX, float toY, float unk5); // make unk5
+int GrColl_CrawlGround(int line_index, Vec3 *pos, int *return_line, Vec3 *return_pos, int *return_flags, Vec3 *return_slope, float x_offset, float y_offset);                                    // returns bool for if position on line series exists
+int GrColl_GetPosDifference(int line_index, Vec3 *pos, Vec3 *return_pos);
+int GrColl_GetLineInfo(int line_index, Vec3 *r4, void *r5, int *flags, Vec3 *return_slope);
+void GrColl_GetLineSlope(int line_index, Vec3 *return_slope);
+int GrColl_CheckIfLineEnabled(int line_index);
+
+static int *stc_colltest = R13 + (COLL_TEST);
+static CollGroup **stc_firstcollgroup = R13 + (-0x51DC);
+static CollGroup **stc_collgroup = R13 + (-0x51E0);
+static CollLine **stc_collline = R13 + (-0x51E4);
+static CollVert **stc_collvert = R13 + (-0x51E8);
+static CollDataStage **stc_colldata = R13 + (-0x51EC);
 
 #endif

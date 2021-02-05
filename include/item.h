@@ -262,13 +262,133 @@
 
 /*** Structs ***/
 
+typedef struct ItemModelDesc
+{
+    JOBJ* model;
+    int bone_count;
+    int bone_attach_id;
+    int bit_field;
+} ItemModelDesc;
+
+typedef struct ItemDesc
+{
+    int* common_attributes;
+    int* unqiue_attributes;
+    int* hurtboxes;
+    int* states;
+    ItemModelDesc* model;
+    int* dynamics;
+} ItemDesc;
+
+typedef struct itCommonData
+{
+    int x00;
+    int x04;
+    int x08;
+    int x0C;
+    int x10;
+    int x14;
+    int x18;
+    int x1C;
+    int x20;
+    int x24;
+    int x28;
+    int x2C;
+    int x30;
+    int x34;
+    int x38;
+    int x3C;
+    int x40;
+    int x44;
+    float x48;
+    float x4C;
+    float x50;
+    float x54;
+    float x58;
+    float x5C;
+    float x60;
+    float x64;
+    float x68;
+    float x6C;
+    float x70;
+    float x74;
+    float x78;
+    float x7C;
+    float x80;
+    float x84;
+    float x88;
+    float x8C;
+    float x90;
+    float x94;
+    float x98;
+    float x9C;
+    float xA0;
+    float xA4;
+    float xA8;
+    float xAC;
+    float xB0;
+    int xB4;
+    float xB8;
+    float xBC;
+    float xC0;
+    float xC4;
+    float xC8;
+    float xCC;
+    float xD0;
+    float xD4;
+    int xD8;
+    int xDC;
+    float xE0;
+    float xE4;
+    float xE8;
+    float xEC;
+    float xF0;
+    float xF4;
+    float xF8;
+    int xFC;
+    int x100;
+    int x104;
+    int x108;
+    int x10C;
+    int x110;
+    int x114;
+    int x118;
+    int x11C;
+    int x120;
+    int x124;
+    int x128;
+    int x12C;
+    int x130;
+    int x134;
+    int x138;
+    int x13C;
+    int x140;
+    float x144;
+    int x148;
+    float x14C;
+    float x150;
+    float x154;
+    float x158;
+    float x15C;
+} itCommonData;
+
+typedef struct itPublicData
+{
+    itCommonData* itCommonData;
+    ItemDesc** common_items;
+    ItemDesc** adventure_items;
+    ItemDesc** pokemon_items;
+    int* x10;
+    int* x14;
+} itPublicData;
+
 struct itData
 {
     int x0;
-    int *itemAttributes;
-    int archive;
-    int animFlags;
-    int animDynamics;
+    float *param_ext;
+    void *archive;
+    void *animFlags;
+    void *animDynamics;
     int x14;
     int x18;
     int x1C;
@@ -291,10 +411,15 @@ struct itData
 
 struct itCommonAttr
 {
-    char flags1; //0x0, bit 0x80 = is heavy item (crate)
-    char flags2; //0x1
-    char flags3; //0x2
-    char flags4; //0x3
+    char flags1;                //0x0, bit 0x80 = is heavy item (crate)
+    unsigned char x1_1 : 1;     // 0x1 0x80
+    unsigned char x1_2 : 1;     // 0x1 0x40
+    unsigned char x1_3 : 1;     // 0x1 0x20
+    unsigned char x1_4 : 1;     // 0x1 0x10
+    unsigned char x1_5 : 1;     // 0x1 0x08
+    unsigned char cam_kind : 2; // 0x1 0x06, is stored to 0xdcd
+    unsigned char x1_8 : 1;     // 0x1 0x01    char flags3; //0x2
+    char flags4;                //0x3
     int x4;
     int x8;
     float spinVelocity;
@@ -463,11 +588,11 @@ struct itHit
 
 struct ItemData
 {
+    int x0;                                  // 0x0
     GOBJ *item;                              // 0x0
-    int x4;                                  // 0x4
     int x8;                                  // 0x8
     int spawnType;                           // 0xC
-    int kind;                                // 0x10
+    int itemID;                              // 0x10
     int x14;                                 // 0x14
     int x18;                                 // 0x18
     int x1c;                                 // 0x1c
@@ -479,12 +604,10 @@ struct ItemData
     float spinUnk;                           // 0x34
     float scale;                             // 0x38
     int x3c;                                 // 0x3c
-    Vec3 selfVel;                            // 0x40
+    Vec3 self_vel;                           // 0x40
     Vec3 pos;                                // 0x4C
-    Vec3 unkVel;                             // 0x58-0x64
-    int x64;                                 // 0x64
-    int x68;                                 // 0x68
-    int x6c;                                 // 0x6c
+    Vec3 unkVel;                             // 0x58 - 0x64
+    Vec3 unkVel2;							 // 0x64 - 0x70
     Vec3 nudgeVel;                           // 0x70 - 0x7C
     int x7c;                                 // 0x7c
     int x80;                                 // 0x80
@@ -501,7 +624,7 @@ struct ItemData
     int xac;                                 // 0xac
     int xb0;                                 // 0xb0
     int xb4;                                 // 0xb4
-    int xb8;                                 // 0xb8
+    void *it_cb;                             // 0xb8, global item callbacks
     ItemState *itemStates;                   // 0xbc
     int isRotate;                            // 0xc0
     itData *itData;                          // 0xc4
@@ -511,7 +634,7 @@ struct ItemData
     int xd4;                                 // 0xd4
     int xd8;                                 // 0xd8
     int xdc;                                 // 0xdc
-    int xe0;                                 // 0xe0
+    int ground_air_state;                    // 0xe0
     int xe4;                                 // 0xe4
     int xe8;                                 // 0xe8
     int xec;                                 // 0xec
@@ -677,8 +800,8 @@ struct ItemData
     int x36c;                                // 0x36c
     int x370;                                // 0x370
     int x374;                                // 0x374
-    CollData collData;                       // 0x378 -> 0x518
-    FighterData *fighter;                    // 0x518
+    CollData coll_data;                      // 0x378 -> 0x518
+    GOBJ *fighter_gobj;                    // 0x518
     int x51c;                                // 0x51c
     CameraBox *camerabox;                    // 0x520
     int x524;                                // 0x524
@@ -843,16 +966,19 @@ struct ItemData
     int xd08;                                // 0xd08
     int xd0c;                                // 0xd0c
     int xd10;                                // 0xd10
-    int xd14;                                // 0xd14
-    int xd18;                                // 0xd18
-    int xd1c;                                // 0xd1c
-    void *cb_Accessory;                      // 0xd20
-    int xd24;                                // 0xd24
-    int xd28;                                // 0xd28
-    int xd2c;                                // 0xd2c
-    int xd30;                                // 0xd30
-    void *grabbedFighter_OnItem;             // 0xd34
-    void *grabbedFighter_OnFighter;          // 0xd38
+    struct                                   // cb
+    {                                        //
+        void (*anim)(GOBJ *item);            // 0xd14
+        void (*phys)(GOBJ *item);            // 0xd18
+        void (*coll)(GOBJ *item);            // 0xd1c
+        void (*accessory)(GOBJ *item);       // 0xd20
+        void *xd24;                          // 0xd24
+        void *xd28;                          // 0xd28
+        void *xd2c;                          // 0xd2c
+        void *jumped_on;                     // 0xd30, runs when the item is "jumped on", 80269bac
+        void *grabFt_onIt;                   // 0xd34, when grabbing a fighter, run this function on self
+        void *grabFt_onFt;                   // 0xd38, when grabbing a fighter, run this function on fighter
+    } cb;                                    //
     float rotateSpeed;                       // 0xd3c
     int xd40;                                // 0xd40
     float lifetime;                          // 0xd44
@@ -899,9 +1025,17 @@ struct ItemData
     int xdc0;                                // 0xdc0
     int xdc4;                                // 0xdc4
     u16 flags1 : 16;                         // 0xdc8
-    u16 flags2 : 7;                          // 0xdca
-    u16 rotateAxis : 3;                      // 0xdcb
-    u16 flags4 : 6;                          // 0xdcb
+    u16 xdca1 : 1;                           // 0xdca 0x80
+    u16 xdca2 : 1;                           // 0xdca 0x40
+    u16 xdca3 : 1;                           // 0xdca 0x20
+    u16 xdca4 : 1;                           // 0xdca 0x10
+    u16 xdca5 : 1;                           // 0xdca 0x08
+    u16 can_hold : 1;                        // 0xdca 0x04
+    u16 xdca7 : 1;                           // 0xdca 0x02
+    u16 rotateAxis : 3;                      // 0xdcb,
+    u16 flags4 : 2;                          // 0xdcb, 0x30
+    u16 can_nudge : 1;                       // 0xdcb, 0x08
+    u16 xdcb_7 : 3;                          // 0xdcb, 0x07
     unsigned char xdcc1 : 1;                 // 0xdcc, 0x80
     unsigned char xdcc2 : 1;                 // 0xdcc, 0x40
     unsigned char xdcc3 : 1;                 // 0xdcc, 0x20
@@ -910,8 +1044,7 @@ struct ItemData
     unsigned char isCheckLeftBlastzone : 1;  // 0xdcc, 0x04
     unsigned char isCheckUpBlastzone : 1;    // 0xdcc, 0x02
     unsigned char isCheckDownBlastzone : 1;  // 0xdcc, 0x01
-    unsigned char xdcd1 : 1;                 // 0xdcd, 0x80
-    unsigned char update_cam : 1;            // 0xdcd, 0x40. indicates this item has a camera box
+    unsigned char cam_kind : 2;              // 0xdcd, 0xc0. indicates this item has a camera box
     unsigned char xdcd3 : 1;                 // 0xdcd, 0x20
     unsigned char xdcd4 : 1;                 // 0xdcd, 0x10
     unsigned char xdcd5 : 1;                 // 0xdcd, 0x08
@@ -964,12 +1097,17 @@ struct ItemData
     int xe3c;                                // 0xe3c
 };
 
+
+/*** static reference ***/
+
+static itPublicData *stc_itPublicData = (R13 + -0x4978);
+
+
 /*** Functions ***/
 
 void Item_Hold(GOBJ *item, GOBJ *fighter, int boneID);
 void Item_Catch(GOBJ *fighter, int unk);
-void Items_StoreItemDataToCharItemTable(undefined4, int);
-void Items_StoreItemDataToCharItemTable2(int articleData, int articleID);
+void Items_StoreItemDataToCharItemTable(int articleData, int articleID);
 void Items_StoreTimeout(GOBJ *item, float timeout);
 GOBJ *Item_CreateItem(SpawnItem *item_spawn); // sorry for confusion, use this one for best results
 GOBJ *Item_CreateItem1(SpawnItem *item_spawn);
@@ -985,7 +1123,7 @@ void Item_PlaceOnGroundBelow(GOBJ *item);
 int Item_CheckIfTouchingWall(GOBJ *item, float *unk[]);
 void Item_InitGrab(ItemData *item, int unk, void *OnItem, void *OnFighter);
 void Item_ResetAllHitPlayers(ItemData *item);
-int Item_CountActiveItems(int kind);
+int Item_CountActiveItems(int itemID);
 void Item_CopyDevelopState(GOBJ *item, GOBJ *fighter);
 int Items_DecLife(GOBJ *item);
 void GXLink_Item(GOBJ *gobj, int pass);
@@ -996,5 +1134,14 @@ void Item_SetLifeTimer(GOBJ *item, float lifetime); // sets frames until item is
 int Item_DecLifeTimer(GOBJ *item);                  // returns isEnd bool
 JOBJ *Item_GetBoneJOBJ(GOBJ *item, int bone_index);
 int Item_CheckIfEnabled(); // returns bool regarding if items are enabled for this match
+int Item_GetGroundAirState(GOBJ *item);
+void Item_UpdatePhysAndColl(GOBJ *item);
+void Item_InvertVelocityAndFacingDirection(GOBJ *item);
+void Item_ProjectileVelocityCalculate(GOBJ *item, float fall_speed, float max_fall_speed);
+void Item_PlayOnDestroySFXAgain(ItemData*, int sfxid, int volume, int unk);
+void Item_UpdatePositionCollision(GOBJ *item);
+void Item_ScaleToPlayerSize(GOBJ *item);
+void Item_AnimateAndUpdateSubactions(GOBJ *item);
+void Barrel_EnterBreak(GOBJ *item);
 
 #endif

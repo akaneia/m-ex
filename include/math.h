@@ -21,15 +21,17 @@ void VECSubtract(Vec3 *a, Vec3 *b, Vec3 *a_b);
 void VECMultAndAdd(Vec3 *a, Vec3 *b);
 float VECDotProduct(Vec3 *a, Vec3 *b);
 void VECCrossProduct(Vec3 *a, Vec3 *b, Vec3 *axb);
+float Vec2_Normalize(Vec2 *v);
+float Vec3_Normalize(Vec3 *v);
+void Vec2_Add(Vec2 *a, Vec2 *b);
 //void MTXQuat(Mtx *m, Vec4 *dest);           // quat to matrix
 void HSD_MkRotationMtx(Mtx *dest, Vec4 *v); // quat to rot matrix
 void HSD_MtxGetScale(Mtx *m, Vec3 *dest);
 void HSD_MtxGetRotation(Mtx *m, Vec3 *dest);
 void HSD_MtxGetTranslate(Mtx *m, Vec3 *dest);
 void HSD_MtxSRT(Mtx *m, Vec3 *scale, Vec3 *rot, Vec3 *trans, int unk);
-void MatToQuat(Mtx *m, Vec3 *dest); // matrix to quat
+void MatToQuat(Mtx *m, Vec4 *dest); // matrix to quat
 float sqrtf(float num);
 void MTXRotRad(Mtx m, char axis, f32 rad);
-float Math_Unk(Vec3 *a, Vec3 *b);
 
 #endif
