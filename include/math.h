@@ -33,5 +33,7 @@ void HSD_MtxSRT(Mtx *m, Vec3 *scale, Vec3 *rot, Vec3 *trans, int unk);
 void MatToQuat(Mtx *m, Vec4 *dest); // matrix to quat
 float sqrtf(float num);
 void MTXRotRad(Mtx m, char axis, f32 rad);
+float Vec2_CalculateAngle(Vec2 *a, Vec2 *b);
+float Vec3_CalculateAngle(Vec3 *a, Vec3 *b);
 
 #endif

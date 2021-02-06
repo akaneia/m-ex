@@ -215,6 +215,8 @@
 800D54A4:Fighter_UpdateRebirthPlatformPos
 80091E78:Fighter_UpdateShieldGFX
 800B4A78:Fighter_ZeroCPUInputs
+800dcfd4:Fighter_BreakGrabUnk
+800dc920:Fighter_BreakGrab
 80380358:File_GetSymbol
 80016BE0:File_Load
 80016C64:File_LoadInitReturnSymbol
@@ -365,7 +367,6 @@
 802F40B8:Match_ShowTimer
 801C10B8:Match_StoreGoCallback
 801A4674:Match_UnfreezeGame
-8000D790:Math_Unk
 8037E708:MatToQuat
 8001B6F8:Memcard_CheckStatus
 8001BB48:Memcard_CreateSnapshot
@@ -502,6 +503,8 @@
 8000DC6C:VECMultAndAdd
 80342DB8:VECNormalize
 80342D78:VECSubtract
+8000D790:Vec2_CalculateAngle
+8000d620:Vec3_CalculateAngle 
 800119DC:Wind_FighterCreate
 80011A50:Wind_StageCreate
 8027B5B0:Zako_Create

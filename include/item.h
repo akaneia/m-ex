@@ -1123,7 +1123,6 @@ void Item_InitGrab(ItemData *item, int unk, void *OnItem, void *OnFighter);
 void Item_ResetAllHitPlayers(ItemData *item);
 int Item_CountActiveItems(int itemID);
 void Item_CopyDevelopState(GOBJ *item, GOBJ *fighter);
-int Items_DecLife(GOBJ *item);
 void GXLink_Item(GOBJ *gobj, int pass);
 void Item_UpdateSpin(GOBJ *item, float unk);
 void Item_EnableSpin(GOBJ *item);

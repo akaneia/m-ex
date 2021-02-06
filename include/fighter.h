@@ -1727,7 +1727,7 @@ struct FighterData
         int air_state;                                         // 0xE0
         float horzitonal_velocity_queue_will_be_added_to_0xec; // 0xE4
         float vertical_velocity_queue_will_be_added_to_0xec;   // 0xE8
-        Vec3 selfVelGround;                                    // 0xEC
+        Vec3 self_vel_ground;                                  // 0xEC
         int unknownF8;                                         // 0xF8
         int unknownFC;                                         // 0xFC
         int unknown100;                                        // 0x100
@@ -2202,8 +2202,8 @@ struct FighterData
         float grab_timer;                     // 0x1a4c
         int x1a50;                            // 0x1a50
         int x1a54;                            // 0x1a54
-        GOBJ *grab_attacker;                  // 0x1a58
-        GOBJ *grab_victim;                    // 0x1a5c
+        GOBJ *attacker;                       // 0x1a58
+        GOBJ *victim;                         // 0x1a5c
         int x1a60;                            // 0x1a60
         int x1a64;                            // 0x1a64
         u16 x1a68;                            // 0x1a68
@@ -2359,10 +2359,10 @@ struct FighterData
     unsigned char show_model : 1;                // 0x1 - x21fc_
     struct ftcmd_var                             // 0x2200
     {                                            //
-        int subactionFlag0;                      // 0x2200
-        int subactionFlag1;                      // 0x2204
-        int subactionFlag2;                      // 0x2208
-        int subactionFlag3;                      // 0x220C
+        int flag0;                               // 0x2200
+        int flag1;                               // 0x2204
+        int flag2;                               // 0x2208
+        int flag3;                               // 0x220C
     } ftcmd_var;                                 //
     struct flags                                 // 0x2210
     {                                            //
@@ -2449,7 +2449,14 @@ struct FighterData
         unsigned char has_follower : 1;       // 0x04 - 0x2222, this makes the subcharacter enter sleep when the main char dies
         unsigned char x2222_7 : 1;            // 0x02 - 0x2222
         unsigned char x2222_8 : 1;            // 0x01 - 0x2222
-        char flags_2223;                      // 0x2223
+        unsigned char x2223_1 : 1;            // 0x80 - 0x2223
+        unsigned char x2223_2 : 1;            // 0x40 - 0x2223
+        unsigned char x2223_3 : 1;            // 0x20 - 0x2223
+        unsigned char x2223_4 : 1;            // 0x10 - 0x2223
+        unsigned char x2223_5 : 1;            // 0x8 - 0x2223
+        unsigned char x2223_6 : 1;            // 0x4 - 0x2223
+        unsigned char x2223_7 : 1;            // 0x2 - 0x2223
+        unsigned char x2223_8 : 1;            // 0x1 - 0x2223
         unsigned char x2224_1 : 1;            // 0x80 - 0x2224
         unsigned char x2224_2 : 1;            // 0x40 - 0x2224
         unsigned char stamina_dead : 1;       // 0x20 - 0x2224
