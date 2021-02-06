@@ -52,6 +52,12 @@ load	r20,0x803456a8			#OSReport
   mtctr	r20
   bctrl
 
+#OSReport Version
+  bl	Version
+  mflr	r3
+  mtctr	r20
+  bctrl
+
 b	Exit
 
 #########################################################
@@ -79,11 +85,8 @@ blrl
 
 Version:
 blrl
-.long 0x56455253
-.long 0x494f4e3a
-.long 0x2049534f
-.long 0x2025730a
-.long 0x00000000
+.string "v0.6\n"
+.align 2
 
 ResetCombo:
 blrl
