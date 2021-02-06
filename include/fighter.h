@@ -2465,12 +2465,13 @@ struct FighterData
         unsigned char x2225_5 : 1;            // 0x8 - 0x2225
         unsigned char x2225_6 : 1;            // 0x4 - 0x2225
         unsigned char x2225_7 : 1;            // 0x2 - 0x2225
-        unsigned char x2225_8 : 1;            // 0x1 - 0x2225        unsigned char x2226_1 : 1;            // 0x80 - 0x2226
+        unsigned char x2225_8 : 1;            // 0x1 - 0x2225
+        unsigned char x2226_1 : 1;            // 0x80 - 0x2226
         unsigned char x2226_2 : 1;            // 0x40 - 0x2226
         unsigned char is_thrown : 1;          // 0x20 - 0x2226, might actually be for skipping grab collision
         unsigned char x2226_4 : 1;            // 0x10 - 0x2226
-        unsigned char x2226_5 : 1;            // 0x8 - 0x2226
-        unsigned char x2226_6 : 1;            // 0x4 - 0x2226
+        unsigned char cloak1 : 1;             // 0x8 - 0x2226
+        unsigned char cloak2 : 1;             // 0x4 - 0x2226
         unsigned char x2226_7 : 1;            // 0x2 - 0x2226
         unsigned char x2226_8 : 1;            // 0x1 - 0x2226
         char flags_2227;                      // 0x2227
@@ -2798,7 +2799,6 @@ int Fighter_CountPlayers();
 void Fighter_InitData();
 void Fighter_BreakGrabUnk(GOBJ *victim);
 void Fighter_BreakGrab(GOBJ *fighter, GOBJ *victim);
-#endif
 void Fighter_SetCharacterFlags(GOBJ *fighter, int, int);
 void Fighter_GetECBPosition(GOBJ *fighter, Vec3 *position);
 void Fighter_Phys_AnimationFriction(GOBJ *fighter);

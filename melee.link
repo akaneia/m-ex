@@ -350,6 +350,8 @@
 802F3424:Match_GetPlayerHUDPos
 802F3394:Match_HideHUD
 802F405C:Match_HideTimer
+802f6898:Match_HidePercents
+802f68f0:Match_ShowPercents
 801A583C:Match_InitMinorData
 8003006C:Match_SetDevelopCamera
 8016B33C:Match_SetEndGraphic

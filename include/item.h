@@ -264,7 +264,7 @@
 
 typedef struct ItemModelDesc
 {
-    JOBJ* model;
+    JOBJ *model;
     int bone_count;
     int bone_attach_id;
     int bit_field;
@@ -272,12 +272,12 @@ typedef struct ItemModelDesc
 
 typedef struct ItemDesc
 {
-    int* common_attributes;
-    int* unqiue_attributes;
-    int* hurtboxes;
-    int* states;
-    ItemModelDesc* model;
-    int* dynamics;
+    int *common_attributes;
+    int *unqiue_attributes;
+    int *hurtboxes;
+    int *states;
+    ItemModelDesc *model;
+    int *dynamics;
 } ItemDesc;
 
 typedef struct itCommonData
@@ -374,12 +374,12 @@ typedef struct itCommonData
 
 typedef struct itPublicData
 {
-    itCommonData* itCommonData;
-    ItemDesc** common_items;
-    ItemDesc** adventure_items;
-    ItemDesc** pokemon_items;
-    int* x10;
-    int* x14;
+    itCommonData *itCommonData;
+    ItemDesc **common_items;
+    ItemDesc **adventure_items;
+    ItemDesc **pokemon_items;
+    int *x10;
+    int *x14;
 } itPublicData;
 
 struct itData
@@ -592,7 +592,7 @@ struct ItemData
     GOBJ *item;                              // 0x0
     int x8;                                  // 0x8
     int spawnType;                           // 0xC
-    int itemID;                              // 0x10
+    int kind;                                // 0x10
     int x14;                                 // 0x14
     int x18;                                 // 0x18
     int x1c;                                 // 0x1c
@@ -607,7 +607,7 @@ struct ItemData
     Vec3 self_vel;                           // 0x40
     Vec3 pos;                                // 0x4C
     Vec3 unkVel;                             // 0x58 - 0x64
-    Vec3 unkVel2;							 // 0x64 - 0x70
+    Vec3 unkVel2;                            // 0x64 - 0x70
     Vec3 nudgeVel;                           // 0x70 - 0x7C
     int x7c;                                 // 0x7c
     int x80;                                 // 0x80
@@ -801,7 +801,7 @@ struct ItemData
     int x370;                                // 0x370
     int x374;                                // 0x374
     CollData coll_data;                      // 0x378 -> 0x518
-    GOBJ *fighter_gobj;                    // 0x518
+    GOBJ *fighter_gobj;                      // 0x518
     int x51c;                                // 0x51c
     CameraBox *camerabox;                    // 0x520
     int x524;                                // 0x524
@@ -1097,11 +1097,9 @@ struct ItemData
     int xe3c;                                // 0xe3c
 };
 
-
 /*** static reference ***/
 
 static itPublicData *stc_itPublicData = (R13 + -0x4978);
-
 
 /*** Functions ***/
 
@@ -1138,7 +1136,7 @@ int Item_GetGroundAirState(GOBJ *item);
 void Item_UpdatePhysAndColl(GOBJ *item);
 void Item_InvertVelocityAndFacingDirection(GOBJ *item);
 void Item_ProjectileVelocityCalculate(GOBJ *item, float fall_speed, float max_fall_speed);
-void Item_PlayOnDestroySFXAgain(ItemData*, int sfxid, int volume, int unk);
+void Item_PlayOnDestroySFXAgain(ItemData *, int sfxid, int volume, int unk);
 void Item_UpdatePositionCollision(GOBJ *item);
 void Item_ScaleToPlayerSize(GOBJ *item);
 void Item_AnimateAndUpdateSubactions(GOBJ *item);
