@@ -1,0 +1,79 @@
+MARIO
+fireball spawn - 1146, 800e0f98
+fireball bounce - 1147, 8029b9f0
+tornado - 1148, 800e210c, 800e2238
+cape sparkle 1 - 1149, 802b27c8
+cape sparkle 2 - 1150, 802b2800
+
+FOX
+
+
+FALCON
+
+DK
+
+KIRBY
+
+
+BOWSER
+
+
+LINK
+
+
+SHEIK
+
+
+NESS
+
+
+PEACH
+
+
+POPO
+
+
+NANA
+
+PIKA
+
+
+SAMUS
+
+
+YOSHI
+
+
+JIGGLYPUFF
+
+MEWTWO
+
+
+LUIGI
+
+
+MARTH
+
+ZELDA
+
+
+GAW
+
+
+
+*CLONES*
+
+YOUNG LINK
+
+
+DOC
+pill bounce - 1147, 8029b9f0
+
+FALCO
+
+
+PICHU
+
+GANON
+
+ROY

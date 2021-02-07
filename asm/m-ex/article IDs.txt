@@ -1,0 +1,132 @@
+MARIO
+0 - fireball (0x30) 800e0f6c
+1 - cape (0x53)
+
+FOX
+0 - laser (0x36)
+1 - gun (0x4A)
+2 - illusion (0x38)
+
+FALCON
+
+DK
+
+KIRBY
+0 - cutter shot (0x32)
+1 - hammer (033)
+2 - star (0x34)
+3 - star again (0x35)
+
+BOWSER
+0 - flame (0xd2)
+
+LINK
+0 - bomb (0x3A)
+1 - boomerang (0x3C)
+3 - hookshot (0x3e)
+4 - arrow (0x40)
+5 - bow (0x4c)
+
+SHEIK
+0 - needle (0x4f)
+1 - needlestack (0x50)
+2 - unk (0x55)
+3 - chain link (0x61)
+
+NESS
+0 - pk fire travel (0x42)
+1 - pk fire explode (0x43)
+2 - pk flash travel (0x44)
+3 - pk thunder ball (0x45)
+4 - pk thunder tail 1 (0x46)
+5 - pk thunder tail 2 (0x47)
+6 - pk thunder tail 3 (0x48)
+7 - pk thunder tail 4 (0x49)
+8 - pk flash explode (0x4e)
+9 - bat (0x65)
+10 - yoyo rope (0x66)
+
+PEACH
+0 - peach bomber (0x62)
+1 - turnip  (0x63)
+2 - parasol (0x67)
+3 - toad (0x68)
+4 - toads spore (0x6f)
+
+POPO
+0 - ice glacier (0x6A)
+1 - mist (0x6B)
+2 - rope (0x71)
+
+NANA
+
+PIKA
+0 - thunder (0x51)
+1 - thunder jolt air (0x59)
+2 - thunder jolt ground (0x5A)
+
+SAMUS
+0 - bomb (0x5D)
+1 - charge shot (0x5e)
+2 - missile (0x5F)
+3 - grapple (0x60)
+
+YOSHI
+0 - throw egg (0x56)
+1 - star (0x58)
+2 - lay egg (0x57)
+
+JIGGLYPUFF
+
+MEWTWO
+0 - disable (0x6E)
+1 - shadow ball(0x70)
+
+LUIGI
+0 - fireball (0x69)
+
+MARTH
+
+ZELDA
+0 - dins fire travel (0x6C)
+1 - dins fire explode (0x6D)
+
+GAW
+0 - smoker (0x72)
+1 - manhole cover (0x73)
+2 - flame (0x74)
+3 - nair (0x75)
+4 - turtle (0x76)
+5 - smoke (0x77)
+6 - hammer (0x78)
+7 - oil (0x79)
+8 - bacon (0x7A)
+9 - firemen (0x7C)
+
+
+*CLONES*
+
+YOUNG LINK
+0 - bomb (0x3B)
+1 - boomerang (0x3D)
+3 - hookshot (0x3F)
+4 - arrow (0x41)
+5 - bow (0x4D)
+
+DOC
+0 - fireball (0x31) 800e1018
+1 - cape (0x54)
+
+FALCO
+0 - laser (0x37)
+1 - gun (0x4B)
+2 - illusion (0x39)
+
+PICHU
+0 - thunder (0x52)
+1 - thunder jolt air (0x5B)
+2 - thunder jolt ground (0x5C)
+
+GANON
+
+ROY

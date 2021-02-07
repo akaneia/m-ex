@@ -1,0 +1,47 @@
+MUST DO
+-change all onSwallow references to OFST_KirbyAbilityRuntimeStruct, dk's is here 800f0ff8
+-modulate code to index kirby items @ 800f16f0
+-note to self, the struct that contains pointers to the
+ftDemo files has not been expanded! I believe
+its right here 800beb70
+-psInitParticle table might need to be expanded.
+exists @ 804d0d58 and 804d0e5c. check notes for more info
+-expand result screen size struct referenced during no contest @ 8017a8f4. each entry is 48 bytes...
+
+MAYBE
+-at the end of the ftData pointer table, there are some bits that
+idk what they do. might have to modify this. codeline 800853dc interfaces w. this
+
+IDEAS
+-wolf up b hitting walls enters rebound?, ground rebound enters fall?
+-css use icon positions
+-investigate the queue effects function,s try to make char effects work
+
+look into how when holding an item, ragdoll bones snap into place
+
+
+
+
+Brainstorming how to easily clone fighters with their effects and items.
+- function responsible for creating model effects is 8005be88(gxfID, fighter, position)
+- function responsible for creating particle effects is 8039f05c(unk, effectfile, gxfID)
+maybe i can inject on this functions and swap out the ids. particles will be tricky because there
+are no references to the fighter passed in...
+
+
+
+
+particle tables
+804d08e8
+    0x000 - int32, array of unk. runtime variables
+    0x020 - array of live particles pointers? is accessed directly by codeline 8039fc9c
+    0x060 - array of unk. (is == 0 when 803984f4.r6 == 0, otherwise its == r6), indexed by effect file ID
+    0x164 - array of TextureGraphicsNum (0x0 of TextureGraphics in effect file), indexed by effect file ID
+    0x268 - array of pointers to TextureGraphics Data (0x0 of TextureGraphics in effect file), indexed by effect file ID
+    0x36C - array of unk. (is == 0 when 803984f4.r7 == 0), indexed by effect file ID
+    0x470 - array of ParticleLast (ParticleIDStart + ParticleCount), indexed by effect file ID
+    0x574 - array of pointers to Particles Data (0x4 of Particles in effect file), indexed by effect file ID
+
+804d0f60 - directly referenced @ 80398c10
+    0x000 - int32, unk
+    0x004 - pointer to some obj
