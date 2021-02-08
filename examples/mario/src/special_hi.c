@@ -2,27 +2,27 @@
 ////////////////////////
 //  Inital SpecialHi  //
 ////////////////////////
-/// 
+///
 /// 0x800E1A54
 ///
 void SpecialHi(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
-	
+
 	// clear flags that are going to be used by this action
 	fighter_data->ftcmd_var.flag0 = 0;
 
 	// todo: there has to be a cleaner way to do this
 	int *flag = &fighter_data->flags;
 	flag[0] = 0;
-	
+
 	// change state and update subaction
-	ActionStateChange(0, 1, 0, gobj, STATE_SPECIALHI, 0,0);
+	ActionStateChange(0, 1, 0, gobj, STATE_SPECIALHI, 0, 0);
 	Fighter_AdvanceScript(gobj);
-	
+
 	return;
 }
-/// 
+///
 /// 0x800E1AB0
 ///
 void SpecialAirHi(GOBJ *gobj)
@@ -36,15 +36,15 @@ void SpecialAirHi(GOBJ *gobj)
 	// todo: there has to be a cleaner way to do this
 	int *flag = &fighter_data->flags;
 	flag[0] = 0;
-	
+
 	// stop y velocity and boost x velocity by value defined in special attributes
 	fighter_data->phys.self_vel.Y = 0;
 	fighter_data->phys.self_vel.X = fighter_data->phys.self_vel.X * mrAttr->specialHi_initial_x_momemtum;
-	
+
 	// change state and update subaction
 	ActionStateChange(0, 1, 0, gobj, STATE_SPECIALHIAIR, 0, 0);
 	Fighter_AdvanceScript(gobj);
-	
+
 	return;
 }
 ////////////////////////
@@ -56,10 +56,11 @@ void SpecialAirHi(GOBJ *gobj)
 void SpecialHi_AnimationCallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
-	
+
 	MarioAttr *mrAttr = fighter_data->special_attributes;
 
-	if (FrameTimerCheck(gobj) == 0) {
+	if (FrameTimerCheck(gobj) == 0)
+	{
 		Fighter_EnterSpecialFall(gobj, 0, 1, 0, mrAttr->specialHi_fall_air_mobility, mrAttr->specialHi_landing_lag);
 	}
 	return;
@@ -78,47 +79,55 @@ void SpecialHi_IASACallback(GOBJ *gobj)
 
 	float lstick_x_clamp = lstick_x;
 
-	if (lstick_x < 0) {
+	if (lstick_x < 0)
+	{
 		lstick_x_clamp = -lstick_x;
 	}
 
-	if ((fighter_data->ftcmd_var.flag0 == 0) && stick_threshold < lstick_x_clamp) 
+	if ((fighter_data->ftcmd_var.flag0 == 0) && stick_threshold < lstick_x_clamp)
 	{
 		float new_angle = mrAttr->specialHi_stick_control * ((lstick_x_clamp - stick_threshold) / (1 - stick_threshold));
-		
-		if (lstick_x <= 0) {
+
+		if (lstick_x <= 0)
+		{
 			new_angle = M_1DEGREE * new_angle;
 		}
-		else {
+		else
+		{
 			new_angle = -(M_1DEGREE * new_angle);
 		}
 
 		float stick_angle = fighter_data->input_stickangle;
 
-		if (stick_angle < M_1DEGREE) {
+		if (stick_angle < M_1DEGREE)
+		{
 			stick_angle = -stick_angle;
 		}
 
-		if (new_angle < M_1DEGREE) {
+		if (new_angle < M_1DEGREE)
+		{
 			new_angle = -new_angle;
 		}
 
-		if (stick_angle < new_angle) {
+		if (stick_angle < new_angle)
+		{
 			fighter_data->input_stickangle = new_angle;
 		}
 	}
 
-	if (fighter_data->flags.throw_release != 0) 
+	if (fighter_data->flags.throw_release != 0)
 	{
 		fighter_data->flags.throw_release = 0;
 
 		lstick_x = fighter_data->input.lstick_x;
 
-		if (lstick_x < 0) {
+		if (lstick_x < 0)
+		{
 			lstick_x = -lstick_x;
 		}
 
-		if (mrAttr->specialHi_stick_reverse_threshold < lstick_x) {
+		if (mrAttr->specialHi_stick_reverse_threshold < lstick_x)
+		{
 			Fighter_SetFacingToStickDirection(fighter_data);
 			Fighter_RotateBone_Pitch(fighter_data, 0, 1.57079632f * fighter_data->facing_direction);
 		}
@@ -131,11 +140,13 @@ void SpecialHi_IASACallback(GOBJ *gobj)
 void SpecialHi_PhysicCallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
-	
-	if (fighter_data->phys.air_state == 1) {
+
+	if (fighter_data->phys.air_state == 1)
+	{
 		Fighter_Phys_UseAnimPosAndStick(gobj);
 	}
-	else {
+	else
+	{
 		Fighter_Phys_AnimationFriction(gobj);
 	}
 
@@ -153,7 +164,7 @@ void SpecialHi_OnLand(GOBJ *gobj)
 
 	Fighter_EnterSpecialLanding(gobj, 0, mrAttr->specialHi_landing_lag);
 
- 	return;
+	return;
 }
 ///
 /// 0x800E1F70
@@ -162,15 +173,19 @@ void SpecialHi_CollisionCallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
 
-	if (fighter_data->phys.air_state == 1) {
-		if ((fighter_data->ftcmd_var.flag0 == 0) || (0 <= fighter_data->phys.self_vel.Y)) {
+	if (fighter_data->phys.air_state == 1)
+	{
+		if ((fighter_data->ftcmd_var.flag0 == 0) || (0 <= fighter_data->phys.self_vel.Y))
+		{
 			Fighter_CollAir(gobj);
-		}	
-		else {
+		}
+		else
+		{
 			Fighter_CollAir_GrabLedgeWalljump(gobj, Fighter_Coll_CheckToPass, SpecialHi_OnLand);
 		}
 	}
-	else {
+	else
+	{
 		Fighter_CollGround_StopLedge(gobj);
 	}
 	return;
@@ -184,10 +199,11 @@ void SpecialHi_CollisionCallback(GOBJ *gobj)
 void SpecialAirHi_AnimationCallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
-	
+
 	MarioAttr *mrAttr = fighter_data->special_attributes;
 
-	if (FrameTimerCheck(gobj) == 0) {
+	if (FrameTimerCheck(gobj) == 0)
+	{
 		Fighter_EnterSpecialFall(gobj, 0, 1, 0, mrAttr->specialHi_fall_air_mobility, mrAttr->specialHi_landing_lag);
 	}
 	return;
@@ -206,47 +222,55 @@ void SpecialAirHi_IASACallback(GOBJ *gobj)
 
 	float lstick_x_clamp = lstick_x;
 
-	if (lstick_x < 0) {
+	if (lstick_x < 0)
+	{
 		lstick_x_clamp = -lstick_x;
 	}
 
-	if ((fighter_data->ftcmd_var.flag0 == 0) && stick_threshold < lstick_x_clamp) 
+	if ((fighter_data->ftcmd_var.flag0 == 0) && stick_threshold < lstick_x_clamp)
 	{
 		float new_angle = mrAttr->specialHi_stick_control * ((lstick_x_clamp - stick_threshold) / (1 - stick_threshold));
-		
-		if (lstick_x <= 0) {
+
+		if (lstick_x <= 0)
+		{
 			new_angle = M_1DEGREE * new_angle;
 		}
-		else {
+		else
+		{
 			new_angle = -(M_1DEGREE * new_angle);
 		}
 
 		float stick_angle = fighter_data->input_stickangle;
 
-		if (stick_angle < M_1DEGREE) {
+		if (stick_angle < M_1DEGREE)
+		{
 			stick_angle = -stick_angle;
 		}
 
-		if (new_angle < M_1DEGREE) {
+		if (new_angle < M_1DEGREE)
+		{
 			new_angle = -new_angle;
 		}
 
-		if (stick_angle < new_angle) {
+		if (stick_angle < new_angle)
+		{
 			fighter_data->input_stickangle = new_angle;
 		}
 	}
 
-	if (fighter_data->flags.throw_release != 0) 
+	if (fighter_data->flags.throw_release != 0)
 	{
 		fighter_data->flags.throw_release = 0;
 
 		lstick_x = fighter_data->input.lstick_x;
 
-		if (lstick_x < 0) {
+		if (lstick_x < 0)
+		{
 			lstick_x = -lstick_x;
 		}
 
-		if (mrAttr->specialHi_stick_reverse_threshold < lstick_x) {
+		if (mrAttr->specialHi_stick_reverse_threshold < lstick_x)
+		{
 			Fighter_SetFacingToStickDirection(fighter_data);
 			Fighter_RotateBone_Pitch(fighter_data, 0, 1.57079632f * fighter_data->facing_direction);
 		}
@@ -262,13 +286,13 @@ void SpecialAirHi_PhysicCallback(GOBJ *gobj)
 
 	MarioAttr *mrAttr = fighter_data->special_attributes;
 
-	if ((fighter_data->ftcmd_var).flag0 == 0) 
+	if ((fighter_data->ftcmd_var).flag0 == 0)
 	{
 		Fighter_PhysAir_ApplyGravity(fighter_data, mrAttr->specialHi_initial_gravity, fighter_data->attr.terminal_velocity);
-		
+
 		Fighter_PhysAir_LimitXVelocity(fighter_data);
 	}
-	else 
+	else
 	{
 		Fighter_Phys_UseAnimPosAndStick(gobj);
 		fighter_data->phys.self_vel.X *= mrAttr->specialHi_initial_y_momemtum;
@@ -284,15 +308,19 @@ void SpecialAirHi_CollisionCallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
 
-	if (fighter_data->phys.air_state == 1) {
-		if ((fighter_data->ftcmd_var.flag0 == 0) || (0 <= fighter_data->phys.self_vel.Y)) {
+	if (fighter_data->phys.air_state == 1)
+	{
+		if ((fighter_data->ftcmd_var.flag0 == 0) || (0 <= fighter_data->phys.self_vel.Y))
+		{
 			Fighter_CollAir(gobj);
-		}	
-		else {
+		}
+		else
+		{
 			Fighter_CollAir_GrabLedgeWalljump(gobj, Fighter_Coll_CheckToPass, SpecialHi_OnLand);
 		}
 	}
-	else {
+	else
+	{
 		Fighter_CollGround_StopLedge(gobj);
 	}
 	return;
