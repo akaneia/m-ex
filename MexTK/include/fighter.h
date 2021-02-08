@@ -2674,6 +2674,22 @@ struct FtPartsVis // is in the fighter data
     FtPartsVisLookup *x1C;             // 0x1C
 };
 
+struct FtSymbolLookup
+{
+    FtSymbols *archives;
+    u8 num;
+};
+
+struct FtSymbols
+{
+    JOBJ *joint;         // 0x0
+    void *matanim_joint; // 0x4
+    void *x8;            // 0x8
+    void *xc;            // 0xc
+    void *x10;           // 0x10
+    ArchiveInfo *costume // 0x14
+};
+
 /** State Structs **/
 struct FtCliffCatch
 {
