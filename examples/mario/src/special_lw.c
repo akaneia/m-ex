@@ -33,13 +33,17 @@ void SpecialLw(GOBJ *gobj)
 	Fighter_ClampHorizontalVelocity(fighter_data, mrAttr->specialLw_base_air_speed);
 
 	// clear flags for this state
-	fighter_data->ftcmd_var.flag0 = 0;
-	fighter_data->ftcmd_var.flag1 = 0;
+	SpecialLwFtCmd *script_flags = &fighter_data->ftcmd_var;
+	script_flags->decay_air_speed = 0;
+	script_flags->disable_rise = 0;
 
 	// clear state variables
-	fighter_data->state_var.stateVar1 = 0;
-	fighter_data->state_var.stateVar2 = mrAttr->specialLw_state_Var2 + 1;
-	fighter_data->state_var.stateVar4 = 0;
+	SpecialLwVar *state_var = &fighter_data->state_var;
+	state_var->air_speed = 0;
+	state_var->on_ground = 0;
+
+	// note: this variable is set but unused?
+	state_var->x04 = mrAttr->specialLw_state_Var2 + 1;
 
 	// set take damage and death callbacks
 	// these reset some kind of bone rotation yaw
@@ -88,13 +92,17 @@ void SpecialAirLw(GOBJ *gobj)
 	Fighter_ClampHorizontalVelocity(fighter_data, mrAttr->specialLw_base_air_speed);
 
 	// clear flags
-	fighter_data->ftcmd_var.flag0 = 0;
-	fighter_data->ftcmd_var.flag1 = 0;
+	SpecialLwFtCmd *script_flags = &fighter_data->ftcmd_var;
+	script_flags->decay_air_speed = 0;
+	script_flags->disable_rise = 0;
 
 	// clear state variables
-	fighter_data->state_var.stateVar1 = 0;
-	fighter_data->state_var.stateVar2 = mrAttr->specialLw_state_Var2 + 1;
-	fighter_data->state_var.stateVar4 = 0;
+	SpecialLwVar *state_var = &fighter_data->state_var;
+	state_var->air_speed = 0;
+	state_var->on_ground = 0;
+
+	// note: this variable is set but unused?
+	state_var->x04 = mrAttr->specialLw_state_Var2 + 1;
 
 	// set take damage and death callbacks
 	// these reset some kind of bone rotation yaw
@@ -144,15 +152,18 @@ void SpecialLw_PhysicCallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
 	MarioAttr *mrAttr = fighter_data->special_attributes;
+	SpecialLwFtCmd *script_flags = &fighter_data->ftcmd_var;
 
 	float base_air_speed = mrAttr->specialLw_base_air_speed;
 	float airSpeed = base_air_speed;
 
-	if (fighter_data->ftcmd_var.flag0 != 0)
-	{
-		float new_air_speed = AS_FLOAT(fighter_data->state_var.stateVar1) - mrAttr->speicalLw_air_speed_decel;
+	SpecialLwVar *state_var = &fighter_data->state_var;
 
-		fighter_data->state_var.stateVar1 = AS_INT(new_air_speed);
+	if (script_flags->decay_air_speed != 0)
+	{
+		float new_air_speed = state_var->air_speed - mrAttr->speicalLw_air_speed_decel;
+
+		state_var->air_speed = new_air_speed;
 
 		airSpeed = base_air_speed + new_air_speed;
 
@@ -219,6 +230,7 @@ void SpecialLw_CollisionCallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
 	MarioAttr *mrAttr = fighter_data->special_attributes;
+	SpecialLwVar *state_var = &fighter_data->state_var;
 
 	ECBSize fake_ecb = {12, 0, -6, 6, 6, 6};
 
@@ -233,11 +245,11 @@ void SpecialLw_CollisionCallback(GOBJ *gobj)
 			Fighter_ClampHorizontalVelocity(fighter_data, mrAttr->specialLw_x_vel_clamp);
 			fighter_data->cb.EnterHitlag = Effect_PauseAll;
 			fighter_data->cb.ExitHitlag = Effect_ResumeAll;
-			fighter_data->state_var.stateVar4 = 0;
+			state_var->on_ground = 0;
 		}
 		else
 		{
-			fighter_data->state_var.stateVar4 = 1;
+			state_var->on_ground = 1;
 		}
 	}
 	else
@@ -251,17 +263,17 @@ void SpecialLw_CollisionCallback(GOBJ *gobj)
 			Fighter_ClampHorizontalVelocity(fighter_data, mrAttr->specialLw_x_vel_clamp);
 			fighter_data->cb.EnterHitlag = Effect_PauseAll;
 			fighter_data->cb.ExitHitlag = Effect_ResumeAll;
-			fighter_data->state_var.stateVar4 = 0;
+			state_var->on_ground = 0;
 		}
 		else
 		{
-			fighter_data->state_var.stateVar4 = 1;
+			state_var->on_ground = 1;
 		}
 	}
 
-	if ((fighter_data->ftcmd_var.flag3 == 0) || (fighter_data->state_var.stateVar4 == 0))
+	if ((fighter_data->ftcmd_var.flag3 == 0) || (state_var->on_ground == 0))
 	{
-		// Reset Rotation
+		// Reset Rotation if not grounded
 		Fighter_RotateBone_Yaw(fighter_data, 0, 0);
 	}
 	else
@@ -282,10 +294,11 @@ void SpecialAirLw_AnimationCallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
 	MarioAttr *mrAttr = fighter_data->special_attributes;
+	SpecialLwFtCmd *script_flags = &fighter_data->ftcmd_var;
 
-	if (fighter_data->ftcmd_var.flag1 != 0)
+	if (script_flags->disable_rise != 0)
 	{
-		fighter_data->ftcmd_var.flag1 = 0;
+		script_flags->disable_rise = 0;
 		fighter_data->fighter_var.charVar3 = 1;
 	}
 
@@ -319,6 +332,8 @@ void SpecialAirLw_PhysicCallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
 	MarioAttr *mrAttr = fighter_data->special_attributes;
+	SpecialLwVar *state_var = &fighter_data->state_var;
+	SpecialLwFtCmd *script_flags = &fighter_data->ftcmd_var;
 
 	if (fighter_data->fighter_var.charVar3 == 0)
 	{
@@ -333,11 +348,11 @@ void SpecialAirLw_PhysicCallback(GOBJ *gobj)
 	float base_air_speed = mrAttr->specialLw_base_air_speed;
 	float airSpeed = base_air_speed;
 
-	if (fighter_data->ftcmd_var.flag0 != 0)
+	if (script_flags->decay_air_speed != 0)
 	{
-		float new_air_speed = AS_FLOAT(fighter_data->state_var.stateVar1) - mrAttr->speicalLw_air_speed_decel;
+		float new_air_speed = state_var->air_speed - mrAttr->speicalLw_air_speed_decel;
 
-		fighter_data->state_var.stateVar1 = AS_INT(new_air_speed);
+		state_var->air_speed = new_air_speed;
 
 		airSpeed = base_air_speed + new_air_speed;
 
@@ -354,14 +369,14 @@ void SpecialAirLw_PhysicCallback(GOBJ *gobj)
 void SpecialAirLw_CollisionCallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
-
 	MarioAttr *mrAttr = fighter_data->special_attributes;
-
+	SpecialLwVar *state_var = &fighter_data->state_var;
+	
 	ECBSize fake_ecb = {12, 0, -6, 6, 6, 6};
 
 	if (Fighter_CollAir_DefineECB(gobj, &fake_ecb) == 0)
 	{
-		fighter_data->state_var.stateVar4 = 0;
+		state_var->on_ground = 0;
 	}
 	else
 	{
@@ -378,17 +393,19 @@ void SpecialAirLw_CollisionCallback(GOBJ *gobj)
 
 		fighter_data->cb.EnterHitlag = Effect_PauseAll;
 		fighter_data->cb.ExitHitlag = Effect_ResumeAll;
-		fighter_data->state_var.stateVar4 = 1;
+		state_var->on_ground = 1;
 	}
 
-	if ((fighter_data->ftcmd_var.flag3 == 0) || (fighter_data->state_var.stateVar4 == 0))
+	// set rotation
+	if ((fighter_data->ftcmd_var.flag3 == 0) || (state_var->on_ground == 0))
 	{
+		// if in air reset rotation
 		Fighter_RotateBone_Yaw(fighter_data, 0, 0);
 	}
 	else
 	{
+		// if on ground rotate to ground slope
 		float angle = atan2(fighter_data->coll_data.ground_slope.X, fighter_data->coll_data.ground_slope.Y);
-
 		Fighter_RotateBone_Yaw(fighter_data, 0, fighter_data->facing_direction * angle);
 	}
 	return;

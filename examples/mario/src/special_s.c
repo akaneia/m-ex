@@ -8,6 +8,8 @@
 void SpecialS(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
+	SpecialSFtCmd *script_flags = &fighter_data->ftcmd_var;
+	SpecialSVar *state_var = &fighter_data->state_var;
 
 	// stop y velocity
 	fighter_data->phys.self_vel.Y = 0;
@@ -17,10 +19,10 @@ void SpecialS(GOBJ *gobj)
 	Fighter_AdvanceScript(gobj);
 
 	// clear flags that are going to be used by this action
-	fighter_data->ftcmd_var.flag0 = 0;
-	fighter_data->ftcmd_var.flag1 = 0;
-	fighter_data->ftcmd_var.flag2 = 0;
-	fighter_data->state_var.stateVar1 = 0;
+	script_flags->create_wind = 0;
+	script_flags->enable_reflect = 0;
+	script_flags->spawn_cape = 0;
+	state_var->reflect_enabled = 0;
 
 	// set the accessory callback for mario's cape
 	// this function will spawn the cape item in mario's hand
@@ -34,6 +36,8 @@ void SpecialAirS(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
 	MarioAttr *mrAttr = fighter_data->special_attributes;
+	SpecialSFtCmd *script_flags = &fighter_data->ftcmd_var;
+	SpecialSVar *state_var = &fighter_data->state_var;
 
 	// slow down x velocity by rate defined in special attributes
 	fighter_data->phys.self_vel.X = fighter_data->phys.self_vel.X / mrAttr->specialS_horizontal_momentum;
@@ -43,10 +47,10 @@ void SpecialAirS(GOBJ *gobj)
 	Fighter_AdvanceScript(gobj);
 
 	// clear flags that are going to be used by this action
-	fighter_data->ftcmd_var.flag2 = 0;
-	fighter_data->ftcmd_var.flag1 = 0;
-	fighter_data->ftcmd_var.flag0 = 0;
-	fighter_data->state_var.stateVar1 = 0;
+	script_flags->create_wind = 0;
+	script_flags->enable_reflect = 0;
+	script_flags->spawn_cape = 0;
+	state_var->reflect_enabled = 0;
 
 	// set the accessory callback for mario's cape
 	// this function will spawn the cape item in mario's hand
@@ -140,11 +144,12 @@ void MarioCapeThink(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
 	MarioAttr *mrAttr = fighter_data->special_attributes;
+	SpecialSFtCmd *script_flags  = &fighter_data->ftcmd_var;
 
 	// this flag is used to track if the cape has been spawned already
-	if (fighter_data->ftcmd_var.flag2 == 0)
+	if (script_flags->spawn_cape == 0)
 	{
-		fighter_data->ftcmd_var.flag2 = 1;
+		script_flags->spawn_cape = 1;
 
 		// get the index of mario's right holding bone (RHaveN)
 		int bone_index = Fighter_BoneLookup(fighter_data, RHaveN);
@@ -154,8 +159,8 @@ void MarioCapeThink(GOBJ *gobj)
 		JOBJ_GetWorldPosition(fighter_data->bones[bone_index].joint, 0, &pos);
 
 		// create the cape item
-		int mex_cape_kind = MEX_GetFtItemID(fighter_data->kind, MEX_ITEM_CAPE);
 		// cape kind was originally stored in mario's attributes
+		int mex_cape_kind = MEX_GetFtItemID(fighter_data->kind, MEX_ITEM_CAPE);
 		GOBJ *cape = CreateCape(fighter_data->facing_direction, gobj, &pos, bone_index, mex_cape_kind); // mrAttr->cape_item_kind);
 
 		// store the cape pointer to a charVar and the special help item location
@@ -208,12 +213,14 @@ void SpecialS_PhysicCallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
 	MarioAttr *mrAttr = fighter_data->special_attributes;
+	SpecialSVar *state_var = &fighter_data->state_var;
+	SpecialSFtCmd *script_flags = &fighter_data->ftcmd_var;
 
 	// ftCmd sets this subaction flag
 	// creates wind when it is set
-	if (fighter_data->ftcmd_var.flag0 == 1)
+	if (script_flags->create_wind == 1)
 	{
-		fighter_data->ftcmd_var.flag0 = 2;
+		script_flags->create_wind = 2;
 
 		// i'm not sure why the Hip bone, but that's what it uses
 		int bone_index = Fighter_BoneLookup(fighter_data, HipN);
@@ -233,14 +240,14 @@ void SpecialS_PhysicCallback(GOBJ *gobj)
 	Fighter_PhysGround_ApplyFriction(gobj);
 
 	// create the reflect bubble when flags are set
-	if ((fighter_data->ftcmd_var.flag1 == 1) && (fighter_data->state_var.stateVar1 == 0))
+	if ((script_flags->enable_reflect == 1) && (state_var->reflect_enabled == 0))
 	{
-		fighter_data->state_var.stateVar1 = 1;
+		state_var->reflect_enabled = 1;
 		Fighter_CreateReflect(gobj, &mrAttr->reflect_data, 0);
 	}
-	else if ((fighter_data->ftcmd_var.flag1 == 0) && (fighter_data->state_var.stateVar1 == 1))
+	else if ((script_flags->enable_reflect == 0) && (state_var->reflect_enabled == 1))
 	{
-		fighter_data->state_var.stateVar1 = 0;
+		state_var->reflect_enabled = 0;
 		fighter_data->flags.reflect_enable = 0;
 	}
 
@@ -254,6 +261,8 @@ void SpecialS_PhysicCallback(GOBJ *gobj)
 void SpecialS_EnterAir(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
+	SpecialSVar *state_var = &fighter_data->state_var;
+	SpecialSFtCmd *script_flags = &fighter_data->ftcmd_var;
 
 	// set fighter to air state
 	Fighter_SetAirborne(fighter_data);
@@ -262,13 +271,13 @@ void SpecialS_EnterAir(GOBJ *gobj)
 	ActionStateChange(fighter_data->stateFrame, 1, 0, gobj, STATE_SPECIALSAIR, 0xc4c508c, 0);
 
 	// 
-	if (fighter_data->ftcmd_var.flag0 == 1)
+	if (script_flags->create_wind == 1)
 	{
-		fighter_data->ftcmd_var.flag0 = 2;
+		script_flags->create_wind = 2;
 	}
 
 	// 
-	if (fighter_data->state_var.stateVar1 != 0)
+	if (state_var->reflect_enabled != 0)
 	{
 		fighter_data->flags.reflect_enable = 1;
 	}
@@ -332,18 +341,19 @@ void SpecialAirS_IASACallback(GOBJ *gobj)
 void SpecialAirS_PhysicCallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
-
 	MarioAttr *mrAttr = fighter_data->special_attributes;
+	SpecialSVar *state_var = &fighter_data->state_var;
+	SpecialSFtCmd *script_flags = &fighter_data->ftcmd_var;
 
-	if (fighter_data->ftcmd_var.flag0 == 0)
+	if (script_flags->create_wind == 0)
 	{
 		Fighter_Phys_ApplyVerticalAirFriction(fighter_data);
 	}
 	else
 	{
-		if (fighter_data->ftcmd_var.flag0 == 1)
+		if (script_flags->create_wind == 1)
 		{
-			fighter_data->ftcmd_var.flag0 = 2;
+			script_flags->create_wind = 2;
 			if (fighter_data->fighter_var.charVar4 == 0)
 			{
 				fighter_data->fighter_var.charVar4 = 1;
@@ -368,14 +378,14 @@ void SpecialAirS_PhysicCallback(GOBJ *gobj)
 
 	Fighter_PhysAir_DecayXVelocity(fighter_data, mrAttr->specialS_horizontal_velocity);
 
-	if ((fighter_data->ftcmd_var.flag1 == 1) && (fighter_data->state_var.stateVar1 == 0))
+	if ((script_flags->enable_reflect == 1) && (state_var->reflect_enabled == 0))
 	{
-		fighter_data->state_var.stateVar1 = 1;
+		state_var->reflect_enabled = 1;
 		Fighter_CreateReflect(gobj, &mrAttr->reflect_data, 0);
 	}
-	else if ((fighter_data->ftcmd_var.flag1 == 0) && (fighter_data->state_var.stateVar1 == 1))
+	else if ((script_flags->enable_reflect == 0) && (state_var->reflect_enabled == 1))
 	{
-		fighter_data->state_var.stateVar1 = 0;
+		state_var->reflect_enabled = 0;
 		fighter_data->flags.reflect_enable = 0;
 	}
 
@@ -388,6 +398,7 @@ void SpecialAirS_PhysicCallback(GOBJ *gobj)
 void SpecialAirS_CollisionCallback_StateChange(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
+	SpecialSVar *state_var = &fighter_data->state_var;
 
 	fighter_data->fighter_var.charVar4 = 0;
 	
@@ -398,7 +409,7 @@ void SpecialAirS_CollisionCallback_StateChange(GOBJ *gobj)
 	ActionStateChange(fighter_data->stateFrame, 1, 0, gobj, STATE_SPECIALS, 0xc4c508c, 0);
 
 	// enable reflect flag if stateVar has been set
-	if (fighter_data->state_var.stateVar1 != 0)
+	if (state_var->reflect_enabled != 0)
 	{
 		fighter_data->flags.reflect_enable = 1;
 	}

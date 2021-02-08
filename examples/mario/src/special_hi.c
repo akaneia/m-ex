@@ -8,13 +8,11 @@
 void SpecialHi(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
+	SpecialHiFtCmd *script_flags = &fighter_data->ftcmd_var;
 
 	// clear flags that are going to be used by this action
-	fighter_data->ftcmd_var.flag0 = 0;
-
-	// todo: there has to be a cleaner way to do this
-	int *flag = &fighter_data->flags;
-	flag[0] = 0;
+	script_flags->can_control = 0;
+	fighter_data->flags.throw_release = 0;
 
 	// change state and update subaction
 	ActionStateChange(0, 1, 0, gobj, STATE_SPECIALHI, 0, 0);
@@ -29,13 +27,11 @@ void SpecialAirHi(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
 	MarioAttr *mrAttr = fighter_data->special_attributes;
+	SpecialHiFtCmd *script_flags = &fighter_data->ftcmd_var;
 
 	// clear flags that are going to be used by this action
-	fighter_data->ftcmd_var.flag0 = 0;
-
-	// todo: there has to be a cleaner way to do this
-	int *flag = &fighter_data->flags;
-	flag[0] = 0;
+	script_flags->can_control = 0;
+	fighter_data->flags.throw_release = 0;
 
 	// stop y velocity and boost x velocity by value defined in special attributes
 	fighter_data->phys.self_vel.Y = 0;
@@ -73,6 +69,8 @@ void SpecialHi_IASACallback(GOBJ *gobj)
 	FighterData *fighter_data = gobj->userdata;
 
 	MarioAttr *mrAttr = fighter_data->special_attributes;
+	
+	SpecialHiFtCmd *script_flags = &fighter_data->ftcmd_var;
 
 	float lstick_x = fighter_data->input.lstick_x;
 	float stick_threshold = mrAttr->specialHi_stick_threshold;
@@ -84,7 +82,7 @@ void SpecialHi_IASACallback(GOBJ *gobj)
 		lstick_x_clamp = -lstick_x;
 	}
 
-	if ((fighter_data->ftcmd_var.flag0 == 0) && stick_threshold < lstick_x_clamp)
+	if ((script_flags->can_control == 0) && stick_threshold < lstick_x_clamp)
 	{
 		float new_angle = mrAttr->specialHi_stick_control * ((lstick_x_clamp - stick_threshold) / (1 - stick_threshold));
 
@@ -172,10 +170,11 @@ void SpecialHi_OnLand(GOBJ *gobj)
 void SpecialHi_CollisionCallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
+	SpecialHiFtCmd *script_flags = &fighter_data->ftcmd_var;
 
 	if (fighter_data->phys.air_state == 1)
 	{
-		if ((fighter_data->ftcmd_var.flag0 == 0) || (0 <= fighter_data->phys.self_vel.Y))
+		if ((script_flags->can_control == 0) || (0 <= fighter_data->phys.self_vel.Y))
 		{
 			Fighter_CollAir(gobj);
 		}
@@ -217,6 +216,8 @@ void SpecialAirHi_IASACallback(GOBJ *gobj)
 
 	MarioAttr *mrAttr = fighter_data->special_attributes;
 
+	SpecialHiFtCmd *script_flags = &fighter_data->ftcmd_var;
+
 	float lstick_x = fighter_data->input.lstick_x;
 	float stick_threshold = mrAttr->specialHi_stick_threshold;
 
@@ -227,7 +228,7 @@ void SpecialAirHi_IASACallback(GOBJ *gobj)
 		lstick_x_clamp = -lstick_x;
 	}
 
-	if ((fighter_data->ftcmd_var.flag0 == 0) && stick_threshold < lstick_x_clamp)
+	if ((script_flags->can_control == 0) && stick_threshold < lstick_x_clamp)
 	{
 		float new_angle = mrAttr->specialHi_stick_control * ((lstick_x_clamp - stick_threshold) / (1 - stick_threshold));
 
@@ -286,7 +287,9 @@ void SpecialAirHi_PhysicCallback(GOBJ *gobj)
 
 	MarioAttr *mrAttr = fighter_data->special_attributes;
 
-	if ((fighter_data->ftcmd_var).flag0 == 0)
+	SpecialHiFtCmd *script_flags = &fighter_data->ftcmd_var;
+
+	if (script_flags->can_control == 0)
 	{
 		Fighter_PhysAir_ApplyGravity(fighter_data, mrAttr->specialHi_initial_gravity, fighter_data->attr.terminal_velocity);
 
@@ -308,9 +311,11 @@ void SpecialAirHi_CollisionCallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
 
+	SpecialHiFtCmd *script_flags = &fighter_data->ftcmd_var;
+
 	if (fighter_data->phys.air_state == 1)
 	{
-		if ((fighter_data->ftcmd_var.flag0 == 0) || (0 <= fighter_data->phys.self_vel.Y))
+		if ((script_flags->can_control == 0) || (0 <= fighter_data->phys.self_vel.Y))
 		{
 			Fighter_CollAir(gobj);
 		}

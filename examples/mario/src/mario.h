@@ -87,6 +87,46 @@ typedef struct MarioAttr
     ReflectDesc reflect_data;                 //0x60
 } MarioAttr;
 
+typedef struct SpecialNFtCmd
+{
+	int interruptable;
+} SpecialNFtCmd;
+
+
+typedef struct SpecialSFtCmd
+{
+	int create_wind;
+	int enable_reflect;
+	int spawn_cape;
+} SpecialSFtCmd;
+
+typedef struct SpecialSVar
+{
+	int reflect_enabled;
+} SpecialSVar;
+
+
+typedef struct SpecialHiFtCmd
+{
+	int can_control;
+} SpecialHiFtCmd;
+
+
+typedef struct SpecialLwFtCmd
+{
+	int decay_air_speed;
+	int disable_rise; 		//?
+} SpecialLwFtCmd;
+
+typedef struct SpecialLwVar
+{
+	float air_speed;	// x00
+	int x04;			// x04
+	int x08;			// x08
+	float on_ground;	// x0C
+} SpecialLwVar;
+
+
 ///////////////////////
 //     Functions     //
 ///////////////////////

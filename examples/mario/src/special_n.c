@@ -8,13 +8,11 @@
 void SpecialN(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
+	SpecialNFtCmd *script_flags = &fighter_data->ftcmd_var;
 
 	// clear subaction flags used by this special
-	fighter_data->ftcmd_var.flag0 = 0;
-
-	// todo: there has to be a cleaner way to do this
-	int *flag = &fighter_data->flags;
-	flag[0] = 0;
+	script_flags->interruptable = 0;
+	fighter_data->flags.throw_1 = 0;
 
 	// change to special n state and update subaction
 	ActionStateChange(0, 1, 0, gobj, STATE_SPECIALN, 0, 0);
@@ -31,13 +29,11 @@ void SpecialN(GOBJ *gobj)
 void SpecialAirN(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
+	SpecialNFtCmd *script_flags = &fighter_data->ftcmd_var;
 
 	// clear subaction flags used by this function
-	fighter_data->ftcmd_var.flag0 = 0;
-
-	// todo: there has to be a cleaner way to do this
-	int *flag = &fighter_data->flags;
-	flag[0] = 0;
+	script_flags->interruptable = 0;
+	fighter_data->flags.throw_1 = 0;
 
 	// change to special n state and update subaction
 	ActionStateChange(0, 1, 0, gobj, STATE_SPECIALNAIR, 0, 0);
@@ -70,9 +66,10 @@ void SpecialN_AnimationCallback(GOBJ *gobj)
 void SpecialN_IASACallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
+	SpecialNFtCmd *script_flags = &fighter_data->ftcmd_var;
 
 	// flag0 is set by ftCmd and determines when you can interupt
-	if (fighter_data->ftcmd_var.flag0 != 0)
+	if (script_flags->interruptable != 0)
 	{
 		Fighter_Interrupt_AllGrounded(gobj);
 	}
@@ -136,9 +133,10 @@ void SpecialAirN_AnimationCallback(GOBJ *gobj)
 void SpecialAirN_IASACallback(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
+	SpecialNFtCmd *script_flags = &fighter_data->ftcmd_var;
 
 	// ftcmd_var.flag0 is set by ftCmd and determines when you can interupt
-	if (fighter_data->ftcmd_var.flag0 != 0)
+	if (script_flags->interruptable != 0)
 	{
 		Fighter_Interrupt_AllAerial(gobj);
 	}
