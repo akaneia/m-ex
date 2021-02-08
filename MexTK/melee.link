@@ -96,7 +96,6 @@
 802787B4:Effect_SpawnItEffect
 80278800:Effect_SpawnItEffectLookup
 8005FDDC:Effect_SpawnSync
-800827A0:EnvironmentCollision_StopAtLedge
 8007D508:Fighter_AddClampYPosition
 8007D3A8:Fighter_AllowXDrift
 8007B760:Fighter_ApplyIntang
@@ -112,8 +111,11 @@
 800831CC:Fighter_CollAir_GrabLedgeWalljump
 80082C74:Fighter_CollAir_IgnoreLedge
 80081D0C:Fighter_CollAir_IgnoreLedge_NoCB
+800824a0:Fighter_CollAir_DefineECB
 80082708:Fighter_CollGround_PassLedge
-80084104:Fighter_CollGround_StopLedge
+80084104:Fighter_CollGround_StopLedge_EnterFall
+800827A0:Fighter_CollGround_StopLedge
+80096cc8:Fighter_Coll_CheckToPass
 800C0200:Fighter_ColorRemove
 8016B558:Fighter_CountPlayers
 800A101C:Fighter_CPUInitialize
@@ -121,7 +123,9 @@
 8007B23C:Fighter_CreateReflect
 800921DC:Fighter_CreateShieldGFX
 800e13f8:Fighter_RemoveHeldFighterItem
+800e1368:Fighter_DestroyAndRemoveHeldFighterItem
 8008A6D8:Fighter_DisableBlend
+8026b724:Fighter_EnableUnknownHitbox3Flag
 8007D5BC:Fighter_EnableECBBottomUpdate
 8007AEF8:Fighter_EnableReflectUpdate
 8009A804:Fighter_EnterCliffWait
@@ -171,6 +175,8 @@
 8007487C:Fighter_InitFtPartsModel
 80074148:Fighter_InitPObj
 80074170:Fighter_InitPObj2
+8008A4D4:Fighter_Interrupt_AllGrounded
+800CCAAC:Fighter_Interrupt_AllAerial
 8007E2FC:Fighter_KillAllVelocity
 80081544:Fighter_MoveToCliff
 80084FA8:Fighter_Phys_AnimationFriction
@@ -271,8 +277,6 @@
 80380528:HSD_Randf
 80380580:HSD_Randi
 8037540C:HSD_SetHeapID
-800CCAAC:Interrupt_AS_Fall
-8008A4D4:Interrupt_AS_Wait
 80094818:Item_Catch
 80266F3C:Item_CheckIfEnabled
 80276348:Item_CheckIfTouchingWall
@@ -336,6 +340,8 @@
 80371D00:JOBJ_SetFlags
 80371D9C:JOBJ_SetFlagsAll
 803732E8:JOBJ_SetMtxDirtySub
+80011c18:JOBJ_EnableFlagAllMOBJ
+80213250:JOBJ_CompileTEVAllMOBJ
 803D7080:KirbyStateChange
 802FA5BC:KOCount_Init
 802FA2D0:KOCount_Update

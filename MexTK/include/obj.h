@@ -498,7 +498,9 @@ void JOBJ_ReqAnimAllByFlags(JOBJ *joint, int flags, float frame);
 float JOBJ_GetJointAnimFrameTotal(JOBJ *joint);
 float JOBJ_GetJointAnimNextFrame(JOBJ *joint);
 void JOBJ_SetAllMOBJFlags(JOBJ *joint, int flags);
+void JOBJ_EnableFlagAllMOBJ(JOBJ *joint, int flags); // enables this flag for all mobjs
 int JOBJ_CheckAObjEnd(JOBJ *joint);
+void JOBJ_CompileTEVAllMOBJ(JOBJ *joint);
 void JObj_DispAll(JOBJ *joint, Mtx *vmtx, int flags, int rendermode);
 void AOBJ_ReqAnim(int *aobj, float unk);
 void AOBJ_StopAnim(JOBJ *jobj, int flags, int flags2);

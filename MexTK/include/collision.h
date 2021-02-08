@@ -19,7 +19,7 @@
 
 /*** Structs ***/
 
-struct ECBBones
+struct ECBSize
 {
     float topY;
     float botY;
@@ -241,8 +241,8 @@ struct CollDataStage
 /*** Functions ***/
 void Coll_ECBCurrToPrev(CollData *coll_data);
 void Coll_InitECB(CollData *coll_data);
-int ECB_CollGround_PassLedge(CollData *ecb, ECBBones *bones); // returns is touching ground bool
-void ECB_CollAir(CollData *ecb, ECBBones *bones);
+int ECB_CollGround_PassLedge(CollData *ecb, ECBSize *bones); // returns is touching ground bool
+void ECB_CollAir(CollData *ecb, ECBSize *bones);
 void GrColl_GetLedgeLeft(int floor_index, Vec3 *pos);                                                                                                                                            // this functon will crawl along the entire line sequence and find the end of the ledge
 void GrColl_GetLedgeRight(int floor_index, Vec3 *pos);                                                                                                                                           // this functon will crawl along the entire line sequence and find the end of the ledge
 void GrColl_GetLedgeLeft2(int floor_index, Vec3 *pos);                                                                                                                                           // this functon will crawl along the entire line sequence and find the end of the ledge

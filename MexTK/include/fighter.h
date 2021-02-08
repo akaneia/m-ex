@@ -2745,11 +2745,14 @@ void Fighter_SetStocks(int ply, int stocks);
 int FrameTimerCheck(GOBJ *fighter);
 void Fighter_EnterMiscPassState(float start_frame, GOBJ *fighter, int state, int flags);
 int Fighter_CollGround_PassLedge(GOBJ *fighter);
-void Fighter_CollGround_StopLedge(GOBJ *fighter);
+int Fighter_CollGround_StopLedge(GOBJ *fighter); // returns is_grounded
+void Fighter_CollGround_StopLedge_EnterFall(GOBJ *fighter);
 int Fighter_CollAir_GrabLedgeWalljump(GOBJ *fighter, void *perFrame, void *onLand);
 int Fighter_CollAir_GrabLedge(GOBJ *fighter, int grab_direction);
 void Fighter_CollAir_IgnoreLedge(GOBJ *fighter, void *callback);
 int Fighter_CollAir_IgnoreLedge_NoCB(GOBJ *fighter);
+int Fighter_CollAir_DefineECB(GOBJ *fighter, ECBSize *ecb);
+int Fighter_Coll_CheckToPass(GOBJ *fighter, int floor_type); // usually used as a callback, pass = fall through platform
 int Fighter_IASACheck_CliffCatch(GOBJ *fighter);
 int Fighter_IASACheck_JumpAerial(GOBJ *fighter);
 int Fighter_IASACheck_JumpF(GOBJ *fighter);
@@ -2834,6 +2837,7 @@ void Fighter_AllowXDrift(FighterData *fighter_data, float unk, float accel, floa
 void Fighter_AddClampYPosition(FighterData *fighter_data, float amt, float max);
 void Fighter_ClampHorizontalGroundVelocity(FighterData *, float);
 void Fighter_RemoveHeldFighterItem(GOBJ *fighter);
+void Fighter_DestroyAndRemoveHeldFighterItem(GOBJ *fighter);
 void Fighter_Phys_ApplyVerticalAirFriction(FighterData *fighter_data);
-
+void Fighter_EnableUnknownHitbox3Flag(GOBJ *fighter);
 #endif

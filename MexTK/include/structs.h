@@ -158,7 +158,7 @@ typedef struct Rules1 Rules1;
 
 // Collision
 typedef struct CollData CollData;
-typedef struct ECBBones ECBBones;
+typedef struct ECBSize ECBSize;
 typedef struct DmgHazard DmgHazard;
 typedef struct CollLineInfo CollLineInfo;
 typedef struct CollLine CollLine;
