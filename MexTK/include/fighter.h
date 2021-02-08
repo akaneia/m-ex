@@ -2839,5 +2839,4 @@ void Fighter_ClampHorizontalGroundVelocity(FighterData *, float);
 void Fighter_RemoveHeldFighterItem(GOBJ *fighter);
 void Fighter_DestroyAndRemoveHeldFighterItem(GOBJ *fighter);
 void Fighter_Phys_ApplyVerticalAirFriction(FighterData *fighter_data);
-void Fighter_EnableUnknownHitbox3Flag(GOBJ *fighter);
 #endif

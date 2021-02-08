@@ -120,7 +120,7 @@ void CapeEnableUnknownHitbox3Flag(GOBJ *gobj)
 
 	if (fighter_data->fighter_var.charVar5 != 0) 
 	{
-		Fighter_EnableUnknownHitbox3Flag(gobj);
+		Item_EnableUnknownFlag(fighter_data->fighter_var.charVar5);
 	}
 	return;
 }

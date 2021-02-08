@@ -1140,5 +1140,6 @@ void Item_UpdatePositionCollision(GOBJ *item);
 void Item_ScaleToPlayerSize(GOBJ *item);
 void Item_AnimateAndUpdateSubactions(GOBJ *item);
 void Barrel_EnterBreak(GOBJ *item);
+void Item_EnableUnknownFlag(GOBJ *item);
 
 #endif

@@ -125,7 +125,6 @@
 800e13f8:Fighter_RemoveHeldFighterItem
 800e1368:Fighter_DestroyAndRemoveHeldFighterItem
 8008A6D8:Fighter_DisableBlend
-8026b724:Fighter_EnableUnknownHitbox3Flag
 8007D5BC:Fighter_EnableECBBottomUpdate
 8007AEF8:Fighter_EnableReflectUpdate
 8009A804:Fighter_EnterCliffWait
@@ -311,6 +310,7 @@
 80275158:Item_SetLifeTimer
 8026D9A0:Item_UpdatePositionCollision
 80268E5C:ItemStateChange
+8026b724:Item_EnableUnknownFlag
 8036FB5C:JOBJ_AddAnimAll
 803717A8:JOBJ_AddChild
 80370780:JOBJ_Anim
