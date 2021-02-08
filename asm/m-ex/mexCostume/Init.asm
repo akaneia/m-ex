@@ -1,4 +1,4 @@
-#To be inserted at 8007b358
+#To be inserted at 8007b4c0
 .include "../../Globals.s"
 .include "../Header.s"
 
@@ -162,6 +162,60 @@ ModelAddDescArr_Loop:
         cmpw REG_DynamicsCount,r0
         blt Dynamics_Loop
 
+        branchl r12,0x8021b2d8
+
+        # Add all dynamics hit
+        .set REG_DynamicsHitCount,23
+        .set REG_DynamicsHit,24
+        .set REG_DynamicsHitDesc,25
+          li REG_DynamicsHitCount,0
+          b DynamicsHit_Check
+        DynamicsHit_Loop:
+            # Get this dynamics desc
+              lwz r3,mdAddDesc_dynamicshitdesc(REG_ModelAddDesc)
+              mulli r0,REG_DynamicsHitCount,4
+              lwzx REG_DynamicsHitDesc,r3,r0
+            # Get next dynamics hit in fighter data
+              addi REG_DynamicsHit, REG_FighterData, 0x1670
+              lbz r3,0x166C(REG_FighterData)
+              mulli r0,r3,0x28
+              add REG_DynamicsHit, REG_DynamicsHit, r0
+
+            # Increment dynamics hit num
+              lbz r3,0x166C(REG_FighterData)
+              addi r3,r3,1
+              stb r3,0x166C(REG_FighterData)
+            # Check if over max
+              cmpwi r3,11
+              bge DyanmicsHitOver
+
+            # Store bone index
+              lwz r3,0x0(REG_DynamicsHitDesc)
+              stw r3,0x24(REG_DynamicsHit)
+            # Store bone pointer
+              lwz r3,0x0(REG_DynamicsHitDesc)
+              lwz	r4, 0x05E8 (REG_FighterData)
+              mulli r3,r3,0x10
+              lwzx r3,r3,r4
+              stw r3,0x10(REG_DynamicsHit)
+            # Store offset
+              lfs f1,0x4(REG_DynamicsHitDesc)
+              stfs f1,0x0(REG_DynamicsHit)
+              lfs f1,0x8(REG_DynamicsHitDesc)
+              stfs f1,0x4(REG_DynamicsHit)
+              lfs f1,0xC(REG_DynamicsHitDesc)
+              stfs f1,0x8(REG_DynamicsHit)
+            # Store size
+              lfs f1,0x10(REG_DynamicsHitDesc)
+              stfs f1,0xC(REG_DynamicsHit)
+
+        DynamicsHit_Inc:
+        addi REG_DynamicsHitCount,REG_DynamicsHitCount,1
+        DynamicsHit_Check:
+        lwz r0,mdAddDesc_dynamicshitnum(REG_ModelAddDesc)
+        cmpw REG_DynamicsHitCount,r0
+        blt DynamicsHit_Loop
+
 ModelAddDescArr_LoopAdd:
   addi REG_ModelDescCount,REG_ModelDescCount,1
 ModelAddDescArr_LoopCheck:
@@ -196,6 +250,27 @@ DyanmicsOver:
   li  r4,0
   load  r5,0x804d3940
   branchl r12,0x80388220
+#############################################
+DyanmicsHitOver:
+#OSReport
+  bl  DynHitErrorString
+  mflr  r3
+  lwz  r4,OFST_MnSlChrCostumeFileSymbols(rtoc)
+  lwz	r0, 0x04 (REG_FighterData)
+  mulli r0,r0,4
+  lwzx r4,r4,0
+  lbz	r0, 0x0619 (REG_FighterData)
+  mulli r0,r0,CostumeFileSymbols_Stride
+  add r4,r4,r0
+  lwz r4,CostumeFileSymbols_FileName(r4)
+  branchl r12,0x803456a8
+#Assert
+  bl  Assert_Name
+  mflr  r3
+  li  r4,0
+  load  r5,0x804d3940
+  branchl r12,0x80388220
+#############################################
 Assert_Name:
 blrl
 .string "m-ex"
@@ -203,6 +278,10 @@ blrl
 ErrorString:
 blrl
 .string "error: costume %s uses more than 10 dynamics\n"
+.align 2
+DynHitErrorString:
+blrl
+.string "error: costume %s uses more than 11 dynamics hits\n"
 .align 2
 ###############################################
 
@@ -213,4 +292,4 @@ NoModelAdd:
 
 Exit:
   restore
-  lwz	r0, 0 (r30)
+  lwz	r0, 0x002C (sp)

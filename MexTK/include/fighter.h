@@ -619,12 +619,12 @@ struct FtDynamicRoot
 
 struct FtDynamicHit
 {
-    int x0;         // 0x1670
-    Vec3 x4;        // 0x1674
-    JOBJ *bone;     // 0x1680
-    int x14;        // 0x1684
-    Vec3 pos;       // 0x1688
-    int bone_index; // 0x1694
+    Vec3 offset;    // 0x1670, 0x0
+    float size;     // 0x167C, 0xC
+    JOBJ *bone;     // 0x1680, 0x10
+    int x14;        // 0x1684, 0x14
+    Vec3 pos;       // 0x1688, 0x18
+    int bone_index; // 0x1694, 0x24
 };
 
 struct ftData

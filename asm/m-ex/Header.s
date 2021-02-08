@@ -105,6 +105,8 @@
 .set mdAddDesc_modelvisdesc, 0x10
   .set mdAddDesc_modelvisdesc_num, 0x0
   .set mdAddDesc_modelvisdesc_table, 0x4
+.set mdAddDesc_dynamicshitnum, 0x18
+.set mdAddDesc_dynamicshitdesc, 0x1C
 
 #FtModelAdd
 .set mdAdd_size, 0x30
