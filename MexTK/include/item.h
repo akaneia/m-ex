@@ -7,248 +7,98 @@
 #include "color.h"
 
 // Item IDs
-#define ITEM_CAPSULE 0
-#define ITEM_BOX 1
-#define ITEM_BARREL 2
-#define ITEM_EGG 3
-#define ITEM_PARTYBALL 4
-#define ITEM_BARRELCANNON 5
-#define ITEM_BOBOMB 6
-#define ITEM_MRSATURN 7
-#define ITEM_HEARTCONTAINER 8
-#define ITEM_MAXIMTOMATO 9
-#define ITEM_STARMAN 10
-#define ITEM_HOMERUNBAT 11
-#define ITEM_BEAMSWORD 12
-#define ITEM_PARASOL 13
-#define ITEM_GREENSHELL 14
-#define ITEM_REDSHELL 15
-#define ITEM_RAYGUN 16
-#define ITEM_FREEZIE 17
-#define ITEM_FOOD 18
-#define ITEM_MOTIONSENSORBOMB 19
-#define ITEM_FLIPPER 20
-#define ITEM_SUPERSCOPE 21
-#define ITEM_STARROD 22
-#define ITEM_LIPSSTICK 23
-#define ITEM_FAN 24
-#define ITEM_FIREFLOWER 25
-#define ITEM_SUPERMUSHROOM 26
-#define ITEM_POISONMUSHROOM 27
-#define ITEM_HAMMER 28
-#define ITEM_WARPSTAR 29
-#define ITEM_SCREWATTACK 30
-#define ITEM_BUNNYHOOD 31
-#define ITEM_METALBOX 32
-#define ITEM_CLOAKINGDEVICE 33
-#define ITEM_POKEBALL 34
-#define ITEM_RAYGUNUNK 35
-#define ITEM_STARRODSTAR 36
-#define ITEM_LIPSSTICKDUST 37
-#define ITEM_SUPERSCOPEBEAM 38
-#define ITEM_RAYGUNBEAM 39
-#define ITEM_HAMMERHEAD 40
-#define ITEM_FLOWER 41
-#define ITEM_YOSHISEGG 42
-#define ITEM_GOOMBA 43
-#define ITEM_REDEAD 44
-#define ITEM_OCTAROK 45
-#define ITEM_OTTOSEA 46
-#define ITEM_STONE 47
-#define ITEM_MARIOFIRE 48
-#define ITEM_DRMARIOPILL 49
-#define ITEM_KIRBYCUTTER 50
-#define ITEM_KIRBYHAMMER 51
-#define ITEM_KIRBYABILITYSTAR 52
-/*
- #define ITEM_ 53
- #define ITEM_ 54
- #define ITEM_ 55
- #define ITEM_ 56
- #define ITEM_ 57
- #define ITEM_ 58
- #define ITEM_ 59
- #define ITEM_ 60
- #define ITEM_ 61
- #define ITEM_ 62
- #define ITEM_ 63
- #define ITEM_ 64
- #define ITEM_ 65
- #define ITEM_ 66
- #define ITEM_ 67
- #define ITEM_ 68
- #define ITEM_ 69
- #define ITEM_ 70
- #define ITEM_ 71
- #define ITEM_ 72
- #define ITEM_ 73
- #define ITEM_ 74
- #define ITEM_ 75
- #define ITEM_ 76
- #define ITEM_ 77
- #define ITEM_ 78
- #define ITEM_ 79
- #define ITEM_ 80
- #define ITEM_ 81
- #define ITEM_ 82
- #define ITEM_ 83
- #define ITEM_ 84
- #define ITEM_ 85
- #define ITEM_ 86
- #define ITEM_ 87
- #define ITEM_ 88
- #define ITEM_ 89
- #define ITEM_ 90
- #define ITEM_ 91
- #define ITEM_ 92
- #define ITEM_ 93
- #define ITEM_ 94
- #define ITEM_ 95
- #define ITEM_ 96
- #define ITEM_ 97
- #define ITEM_ 98
- #define ITEM_ 99
- #define ITEM_ 100
- #define ITEM_ 101
- #define ITEM_ 102
- #define ITEM_ 103
- #define ITEM_ 104
- #define ITEM_ 105
- #define ITEM_ 106
- #define ITEM_ 107
- #define ITEM_ 108
- #define ITEM_ 109
- #define ITEM_ 110
- #define ITEM_ 111
- #define ITEM_ 112
- #define ITEM_ 113
- #define ITEM_ 114
- #define ITEM_ 115
- #define ITEM_ 116
- #define ITEM_ 117
- #define ITEM_ 118
- #define ITEM_ 119
- #define ITEM_ 120
- #define ITEM_ 121
- #define ITEM_ 122
- #define ITEM_ 123
- #define ITEM_ 124
- #define ITEM_ 125
- #define ITEM_ 126
- #define ITEM_ 127
- #define ITEM_ 128
- #define ITEM_ 129
- #define ITEM_ 130
- #define ITEM_ 131
- #define ITEM_ 132
- #define ITEM_ 133
- #define ITEM_ 134
- #define ITEM_ 135
- #define ITEM_ 136
- #define ITEM_ 137
- #define ITEM_ 138
- #define ITEM_ 139
- #define ITEM_ 140
- #define ITEM_ 141
- #define ITEM_ 142
- #define ITEM_ 143
- #define ITEM_ 144
- #define ITEM_ 145
- #define ITEM_ 146
- #define ITEM_ 147
- #define ITEM_ 148
- #define ITEM_ 149
- #define ITEM_ 150
- #define ITEM_ 151
- #define ITEM_ 152
- #define ITEM_ 153
- #define ITEM_ 154
- #define ITEM_ 155
- #define ITEM_ 156
- #define ITEM_ 157
- #define ITEM_ 158
- #define ITEM_ 159
- */
-#define ITEM_POKERANDOM 160
-#define ITEM_GOLDEEN 161
-#define ITEM_CHICORITA 162
-#define ITEM_SNORLAX 163
-#define ITEM_BLASTOISE 164
-#define ITEM_WEEZING 165
-#define ITEM_CHARIZARD 166
-#define ITEM_MOLTRES 167
-#define ITEM_ZAPDOS 168
-#define ITEM_ARCTICUNO 169
-#define ITEM_WOBBUFFET 170
-#define ITEM_SCIZOR 171
-#define ITEM_UNOWN 172
-#define ITEM_ENTEI 173
-#define ITEM_RAIKOU 174
-#define ITEM_SUICUNE 175
-#define ITEM_BELLOSSOM 176
-#define ITEM_ELECTRODE 177
-#define ITEM_LUGIA 178
-#define ITEM_HOOH 179
-#define ITEM_DITTO 180
-#define ITEM_CLEFAIRY 181
-#define ITEM_TOGEPI 182
-#define ITEM_MEW 183
-#define ITEM_CELEBI 184
-#define ITEM_STARYU 185
-#define ITEM_CHANSEY 186
-#define ITEM_PORYGON2 187
-#define ITEM_CYNDAQUIL 188
-#define ITEM_MARILL 189
-#define ITEM_VENUSAUR 190
-/*
- #define ITEM_ 191
- #define ITEM_ 192
- #define ITEM_ 193
- #define ITEM_ 194
- #define ITEM_ 195
- #define ITEM_ 196
- #define ITEM_ 197
- #define ITEM_ 198
- #define ITEM_ 199
- #define ITEM_ 200
- #define ITEM_ 201
- #define ITEM_ 202
- #define ITEM_ 203
- #define ITEM_ 204
- #define ITEM_ 205
- #define ITEM_ 206
- #define ITEM_ 207
- #define ITEM_ 208
- */
-#define ITEM_TARGET 209
-/*
- #define ITEM_ 210
- #define ITEM_ 211
- #define ITEM_ 212
- #define ITEM_ 213
- #define ITEM_ 214
- #define ITEM_ 215
- #define ITEM_ 216
- #define ITEM_ 217
- #define ITEM_ 218
- #define ITEM_ 219
- #define ITEM_ 220
- #define ITEM_ 221
- #define ITEM_ 222
- #define ITEM_ 223
- #define ITEM_ 224
- #define ITEM_ 225
- #define ITEM_ 226
- #define ITEM_ 227
- #define ITEM_ 228
- #define ITEM_ 229
- #define ITEM_ 230
- #define ITEM_ 231
- #define ITEM_ 232
- #define ITEM_ 233
- #define ITEM_ 234
- #define ITEM_ 235
- */
+enum ItemID
+{
+    ITEM_CAPSULE,
+    ITEM_BOX,
+    ITEM_BARREL,
+    ITEM_EGG,
+    ITEM_PARTYBALL,
+    ITEM_BARRELCANNON,
+    ITEM_BOBOMB,
+    ITEM_MRSATURN,
+    ITEM_HEARTCONTAINER,
+    ITEM_MAXIMTOMATO,
+    ITEM_STARMAN,
+    ITEM_HOMERUNBAT,
+    ITEM_BEAMSWORD,
+    ITEM_PARASOL,
+    ITEM_GREENSHELL,
+    ITEM_REDSHELL,
+    ITEM_RAYGUN,
+    ITEM_FREEZIE,
+    ITEM_FOOD,
+    ITEM_MOTIONSENSORBOMB,
+    ITEM_FLIPPER,
+    ITEM_SUPERSCOPE,
+    ITEM_STARROD,
+    ITEM_LIPSSTICK,
+    ITEM_FAN,
+    ITEM_FIREFLOWER,
+    ITEM_SUPERMUSHROOM,
+    ITEM_POISONMUSHROOM,
+    ITEM_HAMMER,
+    ITEM_WARPSTAR,
+    ITEM_SCREWATTACK,
+    ITEM_BUNNYHOOD,
+    ITEM_METALBOX,
+    ITEM_CLOAKINGDEVICE,
+    ITEM_POKEBALL,
+    ITEM_RAYGUNUNK,
+    ITEM_STARRODSTAR,
+    ITEM_LIPSSTICKDUST,
+    ITEM_SUPERSCOPEBEAM,
+    ITEM_RAYGUNBEAM,
+    ITEM_HAMMERHEAD,
+    ITEM_FLOWER,
+    ITEM_YOSHISEGG,
+    ITEM_GOOMBA,
+    ITEM_REDEAD,
+    ITEM_OCTAROK,
+    ITEM_OTTOSEA,
+    ITEM_STONE,
+    ITEM_MARIOFIRE,
+    ITEM_DRMARIOPILL,
+    ITEM_KIRBYCUTTER,
+    ITEM_KIRBYHAMMER,
+    ITEM_KIRBYABILITYSTAR,
+
+    // pokemon
+    ITEM_POKERANDOM = 160,
+    ITEM_GOLDEEN,
+    ITEM_CHICORITA,
+    ITEM_SNORLAX,
+    ITEM_BLASTOISE,
+    ITEM_WEEZING,
+    ITEM_CHARIZARD,
+    ITEM_MOLTRES,
+    ITEM_ZAPDOS,
+    ITEM_ARCTICUNO,
+    ITEM_WOBBUFFET,
+    ITEM_SCIZOR,
+    ITEM_UNOWN,
+    ITEM_ENTEI,
+    ITEM_RAIKOU,
+    ITEM_SUICUNE,
+    ITEM_BELLOSSOM,
+    ITEM_ELECTRODE,
+    ITEM_LUGIA,
+    ITEM_HOOH,
+    ITEM_DITTO,
+    ITEM_CLEFAIRY,
+    ITEM_TOGEPI,
+    ITEM_MEW,
+    ITEM_CELEBI,
+    ITEM_STARYU,
+    ITEM_CHANSEY,
+    ITEM_PORYGON2,
+    ITEM_CYNDAQUIL,
+    ITEM_MARILL,
+    ITEM_VENUSAUR,
+
+    // stage
+    ITEM_TARGET = 209,
+};
 
 // ItemStateChange Flags
 #define ITEMSTATE_UPDATEANIM 0x2
@@ -256,9 +106,18 @@
 #define ITEMSTATE_KEEPHIT 0x10 // dont remove hitboxes on state change
 
 // Item hold_kind definitions
-#define ITHOLD_HAND 0  // held item, like a capsule
-#define ITHOLD_HEAVY 1 // overhead item, like a crate
-#define ITHOLD_NONE 8  // unable to be held
+enum ItHoldKind
+{
+    ITHOLD_HAND,  // held item, like a capsule
+    ITHOLD_HEAVY, // overhead item, like a crate
+    ITHOLD_2,
+    ITHOLD_3,
+    ITHOLD_4,
+    ITHOLD_5,
+    ITHOLD_6,
+    ITHOLD_7,
+    ITHOLD_NONE, // unable to be held
+};
 
 /*** Structs ***/
 
@@ -374,7 +233,7 @@ typedef struct itCommonData
 
 typedef struct itPublicData
 {
-    itCommonData *itCommonData;
+    itCommonData *common_data;
     ItemDesc **common_items;
     ItemDesc **adventure_items;
     ItemDesc **pokemon_items;
@@ -422,9 +281,9 @@ struct itCommonAttr
     char flags4;                //0x3
     int x4;
     int x8;
-    float spinVelocity;
-    float fallSpeed;
-    float maxFallSpeed;
+    float spin_speed;
+    float fall_speed;
+    float fall_speed_max;
     float x18;
     float x1C;       //collision related
     int x20;         // 0x20
@@ -591,24 +450,24 @@ struct ItemData
     int x0;                                  // 0x0
     GOBJ *item;                              // 0x0
     int x8;                                  // 0x8
-    int spawnType;                           // 0xC
+    int spawn_kind;                          // 0xC
     int kind;                                // 0x10
     int x14;                                 // 0x14
     int x18;                                 // 0x18
     int x1c;                                 // 0x1c
     int x20;                                 // 0x20
-    int stateID;                             // 0x24
+    int state;                               // 0x24
     int x28;                                 // 0x28
     float facing_direction;                  // 0x2c
     int x30;                                 // 0x30
-    float spinUnk;                           // 0x34
+    float spin_unk;                          // 0x34
     float scale;                             // 0x38
     int x3c;                                 // 0x3c
     Vec3 self_vel;                           // 0x40
     Vec3 pos;                                // 0x4C
-    Vec3 unkVel;                             // 0x58 - 0x64
-    Vec3 unkVel2;                            // 0x64 - 0x70
-    Vec3 nudgeVel;                           // 0x70 - 0x7C
+    Vec3 vel_unk;                            // 0x58 - 0x64
+    Vec3 vel_unk2;                           // 0x64 - 0x70
+    Vec3 vel_nudge;                          // 0x70 - 0x7C
     int x7c;                                 // 0x7c
     int x80;                                 // 0x80
     int x84;                                 // 0x84
@@ -625,16 +484,16 @@ struct ItemData
     int xb0;                                 // 0xb0
     int xb4;                                 // 0xb4
     void *it_cb;                             // 0xb8, global item callbacks
-    ItemState *itemStates;                   // 0xbc
+    ItemState *item_states;                  // 0xbc
     int isRotate;                            // 0xc0
     itData *itData;                          // 0xc4
     JOBJ *joint;                             // 0xc8
-    itCommonAttr *itemAttributes;            // 0xcc
+    itCommonAttr *common_attr;               // 0xcc
     int xd0;                                 // 0xd0
     int xd4;                                 // 0xd4
     int xd8;                                 // 0xd8
     int xdc;                                 // 0xdc
-    int ground_air_state;                    // 0xe0
+    int air_state;                           // 0xe0
     int xe4;                                 // 0xe4
     int xe8;                                 // 0xe8
     int xec;                                 // 0xec
@@ -936,32 +795,35 @@ struct ItemData
     int xc90;                                // 0xc90
     int xc94;                                // 0xc94
     int xc98;                                // 0xc98
-    int dmg_total;                           // 0xc9c
-    int dmg_recent;                          // 0xca0
-    int xca4;                                // 0xca4
-    int xca8;                                // 0xca8
-    int dmg_angle;                           // 0xcac
-    int xcb0;                                // 0xcb0
-    int xcb4;                                // 0xcb4
-    int xcb8;                                // 0xcb8
-    int xcbc;                                // 0xcbc
-    int xcc0;                                // 0xcc0
-    int xcc4;                                // 0xcc4
-    float dmg_kb;                            // 0xcc8
-    float dmg_direction;                     // 0xccc
-    int xcd0;                                // 0xcd0
-    int xcd4;                                // 0xcd4
-    int xcd8;                                // 0xcd8
-    int xcdc;                                // 0xcdc
-    int xce0;                                // 0xce0
-    int xce4;                                // 0xce4
-    int xce8;                                // 0xce8
-    GOBJ *dmgsource_fighter;                 // 0xcec
-    GOBJ *dmgsource_item;                    // 0xcf0
+    struct                                   // 0xc9c
+    {                                        //
+        int total;                           // 0xc9c
+        int recent;                          // 0xca0
+        int xca4;                            // 0xca4
+        int xca8;                            // 0xca8
+        int angle;                           // 0xcac
+        int xcb0;                            // 0xcb0
+        int xcb4;                            // 0xcb4
+        int xcb8;                            // 0xcb8
+        int xcbc;                            // 0xcbc
+        int xcc0;                            // 0xcc0
+        int xcc4;                            // 0xcc4
+        float kb;                            // 0xcc8
+        float direction;                     // 0xccc
+        int xcd0;                            // 0xcd0
+        int xcd4;                            // 0xcd4
+        int xcd8;                            // 0xcd8
+        int xcdc;                            // 0xcdc
+        int xce0;                            // 0xce0
+        int xce4;                            // 0xce4
+        int xce8;                            // 0xce8
+        GOBJ *source_fighter;                // 0xcec
+        GOBJ *source_item;                   // 0xcf0
+    } dmg;                                   //
     int xcf4;                                // 0xcf4
     int xcf8;                                // 0xcf8
     int xcfc;                                // 0xcfc
-    GOBJ *grabbedFighter;                    // 0xd00
+    GOBJ *grabbed_fighter;                   // 0xd00
     int xd04;                                // 0xd04
     int xd08;                                // 0xd08
     int xd0c;                                // 0xd0c
@@ -979,7 +841,7 @@ struct ItemData
         void *grabFt_onIt;                   // 0xd34, when grabbing a fighter, run this function on self
         void *grabFt_onFt;                   // 0xd38, when grabbing a fighter, run this function on fighter
     } cb;                                    //
-    float rotateSpeed;                       // 0xd3c
+    float spin_speed;                        // 0xd3c
     int xd40;                                // 0xd40
     float lifetime;                          // 0xd44
     int xd48;                                // 0xd48
@@ -1017,11 +879,14 @@ struct ItemData
     unsigned char xdaa7 : 1;                 // 0xda8 0x02
     unsigned char visible : 1;               // 0xda8 0x01
     char xdab;                               // 0xda8
-    int scriptFlag1;                         // 0xdac
-    int scriptFlag2;                         // 0xdb0
-    int scriptFlag3;                         // 0xdb4
-    int xdb8;                                // 0xdb8
-    int scriptFlag4;                         // 0xdbc
+    struct                                   //
+    {                                        //
+        int flag1;                           // 0xdac
+        int flag2;                           // 0xdb0
+        int flag3;                           // 0xdb4
+        int flag4;                           // 0xdb8
+        int flag5;                           // 0xdbc
+    } ftcmd_var;                             //
     int xdc0;                                // 0xdc0
     int xdc4;                                // 0xdc4
     u16 flags1 : 16;                         // 0xdc8
@@ -1032,7 +897,7 @@ struct ItemData
     u16 xdca5 : 1;                           // 0xdca 0x08
     u16 can_hold : 1;                        // 0xdca 0x04
     u16 xdca7 : 1;                           // 0xdca 0x02
-    u16 rotateAxis : 3;                      // 0xdcb,
+    u16 rotate_axis : 3;                     // 0xdcb,
     u16 flags4 : 2;                          // 0xdcb, 0x30
     u16 can_nudge : 1;                       // 0xdcb, 0x08
     u16 xdcb_7 : 3;                          // 0xdcb, 0x07
@@ -1068,18 +933,21 @@ struct ItemData
     unsigned char xdcf7 : 1;                 // 0xdcf, 0x02
     unsigned char xdcf8 : 1;                 // 0xdcf, 0x01
     int xdd0;                                // 0xdd0
-    int itemVar1;                            // 0xdd4
-    int itemVar2;                            // 0xdd8
-    int itemVar3;                            // 0xddc
-    int itemVar4;                            // 0xde0
-    int itemVar5;                            // 0xde4
-    int itemVar6;                            // 0xde8
-    int itemVar7;                            // 0xdec
-    int itemVar8;                            // 0xdf0
-    int itemVar9;                            // 0xdf4
-    int itemVar10;                           // 0xdf8
-    int itemVar11;                           // 0xdfc
-    int itemVar12;                           // 0xe00
+    struct                                   // 0xdd4
+    {                                        //
+        int itemVar1;                        // 0xdd4
+        int itemVar2;                        // 0xdd8
+        int itemVar3;                        // 0xddc
+        int itemVar4;                        // 0xde0
+        int itemVar5;                        // 0xde4
+        int itemVar6;                        // 0xde8
+        int itemVar7;                        // 0xdec
+        int itemVar8;                        // 0xdf0
+        int itemVar9;                        // 0xdf4
+        int itemVar10;                       // 0xdf8
+        int itemVar11;                       // 0xdfc
+        int itemVar12;                       // 0xe00
+    } it_var;                                //
     int xe04;                                // 0xe04
     int xe08;                                // 0xe08
     int xe0c;                                // 0xe0c

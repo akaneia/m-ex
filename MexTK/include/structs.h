@@ -47,8 +47,8 @@ typedef struct MapHead MapHead;
 // Stage
 typedef struct Stage Stage;
 typedef struct StageOnGO StageOnGO;
-typedef struct map_gobjData map_gobjData;
-typedef struct map_gobjDesc map_gobjDesc;
+typedef struct MapData MapData;
+typedef struct MapDesc MapDesc;
 typedef struct StageFile StageFile;
 typedef struct GrDesc GrDesc;
 typedef struct GrExtLookup GrExtLookup;

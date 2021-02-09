@@ -6,7 +6,7 @@
 #include "hsd.h"
 #include "obj.h"
 
-// map_gobjDesc Flags
+// MapDesc Flags
 #define map_isCObj 0x20000000
 #define map_isBG 0x40000000
 #define map_isUnk 0x80000000
@@ -55,19 +55,18 @@ enum GrInternal
 
 /*** Structs ***/
 
-struct map_gobjDesc
+struct MapDesc
 {
     void *(*onCreation)(GOBJ *map);
     void *onDeletion;
     void *onFrame;
     void *onUnk;
-    int flags;
-    //unsigned char is_unk : 1;        //  0x80
-    //unsigned char is_foreground : 1; //  0x40
-    //unsigned char is_cobj : 1;       //  0x20
+    unsigned char is_unk : 1;        //  0x80
+    unsigned char is_foreground : 1; //  0x40
+    unsigned char is_cobj : 1;       //  0x20
 };
 
-struct map_gobjData
+struct MapData
 {
     int x0;                    // 0x0
     GOBJ *gobj;                // 0x4
@@ -75,7 +74,7 @@ struct map_gobjData
     int xC;                    // 0xC
     unsigned char flagx80 : 1; //  0x80
     unsigned char flagx40 : 1; //  0x40
-    unsigned char isFog : 1;   //  0x20, checked @ 801c5e80 and 801c5f10
+    unsigned char is_fog : 1;  //  0x20, checked @ 801c5e80 and 801c5f10
     unsigned char flagx10 : 1; //  0x10
     unsigned char flagx8 : 1;  //  0x08
     unsigned char gx_unk1 : 1; //  0x04, checked @ 801c5e9c
@@ -89,60 +88,56 @@ struct map_gobjData
     unsigned char flag2x02 : 1; //  0x02
     unsigned char flag2x01 : 1; //  0x01
 
-    int map_gobjID;      // 0x14
-    int x18;             // 0x18
-    int onUnk;           // 0x1c
-    int x20;             // 0x20
-    int x24;             // 0x24
-    int stateID;         // 0x28
-    int facingDirection; // 0x2c
-    int x30;             // 0x30
-    int x34;             // 0x34
-    float scale;         // 0x38
-    int x3c;             // 0x3c
-    float selfVelX;      // 0x40
-    float selfVelY;      // 0x44
-    float selfVelZ;      // 0x48
-    float posX;          // 0x4c
-    float posY;          // 0x50
-    float posZ;          // 0x54
-    int x58;             // 0x58
-    int x5c;             // 0x5c
-    int x60;             // 0x60
-    int x64;             // 0x64
-    int x68;             // 0x68
-    int x6c;             // 0x6c
-    int x70;             // 0x70
-    int x74;             // 0x74
-    int x78;             // 0x78
-    int x7c;             // 0x7c
-    int x80;             // 0x80
-    int x84;             // 0x84
-    int x88;             // 0x88
-    int x8c;             // 0x8c
-    int x90;             // 0x90
-    int x94;             // 0x94
-    int x98;             // 0x98
-    int x9c;             // 0x9c
-    int xa0;             // 0xa0
-    int xa4;             // 0xa4
-    int xa8;             // 0xa8
-    int xac;             // 0xac
-    int xb0;             // 0xb0
-    int xb4;             // 0xb4
-    int xb8;             // 0xb8
-    int xbc;             // 0xbc
-    int xc0;             // 0xc0
-    u8 xc4;              // 0xc4
-    u8 xc5;              // 0xc5
-    u8 xc6;              // 0xc6
-    u8 xc7;              // 0xc7
-    int xc8;             // 0xc8
-    int xcc;             // 0xcc
-    int xd0;             // 0xd0
-    int xd4;             // 0xd4
-    int xd8;             // 0xd8
-    int xdc;             // 0xdc
+    int index;            // 0x14, map_gobj index
+    int x18;              // 0x18
+    int x1c;              // 0x1c
+    int x20;              // 0x20
+    int x24;              // 0x24
+    int state;            // 0x28
+    int facing_direction; // 0x2c
+    int x30;              // 0x30
+    int x34;              // 0x34
+    float scale;          // 0x38
+    int x3c;              // 0x3c
+    Vec3 self_vel;        // 0x40
+    Vec3 pos;             // 0x4c
+    int x58;              // 0x58
+    int x5c;              // 0x5c
+    int x60;              // 0x60
+    int x64;              // 0x64
+    int x68;              // 0x68
+    int x6c;              // 0x6c
+    int x70;              // 0x70
+    int x74;              // 0x74
+    int x78;              // 0x78
+    int x7c;              // 0x7c
+    int x80;              // 0x80
+    int x84;              // 0x84
+    int x88;              // 0x88
+    int x8c;              // 0x8c
+    int x90;              // 0x90
+    int x94;              // 0x94
+    int x98;              // 0x98
+    int x9c;              // 0x9c
+    int xa0;              // 0xa0
+    int xa4;              // 0xa4
+    int xa8;              // 0xa8
+    int xac;              // 0xac
+    int xb0;              // 0xb0
+    int xb4;              // 0xb4
+    int xb8;              // 0xb8
+    int xbc;              // 0xbc
+    int xc0;              // 0xc0
+    u8 xc4;               // 0xc4
+    u8 xc5;               // 0xc5
+    u8 xc6;               // 0xc6
+    u8 xc7;               // 0xc7
+    int xc8;              // 0xc8
+    int xcc;              // 0xcc
+    int xd0;              // 0xd0
+    int xd4;              // 0xd4
+    int xd8;              // 0xd8
+    int xdc;              // 0xdc
     struct
     {
         int mapVar0; // 0xe0
@@ -218,7 +213,7 @@ struct map_gobjData
         int x1f8;    // 0x1f8
         int x1fc;    // 0x1fc
         int x200;    // 0x200
-    } map_struct;
+    } map_var;
 };
 
 struct StageOnGO
