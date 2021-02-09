@@ -1684,7 +1684,7 @@ struct FighterData
     char xd;                                                   // 0xD
     char xe;                                                   // 0xE
     char xf;                                                   // 0xF
-    int state;                                                 // 0x10
+    int state_id;                                              // 0x10
     int anim_id;                                               // 0x14
     int state_num;                                             // 0x18
     MoveLogic *common_states;                                  // 0x1C
@@ -2840,4 +2840,6 @@ void Fighter_ClampHorizontalGroundVelocity(FighterData *, float);
 void Fighter_RemoveHeldFighterItem(GOBJ *fighter);
 void Fighter_DestroyAndRemoveHeldFighterItem(GOBJ *fighter);
 void Fighter_Phys_ApplyVerticalAirFriction(FighterData *fighter_data);
+void Fighter_VisTableGet(GOBJ *fighter, int vis_index);
+void Fighter_VisTableSet(GOBJ *fighter, int vis_index, int val); // val = -1 for disable, 0 for enable
 #endif
