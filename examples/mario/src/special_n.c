@@ -93,7 +93,7 @@ void SpecialN_EnterAerial(GOBJ *gobj)
 
 	Fighter_SetAirborne(fighter_data);
 
-	ActionStateChange(fighter_data->stateFrame, 1, 0, gobj, STATE_SPECIALNAIR, 0x5000, 0);
+	ActionStateChange(fighter_data->state.frame, 1, 0, gobj, STATE_SPECIALNAIR, 0x5000, 0);
 
 	fighter_data->cb.Accessory4 = FireBallThink;
 	return;
@@ -160,7 +160,7 @@ void SpecialAirN_EnterGrounded(GOBJ *gobj)
 
 	Fighter_SetGrounded2(fighter_data);
 
-	ActionStateChange(fighter_data->stateFrame, 1, 0, gobj, STATE_SPECIALN, 0x5000, 0);
+	ActionStateChange(fighter_data->state.frame, 1, 0, gobj, STATE_SPECIALN, 0x5000, 0);
 
 	fighter_data->cb.Accessory4 = FireBallThink;
 

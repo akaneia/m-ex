@@ -83,7 +83,7 @@ void SpecialAirLw(GOBJ *gobj)
 	float y_vel = 0;
 
 	// if this variable is set then set y vel reduction to initial rising power
-	if (fighter_data->fighter_var.charVar3 == 0)
+	if (fighter_data->fighter_var.ft_var3 == 0)
 		y_vel = mrAttr->specialLw_rising_tap_power;
 
 	fighter_data->phys.self_vel.Y = mrAttr->specialLw_grounded_rise_resistance - y_vel;
@@ -183,7 +183,7 @@ void SpecialLw_PhysicCallback(GOBJ *gobj)
 
 		Fighter_SetAirborne(fighter_data);
 
-		ActionStateChange(fighter_data->stateFrame, 1, 0, gobj, STATE_SPECIALLWAIR, 0xc4c508a, 0);
+		ActionStateChange(fighter_data->state.frame, 1, 0, gobj, STATE_SPECIALLWAIR, 0xc4c508a, 0);
 
 		Fighter_ClampFallSpeed(fighter_data, mrAttr->specialLw_terminal_velocity);
 
@@ -240,7 +240,7 @@ void SpecialLw_CollisionCallback(GOBJ *gobj)
 		{
 			fighter_data->ftcmd_var.flag2 = 0;
 			Fighter_SetAirborne(fighter_data);
-			ActionStateChange(fighter_data->stateFrame, 1, 0, gobj, STATE_SPECIALLWAIR, 0xc4c508a, 0);
+			ActionStateChange(fighter_data->state.frame, 1, 0, gobj, STATE_SPECIALLWAIR, 0xc4c508a, 0);
 			Fighter_ClampFallSpeed(fighter_data, mrAttr->specialLw_terminal_velocity);
 			Fighter_ClampHorizontalVelocity(fighter_data, mrAttr->specialLw_x_vel_clamp);
 			fighter_data->cb.EnterHitlag = Effect_PauseAll;
@@ -258,7 +258,7 @@ void SpecialLw_CollisionCallback(GOBJ *gobj)
 		{
 			fighter_data->ftcmd_var.flag2 = 0;
 			Fighter_SetAirborne(fighter_data);
-			ActionStateChange(fighter_data->stateFrame, 1, 0, gobj, STATE_SPECIALLWAIR, 0xc4c508a, 0);
+			ActionStateChange(fighter_data->state.frame, 1, 0, gobj, STATE_SPECIALLWAIR, 0xc4c508a, 0);
 			Fighter_ClampFallSpeed(fighter_data, mrAttr->specialLw_terminal_velocity);
 			Fighter_ClampHorizontalVelocity(fighter_data, mrAttr->specialLw_x_vel_clamp);
 			fighter_data->cb.EnterHitlag = Effect_PauseAll;
@@ -299,7 +299,7 @@ void SpecialAirLw_AnimationCallback(GOBJ *gobj)
 	if (script_flags->disable_rise != 0)
 	{
 		script_flags->disable_rise = 0;
-		fighter_data->fighter_var.charVar3 = 1;
+		fighter_data->fighter_var.ft_var3 = 1;
 	}
 
 	if (FrameTimerCheck(gobj) == 0)
@@ -335,7 +335,7 @@ void SpecialAirLw_PhysicCallback(GOBJ *gobj)
 	SpecialLwVar *state_var = &fighter_data->state_var;
 	SpecialLwFtCmd *script_flags = &fighter_data->ftcmd_var;
 
-	if (fighter_data->fighter_var.charVar3 == 0)
+	if (fighter_data->fighter_var.ft_var3 == 0)
 	{
 		if ((fighter_data->ftcmd_var.flag2 != 0) && ((fighter_data->input.down & HSD_BUTTON_B) != 0))
 		{
@@ -385,9 +385,9 @@ void SpecialAirLw_CollisionCallback(GOBJ *gobj)
 		Fighter_SetGrounded2(fighter_data);
 
 		fighter_data->phys.self_vel.Y = 0;
-		fighter_data->fighter_var.charVar3 = 0;
+		fighter_data->fighter_var.ft_var3 = 0;
 
-		ActionStateChange(fighter_data->stateFrame, 1, 0, gobj, STATE_SPECIALLW, 0xc4c508a, 0);
+		ActionStateChange(fighter_data->state.frame, 1, 0, gobj, STATE_SPECIALLW, 0xc4c508a, 0);
 
 		Fighter_ClampHorizontalGroundVelocity(fighter_data, mrAttr->specialLw_base_air_speed);
 

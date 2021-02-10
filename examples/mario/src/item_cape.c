@@ -11,7 +11,7 @@ void RemoveCapeItem(GOBJ *gobj)
 
     FighterData *fighter_data = gobj->userdata;
 
-    fighter_data->fighter_var.charVar5 = 0;
+    fighter_data->fighter_var.ft_var5 = 0;
 
     fighter_data->cb.OnDeath2 = 0x0;
     fighter_data->cb.OnTakeDamage = 0x0;
@@ -40,8 +40,8 @@ int OnPickup(GOBJ *gobj)
 {
     ItemData *item_data = gobj->userdata;
 
-    item_data->scriptFlag1 = 0;
-    item_data->scriptFlag2 = 0;
+    item_data->ftcmd_var.flag1 = 0;
+    item_data->ftcmd_var.flag2 = 0;
 
     if (item_data->fighter_gobj)
     {
@@ -69,7 +69,7 @@ int IsSpecialS_State(GOBJ *gobj)
 {
     FighterData *fighter_data = gobj->userdata;
 
-    int state = fighter_data->state;
+    int state = fighter_data->state_id;
 
     if (state >= STATE_SPECIALS &&
         state <= STATE_SPECIALSAIR)
@@ -84,15 +84,15 @@ int Cape_AnimCallback(GOBJ *gobj)
 {
     ItemData *item_data = gobj->userdata;
 
-    if (item_data->scriptFlag1 != 0)
+    if (item_data->ftcmd_var.flag1 != 0)
     {
-        item_data->scriptFlag1 = 0;
+        item_data->ftcmd_var.flag1 = 0;
         Effect_SpawnAsync(gobj, (int)gobj->userdata + 0xbc0, 0, 0x47d, *(int *)(item_data->xbbc + 0x40));
     }
 
-    if (item_data->scriptFlag2 != 0)
+    if (item_data->ftcmd_var.flag2 != 0)
     {
-        item_data->scriptFlag2 = 0;
+        item_data->ftcmd_var.flag2 = 0;
         Effect_SpawnAsync(gobj, (int)gobj->userdata + 0xbc0, 0, 0x47e, *(int *)(item_data->xbbc + 0x18));
     }
 

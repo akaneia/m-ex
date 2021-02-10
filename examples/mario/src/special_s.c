@@ -113,12 +113,12 @@ void UnknownCapeExitHitlag(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
 
-	// charVar5 stores the cape item gobj
-	if (fighter_data->fighter_var.charVar5 != 0)
+	// ft_var5 stores the cape item gobj
+	if (fighter_data->fighter_var.ft_var5 != 0)
 	{
 		void (*UnknownItemFunction)(GOBJ *item_gobj) = (void*)0x8026b73c;
 
-		UnknownItemFunction(fighter_data->fighter_var.charVar5);
+		UnknownItemFunction(fighter_data->fighter_var.ft_var5);
 	}
 
 	return;
@@ -130,10 +130,10 @@ void CapeEnableUnknownHitbox3Flag(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
 
-	// charVar5 stores the cape item gobj
-	if (fighter_data->fighter_var.charVar5 != 0)
+	// ft_var5 stores the cape item gobj
+	if (fighter_data->fighter_var.ft_var5 != 0)
 	{
-		Item_EnableUnknownFlag(fighter_data->fighter_var.charVar5);
+		Item_EnableUnknownFlag(fighter_data->fighter_var.ft_var5);
 	}
 	return;
 }
@@ -163,12 +163,12 @@ void MarioCapeThink(GOBJ *gobj)
 		int mex_cape_kind = MEX_GetFtItemID(fighter_data->kind, MEX_ITEM_CAPE);
 		GOBJ *cape = CreateCape(fighter_data->facing_direction, gobj, &pos, bone_index, mex_cape_kind); // mrAttr->cape_item_kind);
 
-		// store the cape pointer to a charVar and the special help item location
-		fighter_data->fighter_var.charVar5 = cape;
-		fighter_data->heldItemSpecial = cape;
+		// store the cape pointer to a ft_var5 and the special help item location
+		fighter_data->fighter_var.ft_var5 = cape;
+		fighter_data->item_held_spec = cape;
 
 		// if the cape successully spawned, set the callbacks to remove it
-		if (fighter_data->fighter_var.charVar5 != 0)
+		if (fighter_data->fighter_var.ft_var5 != 0)
 		{
 			fighter_data->cb.OnDeath2 = DestroyCape;
 			fighter_data->cb.OnTakeDamage = DestroyCape;
@@ -268,7 +268,7 @@ void SpecialS_EnterAir(GOBJ *gobj)
 	Fighter_SetAirborne(fighter_data);
 
 	// enter air state
-	ActionStateChange(fighter_data->stateFrame, 1, 0, gobj, STATE_SPECIALSAIR, 0xc4c508c, 0);
+	ActionStateChange(fighter_data->state.frame, 1, 0, gobj, STATE_SPECIALSAIR, 0xc4c508c, 0);
 
 	// 
 	if (script_flags->create_wind == 1)
@@ -284,8 +284,8 @@ void SpecialS_EnterAir(GOBJ *gobj)
 
 	// if cape is set then make sure the damage callbacks are set
 	// these callbacks will remove the cape when mario is hit or dies
-	// charVar5 stores the cape item gobj
-	if (fighter_data->fighter_var.charVar5 != 0)
+	// ft_var5 stores the cape item gobj
+	if (fighter_data->fighter_var.ft_var5 != 0)
 	{
 		fighter_data->cb.OnDeath2 = DestroyCape;
 		fighter_data->cb.OnTakeDamage = DestroyCape;
@@ -354,9 +354,9 @@ void SpecialAirS_PhysicCallback(GOBJ *gobj)
 		if (script_flags->create_wind == 1)
 		{
 			script_flags->create_wind = 2;
-			if (fighter_data->fighter_var.charVar4 == 0)
+			if (fighter_data->fighter_var.ft_var4 == 0)
 			{
-				fighter_data->fighter_var.charVar4 = 1;
+				fighter_data->fighter_var.ft_var4 = 1;
 				fighter_data->phys.self_vel.Y = mrAttr->specialS_vertical_momentum;
 			}
 			else
@@ -400,13 +400,13 @@ void SpecialAirS_CollisionCallback_StateChange(GOBJ *gobj)
 	FighterData *fighter_data = gobj->userdata;
 	SpecialSVar *state_var = &fighter_data->state_var;
 
-	fighter_data->fighter_var.charVar4 = 0;
+	fighter_data->fighter_var.ft_var4 = 0;
 	
 	// ground fighter
 	Fighter_SetGrounded2(fighter_data);
 
 	// change into grounded special state and preserve frame
-	ActionStateChange(fighter_data->stateFrame, 1, 0, gobj, STATE_SPECIALS, 0xc4c508c, 0);
+	ActionStateChange(fighter_data->state.frame, 1, 0, gobj, STATE_SPECIALS, 0xc4c508c, 0);
 
 	// enable reflect flag if stateVar has been set
 	if (state_var->reflect_enabled != 0)
@@ -414,8 +414,8 @@ void SpecialAirS_CollisionCallback_StateChange(GOBJ *gobj)
 		fighter_data->flags.reflect_enable = 1;
 	}
 
-	// charVar5 stores the cape item gobj
-	if (fighter_data->fighter_var.charVar5 != 0)
+	// ft_var5 stores the cape item gobj
+	if (fighter_data->fighter_var.ft_var5 != 0)
 	{
 		fighter_data->cb.OnDeath2 = DestroyCape;
 		fighter_data->cb.OnTakeDamage = DestroyCape;

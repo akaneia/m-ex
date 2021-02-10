@@ -107,11 +107,11 @@ int Fireball_PhysCallback(GOBJ *gobj)
 {
     ItemData *item_data = gobj->userdata;
 
-    itCommonAttr *attributes = item_data->itemAttributes;
+    itCommonAttr *attributes = item_data->common_attr;
 
-    Item_ProjectileVelocityCalculate(gobj, attributes->fallSpeed, attributes->maxFallSpeed);
+    Item_ProjectileVelocityCalculate(gobj, attributes->fall_speed, attributes->fall_speed_max);
 
-    itCommonData *stc_itCommon = stc_itPublicData->itCommonData;
+    itCommonData *stc_itCommon = stc_itPublicData->common_data;
 
     Item_UpdateSpin(gobj, stc_itCommon->x68);
 
@@ -123,7 +123,7 @@ int Fireball_PhysCallback(GOBJ *gobj)
 int Fireball_HitStageUpdate(GOBJ *gobj)
 {
     ItemData *item_data = gobj->userdata;
-    itCommonAttr *itCommonAttr = item_data->itemAttributes;
+    itCommonAttr *itCommonAttr = item_data->common_attr;
     CollData *coll_data = &item_data->coll_data;
 
     int made_collision = 0;
@@ -267,9 +267,9 @@ int Fireball_HitStageUpdate(GOBJ *gobj)
 
         x_vel = magnitude * AS_FLOAT(itCommonAttr->x58);
 
-        item_data->unkVel2.X = local_3c.X;
-        item_data->unkVel2.Y = local_3c.Y;
-        item_data->unkVel2.Z = local_3c.Z;
+        item_data->vel_unk2.X = local_3c.X;
+        item_data->vel_unk2.Y = local_3c.Y;
+        item_data->vel_unk2.Z = local_3c.Z;
 
         item_data->self_vel.X = velocity_2d.X * x_vel;
         item_data->self_vel.Y = velocity_2d.Y * x_vel;

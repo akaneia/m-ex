@@ -42,12 +42,12 @@ void OnDeath(GOBJ *gobj)
 	Fighter_SetCharacterFlags(gobj, 0, 0);
 
 	// reset character variables 1-6
-	fighter_data->fighter_var.charVar1 = 9;
-	fighter_data->fighter_var.charVar2 = 9;
-	fighter_data->fighter_var.charVar3 = 0;
-	fighter_data->fighter_var.charVar4 = 0;
-	fighter_data->fighter_var.charVar5 = 0;
-	fighter_data->fighter_var.charVar6 = 0;
+	fighter_data->fighter_var.ft_var1 = 9;
+	fighter_data->fighter_var.ft_var2 = 9;
+	fighter_data->fighter_var.ft_var3 = 0;
+	fighter_data->fighter_var.ft_var4 = 0;
+	fighter_data->fighter_var.ft_var5 = 0;
+	fighter_data->fighter_var.ft_var6 = 0;
 	return;
 }
 ///
