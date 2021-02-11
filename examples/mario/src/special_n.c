@@ -148,7 +148,7 @@ void SpecialAirN_IASACallback(GOBJ *gobj)
 ///
 void SpecialAirN_PhysicCallback(GOBJ *gobj)
 {
-	Fighter_PhysAir_ApplyGravityAndFastfall(gobj);
+	Fighter_PhysAir_ApplyGravityFastfall(gobj);
 	return;
 }
 ///
