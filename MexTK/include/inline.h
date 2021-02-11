@@ -12,7 +12,7 @@
 
 /*** Functions ***/
 
-static float fabs(float x)
+float fabs(float x)
 {
     if (x < 0)
     {
@@ -21,7 +21,7 @@ static float fabs(float x)
     return x;
 }
 
-static int abs(int x)
+int abs(int x)
 {
     if (x < 0)
     {
@@ -30,7 +30,7 @@ static int abs(int x)
     return x;
 }
 
-static void enterKnockback(GOBJ *fighter, int angle, float mag)
+void enterKnockback(GOBJ *fighter, int angle, float mag)
 {
     FighterData *fighter_data = ((FighterData *)fighter->userdata);
 
@@ -49,12 +49,12 @@ static void enterKnockback(GOBJ *fighter, int angle, float mag)
     return;
 }
 
-static void null()
+void null()
 {
     return;
 }
 
-static void __attribute__((optimize("O0"))) PRIM_DRAW(PRIM *gx, float x, float y, float z, int color)
+void __attribute__((optimize("O0"))) PRIM_DRAW(PRIM *gx, float x, float y, float z, int color)
 {
     AS_FLOAT(gx->data) = x;
     AS_FLOAT(gx->data) = y;
@@ -63,7 +63,7 @@ static void __attribute__((optimize("O0"))) PRIM_DRAW(PRIM *gx, float x, float y
     return;
 }
 
-static void C_QUATMtx(Vec4 *r, Mtx m)
+void C_QUATMtx(Vec4 *r, Mtx m)
 {
     /*---------------------------------------------------------------------------*
    Name:         QUATMtx
@@ -116,7 +116,7 @@ static void C_QUATMtx(Vec4 *r, Mtx m)
     }
 }
 
-static HSD_Pad *PadGet(int playerIndex, int padType)
+HSD_Pad *PadGet(int playerIndex, int padType)
 {
     HSD_Pads *pads;
 
@@ -129,7 +129,7 @@ static HSD_Pad *PadGet(int playerIndex, int padType)
     return (&pads->pad[playerIndex]);
 }
 
-static float lerp(Translation *anim, float currFrame)
+float lerp(Translation *anim, float currFrame)
 {
     float prevFrame, prevPos, nextFrame, nextPos, amt;
 
@@ -154,7 +154,7 @@ static float lerp(Translation *anim, float currFrame)
     return amt * (nextPos - prevPos) + prevPos;
 }
 
-static float JOBJ_GetAnimFrame(JOBJ *joint)
+float JOBJ_GetAnimFrame(JOBJ *joint)
 {
     // check for AOBJ in jobj
     JOBJ *jobj;
@@ -206,7 +206,7 @@ static float JOBJ_GetAnimFrame(JOBJ *joint)
     return -1;
 }
 
-static AOBJ *JOBJ_GetFirstAOBJ(JOBJ *jobj)
+AOBJ *JOBJ_GetFirstAOBJ(JOBJ *jobj)
 {
     // check for AOBJ in this jobj
 
@@ -267,7 +267,7 @@ static AOBJ *JOBJ_GetFirstAOBJ(JOBJ *jobj)
     return 0;
 }
 
-static AOBJ *JOBJ_GetJointAOBJ(JOBJ *jobj)
+AOBJ *JOBJ_GetJointAOBJ(JOBJ *jobj)
 {
     // check for AOBJ in this jobj
 
@@ -296,7 +296,7 @@ static AOBJ *JOBJ_GetJointAOBJ(JOBJ *jobj)
     return 0;
 }
 
-static DOBJ *JOBJ_GetDObjChild(JOBJ *joint, int dobj_index)
+DOBJ *JOBJ_GetDObjChild(JOBJ *joint, int dobj_index)
 {
 
     int count = 0;
@@ -316,7 +316,7 @@ static DOBJ *JOBJ_GetDObjChild(JOBJ *joint, int dobj_index)
     return dobj;
 }
 
-static float Math_Vec2Angle(Vec2 *a, Vec2 *b)
+float Math_Vec2Angle(Vec2 *a, Vec2 *b)
 {
     // get angle
     // float angle = atan((b->Y - a->Y) / (b->X - a->X));
@@ -337,12 +337,12 @@ static float Math_Vec2Angle(Vec2 *a, Vec2 *b)
     return angle;
 }
 
-static float Math_Vec2Distance(Vec2 *a, Vec2 *b)
+float Math_Vec2Distance(Vec2 *a, Vec2 *b)
 {
     return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2));
 }
 
-static float Math_Vec3Distance(Vec3 *a, Vec3 *b)
+float Math_Vec3Distance(Vec3 *a, Vec3 *b)
 {
     return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2));
 }
