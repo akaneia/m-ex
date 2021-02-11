@@ -17,7 +17,7 @@ onmakeitemvisible
 onitemdrop
 onitemcatch
 onunknownitemrelated
-onunknowncharactermodelflags1
+onapplyheaditem
 onremoveheaditem
 onhit
 onunknowneyetexturerelated

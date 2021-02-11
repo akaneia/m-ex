@@ -205,7 +205,7 @@
   .set  Arch_FighterFunc_OnItemRelease,0x40
   .set  Arch_FighterFunc_OnItemPickup2,0x44
   .set  Arch_FighterFunc_onUnknownItemRelated,0x48
-  .set  Arch_FighterFunc_onUnknownCharacterModelFlags1,0x4C
+  .set  Arch_FighterFunc_onApplyHeadItem,0x4C
   .set  Arch_FighterFunc_onRemoveHeadItem,0x50
   .set  Arch_FighterFunc_onKnockbackEnter,0x54
   .set  Arch_FighterFunc_onKnockbackExit,0x58
