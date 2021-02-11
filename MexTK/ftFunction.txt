@@ -18,7 +18,7 @@ onitemdrop
 onitemcatch
 onunknownitemrelated
 onunknowncharactermodelflags1
-onunknowncharactermodelflags2
+onremoveheaditem
 onhit
 onunknowneyetexturerelated
 onframe

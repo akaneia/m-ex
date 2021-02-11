@@ -339,7 +339,7 @@ struct Stage
     int *ALDYakuAll;           // 0x6b4
     int *map_ptcl;             // 0x6b8
     int *map_texg;             // 0x6bc
-    int *yakumono_param;       // 0x6c0
+    void *yakumono_param;      // 0x6c0
     int *map_plit;             // 0x6c4
     int *x6c8;                 // 0x6c8
     void *quake_model_set;     // 0x6cc
