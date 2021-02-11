@@ -53,10 +53,35 @@ InitItem:
 #Get this items dat pointer
   mulli r0,r3,0x4
   lwzx REG_ItemData,r5,r0
+  cmpwi REG_ItemData,0
+  beq ItemNotInitialized
 #Store Item functions
   stw REG_ItemFunctions,0xB8(REG_ItemGObjData)
 #Store item dat pointer
   stw REG_ItemData,0xC4(REG_ItemGObjData)
+  b Exit
+
+ItemNotInitialized:
+#OSReport
+  bl  ErrorString
+  mflr  r3
+  branchl r12,0x803456a8
+#Assert
+  bl  Assert_Name
+  mflr  r3
+  li  r4,0
+  load  r5,0x804d3940
+  branchl r12,0x80388220
+#############################################
+Assert_Name:
+blrl
+.string "m-ex"
+.align 2
+ErrorString:
+blrl
+.string "error: item not initialized\n"
+.align 2
+###############################################
 
 Exit:
   restore
