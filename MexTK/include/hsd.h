@@ -155,7 +155,7 @@ struct HSD_VI
 };
 
 /*** Static Variables ***/
-static HSD_VI *stc_HSD_VI = 0x8046b0f0;
+HSD_VI *stc_HSD_VI = 0x8046b0f0;
 
 /*** Functions ***/
 

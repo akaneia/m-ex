@@ -2701,8 +2701,8 @@ struct FtCliffCatch
 
 /** Static Variables **/
 
-static ftCommonData **stc_ftcommon = (R13 + -0x514C);
-static GXColor **stc_shieldcolors = (R13 + -0x5194);
+ftCommonData **stc_ftcommon = (R13 + -0x514C);
+GXColor **stc_shieldcolors = (R13 + -0x5194);
 
 /*** Functions ***/
 void ActionStateChange(float startFrame, float animSpeed, float animBlend, GOBJ *fighter, int stateID, int flags1, int flags2);

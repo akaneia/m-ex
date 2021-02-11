@@ -2740,9 +2740,9 @@ struct Rules1
 };
 
 /*** Static Variables ***/
-static MemcardInfo *stc_memcard_info = 0x80433380;
-static MemcardUnk *stc_memcard_unk = 0x803bacc8;
-static MemcardWork *stc_memcard_work = 0x80432a68;
+MemcardInfo *stc_memcard_info = 0x80433380;
+MemcardUnk *stc_memcard_unk = 0x803bacc8;
+MemcardWork *stc_memcard_work = 0x80432a68;
 int *stc_memcard_block_curr = R13 + (-0x3d20);
 int *stc_memcard_block_last = R13 + (-0x3d1c);
 int *stc_memcard_write_status = 0x804d1138;

@@ -195,39 +195,39 @@ struct VSMinorData
 };
 
 /*** Variables ***/
-static MnSlChrData *stc_css_data = 0x803f0a48;
-static VSMinorData **stc_css_minorscene = R13 + (-0x49F0);
-static u8 *stc_css_regtagnum = R13 + (-0x49A8); // number of registered tags
-static u8 *stc_css_49b0 = R13 + (-0x49B0);
-static u8 *stc_css_49a7 = R13 + (-0x49A7);
-static u8 *stc_css_49a8 = R13 + (-0x49A8);
-static ArchiveInfo **stc_css_archive = R13 + (-0x49D0);
-static ArchiveInfo **stc_css_menuarchive = R13 + (-0x49CC);
-static u8 *stc_css_49ac = R13 + (-0x49AC);
-static GOBJ **stc_css_menugobj = R13 + (-0x49E4);
-static JOBJ **stc_css_menumodel = R13 + (-0x49E0);
-static CSSCursor **stc_css_cursors = 0x804a0bc0;
-static CSSPuck **stc_css_pucks = 0x804a0bd0;
+MnSlChrData *stc_css_data = 0x803f0a48;
+VSMinorData **stc_css_minorscene = R13 + (-0x49F0);
+u8 *stc_css_regtagnum = R13 + (-0x49A8); // number of registered tags
+u8 *stc_css_49b0 = R13 + (-0x49B0);
+u8 *stc_css_49a7 = R13 + (-0x49A7);
+u8 *stc_css_49a8 = R13 + (-0x49A8);
+ArchiveInfo **stc_css_archive = R13 + (-0x49D0);
+ArchiveInfo **stc_css_menuarchive = R13 + (-0x49CC);
+u8 *stc_css_49ac = R13 + (-0x49AC);
+GOBJ **stc_css_menugobj = R13 + (-0x49E4);
+JOBJ **stc_css_menumodel = R13 + (-0x49E0);
+CSSCursor **stc_css_cursors = 0x804a0bc0;
+CSSPuck **stc_css_pucks = 0x804a0bd0;
 
-static u8 *stc_css_hmnport = R13 + (-0x49B0);
-static u8 *stc_css_cpuport = R13 + (-0x49AF);
-static u8 *stc_css_delay = R13 + (-0x49AE);
-static u8 *stc_css_maxply = R13 + (-0x49AB);
-static u8 *stc_css_singeplyport = R13 + (-0x4DE0);
-static u8 *stc_css_49f0 = R13 + (-0x49f0);
-static int *stc_css_49c0 = R13 + (-0x49c0);
-static int *stc_css_49c4 = R13 + (-0x49c4);
-static int *stc_css_49b8 = R13 + (-0x49b8);
-static int *stc_css_49bc = R13 + (-0x49bc);
-static int *stc_css_bgtimer = R13 + (-0x49b4);
-static u8 *stc_css_hasreleasedb = R13 + (-0x49ad);
-static u8 *stc_css_exitkind = R13 + (-0x49aa);
-static u8 *stc_css_49a9 = R13 + (-0x49a9);
-static MnSelectChrDataTable **stc_css_datatable = R13 + (-0x49EC);
-static COBJDesc **stc_css_cobjdesc = R13 + (-0x4ADC);
-static GOBJ **stc_css_camgobj = R13 + (-0x49E8);
-static HSD_Pad *stc_css_pad = 0x804c20bc;
-static u8 *stc_css_unkarr = 0x804d50c8;
+u8 *stc_css_hmnport = R13 + (-0x49B0);
+u8 *stc_css_cpuport = R13 + (-0x49AF);
+u8 *stc_css_delay = R13 + (-0x49AE);
+u8 *stc_css_maxply = R13 + (-0x49AB);
+u8 *stc_css_singeplyport = R13 + (-0x4DE0);
+u8 *stc_css_49f0 = R13 + (-0x49f0);
+int *stc_css_49c0 = R13 + (-0x49c0);
+int *stc_css_49c4 = R13 + (-0x49c4);
+int *stc_css_49b8 = R13 + (-0x49b8);
+int *stc_css_49bc = R13 + (-0x49bc);
+int *stc_css_bgtimer = R13 + (-0x49b4);
+u8 *stc_css_hasreleasedb = R13 + (-0x49ad);
+u8 *stc_css_exitkind = R13 + (-0x49aa);
+u8 *stc_css_49a9 = R13 + (-0x49a9);
+MnSelectChrDataTable **stc_css_datatable = R13 + (-0x49EC);
+COBJDesc **stc_css_cobjdesc = R13 + (-0x4ADC);
+GOBJ **stc_css_camgobj = R13 + (-0x49E8);
+HSD_Pad *stc_css_pad = 0x804c20bc;
+u8 *stc_css_unkarr = 0x804d50c8;
 
 /*** Functions ***/
 void MainMenu_CamRotateThink(GOBJ *gobj);

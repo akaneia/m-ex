@@ -967,7 +967,7 @@ struct ItemData
 
 /*** static reference ***/
 
-static itPublicData *stc_itPublicData = (R13 + -0x4978);
+itPublicData *stc_itPublicData = (R13 + -0x4978);
 
 /*** Functions ***/
 
