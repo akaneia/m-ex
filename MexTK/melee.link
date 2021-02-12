@@ -285,6 +285,7 @@
 80266F3C:Item_CheckIfEnabled
 80276348:Item_CheckIfTouchingWall
 8026E15C:Item_CollAir
+8026daa8:Item_CollAir_NoCB
 8026D62C:Item_CollGround_PassLedge
 8026D8A4:Item_CollGround_StopLedge
 80225DD8:Item_CopyDevelopState
