@@ -308,7 +308,6 @@
 802694CC:Item_AnimateAndUpdateSubactions
 80273130:Item_DecLifeTimer
 800865CC:Item_GetGroundAirState
-80273030:Item_InvertVelocityAndFacingDirection
 8026AE84:Item_PlayOnDestroySFXAgain
 80272860:Item_ProjectileVelocityCalculate
 80274594:Item_ScaleToPlayerSize
