@@ -330,20 +330,20 @@ struct ItemState
 
 struct SpawnItem
 {
-    GOBJ *parent_gobj;      // 0x0
-    GOBJ *parent_gobj2;     // 0x4
-    int it_kind;            // 0x8, id of the item to spawn
-    int hold_kind;          // 0xC, defines the behavior of the item, such as thrown and pickup. 0 = capsule
-    int unk2;               // 0x10
-    Vec3 pos;               // 0x14
-    Vec3 pos2;              // 0x20
-    Vec3 vel;               // 0x2C
-    float facing_direction; // 0x38
-    short damage;           // 0x3C
-    short unk5;             // 0x3E
-    int unk6;               // 0x40, 1 = correct initial position
-    char unk7;              // 0x44, 0x80 = perform initial collision check
-    int is_spin;            // 0x48, enables item spinning
+    GOBJ *parent_gobj;                  // 0x0
+    GOBJ *parent_gobj2;                 // 0x4
+    int it_kind;                        // 0x8, id of the item to spawn
+    int hold_kind;                      // 0xC, defines the behavior of the item, such as thrown and pickup. 0 = capsule
+    int unk2;                           // 0x10
+    Vec3 pos;                           // 0x14
+    Vec3 pos2;                          // 0x20
+    Vec3 vel;                           // 0x2C
+    float facing_direction;             // 0x38
+    short damage;                       // 0x3C
+    short unk5;                         // 0x3E
+    int unk6;                           // 0x40, 1 = correct initial position
+    unsigned char is_raycast_below : 1; // 0x44, 0x80 = perform initial collision check
+    int is_spin;                        // 0x48, enables item spinning
 };
 
 struct itHit
