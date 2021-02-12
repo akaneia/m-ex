@@ -2252,7 +2252,7 @@ struct FighterData
     int x205c;                                // 0x205c
     int x2060;                                // 0x2060
     int ledge_cooldown;                       // 0x2064
-    int attack_kind;                          // 0x2068, non attacks have id 1
+    int atk_kind;                             // 0x2068, non attacks have id 1
     int x206c;                                // 0x206c
     u8 x2070;                                 // 0x2070
     u8 x2071;                                 // 0x2071
@@ -2740,6 +2740,7 @@ void Fighter_EnterDamageState(GOBJ *fighter, int stateID, float frame);
 int Fighter_BoneLookup(FighterData *fighter, int boneID);
 void Fighter_GiveDamage(FighterData *fighter, float damage);
 void Fighter_GiveHeal(FighterData *fighter, int heal);
+void Fighter_StaleDamage(FighterData *fighter, float dmg, int atk_kind, int atk_instance);
 void Fighter_SetHUDDamage(int player, u16 damage);
 void Fighter_RunOnHitCallbacks(GOBJ *fighter);
 void Fighter_SetStocks(int ply, int stocks);

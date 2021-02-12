@@ -350,8 +350,8 @@ struct itHit
 {
     int active;                   // 0x0
     int x4;                       // 0x4, depends on
-    int dmg;                      // 0x8
-    float dmg_f;                  // 0xc
+    int dmg;                      // 0x8, projected damage
+    float dmg_f;                  // 0xc, staled damage, actually applied
     Vec3 offset;                  // 0x10
     float size;                   // 0x1c
     int angle;                    // 0x20
@@ -860,8 +860,8 @@ struct ItemData
     int xd7c;                                // 0xd7c
     int xd80;                                // 0xd80
     int xd84;                                // 0xd84
-    int xd88;                                // 0xd88
-    int xd8c;                                // 0xd8c
+    u16 atk_instance;                        // 0xd88, Contains an ID unique to the current move instance. e.g, if two dairs are done back to back, this ID will differ to tell them apart from each other. It is stored to 0x18EC of the victim upon colliding with someone.
+    int atk_kind;                            // 0xd8c, copied from fighter atk_kind
     int xd90;                                // 0xd90
     int xd94;                                // 0xd94
     int xd98;                                // 0xd98

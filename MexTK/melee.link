@@ -161,6 +161,7 @@
 8003418C:Fighter_GetSubcharGObj
 8007DB24:Fighter_GFXRemoveAll
 8006CC7C:Fighter_GiveDamage
+80089228:Fighter_StaleDamage
 8006CF5C:Fighter_GiveHeal
 80081298:Fighter_IASACheck_CliffCatch
 800CB870:Fighter_IASACheck_JumpAerial
