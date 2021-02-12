@@ -81,12 +81,12 @@ struct MapData
     unsigned char flagx2 : 1;  //  0x02
     unsigned char flagx1 : 1;  //  0x01
 
-    unsigned char gx_unk2 : 3;  //  0x80
-    unsigned char flag2x10 : 1; //  0x10
-    unsigned char flag2x08 : 1; //  0x08
-    unsigned char flag2x04 : 1; //  0x04, checked @ 801c5e9c
-    unsigned char flag2x02 : 1; //  0x02
-    unsigned char flag2x01 : 1; //  0x01
+    unsigned char gx_unk2 : 3;         //  0x80
+    unsigned char flag2x10 : 1;        //  0x10
+    unsigned char flag2x08 : 1;        //  0x08
+    unsigned char is_check_shadow : 1; //  0x04, will run the "shadow check" per fighter to see if a fighter's shadow should be drawn
+    unsigned char flag2x02 : 1;        //  0x02
+    unsigned char flag2x01 : 1;        //  0x01
 
     int index;            // 0x14, map_gobj index
     int x18;              // 0x18
@@ -225,102 +225,102 @@ struct StageOnGO
 
 struct Stage
 {
-    float cam_LeftBound;   // 0x0
-    float cam_RightBound;  // 0x4
-    float cam_TopBound;    // 0x8
-    float cam_BottomBound; // 0xc
-    float cam_HorizOffset; // 0x10
-    float crowdReactStart; // 0x14, begins checking for crowd gasps below this position
-    float fov_d;           // 0x18
-    float fov_u;           // 0x1c
-    float fov_r;           // 0x20, actually horizontal rotation?
-    float fov_l;           // 0x24
-    float x28;             // 0x28
-    float x2c;             // 0x2c
-    float x30;             // 0x30
-    float x34;             // 0x34, camera distance min
-    float x38;             // 0x38
-    float x3c;             // 0x3c
-    float x40;             // 0x40
-    int x44;               // 0x44
-    int x48;               // 0x48
-    int x4c;               // 0x4c
-    int x50;               // 0x50
-    int x54;               // 0x54
-    int x58;               // 0x58
-    int x5c;               // 0x5c
-    int x60;               // 0x60
-    int x64;               // 0x64
-    int x68;               // 0x68
-    int x6c;               // 0x6c
-    int x70;               // 0x70
-    float blastzoneLeft;   // 0x74
-    float blastzoneRight;  // 0x78
-    float blastzoneTop;    // 0x7c
-    float blastzoneBottom; // 0x80
-    int flags;             // 0x84
-    int stageID;           // 0x88
-    int flags2;            // 0x8c
-    int x90;               // 0x90
-    int x94;               // 0x94
-    int hpsID;             // 0x98
-    int x9c;               // 0x9c
-    int xa0;               // 0xa0
-    int xa4;               // 0xa4
-    int xa8;               // 0xa8
-    int xac;               // 0xac
-    int xb0;               // 0xb0
-    int xb4;               // 0xb4
-    int xb8;               // 0xb8
-    int xbc;               // 0xbc
-    int xc0;               // 0xc0
-    int xc4;               // 0xc4
-    int xc8;               // 0xc8
-    int xcc;               // 0xcc
-    int xd0;               // 0xd0
-    int xd4;               // 0xd4
-    int xd8;               // 0xd8
-    int xdc;               // 0xdc
-    int xe0;               // 0xe0
-    int xe4;               // 0xe4
-    int xe8;               // 0xe8
-    int xec;               // 0xec
-    int xf0;               // 0xf0
-    int xf4;               // 0xf4
-    int xf8;               // 0xf8
-    int xfc;               // 0xfc
-    int x100;              // 0x100
-    int x104;              // 0x104
-    int x108;              // 0x108
-    int x10c;              // 0x10c
-    int x110;              // 0x110
-    int x114;              // 0x114
-    int x118;              // 0x118
-    int x11c;              // 0x11c
-    int x120;              // 0x120
-    int x124;              // 0x124
-    int x128;              // 0x128
-    int x12c;              // 0x12c
-    int x130;              // 0x130
-    int x134;              // 0x134
-    int x138;              // 0x138
-    int x13c;              // 0x13c
-    int x140;              // 0x140
-    int x144;              // 0x144
-    int x148;              // 0x148
-    int x14c;              // 0x14c
-    int x150;              // 0x150
-    int x154;              // 0x154
-    int x158;              // 0x158
-    int x15c;              // 0x15c
-    int x160;              // 0x160
-    int x164;              // 0x164
-    int x168;              // 0x168
-    int x16c;              // 0x16c
-    int x170;              // 0x170
-    int x174;              // 0x174
-    int x178;              // 0x178
-    int x17c;              // 0x17c
+    float cam_LeftBound;                                                  // 0x0
+    float cam_RightBound;                                                 // 0x4
+    float cam_TopBound;                                                   // 0x8
+    float cam_BottomBound;                                                // 0xc
+    float cam_HorizOffset;                                                // 0x10
+    float crowdReactStart;                                                // 0x14, begins checking for crowd gasps below this position
+    float fov_d;                                                          // 0x18
+    float fov_u;                                                          // 0x1c
+    float fov_r;                                                          // 0x20, actually horizontal rotation?
+    float fov_l;                                                          // 0x24
+    float x28;                                                            // 0x28
+    float x2c;                                                            // 0x2c
+    float x30;                                                            // 0x30
+    float x34;                                                            // 0x34, camera distance min
+    float x38;                                                            // 0x38
+    float x3c;                                                            // 0x3c
+    float x40;                                                            // 0x40
+    int x44;                                                              // 0x44
+    int x48;                                                              // 0x48
+    int x4c;                                                              // 0x4c
+    int x50;                                                              // 0x50
+    int x54;                                                              // 0x54
+    int x58;                                                              // 0x58
+    int x5c;                                                              // 0x5c
+    int x60;                                                              // 0x60
+    int x64;                                                              // 0x64
+    int x68;                                                              // 0x68
+    int x6c;                                                              // 0x6c
+    int x70;                                                              // 0x70
+    float blastzoneLeft;                                                  // 0x74
+    float blastzoneRight;                                                 // 0x78
+    float blastzoneTop;                                                   // 0x7c
+    float blastzoneBottom;                                                // 0x80
+    int flags;                                                            // 0x84
+    int stageID;                                                          // 0x88
+    int flags2;                                                           // 0x8c
+    int x90;                                                              // 0x90
+    int x94;                                                              // 0x94
+    int hpsID;                                                            // 0x98
+    int x9c;                                                              // 0x9c
+    int xa0;                                                              // 0xa0
+    int xa4;                                                              // 0xa4
+    int xa8;                                                              // 0xa8
+    int xac;                                                              // 0xac
+    int xb0;                                                              // 0xb0
+    int xb4;                                                              // 0xb4
+    int xb8;                                                              // 0xb8
+    int xbc;                                                              // 0xbc
+    int xc0;                                                              // 0xc0
+    int xc4;                                                              // 0xc4
+    int xc8;                                                              // 0xc8
+    int xcc;                                                              // 0xcc
+    int xd0;                                                              // 0xd0
+    int xd4;                                                              // 0xd4
+    int xd8;                                                              // 0xd8
+    int xdc;                                                              // 0xdc
+    int xe0;                                                              // 0xe0
+    int xe4;                                                              // 0xe4
+    int xe8;                                                              // 0xe8
+    int xec;                                                              // 0xec
+    int xf0;                                                              // 0xf0
+    int xf4;                                                              // 0xf4
+    int xf8;                                                              // 0xf8
+    int xfc;                                                              // 0xfc
+    int x100;                                                             // 0x100
+    int x104;                                                             // 0x104
+    int x108;                                                             // 0x108
+    int x10c;                                                             // 0x10c
+    int x110;                                                             // 0x110
+    int x114;                                                             // 0x114
+    int x118;                                                             // 0x118
+    int x11c;                                                             // 0x11c
+    int x120;                                                             // 0x120
+    int x124;                                                             // 0x124
+    int x128;                                                             // 0x128
+    int x12c;                                                             // 0x12c
+    int x130;                                                             // 0x130
+    int x134;                                                             // 0x134
+    int x138;                                                             // 0x138
+    int x13c;                                                             // 0x13c
+    int x140;                                                             // 0x140
+    int x144;                                                             // 0x144
+    int x148;                                                             // 0x148
+    int x14c;                                                             // 0x14c
+    int x150;                                                             // 0x150
+    int x154;                                                             // 0x154
+    int x158;                                                             // 0x158
+    int x15c;                                                             // 0x15c
+    int x160;                                                             // 0x160
+    int x164;                                                             // 0x164
+    int x168;                                                             // 0x168
+    int x16c;                                                             // 0x16c
+    int x170;                                                             // 0x170
+    int x174;                                                             // 0x174
+    int x178;                                                             // 0x178
+    void (*OnShadowRender)(Vec3 *fighter_pos, int unk, JOBJ *stage_jobj); // 0x17c
     GOBJ *map_gobjs[64];
     JOBJ *general_points[256]; // 0x280
     int x680;                  // 0x680
