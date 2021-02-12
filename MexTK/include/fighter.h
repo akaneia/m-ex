@@ -2740,7 +2740,7 @@ void Fighter_EnterDamageState(GOBJ *fighter, int stateID, float frame);
 int Fighter_BoneLookup(FighterData *fighter, int boneID);
 void Fighter_GiveDamage(FighterData *fighter, float damage);
 void Fighter_GiveHeal(FighterData *fighter, int heal);
-void Fighter_StaleDamage(FighterData *fighter, float dmg, int atk_kind, int atk_instance);
+float Fighter_StaleDamage(FighterData *fighter, float dmg, int atk_kind, int atk_instance);
 void Fighter_SetHUDDamage(int player, u16 damage);
 void Fighter_RunOnHitCallbacks(GOBJ *fighter);
 void Fighter_SetStocks(int ply, int stocks);
