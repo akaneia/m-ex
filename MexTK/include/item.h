@@ -1012,4 +1012,5 @@ void Barrel_EnterBreak(GOBJ *item);
 void Item_EnableUnknownFlag(GOBJ *item);
 void Item_ReflectVelocity(GOBJ *item);
 void Item_Throw(GOBJ *item, float unk, Vec3 *pos, Vec3 *vel);
+JOBJ *Item_GetHeldBone(GOBJ *item);
 #endif
