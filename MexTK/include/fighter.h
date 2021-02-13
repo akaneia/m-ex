@@ -1780,7 +1780,7 @@ struct FighterData
         float ledge_jump_horizontal_velocity;                  // 0x1B8
         float ledge_jump_vertical_velocity;                    // 0x1BC
         float item_throw_velocity_multiplier;                  // 0x1C0
-        int x1C4;                                              // 0x1C4
+        float item_discard_vel_mult;                           // 0x1C4
         int x1C8;                                              // 0x1C8
         int x1CC;                                              // 0x1CC
         int x1D0;                                              // 0x1D0
