@@ -232,6 +232,7 @@
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
+80273078:Item_BounceOffShield
 80380358:File_GetSymbol
 80016BE0:File_Load
 80016C64:File_LoadInitReturnSymbol
@@ -289,7 +290,8 @@
 80094818:Item_Catch
 80266F3C:Item_CheckIfEnabled
 80276348:Item_CheckIfTouchingWall
-8026E15C:Item_CollAir
+8026E15C:Item_CollAir_Bounce
+8026e414:Item_CollAir_Land
 8026daa8:Item_CollAir_NoCB
 8026D62C:Item_CollGround_PassLedge
 8026D8A4:Item_CollGround_StopLedge

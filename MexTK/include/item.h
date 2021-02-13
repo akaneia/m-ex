@@ -982,7 +982,8 @@ GOBJ *Item_CreateItem3(SpawnItem *item_spawn);
 void Item_Destroy(GOBJ *item);
 int Item_CollGround_PassLedge(GOBJ *item, void *callback);
 int Item_CollGround_StopLedge(GOBJ *item, void *callback);
-int Item_CollAir(GOBJ *item, void *callback);
+int Item_CollAir_Bounce(GOBJ *item, void *callback);
+int Item_CollAir_Land(GOBJ *item, void *callback);
 int Item_CollAir_NoCB(GOBJ *item);
 void ItemStateChange(GOBJ *item, int stateID, int flags);
 int ItemFrameTimer(GOBJ *item);
@@ -1014,4 +1015,5 @@ void Item_ReflectVelocity(GOBJ *item);
 void Item_Throw(GOBJ *item, float unk, Vec3 *pos, Vec3 *vel);
 JOBJ *Item_GetHeldBone(GOBJ *item);
 void Item_BounceOffVictim(GOBJ *item);
+void Item_BounceOffShield(GOBJ *item);
 #endif
