@@ -108,15 +108,23 @@ enum ItemID
 // Item hold_kind definitions
 enum ItHoldKind
 {
-    ITHOLD_HAND,  // held item, like a capsule
-    ITHOLD_HEAVY, // overhead item, like a crate
-    ITHOLD_2,
-    ITHOLD_3,
-    ITHOLD_4,
-    ITHOLD_5,
-    ITHOLD_6,
-    ITHOLD_7,
-    ITHOLD_NONE, // unable to be held
+    ITHOLD_NONE,      // no hand change
+    ITHOLD_OPENIN,    // open palm, facing inwards (towards fighter)
+    ITHOLD_SWORD,     // closed palm, holding thin long object
+    ITHOLD_OPENDOWN,  // open palm, facing down
+    ITHOLD_OPENFRONT, // open palm, facing forward
+};
+enum ItUnkKind
+{
+    ITUNK_HAND,  // held item, like a capsule
+    ITUNK_HEAVY, // overhead item, like a crate
+    ITUNK_2,
+    ITUNK_3,
+    ITUNK_4,
+    ITUNK_5,
+    ITUNK_6,
+    ITUNK_7,
+    ITUNK_NONE, // unable to be held
 };
 
 /*** Structs ***/
@@ -270,7 +278,8 @@ struct itData
 
 struct itCommonAttr
 {
-    char flags1;                //0x0, bit 0x80 = is heavy item (crate)
+    char is_heavy : 1;          // 0x0, bit 0x80, is heavy item (crate)
+    char hold_kind : 7;         // defines hand hold behavior
     unsigned char x1_1 : 1;     // 0x1 0x80
     unsigned char x1_2 : 1;     // 0x1 0x40
     unsigned char x1_3 : 1;     // 0x1 0x20
