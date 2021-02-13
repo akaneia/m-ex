@@ -227,6 +227,7 @@
 800dc920:Fighter_BreakGrab
 80074a4c:Fighter_VisTableSet
 80074a74:Fighter_VisTableGet
+800948a8:Fighter_GiveItem
 80380358:File_GetSymbol
 80016BE0:File_Load
 80016C64:File_LoadInitReturnSymbol

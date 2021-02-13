@@ -2842,4 +2842,5 @@ void Fighter_DestroyAndRemoveHeldFighterItem(GOBJ *fighter);
 void Fighter_Phys_ApplyVerticalAirFriction(FighterData *fighter_data);
 void Fighter_VisTableGet(GOBJ *fighter, int vis_index);
 void Fighter_VisTableSet(GOBJ *fighter, int vis_index, int val); // val = -1 for disable, 0 for enable
+void Fighter_GiveItem(GOBJ *fighter, GOBJ *item);
 #endif
