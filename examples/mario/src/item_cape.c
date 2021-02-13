@@ -13,7 +13,7 @@ void RemoveCapeItem(GOBJ *gobj)
 
     fighter_data->fighter_var.ft_var5 = 0;
 
-    fighter_data->cb.OnDeath2 = 0x0;
+    fighter_data->cb.OnDeath_State = 0x0;
     fighter_data->cb.OnTakeDamage = 0x0;
     return;
 }
