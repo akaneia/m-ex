@@ -1011,5 +1011,5 @@ void Item_AnimateAndUpdateSubactions(GOBJ *item);
 void Barrel_EnterBreak(GOBJ *item);
 void Item_EnableUnknownFlag(GOBJ *item);
 void Item_ReflectVelocity(GOBJ *item);
-void Item_Throw(GOBJ *item, Vec3 *pos, Vec3 *vel);
+void Item_Throw(GOBJ *item, float unk, Vec3 *pos, Vec3 *vel);
 #endif
