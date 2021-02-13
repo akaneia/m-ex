@@ -947,7 +947,7 @@ struct ItemData
         int itemVar10;                       // 0xdf8
         int itemVar11;                       // 0xdfc
         int itemVar12;                       // 0xe00
-    } it_var;                                //
+    } item_var;                              //
     int xe04;                                // 0xe04
     int xe08;                                // 0xe08
     int xe0c;                                // 0xe0c
