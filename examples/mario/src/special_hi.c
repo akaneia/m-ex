@@ -69,10 +69,10 @@ void SpecialHi_IASACallback(GOBJ *gobj)
 	FighterData *fighter_data = gobj->userdata;
 
 	MarioAttr *mrAttr = fighter_data->special_attributes;
-	
+
 	SpecialHiFtCmd *script_flags = &fighter_data->ftcmd_var;
 
-	float lstick_x = fighter_data->input.lstick_x;
+	float lstick_x = fighter_data->input.lstick.X;
 	float stick_threshold = mrAttr->specialHi_stick_threshold;
 
 	float lstick_x_clamp = lstick_x;
@@ -117,7 +117,7 @@ void SpecialHi_IASACallback(GOBJ *gobj)
 	{
 		fighter_data->flags.throw_release = 0;
 
-		lstick_x = fighter_data->input.lstick_x;
+		lstick_x = fighter_data->input.lstick.X;
 
 		if (lstick_x < 0)
 		{
@@ -218,7 +218,7 @@ void SpecialAirHi_IASACallback(GOBJ *gobj)
 
 	SpecialHiFtCmd *script_flags = &fighter_data->ftcmd_var;
 
-	float lstick_x = fighter_data->input.lstick_x;
+	float lstick_x = fighter_data->input.lstick.X;
 	float stick_threshold = mrAttr->specialHi_stick_threshold;
 
 	float lstick_x_clamp = lstick_x;
@@ -263,7 +263,7 @@ void SpecialAirHi_IASACallback(GOBJ *gobj)
 	{
 		fighter_data->flags.throw_release = 0;
 
-		lstick_x = fighter_data->input.lstick_x;
+		lstick_x = fighter_data->input.lstick.X;
 
 		if (lstick_x < 0)
 		{

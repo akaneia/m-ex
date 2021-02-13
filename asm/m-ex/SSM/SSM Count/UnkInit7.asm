@@ -4,5 +4,7 @@
 
 .set  REG_SSMTotal,12
 
-lwz REG_SSMTotal,OFST_Metadata_SSMCount(rtoc)
-add	r4, r4,REG_SSMTotal
+#lwz REG_SSMTotal,OFST_Metadata_SSMCount(rtoc)
+#add	r4, r4,REG_SSMTotal
+
+addi	r4, r4,55

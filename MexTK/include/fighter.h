@@ -1910,14 +1910,11 @@ struct FighterData
     char x61F;                                                 // 0x61F
     struct input                                               // input data
     {                                                          //
-        float lstick_x;                                        // 0x620
-        float lstick_y;                                        // 0x624
-        float lstick_prev_x;                                   // 0x628
-        float lstick_prev_y;                                   // 0x62C
+        Vec2 lstick;                                           // 0x620
+        Vec2 lstick_prev;                                      // 0x628
         int x630;                                              // 0x630
         int x634;                                              // 0x634
-        float cstick_x;                                        // 0x638
-        float cstick_y;                                        // 0x63C
+        Vec2 cstick;                                           // 0x638
         int x640;                                              // 0x640
         int x644;                                              // 0x644
         int x648;                                              // 0x648
