@@ -2339,10 +2339,10 @@ struct FighterData
         void (*EnterHitlag)(GOBJ *fighter);          // 0x21d4
         void (*ExitHitlag)(GOBJ *fighter);           // 0x21d8
         void (*OnTakeDamage)(GOBJ *fighter);         // 0x21dc
-        void (*OnDeath)(GOBJ *fighter);              // 0x21e0
+        void (*OnDeath_Persist)(GOBJ *fighter);      // 0x21e0
         void (*OnDeath_State)(GOBJ *fighter);        // 0x21e4, internally Dead_Proc as evidenced by 800f5430
         void (*OnDeath3)(GOBJ *fighter);             // 0x21e8
-        void (*OnActionStateChange)(GOBJ *fighter);  // 0x21ec
+        void (*OnStateChange)(GOBJ *fighter);        // 0x21ec
         void (*OnTakeDamage2)(GOBJ *fighter);        // 0x21f0
         void (*OnHurtboxDetect)(GOBJ *fighter);      // 0x21f4
         void (*OnSpin)(GOBJ *fighter);               // 0x21f8
