@@ -2764,7 +2764,7 @@ void Fighter_PhysAir_ApplyGravityDecayX(GOBJ *);
 void Fighter_PhysAir_ApplyGravityFastfall(GOBJ *);
 void Fighter_PhysAir_ApplyGravity(FighterData *fighter, float gravity, float limit);
 void Fighter_PhysAir_ApplyAerialDrift(FighterData *fighter);
-void Fighter_PhysAir_DecayXVelocity(FighterData *fighter, float unk);
+void Fighter_PhysAir_DecayXVelocity(FighterData *fighter, float aerial_friction);
 void Fighter_PhysAir_LimitXVelocity(FighterData *fighter);
 void Fighter_Phys_UseAnimYVelocity(GOBJ *fighter);
 void Fighter_Phys_UseAnimPos(FighterData *fighter);

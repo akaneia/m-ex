@@ -165,6 +165,7 @@
 80089228:Fighter_StaleDamage
 8006CF5C:Fighter_GiveHeal
 80081298:Fighter_IASACheck_CliffCatch
+8008169c:Fighter_IASACheck_WallJump
 800CB870:Fighter_IASACheck_JumpAerial
 800CAED0:Fighter_IASACheck_JumpF
 80099F1C:Fighter_IASACheck_PassConditions

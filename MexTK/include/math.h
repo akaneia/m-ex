@@ -4,8 +4,8 @@
 #include "structs.h"
 #include "datatypes.h"
 
-#define M_PI 3.14159265358979323846
-#define M_1DEGREE 0.0174533
+#define M_PI (3.14159265358979323846)
+#define M_1DEGREE (0.0174533)
 
 /*** Functions ***/
 
