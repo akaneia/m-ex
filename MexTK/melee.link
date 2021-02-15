@@ -142,7 +142,8 @@
 800D5CB0:Fighter_EnterSpecialLanding
 8008A2BC:Fighter_EnterWait
 8007F694:Fighter_GetBaseScale
-80075F48:Fighter_GetBoneRotation
+80075e78:Fighter_GetBoneRotX
+80075F48:Fighter_GetBoneRotY
 8003345C:Fighter_GetControllerPort
 80033198:Fighter_GetCostumeID
 80033670:Fighter_GetCPUKind
@@ -195,9 +196,9 @@
 800881D8:Fighter_PlayVoiceSFX
 8009E0A8:Fighter_ProcDynamics
 8007CADC:Fighter_QueueAllowXDrift
-80075AF0:Fighter_RotateBone_Pitch
-80075CB4:Fighter_RotateBone_Roll
-8007592C:Fighter_RotateBone_Yaw
+8007592C:Fighter_SetBoneRotX
+80075AF0:Fighter_SetBoneRotY
+80075CB4:Fighter_SetBoneRotZ
 8007DB58:Fighter_RunOnHitCallbacks
 8007D5D4:Fighter_SetAirborne
 8007D60C:Fighter_SetAirborneNoJumps

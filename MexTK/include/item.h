@@ -312,12 +312,12 @@ struct itCommonAttr
     int x58;         // 0x58
     int x5c;         // 0x5c
     int x60;         // 0x60
-    int x64;         // 0x64
+    int destroy_gfx; // 0x64, ID of a gfx to play on destroy
     int x68;         // 0x68
     int x6c;         // 0x6c
     int x70;         // 0x70
     int x74;         // 0x74
-    int x78;         // 0x78
+    int destroy_sfx; // 0x78
     int x7c;         // 0x7c
     int x80;         // 0x80
     int x84;         // 0x84
@@ -866,7 +866,7 @@ struct ItemData
     int xd70;                                           // 0xd70
     int xd74;                                           // 0xd74
     int xd78;                                           // 0xd78
-    int xd7c;                                           // 0xd7c
+    int destroy_sfx;                                    // 0xd7c
     int xd80;                                           // 0xd80
     int xd84;                                           // 0xd84
     int atk_kind;                                       // 0xd88, copied from fighter atk_kind
