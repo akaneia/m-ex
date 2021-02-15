@@ -2753,6 +2753,7 @@ int Fighter_CollAir_IgnoreLedge_NoCB(GOBJ *fighter);
 int Fighter_CollAir_DefineECB(GOBJ *fighter, ECBSize *ecb);
 int Fighter_Coll_CheckToPass(GOBJ *fighter, int floor_type); // usually used as a callback, pass = fall through platform
 int Fighter_IASACheck_CliffCatch(GOBJ *fighter);
+int Fighter_IASACheck_WallJump(GOBJ *fighter);
 int Fighter_IASACheck_JumpAerial(GOBJ *fighter);
 int Fighter_IASACheck_JumpF(GOBJ *fighter);
 int Fighter_IASACheck_PassConditions(GOBJ *fighter);
