@@ -502,6 +502,8 @@ void JOBJ_EnableFlagAllMOBJ(JOBJ *joint, int flags); // enables this flag for al
 int JOBJ_CheckAObjEnd(JOBJ *joint);
 void JOBJ_CompileTEVAllMOBJ(JOBJ *joint);
 void JObj_DispAll(JOBJ *joint, Mtx *vmtx, int flags, int rendermode);
+void JOBJ_AttachPosition(JOBJ *to_attach, JOBJ *attach_to);
+void JOBJ_Detach(JOBJ *to_attach);
 void AOBJ_ReqAnim(int *aobj, float unk);
 void AOBJ_StopAnim(JOBJ *jobj, int flags, int flags2);
 void AOBJ_SetRate(AOBJ *aobj, float rate);
@@ -531,5 +533,5 @@ DOBJ *JOBJ_GetDObj(JOBJ *jobj);
 void *MOBJ_SetAlpha(DOBJ *dobj);
 void MOBJ_SetToonTextureImage(_HSD_ImageDesc *);
 void GObj_CopyGXPri(GOBJ *target, GOBJ *source);
-
+void JOBJ_AttachPosition(JOBJ *to_attach, JOBJ *attach_to);
 #endif
