@@ -2119,8 +2119,8 @@ struct FighterData
         int x1948;                 // 0x1948
         int x194c;                 // 0x194c
         int x1950;                 // 0x1950
-        int x1954;                 // 0x1954
-        int x1958;                 // 0x1958
+        float hitlag_env_frames;   // 0x1954, Environment Hitlag Counter (used for peachs castle switches)
+        float x1958;               // 0x1958,
         float hitlag_frames;       // 0x195c
     } dmg;                         //
     int x1960;                     // 0x1960
