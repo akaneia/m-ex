@@ -228,6 +228,7 @@
 800B4A78:Fighter_ZeroCPUInputs
 800dcfd4:Fighter_BreakGrabUnk
 800dc920:Fighter_BreakGrab
+8007e2d0:Fighter_InitGrab
 80074a4c:Fighter_VisTableSet
 80074a74:Fighter_VisTableGet
 800948a8:Fighter_GiveItem
@@ -351,7 +352,7 @@
 8036F8BC:JOBJ_ReqAnimAll
 8036F7B0:JOBJ_ReqAnimAllByFlags
 8036F718:JOBJ_ReqAnimByFlags
-80364C08:JOBJ_PlayAnim
+80364C08:JOBJ_RunAObjCallback
 801C8858:JOBJ_SetAllMOBJFlags
 80371D00:JOBJ_SetFlags
 80371D9C:JOBJ_SetFlagsAll

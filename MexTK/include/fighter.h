@@ -2829,6 +2829,7 @@ int Fighter_CountPlayers();
 void Fighter_InitData();
 void Fighter_BreakGrabUnk(GOBJ *victim);
 void Fighter_BreakGrab(GOBJ *fighter, GOBJ *victim);
+void Fighter_InitGrab(FighterData *fighter, int is_enable, void *on_grabber, void *on_item, void *on_victim);
 void Fighter_SetCharacterFlags(GOBJ *fighter, int, int);
 void Fighter_GetECBPosition(GOBJ *fighter, Vec3 *position);
 void Fighter_Phys_AnimationFriction(GOBJ *fighter);
