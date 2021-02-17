@@ -362,6 +362,7 @@
 8000c1c0:JOBJ_AttachPosition
 8000c390:JOBJ_Detach
 803D7080:KirbyStateChange
+803d709c:MEX_LoadRelArchive
 802FA5BC:KOCount_Init
 802FA2D0:KOCount_Update
 803672DC:LObj_LoadDesc
