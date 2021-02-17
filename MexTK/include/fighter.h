@@ -2732,7 +2732,7 @@ void Fighter_ApplyIntang(GOBJ *fighter, int duration);
 int Fighter_GetSlotType(int index); // returns 0x0 for HMN, 0x1 for CPU, 0x2 for Demo, 0x3 for not present
 int Fighter_GetStocks(int ply);
 void Fighter_SetFallNum(int index, int ms, int falls);
-void Fighter_EnableECBBottomUpdate(FighterData *fighter);
+void Fighter_EnableCollUpdate(FighterData *fighter);
 void Fighter_EnterDamageState(GOBJ *fighter, int stateID, float frame);
 int Fighter_BoneLookup(FighterData *fighter, int boneID);
 void Fighter_GiveDamage(FighterData *fighter, float damage);

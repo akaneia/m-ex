@@ -125,7 +125,7 @@
 800e13f8:Fighter_RemoveHeldFighterItem
 800e1368:Fighter_DestroyAndRemoveHeldFighterItem
 8008A6D8:Fighter_DisableBlend
-8007D5BC:Fighter_EnableECBBottomUpdate
+8007D5BC:Fighter_EnableCollUpdate
 8007AEF8:Fighter_EnableReflectUpdate
 8009A804:Fighter_EnterCliffWait
 80090780:Fighter_EnterDamageFall
