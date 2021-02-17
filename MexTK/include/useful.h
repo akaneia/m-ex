@@ -16,7 +16,7 @@
 #define OSTicksToMilliseconds(ticks) ((ticks) / (os_info->bus_clock / 1000))
 #define BitCheck(num, bit) !!((num) & (1 << (bit))) // returns 0 or 1
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
-#define assert(msg, ...) __assert(__FILENAME__, __LINE__, msg, __VA_ARGS__)
+#define assert(msg, ...) __assert(__FILENAME__, __LINE__, msg)
 #define divide_roundup(dividend, divisor) ((dividend + (divisor / 2)) / divisor)
 #define MTXDegToRad(a) ((a)*0.01745329252f)
 #define MTXRadToDeg(a) ((a)*57.29577951f)
@@ -195,7 +195,7 @@ int OSGetTick();
 u64 OSGetTime();
 void OSTicksToCalendarTime(u64 time, OSCalendarTime *td);
 void OSReport(char *, ...);
-void __assert(char *file, int line, char *assert, ...);
+void __assert(char *file, int line, char *assert);
 int OSCheckHeap(int heap);
 int OSGetConsoleType();
 void memcpy(void *dest, void *source, int size);

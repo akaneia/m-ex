@@ -305,7 +305,7 @@ DOBJ *JOBJ_GetDObjChild(JOBJ *joint, int dobj_index)
     while (count < dobj_index)
     {
         if (dobj->next == 0)
-            assert("dobj not found!", 0);
+            assert("dobj not found!");
 
         else
             dobj = dobj->next;
