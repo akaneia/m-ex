@@ -439,7 +439,10 @@
 8039D3AC:psKillGenerator
 803421D0:PSMTXCopy
 803A4344:psRemoveParticleAppSRT
-801A42F8:Scene_EnterMajor
+801a42e8:Scene_SetNextMajor
+801a42d4:Scene_ExitMajor
+801a42a0:Scene_SetNextMinor
+801a4b60:Scene_ExitMinor
 80021C48:ScreenFlash_Create
 80030E44:ScreenRumble_Execute
 80074A4C:Fighter_SetCharacterFlags

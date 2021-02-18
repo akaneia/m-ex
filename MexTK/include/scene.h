@@ -104,7 +104,17 @@ struct ScDataRst
     RstInit rst_init;
 };
 
-void Scene_EnterMajor(int major_id);
+/*
+Scene Change Notes
+
+MinorThink: run Scene_ExitMinor to execute Scene_Decide
+SceneDecide: run either Scene_SetNextMinor to enter another minor, OR Scene_SetNextMajor then Scene_ExitMajor to enter another major
+*/
+
+void Scene_SetNextMajor(int major_id); // run this in scene decide!
+void Scene_ExitMajor();                // run this to cause a major scene change, usually ran in scene decide!
+void Scene_SetNextMinor(int minor_id); // run this in scene decide!
+void Scene_ExitMinor();                // run this to cause a minor scene change, usually ran in scene think!
 void CSS_DecideNext(MinorScene *minor_scene, ScDataVS *css_data);
 void CSS_ResetKOStars();
 void CSS_InitMajorData(ScDataVS *major_data);
