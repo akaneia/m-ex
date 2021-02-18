@@ -193,6 +193,15 @@ struct VSMinorData
     void *ko_data; // used for displaying KO stars on CSS
     ScDataVS vs_data;
 };
+struct SSSMinorData
+{
+    u8 x0; // is made 0 upon entry
+    u8 x1;
+    u8 x2;
+    u8 auto_random_stage; // is -1 if random stage in rules is disabled
+    u8 exit_kind;         //  0 = back, 1 = advance
+    ScDataVS vs_data;
+};
 
 /*** Variables ***/
 MnSlChrData *stc_css_data = 0x803f0a48;
