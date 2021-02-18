@@ -136,6 +136,7 @@ typedef struct FtCliffCatch FtCliffCatch;
 typedef struct CSSBackup CSSBackup;
 typedef struct MnSelectChrDataTable MnSelectChrDataTable;
 typedef struct VSMinorData VSMinorData;
+typedef struct SSSMinorData SSSMinorData;
 typedef struct CSSCursor CSSCursor;
 typedef struct CSSPuck CSSPuck;
 typedef struct MnSlChrData MnSlChrData;
