@@ -458,6 +458,7 @@
 80323CF4:sprintf
 8000D5BC:sqrtf
 801A5754:SSS_InitMinorData
+801A5754:SSS_DecideNext
 800C07F8:Stage_AddFtChkDevice
 801C3BB4:Stage_BlastzoneInitialization
 801C39C0:Stage_CameraLimitInitialization

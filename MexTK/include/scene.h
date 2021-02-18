@@ -120,6 +120,7 @@ void CSS_ResetKOStars();
 void CSS_InitMajorData(ScDataVS *major_data);
 void CSS_InitMinorData(MinorScene *minor_scene, ScDataVS *major_data, int css_kind);
 void SSS_InitMinorData(MinorScene *minor_scene, ScDataVS *major_data);
+void SSS_DecideNext(MinorScene *minor_scene, ScDataVS *css_data, int exit_minor_id);
 void Match_InitMinorData(MinorScene *minor_scene, ScDataVS *major_data, void *init_cb, void *startmelee_cb);
 void Match_SetNametags(MatchInit *match_init);
 #endif
