@@ -38,7 +38,7 @@ typedef struct _HSD_LightSpot _HSD_LightSpot;
 typedef struct _HSD_LightSpotDesc _HSD_LightSpotDesc;
 typedef struct _HSD_LightAttn _HSD_LightAttn;
 typedef struct LOBJ LOBJ;
-typedef struct JOBJAnimSet JOBJAnimSet;
+typedef struct JOBJSet JOBJSet;
 
 // Archive
 typedef struct ArchiveInfo ArchiveInfo;

@@ -362,6 +362,8 @@
 80213250:JOBJ_CompileTEVAllMOBJ
 8000c1c0:JOBJ_AttachPosition
 8000c390:JOBJ_Detach
+8019035c:JOBJ_LoadSet
+8016895c:JOBJ_AddSetAnim
 803D7080:KirbyStateChange
 803d709c:MEX_LoadRelArchive
 802FA5BC:KOCount_Init

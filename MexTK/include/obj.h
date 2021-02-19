@@ -459,12 +459,12 @@ struct LOBJ
     //GXLightObj spec_lightobj; //0x94
 };
 
-struct JOBJAnimSet
+struct JOBJSet
 {
     JOBJDesc *jobj;
-    void *animjoint;
-    void *matanimjoint;
-    void *shapeaninjoint;
+    void **animjoint;
+    void **matanimjoint;
+    void **shapeaninjoint;
 };
 
 /*** Static Variables ***/
@@ -503,6 +503,9 @@ int JOBJ_CheckAObjEnd(JOBJ *joint);
 void JOBJ_CompileTEVAllMOBJ(JOBJ *joint);
 void JObj_DispAll(JOBJ *joint, Mtx *vmtx, int flags, int rendermode);
 void JOBJ_AttachPosition(JOBJ *to_attach, JOBJ *attach_to);
+void JOBJ_AttachPosition(JOBJ *to_attach, JOBJ *attach_to);
+void JOBJ_LoadSet(int is_hidden, JOBJSet *set, int anim_id, float frame, int gobj_subclass, int gx_link, int is_add_anim, void *cb); // 8019035c
+void JOBJ_AddSetAnim(JOBJ *jobj, JOBJSet *set, int anim_id);                                                                         // 8016895c
 void JOBJ_Detach(JOBJ *to_attach);
 void AOBJ_ReqAnim(int *aobj, float unk);
 void AOBJ_StopAnim(JOBJ *jobj, int flags, int flags2);
@@ -534,5 +537,4 @@ DOBJ *JOBJ_GetDObj(JOBJ *jobj);
 void *MOBJ_SetAlpha(DOBJ *dobj);
 void MOBJ_SetToonTextureImage(_HSD_ImageDesc *);
 void GObj_CopyGXPri(GOBJ *target, GOBJ *source);
-void JOBJ_AttachPosition(JOBJ *to_attach, JOBJ *attach_to);
 #endif

@@ -28,15 +28,15 @@ struct MnSelectChrDataTable
     void *lobj1;
     void *lobj2;
     void *fog;
-    JOBJAnimSet bg;
-    JOBJAnimSet cursor;
-    JOBJAnimSet puck;
-    JOBJAnimSet vsmenu;
-    JOBJAnimSet start;
-    JOBJAnimSet camdoor;
-    JOBJAnimSet solomenu;
-    JOBJAnimSet solooption;
-    JOBJAnimSet cpudoor;
+    JOBJSet bg;
+    JOBJSet cursor;
+    JOBJSet puck;
+    JOBJSet vsmenu;
+    JOBJSet start;
+    JOBJSet camdoor;
+    JOBJSet solomenu;
+    JOBJSet solooption;
+    JOBJSet cpudoor;
 };
 
 enum CSSCursorState
