@@ -515,7 +515,7 @@ void DOBJ_ClearFlags(DOBJ *dobj, int flags);
 COBJ *COBJ_LoadDesc(COBJDesc *cobj);
 COBJ *COBJ_LoadDescSetScissor(COBJDesc *cobj);
 void CObjThink_Common(GOBJ *gobj);
-void CObj_SetCurrent(COBJ *cobj);
+int CObj_SetCurrent(COBJ *cobj);
 void CObj_SetEraseColor(int r, int g, int b, int a);
 void CObj_EraseScreen(COBJ *cobj, int unk, int unk2, int unk3);
 void CObj_RenderGXLinks(GOBJ *gobj, int render_mode);
