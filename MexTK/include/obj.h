@@ -459,6 +459,17 @@ struct LOBJ
     //GXLightObj spec_lightobj; //0x94
 };
 
+struct HSD_Fog
+{
+    u64 parent;
+    u8 type;           //0x08
+    void *fog_adj;     //0x0C
+    f32 start;         //0x10
+    f32 end;           //0x14
+    GXColor color;     //0x18
+    struct AOBJ *aobj; //0x1C
+};
+
 struct JOBJSet
 {
     JOBJDesc *jobj;
@@ -537,7 +548,7 @@ int GX_LookupRenderPass(int pass);
 void GXLink_LObj(GOBJ *gobj, int pass);
 void GXLink_Fog(GOBJ *gobj, int pass);
 void *LObj_LoadDesc(void *lobjdesc);
-void *Fog_LoadDesc(void *fogdesc);
+HSD_Fog *Fog_LoadDesc(void *fogdesc);
 DOBJ *JOBJ_GetDObj(JOBJ *jobj);
 void *MOBJ_SetAlpha(DOBJ *dobj);
 void MOBJ_SetToonTextureImage(_HSD_ImageDesc *);
