@@ -515,6 +515,7 @@ void DOBJ_ClearFlags(DOBJ *dobj, int flags);
 COBJ *COBJ_LoadDesc(COBJDesc *cobj);
 COBJ *COBJ_LoadDescSetScissor(COBJDesc *cobj);
 void CObjThink_Common(GOBJ *gobj);
+void CObjThink_EraseColor(GOBJ *gobj);
 GOBJ *GObj_Create(int type, int subclass, int flags);
 void GObj_Destroy(GOBJ *gobj);
 void GObj_AddGXLink(GOBJ *gobj, void *cb, int gx_link, int gx_pri);

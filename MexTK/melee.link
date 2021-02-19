@@ -36,6 +36,7 @@
 8036A590:COBJ_LoadDesc
 80013B14:COBJ_LoadDescSetScissor
 803910D8:CObjThink_Common
+8022bdb4:CObjThink_EraseColor
 80048160:Coll_CheckLedge
 80041C8C:Coll_ECBCurrToPrev
 80041EE4:Coll_InitECB
