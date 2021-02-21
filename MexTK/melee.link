@@ -50,6 +50,7 @@
 8004CAE8:Collision_CheckRightWallCollision
 80326240:cos
 8022BA1C:MainMenu_CamRotateThink
+80229624:MainMenu_GetPadDown
 80260094:CSS_CostumeChange
 802602A0:CSS_CursorThink
 801A5680:CSS_DecideNext

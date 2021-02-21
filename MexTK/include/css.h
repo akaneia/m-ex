@@ -240,6 +240,7 @@ u8 *stc_css_unkarr = 0x804d50c8;
 
 /*** Functions ***/
 void MainMenu_CamRotateThink(GOBJ *gobj);
+int MainMenu_GetPadDown(int controller_index);
 int CSS_GetNametagRumble(int player, u8 tag);
 void CSS_InitPlayerData(PlayerData *player);
 void CSS_MenuModelThink(GOBJ *gobj);
