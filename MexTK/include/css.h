@@ -6,6 +6,18 @@
 #include "fighter.h"
 #include "scene.h"
 
+#define MENU_BUTTON_UP 0x1
+#define MENU_BUTTON_DOWN 0x2
+#define MENU_BUTTON_LEFT 0x4
+#define MENU_BUTTON_RIGHT 0x8
+#define MENU_BUTTON_A 0x10
+#define MENU_BUTTON_B 0x20
+#define MENU_BUTTON_L 0x40
+#define MENU_BUTTON_R 0x80
+#define MENU_BUTTON_START 0x100
+#define MENU_BUTTON_X 0x400
+#define MENU_BUTTON_Y 0x800
+
 /*** Structs ***/
 struct CSSBackup
 {
