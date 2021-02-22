@@ -16,6 +16,8 @@ typedef struct OSCalendarTime OSCalendarTime;
 typedef struct CARDStat CARDStat;
 typedef struct CARDFileInfo CARDFileInfo;
 typedef struct RGB565 RGB565;
+typedef struct MTHPlayParam MTHPlayParam;
+typedef struct MTHHeader MTHHeader;
 
 // HSD Objects
 typedef struct GOBJ GOBJ;
