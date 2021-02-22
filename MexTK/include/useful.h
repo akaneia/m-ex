@@ -198,6 +198,7 @@ void OSReport(char *, ...);
 void __assert(char *file, int line, char *assert);
 int OSCheckHeap(int heap);
 int OSGetConsoleType();
+int DVDConvertPathToEntrynum(char *file);
 void memcpy(void *dest, void *source, int size);
 void memset(void *dest, int fill, int size);
 s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat *stat);
@@ -224,13 +225,18 @@ void GXWaitDrawDone();
 void blr();
 void blr2();
 
+/*** THP Functions ***/
+void MTH_Init(char *filename, void *playback_param, void *buffer, int buffer_size, void *unk);
+void MTH_Render(GOBJ *gobj, int pass); // 8001f67c
+void MTH_Advance();
+int MTH_CheckEnd();
+
 /*** HSD Library ***/
 int HSD_GetHeapID();
 void HSD_SetHeapID(int heap);
 
 /** String Library **/
 #define vsprintf(buffer, format, args) _vsprintf(buffer, -1, format, args)
-
 int sprintf(char *s, const char *format, ...);
 int _vsprintf(char *str, int unk, const char *format, va_list arg);
 int strlen(char *str);

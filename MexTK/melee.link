@@ -436,6 +436,11 @@
 8034C3F0:OSGetTime
 803456A8:OSReport
 8034C668:OSTicksToCalendarTime
+8033796c:DVDConvertPathToEntrynum
+8001f410:MTH_Init
+8001f67c:MTH_Render
+8001f578:MTH_Advance
+8001f604:MTH_CheckEnd
 8018F674:Pad_GetRapidHeld
 8039D5DC:Particle_DestroyAll
 801A45E8:Pause_CheckStatus
