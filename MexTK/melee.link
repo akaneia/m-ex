@@ -265,6 +265,7 @@
 8039075C:GOBJ_InitCamera
 8038FED4:GObj_RemoveProc
 8001cec0:GObj_Anim
+8001f624:GObj_AddRenderObject
 80054ED8:GrColl_CheckIfLineEnabled
 80056C54:GrColl_CrawlGround
 80054158:GrColl_GetLedgeLeft
