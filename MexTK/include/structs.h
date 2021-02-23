@@ -21,6 +21,7 @@ typedef struct MTHHeader MTHHeader;
 typedef struct MTHPlayback MTHPlayback;
 
 // HSD Objects
+typedef struct HSD_Obj HSD_Obj;
 typedef struct GOBJ GOBJ;
 typedef struct GOBJProc GOBJProc;
 typedef struct GOBJList GOBJList;

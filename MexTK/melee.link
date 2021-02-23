@@ -304,6 +304,7 @@
 80380580:HSD_Randi
 8037540C:HSD_SetHeapID
 80375538:HSD_StartRender
+80382228:HSD_ClassDestroy
 80094818:Item_Catch
 80266F3C:Item_CheckIfEnabled
 80276348:Item_CheckIfTouchingWall

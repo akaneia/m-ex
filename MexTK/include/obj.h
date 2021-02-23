@@ -96,6 +96,13 @@
 
 /*** Structs ***/
 
+struct HSD_Obj
+{
+    void *parent;
+    s16 ref_count;
+    s16 ref_count_individual;
+};
+
 struct GOBJ
 {
     short entity_class;      // 0x0
@@ -163,8 +170,7 @@ struct GXList
 
 struct TOBJ
 {
-    int *parent;
-    int x4;
+    HSD_Obj parent;
     TOBJ *next;
     u32 id;                           //GXTexMapID
     u32 src;                          //GXTexGenSrc 0x10
@@ -436,7 +442,7 @@ struct _HSD_LightAttn
 
 struct LOBJ
 {
-    u64 parent;        //0x00
+    HSD_Obj parent;    //0x00
     u16 flags;         //0x08
     u16 priority;      //0x0A
     struct LOBJ *next; //0x0C
@@ -461,7 +467,7 @@ struct LOBJ
 
 struct HSD_Fog
 {
-    u64 parent;
+    HSD_Obj parent;
     u8 type;           //0x08
     void *fog_adj;     //0x0C
     f32 start;         //0x10
