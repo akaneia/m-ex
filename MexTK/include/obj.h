@@ -334,7 +334,7 @@ struct WOBJ
 
 struct COBJ
 {
-    u64 parent;          // 0x0
+    HSD_Obj parent;      // 0x0
     u32 flags;           //0x08
     f32 viewport_left;   //0x0C
     f32 viewport_right;  //0x10
