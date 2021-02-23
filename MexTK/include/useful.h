@@ -209,6 +209,26 @@ struct MTHHeader
     int frameOffsets;   // 0x24
     int firstFrameSize; // 0x28
 };
+struct MTHPlayback
+{
+    MTHHeader header;
+    void *x2c; // 0x2c
+    void *x30; // 0x30
+    void *x34; // 0x34
+    void *x38; // 0x38
+    void *x3c; // 0x3c
+    void *x40; // 0x40
+    void *x44; // 0x44
+    void *x48; // 0x48
+    void *x4c; // 0x4c
+    void *x50; // 0x50
+    void *x54; // 0x54
+    void *x58; // 0x58
+    void *x5c; // 0x5c
+    void *x60; // 0x60
+    void *x64; // 0x64
+    int loop;  // 0x68
+};
 
 /*** Static Vars ***/
 OSInfo *os_info = 0x80000000;

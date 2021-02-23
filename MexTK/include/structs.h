@@ -18,6 +18,7 @@ typedef struct CARDFileInfo CARDFileInfo;
 typedef struct RGB565 RGB565;
 typedef struct MTHPlayParam MTHPlayParam;
 typedef struct MTHHeader MTHHeader;
+typedef struct MTHPlayback MTHPlayback;
 
 // HSD Objects
 typedef struct GOBJ GOBJ;
