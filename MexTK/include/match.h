@@ -106,11 +106,11 @@ struct MatchInit
     //byte 0x24
     int unk18; // 0xFFFFFFFF
     //0x28
-    float cameraShakeMult;
+    float quake_mult;
     //0x2C
-    float unk19;
+    float dmg_ratio;
     //0x30
-    float unk20;
+    float match_speed;
     //0x34
     int x34;
     //0x38

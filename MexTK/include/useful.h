@@ -20,6 +20,10 @@
 #define divide_roundup(dividend, divisor) ((dividend + (divisor / 2)) / divisor)
 #define MTXDegToRad(a) ((a)*0.01745329252f)
 #define MTXRadToDeg(a) ((a)*57.29577951f)
+#define SYS_BASE_CACHED (0x80000000)
+#define SYS_BASE_UNCACHED (0xC0000000)
+#define MEM_VIRTUAL_TO_PHYSICAL(x) (((u32)(x)) & ~SYS_BASE_UNCACHED) /*!< Cast virtual address to physical address, e.g. 0x8xxxxxxx -> 0x0xxxxxxx */
+#define MEM_PHYSICAL_TO_K0(x) (void *)((u32)(x) + SYS_BASE_CACHED)   /*!< Cast physical address to cached virtual address, e.g. 0x0xxxxxxx -> 0x8xxxxxxx */
 
 /** Console Definitions */ //
 #define OS_CONSOLE_RETAIL4 0x00000004
