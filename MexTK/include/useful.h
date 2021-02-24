@@ -231,9 +231,9 @@ struct MTHHeader
 struct MTHPlayback
 {
     MTHHeader header;
-    void *numFrames;          // 0x40
-    void *xSize;              // 0x44
-    void *ySize;              // 0x48
+    int numFrames;            // 0x40
+    int xSize;                // 0x44
+    int ySize;                // 0x48
     void *buffer;             // 0x4c
     void *x50;                // 0x50
     void *x54;                // 0x54
