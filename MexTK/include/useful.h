@@ -235,9 +235,9 @@ struct MTHPlayback
     int xSize;                // 0x44
     int ySize;                // 0x48
     void *buffer;             // 0x4c
-    void *x50;                // 0x50
-    void *x54;                // 0x54
-    void *x58;                // 0x58
+    void *bright_buffer;      // 0x50
+    void *chromb_buffer;      // 0x54
+    void *chromr_buffer;      // 0x58
     void *x5c;                // 0x5c
     void *x60;                // 0x60
     void *x64;                // 0x64
