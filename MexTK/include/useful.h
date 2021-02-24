@@ -307,7 +307,8 @@ struct JPEGHeader
     int prevSize;  // 0x4
     int imageSize; // 0x8
     int audioSize; // 0xc
-}
+};
+
 /*** Static Vars ***/
 OSInfo *os_info = 0x80000000;
 
