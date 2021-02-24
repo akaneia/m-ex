@@ -14,6 +14,7 @@ typedef struct Vec4 Vec4;
 typedef struct OSInfo OSInfo;
 typedef struct OSCalendarTime OSCalendarTime;
 typedef struct CARDStat CARDStat;
+typedef struct OSAlarm OSAlarm;
 typedef struct CARDFileInfo CARDFileInfo;
 typedef struct RGB565 RGB565;
 typedef struct MTHPlayParam MTHPlayParam;

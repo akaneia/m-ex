@@ -8,6 +8,8 @@
 #include "fighter.h"
 #include "devtext.h"
 
+typedef s64 OSTime;
+
 // OS Macros
 #define OSRoundUp32B(x) (((u32)(x) + 32 - 1) & ~(32 - 1))
 #define OSRoundDown32B(x) (((u32)(x)) & ~(32 - 1))
@@ -151,6 +153,18 @@ struct OSCalendarTime
     int msec; // milliseconds after the second [0,999]
     int usec; // microseconds after the millisecond [0,999]
 };
+struct OSAlarm
+{
+    void *cb; // 0x0
+
+    OSTime fire;
+    OSAlarm *prev;
+    OSAlarm *next;
+
+    // Periodic alarm
+    OSTime period;
+    OSTime start;
+};
 struct CARDStat
 {
     // read-only (Set by CARDGetStatus)
@@ -285,6 +299,7 @@ struct MTHPlayback
     void *x144;               // 0x144
     void *x148;               // 0x148
     int power;                // 0x14C
+    OSAlarm alarm;            // 0x150
 };
 
 /*** Static Vars ***/
@@ -294,6 +309,9 @@ OSInfo *os_info = 0x80000000;
 int OSGetTick();
 u64 OSGetTime();
 void OSTicksToCalendarTime(u64 time, OSCalendarTime *td);
+u64 cvt_dbl_usll(float num);
+void OSCreateAlarm(OSAlarm *alarm);
+void OSSetPeriodicAlarm(OSAlarm *alarm, OSTime start, OSTime period, void *handler);
 void OSReport(char *, ...);
 void __assert(char *file, int line, char *assert);
 int OSCheckHeap(int heap);

@@ -443,6 +443,9 @@
 8034C3F0:OSGetTime
 803456A8:OSReport
 8034C668:OSTicksToCalendarTime
+8034376c:OSCreateAlarm
+80343a30:OSSetPeriodicAlarm
+80322e54:cvt_dbl_usll
 8033796c:DVDConvertPathToEntrynum
 8038f6d4:File_Read
 8001f410:MTH_Init
