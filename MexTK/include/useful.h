@@ -234,10 +234,10 @@ struct MTHPlayback
     int numFrames;            // 0x40
     int xSize;                // 0x44
     int ySize;                // 0x48
-    void **frame_lookup;      // 0x4c
-    void *bright_buffer;      // 0x50
-    void *chromb_buffer;      // 0x54
-    void *chromr_buffer;      // 0x58
+    void **jpeg_lookup;       // 0x4c
+    void *decoded_bright;     // 0x50
+    void *decoded_chromeb;    // 0x54
+    void *decoded_chromer;    // 0x58
     void *x5c;                // 0x5c
     void *x60;                // 0x60
     void *x64;                // 0x64
@@ -280,14 +280,14 @@ struct MTHPlayback
     void *xf8;                // 0xf8
     void *xfc;                // 0xfc
     int bufSize;              // 0x100
-    int initial_frame_num;    // 0x104
+    int jpeg_cache_num;       // 0x104
     void *x108;               // 0x108
     void *x10c;               // 0x10c
     void *x110;               // 0x110
     void *x114;               // 0x114
     void *x118;               // 0x118
     int x11c;                 // 0x11c
-    int next_offset;          // 0x120, next offset to read on disc
+    int next_jpeg_offset;     // 0x120, next offset to read on disc
     void *x124;               // 0x124
     int entrynum;             // 0x128
     MTHPlayParam *play_param; // 0x12c
