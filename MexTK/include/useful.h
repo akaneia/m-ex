@@ -231,10 +231,10 @@ struct MTHHeader
 struct MTHPlayback
 {
     MTHHeader header;
-    void *x40;                // 0x40
-    void *x44;                // 0x44
-    void *x48;                // 0x48
-    void *x4c;                // 0x4c
+    void *numFrames;          // 0x40
+    void *xSize;              // 0x44
+    void *ySize;              // 0x48
+    void *buffer;             // 0x4c
     void *x50;                // 0x50
     void *x54;                // 0x54
     void *x58;                // 0x58
@@ -279,15 +279,15 @@ struct MTHPlayback
     void *xf4;                // 0xf4
     void *xf8;                // 0xf8
     void *xfc;                // 0xfc
-    void *x100;               // 0x100
-    void *x104;               // 0x104
+    int bufSize;              // 0x100
+    int x104;                 // 0x104
     void *x108;               // 0x108
     void *x10c;               // 0x10c
     void *x110;               // 0x110
     void *x114;               // 0x114
     void *x118;               // 0x118
-    void *x11c;               // 0x11c
-    void *x120;               // 0x120
+    int x11c;                 // 0x11c
+    int next_offset;          // 0x120, next offset to read on disc
     void *x124;               // 0x124
     int entrynum;             // 0x128
     MTHPlayParam *play_param; // 0x12c
@@ -336,6 +336,7 @@ s32 CARDRead(CARDFileInfo *fileInfo, void *buf, s32 length, s32 offset);
 void GXPixModeSync();
 void GXInvalidateTexAll();
 void DCFlushRange(void *startAddr, u32 nBytes);
+void DCInvalidateRange(void *startAddr, u32 nBytes);
 void TRK_FlushCache(void *startAddr, u32 nBytes);
 int memcmp(void *buf1, void *buf2, u32 nBytes);
 int GXGetTexBufferSize(u16 width, u16 height, u32 format, int mipmap, u8 max_lod);

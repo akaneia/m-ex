@@ -78,6 +78,7 @@
 8025D1C4:CSS_UpdateKOStars
 8025BD30:CSS_UpdateRulesText
 8034480C:DCFlushRange
+803447dc:DCInvalidateRange
 80227FE0:DevCam_AdjustPan
 802279E8:DevCam_AdjustRotate
 80227CAC:DevCam_AdjustZoom
