@@ -448,6 +448,7 @@
 80343a30:OSSetPeriodicAlarm
 80322e54:cvt_dbl_usll
 8033796c:DVDConvertPathToEntrynum
+800161a0:DVDWaitForRead
 8038f6d4:File_Read
 8001f410:MTH_Init
 8001f800:MTH_Terminate
