@@ -208,15 +208,15 @@ struct MTHHeader
     int firstFrame;     // 0x20
     int frameOffsets;   // 0x24
     int firstFrameSize; // 0x28
+    void *x2c;          // 0x2c
+    void *x30;          // 0x30
+    void *x34;          // 0x34
+    void *x38;          // 0x38
+    void *x3c;          // 0x3c
 };
 struct MTHPlayback
 {
     MTHHeader header;
-    void *x2c;                // 0x2c
-    void *x30;                // 0x30
-    void *x34;                // 0x34
-    void *x38;                // 0x38
-    void *x3c;                // 0x3c
     void *x40;                // 0x40
     void *x44;                // 0x44
     void *x48;                // 0x48
