@@ -280,7 +280,7 @@ struct MTHPlayback
     void *xf8;                // 0xf8
     void *xfc;                // 0xfc
     int bufSize;              // 0x100
-    int x104;                 // 0x104
+    int initial_frame_num;    // 0x104
     void *x108;               // 0x108
     void *x10c;               // 0x10c
     void *x110;               // 0x110
