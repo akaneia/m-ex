@@ -289,7 +289,7 @@ struct MTHPlayback
     void *x11c;               // 0x11c
     void *x120;               // 0x120
     void *x124;               // 0x124
-    void *x128;               // 0x128
+    int entrynum;             // 0x128
     MTHPlayParam *play_param; // 0x12c
     void *x130;               // 0x130
     void *x134;               // 0x134
