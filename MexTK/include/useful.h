@@ -299,6 +299,7 @@ void __assert(char *file, int line, char *assert);
 int OSCheckHeap(int heap);
 int OSGetConsoleType();
 int DVDConvertPathToEntrynum(char *file);
+int File_Read(int entrynum, int file_offset, void *buffer, int length, int flags, int r8, void *cb, int r10);
 void memcpy(void *dest, void *source, int size);
 void memset(void *dest, int fill, int size);
 s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat *stat);

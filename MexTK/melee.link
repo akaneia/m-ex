@@ -444,6 +444,7 @@
 803456A8:OSReport
 8034C668:OSTicksToCalendarTime
 8033796c:DVDConvertPathToEntrynum
+8038f6d4:File_Read
 8001f410:MTH_Init
 8001f800:MTH_Terminate
 8001f67c:MTH_Render
