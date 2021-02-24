@@ -20,6 +20,7 @@ typedef struct RGB565 RGB565;
 typedef struct MTHPlayParam MTHPlayParam;
 typedef struct MTHHeader MTHHeader;
 typedef struct MTHPlayback MTHPlayback;
+typedef struct JPEGHeader JPEGHeader;
 
 // HSD Objects
 typedef struct HSD_Obj HSD_Obj;

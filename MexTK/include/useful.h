@@ -301,7 +301,13 @@ struct MTHPlayback
     int power;                // 0x14C
     OSAlarm alarm;            // 0x150
 };
-
+struct JPEGHeader
+{
+    int nextSize;  // 0x0
+    int prevSize;  // 0x4
+    int imageSize; // 0x8
+    int audioSize; // 0xc
+}
 /*** Static Vars ***/
 OSInfo *os_info = 0x80000000;
 
