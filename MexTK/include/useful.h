@@ -283,7 +283,7 @@ struct MTHPlayback
     int jpeg_cache_num;       // 0x104
     void *x108;               // 0x108
     void *x10c;               // 0x10c
-    void *x110;               // 0x110
+    void *is_loading_frame;   // 0x110
     void *x114;               // 0x114
     void *x118;               // 0x118
     int x11c;                 // 0x11c
