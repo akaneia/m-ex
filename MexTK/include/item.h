@@ -944,18 +944,18 @@ struct ItemData
     int xdd0;                                           // 0xdd0
     struct                                              // 0xdd4
     {                                                   //
-        int itemVar1;                                   // 0xdd4
-        int itemVar2;                                   // 0xdd8
-        int itemVar3;                                   // 0xddc
-        int itemVar4;                                   // 0xde0
-        int itemVar5;                                   // 0xde4
-        int itemVar6;                                   // 0xde8
-        int itemVar7;                                   // 0xdec
-        int itemVar8;                                   // 0xdf0
-        int itemVar9;                                   // 0xdf4
-        int itemVar10;                                  // 0xdf8
-        int itemVar11;                                  // 0xdfc
-        int itemVar12;                                  // 0xe00
+        int var1;                                       // 0xdd4
+        int var2;                                       // 0xdd8
+        int var3;                                       // 0xddc
+        int var4;                                       // 0xde0
+        int var5;                                       // 0xde4
+        int var6;                                       // 0xde8
+        int var7;                                       // 0xdec
+        int var8;                                       // 0xdf0
+        int var9;                                       // 0xdf4
+        int var10;                                      // 0xdf8
+        int var11;                                      // 0xdfc
+        int var12;                                      // 0xe00
     } item_var;                                         //
     int xe04;                                           // 0xe04
     int xe08;                                           // 0xe08
