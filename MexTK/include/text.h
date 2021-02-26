@@ -10,9 +10,10 @@
 
 struct TextAllocInfo
 {
-    u8 *curr;
-    u8 *start;
-    int size;
+    void *prev; // 0x0
+    void *next; // 0x4,
+    int size;   // 0x8 data remaining after this alloc?
+    // data after this....
 };
 
 struct Text
@@ -64,5 +65,18 @@ int Text_ConvertToMenuText(char *out, char *in);
 void Text_GX(GOBJ *gobj, int pass);
 void Text_LoadSdFile(int index, char *filename, char *symbol);
 void Text_SetSisText(Text *text, int text_index);
+
+/*** Variables ***/
+// Text data
+int *stc_textheap_size = R13 + (-0x3d38);
+TextAllocInfo *stc_textheap_start = R13 + (-0x3d34);
+TextAllocInfo *stc_textheap_next = R13 + (-0x3d30);
+TextAllocInfo *stc_textheap_first = R13 + (-0x3d2c);
+
+// Text object
+TextAllocInfo *stc_textobj_first = R13 + (-0x3d28);
+
+// Text canvas
+TextAllocInfo *stc_textcanvas_first = R13 + (-0x3d24);
 
 #endif
