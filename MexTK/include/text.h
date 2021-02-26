@@ -69,14 +69,14 @@ void Text_SetSisText(Text *text, int text_index);
 /*** Variables ***/
 // Text data
 int *stc_textheap_size = R13 + (-0x3d38);
-TextAllocInfo *stc_textheap_start = R13 + (-0x3d34);
-TextAllocInfo *stc_textheap_next = R13 + (-0x3d30);
-TextAllocInfo *stc_textheap_first = R13 + (-0x3d2c);
+TextAllocInfo **stc_textheap_start = R13 + (-0x3d34);
+TextAllocInfo **stc_textheap_next = R13 + (-0x3d30);
+TextAllocInfo **stc_textheap_first = R13 + (-0x3d2c);
 
 // Text object
-TextAllocInfo *stc_textobj_first = R13 + (-0x3d28);
+TextAllocInfo **stc_textobj_first = R13 + (-0x3d28);
 
 // Text canvas
-TextAllocInfo *stc_textcanvas_first = R13 + (-0x3d24);
+TextAllocInfo **stc_textcanvas_first = R13 + (-0x3d24);
 
 #endif
