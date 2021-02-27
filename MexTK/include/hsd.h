@@ -172,5 +172,7 @@ void GX_AllocImageData(_HSD_ImageDesc *image_desc, int width, int height, int fm
 void GXTexModeSync();
 void GXPixModeSync();
 void GXInvalidateTexAll();
+u64 Pad_GetDown(int pad);
 u64 Pad_GetRapidHeld(int pad);
+u64 Pad_GetHeld(int pad);
 #endif
