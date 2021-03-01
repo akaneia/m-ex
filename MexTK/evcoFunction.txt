@@ -1,1 +1,2 @@
 OnLoad
+EventMenu_Init
