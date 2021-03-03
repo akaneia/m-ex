@@ -11,6 +11,11 @@
 
 backup
 
+# Get currently playing HPS
+  branchl r12,0x801c5a94
+  cmpwi r3,-1
+  beq Exit
+
 # get ifall archive info
   load  r3,0x804d5780
   branchl r12,0x8001819c
