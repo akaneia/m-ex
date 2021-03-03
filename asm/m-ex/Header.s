@@ -27,6 +27,7 @@
 
 #Custom Static Variables
 .set  PersistHeapNum, 5 + 2
+.set  FighterHeapReduction,500*1000     # free up 500kb from fighter heap
 
 #mexSelectChr Offsets
 .set  OFST_mexSelectChr,-0x472C

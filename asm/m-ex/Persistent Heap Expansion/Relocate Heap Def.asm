@@ -44,7 +44,7 @@ blrl
 .long 4     # heap ID
 .long 2     # heap location
 .long 6     # heap priority
-.long 0x5d12e0    # heap size
+.long 6599680 - FighterHeapReduction # heap size
 
 # animation cache
 .long 5     # heap ID
