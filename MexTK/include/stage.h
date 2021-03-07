@@ -61,9 +61,9 @@ struct MapDesc
     void *onDeletion;
     void *onFrame;
     void *onUnk;
-    unsigned char is_unk : 1;        //  0x80
-    unsigned char is_foreground : 1; //  0x40
-    unsigned char is_cobj : 1;       //  0x20
+    unsigned char is_unk : 1;  //  0x80
+    unsigned char is_fog : 1;  //  0x40
+    unsigned char is_cobj : 1; //  0x20
 };
 
 struct MapData
