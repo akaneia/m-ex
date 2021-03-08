@@ -988,6 +988,7 @@ GOBJ *Item_CreateItem(SpawnItem *item_spawn); // sorry for confusion, use this o
 GOBJ *Item_CreateItem1(SpawnItem *item_spawn);
 GOBJ *Item_CreateItem2(SpawnItem *item_spawn);
 GOBJ *Item_CreateItem3(SpawnItem *item_spawn);
+GOBJ *Item_CreateMapItem(int index, int unk, void *data, JOBJ *jobj, void *onHit, void *onHurt, void *onUnk);
 void Item_Destroy(GOBJ *item);
 int Item_CollGround_PassLedge(GOBJ *item, void *callback);
 int Item_CollGround_StopLedge(GOBJ *item, void *callback);

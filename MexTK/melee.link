@@ -320,6 +320,7 @@
 80268B18:Item_CreateItem1
 80268B5C:Item_CreateItem2
 80268B9C:Item_CreateItem3
+801c8cfc:Item_CreateMapItem
 8026A8EC:Item_Destroy
 802762B0:Item_DisableSpin
 802762BC:Item_EnableSpin
