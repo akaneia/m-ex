@@ -972,7 +972,7 @@ struct ItemData
 /*** static reference ***/
 
 itPublicData **stc_itPublicData = (R13 + -0x4978);
-ItemDesc **stc_itco_enemies = (R13 + -0x4968);
+ItemDesc **stc_itdesc_enemies = (R13 + -0x4968);
 
 /*** Functions ***/
 
