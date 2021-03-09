@@ -137,7 +137,7 @@ typedef struct ItemModelDesc
     int bit_field;
 } ItemModelDesc;
 
-struct ItemState
+struct ItemStateDesc
 {
     void *anim_joint;
     void *matanim_joint;
@@ -150,7 +150,7 @@ typedef struct ItemDesc
     int *common_attributes;
     int *unqiue_attributes;
     int *hurtboxes;
-    ItemState *states;
+    ItemStateDesc *states;
     ItemModelDesc *model;
     int *dynamics;
 } ItemDesc;
