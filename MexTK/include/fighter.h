@@ -729,7 +729,7 @@ struct AbsorbDesc
 struct HitVictim
 {
     void *victim_data; // the gobj that was hit
-    int unk;           // not sure, is set to 0 when hitting them
+    int timer;         // items use this to wait until hitting this gobj again
 };
 
 struct ftHit
@@ -2625,8 +2625,9 @@ struct FighterData
     } MEX;
     struct TM
     {
-        s16 state_frame;  // how many frames the player has been in this state
-        s16 shield_frame; // how many frames the player has been shielding
+        s16 state_frame;        // how many frames the player has been in this state
+        s16 state_frame_hitlag; // how many frames the player has been in this state, counting hitlag
+        s16 shield_frame;       // how many frames the player has been shielding
         u16 state_prev[6];
         u16 state_prev_frames[6];
         u16 last_move_hurt;        // Previous Move Instance Hit By
