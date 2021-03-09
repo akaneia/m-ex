@@ -92,12 +92,14 @@ typedef struct ColorOverlay ColorOverlay;
 //typedef struct ItemDesc;
 //typedef struct itCommonData;
 //typedef struct itPublicData;
+typedef struct ItemState ItemState;
 typedef struct ItemData ItemData;
 typedef struct ItemState ItemState;
 typedef struct SpawnItem SpawnItem;
 typedef struct itData itData;
 typedef struct itCommonAttr itCommonAttr;
 typedef struct itHit itHit;
+typedef struct ItHurt ItHurt;
 
 // Boneset
 typedef struct DynamicBoneset DynamicBoneset;

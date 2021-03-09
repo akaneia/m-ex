@@ -137,12 +137,20 @@ typedef struct ItemModelDesc
     int bit_field;
 } ItemModelDesc;
 
+struct ItemState
+{
+    void *anim_joint;
+    void *matanim_joint;
+    void *param;
+    void *script;
+};
+
 typedef struct ItemDesc
 {
     int *common_attributes;
     int *unqiue_attributes;
     int *hurtboxes;
-    int *states;
+    ItemState *states;
     ItemModelDesc *model;
     int *dynamics;
 } ItemDesc;
@@ -454,6 +462,26 @@ struct itHit
     int x138;                     // 0x138
 };
 
+struct ItHurt
+{
+    int hurt_status;              // 0x0
+    Vec3 hurt1_offset;            // 0x4
+    Vec3 hurt2_offset;            // 0x10
+    float scale;                  // 0x1c
+    JOBJ *jobj;                   // 0x20
+    unsigned char is_updated : 1; // 0x24, if enabled, wont update position
+    unsigned char x24_2 : 1;      // 0x24 0x40
+    unsigned char x24_3 : 1;      // 0x24 0x20
+    unsigned char x24_4 : 1;      // 0x24 0x10
+    unsigned char x24_5 : 1;      // 0x24 0x08
+    unsigned char x24_6 : 1;      // 0x24 0x04
+    unsigned char x24_7 : 1;      // 0x24 0x02
+    unsigned char x24_8 : 1;      // 0x24 0x01
+    Vec3 hurt1_pos;               // 0x28
+    Vec3 hurt2_pos;               // 0x34
+    int bone_index;               // 0x40
+};
+
 struct ItemData
 {
     int x0;                                             // 0x0
@@ -687,41 +715,8 @@ struct ItemData
     int x5d0;                                           // 0x5d0
     itHit hitbox[4];                                    // 0x5d4
     int xac4;                                           // 0xac4
-    int xac8;                                           // 0xac8
-    int hurt_status;                                    // 0xacc
-    int xad0;                                           // 0xad0
-    int xad4;                                           // 0xad4
-    int xad8;                                           // 0xad8
-    int xadc;                                           // 0xadc
-    int xae0;                                           // 0xae0
-    int xae4;                                           // 0xae4
-    int xae8;                                           // 0xae8
-    int xaec;                                           // 0xaec
-    int xaf0;                                           // 0xaf0
-    int xaf4;                                           // 0xaf4
-    int xaf8;                                           // 0xaf8
-    int xafc;                                           // 0xafc
-    int xb00;                                           // 0xb00
-    int xb04;                                           // 0xb04
-    int xb08;                                           // 0xb08
-    int xb0c;                                           // 0xb0c
-    int xb10;                                           // 0xb10
-    int xb14;                                           // 0xb14
-    int xb18;                                           // 0xb18
-    int xb1c;                                           // 0xb1c
-    int xb20;                                           // 0xb20
-    int xb24;                                           // 0xb24
-    int xb28;                                           // 0xb28
-    int xb2c;                                           // 0xb2c
-    int xb30;                                           // 0xb30
-    int xb34;                                           // 0xb34
-    int xb38;                                           // 0xb38
-    int xb3c;                                           // 0xb3c
-    int xb40;                                           // 0xb40
-    int xb44;                                           // 0xb44
-    int xb48;                                           // 0xb48
-    int xb4c;                                           // 0xb4c
-    int xb50;                                           // 0xb50
+    int hurt_num;                                       // 0xac8
+    ItHurt it_hurt[2];                                  // 0xacc
     int xb54;                                           // 0xb54
     int xb58;                                           // 0xb58
     int xb5c;                                           // 0xb5c
@@ -977,6 +972,7 @@ struct ItemData
 /*** static reference ***/
 
 itPublicData **stc_itPublicData = (R13 + -0x4978);
+ItemDesc **stc_itco_enemies = (R13 + -0x4968);
 
 /*** Functions ***/
 
