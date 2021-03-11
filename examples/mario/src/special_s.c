@@ -82,7 +82,7 @@ GOBJ *CreateCape(double facing_direction, GOBJ *fighter_gobj, Vec3 *position, in
 	spawnItem.facing_direction = facing_direction;
 	spawnItem.damage = 0;
 	spawnItem.unk6 = 0;
-	spawnItem.unk7 = 0x80;
+	spawnItem.is_raycast_below = 1;
 
 	// create cape item
 	GOBJ *item = Item_CreateItem1(&spawnItem);

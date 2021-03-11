@@ -111,7 +111,7 @@ int Fireball_PhysCallback(GOBJ *gobj)
 
     Item_ProjectileVelocityCalculate(gobj, attributes->fall_speed, attributes->fall_speed_max);
 
-    itCommonData *stc_itCommon = stc_itPublicData->common_data;
+    itCommonData *stc_itCommon = *stc_itPublicData;
 
     Item_UpdateSpin(gobj, stc_itCommon->x68);
 

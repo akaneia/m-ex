@@ -228,7 +228,7 @@ void CreateFireball(float facing_direction, GOBJ *gobj, Vec3 *position, int it_k
 	spawnItem.facing_direction = facing_direction;
 	spawnItem.damage = 0;
 	spawnItem.unk6 = 0;
-	spawnItem.unk7 = 0x80;
+	spawnItem.is_raycast_below = 1;
 
 	// create the new item
 	GOBJ *item = Item_CreateItem1(&spawnItem);
