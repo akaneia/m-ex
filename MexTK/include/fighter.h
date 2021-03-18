@@ -1949,12 +1949,12 @@ struct FighterData
         char timer_item_release;                               // 0x683
         char since_rapid_lr;                                   // 0x684
         char timer_unk2;                                       // 0x685
-        char timer_unk3;                                       // 0x686
-        char timer_unk4;                                       // 0x687
-        char timer_sideb;                                      // 0x688
-        char timer_neutralb;                                   // 0x689
-        char timer_unk5;                                       // 0x68A
-        char timer_unk6;                                       // 0x68B
+        char timer_specialhi;                                  // 0x686
+        char timer_speciallw;                                  // 0x687
+        char timer_specials;                                   // 0x688
+        char timer_specialn;                                   // 0x689
+        char timer_jump_lockout;                               // 0x68A
+        char timer_specialhi_lockout;                          // 0x68B
     } input;                                                   //
     Vec3 transN_pos;                                           // x68c
     Vec3 transN_pos_prev;                                      // 0x698

@@ -1,5 +1,5 @@
 minor_scene
 major_load
-major_unload
+major_exit
 css_load
 sss_load
