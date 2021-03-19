@@ -68,6 +68,46 @@ typedef s64 OSTime;
 #define CARD_RESULT_CANCELED -14
 #define CARD_RESULT_FATAL_ERROR -128
 
+// VI
+#define VI_XFBMODE_SF 0
+#define VI_XFBMODE_DF 1
+#define VI_MAX_WIDTH_NTSC 720
+#define VI_MAX_HEIGHT_NTSC 480
+#define VI_MAX_WIDTH_PAL 720
+#define VI_MAX_HEIGHT_PAL 576
+#define VI_MAX_WIDTH_MPAL 720
+#define VI_MAX_HEIGHT_MPAL 480
+#define VI_MAX_WIDTH_EURGB60 VI_MAX_WIDTH_NTSC
+#define VI_MAX_HEIGHT_EURGB60 VI_MAX_HEIGHT_NTSC
+
+#define VI_NTSC 0      /*!< Video standard used in North America and Japan */
+#define VI_PAL 1       /*!< Video standard used in Europe */
+#define VI_MPAL 2      /*!< Video standard, similar to NTSC, used in Brazil */
+#define VI_DEBUG 3     /*!< Video standard, for debugging purpose, used in North America and Japan. Special decoder needed */
+#define VI_DEBUG_PAL 4 /*!< Video standard, for debugging purpose, used in Europe. Special decoder needed */
+#define VI_EURGB60 5   /*!< RGB 60Hz, 480 lines mode (same timing and aspect ratio as NTSC) used in Europe */
+
+#define VI_INTERLACE 0     /*!< Video mode INTERLACED. */
+#define VI_NON_INTERLACE 1 /*!< Video mode NON INTERLACED */
+#define VI_PROGRESSIVE 2   /*!< Video mode PROGRESSIVE. Special mode for higher quality */
+
+#define VI_TVMODE(fmt, mode) (((fmt) << 2) + (mode))
+#define VI_TVMODE_NTSC_INT VI_TVMODE(VI_NTSC, VI_INTERLACE)
+#define VI_TVMODE_NTSC_DS VI_TVMODE(VI_NTSC, VI_NON_INTERLACE)
+#define VI_TVMODE_NTSC_PROG VI_TVMODE(VI_NTSC, VI_PROGRESSIVE)
+#define VI_TVMODE_PAL_INT VI_TVMODE(VI_PAL, VI_INTERLACE)
+#define VI_TVMODE_PAL_DS VI_TVMODE(VI_PAL, VI_NON_INTERLACE)
+#define VI_TVMODE_PAL_PROG VI_TVMODE(VI_PAL, VI_PROGRESSIVE)
+#define VI_TVMODE_EURGB60_INT VI_TVMODE(VI_EURGB60, VI_INTERLACE)
+#define VI_TVMODE_EURGB60_DS VI_TVMODE(VI_EURGB60, VI_NON_INTERLACE)
+#define VI_TVMODE_EURGB60_PROG VI_TVMODE(VI_EURGB60, VI_PROGRESSIVE)
+#define VI_TVMODE_MPAL_INT VI_TVMODE(VI_MPAL, VI_INTERLACE)
+#define VI_TVMODE_MPAL_DS VI_TVMODE(VI_MPAL, VI_NON_INTERLACE)
+#define VI_TVMODE_MPAL_PROG VI_TVMODE(VI_MPAL, VI_PROGRESSIVE)
+#define VI_TVMODE_DEBUG_INT VI_TVMODE(VI_DEBUG, VI_INTERLACE)
+#define VI_TVMODE_DEBUG_PAL_INT VI_TVMODE(VI_DEBUG_PAL, VI_INTERLACE)
+#define VI_TVMODE_DEBUG_PAL_DS VI_TVMODE(VI_DEBUG_PAL, VI_NON_INTERLACE)
+
 /*** Structs ***/
 struct OSInfo
 {
@@ -310,6 +350,22 @@ struct JPEGHeader
     int imageSize; // 0x8
     int audioSize; // 0xc
 };
+struct GXRenderModeObj
+{
+    u32 viTVMode;             // 0x0
+    u16 fbWidth;              // 0x4
+    u16 efbHeight;            // 0x6
+    u16 xfbHeight;            // 0x8
+    u16 viXOrigin;            // 0xA
+    u16 viYOrigin;            // 0xC
+    u16 viWidth;              // 0xE
+    u16 viHeight;             // 0x10
+    u32 xfbMode;              // 0x14
+    u8 field_rendering;       // 0x18
+    u8 aa;                    // 0x19
+    u8 sample_pattern[12][2]; // 0x1a
+    u8 vfilter[7];
+} GXRModeObj;
 
 /*** Static Vars ***/
 OSInfo *os_info = 0x80000000;

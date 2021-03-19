@@ -140,6 +140,7 @@ typedef struct ftDynamics ftDynamics;
 
 // Fighter States
 typedef struct FtCliffCatch FtCliffCatch;
+typedef struct FtDamage FtDamage;
 
 // CSS
 typedef struct CSSBackup CSSBackup;

@@ -1163,7 +1163,7 @@ struct ftCommonData
     float x10;                    // 0x10
     float x14;                    // 0x14
     float x18;                    // 0x18
-    float x1c;                    // 0x1c
+    int meteor_lockout;           // 0x1c
     float lstick_tilt;            // 0x20
     float x24;                    // 0x24
     float x28;                    // 0x28
@@ -2695,6 +2695,19 @@ struct FtCliffCatch
     int ledge_index;
     float fall_timer;
     int timer;
+};
+struct FtDamage
+{
+    float hitstun; // 0x2340
+    int x2344;
+    int x2348;
+    int x234c;
+    int x2350;
+    float x2354;
+    u8 x2358;
+    u8 x2359;
+    u8 is_meteor;      // 0x235a
+    u8 meteor_lockout; // 0x235b
 };
 
 /** Static Variables **/
