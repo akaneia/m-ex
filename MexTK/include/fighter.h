@@ -1664,7 +1664,7 @@ struct ftCommonData
     float x7e4;                   // 0x7e4
     float x7e8;                   // 0x7e8
     float x7ec;                   // 0x7ec
-    float x7f0;                   // 0x7f0
+    int meteor_delay;             // 0x7f0, immediate delay before any action can occur
     float x7f4;                   // 0x7f4
     float x7f8;                   // 0x7f8
     float x7fc;                   // 0x7fc
