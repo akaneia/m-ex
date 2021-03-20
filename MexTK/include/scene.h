@@ -86,6 +86,16 @@ struct MinorScene
     void *unload_data;  // points to static data used throughout this minor. other minors may use the same pointer to exchange data between minors
 };
 
+struct SceneInfo
+{
+    u8 major_curr; // 0x0
+    u8 major_next; // 0x1
+    u8 major_prev; // 0x2
+    u8 minor_curr; // 0x3
+    u8 minor_next; // 0x4
+    u8 minor_prev; // 0x5
+};
+
 struct ScDataVS
 {
     u8 x8;
@@ -104,6 +114,9 @@ struct ScDataRst
     RstInit rst_init;
 };
 
+/*** Static Variables ***/
+SceneInfo *stc_scene_info = 0x80479D30;
+
 /*
 Scene Change Notes
 
@@ -111,6 +124,8 @@ MinorThink: run Scene_ExitMinor to execute Scene_Decide
 SceneDecide: run either Scene_SetNextMinor to enter another minor, OR Scene_SetNextMajor then Scene_ExitMajor to enter another major
 */
 
+u8 Scene_GetCurrentMajor();
+u8 Scene_GetCurrentMinor();
 void Scene_SetNextMajor(int major_id); // run this in scene decide!
 void Scene_ExitMajor();                // run this to cause a major scene change, usually ran in scene decide!
 void Scene_SetNextMinor(int minor_id); // run this in scene decide!

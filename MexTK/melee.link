@@ -470,6 +470,8 @@
 8039D3AC:psKillGenerator
 803421D0:PSMTXCopy
 803A4344:psRemoveParticleAppSRT
+801a4310:Scene_GetCurrentMajor
+801a42c4:Scene_GetCurrentMinor
 801a42e8:Scene_SetNextMajor
 801a42d4:Scene_ExitMajor
 801a42a0:Scene_SetNextMinor

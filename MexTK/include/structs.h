@@ -189,6 +189,7 @@ typedef struct HSD_ObjAllocData HSD_ObjAllocData;
 // Scene
 typedef struct MajorScene MajorScene;
 typedef struct MinorScene MinorScene;
+typedef struct SceneInfo SceneInfo;
 typedef struct ScDataVS ScDataVS;
 typedef struct ScDataRst ScDataRst;
 
