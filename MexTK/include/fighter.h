@@ -1948,7 +1948,7 @@ struct FighterData
         char timer_paddown;                                    // 0x682
         char timer_item_release;                               // 0x683
         char since_rapid_lr;                                   // 0x684
-        char timer_unk2;                                       // 0x685
+        char timer_jump;                                       // 0x685
         char timer_specialhi;                                  // 0x686
         char timer_speciallw;                                  // 0x687
         char timer_specials;                                   // 0x688
