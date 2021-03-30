@@ -94,6 +94,13 @@
 // DOBJ flags
 #define DOBJ_HIDDEN 1
 
+// AOBJ flags
+#define AOBJ_REWINDED (1 << 26)
+#define AOBJ_FIRST_PLAY (1 << 27)
+#define AOBJ_NO_UPDATE (1 << 28)
+#define AOBJ_LOOP (1 << 29)
+#define AOBJ_NO_ANIM (1 << 30)
+
 /*** Structs ***/
 
 struct HSD_Obj

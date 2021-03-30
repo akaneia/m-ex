@@ -6,7 +6,7 @@
 .set  REG_PlayerData,31
 
 #Check for an onUSmash function
-  lwz  r0,OFST_onUSmash(rtoc)
+  lwz  r0,OFST_onDSmash(rtoc)
   lwz r4,0x4(REG_PlayerData)
   mulli r4,r4,4
   lwzx  r12,r4,r0

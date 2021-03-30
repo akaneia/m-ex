@@ -893,7 +893,10 @@ struct ItemData
     } ftcmd_var;                                        //
     int xdc0;                                           // 0xdc0
     int xdc4;                                           // 0xdc4
-    u16 flags1 : 16;                                    // 0xdc8
+    u8 xdc8 : 8;                                        // 0xdc8
+    u8 xdc9_1 : 1;                                      // 0xdc9, 0x80
+    u8 is_hitlag : 1;                                   // 0xdc9, 0x40
+    u8 xdc9_3 : 6;                                      // 0xdc9, 0x3F
     u16 xdca1 : 1;                                      // 0xdca 0x80
     u16 xdca2 : 1;                                      // 0xdca 0x40
     u16 xdca3 : 1;                                      // 0xdca 0x20
