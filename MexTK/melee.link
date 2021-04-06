@@ -526,6 +526,8 @@
 8004D288:Stage_InitLines
 801C2ED0:Stage_InitMovingColl
 801C8138:Stage_MapStateChange
+801c5440:Stage_PlaySFX
+801c54dc:Stage_CheckSFX
 800581A4:Stage_SetCeilingCallback
 801C438C:Stage_SetChkDevicePos
 800580C8:Stage_SetGroundCallback
@@ -556,6 +558,7 @@
 803A746C:Text_SetPosition
 803A7548:Text_SetScale
 803A6368:Text_SetSisText
+803a5da0:Text_DestroySisCanvas
 803A70A0:Text_SetText
 80328F50:TRK_FlushCache
 8000D4A0:Vec2_Add

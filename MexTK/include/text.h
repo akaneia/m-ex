@@ -42,9 +42,25 @@ struct Text
     int x50;
     GOBJ *gobj;               // 0x54
     void *callback;           // 0x58, read at 803a878c
-    u8 *textAlloc;            // 0x5C
-    u8 *textAlloc2;           // 0x60
+    u8 *text_start;           // 0x5C, start parsing text data at this ptr
+    u8 *text_end;             // 0x60, stops parsing text data at this ptr
     TextAllocInfo *allocInfo; // 0x64
+    void *x68;                // 0x68, some alloc used for dialogue?
+    u16 x6c;                  // 0x6c
+    u16 x6e;                  // 0x6e
+    int x70;                  // 0x70
+    int x74;                  // 0x74
+    int x78;                  // 0x78
+    int x7c;                  // 0x7c
+    int x80;                  // 0x80
+    int x84;                  // 0x84
+    int x88;                  // 0x88
+    int x8c;                  // 0x8c
+    int x90;                  // 0x90
+    int x94;                  // 0x94
+    int char_display_num;     // 0x98, how many characters to display
+    u8 is_fit;                // 0x9c
+    int x100;                 // 0x100
 };
 
 /*** Functions ***/
@@ -65,6 +81,7 @@ int Text_ConvertToMenuText(char *out, char *in);
 void Text_GX(GOBJ *gobj, int pass);
 void Text_LoadSdFile(int index, char *filename, char *symbol);
 void Text_SetSisText(Text *text, int text_index);
+void Text_DestroySisCanvas(int canvas_id);
 
 /*** Variables ***/
 // Text data

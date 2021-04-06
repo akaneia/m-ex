@@ -89,16 +89,13 @@ struct MapData
     int index;                         // 0x14, map_gobj index
     int x18;                           // 0x18
     int x1c;                           // 0x1c
-    int x20;                           // 0x20
-    int x24;                           // 0x24
-    int state;                         // 0x28
-    int facing_direction;              // 0x2c
-    int x30;                           // 0x30
-    int x34;                           // 0x34
-    float scale;                       // 0x38
-    int x3c;                           // 0x3c
-    Vec3 self_vel;                     // 0x40
-    Vec3 pos;                          // 0x4c
+    int live_sfx[8];                   // 0x20, sfx ID's currently playing
+    int x40;                           // 0x40
+    int x44;                           // 0x44
+    int x48;                           // 0x48
+    int x4c;                           // 0x4c
+    int x50;                           // 0x50
+    int x54;                           // 0x54
     int x58;                           // 0x58
     int x5c;                           // 0x5c
     int x60;                           // 0x60
@@ -426,6 +423,8 @@ int *Stage_GetYakumonoParam();
 void Stage_MapStateChange(GOBJ *map, int map_gobjID, int anim_id);
 int Stage_CheckAnimEnd(GOBJ *map, int jobj_index, int flags);  // 0x1 = unk aobj, 0x2 = material aobj, 0x4 = unk aobj
 int Stage_CheckAnimEnd2(GOBJ *map, int jobj_index, int flags); // 0x1 = unk aobj, 0x2 = material aobj, 0x4 = unk aobj
+void Stage_PlaySFX(GOBJ *map, int live_index, int sfx_id);
+int Stage_CheckSFX(GOBJ *map, int live_index);
 void Dynamics_DecayWind();
 GOBJ *Stage_CreateMapGObj(int mapgobjID);
 void Stage_DestroyMapGObj(GOBJ *map_gobj);
