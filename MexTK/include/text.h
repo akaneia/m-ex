@@ -96,4 +96,8 @@ TextAllocInfo **stc_textobj_first = R13 + (-0x3d28);
 // Text canvas
 TextAllocInfo **stc_textcanvas_first = R13 + (-0x3d24);
 
+// Sis Library
+ArchiveInfo *stc_sis_archives = 0x804d1110; // array of sis file archive pointers
+void *stc_sis_data = 0x804d1124;            // array of loaded sis data
+
 #endif
