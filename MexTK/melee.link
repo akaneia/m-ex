@@ -10,6 +10,7 @@
 80022C30:atan2
 8002702C:Audio_QueueFileLoad
 80026F2C:Audio_ResetCache
+800056a8:Audio_RequestSSMLoad
 80027648:Audio_SyncLoadAll
 80027168:Audio_UpdateCache
 802886C4:Barrel_EnterBreak

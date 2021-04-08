@@ -19,7 +19,7 @@ struct TextAllocInfo
 struct Text
 {
     Vec3 trans;  // 0x0-0xC
-    Vec2 aspect; // 0xC-0x14
+    Vec2 aspect; // 0xC-0x14 CHANGE THIS TO BOUND
     int x14;
     int x18;
     int x1c;
@@ -65,7 +65,7 @@ struct Text
 
 /*** Functions ***/
 
-int Text_CreateCanvas(int unk, GOBJ *gobj, int text_gobjkind, int text_gobjsubclass, int text_gobjflags, int text_gxlink, int text_gxpri, int cobj_gxpri); // the optional gobj and cobj_gxlink are used to create a cobj as well. set gobj
+int Text_CreateCanvas(int unk, int no_create_cam_gobj, int text_gobjkind, int text_gobjsubclass, int text_gobjflags, int text_gxlink, int text_gxpri, int cobj_gxpri); // the optional gobj and cobj_gxlink are used to create a cobj as well. set gobj
 Text *Text_CreateText(int SisIndex, int canvasID);
 Text *Text_CreateText2(int SisIndex, int canvasID, float pos_x, float pos_y, float pos_z, float limit_x, float limit_y);
 void Text_Destroy(Text *text);
