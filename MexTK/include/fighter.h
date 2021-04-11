@@ -2801,7 +2801,7 @@ void Fighter_SetBoneRotX(FighterData *fighter, int bone, float angle);
 void Fighter_SetBoneRotY(FighterData *fighter, int bone, float angle);
 void Fighter_SetBoneRotZ(FighterData *fighter, int bone, float angle);
 void Fighter_PlayVoiceSFX(FighterData *fighter, int sfxID, int volume, int balance);
-void Fighter_ApplyOverlay(FighterData *fighter_data, int overlay, int unk);
+void Fighter_ApplyColAnim(FighterData *fighter_data, int overlay, int unk);
 void Fighter_UpdateOverlay(GOBJ *fighter);
 void Fighter_DisableBlend(GOBJ *fighter, int animd_id);
 void Fighter_UpdateDynamics(GOBJ *fighter, u16 *dynamic_struct);
