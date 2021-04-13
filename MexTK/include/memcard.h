@@ -2743,6 +2743,7 @@ struct Rules1
 MemcardInfo *stc_memcard_info = 0x80433380;
 MemcardUnk *stc_memcard_unk = 0x803bacc8;
 MemcardWork *stc_memcard_work = 0x80432a68;
+Memcard *stc_memcard = 0x8045a6c0; // pointer to this data @ 0x804d3ee0
 int *stc_memcard_block_curr = R13 + (-0x3d20);
 int *stc_memcard_block_last = R13 + (-0x3d1c);
 int *stc_memcard_write_status = 0x804d1138;

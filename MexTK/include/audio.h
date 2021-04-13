@@ -10,6 +10,7 @@ void Audio_QueueFileLoad(int group_index, u64 ssm_index);
 void Audio_UpdateCache();
 void Audio_RequestSSMLoad(int ssm_id);
 void Audio_SyncLoadAll();
+void BGM_DecideMenuBGM();
 int BGM_GetMenuBGM();
 void BGM_Play(int hpsID);
 

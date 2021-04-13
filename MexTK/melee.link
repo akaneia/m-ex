@@ -14,6 +14,7 @@
 80027648:Audio_SyncLoadAll
 80027168:Audio_UpdateCache
 802886C4:Barrel_EnterBreak
+8015ecbc:BGM_DecideMenuBGM
 8015ECB0:BGM_GetMenuBGM
 80005358:blr
 803230A4:blr2
