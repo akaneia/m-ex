@@ -1578,7 +1578,10 @@ struct Memcard
     int unk1553;           //0x1844
     int unk1554;           //0x1848
     int unk1555;           //0x184C
-    int unk1556;           //0x1850
+    u8 x1850;              //0x1850
+    u8 menu_bgm;           //0x1851
+    u8 x1852;              //0x1852
+    u8 x1853;              //0x1853
     int unk1557;           //0x1854
     int unk1558;           //0x1858
     int unk1559;           //0x185C
