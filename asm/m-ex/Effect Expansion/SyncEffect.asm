@@ -464,12 +464,12 @@ PtclGen_DOLAddr:
 PtclGen_UseJointPos:
 # va_list
 # Vec3 position
-
+.set  REG_Pos,29
 #Pop pos pointer off the va_list
   addi	r3, sp, 508 + 0x100
   li  r4,1
   branchl r12,0x80322620
-  lwz r6,0x0(r3)
+  lwz REG_Pos,0x0(r3)
 #Create Effect
   li  r3,0
   mr  r5,REG_EffectID
@@ -478,6 +478,16 @@ PtclGen_UseJointPos:
   mulhw  r4,r4,r5
   srawi	r4,r4,6
   branchl r12,0x8039f05c
+#Set position
+  cmpwi r3,0
+  beq PtclGen_UseJointPos_Exit
+  lfs f1,0x0(REG_Pos)
+  stfs f1,0x24(r3)
+  lfs f1,0x4(REG_Pos)
+  stfs f1,0x28(r3)
+  lfs f1,0x8(REG_Pos)
+  stfs f1,0x2C(r3)
+PtclGen_UseJointPos_Exit:
   b PtclGen_Exit
 
 PtclGen_FollowJointPos:

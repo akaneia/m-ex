@@ -194,7 +194,7 @@ PtclGen_UseJointPos:
   branchl r12,0x8000b1cc
   mr   r3,REG_EffectID
   mr   r4,REG_FighterGObj
-  addi r5,sp,0x80
+  addi r5,sp,0x80           # position
   addi r6,REG_EffectObj,28  # facing direction
   addi r7,REG_EffectObj,32  # ground orientation
   branchl r12,0x8005fddc

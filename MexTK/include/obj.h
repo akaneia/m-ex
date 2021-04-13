@@ -548,6 +548,7 @@ void CObj_SetOrtho(COBJ *cobj, float top, float bottom, float left, float right)
 void CObj_SetViewport(COBJ *cobj, float left, float right, float top, float bottom);
 void CObj_SetScissor(COBJ *cobj, u16 top, u16 bottom, u16 left, u16 right);
 void CObj_Release(COBJ *cobj);
+void CObj_Destroy(COBJ *cobj);
 GOBJ *GObj_Create(int type, int subclass, int flags);
 void GObj_Destroy(GOBJ *gobj);
 void GObj_AddGXLink(GOBJ *gobj, void *cb, int gx_link, int gx_pri);
