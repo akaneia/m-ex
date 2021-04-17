@@ -785,7 +785,7 @@ struct ItemData
     int xc58;                                           // 0xc58
     int xc5c;                                           // 0xc5c
     int xc60;                                           // 0xc60
-    int xc64;                                           // 0xc64
+    GOBJ *reflect;                                      // 0xc64
     int xc68;                                           // 0xc68
     int xc6c;                                           // 0xc6c
     int xc70;                                           // 0xc70
@@ -796,7 +796,7 @@ struct ItemData
     int xc84;                                           // 0xc84
     int xc88;                                           // 0xc88
     int xc8c;                                           // 0xc8c
-    int xc90;                                           // 0xc90
+    GOBJ *xc90;                                         // 0xc90
     int xc94;                                           // 0xc94
     int xc98;                                           // 0xc98
     struct                                              // 0xc9c
@@ -830,7 +830,7 @@ struct ItemData
     GOBJ *grabbed_fighter;                              // 0xd00
     int xd04;                                           // 0xd04
     int xd08;                                           // 0xd08
-    int xd0c;                                           // 0xd0c
+    GOBJ *xd0c;                                         // 0xd0c
     int xd10;                                           // 0xd10
     struct                                              // cb
     {                                                   //

@@ -445,10 +445,10 @@ register const char *append;
     return (save);
 }
 
-void SFX_Play(int sfxID);
-void SFX_PlayRaw(int sfx, int volume, int pan, int unk, int unk2);
-void SFX_PlayCommon(int sfxID);
-void SFX_PlayCrowd(int sfxID);
+int SFX_Play(int sfxID);
+int SFX_PlayRaw(int sfx, int volume, int pan, int unk, int unk2);
+int SFX_PlayCommon(int sfxID);
+int SFX_PlayCrowd(int sfxID);
 void SFX_StopCrowd();
 void SFX_StopAllFighterSFX(FighterData *fighter_data);
 void BGM_Play(int hpsID);

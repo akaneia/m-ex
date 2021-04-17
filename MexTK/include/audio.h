@@ -13,5 +13,7 @@ void Audio_SyncLoadAll();
 void BGM_DecideMenuBGM();
 int BGM_GetMenuBGM();
 void BGM_Play(int hpsID);
+int FGM_CheckActive(int fgm_id);
+void FGM_Stop(int fgm_id);
 
 #endif
