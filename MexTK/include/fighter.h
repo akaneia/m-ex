@@ -9,41 +9,105 @@
 #include "match.h"
 #include "collision.h"
 
-enum FtKindExt
+enum FtKind
 {
-    FTKINDEXT_FALCON,
-    FTKINDEXT_DK,
-    FTKINDEXT_FOX,
-    FTKINDEXT_GAW,
-    FTKINDEXT_KIRBY,
-    FTKINDEXT_BOWSER,
-    FTKINDEXT_LINK,
-    FTKINDEXT_LUIGI,
-    FTKINDEXT_MARIO,
-    FTKINDEXT_MARTH,
-    FTKINDEXT_MEWTWO,
-    FTKINDEXT_NESS,
-    FTKINDEXT_PEACH,
-    FTKINDEXT_PIKACHU,
-    FTKINDEXT_ICECLIMBERS,
-    FTKINDEXT_JIGGLYPUFF,
-    FTKINDEXT_SAMUS,
-    FTKINDEXT_YOSHI,
-    FTKINDEXT_ZELDA,
-    FTKINDEXT_SHEIK,
-    FTKINDEXT_FALCO,
-    FTKINDEXT_YOUNGLINK,
-    FTKINDEXT_DRMARIO,
-    FTKINDEXT_ROY,
-    FTKINDEXT_PICHU,
-    FTKINDEXT_GANONDORF,
-    FTKINDEXT_MASTERHAND,
-    FTKINDEXT_BOY,
-    FTKINDEXT_GIRL,
-    FTKINDEXT_GIGABOWSER,
-    FTKINDEXT_CRAZYHAND,
-    FTKINDEXT_SANDBAG,
-    FTKINDEXT_POPO,
+    FTKIND_MARIO,
+    FTKIND_FOX,
+    FTKIND_FALCON,
+    FTKIND_DK,
+    FTKIND_KIRBY,
+    FTKIND_BOWSER,
+    FTKIND_LINK,
+    FTKIND_SHEIK,
+    FTKIND_NESS,
+    FTKIND_PEACH,
+    FTKIND_POPO,
+    FTKIND_NANA,
+    FTKIND_PIKACHU,
+    FTKIND_SAMUS,
+    FTKIND_YOSHI,
+    FTKIND_JIGGLYPUFF,
+    FTKIND_MEWTWO,
+    FTKIND_LUIGI,
+    FTKIND_MARTH,
+    FTKIND_ZELDA,
+    FTKIND_YOUNGLINK,
+    FTKIND_DRMARIO,
+    FTKIND_FALCO,
+    FTKIND_PICHU,
+    FTKIND_GAW,
+    FTKIND_GANONDORF,
+    FTKIND_ROY,
+    FTKIND_MASTERHAND,
+    FTKIND_CRAZYHAND,
+    FTKIND_BOY,
+    FTKIND_GIRL,
+    FTKIND_GIGABOWSER,
+    FTKIND_SANDBAG,
+};
+enum CKind
+{
+    CKIND_FALCON,
+    CKIND_DK,
+    CKIND_FOX,
+    CKIND_GAW,
+    CKIND_KIRBY,
+    CKIND_BOWSER,
+    CKIND_LINK,
+    CKIND_LUIGI,
+    CKIND_MARIO,
+    CKIND_MARTH,
+    CKIND_MEWTWO,
+    CKIND_NESS,
+    CKIND_PEACH,
+    CKIND_PIKACHU,
+    CKIND_ICECLIMBERS,
+    CKIND_JIGGLYPUFF,
+    CKIND_SAMUS,
+    CKIND_YOSHI,
+    CKIND_ZELDA,
+    CKIND_SHEIK,
+    CKIND_FALCO,
+    CKIND_YOUNGLINK,
+    CKIND_DRMARIO,
+    CKIND_ROY,
+    CKIND_PICHU,
+    CKIND_GANONDORF,
+    CKIND_MASTERHAND,
+    CKIND_BOY,
+    CKIND_GIRL,
+    CKIND_GIGABOWSER,
+    CKIND_CRAZYHAND,
+    CKIND_SANDBAG,
+    CKIND_POPO,
+};
+enum CPUType
+{
+    CPTP_STAY,
+    CPTP_WALK,
+    CPTP_ESCAPE,
+    CPTP_JUMP,
+    CPTP_NORMAL,
+    CPTP_MANUAL,
+    CPTP_NANA,
+    CPTP_DEFENSIVE,
+    CPTP_STRUGGLE,
+    CPTP_FREAK,
+    CPTP_COOPERATE,
+    CPTP_SPLWLINK,
+    CPTP_SPLWSAMUS,
+    CPTP_ONLYITEM,
+    CPTP_EVZELDA,
+    CPTP_NOACT,
+    CPTP_AIR,
+    CPTP_ITEM,
+};
+enum PlayerKind
+{
+    PKIND_HMN,
+    PKIND_CPU,
+    PKIND_DEMO,
+    PKIND_NONE,
 };
 
 // action state flags
@@ -497,8 +561,8 @@ enum Ft_AttackKind
 struct Playerblock
 {
     int state;           // 0x00 = not present, 0x02 = HMN, 0x03 = CPU
-    int ft_kind;         // external ID
-    int type;            // (0x00 is HMN, 0x01 is CPU, 0x02 is Demo, 0x03 n/a)
+    int ckind;           // external ID
+    int pkind;           // (0x00 is HMN, 0x01 is CPU, 0x02 is Demo, 0x03 n/a)
     u8 isTransformed[2]; // 0xC, 1 indicates the fighter that is active
     Vec3 tagPos;         // 0x10
     Vec3 spawnPos;       // 0x1C
