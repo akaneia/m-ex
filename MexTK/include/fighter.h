@@ -829,7 +829,7 @@ struct AbsorbDesc
 
 struct HitVictim
 {
-    void *victim_data; // the gobj that was hit
+    GOBJ *victim_gobj; // the gobj that was hit
     int timer;         // items use this to wait until hitting this gobj again
 };
 
@@ -2583,7 +2583,7 @@ struct FighterData
         char flags_2227;                      // 0x2227
         char x2228_1 : 1;                     // 0x80 - 0x2228
         char x2228_2 : 1;                     // 0x40 - 0x2228
-        char x2228_3 : 1;                     // 0x20 - 0x2228
+        char x2228_3 : 1;                     // 0x20 - 0x2228, checked on missing tech @ 80097d58
         char x2228_4 : 1;                     // 0x10 - 0x2228
         char x2228_5 : 1;                     // 0x08 - 0x2228
         char x2228_6 : 1;                     // 0x04 - 0x2228
