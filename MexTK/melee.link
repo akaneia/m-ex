@@ -350,6 +350,7 @@
 80268E5C:ItemStateChange
 8026b724:Item_EnableUnknownFlag
 80273030:Item_ReflectVelocity
+8026ae60:Item_GenerateHitExceptionID
 8036FB5C:JOBJ_AddAnimAll
 803717A8:JOBJ_AddChild
 80370780:JOBJ_Anim

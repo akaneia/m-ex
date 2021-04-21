@@ -667,7 +667,7 @@ struct ItemData
     int x5cc;                                           // 0x5cc
     int x5d0;                                           // 0x5d0
     itHit hitbox[4];                                    // 0x5d4
-    int xac4;                                           // 0xac4
+    int hit_exception_id;                               // 0xac4, cannot hit items with a matching index
     int hurt_num;                                       // 0xac8
     ItHurt it_hurt[2];                                  // 0xacc
     int xb54;                                           // 0xb54
@@ -1077,4 +1077,5 @@ void Item_Throw(GOBJ *item, float unk, Vec3 *pos, Vec3 *vel);
 JOBJ *Item_GetHeldBone(GOBJ *item);
 void Item_BounceOffVictim(GOBJ *item);
 void Item_BounceOffShield(GOBJ *item);
+int Item_GenerateHitExceptionID();
 #endif
