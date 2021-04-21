@@ -256,12 +256,11 @@ struct StageOnGO
 
 struct Stage
 {
-    float cam_LeftBound;                                                  // 0x0
-    float cam_RightBound;                                                 // 0x4
-    float cam_TopBound;                                                   // 0x8
-    float cam_BottomBound;                                                // 0xc
-    float cam_HorizOffset;                                                // 0x10
-    float crowdReactStart;                                                // 0x14, begins checking for crowd gasps below this position
+    float cambound_left;                                                  // 0x0
+    float cambound_right;                                                 // 0x4
+    float cambound_top;                                                   // 0x8
+    float cambound_bottom;                                                // 0xc
+    Vec2 cambound_offset;                                                 // 0x10, offset of the camera bounds. begins checking for crowd gasps below this Y component
     float fov_d;                                                          // 0x18
     float fov_u;                                                          // 0x1c
     float fov_r;                                                          // 0x20, actually horizontal rotation?
