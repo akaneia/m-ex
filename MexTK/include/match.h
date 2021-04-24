@@ -84,7 +84,7 @@ struct MatchInit
     //byte 0x8
     u8 isTeams; // 0xFF
     //byte 0x9
-    u8 isKOCounterActive; // 0xFF
+    u8 use_ko_count; // 0xFF
     //byte 0xA
     u8 unk14; // 0xFF
     //byte 0xB

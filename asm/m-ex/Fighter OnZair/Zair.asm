@@ -11,12 +11,21 @@
   mulli r4,r4,4
   lwzx  r12,r4,r0
   cmpwi r12,0
-  beq Exit
-#Branch to DJ function
+  beq False
+#Check if pressing Z
+  lwz	r0, 0x065C (REG_PlayerData)
+  rlwinm.	r0, r0, 0, 0x80000000
+  beq False
+  lwz	r0, 0x0668 (r31)
+  rlwinm.	r0, r0, 0, 0x00000100
+  beq False
+#Branch to tether state enter
   mr  r3,REG_PlayerGObj
   mtctr r12
   bctrl
   branch  r12,0x800c3bb8
+  b Exit
 
-Exit:
+False:
   li  r3,0
+Exit:

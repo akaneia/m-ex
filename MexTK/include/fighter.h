@@ -819,12 +819,8 @@ struct ShieldDesc
 struct AbsorbDesc
 {
     int bone;
-    int max_damage;
     Vec3 pos;
     float radius;
-    float damage_mult;
-    float velocity_mult;
-    int flags;
 };
 
 struct HitVictim
@@ -2258,7 +2254,7 @@ struct FighterData
         float x19b8;           // 0x19b8
         int dmg_taken3;        // 0x19bc, seems to be the most recent amount of damage taken
     } shield;
-    struct shield_update // 0x19c0
+    struct shield_bubble // 0x19c0
     {
         JOBJ *bone;                   // 0x19c0
         unsigned char is_checked : 1; // 0x19d0 0x80. is checked for collision when 0
@@ -2266,7 +2262,7 @@ struct FighterData
         Vec3 offset;                  // 0x19d4
         float size_mult;              // 0x19e0
     } shield_bubble;
-    struct reflect_update // 0x19e4
+    struct reflect_bubble // 0x19e4
     {
         JOBJ *bone;                   // 0x19e4
         unsigned char is_checked : 1; // 0x19d0 0x80. is checked for collision when 0
@@ -2274,7 +2270,7 @@ struct FighterData
         Vec3 offset;                  // 0x19f8
         float size_mult;              // 0x1a04
     } reflect_bubble;
-    struct absorb_update // 0x1a08
+    struct absorb_bubble // 0x1a08
     {
         JOBJ *bone;                   // 0x1a08
         unsigned char is_checked : 1; // 0x1a0c 0x80. is checked for collision when 0
