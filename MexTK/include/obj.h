@@ -321,8 +321,8 @@ struct JOBJ
     DOBJ *dobj;       //0x18
     Vec4 rot;         //0x1C 0x20 0x24 0x28
     Vec3 scale;       //0x2C
-    Vec3 trans;
-    Mtx rotMtx;
+    Vec3 trans;       // 0x38
+    Mtx rotMtx;       // 0x44
     Vec3 *VEC;
     Mtx *MTX;
     AOBJ *aobj;
@@ -499,11 +499,13 @@ u8 *obj_kind = R13 + -(0x3E55);
 int JOBJ_GetWorldPosition(JOBJ *source, Vec3 *add, Vec3 *dest);
 void JOBJ_SetMtxDirtySub(JOBJ *jobj);
 void JOBJ_MakeMatrix(JOBJ *jobj);
+JOBJ *JOBJ_LoadDummy();
 JOBJ *JOBJ_LoadJoint(JOBJDesc *joint);
 void JOBJ_RemoveAll(JOBJ *joint);
 void JOBJ_Remove(JOBJ *joint);
 void JOBJ_GetChild(JOBJ *joint, int ptr, int index, ...);
 void JOBJ_AddChild(JOBJ *parent, JOBJ *child);
+void JOBJ_AddNext(JOBJ *parent, JOBJ *child);
 float JOBJ_GetCurrentMatAnimFrame(JOBJ *joint);
 void JOBJ_SetFlags(JOBJ *joint, int flags);
 void JOBJ_SetFlagsAll(JOBJ *joint, int flags);

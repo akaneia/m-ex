@@ -93,10 +93,10 @@ enum GrExternal
 
 struct MapDesc
 {
-    void *(*onCreation)(GOBJ *map);
-    void *onDeletion;
-    void *onFrame;
-    void *onUnk;
+    void (*onCreation)(GOBJ *map);
+    int (*onDeletion)(GOBJ *map);
+    void (*onFrame)(GOBJ *map);
+    void (*onUnk)(GOBJ *map);
     unsigned char is_unk : 1;  //  0x80
     unsigned char is_fog : 1;  //  0x40
     unsigned char is_cobj : 1; //  0x20
