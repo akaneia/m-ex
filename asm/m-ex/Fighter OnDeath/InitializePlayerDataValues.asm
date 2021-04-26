@@ -2,4 +2,4 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-lwz  r0,OFST_FighterOnDeath(rtoc)
+lwz  r0,OFST_FighterOnSpawn(rtoc)

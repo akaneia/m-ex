@@ -34,7 +34,7 @@ void OnLoad(GOBJ *gobj)
 ///
 /// 0x800E08CC
 ///
-void OnDeath(GOBJ *gobj)
+void OnSpawn(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
 

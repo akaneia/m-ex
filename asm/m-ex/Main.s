@@ -124,7 +124,7 @@
   bl  Fighter_OnDeath
   mflr  r3
   bl  ConvertPointers
-  stw r3,OFST_FighterOnDeath(rtoc)
+  stw r3,OFST_FighterOnSpawn(rtoc)
 #Move Logic
   bl  Fighter_MoveLogic
   mflr  r3

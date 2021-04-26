@@ -1,5 +1,5 @@
 onload
-ondeath
+onspawn
 onunknown
 move_logic
 specialn

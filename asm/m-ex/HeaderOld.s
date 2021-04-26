@@ -61,7 +61,7 @@ NewChar1:
 .set  OFST_MnSlChrAnimCount,0x28
 .set  OFST_FighterMoveLogic,0x2C
 .set  OFST_FighterOnLoad,0x30
-.set  OFST_FighterOnDeath,0x34
+.set  OFST_FighterOnSpawn,0x34
 .set  OFST_FighterSpecialLw,0x38
 .set  OFST_FighterSpecialS,0x3C
 .set  OFST_FighterSpecialN,0x40
