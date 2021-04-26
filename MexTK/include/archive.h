@@ -25,5 +25,6 @@ struct ArchiveInfo
 ArchiveInfo *File_Load(char *filename);
 void File_LoadInitReturnSymbol(char *filename, void *ptr, ...); // input each symbol name pointer sequentially and terminate with 0;
 void *File_GetSymbol(void *archive, char *symbol);
+ArchiveInfo *File_GetPreloadedFile(char *filename);
 
 #endif
