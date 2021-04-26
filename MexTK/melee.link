@@ -460,6 +460,7 @@
 8034376c:OSCreateAlarm
 80343a30:OSSetPeriodicAlarm
 80322e54:cvt_dbl_usll
+80322e54:__fixunsdfdi
 8033796c:DVDConvertPathToEntrynum
 800161a0:DVDWaitForRead
 8038f6d4:File_Read
