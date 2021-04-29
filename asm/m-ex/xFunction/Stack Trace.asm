@@ -80,7 +80,7 @@ backup
 
 Output:
 # OSReport symbol name
-  bl FrameInfo
+  bl StackInfo
   mflr r3
   branchl r12,OSReport
 
