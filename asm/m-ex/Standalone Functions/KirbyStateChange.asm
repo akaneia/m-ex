@@ -67,8 +67,8 @@
   li  r3,0
   stw r3,0x14(REG_FighterData)
 
-# Spoof state as ItemScopeFire
-  li  r3,0xA0
+# Use 400+ for kirby states
+  addi r3, REG_State, 400
   stw r3,0x10(REG_FighterData)
 
 # Spoof current anim offset as -1 (will always result in a cache miss for the next anim load)
