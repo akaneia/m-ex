@@ -10,15 +10,6 @@
 .set    REG_HeapSize,25
 .set    REG_EntryNum,20
 
-#ftX struct
-  .set  ftX_Code,0x0
-  .set  ftX_InstructionRelocTable,0x4
-  .set  ftX_InstructionRelocTableCount,0x8
-  .set  ftX_FunctionRelocTable,0xC
-    .set  FunctionRelocTable_ReplaceThis,0x0
-    .set  FunctionRelocTable_ReplaceWith,0x4
-  .set  ftX_FunctionRelocTableCount,0x10
-
 backup
 
 # check if major has a file
@@ -99,9 +90,7 @@ WaitForFile:
   beq   Exit
 
 #Reloc
-  lwz r3,ftX_InstructionRelocTableCount(REG_scFunction)  #count
-  lwz r4,ftX_Code(REG_scFunction)                        #code
-  lwz r5,ftX_InstructionRelocTable(REG_scFunction)       #reloc table
+  mr r3,REG_scFunction
   branchl r12,Reloc
 
 # zero return struct

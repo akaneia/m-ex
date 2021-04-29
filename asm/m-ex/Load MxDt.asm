@@ -1,4 +1,4 @@
-#To be inserted at 803753b4
+#To be inserted at 803753b0
 .include "../Globals.s"
 .include "Header.s"
 
@@ -123,6 +123,11 @@ PreloadInit_Loop:
   mflr  r3
   stw r3,OFST_HeapRuntime(rtoc)
 
+# xFunction lookup
+  bl  tempalloc2
+  mflr  r3
+  stw r3,OFST_XFunctionLookup(rtoc)
+
   b Exit
 
 tempalloc:
@@ -140,6 +145,12 @@ blrl
 .long 1     # unk
 .long 1     # isDisable, creates the heap when this is 0
 .long 1     # bool, is set to 0 after heap is created
+.endr
+
+tempalloc2:
+blrl
+.rept xFuncLookup_Max + 1
+.long 0 # xFunction ptr
 .endr
 
 FileName:
@@ -225,6 +236,7 @@ rtocOffsets:
   .hword Arch_Effect,Effect_RuntimeUnk4,-1
   .hword Arch_Effect,Effect_RuntimePtclLast,-1
   .hword Arch_Effect,Effect_RuntimePtclData,-1
+  .hword Arch_Metadata,Arch_Metadata_FtIntNum,-1    # xFunction lookup here
   #CSS
   .hword  Arch_Menu,Arch_Menu_MenuParam,-1
   #Map

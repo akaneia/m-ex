@@ -2,18 +2,62 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
+#r3 = xFunction ptr
+
 ###########################################
-#Intialize pointers
-.set  REG_Count,12
-.set  REG_Code,11
-.set  REG_RelocTable,10
-  mr REG_Count,r3
-  mr REG_Code,r4
-  mr REG_RelocTable,r5
+#Intialize
+.set  REG_xFunction,31
+.set  REG_Count,30
+.set  REG_Code,29
+.set  REG_RelocTable,28
+
+  backup
+
+  mr  REG_xFunction, r3
+  lwz REG_Count,ftX_InstructionRelocTableCount(REG_xFunction)  #count
+  lwz REG_Code,ftX_Code(REG_xFunction)                         #code
+  lwz REG_RelocTable,ftX_InstructionRelocTable(REG_xFunction)  #reloc table
+
+Reloc_Index:
+.set REG_xFuncLookup, 27
+# Check if max xFunctions indexed
+  lwz REG_xFuncLookup,OFST_XFunctionLookup(rtoc)
+  lwz r3,xFuncLookup_Num(REG_xFuncLookup)
+  cmpwi r3,xFuncLookup_Max
+  bge Error
+# Check if this already exists for some reason
+.set REG_LoopCount, 26
+.set REG_xFuncNum, 25
+.set REG_Curr, 24
+  li REG_LoopCount, 0
+  lwz REG_xFuncNum,xFuncLookup_Num(REG_xFuncLookup)
+  addi REG_Curr, REG_xFuncLookup, xFuncLookup_Start     # get to xFunction ptr array
+  b Reloc_Index_LoopCheck
+Reloc_Index_Loop:
+# if match exists, dont reloc/index again
+  lwz r3,0x0(REG_Curr)
+  cmpw r3,REG_xFunction
+  beq Reloc_Exit
+Reloc_Index_LoopInc:
+  addi REG_LoopCount,REG_LoopCount,1
+  addi REG_Curr,REG_Curr, xFuncLookup_Start_Size
+Reloc_Index_LoopCheck:
+  cmpw REG_LoopCount,REG_xFuncNum
+  blt Reloc_Index_Loop
+# Index it
+  lwz r3,xFuncLookup_Num(REG_xFuncLookup)
+  mulli r3, r3, xFuncLookup_Start_Size
+  addi r5, REG_xFuncLookup, xFuncLookup_Start     # get to xFunction ptr array
+  stwx REG_xFunction, r3, r5      # store to ptr array
+# Inc num
+  lwz r3,xFuncLookup_Num(REG_xFuncLookup)
+  addi r3,r3,1
+  stw r3,xFuncLookup_Num(REG_xFuncLookup)
+
 Reloc_Loop:
-.set  REG_CodePointer,9
-.set  REG_FuncPointer,8
-.set  REG_Flag,7
+.set  REG_CodePointer,27
+.set  REG_FuncPointer,26
+.set  REG_Flag,25
   lwz r3,0x0(REG_RelocTable)
   rlwinm  REG_Flag,r3,8,0x000000FF            #get flag
   rlwinm  r3,r3,0,0x00FFFFFF
@@ -100,5 +144,31 @@ Reloc_IncLoop:
   subi  REG_Count,REG_Count,1
   cmpwi REG_Count,0
   bgt Reloc_Loop
+
+Reloc_Exit:
+  restore
   blr
 ##############################################
+
+
+#############################################
+Error:
+#OSReport
+  bl  ErrorString
+  mflr  r3
+  branchl r12,0x803456a8
+#Assert
+  bl  Assert_Name
+  mflr  r3
+  li  r4,0
+  load  r5,0x804d3940
+  branchl r12,0x80388220
+Assert_Name:
+blrl
+.string "m-ex"
+.align 2
+ErrorString:
+blrl
+.string "error: over 20 xFunctions indexed\n"
+.align 2
+###############################################

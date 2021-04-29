@@ -12,15 +12,6 @@ r5 = fighter/stage
 .set  REG_Type,30
 .set  REG_itFunction,29
 
-#ftX struct
-  .set  ftX_Code,0x0
-  .set  ftX_InstructionRelocTable,0x4
-  .set  ftX_InstructionRelocTableCount,0x8
-  .set  ftX_FunctionRelocTable,0xC
-    .set  FunctionRelocTable_ReplaceThis,0x0
-    .set  FunctionRelocTable_ReplaceWith,0x4
-  .set  ftX_FunctionRelocTableCount,0x10
-
 backup
 mr  REG_Index,r4
 mr  REG_Type,r5
@@ -49,9 +40,7 @@ itFunction_Init:
   cmpwi REG_ThisItem,0
   beq itFunction_InitLoop
 #Reloc
-  lwz r3,ftX_InstructionRelocTableCount(REG_ThisItem)  #count
-  lwz r4,ftX_Code(REG_ThisItem)  #code
-  lwz r5,ftX_InstructionRelocTable(REG_ThisItem)  #reloc table
+  mr r3, REG_ThisItem
   branchl r12,Reloc
 #Copy function pointers - init
 .set  REG_ThisOffset,12

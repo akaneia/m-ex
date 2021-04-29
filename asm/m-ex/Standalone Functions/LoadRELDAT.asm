@@ -35,9 +35,7 @@ mr  REG_Symbol,r5
   cmpwi REG_mexData,0
   beq mexPatch_Skip
 #Reloc
-  lwz r3,ftX_InstructionRelocTableCount(REG_mexData)  #count
-  lwz r4,ftX_Code(REG_mexData)                        #code
-  lwz r5,ftX_InstructionRelocTable(REG_mexData)       #reloc table
+  mr r3, REG_mexData
   branchl r12,Reloc
 #Overload
   mr  r3,REG_mexData
@@ -55,15 +53,6 @@ mexPatch_Skip:
   blr
 
 ###########################################
-
-#ftX struct
-  .set  ftX_Code,0x0
-  .set  ftX_InstructionRelocTable,0x4
-  .set  ftX_InstructionRelocTableCount,0x8
-  .set  ftX_FunctionRelocTable,0xC
-    .set  FunctionRelocTable_ReplaceThis,0x0
-    .set  FunctionRelocTable_ReplaceWith,0x4
-  .set  ftX_FunctionRelocTableCount,0x10
 
 Overload:
 # r3 = ftX

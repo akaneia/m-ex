@@ -34,9 +34,7 @@
   beq grFunctionSkip
 
 #Reloc
-  lwz r3,grX_InstructionRelocTableCount(REG_grFunction)  #count
-  lwz r4,grX_Code(REG_grFunction)                        #code
-  lwz r5,grX_InstructionRelocTable(REG_grFunction)       #reloc table
+  mr r3, REG_grFunction
   branchl r12,Reloc
 #Overload
   mr  r3,REG_grFunction

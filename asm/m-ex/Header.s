@@ -29,6 +29,30 @@
 .set  PersistHeapNum, 5 + 2
 .set  FighterHeapReduction,500*1000     # free up 500kb from fighter heap
 
+#xFunction struct
+  .set  ftX_Code,0x0
+  .set  ftX_InstructionRelocTable,0x4
+  .set  ftX_InstructionRelocTableCount,0x8
+  .set  ftX_FunctionRelocTable,0xC
+    .set  FunctionRelocTable_ReplaceThis,0x0
+    .set  FunctionRelocTable_ReplaceWith,0x4
+  .set  ftX_FunctionRelocTableCount,0x10
+  .set  ftX_CodeSize,0x14
+  .set  ftX_DebugSymCount,0x18
+  .set  ftX_DebugSym,0x1C
+    .set ftX_DebugSym_Start, 0x0
+    .set ftX_DebugSym_End, ftX_DebugSym_Start + 0x4
+    .set ftX_DebugSym_FuncName, ftX_DebugSym_End + 0x4
+    .set ftX_DebugSym_Size, ftX_DebugSym_FuncName + 0x4
+
+#xFunction Lookup struct
+  .set xFuncLookup_Num, 0x0   # number of xFunctions indexed currently
+  .set xFuncLookup_Start, 0x4 
+    .set xFuncLookup_Start_xFunc, 0x0
+    .set xFuncLookup_Start_Size, xFuncLookup_Start_xFunc + 0x4
+
+  .set xFuncLookup_Max, 20
+
 #mexSelectChr Offsets
 .set  OFST_mexSelectChr,-0x472C
 .set  OFST_mexSelectChr_IconJoint,-0x4728 #originally SceneLoad_Adventure mode static pointers (8031dea0)
@@ -361,8 +385,9 @@
 .set  OFST_PtclRuntime4, OFST_PtclRuntimeTexGrData + 0x4
 .set  OFST_PtclRuntimePtclLast, OFST_PtclRuntime4 + 0x4
 .set  OFST_PtclRuntimePtclData, OFST_PtclRuntimePtclLast + 0x4
+.set  OFST_XFunctionLookup, OFST_PtclRuntimePtclData + 0x4
 #Chr
-.set  OFST_Menu_Param,OFST_PtclRuntimePtclData+0x4
+.set  OFST_Menu_Param,OFST_XFunctionLookup+0x4
 #Map
 .set  OFST_Menu_SSS,OFST_Menu_Param+0x4
 .set  OFST_Map_StageIDs,OFST_Menu_SSS+0x4

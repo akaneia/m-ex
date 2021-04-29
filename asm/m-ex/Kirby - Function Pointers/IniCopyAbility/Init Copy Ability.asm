@@ -2,15 +2,6 @@
 .include "../../../Globals.s"
 .include "../../Header.s"
 
-#ftX struct
-  .set  ftX_Code,0x0
-  .set  ftX_InstructionRelocTable,0x4
-  .set  ftX_InstructionRelocTableCount,0x8
-  .set  ftX_FunctionRelocTable,0xC
-    .set  FunctionRelocTable_ReplaceThis,0x0
-    .set  FunctionRelocTable_ReplaceWith,0x4
-  .set  ftX_FunctionRelocTableCount,0x10
-
 .set  REG_PlayerData,31
 .set  REG_InternalID,30
 .set  REG_Archive,29
@@ -34,9 +25,7 @@ backup
   mr.  REG_kbFunction,r3
   beq kbFunction_Skip
 #Reloc
-  lwz r3,ftX_InstructionRelocTableCount(REG_kbFunction)  #count
-  lwz r4,ftX_Code(REG_kbFunction)                        #code
-  lwz r5,ftX_InstructionRelocTable(REG_kbFunction)       #reloc table
+  mr r3, REG_kbFunction
   branchl r12,Reloc
 #Overload
   mr  r3,REG_kbFunction
