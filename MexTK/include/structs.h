@@ -174,6 +174,7 @@ typedef struct DmgHazard DmgHazard;
 typedef struct CollLineInfo CollLineInfo;
 typedef struct CollLine CollLine;
 typedef struct CollVert CollVert;
+typedef struct CollLineUnk CollLineUnk;
 typedef struct CollDataStage CollDataStage;
 typedef struct CollGroupDesc CollGroupDesc;
 typedef struct CollGroup CollGroup;

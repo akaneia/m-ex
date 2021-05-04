@@ -344,7 +344,7 @@ float Math_Vec2Distance(Vec2 *a, Vec2 *b)
 
 float Math_Vec3Distance(Vec3 *a, Vec3 *b)
 {
-    return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2));
+    return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2) + pow((a->Z - b->Z), 2));
 }
 
 #endif

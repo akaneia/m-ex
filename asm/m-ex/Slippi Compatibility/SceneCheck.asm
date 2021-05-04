@@ -11,8 +11,6 @@
 # r3 - Common ID for the current minor scene
 ################################################################################
 
-.include "Common/Common.s"
-
 .set REG_MINOR_ID, 31
 .set REG_MAJOR_ID, 30
 .set REG_MAJOR_TABLE_START, 29

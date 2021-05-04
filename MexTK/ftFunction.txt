@@ -1,5 +1,5 @@
 onload
-onspawn
+onrespawn
 onunknown
 move_logic
 specialn
@@ -23,7 +23,7 @@ onhit
 onunknowneyetexturerelated
 onframe
 onactionstatechange
-onrespawn
+resetattributes
 onmodelrender
 onshadowrender
 onunknownmultijump

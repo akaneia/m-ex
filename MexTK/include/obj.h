@@ -498,6 +498,7 @@ u8 *obj_kind = R13 + -(0x3E55);
 /*** Functions ***/
 int JOBJ_GetWorldPosition(JOBJ *source, Vec3 *add, Vec3 *dest);
 void JOBJ_SetMtxDirtySub(JOBJ *jobj);
+void JOBJ_SetupMtxSub(JOBJ *jobj);
 void JOBJ_MakeMatrix(JOBJ *jobj);
 JOBJ *JOBJ_LoadDummy();
 JOBJ *JOBJ_LoadJoint(JOBJDesc *joint);

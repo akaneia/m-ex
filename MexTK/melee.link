@@ -51,6 +51,7 @@
 80048160:Coll_CheckLedge
 80041C8C:Coll_ECBCurrToPrev
 80041EE4:Coll_InitECB
+8004220c:Coll_SetECBScale
 8004CAA0:Collision_CheckCeilingCollision
 8004CB78:Collision_CheckGroundCollision
 8004CB30:Collision_CheckLeftWallCollision
@@ -101,6 +102,8 @@
 800115F4:Dynamics_DecayWind
 80096CC8:ECB_CheckToFallThroughPlatform
 800475F4:ECB_CollAir
+800471f8:ECB_CollAir2
+8004b108:ECB_CollGround
 8004B21C:ECB_CollGround_PassLedge
 8005B880:Effect_DestroyAll
 8005BA40:Effect_PauseAll
@@ -155,6 +158,7 @@
 80096900:Fighter_EnterSpecialFall
 800D5CB0:Fighter_EnterSpecialLanding
 8008A2BC:Fighter_EnterWait
+800c3be8:Fighter_EnterAirCatch
 8007F694:Fighter_GetBaseScale
 80075e78:Fighter_GetBoneRotX
 80075F48:Fighter_GetBoneRotY
@@ -202,6 +206,7 @@
 80085134:Fighter_Phys_UseAnimPos
 80085154:Fighter_Phys_UseAnimPosAndStick
 800851C0:Fighter_Phys_UseAnimYVelocity
+8007d528:Fighter_PhysAir_CheckFastfall
 8007D494:Fighter_PhysAir_ApplyGravity
 80084DB0:Fighter_PhysAir_ApplyGravityFastfall
 80084eec:Fighter_PhysAir_ApplyGravityDecayX
@@ -283,6 +288,7 @@
 80054DFC:GrColl_GetLineSlope
 800567C0:GrColl_GetPosDifference
 8004F008:GrColl_RaycastGround
+8004F008:GrColl_RaycastWall
 800121FC:GX_AllocImageData
 80390EB8:GX_LookupRenderPass
 8033E78C:GXGetTexBufferSize
@@ -384,6 +390,7 @@
 80371D00:JOBJ_SetFlags
 80371D9C:JOBJ_SetFlagsAll
 803732E8:JOBJ_SetMtxDirtySub
+80373078:JOBJ_SetupMtxSub
 80011c18:JOBJ_EnableFlagAllMOBJ
 80213250:JOBJ_CompileTEVAllMOBJ
 8000c1c0:JOBJ_AttachPosition
@@ -482,6 +489,8 @@
 8039D048:psDeletePntJObjwithParticle
 8039D3AC:psKillGenerator
 803421D0:PSMTXCopy
+803421a4:PSMTXIdentity
+80342204:PSMTXConcat
 803A4344:psRemoveParticleAppSRT
 801a4310:Scene_GetCurrentMajor
 801a42c4:Scene_GetCurrentMinor
@@ -532,6 +541,7 @@
 801C2D24:Stage_GetGeneralPoint
 80054C6C:Stage_GetLinesDirection
 80056B6C:Stage_GetLinesGroup
+8005ab54:Stage_GetLinesUnk
 801C2BA4:Stage_GetMapGObj
 801C3FA4:Stage_GetMapGObjJObj
 801C0498:Stage_GetScale

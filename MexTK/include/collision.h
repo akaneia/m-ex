@@ -6,10 +6,10 @@
 #include "obj.h"
 
 // ECB Flags
-#define ECB_GROUND 0x8000
-#define ECB_CEIL 0x4000
-#define ECB_WALLLEFT 0x800
-#define ECB_WALLRIGHT 0x20
+#define ECB_GROUND 0x18000
+#define ECB_CEIL 0x6000
+#define ECB_WALLLEFT 0xfc0
+#define ECB_WALLRIGHT 0x3f
 
 // Line Directions
 #define LINE_GROUND 1
@@ -218,6 +218,15 @@ struct CollVert
     Vec2 pos_prev;
 };
 
+struct CollLineUnk
+{
+    int x0;
+    s16 x4;
+    s16 x6;
+    Vec3 left;  // 0x8
+    Vec3 right; // 0x14
+};
+
 struct CollDataStage
 {
     void *verts;
@@ -241,8 +250,11 @@ struct CollDataStage
 /*** Functions ***/
 void Coll_ECBCurrToPrev(CollData *coll_data);
 void Coll_InitECB(CollData *coll_data);
+void Coll_SetECBScale(CollData *coll_data, float scale1, float scale2, float scale3, float scale4);
 int ECB_CollGround_PassLedge(CollData *ecb, ECBSize *bones); // returns is touching ground bool
 void ECB_CollAir(CollData *ecb, ECBSize *bones);
+int ECB_CollAir2(CollData *ecb);
+int ECB_CollGround(CollData *ecb);
 void GrColl_GetLedgeLeft(int floor_index, Vec3 *pos);                                                                                                                                            // this functon will crawl along the entire line sequence and find the end of the ledge
 void GrColl_GetLedgeRight(int floor_index, Vec3 *pos);                                                                                                                                           // this functon will crawl along the entire line sequence and find the end of the ledge
 void GrColl_GetLedgeLeft2(int floor_index, Vec3 *pos);                                                                                                                                           // this functon will crawl along the entire line sequence and find the end of the ledge

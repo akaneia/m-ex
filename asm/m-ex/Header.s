@@ -51,7 +51,7 @@
     .set xFuncLookup_Start_xFunc, 0x0
     .set xFuncLookup_Start_Size, xFuncLookup_Start_xFunc + 0x4
 
-  .set xFuncLookup_Max, 20
+  .set xFuncLookup_Max, 30
 
 #mexSelectChr Offsets
 .set  OFST_mexSelectChr,-0x472C
