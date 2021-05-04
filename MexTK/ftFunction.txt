@@ -36,3 +36,11 @@ onlanding
 onsmashf
 onsmashhi
 onsmashlw
+onextrstanim
+onindexextresultanim
+demomovelogic
+onthrowfw
+onthrowbk
+onthrowhi
+onthrowlw
+gettraildata
