@@ -303,6 +303,7 @@
 8033CCD0:GXWaitDrawDone
 8000ACFC:Hitbox_CheckIfPreviouslyHit
 80008688:Hitbox_SetAsPreviouslyHit
+8007aff8:Hitbox_DisableAll
 8037F1B0:HSD_Free
 80375404:HSD_GetHeapID
 800122C8:HSD_ImageDescCopyFromEFB

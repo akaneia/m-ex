@@ -252,6 +252,11 @@
   .set  Arch_FighterFunc_onGetExtResultAnim,0x98
   .set  Arch_FighterFunc_onIndexExtResultAnim,0x9C
   .set  Arch_FighterFunc_MoveLogicDemo,0xA0
+  .set  Arch_FighterFunc_onThrowF,0xA4
+  .set  Arch_FighterFunc_onThrowB,0xA8
+  .set  Arch_FighterFunc_onThrowHi,0xAC
+  .set  Arch_FighterFunc_onThrowLw,0xB0
+  .set  Arch_FighterFunc_GetTrailData,0xB4
 .set  Arch_FGM,0x10
   .set  Arch_FGM_Files,0x0
   .set  Arch_FGM_Flags,0x4
