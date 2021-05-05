@@ -1,8 +1,7 @@
-#To be inserted @ 800c2798
+#To be inserted @ 800c278c
 .include "../../Globals.s"
 .include "../Header.s"
 
 .set REG_FighterData, 28
 
-bgt 0x7e4
-
+bgt 0xC8

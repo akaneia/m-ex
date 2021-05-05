@@ -827,9 +827,12 @@ struct AfterImageDesc
 {
     float x0;            // 0x0
     float x4;            // 0x4
-    GXColor color;       // 0x8
-    GXColor color2;      // 0xC
-    GXColor color3;      // 0x10
+    u8 start_alpha;      // 0x8
+    u8 end_alpha;        // 0x8
+    u8 in_col[4];        // 0xA
+    u8 out_col[4];       // 0xE
+    u8 x12;              // 0x12
+    u8 x13;              // 0x13
     int bone_index;      // 0x14
     float offset_bottom; // 0x18
     float offset_top;    // 0x1C
@@ -2290,142 +2293,142 @@ struct FighterData
         Vec3 offset;                  // 0x1a1c
         float size_mult;              // 0x1a28
     } absorb_bubble;
-    struct reflect_hit                        // 0x1a2c
-    {                                         //
-        float hit_direction;                  // 0x1a2c
-        int max_dmg;                          // 0x1a30
-        float dmg_mult;                       // 0x1a34
-        int is_break;                         // 0x1a38
-    } reflect_hit;                            //
-    struct absorb_hit                         // 0x1a40
-    {                                         //
-        int x1a3c;                            // 0x1a3c
-        float hit_direction;                  // 0x1a40
-        int dmg_taken;                        // 0x1a44
-        int hits_taken;                       // 0x1a48
-    } absorb_hit;                             //
-    struct grab                               // 0x1a4c
-    {                                         //
-        float grab_timer;                     // 0x1a4c
-        int x1a50;                            // 0x1a50
-        int x1a54;                            // 0x1a54
-        GOBJ *attacker;                       // 0x1a58
-        GOBJ *victim;                         // 0x1a5c
-        int x1a60;                            // 0x1a60
-        int x1a64;                            // 0x1a64
-        u16 x1a68;                            // 0x1a68
-        u16 vuln;                             // 0x1a6a
-        int x1a6c;                            // 0x1a6c
-        int x1a70;                            // 0x1a70
-        int x1a74;                            // 0x1a74
-        int x1a78;                            // 0x1a78
-        int x1a7c;                            // 0x1a7c
-        int x1a80;                            // 0x1a80
-        int x1a84;                            // 0x1a84
-    } grab;                                   //
-    CPU cpu;                                  // 0x1a88
-    int x1fe0;                                // 0x1fe0
-    int x1fe4;                                // 0x1fe4
-    int x1fe8;                                // 0x1fe8
-    int x1fec;                                // 0x1fec
-    int x1ff0;                                // 0x1ff0
-    int x1ff4;                                // 0x1ff4
-    int x1ff8;                                // 0x1ff8
-    int x1ffc;                                // 0x1ffc
-    int x2000;                                // 0x2000
-    int x2004;                                // 0x2004
-    int x2008;                                // 0x2008
-    int x200c;                                // 0x200c
-    int x2010;                                // 0x2010
-    int x2014;                                // 0x2014
-    int x2018;                                // 0x2018
-    int x201c;                                // 0x201c
-    int x2020;                                // 0x2020
-    int x2024;                                // 0x2024
-    int x2028;                                // 0x2028
-    int x202c;                                // 0x202c
-    int x2030;                                // 0x2030
-    int x2034;                                // 0x2034
-    int x2038;                                // 0x2038
-    int x203c;                                // 0x203c
-    int x2040;                                // 0x2040
-    int x2044;                                // 0x2044
-    int x2048;                                // 0x2048
-    int x204c;                                // 0x204c
-    int x2050;                                // 0x2050
-    int x2054;                                // 0x2054
-    int x2058;                                // 0x2058
-    int x205c;                                // 0x205c
-    int x2060;                                // 0x2060
-    int ledge_cooldown;                       // 0x2064
-    int atk_kind;                             // 0x2068, non attacks have id 1
-    int x206c;                                // 0x206c
-    u8 x2070;                                 // 0x2070
-    u8 x2071;                                 // 0x2071
-    u8 x2072;                                 // 0x2072
-    u8 x2073;                                 // 0x2073
-    int x2074;                                // 0x2074
-    int x2078;                                // 0x2078
-    int x207c;                                // 0x207c
-    int x2080;                                // 0x2080
-    int x2084;                                // 0x2084
-    u16 atk_instance;                         // 0x2088, Contains an ID unique to the current move instance. e.g, if two dairs are done back to back, this ID will differ to tell them apart from each other. It is stored to 0x18EC of the victim upon colliding with someone.
-    int x208c;                                // 0x208c
-    int x2090;                                // 0x2090
-    int x2094;                                // 0x2094
-    int x2098;                                // 0x2098
-    int x209c;                                // 0x209c
-    JOBJ *accessory;                          // 0x20a0
-    int x20a4;                                // 0x20a4
-    void *shadow;                             // 0x20a8, ASSERTS @ 8037f7b8, describes multiple struct members
-    int x20ac;                                // 0x20ac
-    struct afterimage                         //
-    {                                         //
-        struct FtAfterImageKey afterimage[3]; // 0x20b0
-        float afterimage_bottom;              // 0x20f8
-        float afterimage_top;                 // 0x20fc
-        u8 afterimage_state;                  // 0x2100
-        unsigned char afterimage_num : 7;     // 0x2101
-    } afterimage;                             //
-    int x2104;                                // 0x2104
-    int x2108;                                // 0x2108
-    int x210c;                                // 0x210c
-    int x2110;                                // 0x2110
-    struct smash                              // 0x2114
-    {                                         //
-        int state;                            // 0x2114 0 = none, 1 = pre-charge, 2 = charging, 3 = release
-        int frame;                            // 0x2118 number of frames fighter has charged for
-        float hold_frame;                     // 0x211c frame that charge begins/ends
-        float dmg_mult;                       // 0x2120 damage multiplier
-        float speed_mult;                     // 0x2124 speed multiplier?
-        int x2128;                            // 0x2128
-        int x212c;                            // 0x212c
-        int is_sfx_played;                    // 0x2130 bool for smash sfx?
-        u8 vibrate_frame;                     // 0x2134
-        u8 x22135;                            // 0x2135
-        float since_hitbox;                   // 0x2138
-    } smash;                                  //
-    int x213c;                                // 0x213c
-    int x2140;                                // 0x2140
-    int x2144;                                // 0x2144
-    int x2148;                                // 0x2148
-    int x214c;                                // 0x214c
-    int x2150;                                // 0x2150
-    int x2154;                                // 0x2154
-    int x2158;                                // 0x2158
-    int x215c;                                // 0x215c
-    int x2160;                                // 0x2160
-    int x2164;                                // 0x2164
-    int x2168;                                // 0x2168
-    int x216c;                                // 0x216c
-    int x2170;                                // 0x2170
-    int x2174;                                // 0x2174
-    int x2178;                                // 0x2178
-    int x217c;                                // 0x217c
-    int x2180;                                // 0x2180
-    int x2184;                                // 0x2184
-    int x2188;                                // 0x2188
-    int x218c;                                // 0x218c
+    struct reflect_hit                    // 0x1a2c
+    {                                     //
+        float hit_direction;              // 0x1a2c
+        int max_dmg;                      // 0x1a30
+        float dmg_mult;                   // 0x1a34
+        int is_break;                     // 0x1a38
+    } reflect_hit;                        //
+    struct absorb_hit                     // 0x1a40
+    {                                     //
+        int x1a3c;                        // 0x1a3c
+        float hit_direction;              // 0x1a40
+        int dmg_taken;                    // 0x1a44
+        int hits_taken;                   // 0x1a48
+    } absorb_hit;                         //
+    struct grab                           // 0x1a4c
+    {                                     //
+        float grab_timer;                 // 0x1a4c
+        int x1a50;                        // 0x1a50
+        int x1a54;                        // 0x1a54
+        GOBJ *attacker;                   // 0x1a58
+        GOBJ *victim;                     // 0x1a5c
+        int x1a60;                        // 0x1a60
+        int x1a64;                        // 0x1a64
+        u16 x1a68;                        // 0x1a68
+        u16 vuln;                         // 0x1a6a
+        int x1a6c;                        // 0x1a6c
+        int x1a70;                        // 0x1a70
+        int x1a74;                        // 0x1a74
+        int x1a78;                        // 0x1a78
+        int x1a7c;                        // 0x1a7c
+        int x1a80;                        // 0x1a80
+        int x1a84;                        // 0x1a84
+    } grab;                               //
+    CPU cpu;                              // 0x1a88
+    int x1fe0;                            // 0x1fe0
+    int x1fe4;                            // 0x1fe4
+    int x1fe8;                            // 0x1fe8
+    int x1fec;                            // 0x1fec
+    int x1ff0;                            // 0x1ff0
+    int x1ff4;                            // 0x1ff4
+    int x1ff8;                            // 0x1ff8
+    int x1ffc;                            // 0x1ffc
+    int x2000;                            // 0x2000
+    int x2004;                            // 0x2004
+    int x2008;                            // 0x2008
+    int x200c;                            // 0x200c
+    int x2010;                            // 0x2010
+    int x2014;                            // 0x2014
+    int x2018;                            // 0x2018
+    int x201c;                            // 0x201c
+    int x2020;                            // 0x2020
+    int x2024;                            // 0x2024
+    int x2028;                            // 0x2028
+    int x202c;                            // 0x202c
+    int x2030;                            // 0x2030
+    int x2034;                            // 0x2034
+    int x2038;                            // 0x2038
+    int x203c;                            // 0x203c
+    int x2040;                            // 0x2040
+    int x2044;                            // 0x2044
+    int x2048;                            // 0x2048
+    int x204c;                            // 0x204c
+    int x2050;                            // 0x2050
+    int x2054;                            // 0x2054
+    int x2058;                            // 0x2058
+    int x205c;                            // 0x205c
+    int x2060;                            // 0x2060
+    int ledge_cooldown;                   // 0x2064
+    int atk_kind;                         // 0x2068, non attacks have id 1
+    int x206c;                            // 0x206c
+    u8 x2070;                             // 0x2070
+    u8 x2071;                             // 0x2071
+    u8 x2072;                             // 0x2072
+    u8 x2073;                             // 0x2073
+    int x2074;                            // 0x2074
+    int x2078;                            // 0x2078
+    int x207c;                            // 0x207c
+    int x2080;                            // 0x2080
+    int x2084;                            // 0x2084
+    u16 atk_instance;                     // 0x2088, Contains an ID unique to the current move instance. e.g, if two dairs are done back to back, this ID will differ to tell them apart from each other. It is stored to 0x18EC of the victim upon colliding with someone.
+    int x208c;                            // 0x208c
+    int x2090;                            // 0x2090
+    int x2094;                            // 0x2094
+    int x2098;                            // 0x2098
+    int x209c;                            // 0x209c
+    JOBJ *accessory;                      // 0x20a0
+    int x20a4;                            // 0x20a4
+    void *shadow;                         // 0x20a8, ASSERTS @ 8037f7b8, describes multiple struct members
+    int x20ac;                            // 0x20ac
+    struct afterimage                     //
+    {                                     //
+        struct FtAfterImageKey key[3];    // 0x20b0
+        float afterimage_bottom;          // 0x20f8
+        float afterimage_top;             // 0x20fc
+        u8 afterimage_state;              // 0x2100
+        unsigned char afterimage_num : 7; // 0x2101
+    } afterimage;                         //
+    int x2104;                            // 0x2104
+    int x2108;                            // 0x2108
+    int x210c;                            // 0x210c
+    int x2110;                            // 0x2110
+    struct smash                          // 0x2114
+    {                                     //
+        int state;                        // 0x2114 0 = none, 1 = pre-charge, 2 = charging, 3 = release
+        int frame;                        // 0x2118 number of frames fighter has charged for
+        float hold_frame;                 // 0x211c frame that charge begins/ends
+        float dmg_mult;                   // 0x2120 damage multiplier
+        float speed_mult;                 // 0x2124 speed multiplier?
+        int x2128;                        // 0x2128
+        int x212c;                        // 0x212c
+        int is_sfx_played;                // 0x2130 bool for smash sfx?
+        u8 vibrate_frame;                 // 0x2134
+        u8 x22135;                        // 0x2135
+        float since_hitbox;               // 0x2138
+    } smash;                              //
+    int x213c;                            // 0x213c
+    int x2140;                            // 0x2140
+    int x2144;                            // 0x2144
+    int x2148;                            // 0x2148
+    int x214c;                            // 0x214c
+    int x2150;                            // 0x2150
+    int x2154;                            // 0x2154
+    int x2158;                            // 0x2158
+    int x215c;                            // 0x215c
+    int x2160;                            // 0x2160
+    int x2164;                            // 0x2164
+    int x2168;                            // 0x2168
+    int x216c;                            // 0x216c
+    int x2170;                            // 0x2170
+    int x2174;                            // 0x2174
+    int x2178;                            // 0x2178
+    int x217c;                            // 0x217c
+    int x2180;                            // 0x2180
+    int x2184;                            // 0x2184
+    int x2188;                            // 0x2188
+    int x218c;                            // 0x218c
     struct cb
     {
         void (*OnGrabFighter_Self)(GOBJ *fighter);   // 0x2190
