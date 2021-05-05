@@ -823,6 +823,18 @@ struct AbsorbDesc
     float radius;
 };
 
+struct AfterImageDesc
+{
+    float x0;            // 0x0
+    float x4;            // 0x4
+    GXColor color;       // 0x8
+    GXColor color2;      // 0xC
+    GXColor color3;      // 0x10
+    int bone_index;      // 0x14
+    float offset_bottom; // 0x18
+    float offset_top;    // 0x1C
+};
+
 struct HitVictim
 {
     GOBJ *victim_gobj; // the gobj that was hit

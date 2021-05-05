@@ -117,6 +117,7 @@ typedef struct FtHurt FtHurt;
 typedef struct ReflectDesc ReflectDesc;
 typedef struct ShieldDesc ShieldDesc;
 typedef struct AbsorbDesc AbsorbDesc;
+typedef struct AfterImageDesc AfterImageDesc;
 typedef struct CPU CPU;
 typedef struct ftData ftData;
 typedef struct ftCommonData ftCommonData;
