@@ -2843,7 +2843,11 @@ void Fighter_EnterLanding(GOBJ *fighter);
 void Fighter_EnterSpecialLanding(GOBJ *fighter, int unk, float state_length);
 void Fighter_EnterSleep(GOBJ *fighter, int ms);
 void Fighter_EnterEntry(GOBJ *fighter);
+int Fighter_CheckNearbyLedges(GOBJ *fighter);
+int Fighter_CheckForOtherFighterOnLedge(GOBJ *fighter);
+void Fighter_EnterCliffCatch(GOBJ *fighter);
 void Fighter_EnterCliffWait(GOBJ *fighter);
+void Fighter_EnterCliffJumpSlow2(GOBJ *fighter, float y_velocity);
 void Fighter_EnterRebirth(GOBJ *fighter);
 void Fighter_EnterRebirthWait(GOBJ *fighter);
 void Fighter_UpdateRebirthPlatformPos(GOBJ *fighter);
@@ -2877,6 +2881,7 @@ int Fighter_CollAir_GrabLedgeWalljump(GOBJ *fighter, void *perFrame, void *onLan
 int Fighter_CollAir_GrabLedge(GOBJ *fighter, int grab_direction);
 void Fighter_CollAir_IgnoreLedge(GOBJ *fighter, void *callback);
 int Fighter_CollAir_IgnoreLedge_NoCB(GOBJ *fighter);
+int Fighter_CollAir_SoftLanding(GOBJ *fighter);
 int Fighter_CollAir_DefineECB(GOBJ *fighter, ECBSize *ecb);
 int Fighter_Coll_CheckToPass(GOBJ *fighter, int floor_type); // usually used as a callback, pass = fall through platform
 int Fighter_IASACheck_CliffCatch(GOBJ *fighter);
@@ -2888,7 +2893,7 @@ int Fighter_IASACheck_Turn(GOBJ *fighter);
 void Fighter_PhysGround_ApplyFriction(GOBJ *fighter);
 void Fighter_PhysGround_ApplyCustomFriction(FighterData *fighter, float friction);
 void Fighter_PhysGround_UnkFriction(GOBJ *fighter);
-void Fighter_PhysAir_CheckFastfall(GOBJ *fighter);
+void Fighter_PhysAir_CheckFastfall(FighterData *fighter);
 void Fighter_PhysAir_ApplyGravityDecayX(GOBJ *);
 void Fighter_PhysAir_ApplyGravityFastfall(GOBJ *);
 void Fighter_PhysAir_ApplyGravity(FighterData *fighter, float gravity, float limit);

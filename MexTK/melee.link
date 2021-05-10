@@ -128,6 +128,7 @@
 800831CC:Fighter_CollAir_GrabLedgeWalljump
 80082C74:Fighter_CollAir_IgnoreLedge
 80081D0C:Fighter_CollAir_IgnoreLedge_NoCB
+80082b78:Fighter_CollAir_SoftLanding
 800824a0:Fighter_CollAir_DefineECB
 80082708:Fighter_CollGround_PassLedge
 80084104:Fighter_CollGround_StopLedge_EnterFall
@@ -144,7 +145,11 @@
 8008A6D8:Fighter_DisableBlend
 8007D5BC:Fighter_EnableCollUpdate
 8007AEF8:Fighter_EnableReflectUpdate
+800c3a14:Fighter_CheckNearbyLedges
+80082e3c:Fighter_CheckForOtherFighterOnLedge
+80081370:Fighter_EnterCliffCatch
 8009A804:Fighter_EnterCliffWait
+8009b390:Fighter_EnterCliffJumpSlow2
 80090780:Fighter_EnterDamageFall
 8008DCE0:Fighter_EnterDamageState
 800C61B0:Fighter_EnterEntry
@@ -288,7 +293,8 @@
 80054DFC:GrColl_GetLineSlope
 800567C0:GrColl_GetPosDifference
 8004F008:GrColl_RaycastGround
-8004F008:GrColl_RaycastWall
+8004F008:GrColl_RaycastGround2
+800524dc:GrColl_RaycastWall
 800121FC:GX_AllocImageData
 80390EB8:GX_LookupRenderPass
 8033E78C:GXGetTexBufferSize
