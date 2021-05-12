@@ -2233,7 +2233,7 @@ struct FighterData
         float x1954;               // 0x1954,
         float hitlag_env_frames;   // 0x1958, Environment Hitlag Counter (used for peachs castle switches)
         float hitlag_frames;       // 0x195c
-        int vibrate_mult;          // 0x1960
+        float vibrate_mult;        // 0x1960
         float x1964;               // 0x1964
     } dmg;                         //
     struct jump                    // 0x1968
