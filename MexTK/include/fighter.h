@@ -1372,7 +1372,7 @@ struct ftCommonData
     float x198;                   // 0x198
     float x19c;                   // 0x19c
     float x1a0;                   // 0x1a0
-    float x1a4;                   // 0x1a4
+    float hitlag_elec;            // 0x1a4
     float tdi_maxAngle;           // 0x1a8
     float x1ac;                   // 0x1ac
     float x1b0;                   // 0x1b0

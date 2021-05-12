@@ -726,54 +726,54 @@ struct ItemData
     float ecb_left;                                     // 0xc28
     int xc2c;                                           // 0xc2c
     int xc30;                                           // 0xc30
-    int xc34;                                           // 0xc34
-    int xc38;                                           // 0xc38
-    int xc3c;                                           // 0xc3c
-    int xc40;                                           // 0xc40
-    int xc44;                                           // 0xc44
-    int xc48;                                           // 0xc48
-    int xc4c;                                           // 0xc4c
-    int xc50;                                           // 0xc50
-    int xc54;                                           // 0xc54
-    int xc58;                                           // 0xc58
-    int xc5c;                                           // 0xc5c
-    int xc60;                                           // 0xc60
-    GOBJ *reflect;                                      // 0xc64
-    int xc68;                                           // 0xc68
-    int xc6c;                                           // 0xc6c
-    int xc70;                                           // 0xc70
-    int xc74;                                           // 0xc74
-    int xc78;                                           // 0xc78
-    int xc7c;                                           // 0xc7c
-    int xc80;                                           // 0xc80
-    int xc84;                                           // 0xc84
-    int xc88;                                           // 0xc88
-    int xc8c;                                           // 0xc8c
-    GOBJ *xc90;                                         // 0xc90
-    int xc94;                                           // 0xc94
-    int xc98;                                           // 0xc98
     struct                                              // 0xc9c
     {                                                   //
+        int dealt;                                      // 0xc34, rounded down
+        int xc38;                                       // 0xc38
+        int xc3c;                                       // 0xc3c
+        int xc40;                                       // 0xc40
+        int xc44;                                       // 0xc44
+        int xc48;                                       // 0xc48
+        int xc4c;                                       // 0xc4c
+        int xc50;                                       // 0xc50
+        int xc54;                                       // 0xc54
+        int xc58;                                       // 0xc58
+        int xc5c;                                       // 0xc5c
+        int xc60;                                       // 0xc60
+        GOBJ *reflect;                                  // 0xc64
+        float xc68;                                     // 0xc68
+        int xc6c;                                       // 0xc6c
+        int xc70;                                       // 0xc70
+        int xc74;                                       // 0xc74
+        int xc78;                                       // 0xc78
+        int xc7c;                                       // 0xc7c
+        int xc80;                                       // 0xc80
+        int xc84;                                       // 0xc84
+        int xc88;                                       // 0xc88
+        int xc8c;                                       // 0xc8c
+        GOBJ *xc90;                                     // 0xc90
+        int xc94;                                       // 0xc94
+        int xc98;                                       // 0xc98
         int total;                                      // 0xc9c
         int recent;                                     // 0xca0
         int xca4;                                       // 0xca4
-        int xca8;                                       // 0xca8
+        int xca8;                                       // 0xca8, hitlag related
         int angle;                                      // 0xcac
-        int xcb0;                                       // 0xcb0
+        int source_ply;                                 // 0xcb0, damage source ply number
         int xcb4;                                       // 0xcb4
-        int xcb8;                                       // 0xcb8
+        float xcb8;                                     // 0xcb8
         int xcbc;                                       // 0xcbc
         int xcc0;                                       // 0xcc0
         int xcc4;                                       // 0xcc4
         float kb;                                       // 0xcc8
         float direction;                                // 0xccc
-        int xcd0;                                       // 0xcd0
-        int xcd4;                                       // 0xcd4
-        int xcd8;                                       // 0xcd8
-        int xcdc;                                       // 0xcdc
-        int xce0;                                       // 0xce0
-        int xce4;                                       // 0xce4
-        int xce8;                                       // 0xce8
+        float xcd0;                                     // 0xcd0
+        float xcd4;                                     // 0xcd4
+        float xcd8;                                     // 0xcd8
+        float xcdc;                                     // 0xcdc
+        float xce0;                                     // 0xce0
+        float xce4;                                     // 0xce4
+        float xce8;                                     // 0xce8
         GOBJ *source_fighter;                           // 0xcec
         GOBJ *source_item;                              // 0xcf0
     } dmg;                                              //
@@ -848,7 +848,7 @@ struct ItemData
     int xdc4;                                           // 0xdc4
     u8 xdc8 : 8;                                        // 0xdc8
     u8 xdc9_1 : 1;                                      // 0xdc9, 0x80
-    u8 is_hitlag : 1;                                   // 0xdc9, 0x40
+    u8 hitlag : 1;                                      // 0xdc9, 0x40
     u8 xdc9_3 : 6;                                      // 0xdc9, 0x3F
     u16 xdca1 : 1;                                      // 0xdca 0x80
     u16 xdca2 : 1;                                      // 0xdca 0x40
