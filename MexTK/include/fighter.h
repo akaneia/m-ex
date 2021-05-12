@@ -2503,7 +2503,7 @@ struct FighterData
         unsigned char x221a_1 : 1;               // 0x80 - 0x221a
         unsigned char x221a_2 : 1;               // 0x40 - 0x221a
         unsigned char hitlag : 1;                // 0x20 - 0x221a
-        unsigned char hitlag_attacker : 1;       // 0x10 - 0x221a
+        unsigned char hitlag_victim : 1;         // 0x10 - 0x221a
         unsigned char is_fastfall : 1;           // 0x8 - 0x221a
         unsigned char no_hurt_script : 1;        // 0x4 - 0x221a
         unsigned char x221a_7 : 1;               // 0x2 - 0x221a
