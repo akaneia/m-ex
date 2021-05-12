@@ -39,7 +39,7 @@ void enterKnockback(GOBJ *fighter, int angle, float mag)
     fighter_data->dmg.kb_angle = angle;
     fighter_data->dmg.direction = fighter_data->facing_direction;
     fighter_data->dmg.damaged_hurtbox = 0;
-    fighter_data->dmg.dealt = 0;
+    fighter_data->dmg.applied = 0;
     fighter_data->dmg.collpos.X = fighter_data->phys.pos.X;
     fighter_data->dmg.collpos.Y = fighter_data->phys.pos.Y;
     fighter_data->dmg.collpos.Z = fighter_data->phys.pos.Z;
