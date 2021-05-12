@@ -1368,7 +1368,7 @@ struct ftCommonData
     float x188;                   // 0x188
     float x18c;                   // 0x18c
     float x190;                   // 0x190
-    float x194;                   // 0x194
+    float hitlag_max;             // 0x194
     float x198;                   // 0x198
     float x19c;                   // 0x19c
     float x1a0;                   // 0x1a0
@@ -2159,14 +2159,14 @@ struct FighterData
         float percent;             // 0x1830
         int x1834;                 // 0x1834
         float percent_temp;        // 0x1838
-        float applied;             // 0x183c
+        int applied;               // 0x183c
         int x1840;                 // 0x1840
         float direction;           // 0x1844
         int kb_angle;              // 0x1848
         int damaged_hurtbox;       // 0x184c
         float force_applied;       // 0x1850
         Vec3 collpos;              // 0x1854
-        int dealt;                 // 0x1860
+        int x1860;                 // 0x1860
         int x1864;                 // 0x1864
         GOBJ *source;              // 0x1868
         int x186c;                 // 0x186c
@@ -2233,9 +2233,9 @@ struct FighterData
         float x1954;               // 0x1954,
         float hitlag_env_frames;   // 0x1958, Environment Hitlag Counter (used for peachs castle switches)
         float hitlag_frames;       // 0x195c
+        int vibrate_mult;          // 0x1960
+        float x1964;               // 0x1964
     } dmg;                         //
-    int x1960;                     // 0x1960
-    float x1964;                   // 0x1964
     struct jump                    // 0x1968
     {                              //
         char jumps_used;           // 0x1968
@@ -2503,7 +2503,7 @@ struct FighterData
         unsigned char x221a_1 : 1;               // 0x80 - 0x221a
         unsigned char x221a_2 : 1;               // 0x40 - 0x221a
         unsigned char hitlag : 1;                // 0x20 - 0x221a
-        unsigned char x221a_4 : 1;               // 0x10 - 0x221a
+        unsigned char hitlag_attacker : 1;       // 0x10 - 0x221a
         unsigned char is_fastfall : 1;           // 0x8 - 0x221a
         unsigned char no_hurt_script : 1;        // 0x4 - 0x221a
         unsigned char x221a_7 : 1;               // 0x2 - 0x221a
@@ -2984,4 +2984,6 @@ void Fighter_VisTableGet(GOBJ *fighter, int vis_index);
 void Fighter_VisTableSet(GOBJ *fighter, int vis_index, int val); // val = -1 for disable, 0 for enable
 void Fighter_GiveItem(GOBJ *fighter, GOBJ *item);
 void Fighter_ReleaseItemUnk(int ply, int ms, GOBJ *item);
+void Fighter_InitDamageVibrate(FighterData *fp, int dmg, float mult, int current_state, int unk_bool);
+float Fighter_CalcHitlagFrames(int dmg, int state_id, float mult);
 #endif
