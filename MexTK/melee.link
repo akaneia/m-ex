@@ -260,6 +260,8 @@
 80074a74:Fighter_VisTableGet
 800948a8:Fighter_GiveItem
 8003e998:Fighter_ReleaseItemUnk
+80090594:Fighter_InitDamageVibrate
+8007da74:Fighter_CalcHitlagFrames
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
