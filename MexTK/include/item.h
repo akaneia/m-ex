@@ -777,7 +777,7 @@ struct ItemData
         GOBJ *source_fighter;                           // 0xcec
         GOBJ *source_item;                              // 0xcf0
     } dmg;                                              //
-    int xcf4;                                           // 0xcf4
+    GOBJ *fighter_unk;                                  // 0xcf4, fighter that hit or got hit by this item? idk what to call this
     int xcf8;                                           // 0xcf8
     int xcfc;                                           // 0xcfc
     GOBJ *grabbed_fighter;                              // 0xd00

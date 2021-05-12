@@ -730,12 +730,11 @@ struct FtDynamicHit
 
 struct ftData
 {
-    char footBoneL;
-    char footBoneR;
-    int *charAttributes; // 0x4
-    u8 *modelLookup;     // 0x8
-    int animFlags;       // 0xC
-    int animDynamics;    // 0x10
+    int *common_attr; // 0x0
+    int *ext_attr;    // 0x4
+    u8 *modelLookup;  // 0x8
+    int animFlags;    // 0xC
+    int animDynamics; // 0x10
     int x14;
     int x18;
     int x1C;
@@ -2242,7 +2241,7 @@ struct FighterData
         char jumps_used;           // 0x1968
         char walljumps_used;       // 0x1969
     } jump;                        //
-    int x196c;                     // 0x196c
+    float hitlag_mult;             // 0x196c
     int x1970;                     // 0x1970
     GOBJ *item_held;               // 0x1974
     GOBJ *x1978;                   // 0x1978
@@ -2441,7 +2440,7 @@ struct FighterData
         void (*Cam)(GOBJ *fighter);                  // 0x21ac
         void (*Accessory1)(GOBJ *fighter);           // 0x21b0
         void (*Accessory2)(GOBJ *fighter);           // 0x21b4
-        void (*Accessory3)(GOBJ *fighter);           // 0x21b8
+        void (*Accessory_Freeze)(GOBJ *fighter);     // 0x21b8, only runs during hitlag
         void (*Accessory4)(GOBJ *fighter);           // 0x21bc
         void (*OnGiveDamage)(GOBJ *fighter);         // 0x21c0
         void (*OnShieldHit)(GOBJ *fighter);          // 0x21c4
@@ -2493,7 +2492,7 @@ struct FighterData
         unsigned char x2218_6 : 1;               // 0x4 - x2218
         unsigned char absorb_enable : 1;         // 0x2 - x2218
         unsigned char absorb_unk : 1;            // 0x1 - x2218
-        unsigned char persistent_gfx : 1;        // is shielding bool. 0x80 - 0x2219
+        unsigned char persistent_gfx : 1;        // 0x80 is shielding bool. 0x80 - 0x2219
         unsigned char immune : 1;                // 0x40 - 0x2219
         unsigned char x2219_3 : 1;               // 0x20 - 0x2219
         unsigned char hitbox_active : 1;         // 0x10 - 0x2219
