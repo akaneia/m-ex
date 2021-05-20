@@ -97,7 +97,7 @@ struct MapDesc
     int (*onDeletion)(GOBJ *map);
     void (*onFrame)(GOBJ *map);
     void (*onUnk)(GOBJ *map);
-    unsigned char is_unk : 1;  //  0x80
+    unsigned char is_lobj : 1; //  0x80
     unsigned char is_fog : 1;  //  0x40
     unsigned char is_cobj : 1; //  0x20
 };
@@ -159,8 +159,7 @@ struct MapData
     int xb8;                           // 0xb8
     int xbc;                           // 0xbc
     int xc0;                           // 0xc0
-    u8 xc4;                            // 0xc4
-    u8 xc5;                            // 0xc5
+    u16 xc4;                           // 0xc4
     u8 xc6;                            // 0xc6
     u8 xc7;                            // 0xc7
     int xc8;                           // 0xc8
@@ -288,11 +287,35 @@ struct Stage
     float blastzoneRight;                                                 // 0x78
     float blastzoneTop;                                                   // 0x7c
     float blastzoneBottom;                                                // 0x80
-    int flags;                                                            // 0x84
+    u8 x84_80 : 1;                                                        // 0x84
+    u8 x84_40 : 1;                                                        // 0x84
+    u8 x84_20 : 1;                                                        // 0x84
+    u8 x84_10 : 1;                                                        // 0x84
+    u8 x84_08 : 1;                                                        // 0x84
+    u8 x84_04 : 1;                                                        // 0x84
+    u8 x84_02 : 1;                                                        // 0x84
+    u8 x84_01 : 1;                                                        // 0x84
+    u8 x85;                                                               // 0x85
+    u8 x86;                                                               // 0x86
+    u8 x87_80 : 1;                                                        // 0x87
+    u8 is_end_temple : 1;                                                 // 0x87, 0x40
+    u8 x87_20 : 1;                                                        // 0x87
+    u8 is_end_mush : 1;                                                   // 0x87, 0x10
+    u8 x87_08 : 1;                                                        // 0x87
+    u8 x87_04 : 1;                                                        // 0x87
+    u8 x87_02 : 1;                                                        // 0x87
+    u8 x87_01 : 1;                                                        // 0x87
     int stageID;                                                          // 0x88
-    int flags2;                                                           // 0x8c
-    int x90;                                                              // 0x90
-    int x94;                                                              // 0x94
+    u8 flags2x80 : 1;                                                     // 0x8c
+    u8 flags2x40 : 1;                                                     // 0x8c
+    u8 flags2x20 : 1;                                                     // 0x8c
+    u8 flags2x10 : 1;                                                     // 0x8c
+    u8 flags2x08 : 1;                                                     // 0x8c
+    u8 flags2x04 : 1;                                                     // 0x8c
+    u8 end_check_mush : 1;                                                // 0x8c
+    u8 end_check_temple : 1;                                              // 0x8c
+    int (*OnEnterEndGame1Check)(Vec3 *f_pos, int genpoint_index);         // 0x90
+    int (*OnEnterEndGame2Check)(Vec3 *f_pos, int genpoint_index);         // 0x94
     int hpsID;                                                            // 0x98
     int x9c;                                                              // 0x9c
     int xa0;                                                              // 0xa0
@@ -352,62 +375,75 @@ struct Stage
     int x178;                                                             // 0x178
     void (*OnShadowRender)(Vec3 *fighter_pos, int unk, JOBJ *stage_jobj); // 0x17c
     GOBJ *map_gobjs[64];
-    JOBJ *general_points[256]; // 0x280
-    int x680;                  // 0x680
-    int x684;                  // 0x684
-    int x688;                  // 0x688
-    int x68c;                  // 0x68c
-    int x690;                  // 0x690
-    int x694;                  // 0x694
-    int x698;                  // 0x698
-    int x69c;                  // 0x69c
-    int x6a0;                  // 0x6a0
-    StageOnGO *on_go;          // 0x6a4
-    int *itemData;             // 0x6a8
-    int *coll_data;            // 0x6ac
-    int *grGroundParam;        // 0x6b0
-    int *ALDYakuAll;           // 0x6b4
-    int *map_ptcl;             // 0x6b8
-    int *map_texg;             // 0x6bc
-    void *yakumono_param;      // 0x6c0
-    int *map_plit;             // 0x6c4
-    int *x6c8;                 // 0x6c8
-    void *quake_model_set;     // 0x6cc
-    int *x6d0;                 // 0x6d0
-    int *targetsRemaining;     // 0x6d4
-    int x6d8;                  // 0x6d8
-    int x6dc;                  // 0x6dc
-    int x6e0;                  // 0x6e0
-    int x6e4;                  // 0x6e4
-    int x6e8;                  // 0x6e8
-    int x6ec;                  // 0x6ec
-    int x6f0;                  // 0x6f0
-    int x6f4;                  // 0x6f4
-    int x6f8;                  // 0x6f8
-    int x6fc;                  // 0x6fc
-    int x700;                  // 0x700
-    int x704;                  // 0x704
-    int x708;                  // 0x708
-    int x70c;                  // 0x70c
-    int x710;                  // 0x710
-    int x714;                  // 0x714
-    int x718;                  // 0x718
-    int x71c;                  // 0x71c
-    int x720;                  // 0x720
-    int x724;                  // 0x724
-    int x728;                  // 0x728
-    int x72C;                  // 0x728
+    JOBJ *general_points[256];  // 0x280
+    int x680;                   // 0x680
+    int x684;                   // 0x684
+    int x688;                   // 0x688
+    int x68c;                   // 0x68c
+    int x690;                   // 0x690
+    int x694;                   // 0x694
+    int x698;                   // 0x698
+    int x69c;                   // 0x69c
+    int x6a0;                   // 0x6a0
+    StageOnGO *on_go;           // 0x6a4
+    int *itemData;              // 0x6a8
+    int *coll_data;             // 0x6ac
+    int *grGroundParam;         // 0x6b0
+    int *ALDYakuAll;            // 0x6b4
+    int *map_ptcl;              // 0x6b8
+    int *map_texg;              // 0x6bc
+    void *yakumono_param;       // 0x6c0
+    int *map_plit;              // 0x6c4
+    int *x6c8;                  // 0x6c8
+    void *quake_model_set;      // 0x6cc
+    int *x6d0;                  // 0x6d0
+    int targets_left;           // 0x6d4
+    int x6d8;                   // 0x6d8
+    int x6dc;                   // 0x6dc
+    int x6e0;                   // 0x6e0
+    int x6e4;                   // 0x6e4
+    int x6e8;                   // 0x6e8
+    int x6ec;                   // 0x6ec
+    int x6f0;                   // 0x6f0
+    int x6f4;                   // 0x6f4
+    int x6f8;                   // 0x6f8
+    int x6fc;                   // 0x6fc
+    int x700;                   // 0x700
+    int x704;                   // 0x704
+    int x708;                   // 0x708
+    float endgame1_boundwidth;  // 0x70c, used for mush king
+    float endgame1_boundheight; // 0x710, used for mush king
+    int endgame1_genpoint;      // 0x714, general point that ended the game, used for mush king
+    float endgame2_boundwidth;  // 0x718, used for temple
+    float endgame2_boundheight; // 0x71c, used for temple
+    int endgame2_genpoint;      // 0x720, general point that ended the gamem, used for temple
+    int x724;                   // 0x724
+    int x728;                   // 0x728
+    int x72C;                   // 0x728
+};
+
+struct GeneralPoints
+{
+    u16 jobj_index;
+    u16 kind;
+};
+
+struct GeneralPointsInfo
+{
+    JOBJ *jobj;
+    GeneralPoints *general_point;
+    int num;
 };
 
 struct MapHead
 {
-    int *general_points;
+    GeneralPointsInfo *general_points_info;
     int general_points_num;
-    int *map_gobjs; // pointer to array of map_gobjs
+    void *map_gobjs; // pointer to array of map_gobjs
     int map_gobj_num;
-    int *splines;
+    void *splines;
     int splines_num;
-    int *lights;
+    void *lights;
     int lights_num;
 };
 
@@ -490,7 +526,7 @@ float Stage_GetCameraRight();
 float Stage_GetCameraLeft();
 float Stage_GetCameraTop();
 float Stage_GetCameraBottom();
-void Stage_GetGeneralPoint(int index, Vec3 *pos);
+int Stage_GetGeneralPoint(int index, Vec3 *pos);
 void Stage_EnableLineGroup(int index);
 void Stage_DisableLineGroup(int index);
 void Stage_InitLines(void *coll_data);

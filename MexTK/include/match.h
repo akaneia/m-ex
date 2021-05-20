@@ -32,6 +32,13 @@
 #define MATCH_ITEMFREQ_HIGH 3
 #define MATCH_ITEMFREQ_VERYHIGH 4
 
+enum MatchState
+{
+    MATCHSTATE_INPROG,
+    MATCHSTATE_GAME,
+    MATCHSTATE_EXIT,
+};
+
 /*** Structs ***/
 
 struct MatchInit
@@ -73,9 +80,9 @@ struct MatchInit
     unsigned char isRunStockLogic : 1;   // 0x20
     unsigned char unk10 : 5;             // 0x01
     //byte 0x5
-    unsigned char isSkipEndCheck : 1;      // 0x80
+    unsigned char no_check_end : 1;        // 0x80
     unsigned char isSkipUnkStockCheck : 1; // 0x40
-    unsigned char isDisableHit : 1;        // 0x20
+    unsigned char no_hit : 1;              // 0x20
     unsigned char unk12 : 5;               // 0x01
     // byte 0x6
     u8 bombRain; // 0xFF
@@ -120,17 +127,18 @@ struct MatchInit
     //0x40
     void *onStartMelee;
     //0x44
-    int unk21;
-    //0x48
-    void *onCheckPause;
-    //0x4C
-    int unk22;
-    //0x50
     void *onMatchFrame1;
-    //0x54
+    //0x48
     void *onMatchFrame2;
-    //0x58
+    //0x4c
     void *onMatchEnd;
+    //0x50
+    int x50;
+    //0x54
+    void *onCheckPause;
+    //0x58
+    int x58;
+
     /*
     //0x5C
     int x5c;
@@ -466,7 +474,7 @@ struct Match // static match struct @ 8046b6a0
     u8 state;         // 0x0
     u8 pauser;        // 0x1
     int x4;           // 0x4
-    int x8;           // 0x8
+    int end_kind;     // 0x8
     int xc;           // 0xc
     int x10;          // 0x10
     int x14;          // 0x14
@@ -2835,6 +2843,7 @@ void KOCount_Update(int KOs);
 void Stage_CameraLimitInitialization();
 void Stage_BlastzoneInitialization();
 void Match_SetEndGraphic(int graphic);
+void Match_DisplayEndGraphic(void *cb);
 void Match_EndImmediate();
 void Match_EndVS();
 void Match_FadeScreen(int time);

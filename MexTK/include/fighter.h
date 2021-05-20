@@ -2581,7 +2581,7 @@ struct FighterData
         unsigned char x2225_5 : 1;            // 0x8 - 0x2225
         unsigned char x2225_6 : 1;            // 0x4 - 0x2225
         unsigned char x2225_7 : 1;            // 0x2 - 0x2225
-        unsigned char x2225_8 : 1;            // 0x1 - 0x2225
+        unsigned char is_stamina : 1;         // 0x1 - 0x2225
         unsigned char x2226_1 : 1;            // 0x80 - 0x2226
         unsigned char x2226_2 : 1;            // 0x40 - 0x2226
         unsigned char is_thrown : 1;          // 0x20 - 0x2226, might actually be for skipping grab collision
@@ -2861,6 +2861,11 @@ void Fighter_SetPosition(int ply, int ms, Vec3 *pos);
 void Fighter_ApplyIntang(GOBJ *fighter, int duration);
 int Fighter_GetSlotType(int index); // returns 0x0 for HMN, 0x1 for CPU, 0x2 for Demo, 0x3 for not present
 int Fighter_GetStocks(int ply);
+void Fighter_SetStocks(int ply, int stocks);
+int Fighter_GetStaminaHP(int ply);
+void Fighter_SetStaminaHP(int ply, int hp);
+int Fighter_CheckStaminaMode(int ply);
+void Fighter_SetStaminaMode(int ply, int is_stamina);
 void Fighter_SetFallNum(int index, int ms, int falls);
 void Fighter_EnableCollUpdate(FighterData *fighter);
 void Fighter_EnterDamageState(GOBJ *fighter, int stateID, float frame);
@@ -2870,7 +2875,6 @@ void Fighter_GiveHeal(FighterData *fighter, int heal);
 float Fighter_StaleDamage(FighterData *fighter, float dmg, int atk_kind, int atk_instance);
 void Fighter_SetHUDDamage(int player, u16 damage);
 void Fighter_RunOnHitCallbacks(GOBJ *fighter);
-void Fighter_SetStocks(int ply, int stocks);
 int FrameTimerCheck(GOBJ *fighter);
 void Fighter_EnterMiscPassState(float start_frame, GOBJ *fighter, int state, int flags);
 int Fighter_CollGround_PassLedge(GOBJ *fighter);

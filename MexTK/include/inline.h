@@ -54,12 +54,12 @@ void null()
     return;
 }
 
-void __attribute__((optimize("O0"))) PRIM_DRAW(PRIM *gx, float x, float y, float z, int color)
+void __attribute__((optimize("O0"))) PRIM_DRAW(PRIM *gx, float x, float y, float z, GXColor color)
 {
     AS_FLOAT(gx->data) = x;
     AS_FLOAT(gx->data) = y;
     AS_FLOAT(gx->data) = z;
-    gx->data = color;
+    *(GXColor *)&gx->data = color;
     return;
 }
 

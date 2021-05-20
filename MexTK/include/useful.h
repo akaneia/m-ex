@@ -399,6 +399,11 @@ s32 CARDCreateAsync(s32 chan, char *fileName, u32 size, CARDFileInfo *fileInfo, 
 s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat *stat, void *callback);
 s32 CARDRead(CARDFileInfo *fileInfo, void *buf, s32 length, s32 offset);
 
+void GXSetColor(GXColor *color);
+void GXSetZMode(int compare_enable, int func, int update_enable);
+void GXSetLineWidth(u8 width, int tex_offsets);
+void GXBegin(int type, int vtxfmt, u16 nverts);
+void GXEnd();
 void GXPixModeSync();
 void GXInvalidateTexAll();
 void DCFlushRange(void *startAddr, u32 nBytes);

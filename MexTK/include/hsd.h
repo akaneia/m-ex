@@ -169,6 +169,8 @@ void HSD_ClassDestroy(void *class);
 void HSD_ImageDescCopyFromEFB(_HSD_ImageDesc *image_desc, int left, int top, int clear_efb); // must be called from a cobj callback!
 void HSD_StartRender(int unk);
 void HSD_SetSpeed(u64 speed);
+void HSD_SetSpeedEasy(float mult);
+void HSD_StateInvalidate(int flags);
 void GX_AllocImageData(_HSD_ImageDesc *image_desc, int width, int height, int fmt, int size); // image data buffer is stored to the image_desc
 void GXTexModeSync();
 void GXPixModeSync();

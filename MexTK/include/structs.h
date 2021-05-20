@@ -59,6 +59,8 @@ typedef struct MapDesc MapDesc;
 typedef struct StageFile StageFile;
 typedef struct GrDesc GrDesc;
 typedef struct GrExtLookup GrExtLookup;
+typedef struct GeneralPoints GeneralPoints;
+typedef struct GeneralPointsInfo GeneralPointsInfo;
 
 // Match
 typedef struct MatchInit MatchInit;

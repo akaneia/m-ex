@@ -892,7 +892,14 @@ struct ItemData
     unsigned char xdcf6 : 1;                            // 0xdcf, 0x04
     unsigned char xdcf7 : 1;                            // 0xdcf, 0x02
     unsigned char xdcf8 : 1;                            // 0xdcf, 0x01
-    int xdd0;                                           // 0xdd0
+    unsigned char can_jumped_on : 1;                    // 0xdd0, 0x80
+    unsigned char xdd0_x40 : 1;                         // 0xdd0, 0x40
+    unsigned char xdd0_x20 : 1;                         // 0xdd0, 0x20
+    unsigned char xdd0_x10 : 1;                         // 0xdd0, 0x10
+    unsigned char xdd0_x08 : 1;                         // 0xdd0, 0x08
+    unsigned char xdd0_x04 : 1;                         // 0xdd0, 0x04
+    unsigned char xdd0_x02 : 1;                         // 0xdd0, 0x02
+    unsigned char xdd0_x01 : 1;                         // 0xdd0, 0x01
     struct                                              // 0xdd4
     {                                                   //
         int var1;                                       // 0xdd4

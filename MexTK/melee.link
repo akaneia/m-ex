@@ -183,6 +183,10 @@
 8003241C:Fighter_GetSlotType
 80036244:Fighter_GetStaleMoveTable
 80033BD8:Fighter_GetStocks
+800345a4:Fighter_GetStaminaHP
+80034524:Fighter_SetStaminaHP
+80034634:Fighter_CheckStaminaMode
+800346a8:Fighter_SetStaminaMode
 80085FD4:Fighter_GetSubactionHeader
 8003418C:Fighter_GetSubcharGObj
 8007DB24:Fighter_GFXRemoveAll
@@ -309,6 +313,11 @@
 8033CD1C:GXPixModeSync
 8033CC38:GXSetDrawDone
 8033CCD0:GXWaitDrawDone
+80058acc:GXSetColor
+80340dc0:GXSetZMode
+8033d240:GXSetLineWidth
+8033d0dc:GXBegin
+:GXEnd
 8000ACFC:Hitbox_CheckIfPreviouslyHit
 80008688:Hitbox_SetAsPreviouslyHit
 8007aff8:Hitbox_DisableAll
@@ -329,6 +338,8 @@
 80375538:HSD_StartRender
 80382228:HSD_ClassDestroy
 80019880:HSD_SetSpeed
+8016b274:HSD_SetSpeedEasy
+80361fc4:HSD_StateInvalidate
 80094818:Item_Catch
 80266F3C:Item_CheckIfEnabled
 80276348:Item_CheckIfTouchingWall
@@ -421,6 +432,7 @@
 8016C7F0:Match_EndVS
 8002063C:Match_FadeScreen
 801A4634:Match_FreezeGame
+802f7034:Match_DisplayEndGraphic
 802F3424:Match_GetPlayerHUDPos
 802F3394:Match_HideHUD
 802F405C:Match_HideTimer
