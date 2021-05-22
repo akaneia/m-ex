@@ -14,6 +14,18 @@
 
 backup
 
+
+lwz REG_FighterData,0x2C(REG_FighterGObj)
+
+# get fighter gobj if item
+  lhz r3,0x0(REG_FighterGObj)
+  cmpwi r3,6
+  bne CheckID
+  lwz r3,0x2C(REG_FighterGObj)
+  lwz r3,0x518(r3)
+  lwz REG_FighterData,0x2C(r3)
+
+CheckID:
 #Check for custom gfx
   cmpwi	REG_EffectID, EffMdlStart
   blt Original
@@ -28,7 +40,6 @@ backup
   b Original
 
 EffectModel:
-  lwz REG_FighterData,0x2C(REG_FighterGObj)
 # Get this fighters effect ID
   subi  REG_EffectIntID,REG_EffectID,EffMdlStart
 # Get this fighters effect file ID
@@ -41,7 +52,6 @@ EffectModel:
   mr REG_effBehaviorTable,r3
   b ParseEffMdlLookup
 PtclGen:
-  lwz REG_FighterData,0x2C(REG_FighterGObj)
 # Get this fighters effect ID
   subi  REG_EffectIntID,REG_EffectID,PtclGenStart
 # Get this fighters effect file ID
@@ -54,7 +64,6 @@ PtclGen:
   mr REG_effBehaviorTable,r3
   b ParsePtclGenLookup
 CopyEffectModel:
-  lwz REG_FighterData,0x2C(REG_FighterGObj)
 # Get this fighters effect ID
   subi  REG_EffectIntID,REG_EffectID,CpEffMdlStart
 # Get the copied fighters effect file ID
@@ -67,7 +76,6 @@ CopyEffectModel:
   mr REG_effBehaviorTable,r3
   b ParseEffMdlLookup
 CopyPtclGen:
-  lwz REG_FighterData,0x2C(REG_FighterGObj)
 # Get this fighters effect ID
   subi  REG_EffectIntID,REG_EffectID,CpPtclGenStart
 # Get this fighters effect file ID
