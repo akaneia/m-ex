@@ -2486,7 +2486,7 @@ struct FighterData
         float throw_timerval;                    // equal to script_event_timer of the attacker
         unsigned char x2218_1 : 1;               // 0x80 - x2218
         unsigned char x2218_2 : 1;               // 0x40 - x2218
-        unsigned char x2218_3 : 1;               // 0x20 - x2218
+        unsigned char has_rapid_jab : 1;         // 0x20 - x2218
         unsigned char reflect_enable : 1;        // 0x10 - x2218
         unsigned char reflect_nochangeowner : 1; // 0x8 - x2218
         unsigned char x2218_6 : 1;               // 0x4 - x2218
