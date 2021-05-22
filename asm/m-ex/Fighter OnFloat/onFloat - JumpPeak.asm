@@ -20,7 +20,7 @@ lwz REG_PlayerData,0x2C(REG_PlayerGObj)
   lfs	f0, 0x0070 (r3)
   lfs	f1, 0x0624 (REG_PlayerData)
   fcmpo	cr0,f1,f0
-  bgt InputSucceed
+  bge InputSucceed
 #Check X/Y
   lwz	r0, 0x065C (REG_PlayerData)
   rlwinm.	r0, r0, 0, 20, 21
