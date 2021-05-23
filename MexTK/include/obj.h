@@ -323,9 +323,9 @@ struct JOBJ
     Vec3 scale;       //0x2C
     Vec3 trans;       // 0x38
     Mtx rotMtx;       // 0x44
-    Vec3 *VEC;
-    Mtx *MTX;
-    AOBJ *aobj;
+    Vec3 *VEC;        // 0x6C
+    Mtx *MTX;         // 0x78
+    AOBJ *aobj;       // 0x7C
     int *RObj;
     JOBJDesc *desc;
 };

@@ -240,10 +240,13 @@ SetSpawn_UpdateFacingDirection_Store:
   mr  r3,REG_PlayerSlot
   branchl r12,0x80033094
 
+# commenting this out because slippi does, will cause a desync otherwise?
+/*
 SetSpawn_AdjustEntryFrames:
   mr  r3,REG_PlayerSlot
   mulli r4,REG_SpawnID,5
   branchl r12,0x80035fdc
+*/
 
 SetSpawn_Exit:
   restore
@@ -270,10 +273,10 @@ blrl
     .float -20,10
     .float 20,10
   #Teams Data
-    .float -20,10
     .float -60,10
-    .float 20,10
+    .float -20,10
     .float 60,10
+    .float 20,10
 #Battlefield
 .long 0x1F                  #Stage ID
   #Singles Data

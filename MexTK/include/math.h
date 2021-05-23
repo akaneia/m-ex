@@ -8,7 +8,7 @@
 #define M_1DEGREE (0.0174533)
 
 /*** Functions ***/
-
+float fmod(float a, float b);
 float atan(float in);
 float atan2(float y, float x);
 float sin(float x);
