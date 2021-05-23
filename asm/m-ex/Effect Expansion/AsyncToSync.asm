@@ -23,6 +23,8 @@ lwz REG_FighterData,0x2C(REG_FighterGObj)
   bne CheckID
   lwz r3,0x2C(REG_FighterGObj)
   lwz r3,0x518(r3)
+  cmpwi r3,0
+  beq CheckID
   lwz REG_FighterData,0x2C(r3)
 
 CheckID:
