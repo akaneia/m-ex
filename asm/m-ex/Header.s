@@ -27,7 +27,7 @@
 
 #Custom Static Variables
 .set  PersistHeapNum, 5 + 2
-.set  FighterHeapReduction,500*1000     # free up 500kb from fighter heap
+.set  FighterHeapReduction,200*1000     # free up 500kb from fighter heap
 
 #xFunction struct
   .set  ftX_Code,0x0
