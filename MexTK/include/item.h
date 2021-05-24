@@ -1071,7 +1071,6 @@ JOBJ *Item_GetBoneJOBJ(GOBJ *item, int bone_index);
 int Item_CheckIfEnabled(); // returns bool regarding if items are enabled for this match
 int Item_GetGroundAirState(GOBJ *item);
 void Item_UpdatePhysAndColl(GOBJ *item);
-void Item_InvertVelocityAndFacingDirection(GOBJ *item);
 void Item_ProjectileVelocityCalculate(GOBJ *item, float fall_speed, float max_fall_speed);
 void Item_PlayOnDestroySFXAgain(ItemData *, int sfxid, int volume, int unk);
 void Item_UpdatePositionCollision(GOBJ *item);
