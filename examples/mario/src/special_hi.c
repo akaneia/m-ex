@@ -127,7 +127,7 @@ void SpecialHi_IASACallback(GOBJ *gobj)
 		if (mrAttr->specialHi_stick_reverse_threshold < lstick_x)
 		{
 			Fighter_SetFacingToStickDirection(fighter_data);
-			Fighter_RotateBone_Pitch(fighter_data, 0, 1.57079632f * fighter_data->facing_direction);
+			Fighter_SetBoneRotY(fighter_data, 0, 1.57079632f * fighter_data->facing_direction);
 		}
 	}
 	return;
@@ -273,7 +273,7 @@ void SpecialAirHi_IASACallback(GOBJ *gobj)
 		if (mrAttr->specialHi_stick_reverse_threshold < lstick_x)
 		{
 			Fighter_SetFacingToStickDirection(fighter_data);
-			Fighter_RotateBone_Pitch(fighter_data, 0, 1.57079632f * fighter_data->facing_direction);
+			Fighter_SetBoneRotY(fighter_data, 0, 1.57079632f * fighter_data->facing_direction);
 		}
 	}
 	return;

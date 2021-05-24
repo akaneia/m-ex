@@ -14,7 +14,7 @@ void OnLoad(GOBJ *gobj)
 	// copy attributes
 	for (int i = 0; i < 0x21; i++)
 	{
-		fighter_data->special_attributes2[i] = fighter_data->ftData->charAttributes[i];
+		fighter_data->special_attributes2[i] = fighter_data->ftData->ext_attr[i];
 	}
 
 	// copy pointer to attributes

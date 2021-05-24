@@ -18,7 +18,7 @@ int OnHitShieldBounce(GOBJ *gobj)
 
     int direction = 0;
 
-    VECMultAndAdd(&item_data->self_vel, &item_data->xc58);
+    VECMultAndAdd(&item_data->self_vel, &item_data->dmg.xc58);
 
     float x_vel = item_data->self_vel.X;
     if (x_vel < 0)
@@ -64,7 +64,7 @@ int OnHitShieldDetermineDestroy(GOBJ *gobj)
 ///
 int OnReflect(GOBJ *gobj)
 {
-    Item_InvertVelocityAndFacingDirection(gobj);
+    Item_ReflectVelocity(gobj);
     return 0;
 }
 ///

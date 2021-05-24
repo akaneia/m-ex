@@ -7,7 +7,7 @@
 ///
 void ResetFighterBoneYaw(GOBJ *gobj)
 {
-	Fighter_RotateBone_Yaw(0, gobj->userdata, 0);
+	Fighter_SetBoneRotZ(0, gobj->userdata, 0);
 	return;
 }
 ///
@@ -274,13 +274,13 @@ void SpecialLw_CollisionCallback(GOBJ *gobj)
 	if ((fighter_data->ftcmd_var.flag3 == 0) || (state_var->on_ground == 0))
 	{
 		// Reset Rotation if not grounded
-		Fighter_RotateBone_Yaw(fighter_data, 0, 0);
+		Fighter_SetBoneRotZ(fighter_data, 0, 0);
 	}
 	else
 	{
 		// Rotate to ground slope angle
 		float angle = atan2(fighter_data->coll_data.ground_slope.X, fighter_data->coll_data.ground_slope.Y);
-		Fighter_RotateBone_Yaw(fighter_data, 0, fighter_data->facing_direction * angle);
+		Fighter_SetBoneRotZ(fighter_data, 0, -1 * angle);
 	}
 	return;
 }
@@ -400,13 +400,13 @@ void SpecialAirLw_CollisionCallback(GOBJ *gobj)
 	if ((fighter_data->ftcmd_var.flag3 == 0) || (state_var->on_ground == 0))
 	{
 		// if in air reset rotation
-		Fighter_RotateBone_Yaw(fighter_data, 0, 0);
+		Fighter_SetBoneRotZ(fighter_data, 0, 0);
 	}
 	else
 	{
 		// if on ground rotate to ground slope
 		float angle = atan2(fighter_data->coll_data.ground_slope.X, fighter_data->coll_data.ground_slope.Y);
-		Fighter_RotateBone_Yaw(fighter_data, 0, fighter_data->facing_direction * angle);
+		Fighter_SetBoneRotZ(fighter_data, 0, -1 * angle);
 	}
 	return;
 }
