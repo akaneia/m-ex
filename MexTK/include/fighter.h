@@ -3001,4 +3001,5 @@ void Fighter_ReleaseItemUnk(int ply, int ms, GOBJ *item);
 void Fighter_InitDamageVibrate(FighterData *fp, int dmg, float mult, int current_state, int unk_bool);
 float Fighter_CalcHitlagFrames(int dmg, int state_id, float mult);
 void Figher_LoadAnimation(GOBJ *f, GOBJ *anim_source, int anim_id);
+void Figher_ApplyAnimation(GOBJ *f, float start_frame, float speed, float blend);)
 #endif

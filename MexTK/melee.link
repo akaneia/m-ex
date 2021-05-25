@@ -266,6 +266,8 @@
 8003e998:Fighter_ReleaseItemUnk
 80090594:Fighter_InitDamageVibrate
 8007da74:Fighter_CalcHitlagFrames
+80085cd8:Figher_LoadAnimation
+8006ebe8:Figher_ApplyAnimation
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
