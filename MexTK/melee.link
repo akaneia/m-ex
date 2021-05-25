@@ -274,6 +274,7 @@
 8007349c:Fighter_ScriptFastForward
 8009750c:Fighter_DropCrate
 800dd168:Fighter_GrabBreakCheck
+800db368:Fighter_ThrownAttach
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim

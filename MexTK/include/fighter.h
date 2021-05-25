@@ -3008,4 +3008,5 @@ void Fighter_ScriptUpdate(GOBJ *f);
 void Fighter_ScriptFastForward(GOBJ *f);
 void Fighter_DropCrate(GOBJ *f);
 void Fighter_GrabBreakCheck(GOBJ *f);
+void Fighter_ThrownAttach(GOBJ *attacker, GOBJ *victim);
 #endif
