@@ -1797,7 +1797,7 @@ struct FighterData
     char xf;                                                   // 0xF
     int state_id;                                              // 0x10
     int anim_id;                                               // 0x14
-    int state_num;                                             // 0x18
+    int common_state_num;                                      // 0x18
     MoveLogic *common_states;                                  // 0x1C
     MoveLogic *special_states;                                 // 0x20
     int *anim_flags;                                           // 0x24
