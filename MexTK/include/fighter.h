@@ -3008,5 +3008,5 @@ void Fighter_ScriptUpdate(GOBJ *f);
 void Fighter_ScriptFastForward(GOBJ *f);
 void Fighter_DropCrate(GOBJ *f);
 void Fighter_GrabBreakCheck(GOBJ *f);
-void Fighter_ThrownAttach(FighterData *attacker_data, FighterData *victim_data);
+void Fighter_ThrownAttach(FighterData *anchor_data, FighterData *attachee_data);
 #endif
