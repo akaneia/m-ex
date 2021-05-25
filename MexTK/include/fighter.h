@@ -728,12 +728,22 @@ struct FtDynamicHit
     int bone_index; // 0x1694, 0x24
 };
 
+struct FtCmd
+{
+    char *anim_symbol; // ptr to the symbol name for this animation
+    int anim_offset;   // offset of the anim data in plxxaj
+    void *anim_data;   // pointer to the animation data in ARAM
+    void *anim_size;   // size of the animation data
+    void *script;      // pointer to the script data for this action
+    int flags;
+};
+
 struct ftData
 {
     int *common_attr; // 0x0
     int *ext_attr;    // 0x4
     u8 *modelLookup;  // 0x8
-    int animFlags;    // 0xC
+    FtCmd *ftcmd;     // 0xC
     int animDynamics; // 0x10
     int x14;
     int x18;
@@ -1800,7 +1810,7 @@ struct FighterData
     int common_state_num;                                      // 0x18
     MoveLogic *common_states;                                  // 0x1C
     MoveLogic *special_states;                                 // 0x20
-    int *anim_flags;                                           // 0x24
+    FtCmd *ftcmd_lookup;                                       // 0x24
     u16 *dynamics_data;                                        // 0x28
     float facing_direction;                                    // 0x2C
     float facing_direction_repeated;                           // 0x30
@@ -1982,15 +1992,15 @@ struct FighterData
     int pointer_to_0x460;                                      // 0x400
     int pointer_to_0x3c0;                                      // 0x404
     ColorOverlay color[3];                                     // 0x408
-    int *LObj;                                                 // 0x588
+    void *LObj;                                                // 0x588
     int anim_num;                                              // 0x58C
-    int *anim_curr_flags_ptr;                                  // 0x590
+    void *anim_curr_flags_ptr;                                 // 0x590
     int anim_curr_flags;                                       // 0x594
-    int *anim_requested;                                       // 0x598
-    int *anim_cache_curr;                                      // 0x59C
-    int *anim_cache_persist;                                   // 0x5A0
-    int *anim_curr_ARAM;                                       // 0x5A4
-    int *anim_persist_ARAM;                                    // 0x5A8
+    void *anim_requested;                                      // 0x598
+    void *anim_cache_curr;                                     // 0x59C
+    void *anim_cache_persist;                                  // 0x5A0
+    void *anim_curr_ARAM;                                      // 0x5A4
+    void *anim_persist_ARAM;                                   // 0x5A8
     int dobj_toggle_num;                                       // 0x5AC
     int x5B0;                                                  // 0x5B0
     int x5B4;                                                  // 0x5B4
@@ -2990,4 +3000,5 @@ void Fighter_GiveItem(GOBJ *fighter, GOBJ *item);
 void Fighter_ReleaseItemUnk(int ply, int ms, GOBJ *item);
 void Fighter_InitDamageVibrate(FighterData *fp, int dmg, float mult, int current_state, int unk_bool);
 float Fighter_CalcHitlagFrames(int dmg, int state_id, float mult);
+void Figher_LoadAnimation(GOBJ *f, GOBJ *anim_source, int anim_id);
 #endif
