@@ -123,7 +123,7 @@
 8007D4F4:Fighter_ClampFallSpeed
 8007CC78:Fighter_ClampHorizontalGroundVelocity
 8007D440:Fighter_ClampHorizontalVelocity
-80083B68:Fighter_CollAir
+80083B68:Fighter_Coll_All
 800822A4:Fighter_CollAir_GrabLedge
 800831CC:Fighter_CollAir_GrabLedgeWalljump
 80082C74:Fighter_CollAir_IgnoreLedge
