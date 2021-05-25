@@ -2827,7 +2827,7 @@ ftCommonData **stc_ftcommon = (R13 + -0x514C);
 GXColor **stc_shieldcolors = (R13 + -0x5194);
 
 /*** Functions ***/
-void ActionStateChange(float startFrame, float animSpeed, float animBlend, GOBJ *fighter, int stateID, int flags1, int flags2);
+void ActionStateChange(float startFrame, float animSpeed, float animBlend, GOBJ *fighter, int stateID, int flags1, GOBJ *alt_state_source);
 void Fighter_UpdateBonePos(FighterData *fighter_data, int unk);
 void *Animation_GetAddress(FighterData *fighter, int animID);
 SubactionHeader *Fighter_GetSubactionHeader(FighterData *fighter, int animID);
