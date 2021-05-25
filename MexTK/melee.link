@@ -130,6 +130,7 @@
 80081D0C:Fighter_CollAir_IgnoreLedge_NoCB
 80082b78:Fighter_CollAir_SoftLanding
 800824a0:Fighter_CollAir_DefineECB
+80083b68:Fighter_CollAir_IgnoreGround
 80082708:Fighter_CollGround_PassLedge
 80084104:Fighter_CollGround_StopLedge_EnterFall
 800827A0:Fighter_CollGround_StopLedge
@@ -271,6 +272,8 @@
 8006e9b4:Fighter_UpdateStateFrameInfo
 80073240:Fighter_ScriptUpdate
 8007349c:Fighter_ScriptFastForward
+8009750c:Fighter_DropCrate
+800dd168:Fighter_GrabBreakCheck
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim

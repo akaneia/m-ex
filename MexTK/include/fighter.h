@@ -2523,9 +2523,9 @@ struct FighterData
         unsigned char shield_x20 : 1;            // 0x20 - 0x221b
         unsigned char shield_x10 : 1;            // 0x10 - 0x221b
         unsigned char shield_x8 : 1;             //  0x8 - 0x221b
-        unsigned char x221b_6 : 1;               // 0x4 - 0x221b
+        unsigned char x221b_grab : 1;            // 0x4 - 0x221b, is checked at 80079304, skips some logic
         unsigned char x221b_7 : 1;               // 0x2 - 0x221b
-        unsigned char x221b_8 : 1;               // 0x1 - 0x221b
+        unsigned char x221b_grab2 : 1;           // 0x1 - 0x221b
         unsigned char x221c_1 : 1;               // 0x80 - 0x221c
         unsigned char x221c_2 : 1;               // 0x40 - 0x221c
         unsigned char x221c_3 : 1;               // 0x20 - 0x221c
@@ -2558,122 +2558,122 @@ struct FighterData
         unsigned char x221f_6 : 1;
         unsigned char x221f_7 : 1;
         unsigned char x221f_8 : 1;
-        char flags_2220;                      // 0x2220
-        char flags_2221;                      // 0x2221
-        unsigned char x2222_1 : 1;            // 0x80 - 0x2222
-        unsigned char is_multijump : 1;       // 0x40 - 0x2222
-        unsigned char x2222_3 : 1;            // 0x20 - 0x2222
-        unsigned char ceilko_nokb : 1;        // 0x10 - 0x2222, allow death off top without any Y KB
-        unsigned char x2222_5 : 1;            // 0x08 - 0x2222
-        unsigned char has_follower : 1;       // 0x04 - 0x2222, this makes the subcharacter enter sleep when the main char dies
-        unsigned char x2222_7 : 1;            // 0x02 - 0x2222
-        unsigned char x2222_8 : 1;            // 0x01 - 0x2222
-        unsigned char x2223_1 : 1;            // 0x80 - 0x2223
-        unsigned char x2223_2 : 1;            // 0x40 - 0x2223
-        unsigned char x2223_3 : 1;            // 0x20 - 0x2223
-        unsigned char x2223_4 : 1;            // 0x10 - 0x2223
-        unsigned char x2223_5 : 1;            // 0x8 - 0x2223
-        unsigned char x2223_6 : 1;            // 0x4 - 0x2223
-        unsigned char x2223_7 : 1;            // 0x2 - 0x2223
-        unsigned char x2223_8 : 1;            // 0x1 - 0x2223
-        unsigned char x2224_1 : 1;            // 0x80 - 0x2224
-        unsigned char x2224_2 : 1;            // 0x40 - 0x2224
-        unsigned char stamina_dead : 1;       // 0x20 - 0x2224
-        unsigned char x2224_4 : 1;            // 0x10 - 0x2224
-        unsigned char x2224_5 : 1;            // 0x8 - 0x2224
-        unsigned char x2224_6 : 1;            // 0x4 - 0x2224
-        unsigned char x2224_7 : 1;            // 0x2 - 0x2224
-        unsigned char x2224_8 : 1;            // 0x1 - 0x2224
-        unsigned char x2225_1 : 1;            // 0x80 - 0x2225
-        unsigned char x2225_2 : 1;            // 0x40 - 0x2225
-        unsigned char has_model_addition : 1; // 0x20 - 0x2225  bool for if fighter has a model addition, like kirby copy ability and puff hat
-        unsigned char x2225_4 : 1;            // 0x10 - 0x2225
-        unsigned char x2225_5 : 1;            // 0x8 - 0x2225
-        unsigned char x2225_6 : 1;            // 0x4 - 0x2225
-        unsigned char x2225_7 : 1;            // 0x2 - 0x2225
-        unsigned char is_stamina : 1;         // 0x1 - 0x2225
-        unsigned char x2226_1 : 1;            // 0x80 - 0x2226
-        unsigned char x2226_2 : 1;            // 0x40 - 0x2226
-        unsigned char is_thrown : 1;          // 0x20 - 0x2226, might actually be for skipping grab collision
-        unsigned char x2226_4 : 1;            // 0x10 - 0x2226
-        unsigned char cloak1 : 1;             // 0x8 - 0x2226
-        unsigned char cloak2 : 1;             // 0x4 - 0x2226
-        unsigned char x2226_7 : 1;            // 0x2 - 0x2226
-        unsigned char x2226_8 : 1;            // 0x1 - 0x2226
-        char flags_2227;                      // 0x2227
-        char x2228_1 : 1;                     // 0x80 - 0x2228
-        char x2228_2 : 1;                     // 0x40 - 0x2228
-        char x2228_3 : 1;                     // 0x20 - 0x2228, checked on missing tech @ 80097d58
-        char x2228_4 : 1;                     // 0x10 - 0x2228
-        char x2228_5 : 1;                     // 0x08 - 0x2228
-        char x2228_6 : 1;                     // 0x04 - 0x2228
-        char used_tether : 1;                 // 0x02 - 0x2228
-        char x2228_8 : 1;                     // 0x01 - 0x2228
-        unsigned char x2229_1 : 1;            // 0x80 - 0x2229
-        unsigned char x2229_2 : 1;            // 0x40 - 0x2229
-        unsigned char x2229_3 : 1;            // 0x20 - 0x2229
-        unsigned char x2229_4 : 1;            // 0x10 - 0x2229
-        unsigned char x2229_5 : 1;            // 0x8 - 0x2229
-        unsigned char x2229_6 : 1;            // 0x4 - 0x2229
-        unsigned char x2229_7 : 1;            // 0x2 - 0x2229
-        unsigned char no_reaction_always : 1; // 0x1 - 0x2229
-        char flags_222A;                      // 0x222A
-        char flags_222B;                      // 0x222B
-    } flags;                                  //
-    struct fighter_var                        // 0x222c
-    {                                         //
-        int ft_var1;                          // 0x222c
-        int ft_var2;                          // 0x2230
-        int ft_var3;                          // 0x2234
-        int ft_var4;                          // 0x2238
-        int ft_var5;                          // 0x223c
-        int ft_var6;                          // 0x2240
-        int ft_var7;                          // 0x2244
-        int ft_var8;                          // 0x2248
-        int ft_var9;                          // 0x224c
-        int ft_var10;                         // 0x2250
-        int ft_var11;                         // 0x2254
-        int ft_var12;                         // 0x2258
-        int ft_var13;                         // 0x225c
-        int ft_var14;                         // 0x2260
-        int ft_var15;                         // 0x2264
-        int ft_var16;                         // 0x2268
-        int ft_var17;                         // 0x226c
-        int ft_var18;                         // 0x2270
-        int ft_var19;                         // 0x2274
-        int ft_var20;                         // 0x2278
-        int ft_var21;                         // 0x227c
-        int ft_var22;                         // 0x2280
-        int ft_var23;                         // 0x2284
-        int ft_var24;                         // 0x2288
-        int ft_var25;                         // 0x228c
-        int ft_var26;                         // 0x2290
-        int ft_var27;                         // 0x2294
-        int ft_var28;                         // 0x2298
-        int ft_var29;                         // 0x229c
-        int ft_var30;                         // 0x22a0
-        int ft_var31;                         // 0x22a4
-        int ft_var32;                         // 0x22a8
-        int ft_var33;                         // 0x22ac
-        int ft_var34;                         // 0x22b0
-        int ft_var35;                         // 0x22b4
-        int ft_var36;                         // 0x22b8
-        int ft_var37;                         // 0x22bc
-        int ft_var38;                         // 0x22c0
-        int ft_var39;                         // 0x22c4
-        int ft_var40;                         // 0x22c8
-        int ft_var41;                         // 0x22cc
-        int ft_var42;                         // 0x22d0
-        int ft_var43;                         // 0x22d4
-        int ft_var44;                         // 0x22d8
-        int ft_var45;                         // 0x22dc
-        int ft_var46;                         // 0x22e0
-        int ft_var47;                         // 0x22e4
-        int ft_var48;                         // 0x22e8
-        int ft_var49;                         // 0x22ec
-        int ft_var50;                         // 0x22f0
-        int ft_var51;                         // 0x22f4
-        int ft_var52;                         // 0x22f8
+        char flags_2220;                          // 0x2220
+        char flags_2221;                          // 0x2221
+        unsigned char x2222_1 : 1;                // 0x80 - 0x2222
+        unsigned char is_multijump : 1;           // 0x40 - 0x2222
+        unsigned char x2222_grab : 1;             // 0x20 - 0x2222
+        unsigned char ceilko_nokb : 1;            // 0x10 - 0x2222, allow death off top without any Y KB
+        unsigned char x2222_5 : 1;                // 0x08 - 0x2222
+        unsigned char has_follower : 1;           // 0x04 - 0x2222, this makes the subcharacter enter sleep when the main char dies
+        unsigned char x2222_skip_phys_update : 1; // 0x02 - 0x2222
+        unsigned char x2222_8 : 1;                // 0x01 - 0x2222
+        unsigned char x2223_1 : 1;                // 0x80 - 0x2223
+        unsigned char x2223_2 : 1;                // 0x40 - 0x2223
+        unsigned char x2223_3 : 1;                // 0x20 - 0x2223
+        unsigned char x2223_4 : 1;                // 0x10 - 0x2223
+        unsigned char x2223_5 : 1;                // 0x8 - 0x2223
+        unsigned char x2223_6 : 1;                // 0x4 - 0x2223
+        unsigned char x2223_7 : 1;                // 0x2 - 0x2223
+        unsigned char x2223_8 : 1;                // 0x1 - 0x2223
+        unsigned char x2224_1 : 1;                // 0x80 - 0x2224
+        unsigned char x2224_2 : 1;                // 0x40 - 0x2224
+        unsigned char stamina_dead : 1;           // 0x20 - 0x2224
+        unsigned char x2224_4 : 1;                // 0x10 - 0x2224
+        unsigned char x2224_5 : 1;                // 0x8 - 0x2224
+        unsigned char x2224_6 : 1;                // 0x4 - 0x2224
+        unsigned char x2224_7 : 1;                // 0x2 - 0x2224
+        unsigned char x2224_8 : 1;                // 0x1 - 0x2224
+        unsigned char x2225_1 : 1;                // 0x80 - 0x2225
+        unsigned char x2225_2 : 1;                // 0x40 - 0x2225
+        unsigned char has_model_addition : 1;     // 0x20 - 0x2225  bool for if fighter has a model addition, like kirby copy ability and puff hat
+        unsigned char x2225_4 : 1;                // 0x10 - 0x2225
+        unsigned char x2225_5 : 1;                // 0x8 - 0x2225
+        unsigned char x2225_6 : 1;                // 0x4 - 0x2225
+        unsigned char x2225_7 : 1;                // 0x2 - 0x2225
+        unsigned char is_stamina : 1;             // 0x1 - 0x2225
+        unsigned char x2226_1 : 1;                // 0x80 - 0x2226
+        unsigned char x2226_2 : 1;                // 0x40 - 0x2226
+        unsigned char is_thrown : 1;              // 0x20 - 0x2226, might actually be for skipping grab collision
+        unsigned char x2226_4 : 1;                // 0x10 - 0x2226
+        unsigned char cloak1 : 1;                 // 0x8 - 0x2226
+        unsigned char cloak2 : 1;                 // 0x4 - 0x2226
+        unsigned char x2226_7 : 1;                // 0x2 - 0x2226
+        unsigned char x2226_8 : 1;                // 0x1 - 0x2226
+        char flags_2227;                          // 0x2227
+        char x2228_1 : 1;                         // 0x80 - 0x2228
+        char x2228_2 : 1;                         // 0x40 - 0x2228
+        char x2228_3 : 1;                         // 0x20 - 0x2228, checked on missing tech @ 80097d58
+        char x2228_4 : 1;                         // 0x10 - 0x2228
+        char x2228_5 : 1;                         // 0x08 - 0x2228
+        char x2228_6 : 1;                         // 0x04 - 0x2228
+        char used_tether : 1;                     // 0x02 - 0x2228
+        char x2228_8 : 1;                         // 0x01 - 0x2228
+        unsigned char x2229_1 : 1;                // 0x80 - 0x2229
+        unsigned char x2229_2 : 1;                // 0x40 - 0x2229
+        unsigned char x2229_3 : 1;                // 0x20 - 0x2229
+        unsigned char x2229_4 : 1;                // 0x10 - 0x2229
+        unsigned char x2229_5 : 1;                // 0x8 - 0x2229
+        unsigned char x2229_6 : 1;                // 0x4 - 0x2229
+        unsigned char x2229_7 : 1;                // 0x2 - 0x2229
+        unsigned char no_reaction_always : 1;     // 0x1 - 0x2229
+        char flags_222A;                          // 0x222A
+        char flags_222B;                          // 0x222B
+    } flags;                                      //
+    struct fighter_var                            // 0x222c
+    {                                             //
+        int ft_var1;                              // 0x222c
+        int ft_var2;                              // 0x2230
+        int ft_var3;                              // 0x2234
+        int ft_var4;                              // 0x2238
+        int ft_var5;                              // 0x223c
+        int ft_var6;                              // 0x2240
+        int ft_var7;                              // 0x2244
+        int ft_var8;                              // 0x2248
+        int ft_var9;                              // 0x224c
+        int ft_var10;                             // 0x2250
+        int ft_var11;                             // 0x2254
+        int ft_var12;                             // 0x2258
+        int ft_var13;                             // 0x225c
+        int ft_var14;                             // 0x2260
+        int ft_var15;                             // 0x2264
+        int ft_var16;                             // 0x2268
+        int ft_var17;                             // 0x226c
+        int ft_var18;                             // 0x2270
+        int ft_var19;                             // 0x2274
+        int ft_var20;                             // 0x2278
+        int ft_var21;                             // 0x227c
+        int ft_var22;                             // 0x2280
+        int ft_var23;                             // 0x2284
+        int ft_var24;                             // 0x2288
+        int ft_var25;                             // 0x228c
+        int ft_var26;                             // 0x2290
+        int ft_var27;                             // 0x2294
+        int ft_var28;                             // 0x2298
+        int ft_var29;                             // 0x229c
+        int ft_var30;                             // 0x22a0
+        int ft_var31;                             // 0x22a4
+        int ft_var32;                             // 0x22a8
+        int ft_var33;                             // 0x22ac
+        int ft_var34;                             // 0x22b0
+        int ft_var35;                             // 0x22b4
+        int ft_var36;                             // 0x22b8
+        int ft_var37;                             // 0x22bc
+        int ft_var38;                             // 0x22c0
+        int ft_var39;                             // 0x22c4
+        int ft_var40;                             // 0x22c8
+        int ft_var41;                             // 0x22cc
+        int ft_var42;                             // 0x22d0
+        int ft_var43;                             // 0x22d4
+        int ft_var44;                             // 0x22d8
+        int ft_var45;                             // 0x22dc
+        int ft_var46;                             // 0x22e0
+        int ft_var47;                             // 0x22e4
+        int ft_var48;                             // 0x22e8
+        int ft_var49;                             // 0x22ec
+        int ft_var50;                             // 0x22f0
+        int ft_var51;                             // 0x22f4
+        int ft_var52;                             // 0x22f8
     } fighter_var;
     int x22fc;           // 0x22fc
     int x2300;           // 0x2300
@@ -2896,6 +2896,7 @@ void Fighter_CollAir_IgnoreLedge(GOBJ *fighter, void *callback);
 int Fighter_CollAir_IgnoreLedge_NoCB(GOBJ *fighter);
 int Fighter_CollAir_SoftLanding(GOBJ *fighter);
 int Fighter_CollAir_DefineECB(GOBJ *fighter, ECBSize *ecb);
+void Fighter_Coll_All(GOBJ *f);
 int Fighter_Coll_CheckToPass(GOBJ *fighter, int floor_type); // usually used as a callback, pass = fall through platform
 int Fighter_IASACheck_CliffCatch(GOBJ *fighter);
 int Fighter_IASACheck_WallJump(GOBJ *fighter);
@@ -3005,5 +3006,6 @@ void Figher_ApplyAnimation(GOBJ *f, float start_frame, float speed, float blend)
 void Fighter_UpdateStateFrameInfo(GOBJ *f);
 void Fighter_ScriptUpdate(GOBJ *f);
 void Fighter_ScriptFastForward(GOBJ *f);
-
+void Fighter_DropCrate(GOBJ *f);
+void Fighter_GrabBreakCheck(GOBJ *f);
 #endif
