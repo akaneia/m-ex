@@ -2431,9 +2431,7 @@ struct FighterData
     int x2168;                            // 0x2168
     int x216c;                            // 0x216c
     int x2170;                            // 0x2170
-    int x2174;                            // 0x2174
-    int x2178;                            // 0x2178
-    int x217c;                            // 0x217c
+    Vec3 thrown_origin;                   // 0x2174
     int x2180;                            // 0x2180
     int x2184;                            // 0x2184
     int x2188;                            // 0x2188
@@ -2468,32 +2466,57 @@ struct FighterData
         void (*OnHurtboxDetect)(GOBJ *fighter);      // 0x21f4
         void (*OnSpin)(GOBJ *fighter);               // 0x21f8
     } cb;
-    unsigned char x21fc_1 : 1;                   // 0x80 - x21fc_
-    unsigned char show_center_sphere : 1;        // 0x40 - x21fc_
-    unsigned char show_item_pickup : 1;          // 0x20 - x21fc_
-    unsigned char show_cpu_ai : 1;               // 0x10 - x21fc_
-    unsigned char show_footstool : 1;            // 0x8 - x21fc_
-    unsigned char show_dynamics : 1;             // 0x4 - x21fc_
-    unsigned char show_hit : 1;                  // 0x2 - x21fc_
-    unsigned char show_model : 1;                // 0x1 - x21fc_
-    struct ftcmd_var                             // 0x2200
-    {                                            //
-        int flag0;                               // 0x2200
-        int flag1;                               // 0x2204
-        int flag2;                               // 0x2208
-        int flag3;                               // 0x220C
-    } ftcmd_var;                                 //
-    struct flags                                 // 0x2210
-    {                                            //
-        unsigned char throw_1 : 1;               // 0x80 - x2210
-        unsigned char throw_2 : 1;               // 0x40 - x2210
-        unsigned char throw_3 : 1;               // 0x20 - x2210
-        unsigned char throw_release : 1;         // 0x10 - x2210. also used to change users direction during aerial attacks
-        unsigned char throw_turn : 1;            // 0x8 - x2210
-        unsigned char throw_6 : 1;               // 0x4 - x2210
-        unsigned char throw_7 : 1;               // 0x2 - x2210
-        unsigned char throw_8 : 1;               // 0x1 - x2210
-        float throw_timerval;                    // equal to script_event_timer of the attacker
+    unsigned char x21fc_1 : 1;            // 0x80 - x21fc_
+    unsigned char show_center_sphere : 1; // 0x40 - x21fc_
+    unsigned char show_item_pickup : 1;   // 0x20 - x21fc_
+    unsigned char show_cpu_ai : 1;        // 0x10 - x21fc_
+    unsigned char show_footstool : 1;     // 0x8 - x21fc_
+    unsigned char show_dynamics : 1;      // 0x4 - x21fc_
+    unsigned char show_hit : 1;           // 0x2 - x21fc_
+    unsigned char show_model : 1;         // 0x1 - x21fc_
+    struct ftcmd_var                      // 0x2200
+    {                                     //
+        int flag0;                        // 0x2200
+        int flag1;                        // 0x2204
+        int flag2;                        // 0x2208
+        int flag3;                        // 0x220C
+    } ftcmd_var;                          //
+    struct flags                          // 0x2210
+    {                                     //
+        unsigned char throw_1 : 1;        // 0x80 - x2210
+        unsigned char throw_2 : 1;        // 0x40 - x2210
+        unsigned char throw_3 : 1;        // 0x20 - x2210
+        unsigned char throw_release : 1;  // 0x10 - x2210. also used to change users direction during aerial attacks
+        unsigned char throw_turn : 1;     // 0x8 - x2210
+        unsigned char throw_6 : 1;        // 0x4 - x2210
+        unsigned char throw_7 : 1;        // 0x2 - x2210
+        unsigned char throw_8 : 1;        // 0x1 - x2210
+        //float throw_timerval;                    // 0x2214 - equal to script_event_timer of the attacker
+        unsigned char x2214_x80 : 1;             // 0x80 - x2214
+        unsigned char x2214_x40 : 1;             // 0x40 - x2214
+        unsigned char x2214_x20 : 1;             // 0x20 - x2214
+        unsigned char x2214_x10 : 1;             // 0x10 - x2214. also used to change users direction during aerial attacks
+        unsigned char x2214_x08 : 1;             // 0x8 - x2214
+        unsigned char x2214_x04 : 1;             // 0x4 - x2214
+        unsigned char x2214_x02 : 1;             // 0x2 - x2214
+        unsigned char x2214_x01 : 1;             // 0x1 - x2214
+        unsigned char x2215_x80 : 1;             // 0x80 - x2215
+        unsigned char x2215_x40 : 1;             // 0x40 - x2215
+        unsigned char x2215_x20 : 1;             // 0x20 - x2215
+        unsigned char x2215_x10 : 1;             // 0x10 - x2215. also used to change users direction during aerial attacks
+        unsigned char x2215_x08 : 1;             // 0x8 - x2215
+        unsigned char x2215_x04 : 1;             // 0x4 - x2215
+        unsigned char x2215_x02 : 1;             // 0x2 - x2215
+        unsigned char x2215_x01 : 1;             // 0x1 - x2215
+        unsigned char x2216_x80 : 1;             // 0x80 - x2216
+        unsigned char x2216_x40 : 1;             // 0x40 - x2216
+        unsigned char is_throwing : 1;           // 0x20 - x2216
+        unsigned char x2216_x10 : 1;             // 0x10 - x2216. also used to change users direction during aerial attacks
+        unsigned char x2216_x08 : 1;             // 0x8 - x2216
+        unsigned char x2216_x04 : 1;             // 0x4 - x2216
+        unsigned char x2216_x02 : 1;             // 0x2 - x2216
+        unsigned char x2216_x01 : 1;             // 0x1 - x2216
+        char x2217;                              // x2217
         unsigned char x2218_1 : 1;               // 0x80 - x2218
         unsigned char x2218_2 : 1;               // 0x40 - x2218
         unsigned char has_rapid_jab : 1;         // 0x20 - x2218
