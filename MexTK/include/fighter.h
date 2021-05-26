@@ -2545,9 +2545,9 @@ struct FighterData
         unsigned char x221c_5 : 1;               // 0x8 - 0x221c
         unsigned char x221c_6 : 1;               // 0x4 - 0x221c
         unsigned char hitstun : 1;               // 0x2 - 0x221c
-        unsigned char x221c_8 : 1;               // 0x1 = 0x221c
-        unsigned char x221d_1 : 1;               // 0x80 - 0x221d
-        unsigned char x221d_2 : 1;               // 0x40 - 0x221d
+        unsigned char ik_orientation : 1;        // 0x1 = 0x221c
+        unsigned char ik_rfoot : 1;              // 0x80 - 0x221d
+        unsigned char ik_lfoot : 1;              // 0x40 - 0x221d
         unsigned char x221d_3 : 1;               // 0x20 - 0x221d
         unsigned char input_enable : 1;          // 0x10 - 0x221d
         unsigned char x221d_5 : 1;               // 0x8 - 0x221d
@@ -3021,4 +3021,6 @@ void Fighter_ScriptFastForward(GOBJ *f);
 void Fighter_DropCrate(GOBJ *f);
 void Fighter_GrabBreakCheck(GOBJ *f);
 void Fighter_ThrownAttach(FighterData *anchor_data, FighterData *attachee_data);
+void Fighter_ThrownRelease(GOBJ *thrower, GOBJ *victim);
+void Fighter_ThrownApplyKnockback(GOBJ *victim, GOBJ *hit_exception, int is_enter_dmgflytop);
 #endif

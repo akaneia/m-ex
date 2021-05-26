@@ -275,6 +275,8 @@
 8009750c:Fighter_DropCrate
 800dd168:Fighter_GrabBreakCheck
 800db368:Fighter_ThrownAttach
+800de2a8:Fighter_ThrownRelease
+800de7c0:Fighter_ThrownApplyKnockback
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
