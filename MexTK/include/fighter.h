@@ -2492,22 +2492,8 @@ struct FighterData
         unsigned char throw_7 : 1;        // 0x2 - x2210
         unsigned char throw_8 : 1;        // 0x1 - x2210
         //float throw_timerval;                    // 0x2214 - equal to script_event_timer of the attacker
-        unsigned char x2214_x80 : 1;             // 0x80 - x2214
-        unsigned char x2214_x40 : 1;             // 0x40 - x2214
-        unsigned char x2214_x20 : 1;             // 0x20 - x2214
-        unsigned char x2214_x10 : 1;             // 0x10 - x2214. also used to change users direction during aerial attacks
-        unsigned char x2214_x08 : 1;             // 0x8 - x2214
-        unsigned char x2214_x04 : 1;             // 0x4 - x2214
-        unsigned char x2214_x02 : 1;             // 0x2 - x2214
-        unsigned char x2214_x01 : 1;             // 0x1 - x2214
-        unsigned char x2215_x80 : 1;             // 0x80 - x2215
-        unsigned char x2215_x40 : 1;             // 0x40 - x2215
-        unsigned char x2215_x20 : 1;             // 0x20 - x2215
-        unsigned char x2215_x10 : 1;             // 0x10 - x2215. also used to change users direction during aerial attacks
-        unsigned char x2215_x08 : 1;             // 0x8 - x2215
-        unsigned char x2215_x04 : 1;             // 0x4 - x2215
-        unsigned char x2215_x02 : 1;             // 0x2 - x2215
-        unsigned char x2215_x01 : 1;             // 0x1 - x2215
+        char x2214;                              // x2214
+        char x2215;                              // x2215
         unsigned char x2216_x80 : 1;             // 0x80 - x2216
         unsigned char x2216_x40 : 1;             // 0x40 - x2216
         unsigned char is_throwing : 1;           // 0x20 - x2216
