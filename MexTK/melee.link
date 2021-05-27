@@ -425,6 +425,7 @@
 80011c18:JOBJ_EnableFlagAllMOBJ
 80213250:JOBJ_CompileTEVAllMOBJ
 8000c1c0:JOBJ_AttachPosition
+8000c2f8:JOBJ_AttachPositionRotation
 8000c390:JOBJ_Detach
 8019035c:JOBJ_LoadSet
 8016895c:JOBJ_AddSetAnim

@@ -530,7 +530,7 @@ int JOBJ_CheckAObjEnd(JOBJ *joint);
 void JOBJ_CompileTEVAllMOBJ(JOBJ *joint);
 void JObj_DispAll(JOBJ *joint, Mtx *vmtx, int flags, int rendermode);
 void JOBJ_AttachPosition(JOBJ *to_attach, JOBJ *attach_to);
-void JOBJ_AttachPosition(JOBJ *to_attach, JOBJ *attach_to);
+void JOBJ_AttachPositionRotation(JOBJ *to_attach, JOBJ *attach_to);
 GOBJ *JOBJ_LoadSet(int is_hidden, JOBJSet *set, int anim_id, float frame, int gobj_subclass, int gx_link, int is_add_anim, void *cb); // 8019035c
 void JOBJ_AddSetAnim(JOBJ *jobj, JOBJSet *set, int anim_id);                                                                          // 8016895c
 void JOBJ_Detach(JOBJ *to_attach);

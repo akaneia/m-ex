@@ -2329,8 +2329,7 @@ struct FighterData
         u16 vuln;                         // 0x1a6a
         int x1a6c;                        // 0x1a6c
         int x1a70;                        // 0x1a70
-        int x1a74;                        // 0x1a74
-        int x1a78;                        // 0x1a78
+        Vec2 release_pos;                 // 0x1a74
         int x1a7c;                        // 0x1a7c
         int x1a80;                        // 0x1a80
         int x1a84;                        // 0x1a84
