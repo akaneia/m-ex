@@ -267,8 +267,8 @@
 8003e998:Fighter_ReleaseItemUnk
 80090594:Fighter_InitDamageVibrate
 8007da74:Fighter_CalcHitlagFrames
-80085cd8:Figher_LoadAnimation
-8006ebe8:Figher_ApplyAnimation
+80085cd8:Fighter_LoadAnimation
+8006ebe8:Fighter_ApplyAnimation
 8006e9b4:Fighter_UpdateStateFrameInfo
 80073240:Fighter_ScriptUpdate
 8007349c:Fighter_ScriptFastForward
@@ -277,6 +277,18 @@
 800db368:Fighter_ThrownAttach
 800de2a8:Fighter_ThrownRelease
 800de7c0:Fighter_ThrownApplyKnockback
+8007891c:Fighter_AddStaleIncCombo
+8007b0c0:Fighter_SetAllHurtboxState
+8007b128:Fighter_SetHurtboxState
+8007b62c:Fighter_SetScriptHurtStatus
+8007b868:Fighter_GetIntangibleFrames
+80076640:Fighter_IncPercent
+800338f4:Fighter_GetAttackRatio
+800339e0:Fighter_GetDefenseRatio
+80078710:Fighter_SetDamageSource
+8007ee0c:Fighter_DamageRumble
+8008d930:Fighter_CheckKnockbackModifiers
+80079ab0:Fighter_KnockbackCalculate
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
@@ -463,6 +475,7 @@
 802F40B8:Match_ShowTimer
 801C10B8:Match_StoreGoCallback
 801A4674:Match_UnfreezeGame
+8016b248:Match_GetDamageRatio
 8037E708:MatToQuat
 8001B6F8:Memcard_CheckStatus
 8001BB48:Memcard_CreateSnapshot

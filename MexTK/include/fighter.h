@@ -900,7 +900,7 @@ struct ftHit
 
 struct FtHurt
 {
-    int x0;                       // 0x0
+    int state;                    // 0x0, whether or not this hurtbox can be hit
     Vec3 hurt1_offset;            // 0x4
     Vec3 hurt2_offset;            // 0x10
     float scale;                  // 0x1c
@@ -2176,7 +2176,7 @@ struct FighterData
         int damaged_hurtbox;       // 0x184c
         float force_applied;       // 0x1850
         Vec3 collpos;              // 0x1854
-        int x1860;                 // 0x1860
+        int attribute;             // 0x1860
         int x1864;                 // 0x1864
         GOBJ *source;              // 0x1868
         int x186c;                 // 0x186c
@@ -3012,8 +3012,8 @@ void Fighter_GiveItem(GOBJ *fighter, GOBJ *item);
 void Fighter_ReleaseItemUnk(int ply, int ms, GOBJ *item);
 void Fighter_InitDamageVibrate(FighterData *fp, int dmg, float mult, int current_state, int unk_bool);
 float Fighter_CalcHitlagFrames(int dmg, int state_id, float mult);
-void Figher_LoadAnimation(FighterData *fp, FighterData *fp_source, int anim_id);
-void Figher_ApplyAnimation(GOBJ *f, float start_frame, float speed, float blend);
+void Fighter_LoadAnimation(FighterData *fp, FighterData *fp_source, int anim_id);
+void Fighter_ApplyAnimation(GOBJ *f, float start_frame, float speed, float blend);
 void Fighter_UpdateStateFrameInfo(GOBJ *f);
 void Fighter_ScriptUpdate(GOBJ *f);
 void Fighter_ScriptFastForward(GOBJ *f);
@@ -3022,4 +3022,17 @@ void Fighter_GrabBreakCheck(GOBJ *f);
 void Fighter_ThrownAttach(FighterData *anchor_data, FighterData *attachee_data);
 void Fighter_ThrownRelease(GOBJ *thrower, GOBJ *victim);
 void Fighter_ThrownApplyKnockback(GOBJ *victim, GOBJ *hit_exception, int is_enter_dmgflytop);
+void Fighter_AddStaleIncCombo(GOBJ *thrower, GOBJ *victim, float dmg); // 8007891c
+void Fighter_SetAllHurtboxState(GOBJ *f, int state);                   // 8007b0c0
+void Fighter_SetHurtboxState(GOBJ *f, int bone_index, int state);      // 8007b128
+void Fighter_SetScriptHurtStatus(GOBJ *f, int state);                  // 8007b62c
+int Fighter_GetIntangibleFrames(GOBJ *f);                              // 8007b868
+void Fighter_IncPercent(GOBJ *f, float *dmg);                          // 80076640
+float Fighter_KnockbackCalculate(float match_dmg_ratio, float ft_attk_ratio, float ft_def_ratio, float unk, FighterData *fp, ftHit *hit, int dmg);
+float Fighter_GetAttackRatio(int ply);                                            // 800338f4
+float Fighter_GetDefenseRatio(int ply);                                           // 800339e0
+void Fighter_SetDamageSource(GOBJ *attacker, GOBJ *victim, float *dmg_direction); // 80078710
+void Fighter_DamageRumble(FighterData *fp, int dmg);                              // 8007ee0c
+void Fighter_CheckKnockbackModifiers(FighterData *fp);                            // 8008d930
+
 #endif
