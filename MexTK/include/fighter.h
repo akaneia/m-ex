@@ -2536,7 +2536,7 @@ struct FighterData
         unsigned char shield_x8 : 1;             //  0x8 - 0x221b
         unsigned char x221b_grab : 1;            // 0x4 - 0x221b, is checked at 80079304, skips some logic
         unsigned char x221b_7 : 1;               // 0x2 - 0x221b
-        unsigned char x221b_grab2 : 1;           // 0x1 - 0x221b
+        unsigned char is_anchor : 1;             // 0x1 - 0x221b, used for determining which player the anchor is during throw release
         unsigned char x221c_1 : 1;               // 0x80 - 0x221c
         unsigned char x221c_2 : 1;               // 0x40 - 0x221c
         unsigned char x221c_3 : 1;               // 0x20 - 0x221c
@@ -2605,8 +2605,8 @@ struct FighterData
         unsigned char is_stamina : 1;             // 0x1 - 0x2225
         unsigned char x2226_1 : 1;                // 0x80 - 0x2226
         unsigned char x2226_2 : 1;                // 0x40 - 0x2226
-        unsigned char is_thrown : 1;              // 0x20 - 0x2226, might actually be for skipping grab collision
-        unsigned char x2226_4 : 1;                // 0x10 - 0x2226
+        unsigned char is_robj_child : 1;          // 0x20 - 0x2226, might actually be for skipping grab collision
+        unsigned char x2226_x10 : 1;              // 0x10 - 0x2226
         unsigned char cloak1 : 1;                 // 0x8 - 0x2226
         unsigned char cloak2 : 1;                 // 0x4 - 0x2226
         unsigned char x2226_7 : 1;                // 0x2 - 0x2226
