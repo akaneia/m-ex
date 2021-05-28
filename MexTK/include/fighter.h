@@ -3023,6 +3023,7 @@ void Fighter_GrabBreakCheck(GOBJ *f);
 void Fighter_ThrownAttach(FighterData *anchor_data, FighterData *attachee_data);
 void Fighter_ThrownRelease(GOBJ *thrower, GOBJ *victim);
 void Fighter_ThrownApplyKnockback(GOBJ *victim, GOBJ *hit_exception, int is_enter_dmgflytop);
+void Fighter_ThrownApplyKnockbackNoTDI(GOBJ *victim, float frame);
 void Fighter_AddStaleIncCombo(GOBJ *thrower, GOBJ *victim, float dmg); // 8007891c
 void Fighter_SetAllHurtboxState(GOBJ *f, int state);                   // 8007b0c0
 void Fighter_SetHurtboxState(GOBJ *f, int bone_index, int state);      // 8007b128

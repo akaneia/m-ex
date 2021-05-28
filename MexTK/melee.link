@@ -277,6 +277,7 @@
 800db368:Fighter_ThrownAttach
 800de2a8:Fighter_ThrownRelease
 800de7c0:Fighter_ThrownApplyKnockback
+8008e908:Fighter_ThrownApplyKnockbackNoTDI
 8007891c:Fighter_AddStaleIncCombo
 8007b0c0:Fighter_SetAllHurtboxState
 8007b128:Fighter_SetHurtboxState
