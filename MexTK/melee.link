@@ -289,6 +289,7 @@
 80033798:Fighter_GetHandicap
 80078710:Fighter_SetDamageSource
 8007ee0c:Fighter_DamageRumble
+8007ebac:Fighter_RumbleExecute
 8008d930:Fighter_CheckKnockbackModifiers
 80079ab0:Fighter_KnockbackCalculate
 80033bb8:Fighter_GetCurrentPlacing

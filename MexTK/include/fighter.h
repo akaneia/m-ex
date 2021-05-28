@@ -3035,7 +3035,8 @@ float Fighter_GetAttackRatio(int ply);                                          
 float Fighter_GetDefenseRatio(int ply);                                           // 800339e0
 void Fighter_SetDamageSource(GOBJ *attacker, GOBJ *victim, float *dmg_direction); // 80078710
 void Fighter_DamageRumble(FighterData *fp, int dmg);                              // 8007ee0c
-void Fighter_CheckKnockbackModifiers(FighterData *fp);                            // 8008d930
+void Fighter_RumbleExecute(FighterData *fp, int strength, int unk);
+void Fighter_CheckKnockbackModifiers(FighterData *fp); // 8008d930
 int Fighter_GetCurrentPlacing(int ply);
 void Fighter_StoreGrabBreakout(FighterData *fp, float amt);
 int Fighter_CheckGrabBreakout(FighterData *fp, float mash_amt); // returns 1 if inputted something
