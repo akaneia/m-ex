@@ -3037,6 +3037,6 @@ void Fighter_DamageRumble(FighterData *fp, int dmg);                            
 void Fighter_CheckKnockbackModifiers(FighterData *fp);                            // 8008d930
 int Fighter_GetCurrentPlacing(int ply);
 void Fighter_StoreGrabBreakout(FighterData *fp, float amt);
-int Fighter_CheckGrabBreakout(FighterData *fp); // returns 1 if inputted something
+int Fighter_CheckGrabBreakout(FighterData *fp), float mash_amt); // returns 1 if inputted something
 void Fighter_SetAnimRate(GOBJ *f, float rate);
 #endif
