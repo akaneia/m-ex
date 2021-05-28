@@ -285,10 +285,15 @@
 80076640:Fighter_IncPercent
 800338f4:Fighter_GetAttackRatio
 800339e0:Fighter_GetDefenseRatio
+80033798:Fighter_GetHandicap
 80078710:Fighter_SetDamageSource
 8007ee0c:Fighter_DamageRumble
 8008d930:Fighter_CheckKnockbackModifiers
 80079ab0:Fighter_KnockbackCalculate
+80033bb8:Fighter_GetCurrentPlacing
+8007dbcc:Fighter_StoreGrabBreakout
+8007dc08:Fighter_CheckGrabBreakout
+8006f190:Fighter_SetAnimRate
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim

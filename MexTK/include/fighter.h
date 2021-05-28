@@ -1490,12 +1490,12 @@ struct ftCommonData
     float x348;                   // 0x348
     float x34c;                   // 0x34c
     float x350;                   // 0x350
-    float x354;                   // 0x354
-    float x358;                   // 0x358
-    float x35c;                   // 0x35c
-    float x360;                   // 0x360
-    float x364;                   // 0x364
-    float x368;                   // 0x368
+    float grab_mash_min;          // 0x354
+    float grab_mash_per_handicap; // 0x358
+    float grab_max_handicap;      // 0x35c
+    float grab_placing_mult;      // 0x360
+    float grab_placing_max;       // 0x364
+    float grab_mash_mult;         // 0x368
     float x36c;                   // 0x36c
     float x370;                   // 0x370
     float x374;                   // 0x374
@@ -1510,11 +1510,11 @@ struct ftCommonData
     float x398;                   // 0x398
     float x39c;                   // 0x39c
     float x3a0;                   // 0x3a0
-    float x3a4;                   // 0x3a4
-    float x3a8;                   // 0x3a8
+    float grab_mash_per_frame;    // 0x3a4
+    float grab_mash_per_input;    // 0x3a8
     float x3ac;                   // 0x3ac
-    float x3b0;                   // 0x3b0
-    float x3b4;                   // 0x3b4
+    float grab_wiggle_per_input;  // 0x3b0
+    float grab_wiggle_rate;       // 0x3b4
     float x3b8;                   // 0x3b8
     float x3bc;                   // 0x3bc
     float x3c0;                   // 0x3c0
@@ -2955,6 +2955,7 @@ void Fighter_UpdateShieldGFX(GOBJ *fighter, float size);
 int Fighter_GetShieldColorIndex(int ply);
 int Fighter_GetExternalID(int ply);
 int Fighter_GetCostumeID(int ply);
+int Fighter_GetHandicap(int ply);
 float Fighter_GetBaseScale(FighterData *fighter);
 void Fighter_SetScale(GOBJ *fighter, float scale);
 void Fighter_InitDynamics(FighterData *fighter_data);
@@ -3034,5 +3035,8 @@ float Fighter_GetDefenseRatio(int ply);                                         
 void Fighter_SetDamageSource(GOBJ *attacker, GOBJ *victim, float *dmg_direction); // 80078710
 void Fighter_DamageRumble(FighterData *fp, int dmg);                              // 8007ee0c
 void Fighter_CheckKnockbackModifiers(FighterData *fp);                            // 8008d930
-
+int Fighter_GetCurrentPlacing(int ply);
+void Fighter_StoreGrabBreakout(FighterData *fp, float amt);
+int Fighter_CheckGrabBreakout(FighterData *fp); // returns 1 if inputted something
+void Fighter_SetAnimRate(GOBJ *f, float rate);
 #endif
