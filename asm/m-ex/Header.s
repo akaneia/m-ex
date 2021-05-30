@@ -210,6 +210,10 @@
   .set  Arch_Fighter_EndMovie, 0x68
   .set  Arch_Fighter_RaceTimes, 0x6C
     .set RaceTimes_Stride,0x4
+  .set  Arch_Fighter_RuntimeIntroPointers, 0x70
+    .set RuntimeIntroPointers_Stride, 0x4
+  .set Arch_Fighter_IntroFilenames, 0x74
+    .set IntroFilenames_Stride, 0x4
 .set  Arch_FighterFunc,0xC
   .set  Arch_FighterFunc_onLoad,0x0
   .set  Arch_FighterFunc_onDeath,0x4
