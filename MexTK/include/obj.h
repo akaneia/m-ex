@@ -356,7 +356,7 @@ struct COBJ
     union
     {
         f32 roll; //0x28
-        Vec3 up;  //0x2C - 0x38
+        Vec3 up;  //0x28 - 0x34
     } u;
     f32 near; //0x3C
     f32 far;  //0x40

@@ -18,6 +18,6 @@
 
 Float:
 blrl
-.float 2
+.float 0
 
 Exit:

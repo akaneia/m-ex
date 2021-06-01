@@ -803,8 +803,8 @@ struct ItemData
     float lifetime;                                     // 0xd44
     int xd48;                                           // 0xd48
     int xd4c;                                           // 0xd4c
-    int xd50;                                           // 0xd50
-    int xd54;                                           // 0xd54
+    int land_num;                                       // 0xd50
+    int throw_num;                                      // 0xd54
     int xd58;                                           // 0xd58
     int xd5c;                                           // 0xd5c
     int xd60;                                           // 0xd60

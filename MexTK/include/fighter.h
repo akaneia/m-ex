@@ -624,12 +624,19 @@ struct PlayerData
     unsigned char isRumble : 1;
     unsigned char isEntry : 1;
     unsigned char unk2 : 6;
-    unsigned char unk3 : 8;
+    // 0xD
+    unsigned char xd_80 : 1;
+    unsigned char is_black_stock : 1; // 0xD, 0x40, makes the stock icon completely black
+    unsigned char xd_20 : 1;
+    unsigned char always_show_indicator : 1; // 0xD, 0x10, will always display player indicator (p1, p2, ally heart, etc)
+    unsigned char xd_3f : 4;                 // 0xD, 0x0F
+    // 0xE
     u8 cpuKind;
-    u8 cpuLevel; // 0xf
+    // 0xF
+    u8 cpuLevel;
     // 0x10
     u16 damageStart;
-    u16 damageSpawn;
+    u16 damageSpawn;  // 0x12
     u16 staminaStart; // 0x14
     float attack;     // 0x18
     float defense;    // 0x1C
