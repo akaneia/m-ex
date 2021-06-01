@@ -27,6 +27,11 @@
   mr REG_Orientation, r8
   lwz REG_FighterData,0x2C(REG_FighterGObj)
 
+#Check for kirby
+  lwz r3,0x4(REG_FighterData)
+  cmpwi r3,4
+  beq CheckID_Kirby
+
 #Check for custom gfx
   cmpwi	REG_EffectID, EffMdlStart
   blt DoesNotExist
@@ -37,6 +42,14 @@
   cmpwi REG_EffectID, CpPtclGenStart
   blt CopyEffectModel
   cmpwi REG_EffectID, MEXEffectEnd
+  blt CopyPtclGen
+
+CheckID_Kirby:
+  cmpwi	REG_EffectID, EffMdlStart
+  blt DoesNotExist
+  cmpwi REG_EffectID, PtclGenStart
+  blt CopyEffectModel
+  cmpwi REG_EffectID, CpEffMdlStart
   blt CopyPtclGen
 
 .set  REG_EffectIntID,12
@@ -75,7 +88,7 @@ PtclGen:
 CopyEffectModel:
   li  REG_EffectKind,0
 # Get this fighters effect ID
-  subi  REG_EffectIntID,REG_EffectID,CpEffMdlStart
+  subi  REG_EffectIntID,REG_EffectID,EffMdlStart     #CpEffMdlStart
 # Get the copied fighters effect file ID
   lwz r3,OFST_MnSlChrEffectFileIDs(rtoc)
   lwz r4,0x2238(REG_FighterData)
@@ -88,7 +101,7 @@ CopyEffectModel:
 CopyPtclGen:
   li  REG_EffectKind,1
 # Get this fighters effect ID
-  subi  REG_EffectIntID,REG_EffectID,CpPtclGenStart
+  subi  REG_EffectIntID,REG_EffectID,PtclGenStart     #CpPtclGenStart
 # Get this fighters effect file ID
   lwz r3,OFST_MnSlChrEffectFileIDs(rtoc)
   lwz r4,0x2238(REG_FighterData)
