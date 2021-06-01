@@ -2,27 +2,46 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-.set  REG_FighterID,31
-.set  REG_ArticleID,30
-.set  REG_ID,29
-.set  REG_MEXItemLookup,28
+.set  REG_FighterData,31
+.set  REG_FighterID,30
+.set  REG_ArticleID,29
+.set  REG_ID,28
+.set  REG_MEXItemLookup,27
 
 backup
 
 #Backup args
-  mr  REG_FighterID,r3
+  lwz  REG_FighterData,0x2C(r3)
   mr  REG_ArticleID,r4
 
 # Get table
   lwz r3,OFST_mexData(rtoc)
   lwz r3,Arch_Fighter(r3)
   lwz r3,Arch_Fighter_MEXItemLookup(r3)
+  lwz REG_FighterID,0x4(REG_FighterData)
   mulli r4,REG_FighterID,MEXItemLookup_Stride
   add REG_MEXItemLookup,r3,r4
 #Check if exists
   lwz r3,0x0(REG_MEXItemLookup)
   cmpw  REG_ArticleID,r3
+  blt HasItem
+#Does not have item, check if this is kirby
+  cmpwi REG_FighterID,4
+  bne DoesNotExist
+#Check if kirby has a copy ability
+  lwz r5,0x2238(REG_FighterData)
+  cmpwi r5,4
+  beq DoesNotExist
+#Check if this fighter has the item
+  lwz r3,OFST_mexData(rtoc)
+  lwz r3,Arch_Fighter(r3)
+  lwz r3,Arch_Fighter_MEXItemLookup(r3)
+  mulli r4,r5,MEXItemLookup_Stride
+  add REG_MEXItemLookup,r3,r4
+  lwz r3,0x0(REG_MEXItemLookup)
+  cmpw  REG_ArticleID,r3
   bge DoesNotExist
+HasItem:
 #Get external item ID from internal
   lwz r3,0x4(REG_MEXItemLookup)
   mulli r4,REG_ArticleID,2

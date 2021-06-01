@@ -45,8 +45,8 @@ struct MEXPlaylist
 ArchiveInfo *MEX_LoadRelArchive(char *file, void *functions, char *symbol);
 void MEX_IndexFighterItem(int fighter_kind, void *itemdata, int item_id);
 void SpawnMEXEffect(int effectID, int fighter, int arg1, int arg2, int arg3, int arg4, int arg5);
-int MEX_GetFtItemID(int ft_kind, int item_id); // gobj can be fighter or stage
-int MEX_GetGrItemID(int item_id);              // gobj can be fighter or stage
+int MEX_GetFtItemID(GOBJ *f, int item_id); // gobj can be fighter or stage
+int MEX_GetGrItemID(int item_id);          // gobj can be fighter or stage
 void SFX_PlayStageSFX(int sfx_id);
 void *calloc(int size);
 PRIM *PRIM_NEW(int vert_count, int params1, int params2);
