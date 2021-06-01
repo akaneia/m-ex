@@ -20,12 +20,18 @@ lwz REG_FighterData,0x2C(REG_FighterGObj)
 # get fighter gobj if item
   lhz r3,0x0(REG_FighterGObj)
   cmpwi r3,6
-  bne CheckID
+  bne ItemSkip
   lwz r3,0x2C(REG_FighterGObj)
   lwz r3,0x518(r3)
   cmpwi r3,0
-  beq CheckID
+  beq ItemSkip
   lwz REG_FighterData,0x2C(r3)
+ItemSkip:
+
+#Check for kirby
+  lwz r3,0x4(REG_FighterData)
+  cmpwi r3,4
+  beq CheckID_Kirby
 
 CheckID:
 #Check for custom gfx
@@ -38,6 +44,16 @@ CheckID:
   cmpwi REG_EffectID, CpPtclGenStart
   blt CopyEffectModel
   cmpwi REG_EffectID, MEXEffectEnd
+  blt CopyPtclGen
+  b Original
+
+CheckID_Kirby:
+#Check for custom gfx
+  cmpwi	REG_EffectID, EffMdlStart
+  blt Original
+  cmpwi REG_EffectID, PtclGenStart
+  blt CopyEffectModel
+  cmpwi REG_EffectID, CpEffMdlStart
   blt CopyPtclGen
   b Original
 
@@ -67,7 +83,7 @@ PtclGen:
   b ParsePtclGenLookup
 CopyEffectModel:
 # Get this fighters effect ID
-  subi  REG_EffectIntID,REG_EffectID,CpEffMdlStart
+  subi  REG_EffectIntID,REG_EffectID,EffMdlStart     #CpEffMdlStart
 # Get the copied fighters effect file ID
   lwz r3,OFST_MnSlChrEffectFileIDs(rtoc)
   lwz r4,0x2238(REG_FighterData)
@@ -79,7 +95,7 @@ CopyEffectModel:
   b ParseEffMdlLookup
 CopyPtclGen:
 # Get this fighters effect ID
-  subi  REG_EffectIntID,REG_EffectID,CpPtclGenStart
+  subi  REG_EffectIntID,REG_EffectID,PtclGenStart     #CpPtclGenStart
 # Get this fighters effect file ID
   lwz r3,OFST_MnSlChrEffectFileIDs(rtoc)
   lwz r4,0x2238(REG_FighterData)

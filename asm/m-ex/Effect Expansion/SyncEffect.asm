@@ -33,10 +33,16 @@ lwz REG_FighterData,0x2C(REG_PlayerGObj)
 # get fighter gobj if item
   lhz r3,0x0(REG_PlayerGObj)
   cmpwi r3,6
-  bne CheckID
+  bne NotItem
   lwz r3,0x2C(REG_PlayerGObj)
   lwz r3,0x518(r3)
   lwz REG_FighterData,0x2C(r3)
+NotItem:
+
+#Check for kirby
+  lwz r3,0x4(REG_FighterData)
+  cmpwi r3,4
+  beq CheckID_Kirby
 
 CheckID:
 #Check for custom gfx
@@ -52,6 +58,15 @@ CheckID:
   blt CopyPtclGen
   b Injection_Exit
 
+CheckID_Kirby:
+#Check for custom gfx
+  cmpwi	REG_EffectID, EffMdlStart
+  blt Injection_Exit
+  cmpwi REG_EffectID, PtclGenStart
+  blt CopyEffectModel
+  cmpwi REG_EffectID, CpEffMdlStart
+  blt CopyPtclGen
+  b Injection_Exit
 
 EffectModel:
   li  REG_EffectKind,0
@@ -82,7 +97,7 @@ PtclGen:
 CopyEffectModel:
   li  REG_EffectKind,0
 # Get this fighters effect ID
-  subi  REG_EffectIntID,REG_EffectID,CpEffMdlStart
+  subi  REG_EffectIntID,REG_EffectID,EffMdlStart    #CpEffMdlStart
 # Get the copied fighters effect file ID
   lwz r3,OFST_MnSlChrEffectFileIDs(rtoc)
   lwz r4,0x2238(REG_FighterData)
@@ -95,7 +110,7 @@ CopyEffectModel:
 CopyPtclGen:
   li  REG_EffectKind,1
 # Get this fighters effect ID
-  subi  REG_EffectIntID,REG_EffectID,CpPtclGenStart
+  subi  REG_EffectIntID,REG_EffectID,PtclGenStart   #CpPtclGenStart
 # Get this fighters effect file ID
   lwz r3,OFST_MnSlChrEffectFileIDs(rtoc)
   lwz r4,0x2238(REG_FighterData)
@@ -116,6 +131,7 @@ ParseEffMdlLookup:
   lwz r3,effBhv_effMdlNum(REG_effBehaviorTable)    #effect num
   cmpw  REG_EffectIntID,r3
   bge DoesNotExist
+HasMdlEffect:
 #Get effect type from internal ID
   lwz r3,effBhv_effMdlBhv(REG_effBehaviorTable)
   lbzx REG_EffectType,r3,REG_EffectIntID
@@ -429,6 +445,7 @@ ParsePtclGenLookup:
   lwz r3,effBhv_ptclGenNum(REG_effBehaviorTable)    #effect num
   cmpw  REG_EffectIntID,r3
   bge DoesNotExist
+HasPtclEffect:
 #Get effect type from internal ID
   lwz r3,effBhv_ptclGenBhv(REG_effBehaviorTable)
   lbzx REG_EffectType,r3,REG_EffectIntID
