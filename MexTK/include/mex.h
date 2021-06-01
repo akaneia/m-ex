@@ -52,7 +52,8 @@ void *calloc(int size);
 PRIM *PRIM_NEW(int vert_count, int params1, int params2);
 void PRIM_CLOSE();
 MEXPlaylist *MEX_GetPlaylist();
-void KirbyStateChange(GOBJ *fighter, int state, float startFrame, float animSpeed, float animBlend);
+//void KirbyStateChange(GOBJ *fighter, int state, float startFrame, float animSpeed, float animBlend);
+void KirbyStateChange(float anim_start_frame, float anim_rate, float anim_blend, GOBJ *f, int state_id, int flags, GOBJ *alt_state_source);
 void *MEX_GetKirbyCpData(int copy_id);
 void *MEX_GetData(int index);
 #endif
