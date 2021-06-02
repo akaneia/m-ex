@@ -834,9 +834,12 @@ struct ShieldDesc
 
 struct AbsorbDesc
 {
-    int bone;
-    Vec3 pos;
-    float radius;
+    int bone; // x00
+    Vec3 pos; // x04
+    float radius; // x10
+    float x14; // x14
+    float x18; // x18
+    float x1C; // x1C
 };
 
 struct AfterImageDesc

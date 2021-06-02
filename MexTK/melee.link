@@ -1,4 +1,5 @@
 80388220:__assert
+80323938:memmove
 80323DC8:_vsprintf
 800693AC:ActionStateChange
 80085E50:Animation_GetAddress
@@ -650,7 +651,7 @@
 80342DB8:VECNormalize
 80342D78:VECSubtract
 8000D790:Vec2_CalculateAngle
-8000d620:Vec3_CalculateAngle 
+8000D620:Vec3_CalculateAngle
 800119DC:Wind_FighterCreate
 80011A50:Wind_StageCreate
 8027B5B0:Zako_Create
