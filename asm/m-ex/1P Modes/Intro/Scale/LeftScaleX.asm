@@ -18,4 +18,5 @@
   lfsx f1,r11,r12
 
 Exit:
+  li r11,1
   cmpwi r11,0 # stupid comparison because upcoming jobj assert
