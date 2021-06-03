@@ -820,7 +820,7 @@ struct ItemData
     int atk_kind;                                       // 0xd88, copied from fighter atk_kind
     u16 atk_instance;                                   // 0xd8c,  Contains an ID unique to the current move instance. e.g, if two dairs are done back to back, this ID will differ to tell them apart from each other. It is stored to 0x18EC of the victim upon colliding with someone.
     int xd90;                                           // 0xd90
-    int xd94;                                           // 0xd94
+    GOBJ *orig_owner;                                   // 0xd94
     int xd98;                                           // 0xd98
     int xd9c;                                           // 0xd9c
     int xda0;                                           // 0xda0
