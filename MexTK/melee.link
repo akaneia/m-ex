@@ -297,6 +297,7 @@
 8007dbcc:Fighter_StoreGrabBreakout
 8007dc08:Fighter_CheckGrabBreakout
 8006f190:Fighter_SetAnimRate
+800cae80:Fighter_CheckJumpInput
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim

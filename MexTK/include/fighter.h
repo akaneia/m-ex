@@ -834,12 +834,12 @@ struct ShieldDesc
 
 struct AbsorbDesc
 {
-    int bone; // x00
-    Vec3 pos; // x04
+    int bone;     // x00
+    Vec3 pos;     // x04
     float radius; // x10
-    float x14; // x14
-    float x18; // x18
-    float x1C; // x1C
+    float x14;    // x14
+    float x18;    // x18
+    float x1C;    // x1C
 };
 
 struct AfterImageDesc
@@ -3051,4 +3051,5 @@ int Fighter_GetCurrentPlacing(int ply);
 void Fighter_StoreGrabBreakout(FighterData *fp, float amt);
 int Fighter_CheckGrabBreakout(FighterData *fp, float mash_amt); // returns 1 if inputted something
 void Fighter_SetAnimRate(GOBJ *f, float rate);
+int Fighter_CheckJumpInput(GOBJ *f);
 #endif
