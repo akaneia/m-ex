@@ -673,6 +673,27 @@ struct DynamicsBehave
     int num; // number of dynamic bones to animate in the boneset
 };
 
+struct IKParam
+{
+    u8 leg_right_index;  // 0x0
+    u8 leg_left_index;   // 0x1
+    float leg_param;     // 0x4
+    u8 knee_right_index; // 0x8
+    u8 knee_left_index;  // 0x9
+    float knee_param;    // 0xC
+    u8 foot_right_index; // 0x10
+    u8 foot_left_index;  // 0x11
+    float foot_param1;
+    float foot_param2;
+    u8 shoulder_right_index;
+    u8 shoulder_left_index;
+    float shoulder_param;
+    u8 arm_right_index;
+    u8 arm_left_index;
+    float arm_param1;
+    float arm_param2;
+};
+
 struct ftDynamics
 {
     int dynamics_num;                   // number of dynamic bonesets for this fighter
@@ -769,7 +790,7 @@ struct ftData
     int *x4C;
     int x50;
     int x54;
-    int *boneLookup;
+    IKParam *ik_param;
 };
 
 struct ftChkDevice // 80459a68
