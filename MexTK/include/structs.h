@@ -140,6 +140,7 @@ typedef struct FtDynamicHit FtDynamicHit;
 typedef struct DynamicsDesc DynamicsDesc;
 typedef struct DynamicsHitDesc DynamicsHitDesc;
 typedef struct DynamicsBehave DynamicsBehave;
+typedef struct IKParam IKParam;
 typedef struct ftDynamics ftDynamics;
 
 // Fighter States
