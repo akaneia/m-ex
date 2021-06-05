@@ -296,7 +296,7 @@ struct itCommonAttr
     unsigned char cam_kind : 2; // 0x1 0x06, is stored to 0xdcd
     unsigned char x1_8 : 1;     // 0x1 0x01    char flags3; //0x2
     char flags4;                //0x3
-    int x4;
+    float throw_speed_mult;     // 0x4, speed multiplier at which this item is thrown at
     int x8;
     float spin_speed;
     float fall_speed;
