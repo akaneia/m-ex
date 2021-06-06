@@ -3073,4 +3073,5 @@ void Fighter_StoreGrabBreakout(FighterData *fp, float amt);
 int Fighter_CheckGrabBreakout(FighterData *fp, float mash_amt); // returns 1 if inputted something
 void Fighter_SetAnimRate(GOBJ *f, float rate);
 int Fighter_CheckJumpInput(GOBJ *f);
+void Fighter_SetEyeTexture(GOBJ *f, int material_index, float frame);
 #endif
