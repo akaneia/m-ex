@@ -305,7 +305,7 @@ struct Stage
     u8 x87_04 : 1;                                                        // 0x87
     u8 x87_02 : 1;                                                        // 0x87
     u8 x87_01 : 1;                                                        // 0x87
-    int stageID;                                                          // 0x88
+    int kind;                                                             // 0x88
     u8 flags2x80 : 1;                                                     // 0x8c
     u8 flags2x40 : 1;                                                     // 0x8c
     u8 flags2x20 : 1;                                                     // 0x8c
@@ -530,6 +530,9 @@ int Stage_GetGeneralPoint(int index, Vec3 *pos);
 void Stage_EnableLineGroup(int index);
 void Stage_DisableLineGroup(int index);
 void Stage_InitLines(void *coll_data);
+void Stage_InitCatchHazard(GOBJ *map, int unk, void *check_cb);
+void Stage_InitMoveHazard(GOBJ *map, int unk, void *check_cb);
+void Stage_InitDamageHazard(GOBJ *map, int unk, void *check_cb);
 int Stage_GetExternalID();
 int Stage_ExternalToInternal(int ext_id);
 #endif

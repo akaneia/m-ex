@@ -607,6 +607,9 @@
 801C49F8:Stage_GetYakumonoParam
 8004D288:Stage_InitLines
 801C2ED0:Stage_InitMovingColl
+800c0764:Stage_InitCatchHazard
+800c06e8:Stage_InitMoveHazard
+800c07f8:Stage_InitDamageHazard
 801C8138:Stage_MapStateChange
 801c5440:Stage_PlaySFX
 801c54dc:Stage_CheckSFX
