@@ -259,29 +259,12 @@ typedef struct itPublicData
 
 struct itData
 {
-    int x0;
-    float *param_ext;
-    void *archive;
-    void *animFlags;
-    void *animDynamics;
-    int x14;
-    int x18;
-    int x1C;
-    int x20;
-    int x24;
-    int x28;
-    int dynamics;
-    int hurtbox;
-    int x34;
-    int x38;
-    int x3C;
-    int x40;
-    int coll;
-    int *items;
-    int x4C;
-    int x50;
-    int x54;
-    int boneLookup;
+    float *param;     // 0x00
+    float *param_ext; // 0x04
+    void *hurtboxes;  // 0x08
+    void *states;     // 0x0C
+    void *model;      // 0x10
+    void *dynamics;   // 0x14
 };
 
 struct itCommonAttr
@@ -648,7 +631,7 @@ struct ItemData
     int x368;                                           // 0x368
     int x36c;                                           // 0x36c
     int x370;                                           // 0x370
-    int x374;                                           // 0x374
+    int dynamics_x374;                                  // 0x374
     CollData coll_data;                                 // 0x378 -> 0x518
     GOBJ *fighter_gobj;                                 // 0x518
     int x51c;                                           // 0x51c
@@ -675,7 +658,7 @@ struct ItemData
     int xb5c;                                           // 0xb5c
     int xb60;                                           // 0xb60
     int xb64;                                           // 0xb64
-    int xb68;                                           // 0xb68
+    int dynamics_xb68;                                  // 0xb68
     int xb6c;                                           // 0xb6c
     int xb70;                                           // 0xb70
     int xb74;                                           // 0xb74

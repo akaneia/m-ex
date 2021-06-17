@@ -18,9 +18,17 @@ addi	REG_PlayerData, r3, 0
   srawi	REG_Temp,REG_Temp,12
   cmpwi REG_Temp,0
   bne Original
-#Check if 5000 or higher
+#Check if Custom ID
   cmpwi REG_SFXID,5000
   blt Original
+#Check if Fighter ID
+  cmpwi REG_SFXID,6000
+  blt Fighter_SFX
+#Check if Copy ID
+  cmpwi REG_SFXID,7000
+  blt Copy_SFX
+
+Fighter_SFX:
 #Isolate rightmost 3 digits
   lis REG_MagicNum,0x68db
   ori REG_MagicNum,REG_MagicNum,35757
@@ -29,6 +37,32 @@ addi	REG_PlayerData, r3, 0
   srawi REG_MagicNum,REG_SFXID,31
   subf REG_MagicNum,REG_MagicNum,REG_Temp
   mulli REG_MagicNum,REG_MagicNum,5000
+  subf REG_SFXID,REG_MagicNum,REG_SFXID
+#Get external ID
+  lbz REG_Temp,0xC(REG_PlayerData)
+  load  REG_Temp2,0x80453080
+  mulli REG_Temp,REG_Temp,0xe90
+  add REG_Temp,REG_Temp,REG_Temp2
+  lwz REG_Temp,0x4(REG_Temp)
+#Get this characters SSM ID
+  lwz REG_Temp2,OFST_MnSlChrSSMFileIDs(rtoc)
+  mulli REG_Temp,REG_Temp,0x10
+  lbzx  REG_Temp,REG_Temp,REG_Temp2
+#multiply by 10000
+  mulli REG_Temp,REG_Temp,10000
+#Add to ID
+  add REG_SFXID,REG_Temp,REG_SFXID
+  b Exit
+
+Copy_SFX:
+#Isolate rightmost 3 digits
+  lis REG_MagicNum,0x68db
+  ori REG_MagicNum,REG_MagicNum,35757
+  mulhw REG_MagicNum,REG_SFXID,REG_MagicNum
+  srawi REG_Temp,REG_MagicNum,11
+  srawi REG_MagicNum,REG_SFXID,31
+  subf REG_MagicNum,REG_MagicNum,REG_Temp
+  mulli REG_MagicNum,REG_MagicNum,6000
   subf REG_SFXID,REG_MagicNum,REG_SFXID
 #Get external ID
   lbz REG_Temp,0xC(REG_PlayerData)
