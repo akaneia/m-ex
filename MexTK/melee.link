@@ -379,7 +379,7 @@
 80094818:Item_Catch
 80266F3C:Item_CheckIfEnabled
 80276348:Item_CheckIfTouchingWall
-8026dd5c:Item_SetGrounded
+8026dd5c:Item_SetGroundedUpright
 8026E15C:Item_CollAir_Bounce
 8026e414:Item_CollAir_Land
 8026daa8:Item_CollAir_NoCB
@@ -393,8 +393,8 @@
 80268B9C:Item_CreateItem3
 801c8cfc:Item_CreateMapItem
 8026A8EC:Item_Destroy
-802762B0:Item_DisableSpin
-802762BC:Item_EnableSpin
+802762B0:Item_SetGrounded
+802762BC:Item_SetAirborne
 80272CC0:Item_GetBoneJOBJ
 8026AB54:Item_Hold
 80274F28:Item_InitGrab

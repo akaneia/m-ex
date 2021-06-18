@@ -882,7 +882,7 @@ int Item_CollGround_StopLedge(GOBJ *item, void *callback);
 int Item_CollAir_Bounce(GOBJ *item, void *callback);
 int Item_CollAir_Land(GOBJ *item, void *callback);
 int Item_CollAir_NoCB(GOBJ *item);
-void Item_SetGrounded(GOBJ *item);
+void Item_SetGroundedUpright(GOBJ *item);
 void ItemStateChange(GOBJ *item, int stateID, int flags);
 int ItemFrameTimer(GOBJ *item);
 void Item_PlaceOnGroundBelow(GOBJ *item);
@@ -893,8 +893,8 @@ int Item_CountActiveItems(int itemID);
 void Item_CopyDevelopState(GOBJ *item, GOBJ *fighter);
 void GXLink_Item(GOBJ *gobj, int pass);
 void Item_UpdateSpin(GOBJ *item, float unk);
-void Item_EnableSpin(ItemData *ip);
-void Item_DisableSpin(ItemData *ip);
+void Item_SetAirborne(ItemData *ip);
+void Item_SetGrounded(ItemData *ip);
 void Item_SetLifeTimer(GOBJ *item, float lifetime); // sets frames until item is destroyed
 int Item_DecLifeTimer(GOBJ *item);                  // returns isEnd bool
 JOBJ *Item_GetBoneJOBJ(GOBJ *item, int bone_index);
