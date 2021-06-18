@@ -620,7 +620,7 @@ struct ItemData
         void (*phys)(GOBJ *item);                       // 0xd18
         void (*coll)(GOBJ *item);                       // 0xd1c
         void (*accessory)(GOBJ *item);                  // 0xd20
-        void *xd24;                                     // 0xd24
+        void (*on_detect)(GOBJ *item);                  // 0xd24
         void *xd28;                                     // 0xd28
         void *xd2c;                                     // 0xd2c
         void *jumped_on;                                // 0xd30, runs when the item is "jumped on", 80269bac
