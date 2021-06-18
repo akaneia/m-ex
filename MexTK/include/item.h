@@ -640,14 +640,7 @@ struct ItemData
     int xd64;                                           // 0xd64
     int xd68;                                           // 0xd68
     int xd6c;                                           // 0xd6c
-    unsigned char xd70_80 : 1;                          // 0xd70 0x80
-    unsigned char xd70_40 : 1;                          // 0xd70 0x40
-    unsigned char no_play_hold_drop_throw_sfx : 1;      // 0xd70 0x20
-    unsigned char xd70_10 : 1;                          // 0xd70 0x10
-    unsigned char xd70_08 : 1;                          // 0xd70 0x08
-    unsigned char xd70_04 : 1;                          // 0xd70 0x04
-    unsigned char xd70_02 : 1;                          // 0xd70 0x02
-    unsigned char xd70_01 : 1;                          // 0xd70 0x01
+    int xd70;                                           // 0xd70
     int xd74;                                           // 0xd74
     int xd78;                                           // 0xd78
     int destroy_sfx;                                    // 0xd7c
@@ -706,7 +699,7 @@ struct ItemData
     unsigned char isCheckUpBlastzone : 1;               // 0xdcc, 0x02
     unsigned char isCheckDownBlastzone : 1;             // 0xdcc, 0x01
     unsigned char cam_kind : 2;                         // 0xdcd, 0xc0. indicates this item has a camera box
-    unsigned char xdcd3 : 1;                            // 0xdcd, 0x20
+    unsigned char no_play_hold_drop_throw_sfx : 1;      // 0xdcd, 0x20
     unsigned char xdcd4 : 1;                            // 0xdcd, 0x10
     unsigned char xdcd5 : 1;                            // 0xdcd, 0x08
     unsigned char xdcd6 : 1;                            // 0xdcd, 0x04
