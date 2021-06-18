@@ -102,6 +102,8 @@ typedef struct itData itData;
 typedef struct itCommonAttr itCommonAttr;
 typedef struct itHit itHit;
 typedef struct ItHurt ItHurt;
+typedef struct ItDynamics ItDynamics;
+typedef struct ItDynamicBoneset ItDynamicBoneset;
 
 // Boneset
 typedef struct DynamicBoneset DynamicBoneset;

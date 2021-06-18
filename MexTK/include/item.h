@@ -259,12 +259,12 @@ typedef struct itPublicData
 
 struct itData
 {
-    float *param;     // 0x00
-    float *param_ext; // 0x04
-    void *hurtboxes;  // 0x08
-    void *states;     // 0x0C
-    void *model;      // 0x10
-    void *dynamics;   // 0x14
+    float *param;         // 0x00
+    float *param_ext;     // 0x04
+    void *hurtboxes;      // 0x08
+    void *states;         // 0x0C
+    void *model;          // 0x10
+    ItDynamics *dynamics; // 0x14
 };
 
 struct itCommonAttr
@@ -282,8 +282,8 @@ struct itCommonAttr
     float throw_speed_mult;     // 0x4, speed multiplier at which this item is thrown at
     int x8;
     float spin_speed;
-    float fall_speed;
-    float fall_speed_max;
+    float fall_speed;     // 0x10
+    float fall_speed_max; // 0x14
     float x18;
     float x1C;       //collision related
     int x20;         // 0x20
@@ -418,6 +418,19 @@ struct ItHurt
     int bone_index;               // 0x40
 };
 
+struct ItDynamics
+{
+    int dynamics_num;            // 0x8 number of dynamic bonesets for this fighter
+    DynamicsDesc *dynamics_desc; // 0x4 boneset data array (one for each boneset)
+};
+
+struct ItDynamicBoneset
+{
+    int apply_phys_num;     // if this is 256, dyanmics are not processed
+    JOBJ *root_bone;        // 0x4
+    DynamicBoneset boneset; // 0x8
+};
+
 struct ItemData
 {
     int x0;                                             // 0x0
@@ -463,175 +476,8 @@ struct ItemData
     JOBJ *joint;                                        // 0xc8
     itCommonAttr *common_attr;                          // 0xcc
     int xd0;                                            // 0xd0
-    int xd4;                                            // 0xd4
-    int xd8;                                            // 0xd8
-    int xdc;                                            // 0xdc
-    int air_state;                                      // 0xe0
-    int xe4;                                            // 0xe4
-    int xe8;                                            // 0xe8
-    int xec;                                            // 0xec
-    int xf0;                                            // 0xf0
-    int xf4;                                            // 0xf4
-    int xf8;                                            // 0xf8
-    int xfc;                                            // 0xfc
-    int x100;                                           // 0x100
-    int x104;                                           // 0x104
-    int x108;                                           // 0x108
-    int x10c;                                           // 0x10c
-    int x110;                                           // 0x110
-    int x114;                                           // 0x114
-    int x118;                                           // 0x118
-    int x11c;                                           // 0x11c
-    int x120;                                           // 0x120
-    int x124;                                           // 0x124
-    int x128;                                           // 0x128
-    int x12c;                                           // 0x12c
-    int x130;                                           // 0x130
-    int x134;                                           // 0x134
-    int x138;                                           // 0x138
-    int x13c;                                           // 0x13c
-    int x140;                                           // 0x140
-    int x144;                                           // 0x144
-    int x148;                                           // 0x148
-    int x14c;                                           // 0x14c
-    int x150;                                           // 0x150
-    int x154;                                           // 0x154
-    int x158;                                           // 0x158
-    int x15c;                                           // 0x15c
-    int x160;                                           // 0x160
-    int x164;                                           // 0x164
-    int x168;                                           // 0x168
-    int x16c;                                           // 0x16c
-    int x170;                                           // 0x170
-    int x174;                                           // 0x174
-    int x178;                                           // 0x178
-    int x17c;                                           // 0x17c
-    int x180;                                           // 0x180
-    int x184;                                           // 0x184
-    int x188;                                           // 0x188
-    int x18c;                                           // 0x18c
-    int x190;                                           // 0x190
-    int x194;                                           // 0x194
-    int x198;                                           // 0x198
-    int x19c;                                           // 0x19c
-    int x1a0;                                           // 0x1a0
-    int x1a4;                                           // 0x1a4
-    int x1a8;                                           // 0x1a8
-    int x1ac;                                           // 0x1ac
-    int x1b0;                                           // 0x1b0
-    int x1b4;                                           // 0x1b4
-    int x1b8;                                           // 0x1b8
-    int x1bc;                                           // 0x1bc
-    int x1c0;                                           // 0x1c0
-    int x1c4;                                           // 0x1c4
-    int x1c8;                                           // 0x1c8
-    int x1cc;                                           // 0x1cc
-    int x1d0;                                           // 0x1d0
-    int x1d4;                                           // 0x1d4
-    int x1d8;                                           // 0x1d8
-    int x1dc;                                           // 0x1dc
-    int x1e0;                                           // 0x1e0
-    int x1e4;                                           // 0x1e4
-    int x1e8;                                           // 0x1e8
-    int x1ec;                                           // 0x1ec
-    int x1f0;                                           // 0x1f0
-    int x1f4;                                           // 0x1f4
-    int x1f8;                                           // 0x1f8
-    int x1fc;                                           // 0x1fc
-    int x200;                                           // 0x200
-    int x204;                                           // 0x204
-    int x208;                                           // 0x208
-    int x20c;                                           // 0x20c
-    int x210;                                           // 0x210
-    int x214;                                           // 0x214
-    int x218;                                           // 0x218
-    int x21c;                                           // 0x21c
-    int x220;                                           // 0x220
-    int x224;                                           // 0x224
-    int x228;                                           // 0x228
-    int x22c;                                           // 0x22c
-    int x230;                                           // 0x230
-    int x234;                                           // 0x234
-    int x238;                                           // 0x238
-    int x23c;                                           // 0x23c
-    int x240;                                           // 0x240
-    int x244;                                           // 0x244
-    int x248;                                           // 0x248
-    int x24c;                                           // 0x24c
-    int x250;                                           // 0x250
-    int x254;                                           // 0x254
-    int x258;                                           // 0x258
-    int x25c;                                           // 0x25c
-    int x260;                                           // 0x260
-    int x264;                                           // 0x264
-    int x268;                                           // 0x268
-    int x26c;                                           // 0x26c
-    int x270;                                           // 0x270
-    int x274;                                           // 0x274
-    int x278;                                           // 0x278
-    int x27c;                                           // 0x27c
-    int x280;                                           // 0x280
-    int x284;                                           // 0x284
-    int x288;                                           // 0x288
-    int x28c;                                           // 0x28c
-    int x290;                                           // 0x290
-    int x294;                                           // 0x294
-    int x298;                                           // 0x298
-    int x29c;                                           // 0x29c
-    int x2a0;                                           // 0x2a0
-    int x2a4;                                           // 0x2a4
-    int x2a8;                                           // 0x2a8
-    int x2ac;                                           // 0x2ac
-    int x2b0;                                           // 0x2b0
-    int x2b4;                                           // 0x2b4
-    int x2b8;                                           // 0x2b8
-    int x2bc;                                           // 0x2bc
-    int x2c0;                                           // 0x2c0
-    int x2c4;                                           // 0x2c4
-    int x2c8;                                           // 0x2c8
-    int x2cc;                                           // 0x2cc
-    int x2d0;                                           // 0x2d0
-    int x2d4;                                           // 0x2d4
-    int x2d8;                                           // 0x2d8
-    int x2dc;                                           // 0x2dc
-    int x2e0;                                           // 0x2e0
-    int x2e4;                                           // 0x2e4
-    int x2e8;                                           // 0x2e8
-    int x2ec;                                           // 0x2ec
-    int x2f0;                                           // 0x2f0
-    int x2f4;                                           // 0x2f4
-    int x2f8;                                           // 0x2f8
-    int x2fc;                                           // 0x2fc
-    int x300;                                           // 0x300
-    int x304;                                           // 0x304
-    int x308;                                           // 0x308
-    int x30c;                                           // 0x30c
-    int x310;                                           // 0x310
-    int x314;                                           // 0x314
-    int x318;                                           // 0x318
-    int x31c;                                           // 0x31c
-    int x320;                                           // 0x320
-    int x324;                                           // 0x324
-    int x328;                                           // 0x328
-    int x32c;                                           // 0x32c
-    int x330;                                           // 0x330
-    int x334;                                           // 0x334
-    int x338;                                           // 0x338
-    int x33c;                                           // 0x33c
-    int x340;                                           // 0x340
-    int x344;                                           // 0x344
-    int x348;                                           // 0x348
-    int x34c;                                           // 0x34c
-    int x350;                                           // 0x350
-    int x354;                                           // 0x354
-    int x358;                                           // 0x358
-    int x35c;                                           // 0x35c
-    int x360;                                           // 0x360
-    int x364;                                           // 0x364
-    int x368;                                           // 0x368
-    int x36c;                                           // 0x36c
-    int x370;                                           // 0x370
-    int dynamics_x374;                                  // 0x374
+    ItDynamicBoneset dynamics_boneset[24];              // 0xd4
+    int dynamics_num;                                   // 0x374
     CollData coll_data;                                 // 0x378 -> 0x518
     GOBJ *fighter_gobj;                                 // 0x518
     int x51c;                                           // 0x51c

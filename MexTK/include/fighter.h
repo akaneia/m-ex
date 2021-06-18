@@ -710,12 +710,8 @@ struct ftDynamics
 
 struct FtDynamicBoneset
 {
-    int apply_phys_num; // if this is 256, dyanmics are not processed
-    void *unk_ptr;      // is stored @ 8000fdd4, comes from a nonstandard heap @ -0x52fc(r13)
-    int bone_num;       // number of bones in this boneset
-    float xc;           // stored @ 80011718, 0x8 of dynamicdesc
-    float x10;          // stored @ 80011720, 0xC of dynamicdesc
-    float x14;          // stored @ 80011728, 0x10 of dynamicdesc
+    int apply_phys_num;     // if this is 256, dyanmics are not processed
+    DynamicBoneset boneset; // 0x4
 };
 
 struct FtDynamicRoot
