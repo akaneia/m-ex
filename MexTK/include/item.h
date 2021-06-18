@@ -590,12 +590,12 @@ struct ItemData
         int angle;                                      // 0xcac
         int source_ply;                                 // 0xcb0, damage source ply number
         int xcb4;                                       // 0xcb4
-        float xcb8;                                     // 0xcb8
+        float givedmg_direction;                        // 0xcb8, updated @ 80078184
         int xcbc;                                       // 0xcbc
         int xcc0;                                       // 0xcc0
         int xcc4;                                       // 0xcc4
         float kb;                                       // 0xcc8
-        float direction;                                // 0xccc
+        float takedmg_direction;                        // 0xccc
         float xcd0;                                     // 0xcd0
         float xcd4;                                     // 0xcd4
         float xcd8;                                     // 0xcd8
@@ -607,7 +607,7 @@ struct ItemData
         GOBJ *source_item;                              // 0xcf0
     } dmg;                                              //
     GOBJ *fighter_unk;                                  // 0xcf4, fighter that hit or got hit by this item? idk what to call this
-    int xcf8;                                           // 0xcf8
+    GOBJ *detected_fighter;                             // 0xcf8, fighter that touched the items detect box. updated @ 800798d4
     int xcfc;                                           // 0xcfc
     GOBJ *grabbed_fighter;                              // 0xd00
     int xd04;                                           // 0xd04
@@ -711,7 +711,7 @@ struct ItemData
     unsigned char xdce4 : 1;                            // 0xdce, 0x10
     unsigned char xdce5 : 1;                            // 0xdce, 0x08
     unsigned char xdce6 : 1;                            // 0xdce, 0x04
-    unsigned char xdce7 : 1;                            // 0xdce, 0x02
+    unsigned char is_detect : 1;                        // 0xdce, 0x02, is flipped when a detect hitbox comes in contact with a hurtbox
     unsigned char xdce8 : 1;                            // 0xdce, 0x01
     unsigned char xdcf1 : 1;                            // 0xdcf, 0x80
     unsigned char xdcf2 : 1;                            // 0xdcf, 0x40
