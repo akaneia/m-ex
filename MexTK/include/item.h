@@ -882,6 +882,7 @@ int Item_CollGround_StopLedge(GOBJ *item, void *callback);
 int Item_CollAir_Bounce(GOBJ *item, void *callback);
 int Item_CollAir_Land(GOBJ *item, void *callback);
 int Item_CollAir_NoCB(GOBJ *item);
+void Item_SetGrounded(GOBJ *item);
 void ItemStateChange(GOBJ *item, int stateID, int flags);
 int ItemFrameTimer(GOBJ *item);
 void Item_PlaceOnGroundBelow(GOBJ *item);

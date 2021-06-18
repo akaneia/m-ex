@@ -379,6 +379,7 @@
 80094818:Item_Catch
 80266F3C:Item_CheckIfEnabled
 80276348:Item_CheckIfTouchingWall
+8026dd5c:Item_SetGrounded
 8026E15C:Item_CollAir_Bounce
 8026e414:Item_CollAir_Land
 8026daa8:Item_CollAir_NoCB
