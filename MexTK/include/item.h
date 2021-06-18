@@ -893,8 +893,8 @@ int Item_CountActiveItems(int itemID);
 void Item_CopyDevelopState(GOBJ *item, GOBJ *fighter);
 void GXLink_Item(GOBJ *gobj, int pass);
 void Item_UpdateSpin(GOBJ *item, float unk);
-void Item_EnableSpin(GOBJ *item);
-void Item_DisableSpin(GOBJ *item);
+void Item_EnableSpin(ItemData *ip);
+void Item_DisableSpin(ItemData *ip);
 void Item_SetLifeTimer(GOBJ *item, float lifetime); // sets frames until item is destroyed
 int Item_DecLifeTimer(GOBJ *item);                  // returns isEnd bool
 JOBJ *Item_GetBoneJOBJ(GOBJ *item, int bone_index);
