@@ -123,6 +123,7 @@ typedef struct ShieldDesc ShieldDesc;
 typedef struct AbsorbDesc AbsorbDesc;
 typedef struct AfterImageDesc AfterImageDesc;
 typedef struct CPU CPU;
+typedef struct FtSFX FtSFX;
 typedef struct FtCmd FtCmd;
 typedef struct ftData ftData;
 typedef struct ftCommonData ftCommonData;

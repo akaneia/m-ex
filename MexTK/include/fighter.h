@@ -767,6 +767,24 @@ struct FtCmd
     void *anim_data; // pointer to the animation data in ARAM
 };
 
+struct FtSFX
+{
+    int x0;         // 0x0
+    int death;      // 0x4
+    int metal_box;  // 0x8
+    int star_ko;    // 0xc
+    int jump;       // 0x10
+    int jump_air;   // 0x14
+    int escape;     // 0x18
+    int x1c;        // 0x1c
+    int x20;        // 0x20
+    int tech;       // 0x24
+    int cliffcatch; // 0x28
+    int heavy_lift; // 0x2c
+    int catch;      // 0x30
+    int cheer;      // 0x34
+};
+
 struct ftData
 {
     int *common_attr; // 0x0
@@ -788,7 +806,7 @@ struct ftData
     int x40;
     int coll;
     void *items;
-    int *x4C;
+    FtSFX *sfx;
     int x50;
     int x54;
     IKParam *ik_param;
