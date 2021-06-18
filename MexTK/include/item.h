@@ -640,7 +640,14 @@ struct ItemData
     int xd64;                                           // 0xd64
     int xd68;                                           // 0xd68
     int xd6c;                                           // 0xd6c
-    int xd70;                                           // 0xd70
+    unsigned char xd70_80 : 1;                          // 0xd70 0x80
+    unsigned char xd70_40 : 1;                          // 0xd70 0x40
+    unsigned char is_play_hold_drop_throw_sfx : 1;      // 0xd70 0x20
+    unsigned char xd70_10 : 1;                          // 0xd70 0x10
+    unsigned char xd70_08 : 1;                          // 0xd70 0x08
+    unsigned char xd70_04 : 1;                          // 0xd70 0x04
+    unsigned char xd70_02 : 1;                          // 0xd70 0x02
+    unsigned char xd70_01 : 1;                          // 0xd70 0x01
     int xd74;                                           // 0xd74
     int xd78;                                           // 0xd78
     int destroy_sfx;                                    // 0xd7c
