@@ -2895,6 +2895,7 @@ void Fighter_EnterLanding(GOBJ *fighter);
 void Fighter_EnterSpecialLanding(GOBJ *fighter, int unk, float state_length);
 void Fighter_EnterSleep(GOBJ *fighter, int ms);
 void Fighter_EnterEntry(GOBJ *fighter);
+void Fighter_EnterDownBound(GOBJ *f);
 int Fighter_CheckNearbyLedges(GOBJ *fighter);
 int Fighter_CheckForOtherFighterOnLedge(GOBJ *fighter);
 void Fighter_EnterCliffCatch(GOBJ *fighter);

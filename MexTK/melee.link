@@ -166,6 +166,7 @@
 800D5CB0:Fighter_EnterSpecialLanding
 8008A2BC:Fighter_EnterWait
 800c3be8:Fighter_EnterAirCatch
+8009794c:Fighter_EnterDownBound
 8007F694:Fighter_GetBaseScale
 80075e78:Fighter_GetBoneRotX
 80075F48:Fighter_GetBoneRotY
