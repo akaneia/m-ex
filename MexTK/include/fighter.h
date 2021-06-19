@@ -785,6 +785,20 @@ struct FtSFX
     int cheer;      // 0x34
 };
 
+struct FtCollDesc
+{
+    u16 ecb_bone_top;         // 0x0
+    u16 ecb_bone_arm_left;    // 0x2
+    u16 ecb_bone_arm_right;   // 0x4
+    u16 ecb_bone_leg_left;    // 0x6
+    u16 ecb_bone_leg_right;   // 0x8
+    u16 ecb_bone_center;      // 0xA
+    float ecb_size_mult;      // 0xC
+    float cliffgrab_width;    // 0x10
+    float cliffgrab_y_offset; // 0x14
+    float cliffgrab_height;   // 0x18
+};
+
 struct ftData
 {
     int *common_attr; // 0x0
@@ -804,7 +818,7 @@ struct ftData
     int x38;
     int x3C;
     int x40;
-    int coll;
+    FtCollDesc *coll;
     void *items;
     FtSFX *sfx;
     int x50;
@@ -2941,7 +2955,7 @@ void Fighter_SetStaminaMode(int ply, int is_stamina);
 void Fighter_SetFallNum(int index, int ms, int falls);
 void Fighter_EnableCollUpdate(FighterData *fighter);
 void Fighter_EnterDamageState(GOBJ *fighter, int stateID, float frame);
-int Fighter_BoneLookup(FighterData *fighter, int boneID);
+s8 Fighter_BoneLookup(FighterData *fighter, int boneID);
 void Fighter_GiveDamage(FighterData *fighter, float damage);
 void Fighter_GiveHeal(FighterData *fighter, int heal);
 float Fighter_StaleDamage(FighterData *fighter, float dmg, int atk_kind, int atk_instance);
