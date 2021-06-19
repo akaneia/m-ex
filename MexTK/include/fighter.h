@@ -2059,107 +2059,120 @@ struct FighterData
     void *LObj;                                                // 0x588
     int anim_num;                                              // 0x58C
     void *anim_curr_flags_ptr;                                 // 0x590
-    int anim_curr_flags;                                       // 0x594
-    void *anim_requested;                                      // 0x598
-    void *anim_cache_curr;                                     // 0x59C
-    void *anim_cache_persist;                                  // 0x5A0
-    void *anim_curr_ARAM;                                      // 0x5A4
-    void *anim_persist_ARAM;                                   // 0x5A8
-    int dobj_toggle_num;                                       // 0x5AC
-    int x5B0;                                                  // 0x5B0
-    int x5B4;                                                  // 0x5B4
-    int x5B8;                                                  // 0x5B8
-    int x5BC;                                                  // 0x5BC
-    int x5C0;                                                  // 0x5C0
-    int x5C4;                                                  // 0x5C4
-    int x5C8;                                                  // 0x5C8
-    int x5CC;                                                  // 0x5CC
-    int x5D0;                                                  // 0x5D0
-    int x5D4;                                                  // 0x5D4
-    int x5D8;                                                  // 0x5D8
-    int x5DC;                                                  // 0x5DC
-    int x5E0;                                                  // 0x5E0
-    int x5E4;                                                  // 0x5E4
-    FighterBone *bones;                                        // 0x5E8
-    int bone_num;                                              // 0x5EC
-    int bone_arr;                                              // 0x5F0
-    u16 dobj_toggle[12];                                       // 0x5f4
-    Effect *gfx;                                               // 0x60C
-    int x610;                                                  // 0x610
-    int x614;                                                  // 0x614
-    char player_controller_number;                             // 0x618
-    char costume_id;                                           // 0x619
-    char color_overlay_id;                                     // 0x61A
-    u8 team;                                                   // 0x61B
-    char x61e;                                                 // 0x61E
-    char x61F;                                                 // 0x61F
-    struct input                                               // input data
-    {                                                          //
-        Vec2 lstick;                                           // 0x620
-        Vec2 lstick_prev;                                      // 0x628
-        int x630;                                              // 0x630
-        int x634;                                              // 0x634
-        Vec2 cstick;                                           // 0x638
-        int x640;                                              // 0x640
-        int x644;                                              // 0x644
-        int x648;                                              // 0x648
-        int x64C;                                              // 0x64C
-        float trigger;                                         // 0x650
-        int x654;                                              // 0x654
-        int x658;                                              // 0x658
-        int held;                                              // 0x65C
-        int held_prev;                                         // 0x660
-        int x664;                                              // 0x664
-        int down;                                              // 0x668
-        int x66C;                                              // 0x66C
-        char timer_lstick_tilt_x;                              // 0x670
-        char timer_lstick_tilt_y;                              // 0x671
-        char timer_trigger_analog;                             // 0x672
-        char timer_lstick_smash_x;                             // 0x673
-        char timer_lstick_smash_y;                             // 0x674
-        char timer_trigger_digital;                            // 0x675
-        char timer_lstick_any_x;                               // 0x676
-        char timer_lstick_any_y;                               // 0x677
-        char timer_trigger_any;                                // 0x678
-        char x679;                                             // 0x679
-        char x67A;                                             // 0x67A
-        char x67B;                                             // 0x67B
-        char timer_a;                                          // 0x67C
-        char timer_b;                                          // 0x67D
-        char timer_xy;                                         // 0x67E
-        char timer_trigger_any_ignore_hitlag;                  // 0x67F
-        char timer_LR;                                         // 0x680
-        char timer_padup;                                      // 0x681
-        char timer_paddown;                                    // 0x682
-        char timer_item_release;                               // 0x683
-        char since_rapid_lr;                                   // 0x684
-        char timer_jump;                                       // 0x685
-        char timer_specialhi;                                  // 0x686
-        char timer_speciallw;                                  // 0x687
-        char timer_specials;                                   // 0x688
-        char timer_specialn;                                   // 0x689
-        char timer_jump_lockout;                               // 0x68A
-        char timer_specialhi_lockout;                          // 0x68B
-    } input;                                                   //
-    Vec3 transN_pos;                                           // x68c
-    Vec3 transN_pos_prev;                                      // 0x698
-    Vec3 transN_offset;                                        // 0x6A4
-    Vec3 transN_offset_prev;                                   // 0x6B0
-    float input_stickangle;                                    // 0x6BC
-    int x6C0;                                                  // 0x6C0
-    int x6C4;                                                  // 0x6C4
-    int x6C8;                                                  // 0x6C8
-    int x6CC;                                                  // 0x6CC
-    int x6D0;                                                  // 0x6D0
-    int x6D4;                                                  // 0x6D4
-    int x6D8;                                                  // 0x6D8
-    int x6DC;                                                  // 0x6DC
-    int x6E0;                                                  // 0x6E0
-    int x6E4;                                                  // 0x6E4
-    int x6E8;                                                  // 0x6E8
-    int x6EC;                                                  // 0x6EC
-    CollData coll_data;                                        // 0x6F0 -> 0x88C
-    CameraBox *cameraBox;                                      // 0x890
+    struct                                                     // 0x594
+    {
+        int transn_phys_update : 1;       // 0x80000000, gives fighter speed based on transN offset
+        int loop_anim : 1;                // 0x40000000, loops animation
+        int x20000000 : 1;                // 0x20000000
+        int x10000000 : 1;                // 0x10000000
+        int no_dynamics : 1;              // 0x08000000
+        int x04000000 : 1;                // 0x04000000
+        int transn_use_model_scale : 1;   // 0x02000000
+        int x01c00000 : 3;                // 0x01C00000
+        int x003ffe00 : 13;               // 0x003ffe00
+        int disable_blend_bone_index : 4; // 0x000001e0
+        int kind : 5;                     // 0x0000001f, ft kind, used in vanilla melee to determine thrown boneset or ft boneset
+    } ftcmd_flags;
+    void *anim_requested;                     // 0x598
+    void *anim_cache_curr;                    // 0x59C
+    void *anim_cache_persist;                 // 0x5A0
+    void *anim_curr_ARAM;                     // 0x5A4
+    void *anim_persist_ARAM;                  // 0x5A8
+    int dobj_toggle_num;                      // 0x5AC
+    int x5B0;                                 // 0x5B0
+    int x5B4;                                 // 0x5B4
+    int x5B8;                                 // 0x5B8
+    int x5BC;                                 // 0x5BC
+    int x5C0;                                 // 0x5C0
+    int x5C4;                                 // 0x5C4
+    int x5C8;                                 // 0x5C8
+    int x5CC;                                 // 0x5CC
+    int x5D0;                                 // 0x5D0
+    int x5D4;                                 // 0x5D4
+    int x5D8;                                 // 0x5D8
+    int x5DC;                                 // 0x5DC
+    int x5E0;                                 // 0x5E0
+    int x5E4;                                 // 0x5E4
+    FighterBone *bones;                       // 0x5E8
+    int bone_num;                             // 0x5EC
+    int bone_arr;                             // 0x5F0
+    u16 dobj_toggle[12];                      // 0x5f4
+    Effect *gfx;                              // 0x60C
+    int x610;                                 // 0x610
+    int x614;                                 // 0x614
+    char player_controller_number;            // 0x618
+    char costume_id;                          // 0x619
+    char color_overlay_id;                    // 0x61A
+    u8 team;                                  // 0x61B
+    char x61e;                                // 0x61E
+    char x61F;                                // 0x61F
+    struct input                              // input data
+    {                                         //
+        Vec2 lstick;                          // 0x620
+        Vec2 lstick_prev;                     // 0x628
+        int x630;                             // 0x630
+        int x634;                             // 0x634
+        Vec2 cstick;                          // 0x638
+        int x640;                             // 0x640
+        int x644;                             // 0x644
+        int x648;                             // 0x648
+        int x64C;                             // 0x64C
+        float trigger;                        // 0x650
+        int x654;                             // 0x654
+        int x658;                             // 0x658
+        int held;                             // 0x65C
+        int held_prev;                        // 0x660
+        int x664;                             // 0x664
+        int down;                             // 0x668
+        int x66C;                             // 0x66C
+        char timer_lstick_tilt_x;             // 0x670
+        char timer_lstick_tilt_y;             // 0x671
+        char timer_trigger_analog;            // 0x672
+        char timer_lstick_smash_x;            // 0x673
+        char timer_lstick_smash_y;            // 0x674
+        char timer_trigger_digital;           // 0x675
+        char timer_lstick_any_x;              // 0x676
+        char timer_lstick_any_y;              // 0x677
+        char timer_trigger_any;               // 0x678
+        char x679;                            // 0x679
+        char x67A;                            // 0x67A
+        char x67B;                            // 0x67B
+        char timer_a;                         // 0x67C
+        char timer_b;                         // 0x67D
+        char timer_xy;                        // 0x67E
+        char timer_trigger_any_ignore_hitlag; // 0x67F
+        char timer_LR;                        // 0x680
+        char timer_padup;                     // 0x681
+        char timer_paddown;                   // 0x682
+        char timer_item_release;              // 0x683
+        char since_rapid_lr;                  // 0x684
+        char timer_jump;                      // 0x685
+        char timer_specialhi;                 // 0x686
+        char timer_speciallw;                 // 0x687
+        char timer_specials;                  // 0x688
+        char timer_specialn;                  // 0x689
+        char timer_jump_lockout;              // 0x68A
+        char timer_specialhi_lockout;         // 0x68B
+    } input;                                  //
+    Vec3 transN_pos;                          // x68c
+    Vec3 transN_pos_prev;                     // 0x698
+    Vec3 transN_offset;                       // 0x6A4
+    Vec3 transN_offset_prev;                  // 0x6B0
+    float input_stickangle;                   // 0x6BC
+    int x6C0;                                 // 0x6C0
+    int x6C4;                                 // 0x6C4
+    int x6C8;                                 // 0x6C8
+    int x6CC;                                 // 0x6CC
+    int x6D0;                                 // 0x6D0
+    int x6D4;                                 // 0x6D4
+    int x6D8;                                 // 0x6D8
+    int x6DC;                                 // 0x6DC
+    int x6E0;                                 // 0x6E0
+    int x6E4;                                 // 0x6E4
+    int x6E8;                                 // 0x6E8
+    int x6EC;                                 // 0x6EC
+    CollData coll_data;                       // 0x6F0 -> 0x88C
+    CameraBox *cameraBox;                     // 0x890
     struct state
     {
         float frame; // 0x894, current frame of the animation
