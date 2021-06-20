@@ -183,7 +183,7 @@ enum FtCommonBone
 };
 
 // Fighter States
-enum FtState
+enum FtStateNames
 {
     ASID_DEADDOWN,
     ASID_DEADLEFT,
