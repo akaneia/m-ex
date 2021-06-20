@@ -757,16 +757,6 @@ struct FtDynamicHit
     int bone_index; // 0x1694, 0x24
 };
 
-struct FtCmd
-{
-    char *anim_symbol; // ptr to the symbol name for this animation
-    int anim_offset;   // offset of the anim data in plxxaj
-    void *anim_size;   // size of the animation data
-    void *script;      // pointer to the script data for this action
-    int flags;
-    void *anim_data; // pointer to the animation data in ARAM
-};
-
 struct FtSFX
 {
     int x0;         // 0x0
@@ -801,11 +791,11 @@ struct FtCollDesc
 
 struct ftData
 {
-    int *common_attr; // 0x0
-    int *ext_attr;    // 0x4
-    u8 *modelLookup;  // 0x8
-    FtCmd *ftcmd;     // 0xC
-    int animDynamics; // 0x10
+    int *common_attr;   // 0x0
+    int *ext_attr;      // 0x4
+    u8 *modelLookup;    // 0x8
+    FtAction *ftaction; // 0xC
+    int animDynamics;   // 0x10
     int x14;
     int x18;
     int x1C;
@@ -851,9 +841,9 @@ struct SubactionHeader
     int flags;
 };
 
-struct MoveLogic
+struct FtState
 {
-    int animation_id;
+    int action_id;
     int flags;
     char move_id;
     char bitflags1;
@@ -862,6 +852,16 @@ struct MoveLogic
     void *physics_callback;
     void *collision_callback;
     void *camera_callback;
+};
+
+struct FtAction
+{
+    char *anim_symbol; // ptr to the symbol name for this animation
+    int anim_offset;   // offset of the anim data in plxxaj
+    int anim_size;     // size of the animation data
+    void *script;      // pointer to the script data for this action
+    int flags;
+    void *anim_data; // pointer to the animation data in ARAM
 };
 
 struct ReflectDesc
@@ -1872,9 +1872,9 @@ struct FighterData
     int state_id;                                              // 0x10
     int anim_id;                                               // 0x14
     int common_state_num;                                      // 0x18
-    MoveLogic *common_states;                                  // 0x1C
-    MoveLogic *special_states;                                 // 0x20
-    FtCmd *ftcmd_lookup;                                       // 0x24
+    FtState *ftstates_common;                                  // 0x1C
+    FtState *ftstates_special;                                 // 0x20
+    FtAction *ftaction;                                        // 0x24
     u16 *dynamics_data;                                        // 0x28
     float facing_direction;                                    // 0x2C
     float facing_direction_repeated;                           // 0x30
@@ -2072,7 +2072,7 @@ struct FighterData
         int x003ffe00 : 13;               // 0x003ffe00
         int disable_blend_bone_index : 4; // 0x000001e0
         int kind : 5;                     // 0x0000001f, ft kind, used in vanilla melee to determine thrown boneset or ft boneset
-    } ftcmd_flags;
+    } action_flags;
     void *anim_requested;                     // 0x598
     void *anim_cache_curr;                    // 0x59C
     void *anim_cache_persist;                 // 0x5A0

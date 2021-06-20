@@ -53,7 +53,7 @@ void OnSpawn(GOBJ *gobj)
 ///
 ///
 ///
-__attribute__((used)) static struct MoveLogic move_logic[] = {
+__attribute__((used)) static struct FtState move_logic[] = {
 	// State: 341 - Animation: FFFFFFFF
 	{
 		-1,	 // AnimationID
