@@ -54,10 +54,10 @@ struct CollData
     int ledge_right;           // 0x44, ledge ID in contact with
     int ignore_group;          // 0x48  ignores this line group during collision
     int check_group;           // 0x4c  checks only this line group during collision
-    int x50;                   // 0x50
-    int x54;                   // 0x54
-    int x58;                   // 0x58
-    int x5c;                   // 0x5c
+    float x50;                 // 0x50
+    float cliffgrab_width;     // 0x54
+    float cliffgrab_y_offset;  // 0x58
+    float cliffgrab_height;    // 0x5c
     int x60;                   // 0x60
     int x64;                   // 0x64
     int x68;                   // 0x68
@@ -255,6 +255,8 @@ int ECB_CollGround_PassLedge(CollData *ecb, ECBSize *bones); // returns is touch
 void ECB_CollAir(CollData *ecb, ECBSize *bones);
 int ECB_CollAir2(CollData *ecb);
 int ECB_CollGround(CollData *ecb);
+int GrColl_SearchLedgeLeft(CollData *coll_data, int *return_ledge_index);
+int GrColl_SearchLedgeRight(CollData *coll_data, int *return_ledge_index);
 void GrColl_GetLedgeLeft(int floor_index, Vec3 *pos);                                                                                                                                            // this functon will crawl along the entire line sequence and find the end of the ledge
 void GrColl_GetLedgeRight(int floor_index, Vec3 *pos);                                                                                                                                           // this functon will crawl along the entire line sequence and find the end of the ledge
 void GrColl_GetLedgeLeft2(int floor_index, Vec3 *pos);                                                                                                                                           // this functon will crawl along the entire line sequence and find the end of the ledge

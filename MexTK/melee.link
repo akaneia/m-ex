@@ -328,6 +328,8 @@
 8001f624:GObj_AddRenderObject
 80054ED8:GrColl_CheckIfLineEnabled
 80056C54:GrColl_CrawlGround
+80044164:GrColl_SearchLedgeLeft
+800443c4:GrColl_SearchLedgeRight
 80054158:GrColl_GetLedgeLeft
 80053ECC:GrColl_GetLedgeLeft2
 80053FF4:GrColl_GetLedgeRight
@@ -588,6 +590,7 @@
 801C4A08:Stage_DestroyMapGObj
 80057BC0:Stage_DisableLineGroup
 80057638:Stage_EnableLineGroup
+800581dc:Stage_LinkLineGroups
 8022519C:Stage_ExternalToInternal
 80224B80:Stage_GetBlastzoneBottom
 80224B50:Stage_GetBlastzoneLeft

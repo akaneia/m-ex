@@ -302,7 +302,7 @@ struct itCommonAttr
     int x54;         // 0x54
     int x58;         // 0x58
     int x5c;         // 0x5c
-    float scale;     // 0x60
+    float scale;     // 0x60, does not affect hitboxes
     int destroy_gfx; // 0x64, ID of a gfx to play on destroy
     int x68;         // 0x68
     int x6c;         // 0x6c

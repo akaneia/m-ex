@@ -529,6 +529,7 @@ float Stage_GetCameraBottom();
 int Stage_GetGeneralPoint(int index, Vec3 *pos);
 void Stage_EnableLineGroup(int index);
 void Stage_DisableLineGroup(int index);
+void Stage_LinkLineGroups(int group1, int group2);
 void Stage_InitLines(void *coll_data);
 void Stage_InitCatchHazard(GOBJ *map, int unk, void *check_cb);
 void Stage_InitMoveHazard(GOBJ *map, int unk, void *check_cb);

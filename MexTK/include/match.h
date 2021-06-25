@@ -205,8 +205,8 @@ struct MatchCamera
     int x0;                       // 0x0
     int cam_kind;                 // 0x4
     GXColor erase_color;          // 0x8
-    int xc;                       // 0xc
-    int x10;                      // 0x10
+    float zoom;                   // 0xc
+    float dist_to_bg;             // 0x10
     int x14;                      // 0x14
     int x18;                      // 0x18
     int x1c;                      // 0x1c
