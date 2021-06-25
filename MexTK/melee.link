@@ -110,7 +110,7 @@
 8005BA40:Effect_PauseAll
 8005BAC4:Effect_ResumeAll
 800676F0:Effect_SpawnAsync
-8009F834:Effect_SpawnFtEffectLookup
+8009F834:Effect_SpawnAsyncLookup
 802787B4:Effect_SpawnItEffect
 80278800:Effect_SpawnItEffectLookup
 8005FDDC:Effect_SpawnSync
