@@ -70,6 +70,8 @@ typedef struct MatchHUD MatchHUD;
 typedef struct MatchCamera MatchCamera;
 typedef struct CameraBox CameraBox;
 typedef struct MatchOffscreen MatchOffscreen;
+typedef struct MatchStandings MatchStandings;
+typedef struct PlayerStandings PlayerStandings;
 
 // Text
 typedef struct Text Text;
