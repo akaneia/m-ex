@@ -302,6 +302,7 @@
 8006f190:Fighter_SetAnimRate
 800cae80:Fighter_CheckJumpInput
 800704f0:Fighter_SetEyeTexture
+8026bb68:Fighter_GetECBCenter
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
