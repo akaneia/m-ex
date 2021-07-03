@@ -259,7 +259,7 @@ typedef struct itPublicData
 
 struct itData
 {
-    float *param;         // 0x00
+    itCommonAttr *param;  // 0x00
     float *param_ext;     // 0x04
     void *hurtboxes;      // 0x08
     void *states;         // 0x0C
@@ -914,4 +914,5 @@ JOBJ *Item_GetHeldBone(GOBJ *item);
 void Item_BounceOffVictim(GOBJ *item);
 void Item_BounceOffShield(GOBJ *item);
 int Item_GenerateHitExceptionID();
+int Item_CheckHeavy(GOBJ *item);
 #endif

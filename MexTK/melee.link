@@ -167,6 +167,7 @@
 8008A2BC:Fighter_EnterWait
 800c3be8:Fighter_EnterAirCatch
 8009794c:Fighter_EnterDownBound
+800cbbc0:Fighter_EnterJumpAerial
 8007F694:Fighter_GetBaseScale
 80075e78:Fighter_GetBoneRotX
 80075F48:Fighter_GetBoneRotY
@@ -303,6 +304,10 @@
 800cae80:Fighter_CheckJumpInput
 800704f0:Fighter_SetEyeTexture
 8026bb68:Fighter_GetECBCenter
+80070b88:Fighter_ApplyPartAnim
+80070fb4:Fighter_SetHoldKind
+80070cc4:Fighter_ApplyHandAnim
+80070c48:Fighter_UpdateHandAnim
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
@@ -419,6 +424,7 @@
 8026b724:Item_EnableUnknownFlag
 80273030:Item_ReflectVelocity
 8026ae60:Item_GenerateHitExceptionID
+8026b2b4:Item_CheckHeavy
 8037210c:JOBJ_LoadDummy
 8036FB5C:JOBJ_AddAnimAll
 803717A8:JOBJ_AddChild

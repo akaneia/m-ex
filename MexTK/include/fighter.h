@@ -3124,4 +3124,7 @@ void Fighter_SetAnimRate(GOBJ *f, float rate);
 int Fighter_CheckJumpInput(GOBJ *f);
 void Fighter_SetEyeTexture(GOBJ *f, int material_index, float frame);
 void Fighter_GetECBCenter(GOBJ *f, Vec3 *center_pos);
+void Fighter_ApplyPartAnim(GOBJ *f, int part_id, int anim_id);
+void Fighter_SetHoldKind(GOBJ *f, int r4, int r5);
+void Fighter_ApplyHandAnim(GOBJ *f, int r4, int r5);
 #endif
