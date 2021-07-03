@@ -75,6 +75,9 @@ CheckRNG_Skip:
 
 CheckRNG_Found:
   lhz r3,0x0(r4)
+  extsh r3,r3
+  cmpwi r3,-1
+  beq InvalidSong
 StoreHPS:
   stw	r3, 0x0 (REG_Arg3)
 
@@ -82,6 +85,30 @@ Exit:
   li  r3,0
   restore
   blr
+
+#############################################
+InvalidSong:
+#OSReport
+  bl  InvalidSongString
+  mflr  r3
+  addi r4, REG_LoopCount, 1
+  branchl r12,0x803456a8
+#Assert
+  bl  Assert_Name
+  mflr  r3
+  li  r4,0
+  load  r5,0x804d3940
+  branchl r12,0x80388220
+#############################################
+Assert_Name:
+blrl
+.string "m-ex"
+.align 2
+InvalidSongString:
+blrl
+.string "error: song %d has an invalid id\n"
+.align 2
+###############################################
 
 Original:
   mr  r3, REG_StageExtID
