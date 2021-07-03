@@ -270,7 +270,8 @@ struct itData
 struct itCommonAttr
 {
     char is_heavy : 1;          // 0x0, bit 0x80, is heavy item (crate)
-    char hold_kind : 7;         // defines hand hold behavior
+    char x0_78 : 4;             // unk
+    char hold_kind : 3;         // defines hand hold behavior
     unsigned char x1_1 : 1;     // 0x1 0x80
     unsigned char x1_2 : 1;     // 0x1 0x40
     unsigned char x1_3 : 1;     // 0x1 0x20
