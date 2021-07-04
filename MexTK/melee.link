@@ -159,6 +159,8 @@
 80082B1C:Fighter_EnterLanding
 800957F4:Fighter_EnterLightThrow
 8009A184:Fighter_EnterMiscPassState
+80167320:Fighter_CheckToRespawn
+8016719c:Fighter_Respawn
 800D4FF4:Fighter_EnterRebirth
 800D5600:Fighter_EnterRebirthWait
 800D4F24:Fighter_EnterSleep
@@ -168,6 +170,7 @@
 800c3be8:Fighter_EnterAirCatch
 8009794c:Fighter_EnterDownBound
 800cbbc0:Fighter_EnterJumpAerial
+800d3e40:Fighter_EnterDeadUp
 8007F694:Fighter_GetBaseScale
 80075e78:Fighter_GetBoneRotX
 80075F48:Fighter_GetBoneRotY
