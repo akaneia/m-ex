@@ -255,6 +255,7 @@
 800866A4:Fighter_SetScale
 8003254C:Fighter_SetSlotType
 80033C60:Fighter_SetStocks
+80033ce0:Fighter_LoseStock
 8006E7B8:Fighter_UpdateBonePos
 800761C8:Fighter_UpdateCameraBox
 80074CA0:Fighter_UpdateDObjFlags
