@@ -234,6 +234,7 @@
 8007C930:Fighter_PhysGround_ApplyCustomFriction
 80084F3C:Fighter_PhysGround_ApplyFriction
 8007CB74:Fighter_PhysGround_UnkFriction
+80088148:Fighter_PlayPositionalSFX
 800881D8:Fighter_PlayVoiceSFX
 80088328:Fighter_PlayVoiceSFX2
 8009E0A8:Fighter_ProcDynamics

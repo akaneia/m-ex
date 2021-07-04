@@ -3025,6 +3025,7 @@ float Fighter_GetBoneRotY(FighterData *fighter, int bone);
 void Fighter_SetBoneRotX(FighterData *fighter, int bone, float angle);
 void Fighter_SetBoneRotY(FighterData *fighter, int bone, float angle);
 void Fighter_SetBoneRotZ(FighterData *fighter, int bone, float angle);
+void Fighter_PlayPositionalSFX(FighterData *fp, int sfxID, int volume, int balance);
 void Fighter_PlayVoiceSFX(FighterData *fighter, int sfxID, int volume, int balance);
 void Fighter_PlayVoiceSFX2(FighterData *fighter, int sfxID, int volume, int balance);
 void Fighter_ApplyColAnim(FighterData *fighter_data, int overlay, int unk);
@@ -3129,6 +3130,6 @@ void Fighter_GetECBCenter(GOBJ *f, Vec3 *center_pos);
 void Fighter_ApplyPartAnim(GOBJ *f, int part_id, int anim_id);
 void Fighter_SetHoldKind(GOBJ *f, int r4, int r5);
 void Fighter_ApplyHandAnim(GOBJ *f, int r4);
-void Fighter_CheckToRespawn(GOBJ *f, int ms);
+void Fighter_CheckToRespawn(int ply, int ms);
 void Fighter_Respawn(GOBJ *f, int ms);
 #endif
