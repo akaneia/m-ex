@@ -257,6 +257,7 @@
 80033C60:Fighter_SetStocks
 80033ce0:Fighter_LoseStock
 800d34e0:Fighter_DeathLogic
+800d331c:Fighter_RunOnDeathCallbacks
 8006E7B8:Fighter_UpdateBonePos
 800761C8:Fighter_UpdateCameraBox
 80074CA0:Fighter_UpdateDObjFlags
