@@ -587,7 +587,8 @@ enum Ft_AttackKind
     ATKKIND_47,
     ATKKIND_48,
     ATKKIND_49,
-    ATKKIND_GETUP,
+    ATKKIND_DOWNATTACKU,
+    ATKKIND_DOWNATTACKD,
 };
 
 /*** Structs ***/
@@ -2239,7 +2240,7 @@ struct FighterData
     int x910;                      // 0x910
     ftHit hitbox[4];               // 0x914
     ftHit throw_hitbox[2];         // 0xdf4
-    ftHit unk_hitbox;              // 0x1064
+    ftHit thrown_hitbox;           // 0x1064
     u8 team_unk;                   // 0x119c, friendly fire related
     u8 grabber_ply;                // 0x119D, slot ID of the person grabbing this fighter
     u8 hurt_num;                   // 0x119E, number of hurtboxes
