@@ -2964,6 +2964,7 @@ int Fighter_GetSlotType(int index); // returns 0x0 for HMN, 0x1 for CPU, 0x2 for
 int Fighter_GetStocks(int ply);
 void Fighter_SetStocks(int ply, int stocks);
 void Fighter_LoseStock(int ply);
+void Fighter_DeathLogic(GOBJ *f);
 int Fighter_GetStaminaHP(int ply);
 void Fighter_SetStaminaHP(int ply, int hp);
 int Fighter_CheckStaminaMode(int ply);
