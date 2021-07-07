@@ -64,7 +64,8 @@ backup
           addi REG_LoopCount2, REG_LoopCount2, 1
         Symbol_Search_LoopCheck:
           cmpw REG_LoopCount2, REG_SymbolNum
-          blt Symbol_Search_Loop
+          #blt Symbol_Search_Loop
+          b Symbol_Search_Loop
 
     xFunc_Search_LoopInc:
       addi REG_LoopCount,REG_LoopCount,1
