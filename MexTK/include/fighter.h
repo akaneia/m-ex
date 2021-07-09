@@ -3165,4 +3165,14 @@ void Fighter_SetHoldKind(GOBJ *f, int r4, int r5);
 void Fighter_ApplyHandAnim(GOBJ *f, int r4);
 void Fighter_CheckToRespawn(int ply, int ms);
 void Fighter_Respawn(GOBJ *f, int ms);
+void Fighter_CreateAbsorb(GOBJ *fighter_gobj, AbsorbDesc *absorb_desc);
+void Fighter_EnableAbsorbUpdate(GOBJ *fighter_gobj);
+void Fighter_PlaySFX(GOBJ* fighter_gobj, int sfxid, int volume, int pitch);
+void Fighter_EnterFallOrWait(GOBJ *fighter_gobj);
+void Fighter_EnterTech(GOBJ *gobj);
+void Fighter_EnterSpecialFallLoseJumps(GOBJ *fighter_gobj, int can_fastfall, int can_not_noimpactland, int can_not_interrupt, float aerial_drift_mult, float landing_lag);
+void Fighter_RumbleController(FighterData *fighter_gobj, int unk1, int unk2);
+void Fighter_GetLeftStick(GOBJ *fighter_gobj, float *stick_x, float *stick_y);
+void Fighter_ClampMaxAirDrift(FighterData *fighter_gobj);
+
 #endif

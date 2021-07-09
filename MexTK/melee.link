@@ -114,6 +114,7 @@
 802787B4:Effect_SpawnItEffect
 80278800:Effect_SpawnItEffectLookup
 8005FDDC:Effect_SpawnSync
+800865d8:Fighter_GetLeftStick
 8007D508:Fighter_AddClampYPosition
 8007D3A8:Fighter_AllowXDrift
 8007B760:Fighter_ApplyIntang
@@ -122,6 +123,7 @@
 8009A134:Fighter_CheckToIgnorePlatform
 80164840:Fighter_CheckUnlocked
 8007D4F4:Fighter_ClampFallSpeed
+8007d468:Fighter_ClampMaxAirDrift
 8007CC78:Fighter_ClampHorizontalGroundVelocity
 8007D440:Fighter_ClampHorizontalVelocity
 80083B68:Fighter_Coll_All
@@ -142,11 +144,13 @@
 8000FD48:Fighter_CreateDynamicsBoneset
 8007B23C:Fighter_CreateReflect
 800921DC:Fighter_CreateShieldGFX
+8007b2c4:Fighter_CreateAbsorb
 800e13f8:Fighter_RemoveHeldFighterItem
 800e1368:Fighter_DestroyAndRemoveHeldFighterItem
 8008A6D8:Fighter_DisableBlend
 8007D5BC:Fighter_EnableCollUpdate
 8007AEF8:Fighter_EnableReflectUpdate
+8007af10:Fighter_EnableAbsorbUpdate
 800c3a14:Fighter_CheckNearbyLedges
 80082e3c:Fighter_CheckForOtherFighterOnLedge
 80081370:Fighter_EnterCliffCatch
@@ -167,10 +171,14 @@
 80096900:Fighter_EnterSpecialFall
 800D5CB0:Fighter_EnterSpecialLanding
 8008A2BC:Fighter_EnterWait
+8007d92c:Fighter_EnterFallOrWait
+80097d40:Fighter_EnterTech
+800969d8:Fighter_EnterSpecialFallLoseJumps
 800c3be8:Fighter_EnterAirCatch
 8009794c:Fighter_EnterDownBound
 800cbbc0:Fighter_EnterJumpAerial
 800d3e40:Fighter_EnterDeadUp
+80086d40:Fighter_RumbleController
 8007F694:Fighter_GetBaseScale
 80075e78:Fighter_GetBoneRotX
 80075F48:Fighter_GetBoneRotY
@@ -255,6 +263,7 @@
 800866A4:Fighter_SetScale
 8003254C:Fighter_SetSlotType
 80033C60:Fighter_SetStocks
+80088478:Fighter_PlaySFX
 80033ce0:Fighter_LoseStock
 800d34e0:Fighter_DeathLogic
 800d331c:Fighter_RunOnDeathCallbacks
@@ -432,6 +441,13 @@
 80273030:Item_ReflectVelocity
 8026ae60:Item_GenerateHitExceptionID
 8026b2b4:Item_CheckHeavy
+8026b3a8:Item_SetUngrabbable
+80272940:Item_SetJobjHidden
+80272460:Item_SetHitboxDamage
+802725d4:Item_RemoveAllHitboxes
+80273454:Item_ClearVelocity
+80276214:Item_UpdateECBTopN
+80276308:Item_GetWallCollFlags
 8037210c:JOBJ_LoadDummy
 8036FB5C:JOBJ_AddAnimAll
 803717A8:JOBJ_AddChild
@@ -671,6 +687,7 @@
 8000D4A0:Vec2_Add
 8000D3B0:Vec2_Normalize
 8000D2EC:Vec3_Normalize
+8000d530:Vec3_CrossDirection
 80342D54:VECAdd
 80342E58:VECCrossProduct
 80342E38:VECDotProduct
