@@ -916,4 +916,11 @@ void Item_BounceOffVictim(GOBJ *item);
 void Item_BounceOffShield(GOBJ *item);
 int Item_GenerateHitExceptionID();
 int Item_CheckHeavy(GOBJ *item);
+void Item_SetUngrabbable(GOBJ *item);
+void Item_SetJobjHidden(GOBJ *item);
+void Item_SetHitboxDamage(itHit* hitbox, int damage, GOBJ *item);
+void Item_RemoveAllHitboxes(GOBJ *item);
+void Item_ClearVelocity(GOBJ *item);
+void Item_UpdateECBTopN(GOBJ *item);
+int Item_GetWallCollFlags(GOBJ *item);
 #endif
