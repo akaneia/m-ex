@@ -6,7 +6,7 @@
   lwz r11,OFST_mexData(rtoc)
   lwz r11,Arch_Fighter(r11)
   lwz r11,Arch_Fighter_DefineIDs(r11)
-  lbz r12,0x0(r25)
+  lbz r12,0x0(r28)
   mulli r12,r12,3
   add r11,r11,r12
   lbz r11,0x0(r11)  # internal ID
