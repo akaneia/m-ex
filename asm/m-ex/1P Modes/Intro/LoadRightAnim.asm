@@ -5,11 +5,13 @@
 .set REG_CharacterTable, 31
 .set REG_PlayerInfo, 29
 .set REG_Lookup, 28
+.set REG_Anim, 27
+.set REG_Params, 26
+.set REG_Count, 25
 
 backup
 
 # get lookup table
-  li  REG_Count,0
   lwz  REG_Lookup,OFST_GmRstPointers(rtoc)
 
 # get this characters fighters
@@ -21,7 +23,6 @@ backup
   add REG_CharacterTable,r3,r4
 
 # load animations for this character
-.set REG_Count, 20
   li REG_Count, 0
   b Loop_Check
 Loop:
@@ -59,6 +60,7 @@ Loop:
 # load it
   load r3,0x80432058
   branchl r12,0x80016be0
+  mr r20, r3
 # get the correct symbol name
   lbz r4,0x0(REG_CharacterTable)
   mulli r4,r4,4
@@ -66,6 +68,13 @@ Loop:
   lwzx r4,r4,r5
   lwz r4, 1 * 4 (r4)  # 1 is the index for intro
   branchl r12,0x80380358
+  mr REG_Anim, r3
+# get params
+  mr r3, r20
+  bl gmIntroEasyTable
+  mflr r4
+  branchl r12,0x80380358
+  mr REG_Params, r3
   b IndexData
 SymbolLoad:
 # get data from IrAls
@@ -77,13 +86,22 @@ SymbolLoad:
   lwz r4, 1 * 4 (r3)  # 1 is the index for intro
   lwz	r3, -0x50AC (r13)
   branchl r12,0x80380358
+  mr REG_Anim, r3
+  li REG_Params, 0
   b IndexData
 
 IndexData:
 # index it to the results anim table
   lbz r4,0x0(REG_CharacterTable)
   mulli r4,r4,GmRstPointers_Stride
-  stwx r3,r4,REG_Lookup
+  stwx REG_Anim,r4,REG_Lookup
+# index params to the table
+  lbz r4,0x0(REG_CharacterTable)
+  mulli r4,r4,RuntimeIntroParam_Stride
+  lwz r3,OFST_mexData(rtoc)
+  lwz r3,Arch_Fighter(r3)
+  lwz r3,Arch_Fighter_RuntimeIntroParam(r3)
+  stwx REG_Params,r4,r3
 Loop_Inc:
   addi REG_Count,REG_Count, 1
   addi REG_CharacterTable,REG_CharacterTable, 1
@@ -95,6 +113,11 @@ Loop_Check:
 Extension:
 blrl
 .string ".dat"
+.align 2
+
+gmIntroEasyTable:
+blrl
+.string "gmIntroEasyTable"
 .align 2
 
 Exit:

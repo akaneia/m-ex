@@ -23,6 +23,7 @@ struct Preload
 /*** Functions ***/
 
 void Preload_Update();       // checks for new files to preload and begins loading them synchronously
+void Preload_Invalidate();   // invalidates cache, this is usually used from scene prep on CSS's
 Preload *Preload_GetTable(); // gets preload table
 
 #endif

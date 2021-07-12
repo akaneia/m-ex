@@ -453,13 +453,14 @@ HasPtclEffect:
 #*****************************#
 # 0x800a0010 seems to setup the effect object with everything i need. 
 # it includes jobj, offset from ftcmd, facing direction, ground orientation
-bl  PtclGen_UseJointPos                # PtclGen_UseJointPos
-bl  PtclGen_UseJointPosRot             # PtclGen_UseJointPosRot
-bl  PtclGen_UseJointPosRot_Ground      # PtclGen_UseJointPosRot_Ground
-bl  PtclGen_UseJointPosFtDir           # PtclGen_UseJointPosFtDir
-bl  PtclGen_UseJointPos_FtDir_Ground   # PtclGen_UseJointPos_FtDir_Ground
-bl  PtclGen_FollowJointPos             # PtclGen_FollowJointPos
-bl  PtclGen_FollowJointPos_FtDir       # PtclGen_FollowJointPos_FtDir
+bl  PtclGen_UseJointPos                   # PtclGen_UseJointPos
+bl  PtclGen_UseJointPosRot                # PtclGen_UseJointPosRot
+bl  PtclGen_UseJointPosRot_Ground         # PtclGen_UseJointPosRot_Ground
+bl  PtclGen_UseJointPosFtDir              # PtclGen_UseJointPosFtDir
+bl  PtclGen_UseJointPos_FtDir_Ground      # PtclGen_UseJointPos_FtDir_Ground
+bl  PtclGen_FollowJointPos                # PtclGen_FollowJointPos
+bl  PtclGen_FollowJointPos_FtDir          # PtclGen_FollowJointPos_FtDir
+bl  PtclGen_FollowJointPos_CopyGObjScale  # PtclGen_FollowJointPos_CopyGObjScale
 #*****************************#
 SkipPtclGenTable:
 #Get effect type
@@ -543,6 +544,21 @@ PtclGen_FollowJointPos_FtDir:
   branchl r12,0x8005cf40
   b PtclGen_Exit
 
+PtclGen_FollowJointPos_CopyGObjScale:
+# va_list
+# JOBJ
+# Facing Direction
+# Create Effect
+  mr  r3,REG_EffectID
+  addi	r4, sp, 508 + 0x100     # va_list
+  mr r5, REG_PlayerGObj
+  branchl r12,0x8005cd2c
+  b PtclGen_Exit
+
+PtclGen_UseJointPosRot:
+PtclGen_UseJointPosRot_Ground:
+PtclGen_UseJointPosFtDir:
+PtclGen_UseJointPos_FtDir_Ground:
 PtclGen_Exit:
   restore
   mr  r31,r3

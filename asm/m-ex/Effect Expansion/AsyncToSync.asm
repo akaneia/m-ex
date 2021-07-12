@@ -195,6 +195,7 @@ bl PtclGen_UseJointPosFtDir
 bl PtclGen_UseJointPos_FtDir_Ground
 bl PtclGen_FollowJointPos
 bl PtclGen_FollowJointPos_FtDir
+bl PtclGen_FollowJointPos_CopyGObjScale
 #*****************************#
 SkipPtclGenTable:
 #Get effect type
@@ -245,6 +246,13 @@ PtclGen_FollowJointPos_FtDir:
   mr   r4,REG_FighterGObj
   lwz	r5, 0x000C (REG_EffectObj)    # jobj
   addi r6,REG_EffectObj,28          # facing direction
+  branchl r12,0x8005fddc
+  b Exit
+
+PtclGen_FollowJointPos_CopyGObjScale:
+  mr   r3,REG_EffectID
+  mr   r4,REG_FighterGObj
+  lwz	r5, 0x000C (REG_EffectObj)    # jobj
   branchl r12,0x8005fddc
   b Exit
 
