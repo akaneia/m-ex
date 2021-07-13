@@ -1,22 +1,8 @@
-#To be inserted at 80394a74
+#To be inserted at 80394bd4
 .include "../../Globals.s"
 .include "../Header.s"
 
 backup
-
-# OSReport data info
-  bl StackInfo
-  mflr r3
-  branchl r12,OSReport
-
-# output stack
-.set REG_Count, 31
-.set REG_BackChain, 30
-  li REG_Count, 0
-  lwz REG_BackChain, 0x4 (r28)
-  b Loop_Check
-
-Loop:
 
     xFunc_Search:
     .set REG_xFuncLookup, 29
@@ -35,7 +21,7 @@ Loop:
       lwz REG_xFunc,0x0(REG_Curr)
     # check if LR lies within this xFunctions codeblock
       lwz r3, ftX_Code(REG_xFunc)
-      lwz r4, 0x4 (REG_BackChain)       # link register
+      lwz	r4, 0x0198 (r30)        # instruction
       cmpw r4, r3
       blt xFunc_Search_LoopInc
       lwz r5, ftX_CodeSize(REG_xFunc)
@@ -59,19 +45,19 @@ Loop:
           lwz r3, ftX_Code(REG_xFunc)
           lwz r4, ftX_DebugSym_Start (REG_Symbol)
           add r3, r3, r4
-          lwz r4, 0x4 (REG_BackChain)       # link register
+          lwz	r4, 0x0198 (r30)        # instruction
           cmpw r4,r3
           blt Symbol_Search_LoopInc
         # check func end
           lwz r3, ftX_Code(REG_xFunc)
           lwz r4, ftX_DebugSym_End (REG_Symbol)
           add r3, r3, r4
-          lwz r4, 0x4 (REG_BackChain)       # link register
+          lwz	r4, 0x0198 (r30)        # instruction
           cmpw r4,r3
           bgt Symbol_Search_LoopInc
 
         # get func name and output it
-          lwz r5, ftX_DebugSym_FuncName (REG_Symbol)
+          lwz r4, ftX_DebugSym_FuncName (REG_Symbol)
           b Output
 
         Symbol_Search_LoopInc:
@@ -80,7 +66,7 @@ Loop:
           cmpw REG_LoopCount2, REG_SymbolNum
           #blt Symbol_Search_Loop
           b Symbol_Search_Loop
-          
+
     xFunc_Search_LoopInc:
       addi REG_LoopCount,REG_LoopCount,1
       addi REG_Curr,REG_Curr,xFuncLookup_Start_Size
@@ -89,35 +75,92 @@ Loop:
       blt xFunc_Search_Loop
     xFunc_Search_LoopEnd:
 
-# Get null string
-  bl NullString
-  mflr r5
+    DOLSearch:
+    .set REG_SymbolStart, 29
+    .set REG_SymbolEnd, 28
+    .set REG_DOLLookup, 27
+    .set REG_SymbolID, 26
+    .set REG_IsLast, 25
+      lwz r3, -0x5004(r13)
+      cmpwi r3,0
+      beq DOLSymbol_NotFound
+      li REG_SymbolStart, 0
+      li REG_IsLast, 0
+      lwz REG_SymbolEnd,0x0(r3)
+      lwz REG_DOLLookup,0x4(r3)
+    # start in the middle of the symbols
+      srawi r3,REG_SymbolEnd,1
+      addze REG_SymbolID,r3
+
+    DOLSymbol_Search:
+    .set REG_ThisSymbol, 12
+    # get this symbol
+      mulli r3,REG_SymbolID,0xC
+      add REG_ThisSymbol, r3, REG_DOLLookup
+    # check address
+      lwz r3,0x0(REG_ThisSymbol)
+      lwz	r4, 0x0198 (r30)        # instruction
+      cmpw r4,r3
+      bge DOLSymbol_After
+
+    DOLSymbol_Before:
+    # slice in half
+      mr REG_SymbolEnd, REG_SymbolID
+      sub r3, REG_SymbolID, REG_SymbolStart
+      cmpwi r3, 1                      
+      bne DOLSymbol_BeforeCont
+    # if this is 1, theres only one left
+      li REG_IsLast, 1
+    DOLSymbol_BeforeCont:
+      srawi r3,r3,1
+      addze r3,r3
+      add REG_SymbolID, r3, REG_SymbolStart
+      b DOLSymbol_Search
+
+    DOLSymbol_After:
+    # first check if this is the correct symbol
+      lwz r3,0x4(REG_ThisSymbol)
+      cmpw r4,r3
+      blt DOLSymbol_Found
+    # check if this was the last one
+      cmpwi REG_IsLast, 1
+      beq DOLSymbol_NotFound
+    # move up by half
+      mr REG_SymbolStart, REG_SymbolID
+      sub r3, REG_SymbolEnd, REG_SymbolStart
+      cmpwi r3, 1                      
+      bne DOLSymbol_AfterCont
+    # if this is 1, theres only one left
+      li REG_IsLast, 1
+    DOLSymbol_AfterCont:
+      srawi r3,r3,1
+      addze r3,r3
+      add REG_SymbolID, r3, REG_SymbolStart
+      b DOLSymbol_Search
+
+    DOLSymbol_Found:
+    # get func name and output it
+      lwz r4, 0x8 (REG_ThisSymbol)
+      cmpwi r4,0
+      beq DOLSymbol_NotFound
+      b Output   
+
+    DOLSymbol_NotFound:
+    # Get null string
+      bl NullString
+      mflr r4
 
 Output:
-# OSReport frame info
-  bl FrameInfo
+# OSReport symbol name
+  bl StackInfo
   mflr r3
-  lwz r4, 0x4 (REG_BackChain)       # link register
   branchl r12,OSReport
-Loop_Next:
-  lwz REG_BackChain, 0x0 (REG_BackChain)
-  addi REG_Count, REG_Count, 1
-Loop_Check:
-  cmpwi REG_Count,8
-  bge Exit
-  cmpwi REG_BackChain,-1
-  bne Loop
 
 b Exit
 
 StackInfo:
 blrl
-.string " LR Save:  Symbol\n"
-.align 2
-
-FrameInfo:
-blrl
-.string "%X:  %s\n"
+.string "Symbol: %s\n"
 .align 2
 
 NullString:
@@ -128,4 +171,4 @@ blrl
 
 Exit:
   restore
-  branch r12,0x80394b04
+  rlwinm.	r0, r27, 0, 6, 6
