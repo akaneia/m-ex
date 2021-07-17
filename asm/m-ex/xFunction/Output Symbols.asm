@@ -71,12 +71,17 @@ Exit:
   li r4,16
   branchl r12,0x80394a48
 
+# Check to output instruction
+  lwz r3, -0x5008(r13)
+  cmpwi r3,-1
+  beq NoInstruction
 # Instruction
   lwz r3, -0x5008(r13)
   lwz r4, -0x500c(r13)
   lwz r5, -0x5010(r13)
   lwz r6, -0x5014(r13)
   branchl r12,0x80394b18
+NoInstruction:
 
   restore
   li	r3, 0

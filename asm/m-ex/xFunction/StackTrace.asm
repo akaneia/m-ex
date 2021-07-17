@@ -2,6 +2,8 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
+.set CallstackNum, 10
+
 .set REG_FileSize, 31
 
 backup
@@ -179,7 +181,7 @@ Loop_Next:
   lwz REG_BackChain, 0x0 (REG_BackChain)
   addi REG_Count, REG_Count, 1
 Loop_Check:
-  cmpwi REG_Count,8
+  cmpwi REG_Count,CallstackNum
   bge Exit
   cmpwi REG_BackChain,-1
   bne Loop
