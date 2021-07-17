@@ -943,8 +943,8 @@ struct AfterImageDesc
 
 struct HitVictim
 {
-    GOBJ *victim_gobj; // the gobj that was hit
-    int timer;         // items use this to wait until hitting this gobj again
+    void *data; // userdata of the object that was hit
+    int timer;  // items use this to wait until hitting this gobj again
 };
 
 struct ftHit
@@ -3167,7 +3167,7 @@ void Fighter_CheckToRespawn(int ply, int ms);
 void Fighter_Respawn(GOBJ *f, int ms);
 void Fighter_CreateAbsorb(GOBJ *fighter_gobj, AbsorbDesc *absorb_desc);
 void Fighter_EnableAbsorbUpdate(GOBJ *fighter_gobj);
-void Fighter_PlaySFX(GOBJ* fighter_gobj, int sfxid, int volume, int pitch);
+void Fighter_PlaySFX(GOBJ *fighter_gobj, int sfxid, int volume, int pitch);
 void Fighter_EnterFallOrWait(GOBJ *fighter_gobj);
 void Fighter_EnterTech(GOBJ *gobj);
 void Fighter_EnterSpecialFallLoseJumps(GOBJ *fighter_gobj, int can_fastfall, int can_not_noimpactland, int can_not_interrupt, float aerial_drift_mult, float landing_lag);
