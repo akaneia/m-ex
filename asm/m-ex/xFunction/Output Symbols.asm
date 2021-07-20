@@ -27,6 +27,12 @@ backup
   cmpw REG_FileSize, r3
   bge NullDebug
 
+# check if persist heap has something
+  lwz r3,OFST_HeapRuntime(rtoc)
+  lwz r3,0x28(r3)
+  cmpwi r3,0 
+  bne NullDebug
+
 # load it
   bl FileName
   mflr r3
