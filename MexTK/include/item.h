@@ -679,7 +679,9 @@ struct ItemData
     u8 xdc8 : 8;                                        // 0xdc8
     u8 xdc9_1 : 1;                                      // 0xdc9, 0x80
     u8 hitlag : 1;                                      // 0xdc9, 0x40
-    u8 xdc9_3 : 6;                                      // 0xdc9, 0x3F
+    u8 freeze : 1;                                      // 0xdc9, 0x20
+    u8 xdc9_10 : 1;                                     // 0xdc9, 0x10
+    u8 xdc9_f : 4;                                      // 0xdc9, 0xF
     u16 xdca1 : 1;                                      // 0xdca 0x80
     u16 xdca2 : 1;                                      // 0xdca 0x40
     u16 xdca3 : 1;                                      // 0xdca 0x20
@@ -918,7 +920,7 @@ int Item_GenerateHitExceptionID();
 int Item_CheckHeavy(GOBJ *item);
 void Item_SetUngrabbable(GOBJ *item);
 void Item_SetJobjHidden(GOBJ *item);
-void Item_SetHitboxDamage(itHit* hitbox, int damage, GOBJ *item);
+void Item_SetHitboxDamage(itHit *hitbox, int damage, GOBJ *item);
 void Item_RemoveAllHitboxes(GOBJ *item);
 void Item_ClearVelocity(GOBJ *item);
 void Item_UpdateECBTopN(GOBJ *item);
