@@ -4,3 +4,4 @@
 
 lwz  r3,OFST_MnSlChrEffectFileIDs(rtoc)
 lbzx	r3, r3, r31
+extsb r3,r3

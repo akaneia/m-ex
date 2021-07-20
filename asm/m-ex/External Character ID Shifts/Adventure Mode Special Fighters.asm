@@ -36,20 +36,24 @@ TableLoop:
   # get ext ID
     add r4,REG_Table,REG_FtCount
     lbz REG_ExtID,0xA(r4)
-  #Check if null
-    cmpwi REG_ExtID,33
-    beq FtLoop_Inc
   #Check if a special character
     cmpwi REG_ExtID,0x1a
     blt NormalCharacter
-    cmpwi REG_ExtID,0x20
-    bgt NormalCharacter
+    cmpwi REG_ExtID,0x21
+    bge NullCharacter
+  SpecialCharacter:
   # get special fighter index
     subi r3, REG_ExtID, 0x1A
   # get m-ex special fighter ID
     add  REG_ExtID,REG_SpecialFtStart,r3
   # store back
     stb REG_ExtID,0xA(r4)
+    b FtLoop_Inc
+  NullCharacter:
+    lwz r3,OFST_Metadata_FtExtNum(rtoc)
+    stb r3,0xA(r4)   # store back
+    b FtLoop_Inc
+
   NormalCharacter:
   FtLoop_Inc:
     addi REG_FtCount, REG_FtCount, 1
