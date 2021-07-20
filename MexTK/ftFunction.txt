@@ -1,6 +1,6 @@
 onload
 onrespawn
-onunknown
+ondestroy
 move_logic
 specialn
 specialairn
