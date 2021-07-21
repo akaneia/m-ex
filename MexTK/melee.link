@@ -324,6 +324,7 @@
 80070fb4:Fighter_SetHoldKind
 80070cc4:Fighter_ApplyHandAnim
 80070c48:Fighter_UpdateHandAnim
+8007abd0:Fighter_UpdateHitboxDamage
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
@@ -448,6 +449,7 @@
 80273454:Item_ClearVelocity
 80276214:Item_UpdateECBTopN
 80276308:Item_GetWallCollFlags
+80272460:Item_UpdateHitboxDamage
 8037210c:JOBJ_LoadDummy
 8036FB5C:JOBJ_AddAnimAll
 803717A8:JOBJ_AddChild

@@ -3174,5 +3174,5 @@ void Fighter_EnterSpecialFallLoseJumps(GOBJ *fighter_gobj, int can_fastfall, int
 void Fighter_RumbleController(FighterData *fighter_gobj, int unk1, int unk2);
 void Fighter_GetLeftStick(GOBJ *fighter_gobj, float *stick_x, float *stick_y);
 void Fighter_ClampMaxAirDrift(FighterData *fighter_gobj);
-
+void Fighter_UpdateHitboxDamage(ftHit *hit, int dmg, GOBJ *f);
 #endif
