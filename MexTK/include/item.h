@@ -442,7 +442,7 @@ struct ItemData
     int x14;                                            // 0x14
     int x18;                                            // 0x18
     int x1c;                                            // 0x1c
-    int x20;                                            // 0x20
+    u8 team_id;                                         // 0x20
     int state;                                          // 0x24
     int x28;                                            // 0x28
     float facing_direction;                             // 0x2c
@@ -860,6 +860,10 @@ struct ItemData
         int xfc0;                                       // 0xfc0
         int xfc4;                                       // 0xfc4
         int xfc8;                                       // 0xfc8
+        struct                                          //
+        {                                               //
+            GOBJ *fighter_orig;                         // 0xfcc
+        } MEX;                                          //
     } item_var;                                         //
 };
 

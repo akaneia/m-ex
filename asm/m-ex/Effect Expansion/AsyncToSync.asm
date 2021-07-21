@@ -22,7 +22,7 @@ lwz REG_FighterData,0x2C(REG_FighterGObj)
   cmpwi r3,6
   bne ItemSkip
   lwz r3,0x2C(REG_FighterGObj)
-  lwz r3,0x518(r3)
+  lwz r3,MEX_OrigOwner(r3)
   cmpwi r3,0
   beq ItemSkip
   lwz REG_FighterData,0x2C(r3)

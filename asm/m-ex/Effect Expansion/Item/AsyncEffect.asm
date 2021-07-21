@@ -22,7 +22,7 @@ backup
   cmpwi REG_EffectID, MEXEffectEnd
   bge Exit
 #Check if item has a parent gobj
-  lwz r3,0x518(REG_ItemData)
+  lwz r3,MEX_OrigOwner(REG_ItemData)
   mr. REG_FighterGObj,r3
   beq Exit
 

@@ -35,7 +35,7 @@ lwz REG_FighterData,0x2C(REG_PlayerGObj)
   cmpwi r3,6
   bne NotItem
   lwz r3,0x2C(REG_PlayerGObj)
-  lwz r3,0x518(r3)
+  lwz r3,MEX_OrigOwner(r3)
   lwz REG_FighterData,0x2C(r3)
 NotItem:
 

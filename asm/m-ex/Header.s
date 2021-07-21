@@ -453,6 +453,22 @@
 .set  MEX_align, MEX_UCF2fX + 0x1   #1 byte
 .set  MEX_FtModelAdd_num, MEX_align + 0x1   #4 bytes
 .set  MEX_FtModelAdd_ptr, MEX_FtModelAdd_num + 0x4   #4 bytes
+
+
+# Item Data Sizes
+.set  ItemDataOrigSize, 0xfcc
+.set  MEX_ItemDataSize, 0x4       # mex needs additional X bytes
+.set  ItemDataTotalSize, ItemDataOrigSize + MEX_ItemDataSize
+
+# Fighter Data Start
+.set ItemDataStart, 0x0
+.set MEX_ItemDataStart, ItemDataStart + ItemDataOrigSize
+
+# Item Data Vairables
+#MEX
+.set  MEX_OrigOwner, MEX_ItemDataStart + 0x0  #4 bytes
+
+
 /*
 #SSM Struct Offsets
 #Header
