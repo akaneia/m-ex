@@ -23,8 +23,9 @@ backup
   branchl r12,0x80375404  # get heap id
   cmpwi r3,-1
   beq NullDebug
-  branchl r12,0x80344168  # get mem in this heap
-  cmpw REG_FileSize, r3
+  branchl r12,0x80344168      # get mem in this heap
+  addi r4, REG_FileSize, 68   # archive header alloc as well  
+  cmpw r4, r3
   bge NullDebug
 
 # check if persist heap has something
