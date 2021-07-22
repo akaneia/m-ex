@@ -472,7 +472,7 @@ struct ItemData
     int xb4;                                            // 0xb4
     void *it_cb;                                        // 0xb8, global item callbacks
     ItemState *item_states;                             // 0xbc
-    int isRotate;                                       // 0xc0, also air state?? 802e4ff4 octorock
+    int air_state;                                      // 0xc0, also air state?? 802e4ff4 octorock
     itData *itData;                                     // 0xc4
     JOBJ *joint;                                        // 0xc8
     itCommonAttr *common_attr;                          // 0xcc
