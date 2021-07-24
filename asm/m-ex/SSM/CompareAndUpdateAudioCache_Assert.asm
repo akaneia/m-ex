@@ -106,7 +106,7 @@ blrl
 
 FGMNeeded:
 blrl
-.string "\nFGM Needed:\n"
+.string "\nFGM Pending:\n"
 .align 2
 
 FGMName:
