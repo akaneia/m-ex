@@ -253,13 +253,13 @@ struct MTHPlayParam
 };
 struct MTHHeader
 {
-    char magic[4]; // 0x0, idk why they call this magic
-    int x4;
+    char magic[4];      // 0x0, idk why they call this magic
+    int x4;             //
     int version;        // 0x8
     int bufSize;        // 0xc
     int xSize;          // 0x10
     int ySize;          // 0x14
-    int framerate;      //0x18
+    int framerate;      // 0x18
     int numFrames;      // 0x1c
     int firstFrame;     // 0x20
     int frameOffsets;   // 0x24
