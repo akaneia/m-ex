@@ -2060,8 +2060,8 @@ struct FighterData
     int x2B8;                                                  // 0x2B8
     int x2BC;                                                  // 0x2BC
     int x2C0;                                                  // 0x2C0
-    int x2C4;                                                  // 0x2C4
-    int x2C8;                                                  // 0x2C8
+    float jostle_offset;                                       // 0x2C4
+    float jostle_range;                                        // 0x2C8
     int x2CC;                                                  // 0x2CC
     int x2D0;                                                  // 0x2D0
     int *special_attributes;                                   // 0x2D4
