@@ -2737,6 +2737,7 @@ void Match_EndVS();
 void Match_FadeScreen(int time);
 int Match_CheckIfTeams();
 int Match_CheckIfStock();
+int Match_CheckIfFriendlyFire();
 void Match_SetPostMatchSFX(int sfx);
 void Match_FreezeGame(int freeze_kind);
 void Match_UnfreezeGame(int freeze_kind);

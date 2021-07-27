@@ -498,6 +498,7 @@
 80024E84:Match_AdjustSoundOnPause
 8016B094:Match_CheckIfStock
 8016B168:Match_CheckIfTeams
+8016b0d4:Match_CheckIfFriendlyFire
 8002F3AC:Match_CorrectCamera
 802F6E1C:Match_CreateHUD
 8016B328:Match_EndImmediate
