@@ -281,44 +281,43 @@ struct itCommonAttr
     unsigned char x1_8 : 1;     // 0x1 0x01    char flags3; //0x2
     char flags4;                //0x3
     float throw_speed_mult;     // 0x4, speed multiplier at which this item is thrown at
-    int x8;
-    float spin_speed;
-    float fall_speed;     // 0x10
-    float fall_speed_max; // 0x14
-    float x18;
-    float x1C;       //collision related
-    int x20;         // 0x20
-    int x24;         // 0x24
-    int x28;         // 0x28
-    int x2c;         // 0x2c
-    int x30;         // 0x30
-    int x34;         // 0x34
-    int x38;         // 0x38
-    int x3c;         // 0x3c
-    float ecb_top;   // 0x40
-    float ecb_bot;   // 0x44
-    float ecb_right; // 0x48
-    float ecb_left;  // 0x4c
-    int x50;         // 0x50
-    int x54;         // 0x54
-    int x58;         // 0x58
-    int x5c;         // 0x5c
-    float scale;     // 0x60, does not affect hitboxes
-    int destroy_gfx; // 0x64, ID of a gfx to play on destroy
-    int x68;         // 0x68
-    int x6c;         // 0x6c
-    int x70;         // 0x70
-    int x74;         // 0x74
-    int destroy_sfx; // 0x78
-    int x7c;         // 0x7c
-    int x80;         // 0x80
-    int x84;         // 0x84
-    int x88;         // 0x88
-    int x8c;         // 0x8c
-    int x90;         // 0x90
-    int x94;         // 0x94
-    int x98;         // 0x98
-    int x9c;         // 0x9c
+    int x8;                     //
+    float spin_speed;           //
+    float fall_speed;           // 0x10
+    float fall_speed_max;       // 0x14
+    float x18;                  //
+    float dmg_mult;             // collision related? referenced on taking damage @ 80270f90
+    int x20;                    // 0x20
+    int x24;                    // 0x24
+    int x28;                    // 0x28
+    int x2c;                    // 0x2c
+    int x30;                    // 0x30
+    float x34;                  // 0x34
+    Vec2 grab_range;            // 0x38
+    float ecb_top;              // 0x40
+    float ecb_bot;              // 0x44
+    float ecb_right;            // 0x48
+    float ecb_left;             // 0x4c
+    int x50;                    // 0x50
+    int x54;                    // 0x54
+    int x58;                    // 0x58
+    int x5c;                    // 0x5c
+    float scale;                // 0x60, does not affect hitboxes
+    int destroy_gfx;            // 0x64, ID of a gfx to play on destroy
+    int x68;                    // 0x68
+    int x6c;                    // 0x6c
+    int x70;                    // 0x70
+    int x74;                    // 0x74
+    int destroy_sfx;            // 0x78
+    int x7c;                    // 0x7c
+    int x80;                    // 0x80
+    int x84;                    // 0x84
+    int x88;                    // 0x88
+    int x8c;                    // 0x8c
+    int x90;                    // 0x90
+    int x94;                    // 0x94
+    int x98;                    // 0x98
+    int x9c;                    // 0x9c
 };
 
 struct ItemState
