@@ -4,7 +4,7 @@
 #include "structs.h"
 #include "datatypes.h"
 #include "obj.h"
-#include "color.h"
+#include "gx.h"
 
 // button bits
 #define PAD_BUTTON_DPAD_LEFT 0x1

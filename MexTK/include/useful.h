@@ -350,22 +350,6 @@ struct JPEGHeader
     int imageSize; // 0x8
     int audioSize; // 0xc
 };
-struct GXRenderModeObj
-{
-    u32 viTVMode;             // 0x0
-    u16 fbWidth;              // 0x4
-    u16 efbHeight;            // 0x6
-    u16 xfbHeight;            // 0x8
-    u16 viXOrigin;            // 0xA
-    u16 viYOrigin;            // 0xC
-    u16 viWidth;              // 0xE
-    u16 viHeight;             // 0x10
-    u32 xfbMode;              // 0x14
-    u8 field_rendering;       // 0x18
-    u8 aa;                    // 0x19
-    u8 sample_pattern[12][2]; // 0x1a
-    u8 vfilter[7];
-} GXRModeObj;
 
 /*** Static Vars ***/
 OSInfo *os_info = 0x80000000;
@@ -399,20 +383,10 @@ s32 CARDCreateAsync(s32 chan, char *fileName, u32 size, CARDFileInfo *fileInfo, 
 s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat *stat, void *callback);
 s32 CARDRead(CARDFileInfo *fileInfo, void *buf, s32 length, s32 offset);
 
-void GXSetColor(GXColor *color);
-void GXSetZMode(int compare_enable, int func, int update_enable);
-void GXSetLineWidth(u8 width, int tex_offsets);
-void GXBegin(int type, int vtxfmt, u16 nverts);
-void GXEnd();
-void GXPixModeSync();
-void GXInvalidateTexAll();
 void DCFlushRange(void *startAddr, u32 nBytes);
 void DCInvalidateRange(void *startAddr, u32 nBytes);
 void TRK_FlushCache(void *startAddr, u32 nBytes);
 int memcmp(void *buf1, void *buf2, u32 nBytes);
-int GXGetTexBufferSize(u16 width, u16 height, u32 format, int mipmap, u8 max_lod);
-void GXSetDrawDone();
-void GXWaitDrawDone();
 void blr();
 void blr2();
 

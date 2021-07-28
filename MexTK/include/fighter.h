@@ -4,6 +4,7 @@
 #include "structs.h"
 #include "datatypes.h"
 #include "obj.h"
+#include "gx.h"
 #include "color.h"
 #include "effects.h"
 #include "match.h"

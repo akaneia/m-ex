@@ -4,7 +4,7 @@
 #include "structs.h"
 #include "datatypes.h"
 #include "obj.h"
-#include "color.h"
+#include "gx.h"
 
 /*** Structs ***/
 

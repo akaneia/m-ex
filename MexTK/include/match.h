@@ -5,7 +5,7 @@
 #include "datatypes.h"
 #include "obj.h"
 #include "fighter.h"
-#include "color.h"
+#include "gx.h"
 
 // Match Data definitions
 #define MATCH_TIMER_FROZEN 0

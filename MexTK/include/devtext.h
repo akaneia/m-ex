@@ -2,7 +2,7 @@
 #define MEX_H_DEVTEXT
 
 #include "structs.h"
-#include "color.h"
+#include "gx.h"
 
 /*** Structs ***/
 

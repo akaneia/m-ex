@@ -3,7 +3,7 @@
 
 #include "structs.h"
 #include "datatypes.h"
-#include "color.h"
+#include "gx.h"
 
 // JObj Flags
 #define JOBJ_SKELETON (1 << 0)
