@@ -4,8 +4,11 @@
 #include "structs.h"
 #include "datatypes.h"
 
+#define HUGE_ENUF 1e+300 // _HUGE_ENUF*_HUGE_ENUF must overflow
+#define INFINITY ((float)(HUGE_ENUF * HUGE_ENUF))
 #define M_PI (3.14159265358979323846)
 #define M_1DEGREE (0.0174533)
+#define M_NAN ((float)(INFINITY * 0.0F))
 
 /*** Functions ***/
 float fmod(float a, float b);
