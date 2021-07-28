@@ -22,6 +22,11 @@ typedef struct MTHHeader MTHHeader;
 typedef struct MTHPlayback MTHPlayback;
 typedef struct JPEGHeader JPEGHeader;
 
+// GX
+typedef struct GXColor GXColor;
+typedef struct GXRenderModeObj GXRenderModeObj;
+typedef struct GXPipe GXPipe;
+
 // HSD Objects
 typedef struct HSD_Obj HSD_Obj;
 typedef struct GOBJ GOBJ;
@@ -88,7 +93,6 @@ typedef struct ptclGen ptclGen;
 typedef struct GeneratorAppSRT GeneratorAppSRT;
 
 // Color
-typedef struct GXColor GXColor;
 typedef struct ColorOverlay ColorOverlay;
 
 // Item

@@ -6,6 +6,7 @@
 #include "obj.h"
 #include "mex.h"
 #include "datatypes.h"
+#include "gx.h"
 #include "hsd.h"
 #include "math.h"
 #include "useful.h"
@@ -54,12 +55,24 @@ void null()
     return;
 }
 
-void __attribute__((optimize("O0"))) PRIM_DRAW(PRIM *gx, float x, float y, float z, GXColor color)
+// void __attribute__((optimize("O0"))) PRIM_DRAW(PRIM *gx, float x, float y, float z, GXColor color)
+// {
+//     AS_FLOAT(gx->data) = x;
+//     AS_FLOAT(gx->data) = y;
+//     AS_FLOAT(gx->data) = z;
+//     *(GXColor *)&gx->data = color;
+//     return;
+// }
+
+__attribute__((optimize("O0"))) void GX_Draw(float x, float y, float z, GXColor color)
 {
-    AS_FLOAT(gx->data) = x;
-    AS_FLOAT(gx->data) = y;
-    AS_FLOAT(gx->data) = z;
-    *(GXColor *)&gx->data = color;
+    gx_pipe->d.F32 = x;
+    gx_pipe->d.F32 = y;
+    gx_pipe->d.F32 = z;
+    gx_pipe->d.U8 = color.r;
+    gx_pipe->d.U8 = color.g;
+    gx_pipe->d.U8 = color.b;
+    gx_pipe->d.U8 = color.a;
     return;
 }
 

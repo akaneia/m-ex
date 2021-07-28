@@ -30,6 +30,20 @@ struct GXRenderModeObj
     u8 vfilter[7];
 };
 
+struct GXPipe
+{
+    union
+    {
+        u8 U8;
+        s8 S8;
+        u16 U16;
+        s16 S16;
+        u32 U32;
+        s32 S32;
+        f32 F32;
+    } d;
+};
+
 typedef enum GXBool
 {
     GX_DISABLE,
@@ -397,6 +411,8 @@ typedef enum GXColorSrc
     Register,
     Vertex
 } GXColorSrc;
+
+GXPipe *gx_pipe;
 
 void GXSetColor(GXColor *color);
 void GXSetZMode(
