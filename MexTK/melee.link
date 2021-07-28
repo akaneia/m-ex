@@ -49,6 +49,7 @@
 8036a010:CObj_SetScissor
 8036a6c8:CObj_Release
 80391120:CObj_Destroy
+8036a288:COBJ_GetCurrent
 80048160:Coll_CheckLedge
 80041C8C:Coll_ECBCurrToPrev
 80041EE4:Coll_InitECB
