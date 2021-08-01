@@ -142,31 +142,6 @@ HSD_Pad *PadGet(int playerIndex, int padType)
     return (&pads->pad[playerIndex]);
 }
 
-float lerp(Translation *anim, float currFrame)
-{
-    float prevFrame, prevPos, nextFrame, nextPos, amt;
-
-    // get previous threshold
-    int i = 0;
-    prevFrame = anim[i].frame;
-    prevPos = anim[i].value;
-    nextFrame = anim[i + 1].frame;
-    nextPos = anim[i + 1].value;
-    while ((currFrame < prevFrame) | (currFrame > nextFrame))
-    {
-        i++;
-        prevFrame = anim[i].frame;
-        prevPos = anim[i].value;
-        nextFrame = anim[i + 1].frame;
-        nextPos = anim[i + 1].value;
-    }
-
-    // get amt
-    amt = (currFrame - prevFrame) / (nextFrame - prevFrame);
-
-    return amt * (nextPos - prevPos) + prevPos;
-}
-
 float JOBJ_GetAnimFrame(JOBJ *joint)
 {
     // check for AOBJ in jobj

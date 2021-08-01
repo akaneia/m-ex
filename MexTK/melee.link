@@ -598,8 +598,6 @@
 8001822C:Preload_GetTable
 80018254:Preload_Update
 800174bc:Preload_Invalidate
-804DD848:PRIM_CLOSE
-804DD84C:PRIM_NEW
 8039D048:psDeletePntJObjwithParticle
 8039D3AC:psKillGenerator
 803421D0:PSMTXCopy
