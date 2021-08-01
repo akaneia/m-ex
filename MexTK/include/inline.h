@@ -64,7 +64,7 @@ void null()
 //     return;
 // }
 
-__attribute__((optimize("O0"))) void GX_Draw(float x, float y, float z, GXColor *color)
+void GX_Draw(float x, float y, float z, GXColor *color)
 {
     gx_pipe->d.F32 = x;
     gx_pipe->d.F32 = y;
