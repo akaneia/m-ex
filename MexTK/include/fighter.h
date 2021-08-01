@@ -2049,48 +2049,45 @@ struct FighterData
         int special_jump_action___1;                           // 0x28C
         int weight_dependent_throw_speed_flags;                // 0x290
     } attr;                                                    //
-    int x294;                                                  // 0x294
-    int x298;                                                  // 0x298
-    int x29C;                                                  // 0x29C
-    int x2A0;                                                  // 0x2A0
-    int x2A4;                                                  // 0x2A4
-    int x2A8;                                                  // 0x2A8
-    int x2AC;                                                  // 0x2AC
-    int x2B0;                                                  // 0x2B0
-    int x2B4;                                                  // 0x2B4
-    int x2B8;                                                  // 0x2B8
-    int x2BC;                                                  // 0x2BC
-    int x2C0;                                                  // 0x2C0
-    float jostle_offset;                                       // 0x2C4
-    float jostle_range;                                        // 0x2C8
-    int x2CC;                                                  // 0x2CC
-    int x2D0;                                                  // 0x2D0
-    int *special_attributes;                                   // 0x2D4
-    int *special_attributes2;                                  // 0x2D8
-    int x2DC;                                                  // 0x2DC
-    int x2E0;                                                  // 0x2E0
-    int x2E4;                                                  // 0x2E4
-    int x2E8;                                                  // 0x2E8
-    int x2EC;                                                  // 0x2EC
-    FtDynamicBoneset dynamics_boneset[10];                     // 0x2f0
-    int dynamics_num;                                          // 0x3E0
-    struct script                                              //  0x3E4
-    {                                                          //
-        float script_event_timer;                              // 0x3E4
-        float script_frame_timer;                              // 0x3E8
-        int *script_current;                                   // 0x3EC
-        int script_loop_num;                                   // 0x3F0
-        int *script_return;                                    // 0x3F4
-    } script;                                                  //
-    int unk;                                                   // 0x3F8
-    int unk3FC;                                                // 0x3FC
-    int pointer_to_0x460;                                      // 0x400
-    int pointer_to_0x3c0;                                      // 0x404
-    ColorOverlay color[3];                                     // 0x408
-    void *LObj;                                                // 0x588
-    int anim_num;                                              // 0x58C
-    void *anim_curr_flags_ptr;                                 // 0x590
-    struct                                                     // 0x594
+    struct
+    {
+        Vec2 ground_light_offset; // 0x294
+        Vec2 ground_light_size;   // 0x29C
+        Vec2 ground_light_offset; // 0x2A4
+        Vec2 ground_light_size;   // 0x2AC
+        Vec2 air_light_offset;    // 0x2B4
+        Vec2 air_light_size;      // 0x2BC
+    } itpickup;
+    float jostle_offset;                   // 0x2C4
+    float jostle_range;                    // 0x2C8
+    int x2CC;                              // 0x2CC
+    int x2D0;                              // 0x2D0
+    int *special_attributes;               // 0x2D4
+    int *special_attributes2;              // 0x2D8
+    int x2DC;                              // 0x2DC
+    int x2E0;                              // 0x2E0
+    int x2E4;                              // 0x2E4
+    int x2E8;                              // 0x2E8
+    int x2EC;                              // 0x2EC
+    FtDynamicBoneset dynamics_boneset[10]; // 0x2f0
+    int dynamics_num;                      // 0x3E0
+    struct script                          //  0x3E4
+    {                                      //
+        float script_event_timer;          // 0x3E4
+        float script_frame_timer;          // 0x3E8
+        int *script_current;               // 0x3EC
+        int script_loop_num;               // 0x3F0
+        int *script_return;                // 0x3F4
+    } script;                              //
+    int unk;                               // 0x3F8
+    int unk3FC;                            // 0x3FC
+    int pointer_to_0x460;                  // 0x400
+    int pointer_to_0x3c0;                  // 0x404
+    ColorOverlay color[3];                 // 0x408
+    void *LObj;                            // 0x588
+    int anim_num;                          // 0x58C
+    void *anim_curr_flags_ptr;             // 0x590
+    struct                                 // 0x594
     {
         int transn_phys_update : 1;       // 0x80000000, gives fighter speed based on transN offset
         int loop_anim : 1;                // 0x40000000, loops animation
