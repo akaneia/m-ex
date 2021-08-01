@@ -55,27 +55,6 @@ void null()
     return;
 }
 
-// void __attribute__((optimize("O0"))) PRIM_DRAW(PRIM *gx, float x, float y, float z, GXColor color)
-// {
-//     AS_FLOAT(gx->data) = x;
-//     AS_FLOAT(gx->data) = y;
-//     AS_FLOAT(gx->data) = z;
-//     *(GXColor *)&gx->data = color;
-//     return;
-// }
-
-void GX_Draw(float x, float y, float z, GXColor *color)
-{
-    gx_pipe->d.F32 = x;
-    gx_pipe->d.F32 = y;
-    gx_pipe->d.F32 = z;
-    gx_pipe->d.U8 = color->r;
-    gx_pipe->d.U8 = color->g;
-    gx_pipe->d.U8 = color->b;
-    gx_pipe->d.U8 = color->a;
-    return;
-}
-
 void C_QUATMtx(Vec4 *r, Mtx m)
 {
     /*---------------------------------------------------------------------------*
@@ -343,6 +322,202 @@ float fmin(float a, float b)
 float fmax(float a, float b)
 {
     return (((a) > (b)) ? (a) : (b));
+}
+
+/*---------------------------------------------*
+ * GXVertex functions                          *
+ *---------------------------------------------*/
+void GXPosition3f32(f32 x, f32 y, f32 z)
+{
+    gx_pipe->d.F32 = x;
+    gx_pipe->d.F32 = y;
+    gx_pipe->d.F32 = z;
+}
+void GXPosition3u16(u16 x, u16 y, u16 z)
+{
+    gx_pipe->d.U16 = x;
+    gx_pipe->d.U16 = y;
+    gx_pipe->d.U16 = z;
+}
+void GXPosition3s16(s16 x, s16 y, s16 z)
+{
+    gx_pipe->d.S16 = x;
+    gx_pipe->d.S16 = y;
+    gx_pipe->d.S16 = z;
+}
+void GXPosition3u8(u8 x, u8 y, u8 z)
+{
+    gx_pipe->d.U8 = x;
+    gx_pipe->d.U8 = y;
+    gx_pipe->d.U8 = z;
+}
+void GXPosition3s8(s8 x, s8 y, s8 z)
+{
+    gx_pipe->d.S8 = x;
+    gx_pipe->d.S8 = y;
+    gx_pipe->d.S8 = z;
+}
+void GXPosition2f32(f32 x, f32 y)
+{
+    gx_pipe->d.F32 = x;
+    gx_pipe->d.F32 = y;
+}
+void GXPosition2u16(u16 x, u16 y)
+{
+    gx_pipe->d.U16 = x;
+    gx_pipe->d.U16 = y;
+}
+void GXPosition2s16(s16 x, s16 y)
+{
+
+    gx_pipe->d.S16 = x;
+    gx_pipe->d.S16 = y;
+}
+void GXPosition2u8(u8 x, u8 y)
+{
+    gx_pipe->d.U8 = x;
+    gx_pipe->d.U8 = y;
+}
+void GXPosition2s8(s8 x, s8 y)
+{
+    gx_pipe->d.S8 = x;
+    gx_pipe->d.S8 = y;
+}
+void GXPosition1x16(u16 index)
+{
+    gx_pipe->d.U16 = index;
+}
+void GXPosition1x8(u8 index)
+{
+    gx_pipe->d.U8 = index;
+}
+
+void GXNormal3f32(f32 x, f32 y, f32 z)
+{
+    gx_pipe->d.F32 = x;
+    gx_pipe->d.F32 = y;
+    gx_pipe->d.F32 = z;
+}
+void GXNormal3s16(s16 x, s16 y, s16 z)
+{
+    gx_pipe->d.S16 = x;
+    gx_pipe->d.S16 = y;
+    gx_pipe->d.S16 = z;
+}
+void GXNormal3s8(s8 x, s8 y, s8 z)
+{
+    gx_pipe->d.S8 = x;
+    gx_pipe->d.S8 = y;
+    gx_pipe->d.S8 = z;
+}
+void GXNormal1x16(u16 index)
+{
+    gx_pipe->d.U32 = index;
+}
+void GXNormal1x8(u8 index)
+{
+    gx_pipe->d.U8 = index;
+}
+
+void GXColor4u8(u8 r, u8 g, u8 b, u8 a)
+{
+    gx_pipe->d.U8 = r;
+    gx_pipe->d.U8 = g;
+    gx_pipe->d.U8 = b;
+    gx_pipe->d.U8 = b;
+}
+void GXColor3u8(u8 r, u8 g, u8 b)
+{
+    gx_pipe->d.U8 = r;
+    gx_pipe->d.U8 = g;
+    gx_pipe->d.U8 = g;
+}
+void GXColor1u32(u32 clr)
+{
+    gx_pipe->d.U32 = clr;
+}
+void GXColor1u16(u16 clr)
+{
+    gx_pipe->d.U16 = clr;
+}
+void GXColor1x16(u16 index)
+{
+    gx_pipe->d.U16 = index;
+}
+void GXColor1x8(u8 index)
+{
+    gx_pipe->d.U8 = index;
+}
+
+void GXTexCoord2f32(f32 s, f32 t)
+{
+    gx_pipe->d.F32 = s;
+    gx_pipe->d.F32 = t;
+}
+void GXTexCoord2u16(u16 s, u16 t)
+{
+    gx_pipe->d.U16 = s;
+    gx_pipe->d.U16 = t;
+}
+void GXTexCoord2s16(s16 s, s16 t)
+{
+    gx_pipe->d.S16 = s;
+    gx_pipe->d.S16 = t;
+}
+void GXTexCoord2u8(u8 s, u8 t)
+{
+    gx_pipe->d.U8 = s;
+    gx_pipe->d.U8 = t;
+}
+void GXTexCoord2s8(s8 s, s8 t)
+{
+    gx_pipe->d.S8 = s;
+    gx_pipe->d.S8 = t;
+}
+void GXTexCoord1f32(f32 s, f32 t)
+{
+    gx_pipe->d.F32 = s;
+    gx_pipe->d.F32 = t;
+}
+void GXTexCoord1u16(u16 s, u16 t)
+{
+    gx_pipe->d.U16 = s;
+    gx_pipe->d.U16 = t;
+}
+void GXTexCoord1s16(s16 s, s16 t)
+{
+    gx_pipe->d.S16 = s;
+    gx_pipe->d.S16 = t;
+}
+void GXTexCoord1u8(u8 s, u8 t)
+{
+    gx_pipe->d.U8 = s;
+    gx_pipe->d.U8 = t;
+}
+void GXTexCoord1s8(s8 s, s8 t)
+{
+    gx_pipe->d.S8 = s;
+    gx_pipe->d.S8 = t;
+}
+void GXTexCoord1x16(u16 index)
+{
+    gx_pipe->d.U16 = index;
+}
+void GXTexCoord1x8(u8 index)
+{
+    gx_pipe->d.U8 = index;
+}
+
+void GX_Draw(float x, float y, float z, GXColor *color)
+{
+    gx_pipe->d.F32 = x;
+    gx_pipe->d.F32 = y;
+    gx_pipe->d.F32 = z;
+    gx_pipe->d.U8 = color->r;
+    gx_pipe->d.U8 = color->g;
+    gx_pipe->d.U8 = color->b;
+    gx_pipe->d.U8 = color->a;
+    return;
 }
 
 #endif
