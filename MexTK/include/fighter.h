@@ -2053,8 +2053,8 @@ struct FighterData
     {
         Vec2 ground_light_offset; // 0x294
         Vec2 ground_light_size;   // 0x29C
-        Vec2 ground_light_offset; // 0x2A4
-        Vec2 ground_light_size;   // 0x2AC
+        Vec2 ground_heavy_offset; // 0x2A4
+        Vec2 ground_heavy_size;   // 0x2AC
         Vec2 air_light_offset;    // 0x2B4
         Vec2 air_light_size;      // 0x2BC
     } itpickup;
