@@ -424,13 +424,13 @@ void GXColor4u8(u8 r, u8 g, u8 b, u8 a)
     gx_pipe->d.U8 = r;
     gx_pipe->d.U8 = g;
     gx_pipe->d.U8 = b;
-    gx_pipe->d.U8 = b;
+    gx_pipe->d.U8 = a;
 }
 void GXColor3u8(u8 r, u8 g, u8 b)
 {
     gx_pipe->d.U8 = r;
     gx_pipe->d.U8 = g;
-    gx_pipe->d.U8 = g;
+    gx_pipe->d.U8 = b;
 }
 void GXColor1u32(u32 clr)
 {
