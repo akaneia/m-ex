@@ -419,6 +419,8 @@
 80019880:HSD_SetSpeed
 8016b274:HSD_SetSpeedEasy
 80361fc4:HSD_StateInvalidate
+803624d8:HSD_StateInitTev
+8036c244:HSD_ClearVtxDesc
 80094818:Item_Catch
 80266F3C:Item_CheckIfEnabled
 80276348:Item_CheckIfTouchingWall

@@ -171,6 +171,8 @@ void HSD_StartRender(int unk);
 void HSD_SetSpeed(u64 speed);
 void HSD_SetSpeedEasy(float mult);
 void HSD_StateInvalidate(int flags);
+void HSD_StateInitTev();
+void HSD_ClearVtxDesc();
 void GX_AllocImageData(_HSD_ImageDesc *image_desc, int width, int height, int fmt, int size); // image data buffer is stored to the image_desc
 void GXTexModeSync();
 void GXPixModeSync();
