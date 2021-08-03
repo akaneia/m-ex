@@ -470,6 +470,29 @@ struct MatchOffscreen
     void *x10;
 };
 
+struct ExclamData
+{
+    GOBJ *gobj;           // 0x0
+    int x4;               // 0x4
+    int x8;               // 0x8
+    int sfx;              // 0xc, -1 for none
+    u8 x10;               // 0x10
+    u8 x11;               // 0x11
+    u8 is_play_sfx12 : 1; // 0x12, 0x80, flags
+    u8 is_play_sfx3 : 1;  // 0x12, 0x40 flags
+    u8 is_exec_func1 : 1; // 0x12, 0x20, flags
+    u8 x12_x10 : 1;       // 0x12, flags
+    u8 x12_x08 : 1;       // 0x12, flags
+    u8 x12_x04 : 1;       // 0x12, flags
+    u8 x12_x02 : 1;       // 0x12, flags
+    u8 x12_x01 : 1;       // 0x12, flags
+    int x14;              // 0x14
+    void *on_start;       // 0x18, executes when exclam starts
+    void *on_end;         // 0x1c, executes when exclam ends
+    int sfx2;             // 0x20, -1 for none
+    int sfx3;             // 0x24, -1 for none
+};
+
 struct PlayerStandings
 {
     u8 pkind;       // 0x58
@@ -2721,6 +2744,7 @@ Match *stc_match = 0x8046b6a0;
 MatchCamera *stc_matchcam = 0x80452c68;
 MatchHUD *stc_matchhud = 0x804a10c8;
 MatchOffscreen *stc_match_offscreen = 0x804a1df0;
+ExclamData *stc_exclam_data = 0x803f9628; // 8 of these
 
 /*** Functions ***/
 
@@ -2760,6 +2784,7 @@ void DevCam_AdjustZoom(COBJ *cobj, float stickY);
 void ScreenFlash_Create(int kind, int unk);
 void ScreenRumble_Execute(int kind, Vec3 *pos);
 void Match_StoreGoCallback(GOBJ *gobj, void *cb);
+void Match_CreateExclamation(int exclam, int is_play_sfx, int sfx, int r6, void *cb, void *cb2);
 void Match_AdjustSoundOnPause(int is_pause);
 Vec3 *Match_GetPlayerHUDPos(int ply);
 COBJ *Match_GetCObj();

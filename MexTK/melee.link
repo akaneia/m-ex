@@ -536,6 +536,7 @@
 801A583C:Match_InitMinorData
 8003006C:Match_SetDevelopCamera
 8016B33C:Match_SetEndGraphic
+802f6ea4:Match_CreateExclamation
 80165290:Match_SetFixedCamera
 801652B0:Match_SetFreeCamera
 8016F088:Match_SetNametags

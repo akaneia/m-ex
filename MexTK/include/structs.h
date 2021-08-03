@@ -74,9 +74,9 @@ typedef struct MatchOffscreen MatchOffscreen;
 typedef struct MatchHUD MatchHUD;
 typedef struct MatchCamera MatchCamera;
 typedef struct CameraBox CameraBox;
-typedef struct MatchOffscreen MatchOffscreen;
 typedef struct MatchStandings MatchStandings;
 typedef struct PlayerStandings PlayerStandings;
+typedef struct ExclamData ExclamData;
 
 // Text
 typedef struct Text Text;
