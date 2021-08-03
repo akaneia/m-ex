@@ -548,6 +548,8 @@
 801C10B8:Match_StoreGoCallback
 801A4674:Match_UnfreezeGame
 8016b248:Match_GetDamageRatio
+8016b7f8:Match_CreateGOExclamation
+800868a4:Match_EnableFighterInputs
 8037E708:MatToQuat
 8001B6F8:Memcard_CheckStatus
 8001BB48:Memcard_CreateSnapshot

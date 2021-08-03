@@ -2789,4 +2789,6 @@ void Match_AdjustSoundOnPause(int is_pause);
 Vec3 *Match_GetPlayerHUDPos(int ply);
 COBJ *Match_GetCObj();
 float Match_GetDamageRatio();
+void Match_CreateGOExclamation();
+void Match_EnableFighterInputs();
 #endif
