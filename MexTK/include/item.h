@@ -657,15 +657,15 @@ struct ItemData
     int xda4;                                           // 0xda4
     char xda8;                                          // 0xda8
     char xda9;                                          // 0xda8
-    unsigned char xdaa1 : 1;                            // 0xda8 0x80
-    unsigned char xdaa2 : 1;                            // 0xda8 0x40
-    unsigned char xdaa3 : 1;                            // 0xda8 0x20
-    unsigned char xdaa4 : 1;                            // 0xda8 0x10
-    unsigned char xdaa5 : 1;                            // 0xda8 0x08
-    unsigned char xdaa6 : 1;                            // 0xda8 0x04
-    unsigned char xdaa7 : 1;                            // 0xda8 0x02
-    unsigned char visible : 1;                          // 0xda8 0x01
-    char xdab;                                          // 0xda8
+    unsigned char xdaa1 : 1;                            // 0x80 - 0xda8
+    unsigned char show_center_sphere : 1;               // 0x40 - 0xda8
+    unsigned char show_item_pickup : 1;                 // 0x20 - 0xda8
+    unsigned char show_cpu_ai : 1;                      // 0x10 - 0xda8
+    unsigned char show_footstool : 1;                   // 0x8 - 0xda8
+    unsigned char show_dynamics : 1;                    // 0x4 - 0xda8
+    unsigned char show_hit : 1;                         // 0x2 - 0xda8
+    unsigned char show_model : 1;                       // 0x1 - 0xda8
+    char xdab;                                          // 0xdab
     struct                                              //
     {                                                   //
         int flag1;                                      // 0xdac
