@@ -421,6 +421,7 @@
 8016b274:HSD_SetSpeedEasy
 80361fc4:HSD_StateInvalidate
 803624d8:HSD_StateInitTev
+803738d0:HSD_StateInitDirect
 8036c244:HSD_ClearVtxDesc
 80094818:Item_Catch
 80266F3C:Item_CheckIfEnabled

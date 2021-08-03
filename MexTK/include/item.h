@@ -660,8 +660,8 @@ struct ItemData
     unsigned char xdaa1 : 1;                            // 0x80 - 0xda8
     unsigned char show_center_sphere : 1;               // 0x40 - 0xda8
     unsigned char show_item_pickup : 1;                 // 0x20 - 0xda8
-    unsigned char show_cpu_ai : 1;                      // 0x10 - 0xda8
-    unsigned char show_footstool : 1;                   // 0x8 - 0xda8
+    unsigned char show_footstool : 1;                   // 0x10 - 0xda8
+    unsigned char xda8_x8 : 1;                          // 0x8 - 0xda8
     unsigned char show_dynamics : 1;                    // 0x4 - 0xda8
     unsigned char show_hit : 1;                         // 0x2 - 0xda8
     unsigned char show_model : 1;                       // 0x1 - 0xda8
@@ -724,7 +724,7 @@ struct ItemData
     unsigned char xdcf6 : 1;                            // 0xdcf, 0x04
     unsigned char xdcf7 : 1;                            // 0xdcf, 0x02
     unsigned char xdcf8 : 1;                            // 0xdcf, 0x01
-    unsigned char can_jumped_on : 1;                    // 0xdd0, 0x80
+    unsigned char is_footstool : 1;                     // 0xdd0, 0x80
     unsigned char xdd0_x40 : 1;                         // 0xdd0, 0x40
     unsigned char xdd0_x20 : 1;                         // 0xdd0, 0x20
     unsigned char xdd0_x10 : 1;                         // 0xdd0, 0x10
