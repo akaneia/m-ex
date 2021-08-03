@@ -17,53 +17,101 @@ enum HEAP_KIND
 };
 enum MINOR_KIND
 {
-    MNRKIND_TITLE,      // Title Screen
-    MNRKIND_MNMA,       // Main Menu
-    MNRKIND_MATCH,      // VS Dairantou (In-Game)
-    MNRKIND_SUDDEATH,   // Sudden Death Dairantou (In-Game)
-    MNRKIND_TRAIN,      // Training Mode Dairantou (In-Game)
-    MNRKIND_RST,        // Result Screen
-    MNRKIND_X6,         //
-    MNRKIND_DB,         // Debug Menu
-    MNRKIND_CSS,        // CSS
-    MNRKIND_SSS,        // SSS
-    MNRKIND_XA,         //
-    MNRKIND_TYGAL,      // Trophy Gallery
-    MNRKIND_TYLOT,      // Trophy Lottery
-    MNRKIND_TYCOL,      // Trophy Collection
-    MNRKIND_ADVSPLSH,   // Adventure Mode Splash Screen
-    MNRKIND_TYFALL,     // 1P Mode Trophy Falling Cutscene
-    MNRKIND_ADVCGRT,    // Adventure Mode Congratulations
-    MNRKIND_VI1,        // VisualScene_Luigi
-    MNRKIND_VI2,        // VisualScene_BrinstarLava
-    MNRKIND_VI3,        // VisualScene_PlanetExplode
-    MNRKIND_VI4,        // VisualScene_3KirbysSpawn
-    MNRKIND_VI5,        // VisualScene_GiantKirbySpawns
-    MNRKIND_VI6,        // VisualScene_StarFoxDialog
-    MNRKIND_VI7,        // VisualScene_FZeroRace
-    MNRKIND_VI8,        // VisualScene_MetalMarioLuigi
-    MNRKIND_VI9,        // VisualScene_BowserTrophyFalls
-    MNRKIND_VI10,       // VisualScene_GigaBowserTransformation
-    MNRKIND_VI11,       // VisualScene_GigaBowserDefeated
-    MNRKIND_OP,         // Opening Movie
-    MNRKIND_1PENDMV,    // 1P Mode End Movie
-    MNRKIND_HOWMV,      // How to Play Movie
-    MNRKIND_OMAKE,      // Special Movie
-    MNRKIND_CLSCSPLSH,  // TEST
-    MNRKIND_ALSPLSH,    // TEST
-    MNRKIND_GMOV,       // Game over
-    MNRKIND_SOON,       // coming soon
-    MNRKIND_TOSETUP,    // tournament setup
-    MNRKIND_TOBRCK,     // tourn bracket
-    MNRKIND_TOUNK,      // tourn unk
-    MNRKIND_SPCLMSG,    // special msg
-    MNRKIND_PROG,       // progressive
-    MNRKIND_CHLG,       // challenger
-    MNRKIND_CARD,       // memcard prompt
-    MNRKIND_STAFF,      // credits
-    MNRKIND_CAMWARN,    // camera mode memcard prompt
-    MNRKIND_NULL,       // terminator
-    MNRKIND_SMSHDWNCSS, // custom smashdown css
+    MNRKIND_TITLE,     // Title Screen
+    MNRKIND_MNMA,      // Main Menu
+    MNRKIND_MATCH,     // VS Dairantou (In-Game)
+    MNRKIND_SUDDEATH,  // Sudden Death Dairantou (In-Game)
+    MNRKIND_TRAIN,     // Training Mode Dairantou (In-Game)
+    MNRKIND_RST,       // Result Screen
+    MNRKIND_X6,        //
+    MNRKIND_DB,        // Debug Menu
+    MNRKIND_CSS,       // CSS
+    MNRKIND_SSS,       // SSS
+    MNRKIND_XA,        //
+    MNRKIND_TYGAL,     // Trophy Gallery
+    MNRKIND_TYLOT,     // Trophy Lottery
+    MNRKIND_TYCOL,     // Trophy Collection
+    MNRKIND_ADVSPLSH,  // Adventure Mode Splash Screen
+    MNRKIND_TYFALL,    // 1P Mode Trophy Falling Cutscene
+    MNRKIND_ADVCGRT,   // Adventure Mode Congratulations
+    MNRKIND_VI1,       // VisualScene_Luigi
+    MNRKIND_VI2,       // VisualScene_BrinstarLava
+    MNRKIND_VI3,       // VisualScene_PlanetExplode
+    MNRKIND_VI4,       // VisualScene_3KirbysSpawn
+    MNRKIND_VI5,       // VisualScene_GiantKirbySpawns
+    MNRKIND_VI6,       // VisualScene_StarFoxDialog
+    MNRKIND_VI7,       // VisualScene_FZeroRace
+    MNRKIND_VI8,       // VisualScene_MetalMarioLuigi
+    MNRKIND_VI9,       // VisualScene_BowserTrophyFalls
+    MNRKIND_VI10,      // VisualScene_GigaBowserTransformation
+    MNRKIND_VI11,      // VisualScene_GigaBowserDefeated
+    MNRKIND_OP,        // Opening Movie
+    MNRKIND_1PENDMV,   // 1P Mode End Movie
+    MNRKIND_HOWMV,     // How to Play Movie
+    MNRKIND_OMAKE,     // Special Movie
+    MNRKIND_CLSCSPLSH, // TEST
+    MNRKIND_ALSPLSH,   // TEST
+    MNRKIND_GMOV,      // Game over
+    MNRKIND_SOON,      // coming soon
+    MNRKIND_TOSETUP,   // tournament setup
+    MNRKIND_TOBRCK,    // tourn bracket
+    MNRKIND_TOUNK,     // tourn unk
+    MNRKIND_SPCLMSG,   // special msg
+    MNRKIND_PROG,      // progressive
+    MNRKIND_CHLG,      // challenger
+    MNRKIND_CARD,      // memcard prompt
+    MNRKIND_STAFF,     // credits
+    MNRKIND_CAMWARN,   // camera mode memcard prompt
+    MNRKIND_NULL,      // terminator
+};
+enum MAJOR_KIND
+{
+    MJRKIND_TITLE,        // Title Screen
+    MJRKIND_MNMA,         // Main Menu
+    MJRKIND_VS,           //
+    MJRKIND_CLASSIC,      //
+    MJRKIND_ADV,          //
+    MJRKIND_ALLSTAR,      //
+    MJRKIND_DBG,          //
+    MJRKIND_DBGSOUND,     //
+    MJRKIND_HANYUTESTCSS, //
+    MJRKIND_HANYUTESTSSS, //
+    MJRKIND_CAMWARN,      // camera mode memcard prompt
+    MJRKIND_TYGAL,        // Trophy Gallery
+    MJRKIND_TYLOT,        // Trophy Lottery
+    MJRKIND_TYCOL,        // Trophy Collection
+    MJRKIND_DBGFIGHT,     //
+    MJRKIND_TARGETS,      //
+    MJRKIND_VSSUDDEATH,   //
+    MJRKIND_VSINVIS,      //
+    MJRKIND_VSSLOW,       //
+    MJRKIND_VSFAST,       //
+    MJRKIND_CHLG,         // Challenger Approaching
+    MJRKIND_CLSCEND,      //
+    MJRKIND_ADVEND,       //
+    MJRKIND_ALLSTAREND,   //
+    MJRKIND_OP,           //
+    MJRKIND_VIS,          // Visual Scene (cutscene)
+    MJRKIND_DBGEND,       // Debug 1P Ending
+    MJRKIND_TOURN,        //
+    MJRKIND_TRAIN,        //
+    MJRKIND_VSTINY,       //
+    MJRKIND_VSGIANT,      //
+    MJRKIND_VSSTAMINA,    //
+    MJRKIND_HOMERUN,      //
+    MJRKIND_10MAN,        //
+    MJRKIND_100MAN,       //
+    MJRKIND_3MIN,         //
+    MJRKIND_15MIN,        //
+    MJRKIND_ENDLESS,      //
+    MJRKIND_CRUEL,        //
+    MJRKIND_PROG,         // Progressive prompt
+    MJRKIND_BOOT,         //
+    MJRKIND_CARD,         // Memcard prompt
+    MJRKIND_VSFIXEDCAM,   //
+    MJRKIND_EVENT,        //
+    MJRKIND_VSSNGLBTN,    //
+    MJRKIND_NULL,         // terminator
 };
 
 struct MajorScene
