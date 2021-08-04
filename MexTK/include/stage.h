@@ -509,6 +509,7 @@ void Stage_SetGroundCallback(int line, void *userdata, void *callback);
 void Stage_SetCeilingCallback(int line, void *userdata, void *callback);
 void Stage_InitMovingColl(JOBJ *mapjoint, int mapgobjID);
 void Stage_UpdateMovingColl(GOBJ *mapgobj);
+void Stage_GetSpawnPosition(int spawn_id, Vec3 *pos);
 Particle *Stage_SpawnEffectPos(int gfxID, int efFileID, Vec3 *pos);
 Particle *Stage_SpawnEffectJointPos(int gfxID, int efFileID, JOBJ *pos);
 Particle *Stage_SpawnEffectJointPos2(int gfxID, int efFileID, JOBJ *pos);

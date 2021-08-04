@@ -686,6 +686,7 @@
 801C9808:Stage_SpawnEffectJointPos2
 801C96F8:Stage_SpawnEffectPos
 801C2FE0:Stage_UpdateMovingColl
+80224e64:Stage_GetSpawnPosition
 80325878:strchr
 803258E8:strcmp
 80325A50:strcpy
