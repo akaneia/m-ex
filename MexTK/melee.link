@@ -99,6 +99,7 @@
 80302AE0:DevelopText_HideBG
 80302af0:DevelopText_ShowText
 80302B00:DevelopText_HideText
+80302b64:DevelopText_StoreTextColor
 80302B90:DevelopText_StoreBGColor
 80302B10:DevelopText_StoreTextScale
 8035DDD0:DOBJ_ClearFlags
