@@ -95,7 +95,9 @@
 80302D4C:DevelopText_AddString
 80302834:DevelopText_CreateDataTable
 80302BB0:DevelopText_EraseAllText
+80302ad0:DevelopText_ShowBG
 80302AE0:DevelopText_HideBG
+80302af0:DevelopText_ShowText
 80302B00:DevelopText_HideText
 80302B90:DevelopText_StoreBGColor
 80302B10:DevelopText_StoreTextScale
