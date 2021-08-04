@@ -3107,7 +3107,7 @@ int Hitbox_CheckIfPreviouslyHit(void *victim_data, ftHit *hitbox);
 void Hitbox_SetAsPreviouslyHit(ftHit *hitbox, int unk, void *victim_data);
 void Hitbox_DisableAll(GOBJ *fighter);
 int Fighter_CountPlayers();
-void Fighter_InitData();
+void Fighter_InitData(GOBJ *f);
 void Fighter_InitInputs(GOBJ *fighter);
 void Fighter_BreakGrabUnk(GOBJ *victim);
 void Fighter_BreakGrab(GOBJ *fighter, GOBJ *victim);
