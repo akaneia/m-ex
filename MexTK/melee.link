@@ -261,7 +261,11 @@
 8007D6A4:Fighter_SetGrounded
 8007D7FC:Fighter_SetGrounded2
 80034330:Fighter_SetHUDDamage
+80032768:Fighter_SetInitialPosition
 80032828:Fighter_SetPosition
+800326cc:Fighter_GetPosition
+80033094:Fighter_SetDirection
+80033024:Fighter_GetDirection
 800866A4:Fighter_SetScale
 8003254C:Fighter_SetSlotType
 80033C60:Fighter_SetStocks

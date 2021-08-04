@@ -2987,7 +2987,11 @@ void Fighter_SetSlotType(int ply, int slot);
 int Fighter_GetControllerPort(int ply);
 int Fighter_GetTeam(int ply);
 int *Fighter_GetStaleMoveTable(int ply);
+void Fighter_SetInitialPosition(int ply, Vec3 *pos);
 void Fighter_SetPosition(int ply, int ms, Vec3 *pos);
+void Fighter_GetPosition(int ply, Vec3 *pos);
+void Fighter_SetDirection(int ply, float dir);
+float Fighter_GetDirection(int ply);
 void Fighter_ApplyIntang(GOBJ *fighter, int duration);
 int Fighter_GetSlotType(int index); // returns 0x0 for HMN, 0x1 for CPU, 0x2 for Demo, 0x3 for not present
 int Fighter_GetStocks(int ply);
