@@ -189,6 +189,7 @@
 800336e0:Fighter_SetCPUKind
 80033548:Fighter_GetCPULevel
 800335b8:Fighter_SetCPULevel
+80033370:Fighter_GetTeam
 80086990:Fighter_GetECBPosition
 80032330:Fighter_GetExternalID
 80034110:Fighter_GetGObj

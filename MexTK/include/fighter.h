@@ -2985,6 +2985,7 @@ GOBJ *Fighter_GetSubcharGObj(int ply, int ms);
 Playerblock *Fighter_GetPlayerblock(int ply);
 void Fighter_SetSlotType(int ply, int slot);
 int Fighter_GetControllerPort(int ply);
+int Fighter_GetTeam(int ply);
 int *Fighter_GetStaleMoveTable(int ply);
 void Fighter_SetPosition(int ply, int ms, Vec3 *pos);
 void Fighter_ApplyIntang(GOBJ *fighter, int duration);
