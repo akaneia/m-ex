@@ -3197,5 +3197,5 @@ void Fighter_UpdateHitboxDamage(ftHit *hit, int dmg, GOBJ *f);
 void GXLink_Fighter(GOBJ *f, int pass);
 void Fighter_MultiJump_TurnThink(GOBJ *f, int turn_frames);
 int Fighter_CheckFootstool(GOBJ *f);
-float Fighter_GetSoftLandVelocity(FighterData *fp)
+float Fighter_GetSoftLandVelocity(FighterData *fp);
 #endif
