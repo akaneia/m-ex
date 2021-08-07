@@ -134,6 +134,7 @@ typedef struct FtSFX FtSFX;
 typedef struct FtAction FtAction;
 typedef struct ftData ftData;
 typedef struct ftCommonData ftCommonData;
+typedef struct FtMultiJumpDesc FtMultiJumpDesc;
 typedef struct ftChkDevice ftChkDevice;
 typedef struct FtSymbolLookup FtSymbolLookup;
 typedef struct FtSymbols FtSymbols;
