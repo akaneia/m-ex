@@ -2674,7 +2674,7 @@ struct FighterData
         unsigned char x221f_6 : 1;
         unsigned char x221f_7 : 1;
         unsigned char x221f_8 : 1;
-        char flags_2220;                          // 0x2220
+        char can_input_multijump;                 // 0x2220
         char flags_2221;                          // 0x2221
         unsigned char x2222_1 : 1;                // 0x80 - 0x2222
         unsigned char is_multijump : 1;           // 0x40 - 0x2222
