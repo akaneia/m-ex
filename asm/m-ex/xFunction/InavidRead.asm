@@ -2,21 +2,25 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
+.set SymbolMaxChar, 45
+
+.set REG_SymbolName, 29
+
 backup
 
     xFunc_Search:
-    .set REG_xFuncLookup, 29
+    .set REG_xFuncLookup, 28
       lwz REG_xFuncLookup,OFST_XFunctionLookup(rtoc)
     # Check if this LR address in from any xFunctions
-    .set REG_LoopCount, 28
-    .set REG_xFuncNum, 27
-    .set REG_Curr, 26
+    .set REG_LoopCount, 27
+    .set REG_xFuncNum, 26
+    .set REG_Curr, 25
       li REG_LoopCount, 0
       lwz REG_xFuncNum,xFuncLookup_Num(REG_xFuncLookup)
       addi REG_Curr, REG_xFuncLookup, xFuncLookup_Start                  # get to xFunction ptr array
       b xFunc_Search_LoopCheck
     xFunc_Search_Loop:
-    .set REG_xFunc, 25
+    .set REG_xFunc, 24
     # get this xFunc
       lwz REG_xFunc,0x0(REG_Curr)
     # check if LR lies within this xFunctions codeblock
@@ -31,8 +35,8 @@ backup
         
         Symbol_Search:
         # Now find which function we're in
-        .set REG_LoopCount2, 24
-        .set REG_SymbolNum, 23
+        .set REG_LoopCount2, 23
+        .set REG_SymbolNum, 22
           li REG_LoopCount2, 0
           lwz REG_SymbolNum, ftX_DebugSymCount (REG_xFunc)
         Symbol_Search_Loop:
@@ -76,11 +80,11 @@ backup
     xFunc_Search_LoopEnd:
 
     DOLSearch:
-    .set REG_SymbolStart, 29
-    .set REG_SymbolEnd, 28
-    .set REG_DOLLookup, 27
-    .set REG_SymbolID, 26
-    .set REG_IsLast, 25
+    .set REG_SymbolStart, 28
+    .set REG_SymbolEnd, 27
+    .set REG_DOLLookup, 26
+    .set REG_SymbolID, 25
+    .set REG_IsLast, 24
       lwz r3, -0x5004(r13)
       cmpwi r3,0
       beq DOLSymbol_NotFound
@@ -140,20 +144,33 @@ backup
 
     DOLSymbol_Found:
     # get func name and output it
-      lwz r4, 0x8 (REG_ThisSymbol)
-      cmpwi r4,0
+      lwz REG_SymbolName, 0x8 (REG_ThisSymbol)
+      cmpwi REG_SymbolName,0
       beq DOLSymbol_NotFound
       b Output   
 
     DOLSymbol_NotFound:
     # Get null string
       bl NullString
-      mflr r4
+      mflr REG_SymbolName
 
 Output:
+# Ensure char num isnt over
+  mr r3,REG_SymbolName
+  branchl r12,strlen
+  cmpwi r3,SymbolMaxChar
+  ble Print
+# Copy first X chars
+  addi r3,sp,0x80
+  mr r4,REG_SymbolName
+  li r5,SymbolMaxChar
+  branchl r12,memcpy
+  addi REG_SymbolName,sp,0x80
+Print:
 # OSReport symbol name
   bl StackInfo
   mflr r3
+  mr r4,REG_SymbolName
   branchl r12,OSReport
 
 b Exit

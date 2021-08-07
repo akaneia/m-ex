@@ -3,6 +3,7 @@
 .include "../Header.s"
 
 .set CallstackNum, 10
+.set SymbolMaxChar, 42
 
 .set REG_FileSize, 31
 
@@ -16,6 +17,7 @@ backup
 # output stack
 .set REG_Count, 31
 .set REG_BackChain, 30
+.set REG_SymbolName, 29
   li REG_Count, 0
   lwz REG_BackChain, 0x4 (r28)
   b Loop_Check
@@ -23,18 +25,18 @@ backup
 Loop:
 
     xFunc_Search:
-    .set REG_xFuncLookup, 29
+    .set REG_xFuncLookup, 28
       lwz REG_xFuncLookup,OFST_XFunctionLookup(rtoc)
     # Check if this LR address in from any xFunctions
-    .set REG_LoopCount, 28
-    .set REG_xFuncNum, 27
-    .set REG_Curr, 26
+    .set REG_LoopCount, 27
+    .set REG_xFuncNum, 26
+    .set REG_Curr, 25
       li REG_LoopCount, 0
       lwz REG_xFuncNum,xFuncLookup_Num(REG_xFuncLookup)
       addi REG_Curr, REG_xFuncLookup, xFuncLookup_Start                  # get to xFunction ptr array
       b xFunc_Search_LoopCheck
     xFunc_Search_Loop:
-    .set REG_xFunc, 25
+    .set REG_xFunc, 24
     # get this xFunc
       lwz REG_xFunc,0x0(REG_Curr)
     # check if LR lies within this xFunctions codeblock
@@ -97,11 +99,11 @@ Loop:
 
 
     DOLSearch:
-    .set REG_SymbolStart, 29
-    .set REG_SymbolEnd, 28
-    .set REG_DOLLookup, 27
-    .set REG_SymbolID, 26
-    .set REG_IsLast, 25
+    .set REG_SymbolStart, 28
+    .set REG_SymbolEnd, 27
+    .set REG_DOLLookup, 26
+    .set REG_SymbolID, 25
+    .set REG_IsLast, 24
       lwz r3, -0x5004(r13)
       cmpwi r3,0
       beq DOLSymbol_NotFound
@@ -161,21 +163,34 @@ Loop:
 
     DOLSymbol_Found:
     # get func name and output it
-      lwz r5, 0x8 (REG_ThisSymbol)
-      cmpwi r5,0
+      lwz REG_SymbolName, 0x8 (REG_ThisSymbol)
+      cmpwi REG_SymbolName,0
       beq DOLSymbol_NotFound
       b Output   
 
     DOLSymbol_NotFound:
     # Get null string
       bl NullString
-      mflr r5
+      mflr REG_SymbolName
 
 Output:
+# Ensure char num isnt over
+  mr r3,REG_SymbolName
+  branchl r12,strlen
+  cmpwi r3,SymbolMaxChar
+  ble Print
+# Copy first X chars
+  addi r3,sp,0x80
+  mr r4,REG_SymbolName
+  li r5,SymbolMaxChar
+  branchl r12,memcpy
+  addi REG_SymbolName,sp,0x80
+Print:
 # OSReport frame info
   bl FrameInfo
   mflr r3
   lwz r4, 0x4 (REG_BackChain)       # link register
+  mr r5,REG_SymbolName
   branchl r12,OSReport
 Loop_Next:
   lwz REG_BackChain, 0x0 (REG_BackChain)
