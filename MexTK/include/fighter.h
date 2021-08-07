@@ -2876,6 +2876,19 @@ struct FighterData
     } TM;
 };
 
+struct FtMultiJumpDesc // exists in fighters special attributes
+{
+    int turn_frames;        // turn frame length
+    float turn_stick_x_min; // min x value on left stick to trigger aerial turn
+    float vel_stick_x_mult; // jump x velocity = left stick x * this
+    float phys_xc;          // 0xC
+    float phys_x10;         // 0x10
+    float jump_vel_y[5];    // 0x14 subsequemt jumps Y velocities
+    int jump_num;           // 0x28, number of total aerial jumps
+    int jump_state_start;   // 0x2C, state index for first aerial jump
+    int x30;                // 0x30,
+};
+
 struct FtParts // is in the fighter data
 {
     int num;     // 0x2240
