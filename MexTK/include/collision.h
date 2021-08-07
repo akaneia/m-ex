@@ -256,6 +256,7 @@ void ECB_CollAir(CollData *ecb, ECBSize *bones);
 int ECB_CollAir2(CollData *ecb);
 int ECB_CollAirCheckLedge(CollData *ecb);
 int ECB_CollGround(CollData *ecb);
+int ECB_StoreLedgeCheckDirection(CollData *ecb, int ledge_check_dir);
 int GrColl_SearchLedgeLeft(CollData *coll_data, int *return_ledge_index);
 int GrColl_SearchLedgeRight(CollData *coll_data, int *return_ledge_index);
 void GrColl_GetLedgeLeft(int floor_index, Vec3 *pos);                                                                                                                                            // this functon will crawl along the entire line sequence and find the end of the ledge
