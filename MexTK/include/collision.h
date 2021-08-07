@@ -254,6 +254,7 @@ void Coll_SetECBScale(CollData *coll_data, float scale1, float scale2, float sca
 int ECB_CollGround_PassLedge(CollData *ecb, ECBSize *bones); // returns is touching ground bool
 void ECB_CollAir(CollData *ecb, ECBSize *bones);
 int ECB_CollAir2(CollData *ecb);
+int ECB_CollAirCheckLedge(CollData *ecb);
 int ECB_CollGround(CollData *ecb);
 int GrColl_SearchLedgeLeft(CollData *coll_data, int *return_ledge_index);
 int GrColl_SearchLedgeRight(CollData *coll_data, int *return_ledge_index);

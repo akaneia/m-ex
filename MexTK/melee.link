@@ -108,8 +108,10 @@
 80096CC8:ECB_CheckToFallThroughPlatform
 800475F4:ECB_CollAir
 800471f8:ECB_CollAir2
+800473cc:ECB_CollAirCheckLedge
 8004b108:ECB_CollGround
 8004B21C:ECB_CollGround_PassLedge
+800436d8:ECB_StoreLedgeCheckDirection
 8005B880:Effect_DestroyAll
 8005BA40:Effect_PauseAll
 8005BAC4:Effect_ResumeAll
@@ -130,6 +132,7 @@
 8007d468:Fighter_ClampMaxAirDrift
 8007CC78:Fighter_ClampHorizontalGroundVelocity
 8007D440:Fighter_ClampHorizontalVelocity
+80083B68:Fighter_CollCB_JumpAerial
 80083B68:Fighter_Coll_All
 800822A4:Fighter_CollAir_GrabLedge
 800831CC:Fighter_CollAir_GrabLedgeWalljump
@@ -164,6 +167,7 @@
 8008DCE0:Fighter_EnterDamageState
 800C61B0:Fighter_EnterEntry
 800CC730:Fighter_EnterFall
+800ccda8:Fighter_EnterFallAerial
 80082B1C:Fighter_EnterLanding
 800957F4:Fighter_EnterLightThrow
 8009A184:Fighter_EnterMiscPassState
@@ -219,6 +223,8 @@
 800CAED0:Fighter_IASACheck_JumpF
 80099F1C:Fighter_IASACheck_PassConditions
 800C97A8:Fighter_IASACheck_Turn
+8008A4D4:Fighter_IASACheck_AllGrounded
+800CCAAC:Fighter_IASACheck_AllAerial
 80075650:Fighter_IndexFtPartsDObjs
 80068354:Fighter_InitData
 800867e8:Fighter_InitInputs
@@ -227,8 +233,6 @@
 8007487C:Fighter_InitFtPartsModel
 80074148:Fighter_InitPObj
 80074170:Fighter_InitPObj2
-8008A4D4:Fighter_Interrupt_AllGrounded
-800CCAAC:Fighter_Interrupt_AllAerial
 8007E2FC:Fighter_KillAllVelocity
 80081544:Fighter_MoveToCliff
 80084FA8:Fighter_Phys_AnimationFriction
@@ -334,6 +338,9 @@
 80070cc4:Fighter_ApplyHandAnim
 80070c48:Fighter_UpdateHandAnim
 8007abd0:Fighter_UpdateHitboxDamage
+800cb6ec:Fighter_MultiJump_TurnThink
+80081a00:Fighter_CheckFootstool
+800d0ec8:Fighter_GetSoftLandVelocity
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim

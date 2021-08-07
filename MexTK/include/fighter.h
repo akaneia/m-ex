@@ -2878,15 +2878,15 @@ struct FighterData
 
 struct FtMultiJumpDesc // exists in fighters special attributes
 {
-    int turn_frames;        // turn frame length
-    float turn_stick_x_min; // min x value on left stick to trigger aerial turn
-    float vel_stick_x_mult; // jump x velocity = left stick x * this
-    float phys_xc;          // 0xC
-    float phys_x10;         // 0x10
-    float jump_vel_y[5];    // 0x14 subsequemt jumps Y velocities
-    int jump_num;           // 0x28, number of total aerial jumps
-    int jump_state_start;   // 0x2C, state index for first aerial jump
-    int x30;                // 0x30,
+    int turn_frames;                    // turn frame length
+    float turn_stick_x_min;             // min x value on left stick to trigger aerial turn
+    float vel_stick_x_mult;             // jump x velocity = left stick x * this
+    float aerial_drift_stick_mult_mult; // 0xC, multipler for the value in the fighter attribute
+    float aerial_drift_max_mult;        // 0x10, multipler for the value in the fighter attribute
+    float jump_vel_y[5];                // 0x14 subsequemt jumps Y velocities
+    int jump_num;                       // 0x28, number of total aerial jumps
+    int jump_state_start;               // 0x2C, state index for first aerial jump
+    int x30;                            // 0x30,
 };
 
 struct FtParts // is in the fighter data
@@ -2976,6 +2976,7 @@ void Fighter_EnterDamageFall(GOBJ *fighter);
 void Fighter_EnterWait(GOBJ *fighter);
 void Fighter_EnterAirCatch(GOBJ *fighter);
 void Fighter_EnterFall(GOBJ *fighter);
+void Fighter_EnterFallAerial(GOBJ *fighter);
 void Fighter_EnterSpecialFall(GOBJ *fighter, int can_fastfall, int can_not_noimpactland, int can_not_interrupt, float aerialDriftMultipler, float landing_frames);
 void Fighter_EnterLanding(GOBJ *fighter);
 void Fighter_EnterSpecialLanding(GOBJ *fighter, int unk, float state_length);
@@ -3044,6 +3045,8 @@ int Fighter_IASACheck_JumpAerial(GOBJ *fighter);
 int Fighter_IASACheck_JumpF(GOBJ *fighter);
 int Fighter_IASACheck_PassConditions(GOBJ *fighter);
 int Fighter_IASACheck_Turn(GOBJ *fighter);
+int Fighter_IASACheck_AllGrounded(GOBJ *fighter);
+int Fighter_IASACheck_AllAerial(GOBJ *fighter);
 void Fighter_PhysGround_ApplyFriction(GOBJ *fighter);
 void Fighter_PhysGround_ApplyCustomFriction(FighterData *fighter, float friction);
 void Fighter_PhysGround_UnkFriction(GOBJ *fighter);
@@ -3192,4 +3195,7 @@ void Fighter_GetLeftStick(GOBJ *fighter_gobj, float *stick_x, float *stick_y);
 void Fighter_ClampMaxAirDrift(FighterData *fighter_gobj);
 void Fighter_UpdateHitboxDamage(ftHit *hit, int dmg, GOBJ *f);
 void GXLink_Fighter(GOBJ *f, int pass);
+void Fighter_MultiJump_TurnThink(GOBJ *f, int turn_frames);
+int Fighter_CheckFootstool(GOBJ *f);
+float Fighter_GetSoftLandVelocity(FighterData *fp)
 #endif
