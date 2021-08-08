@@ -51,8 +51,8 @@ Loop:
         
         Symbol_Search:
         # Now find which function we're in
-        .set REG_LoopCount2, 24
-        .set REG_SymbolEnd, 23
+        .set REG_LoopCount2, 23
+        .set REG_SymbolEnd, 22
           li REG_LoopCount2, 0
           lwz REG_SymbolEnd, ftX_DebugSymCount (REG_xFunc)
         Symbol_Search_Loop:
