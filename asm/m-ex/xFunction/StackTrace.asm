@@ -77,7 +77,7 @@ Loop:
           bgt Symbol_Search_LoopInc
 
         # get func name and output it
-          lwz r5, ftX_DebugSym_FuncName (REG_Symbol)
+          lwz REG_SymbolName, ftX_DebugSym_FuncName (REG_Symbol)
           b Output
 
         Symbol_Search_LoopInc:
