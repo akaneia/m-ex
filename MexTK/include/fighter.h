@@ -3060,8 +3060,8 @@ void Fighter_PhysAir_SetAerialDrift(FighterData *fp, float curr_x_vel, float thi
 void Fighter_PhysAir_DecayXVelocity(FighterData *fighter, float aerial_friction);
 void Fighter_PhysAir_LimitXVelocity(FighterData *fighter);
 void Fighter_Phys_UseAnimYVelocity(GOBJ *fighter);
-void Fighter_Phys_UseAnimPos(FighterData *fighter);
-void Fighter_Phys_UseAnimPosAndStick(FighterData *fighter);
+void Fighter_Phys_UseAnimPos(GOBJ *fighter);
+void Fighter_Phys_UseAnimPosAndStick(GOBJ *fighter);
 void Fighter_SetGrounded(FighterData *fighter);
 void Fighter_SetGrounded2(FighterData *fighter);
 void Fighter_SetAirborne(FighterData *fighter);
