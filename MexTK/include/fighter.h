@@ -2215,7 +2215,7 @@ struct FighterData
     int x8b4;                      // 0x8b4
     int x8b8;                      // 0x8b8
     int x8bc;                      // 0x8bc
-    int x8c0;                      // 0x8c0
+    int curr_hold_anim;            // 0x8c0
     int x8c4;                      // 0x8c4
     int x8c8;                      // 0x8c8
     int x8cc;                      // 0x8cc
