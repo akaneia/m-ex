@@ -128,6 +128,7 @@ typedef struct ReflectDesc ReflectDesc;
 typedef struct ShieldDesc ShieldDesc;
 typedef struct AbsorbDesc AbsorbDesc;
 typedef struct AfterImageDesc AfterImageDesc;
+typedef struct CPULeaderLog CPULeaderLog;
 typedef struct CPU CPU;
 typedef struct FtCollDesc FtCollDesc;
 typedef struct FtSFX FtSFX;
