@@ -81,6 +81,10 @@
   beq NoAnim
   stw r3,0x590(REG_FighterData)
 
+# Copy action flags
+  lwz r3,0x10(REG_FtCmd)
+  stw r3,0x594(REG_FighterData)
+
 /*
 # Load animation data from source  
   mr  r3, REG_FighterData         # anim dest
