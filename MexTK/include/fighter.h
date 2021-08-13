@@ -1803,8 +1803,8 @@ struct FighterData
     float jostle_range;                    // 0x2C8
     int x2CC;                              // 0x2CC
     FtMultiJumpDesc *multi_jump_desc;      // 0x2D0
-    int *special_attributes;               // 0x2D4
-    int *special_attributes2;              // 0x2D8
+    void *special_attributes;              // 0x2D4
+    void *special_attributes2;             // 0x2D8
     int x2DC;                              // 0x2DC
     int x2E0;                              // 0x2E0
     int x2E4;                              // 0x2E4
