@@ -12,8 +12,8 @@
   lwz r12,Arch_KirbyFunction_OnFrameRuntime(r12)
 
 # get function for this copy ability
-  mulli REG_CopyID,REG_CopyID,4
-  lwzx  r12,REG_CopyID,r0
+  mulli r11,REG_CopyID,4
+  lwzx  r12,r11,r0
   cmpwi r12,0
   beq Exit
 #Branch to function
