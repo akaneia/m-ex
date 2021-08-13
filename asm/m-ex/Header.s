@@ -313,6 +313,7 @@
   .set  Arch_Kirby_OnHit,0x10
   .set  Arch_Kirby_InitItem,0x14
   .set  Arch_Kirby_MoveLogicRuntime,0x18
+  .set  Arch_KirbyFunction_OnFrameRuntime,0x1C
 .set  Arch_Map,0x28
   .set  Arch_Map_StageIDs,0x0
   .set  Arch_Map_Audio,0x4

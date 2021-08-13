@@ -5,3 +5,4 @@ specialairn
 onkirbyhurt
 initcopyitems
 move_logic
+onkirbyframe
