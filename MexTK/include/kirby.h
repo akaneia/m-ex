@@ -9,6 +9,8 @@
 #include "match.h"
 #include "collision.h"
 
+#define Kirby_GetStateID(state) (state + 400) // if you need to check for an m-ex copy state, start at 400
+
 struct FtVarKirby
 {
     int charVar1;           // 0x222c
