@@ -114,6 +114,8 @@ enum PlayerKind
 // action state flags
 #define ASC_PRESERVE_FASTFALL 0x1
 #define ASC_PRESERVE_GFX 0x2
+#define ASC_PRESERVE_HITBOX 0x8
+#define ASC_PRESERVE_VELOCITY 0x20
 #define ASC_PRESERVE_EYE 0x80
 #define ASC_PRESERVE_SFX 0x200
 #define ASC_PRESERVE_COLANIM 0x1000
