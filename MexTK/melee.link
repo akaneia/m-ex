@@ -250,7 +250,7 @@
 8007CF58:Fighter_PhysAir_LimitXVelocity
 8007C930:Fighter_PhysGround_ApplyCustomFriction
 80084F3C:Fighter_PhysGround_ApplyFriction
-8007CB74:Fighter_PhysGround_UnkFriction
+8007CB74:Fighter_PhysGround_ApplyVelocity
 80088148:Fighter_PlayPositionalSFX
 800881D8:Fighter_PlayVoiceSFX
 80088328:Fighter_PlayVoiceSFX2

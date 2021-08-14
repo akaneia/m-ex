@@ -173,7 +173,7 @@ void SpecialLw_PhysicCallback(GOBJ *gobj)
 
 	Fighter_QueueAllowXDrift(fighter_data, 0, mrAttr->specialLw_x_accel, airSpeed);
 
-	Fighter_PhysGround_UnkFriction(gobj);
+	Fighter_PhysGround_ApplyVelocity(gobj);
 
 	if ((fighter_data->ftcmd_var.flag2 != 0) && ((fighter_data->input.down & HSD_BUTTON_B) != 0))
 	{

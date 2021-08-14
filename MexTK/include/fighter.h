@@ -2790,7 +2790,7 @@ int Fighter_IASACheck_AllGrounded(GOBJ *fighter);
 int Fighter_IASACheck_AllAerial(GOBJ *fighter);
 void Fighter_PhysGround_ApplyFriction(GOBJ *fighter);
 void Fighter_PhysGround_ApplyCustomFriction(FighterData *fighter, float friction);
-void Fighter_PhysGround_UnkFriction(GOBJ *fighter);
+void Fighter_PhysGround_ApplyVelocity(GOBJ *fighter);
 void Fighter_PhysAir_CheckFastfall(FighterData *fighter);
 void Fighter_PhysAir_ApplyGravityDecayX(GOBJ *);
 void Fighter_PhysAir_ApplyGravityFastfall(GOBJ *);
