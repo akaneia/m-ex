@@ -430,6 +430,16 @@ EffMdl_FollowJointPos_GroundOrientation:
 */
 
 EffMdl_Exit:
+# set gfx active flag (so gets removed when damaged)
+  #lbz r3,0x2219(REG_FighterData)
+  #ori r3,r3,0x80
+  #stb r3,0x2219(REG_FighterData)
+# set pause and resume gfx callbacks (freezes during hitlag)
+  load r3,0x8005BA40
+  stw r3,0x21d4(REG_FighterData)
+  load r3,0x8005BAC4
+  stw r3,0x21d8(REG_FighterData)
+
   restore
   mr  r31,r3
   branch  r12,0x80061d08
