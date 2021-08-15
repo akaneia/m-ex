@@ -137,7 +137,7 @@ HasMdlEffect:
   lbzx REG_EffectType,r3,REG_EffectIntID
   bl  SkipEffMdlTable
 #*****************************#
-bl  EffMdl_Particle # will be removed
+# bl  EffMdl_Particle # will be removed
 bl  EffMdl_DefinePosRot
 bl  EffMdl_UseJointPos
 bl  EffMdl_UseJointPos_GroundOrientation
