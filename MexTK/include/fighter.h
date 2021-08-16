@@ -2774,8 +2774,9 @@ void Fighter_EnterMiscPassState(float start_frame, GOBJ *fighter, int state, int
 int Fighter_CollGround_PassLedge(GOBJ *fighter);
 int Fighter_CollGround_StopLedge(GOBJ *fighter); // returns is_grounded
 void Fighter_CollGround_StopLedge_EnterFall(GOBJ *fighter);
-int Fighter_CollAir_GrabLedgeWalljump(GOBJ *fighter, void *perFrame, void *onLand);
-int Fighter_CollAir_GrabLedge(GOBJ *fighter, int grab_direction);
+int Fighter_CollAir_GrabFacingLedgeWalljump(GOBJ *fighter, void *perFrame, void *onLand); // this will handle entering cliffcatch / walljump. all in one collision func
+int Fighter_CollAir_GrabBothLedgesWalljump(GOBJ *fighter, void *onLand);                  // this will handle entering cliffcatch / walljump. all in one collision func
+int Fighter_CollAir_CheckLedge(GOBJ *fighter, int grab_direction);                        // this will only check for ledges, you still need to call the cliffcatch/walljump IASA function after
 void Fighter_CollAir_IgnoreLedge(GOBJ *fighter, void *callback);
 int Fighter_CollAir_IgnoreLedge_NoCB(GOBJ *fighter);
 int Fighter_CollAir_SoftLanding(GOBJ *fighter);

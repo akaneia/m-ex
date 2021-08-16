@@ -180,7 +180,7 @@ void SpecialHi_CollisionCallback(GOBJ *gobj)
 		}
 		else
 		{
-			Fighter_CollAir_GrabLedgeWalljump(gobj, Fighter_Coll_CheckToPass, SpecialHi_OnLand);
+			Fighter_CollAir_GrabFacingLedgeWalljump(gobj, Fighter_Coll_CheckToPass, SpecialHi_OnLand);
 		}
 	}
 	else
@@ -321,7 +321,7 @@ void SpecialAirHi_CollisionCallback(GOBJ *gobj)
 		}
 		else
 		{
-			Fighter_CollAir_GrabLedgeWalljump(gobj, Fighter_Coll_CheckToPass, SpecialHi_OnLand);
+			Fighter_CollAir_GrabFacingLedgeWalljump(gobj, Fighter_Coll_CheckToPass, SpecialHi_OnLand);
 		}
 	}
 	else
