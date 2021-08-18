@@ -170,6 +170,8 @@ EffMdl_DOLAddr:
   bctr
 
 ###################################################
+.set  REG_EffectObj,29
+
 EffMdl_Particle:
 # va_list
 # Vec3 position
@@ -189,11 +191,11 @@ EffMdl_Particle:
   mulhw  r4,r4,r5
   srawi	r4,r4,6
   branchl r12,0x8039efac
+  mr REG_EffectObj, r3
   b EffMdl_Exit
 
 EffMdl_DefinePosRot:
 #EffMdl_SpawnSync(ID,gobj,vector,float)
-.set  REG_EffectObj,29
 .set  REG_EffectJObj,28
 .set  REG_ParentJObj,27
 #Pop the position off the va_list
@@ -222,7 +224,6 @@ EffMdl_DefinePosRot:
   lfs r0,0x0(r3)
   stfs  f0,0x24(REG_EffectJObj)
 #Exit
-  mr  r3,REG_EffectObj
   b EffMdl_Exit
 
 EffMdl_UseJointPos:
@@ -236,10 +237,10 @@ EffMdl_UseJointPos:
   mr  r3,REG_EffectID
   mr  r4,REG_PlayerGObj
   branchl r12,0x8005c814
+  mr REG_EffectObj, r3
   b EffMdl_Exit
 
 EffMdl_UseJointPos_GroundOrientation:
-.set  REG_EffectObj,29
 .set  REG_EffectJObj,28
 #Pop position off the va_list
   addi	r3, sp, 508 + 0x100
@@ -265,12 +266,10 @@ EffMdl_UseJointPos_GroundOrientation:
 #Store roll rotation
   stfs	f1, 0x0024 (REG_EffectJObj)
 #Exit
-  mr  r3,REG_EffectObj
   b EffMdl_Exit
 
 EffMdl_UseJointPosRot:
 #EffMdl_SpawnSync(ID,gobj,jobj)
-.set  REG_EffectObj,29
 .set  REG_EffectJObj,28
 .set  REG_ParentJObj,27
 #Pop the jobj off the va_list
@@ -300,12 +299,10 @@ EffMdl_UseJointPosRot:
   lfs f0,0x24(REG_ParentJObj)
   stfs  f0,0x24(REG_EffectJObj)
 #Exit
-  mr  r3,REG_EffectObj
   b EffMdl_Exit
 
 EffMdl_UseJointPosFtDir:
 #EffMdl_SpawnSync(ID,gobj,jobj)
-.set  REG_EffectObj,29
 .set  REG_EffectJObj,28
 .set  REG_Pos,27
 #Pop the pos off the va_list
@@ -349,7 +346,6 @@ EffMdl_UseJointPosFtDir:
   stfs	f1, 0x0034 (REG_EffectJObj)
 
 #Exit
-  mr  r3,REG_EffectObj
   b EffMdl_Exit
 
 EffMdl_FollowJointPos:
@@ -362,6 +358,7 @@ EffMdl_FollowJointPos:
   mr  r3,REG_EffectID
   mr  r4,REG_PlayerGObj
   branchl r12,0x8005c3dc
+  mr REG_EffectObj, r3
   b EffMdl_Exit
 
 EffMdl_FollowJointPosRot:
@@ -375,6 +372,7 @@ EffMdl_FollowJointPosRot:
   mr  r3,REG_EffectID
   mr  r4,REG_PlayerGObj
   branchl r12,0x8005c5c4 #0x8005c814
+  mr REG_EffectObj, r3
   b EffMdl_Exit
 
 /*
@@ -439,7 +437,8 @@ EffMdl_Exit:
   stw r3,0x21d4(REG_FighterData)
   load r3,0x8005BAC4
   stw r3,0x21d8(REG_FighterData)
-
+# return effect object
+  mr  r3,REG_EffectObj
   restore
   mr  r31,r3
   branch  r12,0x80061d08
