@@ -2070,7 +2070,7 @@ struct FighterData
         int x1900;                 // 0x1900
         int x1904;                 // 0x1904
         int x1908;                 // 0x1908
-        int x190c;                 // 0x190c
+        void *random_sfx_table;    // 0x190c, contains a ptr to an sfx table when requesting a random sfx
         int x1910;                 // 0x1910
         int x1914;                 // 0x1914
         int x1918;                 // 0x1918
