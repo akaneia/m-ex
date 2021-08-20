@@ -2839,7 +2839,7 @@ float Fighter_GetBaseScale(FighterData *fighter);
 void Fighter_SetScale(GOBJ *fighter, float scale);
 void Fighter_InitDynamics(FighterData *fighter_data);
 void Fighter_ProcDynamics(GOBJ *fighter);
-void Fighter_CheckToEnableDynamics(GOBJ *fighter, u16 *dynamics_data);
+void Fighter_CheckToEnableDynamics(FighterData *fp, u16 *dynamics_data);
 float Fighter_GetKnockbackAngle(FighterData *fighter_data);
 void Fighter_UpdateCameraBox(GOBJ *fighter);
 void Fighter_SetAllHurtboxesNotUpdated(GOBJ *fighter);
