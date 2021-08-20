@@ -1644,7 +1644,7 @@ struct FighterData
     char xe;                                                   // 0xE
     char xf;                                                   // 0xF
     int state_id;                                              // 0x10
-    int anim_id;                                               // 0x14
+    int action_id;                                             // 0x14
     int common_state_num;                                      // 0x18
     FtState *ftstates_common;                                  // 0x1C
     FtState *ftstates_special;                                 // 0x20
@@ -2839,6 +2839,7 @@ float Fighter_GetBaseScale(FighterData *fighter);
 void Fighter_SetScale(GOBJ *fighter, float scale);
 void Fighter_InitDynamics(FighterData *fighter_data);
 void Fighter_ProcDynamics(GOBJ *fighter);
+void Fighter_CheckToEnableDynamics(GOBJ *fighter, u16 *dynamics_data);
 float Fighter_GetKnockbackAngle(FighterData *fighter_data);
 void Fighter_UpdateCameraBox(GOBJ *fighter);
 void Fighter_SetAllHurtboxesNotUpdated(GOBJ *fighter);

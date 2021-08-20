@@ -256,6 +256,7 @@
 800881D8:Fighter_PlayVoiceSFX
 80088328:Fighter_PlayVoiceSFX2
 8009E0A8:Fighter_ProcDynamics
+8009e7b4:Fighter_CheckToEnableDynamics
 8007CADC:Fighter_QueueAllowXDrift
 8007592C:Fighter_SetBoneRotX
 80075AF0:Fighter_SetBoneRotY
