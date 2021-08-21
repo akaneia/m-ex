@@ -215,7 +215,7 @@
 .set  Arch_FighterFunc,0xC
   .set  Arch_FighterFunc_onLoad,0x0
   .set  Arch_FighterFunc_onDeath,0x4
-  .set  Arch_FighterFunc_onUnknown,0x8
+  .set  Arch_FighterFunc_onDestroy,0x8
   .set  Arch_FighterFunc_MoveLogic,0xC
   .set  Arch_FighterFunc_SpecialN,0x10
   .set  Arch_FighterFunc_SpecialNAir,0x14
@@ -436,12 +436,8 @@
 .set  OFST_HeapRuntime,OFST_EasterEgg + 0x8
 
 
-# Fighter Data Sizes
-.set  FighterDataOrigSize, 0x23ec
-.set  MEX_FighterDataSize, 0x10       # mex needs additional X bytes
-.set  FighterDataTotalSize, FighterDataOrigSize + MEX_FighterDataSize
-
-# Fighter Data Start
+# Fighter Data
+.set FighterDataOrigSize, 0x23ec
 .set FighterDataStart, 0x0
 .set MEX_FighterDataStart, FighterDataStart + FighterDataOrigSize
 
@@ -454,12 +450,14 @@
 .set  MEX_align, MEX_UCF2fX + 0x1   #1 byte
 .set  MEX_FtModelAdd_num, MEX_align + 0x1   #4 bytes
 .set  MEX_FtModelAdd_ptr, MEX_FtModelAdd_num + 0x4   #4 bytes
+.set  MEX_FighterDataEnd, MEX_FtModelAdd_ptr + 0x4
 
+# Total Fighter Data Size
+.set  FighterDataTotalSize, MEX_FighterDataEnd + 32 # adding 32 bytes because theres mem releated bug i cant find :(
 
 # Item Data Sizes
 .set  ItemDataOrigSize, 0xfcc
 .set  MEX_ItemDataSize, 0x4       # mex needs additional X bytes
-.set  ItemDataTotalSize, ItemDataOrigSize + MEX_ItemDataSize
 
 # Fighter Data Start
 .set ItemDataStart, 0x0
@@ -468,7 +466,10 @@
 # Item Data Vairables
 #MEX
 .set  MEX_OrigOwner, MEX_ItemDataStart + 0x0  #4 bytes
+.set  MEX_ItemDataEnd, MEX_OrigOwner + 0x4
 
+# Total Item Data Size
+.set  ItemDataTotalSize, MEX_ItemDataEnd
 
 /*
 #SSM Struct Offsets
