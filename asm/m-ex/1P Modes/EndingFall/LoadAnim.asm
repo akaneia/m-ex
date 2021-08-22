@@ -66,6 +66,8 @@ Loop:
   lwzx r4,r4,r5
   lwz r4, 2 * 4 (r4)  # 2 is the index for ending
   branchl r12,0x80380358
+  cmpwi r3,0
+  beq NoSymbol
   b IndexData
 SymbolLoad:
 # get data from IrAls
@@ -91,6 +93,36 @@ Loop_Check:
   cmpwi REG_Count, 2
   blt Loop
   b Exit
+
+#############################################
+NoSymbol:
+#OSReport
+  bl  ErrorString
+  mflr  r3
+# get symbol name lookup
+  lbz r4,0x0(REG_CharacterTable)
+  mulli r4,r4,4
+  lwz r5,OFST_FtDemoSymbols(rtoc)
+  lwzx r4,r4,r5
+# get the correct symbol name
+  lwz r4, 2 * 4 (r4)  # 1 is the index for intro
+  mr r5,r4
+  branchl r12,0x803456a8
+#Assert
+  bl  Assert_Name
+  mflr  r3
+  li  r4,0
+  load  r5,0x804d3940
+  branchl r12,0x80388220
+Assert_Name:
+blrl
+.string "m-ex"
+.align 2
+ErrorString:
+blrl
+.string "error: %s.dat does not have symbol %s\n"
+.align 2
+###############################################
 
 Extension:
 blrl
