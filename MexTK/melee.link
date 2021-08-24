@@ -347,9 +347,9 @@
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
 80273078:Item_BounceOffShield
-80380358:File_GetSymbol
-80016BE0:File_Load
-80016C64:File_LoadInitReturnSymbol
+80380358:Archive_GetPublicAddress
+80016BE0:Archive_LoadFile
+80016C64:Archive_LoadInitReturnSymbol
 8001819c:File_GetPreloadedFile
 8037DC38:Fog_LoadDesc
 8006F238:FrameTimerCheck

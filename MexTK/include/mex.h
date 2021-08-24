@@ -42,7 +42,7 @@ struct MEXPlaylist
 };
 
 /*** Functions ***/
-ArchiveInfo *MEX_LoadRelArchive(char *file, void *functions, char *symbol);
+HSD_Archive *MEX_LoadRelArchive(char *file, void *functions, char *symbol);
 void MEX_IndexFighterItem(int fighter_kind, void *itemdata, int item_id);
 void SpawnMEXEffect(int effectID, int fighter, int arg1, int arg2, int arg3, int arg4, int arg5);
 int MEX_GetFtItemID(GOBJ *f, int item_id); // gobj can be fighter or stage

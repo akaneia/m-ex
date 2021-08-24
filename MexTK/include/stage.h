@@ -449,7 +449,7 @@ struct MapHead
 
 struct StageFile
 {
-    ArchiveInfo *archive_info;
+    HSD_Archive *archive;
     MapHead *map_head;
 };
 

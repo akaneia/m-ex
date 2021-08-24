@@ -53,7 +53,7 @@ typedef struct HSD_Fog HSD_Fog;
 typedef struct JOBJSet JOBJSet;
 
 // Archive
-typedef struct ArchiveInfo ArchiveInfo;
+typedef struct HSD_Archive HSD_Archive;
 typedef struct MapHead MapHead;
 
 // Stage

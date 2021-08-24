@@ -2679,7 +2679,7 @@ struct FtSymbols
     void *x8;            // 0x8
     void *xc;            // 0xc
     void *x10;           // 0x10
-    ArchiveInfo *costume // 0x14
+    HSD_Archive *costume // 0x14
 };
 
 /** State Structs **/
