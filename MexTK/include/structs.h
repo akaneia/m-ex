@@ -64,6 +64,7 @@ typedef struct MapDesc MapDesc;
 typedef struct StageFile StageFile;
 typedef struct GrDesc GrDesc;
 typedef struct GrExtLookup GrExtLookup;
+typedef struct LineHazardDesc LineHazardDesc;
 typedef struct GeneralPoints GeneralPoints;
 typedef struct GeneralPointsInfo GeneralPointsInfo;
 
@@ -187,7 +188,6 @@ typedef struct Rules1 Rules1;
 // Collision
 typedef struct CollData CollData;
 typedef struct ECBSize ECBSize;
-typedef struct DmgHazard DmgHazard;
 typedef struct CollLineInfo CollLineInfo;
 typedef struct CollLine CollLine;
 typedef struct CollVert CollVert;

@@ -477,6 +477,19 @@ struct GrExtLookup
     int x8;
 };
 
+struct LineHazardDesc
+{
+    int x0;
+    int dmg;
+    int angle;
+    int kb_growth;
+    int x10;
+    int kb;
+    int element;
+    int x1c;
+    int sfx;
+};
+
 Stage *stc_stage = 0x8049e6c8;
 int *ftchkdevice_windnum = R13 + (-0x5128);
 int *ftchkdevice_grabnum = R13 + (-0x512C);

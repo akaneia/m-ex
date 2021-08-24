@@ -17,6 +17,15 @@
 #define LINE_WALLRIGHT 4
 #define LINE_WALLLEFT 8
 
+/*** Enums ***/
+enum LineDirection
+{
+    LINEDIR_GROUND = 1 << 0,
+    LINEDIR_CEIL = 1 << 1,
+    LINEDIR_LEFTWALL = 1 << 2,
+    LINEDIR_RIGHTWALL = 1 << 3,
+};
+
 /*** Structs ***/
 
 struct ECBSize
@@ -25,19 +34,6 @@ struct ECBSize
     float botY;
     Vec2 left;
     Vec2 right;
-};
-
-struct DmgHazard
-{
-    int x0;
-    int dmg;
-    int angle;
-    int kb_growth;
-    int x10;
-    int kb_base;
-    int element;
-    int x1c;
-    int sfx;
 };
 
 struct CollData
