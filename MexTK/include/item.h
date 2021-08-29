@@ -678,7 +678,7 @@ struct ItemData
     int xdc4;                                           // 0xdc4
     u8 xdc8 : 8;                                        // 0xdc8
     u8 xdc9_1 : 1;                                      // 0xdc9, 0x80
-    u8 hitlag : 1;                                      // 0xdc9, 0x40
+    u8 is_hitlag : 1;                                   // 0xdc9, 0x40
     u8 freeze : 1;                                      // 0xdc9, 0x20
     u8 xdc9_10 : 1;                                     // 0xdc9, 0x10
     u8 xdc9_f : 4;                                      // 0xdc9, 0xF
