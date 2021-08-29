@@ -2534,79 +2534,78 @@ struct FighterData
         int ft_var51;                             // 0x22f4
         int ft_var52;                             // 0x22f8
     } fighter_var;
-    int x22fc;           // 0x22fc
-    int x2300;           // 0x2300
-    int x2304;           // 0x2304
-    int x2308;           // 0x2308
-    int x230c;           // 0x230c
-    int x2310;           // 0x2310
-    int x2314;           // 0x2314
-    int x2318;           // 0x2318
-    int x231c;           // 0x231c
-    int x2320;           // 0x2320
-    int stage_internal;  // 0x2324 so stupid, used for decrementing hazard immunity
-    int x2328;           // 0x2328
-    int x232c;           // 0x232c
-    int x2330;           // 0x2330
-    int x2334;           // 0x2334
-    int x2338;           // 0x2338
-    int x233c;           // 0x233c
-    struct state_var     // 0x2340
-    {                    //
-        int state_var1;  // 0x2340
-        int state_var2;  // 0x2344
-        int state_var3;  // 0x2348
-        int state_var4;  // 0x234c
-        int state_var5;  // 0x2350
-        int state_var6;  // 0x2354
-        int state_var7;  // 0x2358
-        int state_var8;  // 0x235c
-        int state_var9;  // 0x2360
-        int state_var10; // 0x2364
-        int state_var11; // 0x2368
-        int state_var12; // 0x236c
-        int state_var13; // 0x2370
-        int state_var14; // 0x2374
-        int state_var15; // 0x2378
-        int state_var16; // 0x237c
-        int state_var17; // 0x2380
-        int state_var18; // 0x2384
-    } state_var;         //
-    int x2388;           // 0x2388
-    int x238c;           // 0x238c
-    int x2390;           // 0x2390
-    int x2394;           // 0x2394
-    int x2398;           // 0x2398
-    int x239c;           // 0x239c
-    int x23a0;           // 0x23a0
-    int x23a4;           // 0x23a4
-    int x23a8;           // 0x23a8
-    int x23ac;           // 0x23ac
-    int x23b0;           // 0x23b0
-    int x23b4;           // 0x23b4
-    int x23b8;           // 0x23b8
-    int x23bc;           // 0x23bc
-    int x23c0;           // 0x23c0
-    int x23c4;           // 0x23c4
-    int x23c8;           // 0x23c8
-    int x23cc;           // 0x23cc
-    int x23d0;           // 0x23d0
-    int x23d4;           // 0x23d4
-    int x23d8;           // 0x23d8
-    int x23dc;           // 0x23dc
-    int x23e0;           // 0x23e0
-    int x23e4;           // 0x23e4
-    int x23e8;           // 0x23e8
-    struct MEX
-    {
-        int anim_owner;
-        GOBJ *kb_abilitysource;
-        u8 ucf_stick_x[3];
-        int costume_num; // number of mexCostumes active
-        void **costumes; // pointer to mexCostume lookup table
-    } MEX;
-    struct TM
-    {
+    int x22fc;                  // 0x22fc
+    int x2300;                  // 0x2300
+    int x2304;                  // 0x2304
+    int x2308;                  // 0x2308
+    int x230c;                  // 0x230c
+    int x2310;                  // 0x2310
+    int x2314;                  // 0x2314
+    int x2318;                  // 0x2318
+    int x231c;                  // 0x231c
+    int x2320;                  // 0x2320
+    int stage_internal;         // 0x2324 so stupid, used for decrementing hazard immunity
+    int x2328;                  // 0x2328
+    int x232c;                  // 0x232c
+    int x2330;                  // 0x2330
+    int x2334;                  // 0x2334
+    int x2338;                  // 0x2338
+    int x233c;                  // 0x233c
+    struct state_var            // 0x2340
+    {                           //
+        int state_var1;         // 0x2340
+        int state_var2;         // 0x2344
+        int state_var3;         // 0x2348
+        int state_var4;         // 0x234c
+        int state_var5;         // 0x2350
+        int state_var6;         // 0x2354
+        int state_var7;         // 0x2358
+        int state_var8;         // 0x235c
+        int state_var9;         // 0x2360
+        int state_var10;        // 0x2364
+        int state_var11;        // 0x2368
+        int state_var12;        // 0x236c
+        int state_var13;        // 0x2370
+        int state_var14;        // 0x2374
+        int state_var15;        // 0x2378
+        int state_var16;        // 0x237c
+        int state_var17;        // 0x2380
+        int state_var18;        // 0x2384
+    } state_var;                //
+    int x2388;                  // 0x2388
+    int x238c;                  // 0x238c
+    int x2390;                  // 0x2390
+    int x2394;                  // 0x2394
+    int x2398;                  // 0x2398
+    int x239c;                  // 0x239c
+    int x23a0;                  // 0x23a0
+    int x23a4;                  // 0x23a4
+    int x23a8;                  // 0x23a8
+    int x23ac;                  // 0x23ac
+    int x23b0;                  // 0x23b0
+    int x23b4;                  // 0x23b4
+    int x23b8;                  // 0x23b8
+    int x23bc;                  // 0x23bc
+    int x23c0;                  // 0x23c0
+    int x23c4;                  // 0x23c4
+    int x23c8;                  // 0x23c8
+    int x23cc;                  // 0x23cc
+    int x23d0;                  // 0x23d0
+    int x23d4;                  // 0x23d4
+    int x23d8;                  // 0x23d8
+    int x23dc;                  // 0x23dc
+    int x23e0;                  // 0x23e0
+    int x23e4;                  // 0x23e4
+    int x23e8;                  // 0x23e8
+    struct MEX                  // 0x23ec
+    {                           //
+        int anim_owner;         // 0x23ec
+        u8 ucf_stick_x[3];      // 0x23f0
+        int costume_num;        // 0x23f4, number of mexCostumes active
+        void **costumes;        // 0x23f8, pointer to mexCostume lookup table
+    } MEX;                      //
+    struct TM                   // 0x23fc
+    {                           //
         s16 state_frame;        // how many frames the player has been in this state
         s16 state_frame_hitlag; // how many frames the player has been in this state, counting hitlag
         s16 shield_frame;       // how many frames the player has been shielding
