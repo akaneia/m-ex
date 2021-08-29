@@ -2602,6 +2602,8 @@ struct FighterData
         int anim_owner;
         GOBJ *kb_abilitysource;
         u8 ucf_stick_x[3];
+        int costume_num; // number of mexCostumes active
+        void **costumes; // pointer to mexCostume lookup table
     } MEX;
     struct TM
     {
