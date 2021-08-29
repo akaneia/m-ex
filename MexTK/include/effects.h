@@ -13,7 +13,7 @@ struct Effect
 {
     GOBJ *child;
     GOBJ *gobj;
-    int x8;
+    GOBJ *parent;
     int xc;
     void *callback;
     int x14;

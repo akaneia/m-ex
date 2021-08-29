@@ -2363,7 +2363,7 @@ struct FighterData
         unsigned char absorb_unk : 1;            // 0x1 - x2218
         unsigned char persistent_gfx : 1;        // 0x80 is shielding bool. 0x80 - 0x2219
         unsigned char immune : 1;                // 0x40 - 0x2219
-        unsigned char x2219_3 : 1;               // 0x20 - 0x2219
+        unsigned char is_ignore_death : 1;       // 0x20 - 0x2219
         unsigned char hitbox_active : 1;         // 0x10 - 0x2219
         unsigned char x2219_5 : 1;               // 0x8 - 0x2219
         unsigned char freeze : 1;                // 0x4 - 0x2219
