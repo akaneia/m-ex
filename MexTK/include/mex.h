@@ -20,7 +20,7 @@ enum MEX_GETDATA
     MXDT_FTCOSTUMEARCHIVE,
     MXDT_GRDESC,      // gets GrDesc struct
     MXDT_GREXTLOOKUP, // gets first stage external ID from internal ID
-    MXDT_GRNAME,      // returns stage name char array
+    MXDT_GRNAME,      // returns stage name char**
 };
 
 /*** Structs ***/
