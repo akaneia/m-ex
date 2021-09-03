@@ -1,3 +1,5 @@
+.set debug, 0
+
 #Constants
 .set  PersonalEffectStart,5000  # used for stage effects, need to rework this?
 .set  EffMdlStart,5000
