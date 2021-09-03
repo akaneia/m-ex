@@ -2,6 +2,10 @@
 .include "../../Globals.s"
 .include "../../m-ex/Header.s"
 
+.if debug==0
+bl 0x1EBD5C
+.endif
+
 .if debug==1
 #OSReport
 	bl	OSReportBegin
@@ -11,12 +15,9 @@
 	branchl r12,0x803456a8
 	li r3,0
 	stw	r3,-0x49b8(r13)
-.endif
 
 branchl r12,0x80390cfc
 
-
-.if debug==1
 #*************************************************
 #Get Tick total
 	lwz	r3,-0x49b8(r13)
