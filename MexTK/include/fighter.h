@@ -2721,7 +2721,7 @@ void Fighter_EnterWait(GOBJ *fighter);
 void Fighter_EnterAirCatch(GOBJ *fighter);
 void Fighter_EnterFall(GOBJ *fighter);
 void Fighter_EnterFallAerial(GOBJ *fighter);
-void Fighter_EnterSpecialFall(GOBJ *fighter, int can_fastfall, int no_soft_landing, int no_interrupt_landing, float air_drift_multiplier, float landing_frames);
+void Fighter_EnterSpecialFall(GOBJ *fighter, int can_fastfall, int no_soft_landing, int can_interrupt_landing, float air_drift_multiplier, float landing_frames);
 void Fighter_EnterLanding(GOBJ *fighter);
 void Fighter_EnterSpecialLanding(GOBJ *fighter, int unk, float state_length);
 void Fighter_EnterSleep(GOBJ *fighter, int ms);
