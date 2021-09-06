@@ -22,7 +22,7 @@ backup
   mflr  r3
   branchl r12,0x800163d8
   addi  REG_FileSize,r3,0
-#ALlign
+#Align
   addi  REG_FileSize,REG_FileSize,31
   rlwinm	REG_FileSize, REG_FileSize, 0, 0, 26
 #Create heap of this size
