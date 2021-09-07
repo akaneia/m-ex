@@ -1,6 +1,6 @@
 #To be inserted at 8025fe6c
-.include "../../Globals.s"
-.include "../Header.s"
+.include "../../../Globals.s"
+.include "../../Header.s"
 
 # the CSS has code to preserve kirbys costume when pressing B to return
 # the puck when hovered over the random icon area apparently...
