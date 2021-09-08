@@ -459,5 +459,11 @@ void GXSetVtxAttrFmt(GXVtxFmt vtxfmt, GXAttribute attribute,
 void GXSetVtxDesc(GXAttribute attribute, GXAttributeType type);
 void GXLoadPosMtxImm(Mtx, GXPosNormMtx);
 void GXSetCurrentMtx(GXPosNormMtx);
+u32 GXGetTexBufferSize(
+    u16 width,
+    u16 height,
+    u32 format,
+    GXBool mipmap,
+    u8 max_lod);
 
 #endif
