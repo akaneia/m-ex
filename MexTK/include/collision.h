@@ -94,8 +94,7 @@ struct CollData
     int envFlags;              // 0x134
     int envFlags_prev;         // 0x138
     int x13c;                  // 0x13c
-    int x140;                  // 0x140
-    int x144;                  // 0x144
+    Vec2 coll_pos;             // 0x140, only updates for ceiling and ground?
     int x148;                  // 0x148
     int ground_index;          // 0x14c, ground
     u8 ground_info;            // 0x150
