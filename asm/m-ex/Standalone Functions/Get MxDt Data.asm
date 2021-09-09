@@ -72,10 +72,12 @@ GrExternalLookup:
   lwz r3,OFST_mexData(rtoc)
   lwz r3,Arch_Map(r3)
   lwz r3,Arch_Map_StageIDs(r3)
+  b Exit
 GrName:
   lwz r3,OFST_mexData(rtoc)
   lwz r3,Arch_Map(r3)
   lwz r3,Arch_Map_StageNames(r3)
+  b Exit
 FtName:
   lwz r3,OFST_mexData(rtoc)
   lwz r3,Arch_Fighter(r3)
