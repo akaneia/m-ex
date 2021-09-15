@@ -199,11 +199,11 @@ struct MnSlChrData
 
 struct VSMinorData
 {
-    u16 x0;
-    u8 css_kind;   // 0 = VS
-    u8 exit_kind;  // 1 = advance, 2 = leave
-    void *ko_data; // used for displaying KO stars on CSS
-    ScDataVS vs_data;
+    u16 x0;           // 0x0
+    u8 css_kind;      // 0x2, 0 = VS
+    u8 exit_kind;     // 0x3, 1 = advance, 2 = leave
+    void *ko_data;    // 0x4, used for displaying KO stars on CSS
+    ScDataVS vs_data; // 0x8
 };
 struct SSSMinorData
 {

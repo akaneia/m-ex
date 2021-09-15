@@ -79,7 +79,8 @@ struct MatchInit
     unsigned char unk11 : 1;             // 0x80
     unsigned char isCheckStockSteal : 1; // 0x40
     unsigned char isRunStockLogic : 1;   // 0x20
-    unsigned char unk10 : 5;             // 0x01
+    unsigned char unk1e : 4;             // 0x1e
+    unsigned char is_teams : 1;          // 0x01
     //byte 0x5
     unsigned char no_check_end : 1;        // 0x80
     unsigned char isSkipUnkStockCheck : 1; // 0x40
