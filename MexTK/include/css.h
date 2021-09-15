@@ -216,36 +216,36 @@ struct SSSMinorData
 };
 
 /*** Variables ***/
-MnSlChrData *stc_css_data;
-VSMinorData **stc_css_minorscene;
-u8 *stc_css_regtagnum; // number of registered tags
-u8 *stc_css_49a7;
-HSD_Archive **stc_css_archive;
-HSD_Archive **stc_css_menuarchive;
-u8 *stc_css_custom_rules;
-GOBJ **stc_css_menugobj;
-JOBJ **stc_css_menumodel;
-CSSCursor **stc_css_cursors;
-CSSPuck **stc_css_pucks;
+MnSlChrData *stc_css_data;         // 0x803f0a48
+VSMinorData **stc_css_minorscene;  // -0x49F0
+u8 *stc_css_regtagnum;             // -0x49A8, number of registered tags
+u8 *stc_css_49a7;                  // -0x49A7
+HSD_Archive **stc_css_archive;     // -0x49D0
+HSD_Archive **stc_css_menuarchive; // -0x49CC
+u8 *stc_css_custom_rules;          // -0x49AC
+GOBJ **stc_css_menugobj;           // -0x49E4
+JOBJ **stc_css_menumodel;          // -0x49E0
+CSSCursor **stc_css_cursors;       // 0x804a0bc0
+CSSPuck **stc_css_pucks;           // 0x804a0bd0
 
-u8 *stc_css_hmnport;
-u8 *stc_css_cpuport;
-u8 *stc_css_delay;
-u8 *stc_css_maxply;
-u8 *stc_css_singeplyport;
-Text *stc_css_ply1_combo_text;
-Text *stc_css_ply2_combo_text;
-Text *stc_css_ply3_combo_text;
-Text *stc_css_ply4_combo_text;
-int *stc_css_bgtimer;
-u8 *stc_css_hasreleasedb;
-u8 *stc_css_exitkind;
-u8 *stc_css_49a9;
-MnSelectChrDataTable **stc_css_datatable;
-COBJDesc **stc_css_cobjdesc;
-GOBJ **stc_css_camgobj;
-HSD_Pad *stc_css_pad;
-u8 *stc_css_unkarr;
+u8 *stc_css_hmnport;                      // -0x49B0
+u8 *stc_css_cpuport;                      // -0x49AF
+u8 *stc_css_delay;                        // -0x49AE
+u8 *stc_css_maxply;                       // -0x49AB
+u8 *stc_css_singeplyport;                 // -0x4DE0
+Text **stc_css_ply1_combo_text;           // -0x49c0
+Text **stc_css_ply2_combo_text;           // -0x49c4
+Text **stc_css_ply3_combo_text;           // -0x49b8
+Text **stc_css_ply4_combo_text;           // -0x49bc
+int *stc_css_bgtimer;                     // -0x49b4
+u8 *stc_css_hasreleasedb;                 // -0x49ad
+u8 *stc_css_exitkind;                     // -0x49aa
+u8 *stc_css_49a9;                         // -0x49a9
+MnSelectChrDataTable **stc_css_datatable; // -0x49EC
+COBJDesc **stc_css_cobjdesc;              // -0x4ADC
+GOBJ **stc_css_camgobj;                   // -0x49E8
+HSD_Pad *stc_css_pad;                     // 0x804c20bc
+u8 *stc_css_unkarr;                       // 0x804d50c8
 
 /*** Functions ***/
 void MainMenu_CamRotateThink(GOBJ *gobj);

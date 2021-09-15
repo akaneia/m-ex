@@ -111,6 +111,34 @@ enum PlayerKind
     PKIND_NONE,
 };
 
+// fighter callback priorities
+enum FtPri
+{
+    FTPRI_HITLAG,
+    FTPRI_ANIM,
+    FTPRI_CPU,
+    FTPRI_IASA,
+    FTPRI_PHYS,
+    FTPRI_5, // nothing
+    FTPRI_ENVCOLL,
+    FTPRI_IK,
+    FTPRI_ACCESSORY,
+    FTPRI_GFX,
+    FTPRI_10,
+    FTPRI_11,
+    FTPRI_GRABCOLL,
+    FTPRI_HITCOLL,
+    FTPRI_DMGAPPLY,
+    FTPRI_15,
+    FTPRI_DYNAMICS,
+    FTPRI_17,
+    FTPRI_CAM,
+    FTPRI_19,
+    FTPRI_20,
+    FTPRI_21,
+    FTPRI_STATS,
+};
+
 // action state flags
 #define ASC_PRESERVE_FASTFALL 0x1
 #define ASC_PRESERVE_GFX 0x2
