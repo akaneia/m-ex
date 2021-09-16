@@ -672,7 +672,7 @@ struct Playerblock
 struct PlayerData
 {
     // byte 0x0
-    u8 ft_kind; // 0x0
+    u8 c_kind; // 0x0
     u8 p_kind;
     u8 stocks;
     u8 costume;
