@@ -18,6 +18,26 @@
 #define MENU_BUTTON_X 0x400
 #define MENU_BUTTON_Y 0x800
 
+enum CSSKind
+{
+    SLCHRKIND_VS,            // regular vs
+    SLCHRKIND_SNAPSHOT,      // camera mode
+    SLCHRKIND_STAMINA,       //
+    SLCHRKIND_SUDDEN,        //
+    SLCHRKIND_GIANT,         //
+    SLCHRKIND_TINY,          //
+    SLCHRKIND_INVISIBLE,     //
+    SLCHRKIND_FIXEDCAM,      //
+    SLCHRKIND_SNGLBTN,       //
+    SLCHRKIND_FAST,          //
+    SLCHRKIND_SLOW,          //
+    SLCHRKIND_CLASSIC,       //
+    SLCHRKIND_ADV,           //
+    SLCHRKIND_ALLSTAR,       //
+    SLCHRKIND_EVENT,         //
+    SLCHRKIND_TRAINING = 23, //
+};
+
 /*** Structs ***/
 struct CSSBackup
 {
@@ -70,6 +90,13 @@ struct CSSCursor
     Vec2 pos;           // 0xc-0x10
 };
 
+enum CSSPuckState
+{
+    SLCHRPUCK_0,
+    SLCHRPUCK_1,
+    SLCHRPUCK_2,
+    SLCHRPUCK_3,
+};
 struct CSSPuck
 {
     GOBJ *gobj;       // 0x0,
@@ -96,13 +123,6 @@ struct MnSlChrIcon
     float bound_d;  // 0x18
 };
 
-enum DoorState
-{
-    DOOR_HMN,
-    DOOR_CPU,
-    DOOR_UNK,
-    DOOR_CLOSED,
-};
 struct MnSlChrDoor
 {
     u8 x0;
@@ -116,7 +136,7 @@ struct MnSlChrDoor
     u8 slider2_joint;   //0x8
     u8 x9;
     u8 dooranim_timer; // 0xa
-    u8 state;          // 0x0 = HMN, 0x1 = CPU, 0x3 = Closed
+    u8 p_kind;         // 0xb, PlayerKind, 0x0 = HMN, 0x1 = CPU, 0x3 = Closed
     u8 xc;
     u8 costume;  // 0xd
     u8 sel_icon; // 0xe, icon this player has selected
@@ -125,10 +145,10 @@ struct MnSlChrDoor
     u8 slideranim_timer;
     u8 x12;
     u8 x13;
-    float button_l; // HMN button bound
-    float button_t; // HMN button bound
-    float button_u; // HMN button bound
-    float button_d; // HMN button bound
+    float button_left;  // 0x14, HMN button bound
+    float button_right; // 0x18, HMN button bound
+    float button_top;   // 0x1C, HMN button bound
+    float button_bot;   // 0x20, HMN button bound
 };
 
 struct MnSlChrTagData

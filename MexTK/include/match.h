@@ -148,7 +148,8 @@ struct MatchInit
     int x60;
     //0x64
     int x64;
-*/
+    */
+
     // player data
     PlayerData playerData[6];
 };

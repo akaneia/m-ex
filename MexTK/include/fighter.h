@@ -10,7 +10,7 @@
 #include "match.h"
 #include "collision.h"
 
-enum FtKind
+typedef enum FighterKind
 {
     FTKIND_MARIO,
     FTKIND_FOX,
@@ -45,8 +45,8 @@ enum FtKind
     FTKIND_GIRL,
     FTKIND_GIGABOWSER,
     FTKIND_SANDBAG,
-};
-enum CKind
+} FighterKind;
+typedef enum CharacterKind
 {
     CKIND_FALCON,
     CKIND_DK,
@@ -81,7 +81,14 @@ enum CKind
     CKIND_CRAZYHAND,
     CKIND_SANDBAG,
     CKIND_POPO,
-};
+} CharacterKind;
+typedef enum PlayerKind
+{
+    PKIND_HMN,
+    PKIND_CPU,
+    PKIND_DEMO,
+    PKIND_NONE,
+} PlayerKind;
 enum CPUType
 {
     CPTP_STAY,
@@ -102,13 +109,6 @@ enum CPUType
     CPTP_NOACT,
     CPTP_AIR,
     CPTP_ITEM,
-};
-enum PlayerKind
-{
-    PKIND_HMN,
-    PKIND_CPU,
-    PKIND_DEMO,
-    PKIND_NONE,
 };
 
 // fighter callback priorities
@@ -672,8 +672,8 @@ struct Playerblock
 struct PlayerData
 {
     // byte 0x0
-    u8 kind;
-    u8 status;
+    u8 ft_kind; // 0x0
+    u8 p_kind;
     u8 stocks;
     u8 costume;
     // 0x4
