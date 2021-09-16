@@ -60,14 +60,14 @@ enum CSSCursorState
 };
 struct CSSCursor
 {
-    GOBJ *gobj;
-    u8 port;
-    u8 state; // 0x5, 0x0 = Pointing / 0x1 = Holding Puck / 0x2 = Open Hand / 0x3 = Hidden/Unplugged
-    u8 puck;  // 0x6, puck index being held
-    u8 x7;    // 0x7,
-    u16 x8;
-    u16 exit_timer; // 0xa, frames held B
-    Vec2 pos;       // 0xc-0x10
+    GOBJ *gobj;         // 0x0
+    u8 port;            // 0x4
+    u8 state;           // 0x5, 0x0 = Pointing / 0x1 = Holding Puck / 0x2 = Open Hand / 0x3 = Hidden/Unplugged
+    u8 puck;            // 0x6, puck index being held
+    u8 x7;              // 0x7,
+    u16 is_over_option; // 0x8, is hovered over an option on the top of the CSS (rules, teams, back)
+    u16 exit_timer;     // 0xa, frames held B
+    Vec2 pos;           // 0xc-0x10
 };
 
 struct CSSPuck
