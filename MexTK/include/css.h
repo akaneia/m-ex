@@ -90,6 +90,21 @@ struct CSSCursor
     Vec2 pos;           // 0xc-0x10
 };
 
+enum CSSObjectKind
+{
+    SLCHROBJKIND_P1PUCK,
+    SLCHROBJKIND_P2PUCK,
+    SLCHROBJKIND_P3PUCK,
+    SLCHROBJKIND_P4PUCK,
+    SLCHROBJKIND_P1CPU,
+    SLCHROBJKIND_P2CPU,
+    SLCHROBJKIND_P3CPU,
+    SLCHROBJKIND_P4CPU,
+    SLCHROBJKIND_P1HANDICAP,
+    SLCHROBJKIND_P2HANDICAP,
+    SLCHROBJKIND_P3HANDICAP,
+    SLCHROBJKIND_P4HANDICAP,
+};
 enum CSSPuckState
 {
     SLCHRPUCK_0,
@@ -130,25 +145,25 @@ struct MnSlChrDoor
     u8 x2;
     u8 joint_id; // 0x3
     u8 x4;
-    u8 x5; // nametag window joint id
-    u8 x6;
-    u8 cpuslider_joint; // 0x7
-    u8 slider2_joint;   //0x8
+    u8 tag_window_joint; // nametag window joint id
+    u8 tag_box_joint;    // 0x6, nametag box joint id (to select)
+    u8 cpuslider_joint;  // 0x7, used when only CPU is showing
+    u8 cpuslider2_joint; // 0x8, used when handicap is also showing
     u8 x9;
-    u8 dooranim_timer; // 0xa
-    u8 p_kind;         // 0xb, PlayerKind, 0x0 = HMN, 0x1 = CPU, 0x3 = Closed
+    u8 team;   // 0xa
+    u8 p_kind; // 0xb, PlayerKind, 0x0 = HMN, 0x1 = CPU, 0x3 = Closed
     u8 xc;
     u8 costume;  // 0xd
     u8 sel_icon; // 0xe, icon this player has selected
     u8 xf;
     u8 x10;
     u8 slideranim_timer;
-    u8 x12;
-    u8 x13;
-    float button_left;  // 0x14, HMN button bound
-    float button_right; // 0x18, HMN button bound
-    float button_top;   // 0x1C, HMN button bound
-    float button_bot;   // 0x20, HMN button bound
+    u8 is_hold_cpu_slider;      // 0x12
+    u8 is_hold_handicap_slider; // 0x13
+    float togglebtn_left;       // 0x14, HMN button bound
+    float togglebtn_right;      // 0x18, HMN button bound
+    float teambtn_left;         // 0x1C, team button bound
+    float teambtn_right;        // 0x20, team button bound
 };
 
 struct MnSlChrTagData
@@ -202,8 +217,8 @@ struct MnSlChrData
     u8 x476;                   // 0x476
     u8 x477;                   // 0x477
     u8 x478;                   // 0x478
-    u8 x479;                   // 0x479
-    u8 x47a;                   // 0x47a
+    u8 tag_window_joint;       // 0x479, for singleplayer
+    u8 tag_box_joint;          // 0x47a, for singleplayer
     u8 x47b;                   // 0x47b
     u8 x47c;                   // 0x47c
     u8 x47d;                   // 0x47d

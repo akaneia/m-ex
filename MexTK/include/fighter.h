@@ -89,6 +89,12 @@ typedef enum PlayerKind
     PKIND_DEMO,
     PKIND_NONE,
 } PlayerKind;
+typedef enum TeamKind
+{
+    TEAMKIND_RED,
+    TEAMKIND_BLUE,
+    TEAMKIND_GREEN,
+} TeamKind;
 enum CPUType
 {
     CPTP_STAY,
