@@ -60,15 +60,18 @@ struct MnSelectChrDataTable
     void *lobj1;
     void *lobj2;
     void *fog;
-    JOBJSet bg;
-    JOBJSet cursor;
-    JOBJSet puck;
-    JOBJSet vsmenu;
-    JOBJSet start;
-    JOBJSet camdoor;
-    JOBJSet solomenu;
-    JOBJSet solooption;
-    JOBJSet cpudoor;
+    struct
+    {
+        JOBJSet bg;
+        JOBJSet cursor;
+        JOBJSet puck;
+        JOBJSet vsmenu;
+        JOBJSet start;
+        JOBJSet camdoor;
+        JOBJSet solomenu;
+        JOBJSet solooption;
+        JOBJSet cpudoor;
+    } jobjset;
 };
 
 enum CSSCursorState
@@ -145,7 +148,7 @@ struct MnSlChrDoor
     u8 x2;
     u8 joint_id; // 0x3
     u8 x4;
-    u8 tag_window_joint; // nametag window joint id
+    u8 tag_window_joint; // 0x5, nametag window joint id (to scroll and choose a name)
     u8 tag_box_joint;    // 0x6, nametag box joint id (to select)
     u8 cpuslider_joint;  // 0x7, used when only CPU is showing
     u8 cpuslider2_joint; // 0x8, used when handicap is also showing
@@ -277,6 +280,7 @@ u8 *stc_css_hasreleasedb;                 // -0x49ad
 u8 *stc_css_exitkind;                     // -0x49aa
 u8 *stc_css_49a9;                         // -0x49a9
 MnSelectChrDataTable **stc_css_datatable; // -0x49EC
+JOBJSet **stc_css_jobjsets;               // -0x49C8
 COBJDesc **stc_css_cobjdesc;              // -0x4ADC
 GOBJ **stc_css_camgobj;                   // -0x49E8
 HSD_Pad *stc_css_pad;                     // 0x804c20bc
