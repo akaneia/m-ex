@@ -61,6 +61,10 @@
 80326240:cos
 8022BA1C:MainMenu_CamRotateThink
 80229624:MainMenu_GetPadDown
+8022f218:MainMenu_CheckForLRA
+8022f0f0:MainMenu_DestroyAllGObjsClass
+8022f138:MainMenu_DestroyAllGObjsSubclass
+803a5e70:MainMenu_DestroyAllTextCanvases
 80260094:CSS_CostumeChange
 802602A0:CSS_CursorThink
 801A5680:CSS_DecideNext
