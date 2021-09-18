@@ -179,7 +179,8 @@ HSD_VI *stc_HSD_VI = 0x8046b0f0;
 
 HSD_Archive *Archive_LoadFile(char *filename);
 void Archive_LoadInitReturnSymbol(char *filename, void *ptr, ...); // input each symbol name pointer sequentially and terminate with 0;
-void *Archive_GetPublicAddress(void *archive, char *symbol);
+void *Archive_GetPublicAddress(HSD_Archive *archive, char *symbol);
+void Archive_Free(HSD_Archive *archive);
 HSD_Archive *File_GetPreloadedFile(char *filename);
 int HSD_Randi(int max);
 float HSD_Randf();

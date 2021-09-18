@@ -40,7 +40,7 @@ enum CSSKind
 
 enum CSSExitKind
 {
-    CSSEXIT_NONE,        // not exiting
+    CSSEXIT_NONE,        // can be used to identify LRStart to go back to main menu
     CSSEXIT_SSS,         //
     CSSEXIT_MAINMENU,    //
     CSSEXIT_RULES,       //
@@ -303,6 +303,7 @@ int MainMenu_CheckForLRA();
 void MainMenu_DestroyAllGObjsClass(int class);                  // destroys all gobjs of class X
 void MainMenu_DestroyAllGObjsSubclass(int class, int subclass); // destroys all gobjs of class X AND subclass Y
 void MainMenu_DestroyAllTextCanvases();                         // destroys all SIS canvases
+void CSS_FreeText();                                            //
 int CSS_GetNametagRumble(int player, u8 tag);
 void CSS_InitPlayerData(PlayerData *player);
 void CSS_MenuModelThink(GOBJ *gobj);

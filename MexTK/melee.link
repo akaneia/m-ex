@@ -65,6 +65,7 @@
 8022f0f0:MainMenu_DestroyAllGObjsClass
 8022f138:MainMenu_DestroyAllGObjsSubclass
 803a5e70:MainMenu_DestroyAllTextCanvases
+803a5fbc:CSS_FreeText
 80260094:CSS_CostumeChange
 802602A0:CSS_CursorThink
 801A5680:CSS_DecideNext
@@ -351,9 +352,10 @@
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
 80273078:Item_BounceOffShield
-80380358:Archive_GetPublicAddress
 80016BE0:Archive_LoadFile
 80016C64:Archive_LoadInitReturnSymbol
+80016efc:Archive_Free
+80380358:Archive_GetPublicAddress
 8001819c:File_GetPreloadedFile
 8037DC38:Fog_LoadDesc
 8006F238:FrameTimerCheck
@@ -533,7 +535,6 @@
 8019035c:JOBJ_LoadSet
 8016895c:JOBJ_AddSetAnim
 803D7080:KirbyStateChange
-803d709c:MEX_LoadRelArchive
 802FA5BC:KOCount_Init
 802FA2D0:KOCount_Update
 803672DC:LObj_LoadDesc
@@ -586,12 +587,14 @@
 803238C8:memcmp
 800031F4:memcpy
 80003100:memset
+803d709c:MEX_LoadRelArchive
 803D7094:MEX_GetData
 803D7088:MEX_GetFtItemID
 803D708C:MEX_GetGrItemID
 803D7084:MEX_GetKirbyCpData
 803D707C:MEX_GetPlaylist
 803D7058:MEX_IndexFighterItem
+800056a0:MEX_GetSSMID
 80363C2C:MOBJ_SetAlpha
 80363b8c:MOBJ_SetToonTextureImage
 80342734:MTXLookAt

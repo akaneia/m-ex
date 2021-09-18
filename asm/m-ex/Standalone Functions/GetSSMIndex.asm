@@ -2,6 +2,8 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
+# SLIPPI ALSO USES THIS FUNCTION AT THIS INJECTION
+
 ################################################################################
 # Address: FN_GetSSMIndex
 ################################################################################
