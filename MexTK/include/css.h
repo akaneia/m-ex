@@ -128,12 +128,12 @@ struct CSSPuck
 
 struct MnSlChrIcon
 {
-    u8 ft_hudindex; // used for getting combo count @ 8025c0c4
-    u8 ft_kind;     // icons external ID
-    u8 state;       // Dictates whether icon can be chosen. 0x0 = Not Unlocked, 0x1 = Unlocked (temp value), 0x2 = Unlocked and Displayed
-    u8 anim_timer;  // is made to be 0xC when the character is chosen.
-    u8 joint_id;    // icon background jobj ID
-    u8 joint2_id;   // used to icons JObj pointer
+    u8 ft_hudindex; // 0x0, used for getting combo count @ 8025c0c4
+    u8 c_kind;      // 0x1, icons external ID
+    u8 state;       // 0x2, Dictates whether icon can be chosen. 0x0 = Not Unlocked, 0x1 = Unlocked (temp value), 0x2 = Unlocked and Displayed
+    u8 anim_timer;  // 0x3, is made to be 0xC when the character is chosen.
+    u8 joint_id_vs; // 0x4, vs icon background jobj ID
+    u8 joint_id_1p; // 0x5, 1p icon background jobj ID
     int sfx;        // 0x8,
     float bound_l;  // 0xC
     float bound_r;  // 0x10
