@@ -574,7 +574,7 @@ void *LObj_LoadDesc(void *lobjdesc);
 void *LObj_LoadAll(void **lobjdesc);
 HSD_Fog *Fog_LoadDesc(void *fogdesc);
 DOBJ *JOBJ_GetDObj(JOBJ *jobj);
-void *MOBJ_SetAlpha(DOBJ *dobj);
+void *MOBJ_SetAlpha(DOBJ *dobj, float alpha);
 void MOBJ_SetToonTextureImage(_HSD_ImageDesc *);
 void GObj_CopyGXPri(GOBJ *target, GOBJ *source);
 #endif

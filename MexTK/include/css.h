@@ -153,24 +153,24 @@ struct MnSlChrIcon
 
 struct MnSlChrDoor
 {
-    u8 x0;
-    u8 csp_joint;
-    u8 x2;
-    u8 joint_id; // 0x3
-    u8 x4;
-    u8 tag_window_joint;    // 0x5, nametag window joint id (to scroll and choose a name)
-    u8 tag_box_joint;       // 0x6, nametag box joint id (to select)
-    u8 cpuslider_joint;     // 0x7, used when only CPU is showing
-    u8 cpuslider2_joint;    // 0x8, used when handicap is also showing
-    u8 selected_since_load; // 0x9, used to determine when the player made a selection since the CSS loaded
-    u8 team;                // 0xa
-    u8 p_kind;              // 0xb, PlayerKind, 0x0 = HMN, 0x1 = CPU, 0x3 = Closed
-    u8 xc;
-    u8 costume;  // 0xd
-    u8 sel_icon; // 0xe, icon this player has selected
-    u8 xf;
-    u8 x10;
-    u8 slideranim_timer;
+    u8 x0;                      // 0x0
+    u8 csp_joint;               // 0x1
+    u8 x2;                      // 0x2
+    u8 joint_id;                // 0x3
+    u8 x4;                      // 0x4
+    u8 tag_window_joint;        // 0x5, nametag window joint id (to scroll and choose a name)
+    u8 tag_box_joint;           // 0x6, nametag box joint id (to select)
+    u8 cpuslider_joint;         // 0x7, used when only CPU is showing
+    u8 cpuslider2_joint;        // 0x8, used when handicap is also showing
+    u8 selected_since_load;     // 0x9, used to determine when the player made a selection since the CSS loaded
+    u8 team;                    // 0xa
+    u8 p_kind;                  // 0xb, PlayerKind, 0x0 = HMN, 0x1 = CPU, 0x3 = Closed
+    u8 xc;                      // 0xc
+    u8 costume;                 // 0xd
+    u8 sel_icon;                // 0xe, icon this player has selected
+    u8 xf;                      // 0xf
+    u8 dooranim_timer;          // 0x10
+    u8 slideranim_timer;        // 0x11
     u8 is_hold_cpu_slider;      // 0x12
     u8 is_hold_handicap_slider; // 0x13
     float togglebtn_left;       // 0x14, HMN button bound
@@ -273,6 +273,7 @@ HSD_Archive **stc_css_menuarchive; // -0x49CC, ptr to MnMaExt archive
 u8 *stc_css_custom_rules;          // -0x49AC
 GOBJ **stc_css_menugobj;           // -0x49E4
 JOBJ **stc_css_menumodel;          // -0x49E0
+JOBJ **stc_css_trainingmodel;      // -0x49DC
 CSSCursor **stc_css_cursors;       // 0x804a0bc0
 CSSPuck **stc_css_pucks;           // 0x804a0bd0
 
