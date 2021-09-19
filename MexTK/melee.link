@@ -623,6 +623,7 @@
 8018f640:Pad_GetDown
 8018F674:Pad_GetRapidHeld
 8018f6a8:Pad_GetHeld
+80014574:Pad_Rumble
 8039D5DC:Particle_DestroyAll
 801A45E8:Pause_CheckStatus
 8007D4B8:Fighter_Phys_ApplyVerticalAirFriction
@@ -761,6 +762,7 @@
 804D6CBC:stc_css_menugobj
 804D6CC0:stc_css_menumodel
 804D6CC4:stc_css_trainingmodel
+804D6CCC:stc_css_cameramodel
 804A0BC0:stc_css_cursors
 804A0BD0:stc_css_pucks
 804D6CF0:stc_css_hmnport
@@ -775,7 +777,7 @@
 804D6CEC:stc_css_bgtimer
 804D6CF3:stc_css_hasreleasedb
 804D6CF6:stc_css_exitkind
-804D6CF7:stc_css_49a9
+804D6CF7:stc_css_is_ready_timer
 804D6CB4:stc_css_datatable
 804D6CD8:stc_css_jobjsets
 804D6BC4:stc_css_cobjdesc

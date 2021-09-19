@@ -274,6 +274,7 @@ u8 *stc_css_custom_rules;          // -0x49AC
 GOBJ **stc_css_menugobj;           // -0x49E4
 JOBJ **stc_css_menumodel;          // -0x49E0
 JOBJ **stc_css_trainingmodel;      // -0x49DC
+JOBJ **stc_css_cameramodel;        // -0x49D4
 CSSCursor **stc_css_cursors;       // 0x804a0bc0
 CSSPuck **stc_css_pucks;           // 0x804a0bd0
 
@@ -282,7 +283,7 @@ u8 *stc_css_cpuport;                      // -0x49AF
 u8 *stc_css_delay;                        // -0x49AE
 u8 *stc_css_exitkind;                     // -0x49AA
 u8 *stc_css_maxply;                       // -0x49AB
-u8 *stc_css_49a9;                         // -0x49A9
+u8 *stc_css_is_ready_timer;               // -0x49A9
 u8 *stc_css_singeplyport;                 // -0x4DE0
 Text **stc_css_ply1_combo_text;           // -0x49C0
 Text **stc_css_ply2_combo_text;           // -0x49C4

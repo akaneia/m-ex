@@ -204,4 +204,5 @@ void GXInvalidateTexAll();
 u64 Pad_GetDown(int pad);
 u64 Pad_GetRapidHeld(int pad);
 u64 Pad_GetHeld(int pad);
+void Pad_Rumble(int pad, int unk, int strength, int duration); // make unk = 0
 #endif
