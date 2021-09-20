@@ -130,7 +130,7 @@ struct CSSPuck
     GOBJ *gobj;       // 0x0,
     u8 port;          // 0x4, port this puck belongs to
     u8 state;         // 0x5, 0x0 = Pointing / 0x1 = Holding Puck / 0x2 = Open Hand / 0x3 = Hidden/Unplugged
-    u8 held;          // 0x6, port that this puck is being held by
+    u8 kind;          // 0x6, port that this puck is being held by
     u8 anim_timer;    // 0x7, Animation Timer. resets animation when this hits 39, checked for @ 80262790
     Vec2 pos_proj;    // 0x8, where the puck should be
     Vec2 pos_correct; // 0x10, where the puck is corrected to
