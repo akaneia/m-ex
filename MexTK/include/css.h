@@ -159,7 +159,7 @@ struct MnSlChrDoor
     u8 joint_id;                // 0x3
     u8 x4;                      // 0x4
     u8 tag_window_joint;        // 0x5, nametag window joint id (to scroll and choose a name)
-    u8 tag_box_joint;           // 0x6, nametag box joint id (to select)
+    u8 slidername_joint;        // 0x6, slider name joint
     u8 cpuslider_joint;         // 0x7, used when only CPU is showing
     u8 cpuslider2_joint;        // 0x8, used when handicap is also showing
     u8 selected_since_load;     // 0x9, used to determine when the player made a selection since the CSS loaded
