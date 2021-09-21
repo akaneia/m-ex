@@ -354,6 +354,7 @@
 80273078:Item_BounceOffShield
 80016BE0:Archive_LoadFile
 80016C64:Archive_LoadInitReturnSymbol
+80016af0:Archive_InitReturnSymbols
 80016efc:Archive_Free
 80380358:Archive_GetPublicAddress
 8001819c:File_GetPreloadedFile

@@ -187,7 +187,8 @@ HSD_VI *stc_HSD_VI = 0x8046b0f0;
 /*** Functions ***/
 
 HSD_Archive *Archive_LoadFile(char *filename);
-void Archive_LoadInitReturnSymbol(char *filename, void *ptr, ...); // input each symbol name pointer sequentially and terminate with 0;
+void Archive_LoadInitReturnSymbol(char *filename, void *ptr, ...);                              // input each symbol name pointer sequentially and terminate with 0;
+void Archive_InitReturnSymbols(HSD_Archive *archive, void *symbol_out, char *symbol_name, ...); // input each symbol name sequentially and terminate with 0;
 void *Archive_GetPublicAddress(HSD_Archive *archive, char *symbol);
 void Archive_Free(HSD_Archive *archive);
 HSD_Archive *File_GetPreloadedFile(char *filename);
