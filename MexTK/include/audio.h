@@ -20,6 +20,7 @@ enum FGMID
     FGM_NR_TITLE,
     FGM_NR_SELECT,
     FGM_NR_1P,
+    FGM_NR_VS,
     FGM_CAPTAIN,
     FGM_CLINK,
     FGM_DK,
