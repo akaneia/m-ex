@@ -41,6 +41,15 @@
 #define HSD_BUTTON_LEFT 0x40000
 #define HSD_BUTTON_RIGHT 0x80000
 
+enum DebugLevel
+{
+    DB_MASTER,        // off
+    DB_NO_DEBUG_ROM,  //
+    DB_DEBUG_DEVELOP, //
+    DB_DEBUG_ROM,     //
+    DB_DEVELOP,       //
+};
+
 /*** Structs ***/
 
 struct HSD_ObjAllocData
@@ -182,6 +191,7 @@ void Archive_LoadInitReturnSymbol(char *filename, void *ptr, ...); // input each
 void *Archive_GetPublicAddress(HSD_Archive *archive, char *symbol);
 void Archive_Free(HSD_Archive *archive);
 HSD_Archive *File_GetPreloadedFile(char *filename);
+void File_LoadSync(char *filename, void *alloc, int *out_size);
 int HSD_Randi(int max);
 float HSD_Randf();
 void *HSD_MemAlloc(int size);
@@ -205,4 +215,5 @@ u64 Pad_GetDown(int pad);
 u64 Pad_GetRapidHeld(int pad);
 u64 Pad_GetHeld(int pad);
 void Pad_Rumble(int pad, int unk, int strength, int duration); // make unk = 0
+void Pad_RumbleStopAll();
 #endif

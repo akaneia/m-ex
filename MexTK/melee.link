@@ -357,6 +357,7 @@
 80016efc:Archive_Free
 80380358:Archive_GetPublicAddress
 8001819c:File_GetPreloadedFile
+8001668c:File_LoadSync
 8037DC38:Fog_LoadDesc
 8006F238:FrameTimerCheck
 8039069C:GObj_AddGXLink
@@ -624,6 +625,7 @@
 8018F674:Pad_GetRapidHeld
 8018f6a8:Pad_GetHeld
 80014574:Pad_Rumble
+800145f4:Pad_RumbleStopAll
 8039D5DC:Particle_DestroyAll
 801A45E8:Pause_CheckStatus
 8007D4B8:Fighter_Phys_ApplyVerticalAirFriction
