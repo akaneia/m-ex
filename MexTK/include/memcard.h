@@ -2731,7 +2731,7 @@ struct Rules1
     u8 x1;
     u8 match_kind;      // 0x2
     u8 time;            // 0x3
-    u8 x4;              // 0x4
+    u8 stock_num;       // 0x4
     u8 handicap;        // 0x5
     u8 dmg_ratio;       // 0x6
     u8 stage_selection; // 0x7
