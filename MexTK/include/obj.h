@@ -566,6 +566,7 @@ void GObj_AddUserData(GOBJ *gobj, int userDataKind, void *destructor, void *user
 void GOBJ_InitCamera(GOBJ *gobj, void *cb, int gx_pri);
 void GObj_Anim(GOBJ *gobj);
 void *GObj_AddRenderObject(GOBJ *gobj, int width, int height);
+void GObj_UnkAllProc();
 void GXLink_Common(GOBJ *gobj, int pass);
 int GX_LookupRenderPass(int pass);
 void GXLink_LObj(GOBJ *gobj, int pass);

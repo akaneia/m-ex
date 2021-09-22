@@ -2729,12 +2729,12 @@ struct Rules1
 {
     u8 x0;
     u8 x1;
-    u8 x2;
-    u8 x3;
-    u8 x4;
-    u8 handicap;
-    u8 x6;
-    u8 x7;
+    u8 match_kind;      // 0x2
+    u8 time;            // 0x3
+    u8 x4;              // 0x4
+    u8 handicap;        // 0x5
+    u8 dmg_ratio;       // 0x6
+    u8 stage_selection; // 0x7
     u8 x8;
     u8 x9;
     u8 xa;
