@@ -581,6 +581,7 @@
 8001D5FC:Memcard_DeleteSnapshot
 803B31CC:Memcard_Deobfuscate
 8015CC34:Memcard_GetRules1
+8015cc58:Memcard_GetRules4
 8001E218:Memcard_InitSnapshotList
 8001C550:Memcard_InitWorkArea
 8001D164:Memcard_LoadAssets

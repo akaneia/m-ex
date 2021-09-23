@@ -12,6 +12,7 @@
 void Memcard_InitWorkArea();
 void Memcard_LoadAssets(int unk);
 Rules1 *Memcard_GetRules1();
+Rules1 *Memcard_GetRules4();
 void Memcard_InitSnapshotList(void *snap_data, void *snap_list);
 void Memcard_UpdateSnapshotList(int slot);
 void Memcard_CreateSnapshot(int slot, char *save_id, MemcardSave *memcard_save, MemcardUnk *memcard_unk, char *file_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, int unk);
@@ -2735,11 +2736,18 @@ struct Rules1
     u8 handicap;        // 0x5
     u8 dmg_ratio;       // 0x6
     u8 stage_selection; // 0x7
-    u8 x8;
-    u8 x9;
-    u8 xa;
-    u8 xb;
-    u8 xc;
+    u8 stock_time;      // 0x8
+    u8 friendly_fire;   // 0x9
+    u8 pause;           // 0xa
+    u8 score_display;   // 0xb
+    u8 self_destruct;   // 0xc
+};
+
+struct Rules4
+{
+    u64 x0;           // 0x0
+    u64 item_switch;  // 0x8
+    u64 random_stage; // 0x10
 };
 
 /*** Static Variables ***/
