@@ -20,22 +20,30 @@
 
 enum CSSKind
 {
-    SLCHRKIND_VS,            // regular vs
-    SLCHRKIND_SNAPSHOT,      // camera mode
-    SLCHRKIND_STAMINA,       //
-    SLCHRKIND_SUDDEN,        //
-    SLCHRKIND_GIANT,         //
-    SLCHRKIND_TINY,          //
-    SLCHRKIND_INVISIBLE,     //
-    SLCHRKIND_FIXEDCAM,      //
-    SLCHRKIND_SNGLBTN,       //
-    SLCHRKIND_FAST,          //
-    SLCHRKIND_SLOW,          //
-    SLCHRKIND_CLASSIC,       //
-    SLCHRKIND_ADV,           //
-    SLCHRKIND_ALLSTAR,       //
-    SLCHRKIND_EVENT,         //
-    SLCHRKIND_TRAINING = 23, //
+    SLCHRKIND_VS,              // regular vs
+    SLCHRKIND_SNAPSHOT,        // camera mode
+    SLCHRKIND_STAMINA,         //
+    SLCHRKIND_SUDDEN,          //
+    SLCHRKIND_GIANT,           //
+    SLCHRKIND_TINY,            //
+    SLCHRKIND_INVISIBLE,       //
+    SLCHRKIND_FIXEDCAM,        //
+    SLCHRKIND_SNGLBTN,         //
+    SLCHRKIND_FAST,            //
+    SLCHRKIND_SLOW,            //
+    SLCHRKIND_CLASSIC,         //
+    SLCHRKIND_ADV,             //
+    SLCHRKIND_ALLSTAR,         //
+    SLCHRKIND_EVENT,           //
+    SLCHRKIND_TARGET,          //
+    SLCHRKIND_HOMERUN,         //
+    SLCHRKIND_MULTIMAN10,      //
+    SLCHRKIND_MULTIMAN100,     //
+    SLCHRKIND_MULTIMAN3MIN,    //
+    SLCHRKIND_MULTIMAN15MIN,   //
+    SLCHRKIND_MULTIMANENDLESS, //
+    SLCHRKIND_MULTIMANCRUEL,   //
+    SLCHRKIND_TRAINING,        //
 };
 
 enum CSSExitKind
@@ -181,7 +189,7 @@ struct MnSlChrDoor
 
 struct MnSlChrTagData
 {
-    Text *name;
+    Text *name;         // 0x0
     Text *namelist;     // 0x4, used when opening the tag window
     float x8;           // 0x8
     float scroll_amt;   // xC, Text Y Offset to scroll up each frame
@@ -250,7 +258,7 @@ struct VSMinorData
     u16 x0;           // 0x0
     u8 css_kind;      // 0x2, 0 = VS
     u8 exit_kind;     // 0x3, 1 = advance, 2 = leave
-    void *ko_data;    // 0x4, used for displaying KO stars on CSS
+    u8 *ko_data;      // 0x4, used for displaying KO stars on CSS
     ScDataVS vs_data; // 0x8
 };
 struct SSSMinorData
