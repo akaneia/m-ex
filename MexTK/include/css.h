@@ -275,7 +275,7 @@ struct SSSMinorData
 MnSlChrData *stc_css_data;         // 0x803f0a48
 VSMinorData **stc_css_minorscene;  // -0x49F0
 u8 *stc_css_regtagnum;             // -0x49A8, number of registered tags
-u8 *stc_css_name_ply;              // -0x49A7, index of the player using the name entry menu
+s8 *stc_css_name_ply;              // -0x49A7, index of the player using the name entry menu
 HSD_Archive **stc_css_archive;     // -0x49D0
 HSD_Archive **stc_css_menuarchive; // -0x49CC, ptr to MnMaExt archive
 u8 *stc_css_custom_rules;          // -0x49AC
@@ -286,8 +286,8 @@ JOBJ **stc_css_cameramodel;        // -0x49D4
 CSSCursor **stc_css_cursors;       // 0x804a0bc0
 CSSPuck **stc_css_pucks;           // 0x804a0bd0
 
-u8 *stc_css_hmnport;                      // -0x49B0
-u8 *stc_css_cpuport;                      // -0x49AF
+s8 *stc_css_hmnport;                      // -0x49B0
+s8 *stc_css_cpuport;                      // -0x49AF
 u8 *stc_css_delay;                        // -0x49AE
 u8 *stc_css_exitkind;                     // -0x49AA
 u8 *stc_css_maxply;                       // -0x49AB
