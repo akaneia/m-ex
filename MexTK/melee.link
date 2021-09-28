@@ -759,8 +759,8 @@
 8027B5B0:Zako_Create
 803F0A48:stc_css_data
 804D6CB0:stc_css_minorscene
-804E0048:stc_css_regtagnum
-804E0047:stc_css_name_ply
+804D6CF8:stc_css_regtagnum
+804D6CF9:stc_css_name_ply
 804D6CD0:stc_css_archive
 804D6CD4:stc_css_menuarchive
 804D6CF4:stc_css_custom_rules
