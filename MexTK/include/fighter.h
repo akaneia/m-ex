@@ -678,10 +678,10 @@ struct Playerblock
 struct PlayerData
 {
     // byte 0x0
-    u8 c_kind; // 0x0
-    u8 p_kind;
-    u8 stocks;
-    u8 costume;
+    u8 c_kind;  // 0x0
+    u8 p_kind;  // 0x1
+    u8 stocks;  // 0x2
+    u8 costume; // 0x3
     // 0x4
     u8 portNumberOverride;
     u8 spawnPointOverride;

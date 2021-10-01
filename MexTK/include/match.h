@@ -637,7 +637,7 @@ struct Match // static match struct @ 8046b6a0
     u8 state;                 // 0x0
     u8 pauser;                // 0x1
     int x4;                   // 0x4
-    int end_kind;             // 0x8
+    u8 end_kind;              // 0x8
     int xc;                   // 0xc
     int x10;                  // 0x10
     int x14;                  // 0x14
