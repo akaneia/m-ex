@@ -266,7 +266,7 @@ void FireBallThink(GOBJ *gobj)
 		JOBJ_GetWorldPosition(fighter_data->bones[bone_index].joint, 0, &bone_position);
 
 		// create fireball item
-		int fireball_id = MEX_GetFtItemID(fighter_data->kind, MEX_ITEM_FIREBALL);
+		int fireball_id = MEX_GetFtItemID(gobj, MEX_ITEM_FIREBALL);
 		CreateFireball(fighter_data->facing_direction, gobj, &bone_position, fireball_id); //VANILLA_ITEM_FIREBALL);
 
 		// create fireball effect

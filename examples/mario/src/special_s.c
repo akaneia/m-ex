@@ -160,7 +160,7 @@ void MarioCapeThink(GOBJ *gobj)
 
 		// create the cape item
 		// cape kind was originally stored in mario's attributes
-		int mex_cape_kind = MEX_GetFtItemID(fighter_data->kind, MEX_ITEM_CAPE);
+		int mex_cape_kind = MEX_GetFtItemID(gobj, MEX_ITEM_CAPE);
 		GOBJ *cape = CreateCape(fighter_data->facing_direction, gobj, &pos, bone_index, mex_cape_kind); // mrAttr->cape_item_kind);
 
 		// store the cape pointer to a ft_var5 and the special help item location
