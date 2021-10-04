@@ -167,6 +167,7 @@ typedef struct VSMinorData VSMinorData;
 typedef struct SSSMinorData SSSMinorData;
 typedef struct CSSCursor CSSCursor;
 typedef struct CSSPuck CSSPuck;
+typedef struct MnSlChrKindData MnSlChrKindData;
 typedef struct MnSlChrData MnSlChrData;
 typedef struct MnSlChrIcon MnSlChrIcon;
 typedef struct MnSlChrDoor MnSlChrDoor;

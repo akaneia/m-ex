@@ -740,6 +740,7 @@
 803A7548:Text_SetScale
 803A6368:Text_SetSisText
 803a5da0:Text_DestroySisCanvas
+803a6048:Text_InitSisHeap
 803A70A0:Text_SetText
 80328F50:TRK_FlushCache
 8000D4A0:Vec2_Add

@@ -226,31 +226,38 @@ struct MnSlChrKOStar
     int x1c;
 };
 
+struct MnSlChrKindData
+{
+    u16 mode_ffa_frame;   // 0x0, anim frame used for the top left mode texture
+    u16 mode_teams_frame; // 0x2, anim frame used for the top left mode texture
+    int enter_sfx;        // 0x4, announcer sfx used when entering the CSS
+};
+
 struct MnSlChrData
 {
-    u8 GaWName[0x1C];          // 0x0
-    u8 x1C[0xC0];              // 0x1c
-    MnSlChrIcon icons[25 + 1]; // 0xDC
-    MnSlChrDoor doors[4];      // 0x3b4
-    MnSlChrTag tags[4];        // 0x444
-    u8 x474;                   // 0x474
-    u8 x475;                   // 0x475
-    u8 x476;                   // 0x476
-    u8 x477;                   // 0x477
-    u8 x478;                   // 0x478
-    u8 tag_window_joint;       // 0x479, for singleplayer
-    u8 tag_box_joint;          // 0x47a, for singleplayer
-    u8 x47b;                   // 0x47b
-    u8 x47c;                   // 0x47c
-    u8 x47d;                   // 0x47d
-    u8 x47e;                   // 0x47e
-    u8 x47f;                   // 0x47f
-    u8 x480;                   // 0x480
-    u8 x481;                   // 0x481
-    u8 x482;                   // 0x482
-    u8 x483;                   // 0x483
-    u8 x484[0x40];             // 0x484
-    MnSlChrKOStar ko_stars[4]; // 0x4c4
+    u8 GaWName[0x1C];              // 0x0
+    MnSlChrKindData kind_data[24]; // 0x1c
+    MnSlChrIcon icons[25 + 1];     // 0xDC
+    MnSlChrDoor doors[4];          // 0x3b4
+    MnSlChrTag tags[4];            // 0x444
+    u8 x474;                       // 0x474
+    u8 x475;                       // 0x475
+    u8 x476;                       // 0x476
+    u8 x477;                       // 0x477
+    u8 x478;                       // 0x478
+    u8 tag_window_joint;           // 0x479, for singleplayer
+    u8 tag_box_joint;              // 0x47a, for singleplayer
+    u8 x47b;                       // 0x47b
+    u8 x47c;                       // 0x47c
+    u8 x47d;                       // 0x47d
+    u8 x47e;                       // 0x47e
+    u8 x47f;                       // 0x47f
+    u8 x480;                       // 0x480
+    u8 x481;                       // 0x481
+    u8 x482;                       // 0x482
+    u8 x483;                       // 0x483
+    u8 x484[0x40];                 // 0x484
+    MnSlChrKOStar ko_stars[4];     // 0x4c4
 };
 
 struct VSMinorData

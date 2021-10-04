@@ -82,6 +82,7 @@ void Text_GX(GOBJ *gobj, int pass);
 void Text_LoadSdFile(int index, char *filename, char *symbol);
 void Text_SetSisText(Text *text, int text_index);
 void Text_DestroySisCanvas(int canvas_id);
+void Text_InitSisHeap();
 
 /*** Variables ***/
 // Text data
