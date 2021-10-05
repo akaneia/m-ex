@@ -70,6 +70,9 @@
 802602A0:CSS_CursorThink
 801A5680:CSS_DecideNext
 80169238:CSS_GetCostumeNum
+80169264:CSS_GetCostumeRed
+801692bc:CSS_GetCostumeBlue
+80169290:CSS_GetCostumeGreen
 801685D4:CSS_GetHandicapValue
 801677F8:CSS_GetNametagRumble
 80167B50:CSS_InitMajorData

@@ -8,19 +8,12 @@
 #define MEMCARD_BANNER_SIZE 0x1800
 #define MEMCARD_ICON_SIZE 0x400
 
-/*** Memcard Library ***/
-void Memcard_InitWorkArea();
-void Memcard_LoadAssets(int unk);
-Rules1 *Memcard_GetRules1();
-Rules1 *Memcard_GetRules4();
-void Memcard_InitSnapshotList(void *snap_data, void *snap_list);
-void Memcard_UpdateSnapshotList(int slot);
-void Memcard_CreateSnapshot(int slot, char *save_id, MemcardSave *memcard_save, MemcardUnk *memcard_unk, char *file_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, int unk);
-void Memcard_DeleteSnapshot(int slot, int index);
-void Memcard_LoadSnapshot(int slot, char *save_id, MemcardSave *memcard_save, char *file_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, int unk);
-int Memcard_CheckStatus(); // returns 11 when operation in effect
-void Memcard_RemovedCallback();
-void Memcard_Deobfuscate(void *data, int size);
+/*** Enums ***/
+enum LanguageKind
+{
+    LANG_JPN,
+    LANG_USA,
+};
 
 /*** Structs ***/
 struct Memcard
@@ -2745,9 +2738,12 @@ struct Rules1
 
 struct Rules4
 {
-    u64 x0;           // 0x0
-    u64 item_switch;  // 0x8
-    u64 random_stage; // 0x10
+    u64 x0;          // 0x0
+    u64 item_switch; // 0x8
+    int x10;         // 0x10
+    u8 x14;          // 0x14
+    u8 x15;          // 0x15
+    u8 language;     // 0x16
 };
 
 /*** Static Variables ***/
@@ -2759,5 +2755,19 @@ int *stc_memcard_block_curr = R13 + (-0x3d20);
 int *stc_memcard_block_last = R13 + (-0x3d1c);
 int *stc_memcard_write_status = 0x804d1138;
 int *stc_CardXferredBytes = R13 + (-0x3D14);
+
+/*** Memcard Library ***/
+void Memcard_InitWorkArea();
+void Memcard_LoadAssets(int unk);
+Rules1 *Memcard_GetRules1();
+Rules1 *Memcard_GetRules4();
+void Memcard_InitSnapshotList(void *snap_data, void *snap_list);
+void Memcard_UpdateSnapshotList(int slot);
+void Memcard_CreateSnapshot(int slot, char *save_id, MemcardSave *memcard_save, MemcardUnk *memcard_unk, char *file_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, int unk);
+void Memcard_DeleteSnapshot(int slot, int index);
+void Memcard_LoadSnapshot(int slot, char *save_id, MemcardSave *memcard_save, char *file_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, int unk);
+int Memcard_CheckStatus(); // returns 11 when operation in effect
+void Memcard_RemovedCallback();
+void Memcard_Deobfuscate(void *data, int size);
 
 #endif
