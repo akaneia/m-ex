@@ -2760,7 +2760,7 @@ int *stc_CardXferredBytes = R13 + (-0x3D14);
 void Memcard_InitWorkArea();
 void Memcard_LoadAssets(int unk);
 Rules1 *Memcard_GetRules1();
-Rules1 *Memcard_GetRules4();
+Rules4 *Memcard_GetRules4();
 void Memcard_InitSnapshotList(void *snap_data, void *snap_list);
 void Memcard_UpdateSnapshotList(int slot);
 void Memcard_CreateSnapshot(int slot, char *save_id, MemcardSave *memcard_save, MemcardUnk *memcard_unk, char *file_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, int unk);
