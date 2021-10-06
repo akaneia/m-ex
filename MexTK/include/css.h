@@ -256,7 +256,6 @@ struct MnSlChrData
     u8 x481;                       // 0x481
     u8 x482;                       // 0x482
     u8 x483;                       // 0x483
-    u8 x484[0x40];                 // 0x484
     int x484;                      // 0x484
     int x488;                      // 0x488
     float x48c;                    // 0x48c
