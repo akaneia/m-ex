@@ -161,11 +161,11 @@ struct MnSlChrIcon
 
 struct MnSlChrDoor
 {
-    u8 x0;                      // 0x0
-    u8 csp_joint;               // 0x1
-    u8 x2;                      // 0x2
-    u8 joint_id;                // 0x3
-    u8 x4;                      // 0x4
+    u8 emblem_joint;            // 0x0
+    u8 costume_joint;           // 0x1
+    u8 team_joint;              // 0x2
+    u8 door_joint;              // 0x3
+    u8 bg_joint;                // 0x4
     u8 tag_window_joint;        // 0x5, nametag window joint id (to scroll and choose a name)
     u8 slidername_joint;        // 0x6, slider name joint
     u8 cpuslider_joint;         // 0x7, used when only CPU is showing
@@ -257,6 +257,21 @@ struct MnSlChrData
     u8 x482;                       // 0x482
     u8 x483;                       // 0x483
     u8 x484[0x40];                 // 0x484
+    int x484;                      // 0x484
+    int x488;                      // 0x488
+    float x48c;                    // 0x48c
+    float x490;                    // 0x490
+    float x494;                    // 0x494
+    float x498;                    // 0x498
+    float x49c;                    // 0x49c
+    float x4a0;                    // 0x4a0
+    u8 x4a4[5];                    // 0x4a4
+    float x4ac;                    // 0x4ac
+    float x4b0;                    // 0x4b0
+    float x4b4;                    // 0x4b4
+    float x4b8;                    // 0x4b8
+    float x4bc;                    // 0x4bc
+    float x4c0;                    // 0x4c0
     MnSlChrKOStar ko_stars[4];     // 0x4c4
 };
 

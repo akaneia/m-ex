@@ -91,6 +91,7 @@
 8025D5AC:CSS_UpdateCSPTexture
 8025D1C4:CSS_UpdateKOStars
 8025BD30:CSS_UpdateRulesText
+8025c020:CSS_UpdateComboText
 8034480C:DCFlushRange
 803447dc:DCInvalidateRange
 80227FE0:DevCam_AdjustPan
