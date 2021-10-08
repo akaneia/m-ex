@@ -276,7 +276,7 @@ struct MnSlChrData
 
 struct VSMinorData
 {
-    u16 1p_port;      // 0x0, port index for single player (1 indexed)
+    u16 snglply_port; // 0x0, port index for single player (1 indexed)
     u8 css_kind;      // 0x2, 0 = VS
     u8 exit_kind;     // 0x3, 1 = advance, 2 = leave
     u8 *ko_data;      // 0x4, used for displaying KO stars on CSS
