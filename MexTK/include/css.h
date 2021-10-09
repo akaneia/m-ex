@@ -102,7 +102,7 @@ enum CSSCursorState
 struct CSSCursor
 {
     GOBJ *gobj;         // 0x0
-    u8 port;            // 0x4
+    u8 door_id;         // 0x4, actually door index
     u8 state;           // 0x5, 0x0 = Pointing / 0x1 = Holding Puck / 0x2 = Open Hand / 0x3 = Hidden/Unplugged
     u8 puck;            // 0x6, puck index being held
     u8 x7;              // 0x7,
@@ -136,7 +136,7 @@ enum CSSPuckState
 struct CSSPuck
 {
     GOBJ *gobj;       // 0x0,
-    u8 port;          // 0x4, port this puck belongs to
+    u8 door_id;       // 0x4, port this puck belongs to
     u8 state;         // 0x5,
     u8 kind;          // 0x6, port that this puck is being held by
     u8 anim_timer;    // 0x7, Animation Timer. resets animation when this hits 39, checked for @ 80262790
