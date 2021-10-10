@@ -176,7 +176,7 @@ struct MnSlChrDoor
     u8 p_kind_prev;             // 0xc
     u8 costume;                 // 0xd
     u8 sel_icon;                // 0xe, icon this player has selected
-    u8 xf;                      // 0xf
+    u8 sel_icon_prev;           // 0xf
     u8 dooranim_timer;          // 0x10
     u8 slideranim_timer;        // 0x11
     u8 is_hold_cpu_slider;      // 0x12
