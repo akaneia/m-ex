@@ -38,6 +38,7 @@
 80030A50:Match_GetCObj
 8036A590:COBJ_LoadDesc
 80013B14:COBJ_LoadDescSetScissor
+8036a55c:COBJ_Init
 803910D8:CObjThink_Common
 80368458:CObj_SetCurrent
 80374a88:CObj_SetEraseColor
@@ -47,9 +48,13 @@
 8036a194:CObj_SetOrtho
 8036a110:CObj_SetViewport
 8036a010:CObj_SetScissor
+803687f0:CObj_SetEyePosition
 8036a6c8:CObj_Release
 80391120:CObj_Destroy
 8036a288:COBJ_GetCurrent
+8036885c:COBJ_GetEyeVector
+803686ac:COBJ_GetInterest
+80368a08:COBJ_GetEyeDistance
 80048160:Coll_CheckLedge
 80041C8C:Coll_ECBCurrToPrev
 80041EE4:Coll_InitECB
@@ -606,6 +611,7 @@
 80363C2C:MOBJ_SetAlpha
 80363b8c:MOBJ_SetToonTextureImage
 80342734:MTXLookAt
+80342530:MTXRotAxisRad
 80342690:MTXQuat
 80342418:MTXRotRad
 80023F28:BGM_Play
@@ -757,6 +763,7 @@
 8000DC6C:VECMultAndAdd
 80342DB8:VECNormalize
 80342D78:VECSubtract
+80342aa8:VECMult
 8000D790:Vec2_CalculateAngle
 8000D620:Vec3_CalculateAngle
 800119DC:Wind_FighterCreate
