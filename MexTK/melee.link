@@ -758,12 +758,13 @@
 8000D3B0:Vec2_Normalize
 8000D2EC:Vec3_Normalize
 8000d530:Vec3_CrossDirection
+80342d9c:VECScale
 80342D54:VECAdd
+80342D78:VECSubtract
 80342E58:VECCrossProduct
 80342E38:VECDotProduct
 8000DC6C:VECMultAndAdd
 80342DB8:VECNormalize
-80342D78:VECSubtract
 80342aa8:VECMult
 8000D790:Vec2_CalculateAngle
 8000D620:Vec3_CalculateAngle
