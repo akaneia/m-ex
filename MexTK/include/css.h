@@ -173,7 +173,7 @@ struct MnSlChrDoor
     u8 selected_since_load;     // 0x9, used to determine when the player made a selection since the CSS loaded
     u8 team;                    // 0xa
     u8 p_kind;                  // 0xb, PlayerKind, 0x0 = HMN, 0x1 = CPU, 0x3 = Closed
-    u8 xc;                      // 0xc
+    u8 p_kind_prev;             // 0xc
     u8 costume;                 // 0xd
     u8 sel_icon;                // 0xe, icon this player has selected
     u8 xf;                      // 0xf
