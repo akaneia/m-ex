@@ -19,8 +19,10 @@ backup
 
 # check if file on disc exists
   branchl r12,0x8033796c
-  mr. REG_EntryNum,r3
-  beq NoFile
+  extsb r0,r3
+  cmpwi r0,-1
+  beq FileNoExist
+  mr REG_EntryNum,r3
 
 # get file size
   lwz  r3,0x14(REG_MajorScene)
@@ -177,6 +179,28 @@ Overload_CheckLoop:
 Overload_Exit:
   blr
 ############################################
+
+FileNoExist:
+#OSReport
+  bl  ErrorString
+  mflr  r3
+  lwz  r4,0x14(REG_MajorScene)
+  branchl r12,0x803456a8
+#Assert
+  bl  Assert_Name
+  mflr  r3
+  li  r4,0
+  load  r5,0x804d3940
+  branchl r12,0x80388220
+Assert_Name:
+blrl
+.string "m-ex"
+.align 2
+ErrorString:
+blrl
+.string "error: major scene file %s does not exist\n"
+.align 2
+###############################################
 
 SymbolName:
 blrl
