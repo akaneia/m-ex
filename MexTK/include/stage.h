@@ -430,7 +430,7 @@ struct GeneralPoints
 
 struct GeneralPointsInfo
 {
-    JOBJDesc *jobj;
+    JOBJDesc *jobj_desc;
     GeneralPoints *general_point;
     int num;
 };
