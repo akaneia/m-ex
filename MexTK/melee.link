@@ -722,6 +722,7 @@
 800581A4:Stage_SetCeilingCallback
 801C438C:Stage_SetChkDevicePos
 800580C8:Stage_SetGroundCallback
+800580e0:Stage_ClearGroundCallback
 801C97DC:Stage_SpawnEffectJointPos
 801C9808:Stage_SpawnEffectJointPos2
 801C96F8:Stage_SpawnEffectPos

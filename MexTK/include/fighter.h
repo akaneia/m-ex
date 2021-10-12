@@ -2717,6 +2717,18 @@ struct FtSymbols
     HSD_Archive *costume // 0x14
 };
 
+struct FtDatNameLookup
+{
+    char *filename;
+    char *symbol;
+};
+struct FtKindDesc
+{
+    s8 ft_main;           // main fighter ft_kind
+    s8 ft_sub;            // sub fighter ft_kind, -1 if none
+    s8 no_spawn_together; //
+};
+
 /** State Structs **/
 struct FtCliffCatch
 {

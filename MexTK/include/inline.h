@@ -16,19 +16,17 @@
 float fabs(float x)
 {
     if (x < 0)
-    {
         return -x;
-    }
-    return x;
+    else
+        return x;
 }
 
 int abs(int x)
 {
     if (x < 0)
-    {
         return -x;
-    }
-    return x;
+    else
+        return x;
 }
 
 void enterKnockback(GOBJ *fighter, int angle, float mag)

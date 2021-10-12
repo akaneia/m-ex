@@ -5,7 +5,7 @@
 backup
 
 # check if over
-  cmpwi  r3,12
+  cmpwi  r3,15
   bge Assert
 
 # get jump table
@@ -24,6 +24,8 @@ bl  GrDesc
 bl  GrExternalLookup
 bl  GrName
 bl  FtName
+bl  FtDat
+bl  FtKindDesc
 #*****************************#
 SkipJumpTable:
 #Get effect type
@@ -82,6 +84,16 @@ FtName:
   lwz r3,OFST_mexData(rtoc)
   lwz r3,Arch_Fighter(r3)
   lwz r3,Arch_Fighter_NameText(r3)
+  b Exit
+FtDat:
+  lwz r3,OFST_mexData(rtoc)
+  lwz r3,Arch_Fighter(r3)
+  lwz r3,Arch_Fighter_CharFiles(r3)
+  b Exit
+FtKindDesc:
+  lwz r3,OFST_mexData(rtoc)
+  lwz r3,Arch_Fighter(r3)
+  lwz r3,Arch_Fighter_DefineIDs(r3)
   b Exit
 
 #############################################
