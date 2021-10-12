@@ -430,7 +430,7 @@ struct GeneralPoints
 
 struct GeneralPointsInfo
 {
-    JOBJ *jobj;
+    JOBJDesc *jobj;
     GeneralPoints *general_point;
     int num;
 };
@@ -439,12 +439,26 @@ struct MapHead
 {
     GeneralPointsInfo *general_points_info;
     int general_points_num;
-    void *map_gobjs; // pointer to array of map_gobjs
-    int map_gobj_num;
+    MapGObjDesc *map_gobj_desc; // pointer to array of map_gobj_desc's
+    int map_gobj_desc_num;
     void *splines;
     int splines_num;
     void *lights;
     int lights_num;
+};
+
+struct MapGObjDesc
+{
+    JOBJSet jobjset;
+    COBJDesc *cobj;
+    void *x14;
+    void *lobj;
+    HSD_Fog *fog;
+    void *coll_links;
+    int coll_links_num;
+    void *x28;
+    void *coll_links2;
+    int coll_links2_num;
 };
 
 struct StageFile

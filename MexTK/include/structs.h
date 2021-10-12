@@ -67,6 +67,7 @@ typedef struct GrExtLookup GrExtLookup;
 typedef struct LineHazardDesc LineHazardDesc;
 typedef struct GeneralPoints GeneralPoints;
 typedef struct GeneralPointsInfo GeneralPointsInfo;
+typedef struct MapGObjDesc MapGObjDesc;
 
 // Match
 typedef struct MatchInit MatchInit;
