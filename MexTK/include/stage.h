@@ -299,11 +299,11 @@ struct Stage
     u8 x86;                                                               // 0x86
     u8 x87_80 : 1;                                                        // 0x87
     u8 is_end_temple : 1;                                                 // 0x87, 0x40
-    u8 x87_20 : 1;                                                        // 0x87
+    u8 is_end_targets : 1;                                                // 0x87, 0x20
     u8 is_end_mush : 1;                                                   // 0x87, 0x10
     u8 x87_08 : 1;                                                        // 0x87
     u8 x87_04 : 1;                                                        // 0x87
-    u8 is_end_targets : 1;                                                // 0x87, 0x02
+    u8 x87_02 : 1;                                                        // 0x87, 0x02
     u8 x87_01 : 1;                                                        // 0x87
     int kind;                                                             // 0x88
     u8 flags2x80 : 1;                                                     // 0x8c
