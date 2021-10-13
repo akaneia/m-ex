@@ -396,8 +396,9 @@ struct Stage
     int *map_plit;              // 0x6c4
     int *x6c8;                  // 0x6c8
     void *quake_model_set;      // 0x6cc
-    int *x6d0;                  // 0x6d0
-    int targets_left;           // 0x6d4
+    s16 x6d0;                   // 0x6d0
+    s16 targets_hit;            // 0x6d2
+    s16 targets_left;           // 0x6d4
     int x6d8;                   // 0x6d8
     int x6dc;                   // 0x6dc
     int x6e0;                   // 0x6e0

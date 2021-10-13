@@ -639,8 +639,8 @@ struct Match // static match struct @ 8046b6a0
     int x4;                   // 0x4
     u8 end_kind;              // 0x8
     int xc;                   // 0xc
-    int x10;                  // 0x10
-    int x14;                  // 0x14
+    int end_sfx_announcer;    // 0x10
+    int end_sfx_crowd;        // 0x14
     int x18;                  // 0x18
     int x1c;                  // 0x1c
     int x20;                  // 0x20
