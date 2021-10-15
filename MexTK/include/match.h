@@ -183,7 +183,7 @@ struct MatchHUD
     unsigned char x10_5 : 1;      // 0x08 - 0x10
     unsigned char x10_6 : 1;      // 0x04 - 0x10
     unsigned char x10_7 : 1;      // 0x02 - 0x10
-    unsigned char x10_8 : 1;      // 0x01 - 0x10
+    unsigned char is_hidden : 1;  // 0x01 - 0x10
     u8 x11;
     u8 x12;
     u8 x13;
