@@ -158,8 +158,7 @@ struct ScDataRst
     int x0;
     int x4;
     int x8;
-    int xc;
-    RstInit rst_init;
+    MatchStandings match_standings; // 0xC
 };
 
 /*** Static Variables ***/

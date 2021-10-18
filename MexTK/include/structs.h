@@ -216,7 +216,6 @@ typedef struct ScDataVS ScDataVS;
 typedef struct ScDataRst ScDataRst;
 
 // Results
-typedef struct RstPlayer RstPlayer;
 typedef struct RstInit RstInit;
 
 // Preload
