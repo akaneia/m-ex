@@ -215,9 +215,6 @@ typedef struct SceneInfo SceneInfo;
 typedef struct ScDataVS ScDataVS;
 typedef struct ScDataRst ScDataRst;
 
-// Results
-typedef struct RstInit RstInit;
-
 // Preload
 typedef struct Preload Preload;
 typedef struct PreloadChar PreloadChar;
