@@ -350,7 +350,9 @@ struct Memcard
     int unk329;            //0x524
     int unk330;            //0x528
     int unk331;            //0x52C
-    CSSBackup EventBackup; //0x530
+    u8 fighter_prev;       //0x530, not really sure, written to @ 801bbef8 and 801bb1d0
+    u8 x531;               //0x531
+    CSSBackup EventBackup; //0x532
     int unk335;            //0x53C
     int unk336;            //0x540
     int unk337;            //0x544
