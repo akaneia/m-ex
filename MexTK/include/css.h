@@ -315,6 +315,7 @@ u8 *stc_css_exitkind;                     // -0x49AA
 u8 *stc_css_maxply;                       // -0x49AB
 u8 *stc_css_is_ready_timer;               // -0x49A9
 u8 *stc_css_singeplyport;                 // -0x4DE0
+u8 *stc_menu_singeplyport;                // -0x4DB8
 Text **stc_css_ply1_combo_text;           // -0x49C4
 Text **stc_css_ply2_combo_text;           // -0x49C0
 Text **stc_css_ply3_combo_text;           // -0x49BC
