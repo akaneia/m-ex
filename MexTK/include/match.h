@@ -567,15 +567,21 @@ struct PlayerStandings
 struct MatchStandings
 {
     int x24c;                         // 0x24c
-    int x250;                         // 0x250
-    int x254;                         // 0x254
-    int x258;                         // 0x258
-    int x25c;                         // 0x25c
+    u8 end_kind;                      // 0x250
+    u8 x5;                            // 0x251
+    u8 is_teams;                      // 0x252
+    int time_frames;                  // 0x254 how many frames passed in the match
+    u8 xc;                            // 0x258
+    u8 winner_num;                    // 0x259 is greater than 1 when a tie occurs
+    u8 placings[4];                   // 0x25a - 0x25d, array of player indices in order of placement
     int x260;                         // 0x260
     int x264;                         // 0x264
     int x268;                         // 0x268
     int x26c;                         // 0x26c
-    int x270;                         // 0x270
+    u8 x270;                          // 0x270
+    u8 x271;                          // 0x271
+    u8 x272;                          // 0x272
+    u8 x273;                          // 0x273
     int x274;                         // 0x274
     int x278;                         // 0x278
     int x27c;                         // 0x27c
@@ -588,69 +594,7 @@ struct MatchStandings
     int x298;                         // 0x298
     int x29c;                         // 0x29c
     int x2a0;                         // 0x2a0
-    PlayerStandings ply_standings[4]; // 0x2a4
-    int x544;                         // 0x544
-    int x548;                         // 0x548
-    int x54c;                         // 0x54c
-    int x550;                         // 0x550
-    int x554;                         // 0x554
-    int x558;                         // 0x558
-    int x55c;                         // 0x55c
-    int x560;                         // 0x560
-    int x564;                         // 0x564
-    int x568;                         // 0x568
-    int x56c;                         // 0x56c
-    int x570;                         // 0x570
-    int x574;                         // 0x574
-    int x578;                         // 0x578
-    int x57c;                         // 0x57c
-    int x580;                         // 0x580
-    int x584;                         // 0x584
-    int x588;                         // 0x588
-    int x58c;                         // 0x58c
-    int x590;                         // 0x590
-    int x594;                         // 0x594
-    int x598;                         // 0x598
-    int x59c;                         // 0x59c
-    int x5a0;                         // 0x5a0
-    int x5a4;                         // 0x5a4
-    int x5a8;                         // 0x5a8
-    int x5ac;                         // 0x5ac
-    int x5b0;                         // 0x5b0
-    int x5b4;                         // 0x5b4
-    int x5b8;                         // 0x5b8
-    int x5bc;                         // 0x5bc
-    int x5c0;                         // 0x5c0
-    int x5c4;                         // 0x5c4
-    int x5c8;                         // 0x5c8
-    int x5cc;                         // 0x5cc
-    int x5d0;                         // 0x5d0
-    int x5d4;                         // 0x5d4
-    int x5d8;                         // 0x5d8
-    int x5dc;                         // 0x5dc
-    int x5e0;                         // 0x5e0
-    int x5e4;                         // 0x5e4
-    int x5e8;                         // 0x5e8
-    int x5ec;                         // 0x5ec
-    int x5f0;                         // 0x5f0
-    int x5f4;                         // 0x5f4
-    int x5f8;                         // 0x5f8
-    int x5fc;                         // 0x5fc
-    int x600;                         // 0x600
-    int x604;                         // 0x604
-    int x608;                         // 0x608
-    int x60c;                         // 0x60c
-    int x610;                         // 0x610
-    int x614;                         // 0x614
-    int x618;                         // 0x618
-    int x61c;                         // 0x61c
-    int x620;                         // 0x620
-    int x624;                         // 0x624
-    int x628;                         // 0x628
-    int x62c;                         // 0x62c
-    int x630;                         // 0x630
-    int x634;                         // 0x634
-    int x638;                         // 0x638
+    PlayerStandings ply_standings[6]; // 0x2a4
 };
 
 struct Match // static match struct @ 8046b6a0
