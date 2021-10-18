@@ -782,6 +782,7 @@
 804D6CBC:stc_css_menugobj
 804D6CC0:stc_css_menumodel
 804D6CC4:stc_css_trainingmodel
+804D6CC8:stc_css_highscoremodel
 804D6CCC:stc_css_cameramodel
 804A0BC0:stc_css_cursors
 804A0BD0:stc_css_pucks

@@ -303,6 +303,7 @@ u8 *stc_css_custom_rules;          // -0x49AC
 GOBJ **stc_css_menugobj;           // -0x49E4
 JOBJ **stc_css_menumodel;          // -0x49E0
 JOBJ **stc_css_trainingmodel;      // -0x49DC
+JOBJ **stc_css_highscoremodel;     // -0x49D8
 JOBJ **stc_css_cameramodel;        // -0x49D4
 CSSCursor **stc_css_cursors;       // 0x804a0bc0
 CSSPuck **stc_css_pucks;           // 0x804a0bd0
