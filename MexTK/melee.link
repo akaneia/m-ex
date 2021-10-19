@@ -118,6 +118,7 @@
 80302B10:DevelopText_StoreTextScale
 8035DDD0:DOBJ_ClearFlags
 8035DDB8:DOBJ_SetFlags
+8035dea0:DOBJ_AddAnimAll
 800115F4:Dynamics_DecayWind
 80096CC8:ECB_CheckToFallThroughPlatform
 800475F4:ECB_CollAir
