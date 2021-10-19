@@ -546,7 +546,7 @@ void AOBJ_StopAnim(AOBJ *aobj);
 void AOBJ_SetRate(AOBJ *aobj, float rate);
 void DOBJ_SetFlags(DOBJ *dobj, int flags);
 void DOBJ_ClearFlags(DOBJ *dobj, int flags);
-void DOBJ_AddAnimAll(DOBJ *dobj, void *matanim);
+void DOBJ_AddAnimAll(DOBJ *dobj, void *matanim, void *textureanim);
 COBJ *COBJ_LoadDesc(COBJDesc *cobj);
 COBJ *COBJ_LoadDescSetScissor(COBJDesc *cobj);
 void COBJ_Init(COBJ *cobj, COBJDesc *cobj_desc); // re-initializes a live cobj using its descriptor
