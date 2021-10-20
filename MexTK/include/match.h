@@ -109,7 +109,7 @@ struct MatchInit
     //byte 0xA
     u8 unk14; // 0xFF
     //byte 0xB
-    u8 itemFreq; // 0xFF
+    s8 itemFreq; // 0xFF
     //byte 0xC
     u8 unk15; // 0xFF
     //byte 0xD
