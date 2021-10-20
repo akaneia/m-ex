@@ -20,7 +20,7 @@ typedef s64 OSTime;
 #define BitCheck(num, bit) !!((num) & (1 << (bit))) // returns 0 or 1
 #define BitCheck(num, bit) !!((num) & (1 << (bit))) // returns 0 or 1
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
-#define assert(msg, ...) __assert(__FILENAME__, __LINE__, msg)
+#define assert(msg) __assert(__FILENAME__, __LINE__, msg)
 #define divide_roundup(dividend, divisor) ((dividend + (divisor / 2)) / divisor)
 #define MTXDegToRad(a) ((a)*0.01745329252f)
 #define MTXRadToDeg(a) ((a)*57.29577951f)
