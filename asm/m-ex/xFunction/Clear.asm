@@ -1,4 +1,4 @@
-#To be inserted @ 801a4c98
+#To be inserted @ 801a4000
 .include "../../Globals.s"
 .include "../Header.s"
 
@@ -51,4 +51,4 @@ Reloc_Index_LoopCheck:
   branchl r12,memset
 
 Exit:
-  lwz	r3, -0x4F74 (r13)
+  lwz	r0, 0x001C (sp)
