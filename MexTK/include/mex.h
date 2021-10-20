@@ -18,12 +18,13 @@ enum MEX_GETDATA
     MXDT_GRICONNUM,
     MXDT_GRICONDATA,
     MXDT_FTCOSTUMEARCHIVE,
-    MXDT_GRDESC,      // gets GrDesc struct
-    MXDT_GREXTLOOKUP, // gets first stage external ID from internal ID
-    MXDT_GRNAME,      // returns stage name char*
-    MXDT_FTNAME,      // returns fighter name char*, indexed by external ID
-    MXDT_FTDAT,       // returns pointer to fighter file struct, indexed by internal ID
-    MXDT_FTKINDDESC,  // returns pointer to ftkind desc array, indexed by external ID
+    MXDT_GRDESC,         // gets GrDesc struct
+    MXDT_GREXTLOOKUP,    // gets first stage external ID from internal ID
+    MXDT_GRNAME,         // returns stage name char*
+    MXDT_FTNAME,         // returns fighter name char*, indexed by external ID
+    MXDT_FTDAT,          // returns pointer to fighter file struct, indexed by internal ID
+    MXDT_FTKINDDESC,     // returns pointer to ftkind desc array, indexed by external ID
+    MXDT_FTEMBLEMLOOKUP, // returns pointer to ftkind desc array, indexed by external ID
 };
 
 typedef enum SSMKind
