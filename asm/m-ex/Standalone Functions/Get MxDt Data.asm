@@ -5,7 +5,7 @@
 backup
 
 # check if over
-  cmpwi  r3,15
+  cmpwi  r3,16
   bge Assert
 
 # get jump table
