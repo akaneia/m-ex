@@ -164,7 +164,7 @@ struct MnSlChrDoor
     u8 team_joint;              // 0x2
     u8 door_joint;              // 0x3
     u8 bg_joint;                // 0x4
-    u8 tag_window_joint;        // 0x5, nametag window joint id (to scroll and choose a name)
+    u8 player_indicator_joint;  // 0x5, nametag window joint id (to scroll and choose a name)
     u8 slidername_joint;        // 0x6, slider name joint
     u8 cpuslider_joint;         // 0x7, used when only CPU is showing
     u8 cpuslider2_joint;        // 0x8, used when handicap is also showing
@@ -214,9 +214,9 @@ struct MnSlChrTag
 
 struct MnSlChrKOStar
 {
-    Text *text;
-    float x4;
-    u8 joint;
+    Text *text; // 0x0
+    float x4;   // 0x4
+    u8 joint;   // 0x8
     int xc;
     int x10;
     int x14;
