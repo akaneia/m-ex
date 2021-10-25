@@ -243,7 +243,7 @@ struct MnSlChrData
     u8 x476;                       // 0x476
     u8 x477;                       // 0x477
     u8 x478;                       // 0x478
-    u8 player_indicator_joint;     // 0x479, for singleplayer
+    u8 name_list_joint;            // 0x479, for singleplayer
     u8 tag_box_joint;              // 0x47a, for singleplayer
     u8 x47b;                       // 0x47b
     u8 x47c;                       // 0x47c
