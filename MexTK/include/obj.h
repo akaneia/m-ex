@@ -566,7 +566,7 @@ COBJ *COBJ_GetCurrent();
 void COBJ_GetEyeVector(COBJ *cobj, Vec3 *eye_vec);
 void COBJ_GetInterest(COBJ *cobj, Vec3 *interest);
 float COBJ_GetEyeDistance(COBJ *cobj);
-GOBJ *GObj_Create(int type, int subclass, int flags);
+GOBJ *GObj_Create(int entity_class, int p_link, int flags);
 void GObj_Destroy(GOBJ *gobj);
 void GObj_AddGXLink(GOBJ *gobj, void *cb, int gx_link, int gx_pri);
 void GObj_DestroyGXLink(GOBJ *gobj);
@@ -580,6 +580,8 @@ void GOBJ_InitCamera(GOBJ *gobj, void *cb, int gx_pri);
 void GObj_Anim(GOBJ *gobj);
 void *GObj_AddRenderObject(GOBJ *gobj, int width, int height);
 void GObj_UnkAllProc();
+void GObj_DestroyByPLink(int p_link);                           // destroys all gobjs with p_link X
+void GObj_DestroyByPLinkRange(int p_link_low, int p_link_high); // destroys all gobjs of p_link_low -> p_link_high
 void GXLink_Common(GOBJ *gobj, int pass);
 int GX_LookupRenderPass(int pass);
 void GXLink_LObj(GOBJ *gobj, int pass);

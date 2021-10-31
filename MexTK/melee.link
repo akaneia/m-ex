@@ -67,8 +67,6 @@
 8022BA1C:MainMenu_CamRotateThink
 80229624:MainMenu_GetPadDown
 8022f218:MainMenu_CheckForLRA
-8022f0f0:MainMenu_DestroyAllGObjsClass
-8022f138:MainMenu_DestroyAllGObjsSubclass
 803a5e70:MainMenu_DestroyAllTextCanvases
 803a5fbc:CSS_FreeText
 80260094:CSS_CostumeChange
@@ -386,6 +384,8 @@
 8001cec0:GObj_Anim
 8001f624:GObj_AddRenderObject
 80390cd4:GObj_UnkAllProc
+8022f0f0:GObj_DestroyByPLink
+8022f138:GObj_DestroyByPLinkRange
 80054ED8:GrColl_CheckIfLineEnabled
 80056C54:GrColl_CrawlGround
 80044164:GrColl_SearchLedgeLeft
