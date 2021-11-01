@@ -792,7 +792,7 @@
 804D6CF2:stc_css_delay
 804D6CF5:stc_css_maxply
 804D68C0:stc_css_singeplyport
-804D68E8:stc_menu_singeplyport
+804D6598:stc_menu_singeplyport
 804D6CDC:stc_css_ply1_combo_text
 804D6CE0:stc_css_ply2_combo_text
 804D6CE4:stc_css_ply3_combo_text
