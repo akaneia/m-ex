@@ -41,7 +41,7 @@
   lbzx  r3,r3,r4
   b  CastToFloat
 
-# stock frame = reserved + costume * stride + extID
+# stock frame = reserved + costume * stride + intID
 NormalCharacter:
   lhz r3,StcIcons_ReservedFrames(REG_StcIcons)
   lhz r4,StcIcons_Stride(REG_StcIcons)
