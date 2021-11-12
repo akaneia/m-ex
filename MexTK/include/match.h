@@ -2711,6 +2711,7 @@ MatchCamera *stc_matchcam = 0x80452c68;
 MatchHUD *stc_matchhud = 0x804a10c8;
 MatchOffscreen *stc_match_offscreen = 0x804a1df0;
 ExclamData *stc_exclam_data = 0x803f9628; // 8 of these
+int *stc_match_canvas = 0x804a1f58;
 
 /*** Functions ***/
 
