@@ -511,7 +511,7 @@ int *ftchkdevice_grabnum = R13 + (-0x512C);
 int *ftchkdevice_dmgnum = R13 + (-0x5130);
 
 /*** Functions ***/
-
+int Stage_GetRandomExternalID();
 StageFile *Stage_GetStageFiles();                 // returns an array of StageFiles
 StageFile *Stage_GetStageFile(int mapgobj_index); // returns the StageFile the ID belongs to
 void Stage_AddFtChkDevice(GOBJ *map, int hazard_kind, void *check);
