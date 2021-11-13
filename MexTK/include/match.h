@@ -51,6 +51,7 @@ enum MatchEndKind
     MATCHENDKIND_1PWIN,     // winning a 1p game
     MATCHENDKIND_NOCONTEST, //
     MATCHENDKIND_RETRY,     // stadium retry
+    MATCHENDKIND_OVERRIDE,  // match end was requested by external code
 };
 
 /*** Structs ***/
@@ -601,7 +602,10 @@ struct Match // static match struct @ 8046b6a0
 {
     u8 state;                 // 0x0
     u8 pauser;                // 0x1
-    int x4;                   // 0x4
+    u8 x4;                    // 0x4
+    u8 x5;                    // 0x5
+    u8 request_match_end;     // 0x6, will override match end logic and set kind to
+    u8 x7;                    // 0x7
     u8 end_kind;              // 0x8
     int xc;                   // 0xc
     int end_sfx_announcer;    // 0x10
