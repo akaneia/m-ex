@@ -101,6 +101,19 @@
 #define AOBJ_LOOP (1 << 29)
 #define AOBJ_NO_ANIM (1 << 30)
 
+// Macro
+#define JOBJ_PauseOnFrame(jobj, flags, frame)                            \
+    {                                                                    \
+        JOBJ_ForEachAnim(jobj, 6, flags, AOBJ_ReqAnim, 1, (float)frame); \
+        JOBJ_AnimAll(jobj);                                              \
+        JOBJ_ForEachAnim(jobj, 6, flags, AOBJ_StopAnim, 6, 0, 0);        \
+    }
+#define JOBJ_PlayOnFrame(jobj, flags, frame)                             \
+    {                                                                    \
+        JOBJ_ForEachAnim(jobj, 6, flags, AOBJ_ReqAnim, 1, (float)frame); \
+        JOBJ_AnimAll(jobj);                                              \
+    }
+
 /*** Structs ***/
 
 struct HSD_Obj
