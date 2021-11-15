@@ -101,6 +101,19 @@
 #define AOBJ_LOOP (1 << 29)
 #define AOBJ_NO_ANIM (1 << 30)
 
+// LOBJ flags
+#define LOBJ_AMBIENT (0 << 0)
+#define LOBJ_INFINITE (1 << 0)
+#define LOBJ_POINT (2 << 0)
+#define LOBJ_SPOT (3 << 0)
+#define LOBJ_DIFFUSE (1 << 2)
+#define LOBJ_SPECULAR (1 << 3)
+#define LOBJ_ALPHA (1 << 4)
+#define LOBJ_HIDDEN (1 << 5)
+#define LOBJ_RAW_PARAM (1 << 6)
+#define LOBJ_DIFF_DIRTY (1 << 7)
+#define LOBJ_SPEC_DIRTY (1 << 8)
+
 // Macro
 #define JOBJ_PauseOnFrame(jobj, child_index, flags, frame)                    \
     {                                                                         \
@@ -602,7 +615,7 @@ void GObj_AddUserData(GOBJ *gobj, int userDataKind, void *destructor, void *user
 void GOBJ_InitCamera(GOBJ *gobj, void *cb, int gx_pri);
 void GObj_Anim(GOBJ *gobj);
 void *GObj_AddRenderObject(GOBJ *gobj, int width, int height);
-void GObj_UnkAllProc();
+void GObj_ProcUnk(GOBJ *gobj);
 void GObj_DestroyByPLink(int p_link);                           // destroys all gobjs with p_link X
 void GObj_DestroyByPLinkRange(int p_link_low, int p_link_high); // destroys all gobjs of p_link_low -> p_link_high
 void GXLink_Common(GOBJ *gobj, int pass);

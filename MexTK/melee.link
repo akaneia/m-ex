@@ -383,7 +383,7 @@
 8038FED4:GObj_RemoveProc
 8001cec0:GObj_Anim
 8001f624:GObj_AddRenderObject
-80390cd4:GObj_UnkAllProc
+80390cd4:GObj_ProcUnk
 8022f0f0:GObj_DestroyByPLink
 8022f138:GObj_DestroyByPLinkRange
 80054ED8:GrColl_CheckIfLineEnabled
