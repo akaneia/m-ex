@@ -136,6 +136,15 @@
         JOBJ_ForEachAnim(this_jobj, 6, flags, AOBJ_ReqAnim, 1, (float)frame); \
         JOBJ_AnimAll(this_jobj);                                              \
     }
+#define JOBJ_GetChildPosition(jobj, child_index, pos)         \
+    {                                                         \
+        JOBJ *this_jobj;                                      \
+        if (child_index != 0)                                 \
+            JOBJ_GetChild(jobj, &this_jobj, child_index, -1); \
+        else                                                  \
+            this_jobj = jobj;                                 \
+        JOBJ_GetWorldPosition(this_jobj, 0, &pos);            \
+    }
 
 /*** Structs ***/
 
