@@ -143,7 +143,7 @@
             JOBJ_GetChild(jobj, &this_jobj, child_index, -1); \
         else                                                  \
             this_jobj = jobj;                                 \
-        JOBJ_GetWorldPosition(this_jobj, 0, &pos);            \
+        JOBJ_GetWorldPosition(this_jobj, 0, pos);             \
     }
 
 /*** Structs ***/
