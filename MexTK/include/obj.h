@@ -102,16 +102,26 @@
 #define AOBJ_NO_ANIM (1 << 30)
 
 // Macro
-#define JOBJ_PauseOnFrame(jobj, flags, frame)                            \
-    {                                                                    \
-        JOBJ_ForEachAnim(jobj, 6, flags, AOBJ_ReqAnim, 1, (float)frame); \
-        JOBJ_AnimAll(jobj);                                              \
-        JOBJ_ForEachAnim(jobj, 6, flags, AOBJ_StopAnim, 6, 0, 0);        \
+#define JOBJ_PauseOnFrame(jobj, child_index, flags, frame)                    \
+    {                                                                         \
+        JOBJ *this_jobj;                                                      \
+        if (child_index != 0)                                                 \
+            JOBJ_GetChild(jobj, &this_jobj, child_index, -1);                 \
+        else                                                                  \
+            this_jobj = jobj;                                                 \
+        JOBJ_ForEachAnim(this_jobj, 6, flags, AOBJ_ReqAnim, 1, (float)frame); \
+        JOBJ_AnimAll(this_jobj);                                              \
+        JOBJ_ForEachAnim(this_jobj, 6, flags, AOBJ_StopAnim, 6, 0, 0);        \
     }
-#define JOBJ_PlayOnFrame(jobj, flags, frame)                             \
-    {                                                                    \
-        JOBJ_ForEachAnim(jobj, 6, flags, AOBJ_ReqAnim, 1, (float)frame); \
-        JOBJ_AnimAll(jobj);                                              \
+#define JOBJ_PlayOnFrame(jobj, child_index, flags, frame)                     \
+    {                                                                         \
+        JOBJ *this_jobj;                                                      \
+        if (child_index != 0)                                                 \
+            JOBJ_GetChild(jobj, &this_jobj, child_index, -1);                 \
+        else                                                                  \
+            this_jobj = jobj;                                                 \
+        JOBJ_ForEachAnim(this_jobj, 6, flags, AOBJ_ReqAnim, 1, (float)frame); \
+        JOBJ_AnimAll(this_jobj);                                              \
     }
 
 /*** Structs ***/
