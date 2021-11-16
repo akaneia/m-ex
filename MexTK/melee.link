@@ -397,8 +397,8 @@
 80054DFC:GrColl_GetLineSlope
 800567C0:GrColl_GetPosDifference
 8004F008:GrColl_RaycastGround
-8004F008:GrColl_RaycastGround2
-800524dc:GrColl_RaycastWall
+8004F008:GrColl_RaycastUnk
+800524dc:GrColl_RaycastAll
 800121FC:GX_AllocImageData
 80390EB8:GX_LookupRenderPass
 8033E78C:GXGetTexBufferSize
