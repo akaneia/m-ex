@@ -2328,7 +2328,7 @@ struct FighterData
         void (*Coll)(GOBJ *fighter);                 // 0x21a8
         void (*Cam)(GOBJ *fighter);                  // 0x21ac
         void (*Accessory1)(GOBJ *fighter);           // 0x21b0
-        void (*Accessory_Persist)(GOBJ *fighter);    // 0x21b4, persists across states while the fighter is alive, death clears this ptr, so re-init on Respawn cb
+        void (*Accessory_Persist)(GOBJ *fighter);    // 0x21b4, persists across states while the fighter is alive, death clears this ptr, so re-init on Respawn cb. phys position is copied to tonp and fighter jobj matrices are updated after this cb runs
         void (*Accessory_Freeze)(GOBJ *fighter);     // 0x21b8, only runs during hitlag
         void (*Accessory4)(GOBJ *fighter);           // 0x21bc
         void (*OnGiveDamage)(GOBJ *fighter);         // 0x21c0
