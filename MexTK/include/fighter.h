@@ -2787,6 +2787,7 @@ void Fighter_MoveToCliff(GOBJ *fighter);
 GOBJ *Fighter_GetGObj(int ply);
 GOBJ *Fighter_GetSubcharGObj(int ply, int ms);
 Playerblock *Fighter_GetPlayerblock(int ply);
+void Fighter_Playerblock_UpdateDamage(int ply, int ms, int percent);
 void Fighter_SetSlotType(int ply, int slot);
 int Fighter_GetControllerPort(int ply);
 int Fighter_GetTeam(int ply);

@@ -217,6 +217,7 @@
 8008D7F0:Fighter_GetKnockbackAngle
 80160980:Fighter_GetName
 80031724:Fighter_GetPlayerblock
+80034418:Fighter_Playerblock_UpdateDamage
 80036538:Fighter_GetShieldColorIndex
 8003241C:Fighter_GetSlotType
 80036244:Fighter_GetStaleMoveTable
