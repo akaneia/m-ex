@@ -330,6 +330,7 @@ u8 *stc_css_unkarr;                       // 0x804d50c8
 /*** Functions ***/
 void MainMenu_CamRotateThink(GOBJ *gobj);
 int MainMenu_GetPadDown(int controller_index);
+int MainMenu_GetPadRapid(int controller_index);
 int MainMenu_CheckForLRA();
 void MainMenu_DestroyAllTextCanvases(); // destroys all SIS canvases
 void CSS_FreeText();                    //

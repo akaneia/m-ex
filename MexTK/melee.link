@@ -66,6 +66,7 @@
 80326240:cos
 8022BA1C:MainMenu_CamRotateThink
 80229624:MainMenu_GetPadDown
+801a36c0:MainMenu_GetPadRapid
 8022f218:MainMenu_CheckForLRA
 803a5e70:MainMenu_DestroyAllTextCanvases
 803a5fbc:CSS_FreeText
