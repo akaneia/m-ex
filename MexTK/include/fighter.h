@@ -2817,6 +2817,7 @@ void Fighter_GiveHeal(FighterData *fighter, int heal);
 float Fighter_StaleDamage(FighterData *fighter, float dmg, int atk_kind, int atk_instance);
 void Fighter_SetHUDDamage(int player, u16 damage);
 void Fighter_RunOnHitCallbacks(GOBJ *fighter);
+void Fighter_ExitHitlag(GOBJ *fighter);
 int FrameTimerCheck(GOBJ *fighter);
 void Fighter_EnterMiscPassState(float start_frame, GOBJ *fighter, int state, int flags);
 int Fighter_CollGround_PassLedge(GOBJ *fighter);

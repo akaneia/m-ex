@@ -277,6 +277,7 @@
 80075AF0:Fighter_SetBoneRotY
 80075CB4:Fighter_SetBoneRotZ
 8007DB58:Fighter_RunOnHitCallbacks
+8006d10c:Fighter_ExitHitlag
 8007D5D4:Fighter_SetAirborne
 8007D60C:Fighter_SetAirborneNoJumps
 8007AF28:Fighter_SetAllHurtboxesNotUpdated

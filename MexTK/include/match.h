@@ -40,18 +40,33 @@ enum MatchState
     MATCHSTATE_EXIT,
 };
 
-enum MatchEndKind
+enum MatchPLinks
 {
-    MATCHENDKIND_NONE,      // hasn't ended yet?
-    MATCHENDKIND_VSTIME,    // timeout in a VS match
-    MATCHENDKIND_VSGAME,    // successful ending to a VS match
-    MATCHENDKIND_3,         //
-    MATCHENDKIND_1PLOSE,    // used for dying in 1p games
-    MATCHENDKIND_5,         //
-    MATCHENDKIND_1PWIN,     // winning a 1p game
-    MATCHENDKIND_NOCONTEST, //
-    MATCHENDKIND_RETRY,     // stadium retry
-    MATCHENDKIND_OVERRIDE,  // match end was requested by external code
+    MATCHPLINK_SYS,
+    MATCHPLINK_1,
+    MATCHPLINK_2,
+    MATCHPLINK_LIGHT,
+    MATCHPLINK_ZAKO,
+    MATCHPLINK_MAP,
+    MATCHPLINK_COLL,
+    MATCHPLINK_7,
+    MATCHPLINK_FIGHTER,
+    MATCHPLINK_ITEM,
+    MATCHPLINK_10,
+    MATCHPLINK_EFFECT1,
+    MATCHPLINK_EFFECT2,
+    MATCHPLINK_MAPMISC,
+    MATCHPLINK_MISC,
+    MATCHPLINK_HUD,
+    MATCHPLINK_16,
+    MATCHPLINK_17,
+    MATCHPLINK_MATCHCAM,
+    MATCHPLINK_MISCCAM,
+    MATCHPLINK_HUDCAM,
+    MATCHPLINK_COINCAM,
+    MATCHPLINK_SCREENFLASHCAM,
+    MATCHPLINK_CROWDSFX,
+    MATCHPLINK_DEVTEXT,
 };
 
 /*** Structs ***/
@@ -2719,7 +2734,6 @@ HSD_Archive **stc_ifall_archive = 0x804d6d5c;
 int *stc_match_canvas = 0x804a1f58;
 
 /*** Functions ***/
-
 CameraBox *CameraBox_Alloc();
 void CameraBox_Destroy(CameraBox *cam);
 void KOCount_Init(int updateCallback);
