@@ -349,54 +349,61 @@ struct SpawnItem
 
 struct itHit
 {
-    int active;                   // 0x0
-    int x4;                       // 0x4, depends on
-    int dmg;                      // 0x8, projected damage
-    float dmg_f;                  // 0xc, staled damage, actually applied
-    Vec3 offset;                  // 0x10
-    float size;                   // 0x1c
-    int angle;                    // 0x20
-    int kb_growth;                // 0x24
-    int wdsk;                     // 0x28
-    int kb;                       // 0x2c
-    int attribute;                // 0x30
-    int shield_dmg;               // 0x34
-    int hitsound_severity;        // 0x38. hurtbox interaction. 0 = none, 1 = grounded, 2 = aerial, 3 = both
-    int hitsound_kind;            // 0x3c
-    unsigned char x401 : 1;       // 0x40 0x80
-    unsigned char x402 : 1;       // 0x40 0x40
-    unsigned char hit_air : 1;    // 0x40 0x20. bool to check against aerial fighters
-    unsigned char hit_ground : 1; // 0x40 0x10. bool to check against grounded fighters
-    unsigned char x405 : 1;       // 0x40 0x08
-    unsigned char x406 : 1;       // 0x40 0x04
-    unsigned char x407 : 1;       // 0x40 0x02
-    unsigned char x408 : 1;       // 0x40 0x01
-    char x41;                     // 0x41
-    unsigned char x421 : 1;       // 0x42 0x80
-    unsigned char x422 : 1;       // 0x42 0x40
-    unsigned char hit_facing : 1; // 0x42 0x20. bool to only hit fighters facing the item
-    unsigned char x424 : 1;       // 0x42 0x10
-    unsigned char no_hurt : 1;    // 0x42 0x08      ignore hurtbox
-    unsigned char no_reflect : 1; // 0x42 0x04      ignore reflect?
-    unsigned char x427 : 1;       // 0x42 0x02
-    unsigned char x428 : 1;       // 0x42 0x01
-    unsigned char x431 : 1;       // 0x43 0x80
-    unsigned char x432 : 1;       // 0x43 0x40
-    unsigned char hit_all : 1;    // 0x43 0x20
-    unsigned char x434 : 1;       // 0x43 0x10
-    unsigned char x435 : 1;       // 0x43 0x08
-    unsigned char x436 : 1;       // 0x43 0x04
-    unsigned char x437 : 1;       // 0x43 0x02
-    unsigned char x438 : 1;       // 0x43 0x01
-    int x44;                      // 0x44
-    JOBJ *bone;                   // 0x48
-    Vec3 pos;                     // 0x4c
-    Vec3 pos_prev;                // 0x58
-    Vec3 pos_coll;                // 0x64   position of hurt collision
-    float coll_distance;          // 0x70   Distance From Collding Hurtbox (Used for phantom hit collision calculation)
-    HitVictim victims[24];        // 0x74
-    int x134;                     // 0x134
-    int x138;                     // 0x138
+    int active;                               // 0x0
+    int x4;                                   // 0x4, depends on
+    int dmg;                                  // 0x8, projected damage
+    float dmg_f;                              // 0xc, staled damage, actually applied
+    Vec3 offset;                              // 0x10
+    float size;                               // 0x1c
+    int angle;                                // 0x20
+    int kb_growth;                            // 0x24
+    int wdsk;                                 // 0x28
+    int kb;                                   // 0x2c
+    int attribute;                            // 0x30
+    int shield_dmg;                           // 0x34
+    int hitsound_severity;                    // 0x38. hurtbox interaction. 0 = none, 1 = grounded, 2 = aerial, 3 = both
+    int hitsound_kind;                        // 0x3c
+    unsigned char x401 : 1;                   // 0x40 0x80
+    unsigned char x402 : 1;                   // 0x40 0x40
+    unsigned char hit_air : 1;                // 0x40 0x20. bool to check against aerial fighters
+    unsigned char hit_ground : 1;             // 0x40 0x10. bool to check against grounded fighters
+    unsigned char x405 : 1;                   // 0x40 0x08
+    unsigned char x406 : 1;                   // 0x40 0x04
+    unsigned char x407 : 1;                   // 0x40 0x02
+    unsigned char x408 : 1;                   // 0x40 0x01
+    unsigned char x41_80 : 1;                 // 0x41 0x80
+    unsigned char x41_40 : 1;                 // 0x41 0x40
+    unsigned char x41_20 : 1;                 // 0x41 0x20
+    unsigned char x41_10 : 1;                 // 0x41 0x10
+    unsigned char timed_rehit_on_item : 1;    // 0x41 0x08
+    unsigned char timed_rehit_on_fighter : 1; // 0x41 0x04
+    unsigned char timed_rehit_on_shield : 1;  // 0x41 0x02
+    unsigned char can_reflect : 1;            // 0x41 0x01
+    unsigned char can_absorb : 1;             // 0x42 0x80
+    unsigned char x42_40 : 1;                 // 0x42 0x40
+    unsigned char hit_facing : 1;             // 0x42 0x20. bool to only hit fighters facing the item
+    unsigned char can_deflect : 1;            // 0x42 0x10
+    unsigned char no_hurt : 1;                // 0x42 0x08      ignore hurtbox
+    unsigned char unk_reflect : 1;            // 0x42 0x04      ignore reflect?
+    unsigned char ignore_ungrab_hurtbox : 1;  // 0x42 0x02
+    unsigned char x42_01 : 1;                 // 0x42 0x01
+    unsigned char hit_item : 1;               // 0x43 0x80
+    unsigned char x432 : 1;                   // 0x43 0x40
+    unsigned char hit_all : 1;                // 0x43 0x20
+    unsigned char x434 : 1;                   // 0x43 0x10
+    unsigned char x435 : 1;                   // 0x43 0x08
+    unsigned char x436 : 1;                   // 0x43 0x04
+    unsigned char x437 : 1;                   // 0x43 0x02
+    unsigned char x438 : 1;                   // 0x43 0x01
+    int x44;                                  // 0x44
+    JOBJ *bone;                               // 0x48
+    Vec3 pos;                                 // 0x4c
+    Vec3 pos_prev;                            // 0x58
+    Vec3 pos_coll;                            // 0x64   position of hurt collision
+    float coll_distance;                      // 0x70   Distance From Collding Hurtbox (Used for phantom hit collision calculation)
+    HitVictim victims[24];                    // 0x74
+    int x134;                                 // 0x134
+    int x138;                                 // 0x138
 };
 
 struct ItHurt
