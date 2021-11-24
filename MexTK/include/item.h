@@ -383,8 +383,8 @@ struct itHit
     unsigned char x42_40 : 1;                 // 0x42 0x40
     unsigned char hit_facing : 1;             // 0x42 0x20. bool to only hit fighters facing the item
     unsigned char can_deflect : 1;            // 0x42 0x10
-    unsigned char no_hurt : 1;                // 0x42 0x08      ignore hurtbox
-    unsigned char unk_reflect : 1;            // 0x42 0x04      ignore reflect?
+    unsigned char unk_reflect : 1;            // 0x42 0x08     ignore reflect?
+    unsigned char no_hurt : 1;                // 0x42 0x04     ignore hurtbox
     unsigned char ignore_ungrab_hurtbox : 1;  // 0x42 0x02
     unsigned char x42_01 : 1;                 // 0x42 0x01
     unsigned char hit_item : 1;               // 0x43 0x80
