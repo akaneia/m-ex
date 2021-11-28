@@ -1866,17 +1866,17 @@ struct FighterData
     void *anim_curr_flags_ptr;             // 0x590
     struct                                 // 0x594
     {
-        int transn_phys_update : 1;       // 0x80000000, gives fighter speed based on transN offset
-        int loop_anim : 1;                // 0x40000000, loops animation
-        int x20000000 : 1;                // 0x20000000
-        int x10000000 : 1;                // 0x10000000
-        int no_dynamics : 1;              // 0x08000000
-        int x04000000 : 1;                // 0x04000000
-        int transn_use_model_scale : 1;   // 0x02000000
-        int x01c00000 : 3;                // 0x01C00000
-        int x003ffe00 : 13;               // 0x003ffe00
-        int disable_blend_bone_index : 4; // 0x000001e0
-        int kind : 5;                     // 0x0000001f, ft kind, used in vanilla melee to determine thrown boneset or ft boneset
+        u32 transn_phys_update : 1;       // 0x80000000, gives fighter speed based on transN offset
+        u32 loop_anim : 1;                // 0x40000000, loops animation
+        u32 x20000000 : 1;                // 0x20000000
+        u32 x10000000 : 1;                // 0x10000000
+        u32 no_dynamics : 1;              // 0x08000000
+        u32 x04000000 : 1;                // 0x04000000
+        u32 transn_use_model_scale : 1;   // 0x02000000
+        u32 x01c00000 : 3;                // 0x01C00000
+        u32 x003ffe00 : 13;               // 0x003ffe00
+        u32 disable_blend_bone_index : 4; // 0x000001e0
+        u32 kind : 5;                     // 0x0000001f, ft kind, used in vanilla melee to determine thrown boneset or ft boneset
     } action_flags;
     void *anim_requested;                     // 0x598
     void *anim_cache_curr;                    // 0x59C
@@ -2254,7 +2254,8 @@ struct FighterData
     int atk_kind;                         // 0x2068, non attacks have id 1
     int x206c;                            // 0x206c
     u8 x2070;                             // 0x2070
-    u8 x2071;                             // 0x2071
+    u8 x2071_xf0 : 4;                     // 0x2071, 0xf0
+    u8 x2071_x0f : 4;                     // 0x2071, 0x0f
     u8 x2072;                             // 0x2072
     u8 x2073;                             // 0x2073
     int x2074;                            // 0x2074
