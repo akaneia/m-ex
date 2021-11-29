@@ -618,7 +618,7 @@ struct ItemData
     GOBJ *detected_fighter;                             // 0xcf8, fighter that touched the items detect box. updated @ 800798d4
     int xcfc;                                           // 0xcfc
     GOBJ *grabbed_fighter;                              // 0xd00
-    int xd04;                                           // 0xd04
+    GOBJ *attacker_item;                                // 0xd04
     int xd08;                                           // 0xd08
     GOBJ *xd0c;                                         // 0xd0c
     int xd10;                                           // 0xd10
@@ -629,7 +629,7 @@ struct ItemData
         void (*coll)(GOBJ *item);                       // 0xd1c
         void (*accessory)(GOBJ *item);                  // 0xd20
         void (*on_detect)(GOBJ *item);                  // 0xd24
-        void *xd28;                                     // 0xd28
+        void (*on_hurt)(GOBJ *item);                    // 0xd28
         void *xd2c;                                     // 0xd2c
         void *jumped_on;                                // 0xd30, runs when the item is "jumped on", 80269bac
         void (*grabFt_onIt)(GOBJ *item);                // 0xd34, when grabbing a fighter, run this function on self
