@@ -629,8 +629,8 @@ struct ItemData
         void (*coll)(GOBJ *item);                       // 0xd1c
         void (*accessory)(GOBJ *item);                  // 0xd20
         void (*on_detect)(GOBJ *item);                  // 0xd24
-        void (*on_hurt)(GOBJ *item);                    // 0xd28
-        void *xd2c;                                     // 0xd2c
+        void (*on_enter_hitlag)(GOBJ *item);            // 0xd28, runs after applying hitlag in damage apply proc 8026a62c
+        void (*on_exit_hitlag)(GOBJ *item);             // 0xd2c, runs after exiting hitlag in hitlag update proc 8026a200
         void *jumped_on;                                // 0xd30, runs when the item is "jumped on", 80269bac
         void (*grabFt_onIt)(GOBJ *item);                // 0xd34, when grabbing a fighter, run this function on self
         void (*grabFt_onFt)(GOBJ *fighter, GOBJ *item); // 0xd38, when grabbing a fighter, run this function on fighter
