@@ -2097,12 +2097,11 @@ struct FighterData
         int x18f0;                 // 0x18f0
         int x18f4;                 // 0x18f4
         u8 x18f8;                  // 0x18f8
-        u8 x18f9;                  // 0x18f8
-        u16 model_shift_frames;    // 0x18f8
+        u8 x18f9;                  // 0x18f9
+        u16 model_shift_frames;    // 0x18fa
         u8 x18fc;                  // 0x18fc
         u8 x18fd;                  // 0x18fd
-        int x1900;                 // 0x1900
-        int x1904;                 // 0x1904
+        Vec2 ground_slope;         // 0x1900
         int x1908;                 // 0x1908
         void *random_sfx_table;    // 0x190c, contains a ptr to an sfx table when requesting a random sfx
         int x1910;                 // 0x1910
