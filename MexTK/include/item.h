@@ -599,7 +599,7 @@ struct ItemData
         int source_ply;                                 // 0xcb0, damage source ply number
         int xcb4;                                       // 0xcb4
         float givedmg_direction;                        // 0xcb8, updated @ 80078184
-        int xcbc;                                       // 0xcbc
+        float hitlag_frames;                            // 0xcbc, hitlag frames remaining
         int xcc0;                                       // 0xcc0
         int xcc4;                                       // 0xcc4
         float kb;                                       // 0xcc8
