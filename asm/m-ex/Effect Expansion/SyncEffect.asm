@@ -542,6 +542,7 @@ PtclGen_UseJointPos_Exit:
   b PtclGen_Exit
 
 PtclGen_FollowJointPos:
+# This will TRY TO copy gobj's scale as well (info commented below)
 # va_list
 # -JOBJ
 #Pop jobj pointer off the va_list
@@ -557,7 +558,36 @@ PtclGen_FollowJointPos:
   mulhw  r4,r4,r5
   srawi	r4,r4,6
   branchl r12,0x8039efac
+  mr. REG_EffectObj,r3
+  beq PtclGen_Exit
+# Apply gobj's scale to generator
+# keep in mind this will only work if the particle commands dont outright
+# set its scale using Set Target Size
+  lwz   r3, 0x0028 (REG_PlayerGObj)
+  lfs	  f1, 0x002C (r3)
+  lfs	  f2, 0x0044 (REG_EffectObj)
+  fmuls f1,f1,f2
+  stfs	f1, 0x0044 (REG_EffectObj)
   b PtclGen_Exit
+/*
+#Create Effect
+  bp
+  mr  r3,REG_EffectID
+  branchl r12,0x8005cab0
+  mr. REG_EffectObj,r3
+  beq PtclGen_Exit
+#Get Effect JOBJ
+  lwz	r4, 0x0054 (REG_EffectObj)
+#Copy GOBJ Scale
+  lwz   r3, 0x0028 (REG_PlayerGObj)
+  lfs	  f1, 0x002C (r3)
+  stfs	f1, 0x0024 (r4)
+  lfs	  f1, 0x0030 (r3)
+  stfs	f1, 0x0028 (r4)
+  lfs	  f1, 0x0034 (r3)
+  stfs	f1, 0x002C (r4)
+  b PtclGen_Exit
+*/
 
 PtclGen_FollowJointPos_FtDir:
 # va_list
@@ -570,6 +600,7 @@ PtclGen_FollowJointPos_FtDir:
   b PtclGen_Exit
 
 PtclGen_FollowJointPos_CopyGObjScale:
+# This will cause all particles created by the generator to stay on the jobj
 # va_list
 # JOBJ
 # Facing Direction
