@@ -866,3 +866,7 @@ lwz r0, 0x104(r1)
 addi	r1,r1,0x100	# release the space
 mtlr r0
 .endm
+
+.macro bp
+branchl r12,0x8021b2d8
+.endm

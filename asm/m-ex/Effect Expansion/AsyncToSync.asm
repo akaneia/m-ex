@@ -231,7 +231,19 @@ PtclGen_UseJointPosRot:
 PtclGen_UseJointPosRot_Ground:
   b Exit
 PtclGen_UseJointPosFtDir:
+# Get joint position + offset from ftcmd
+  lwz	r3, 0x000C (REG_EffectObj)
+  addi r4,REG_EffectObj,16
+  addi r5,sp,0x80
+  branchl r12,0x8000b1cc
+# Spawn Effect
+  mr   r3,REG_EffectID
+  mr   r4,REG_FighterGObj
+  addi r5,sp,0x80           # position vector
+  addi r6,REG_EffectObj,28  # facing direction
+  branchl r12,0x8005fddc
   b Exit
+
 PtclGen_UseJointPos_FtDir_Ground:
   b Exit
 PtclGen_FollowJointPos:

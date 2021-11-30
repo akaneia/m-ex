@@ -227,6 +227,7 @@ EffMdl_DefinePosRot:
   b EffMdl_Exit
 
 EffMdl_UseJointPos:
+#This will copy gobj's scale as well
 #EffMdl_SpawnSync(ID,gobj,vector)
 #Pop some arg off the va_list
   addi	r3, sp, 508 + 0x100
@@ -237,7 +238,20 @@ EffMdl_UseJointPos:
   mr  r3,REG_EffectID
   mr  r4,REG_PlayerGObj
   branchl r12,0x8005c814
-  mr REG_EffectObj, r3
+  mr. REG_EffectObj, r3
+  beq EffMdl_Exit
+#Get Effect JOBJ
+  lwz r3,0x4(REG_EffectObj)
+  lwz r4,0x28(r3)
+#Copy GOBJ Scale
+  lwz   r3, 0x0028 (REG_PlayerGObj)
+  lfs	  f1, 0x002C (r3)
+  stfs	f1, 0x002C (r4)
+  lfs	  f1, 0x0030 (r3)
+  stfs	f1, 0x0030 (r4)
+  lfs	  f1, 0x0034 (r3)
+  stfs	f1, 0x0034 (r4)
+
   b EffMdl_Exit
 
 EffMdl_UseJointPos_GroundOrientation:
@@ -302,6 +316,7 @@ EffMdl_UseJointPosRot:
   b EffMdl_Exit
 
 EffMdl_UseJointPosFtDir:
+#This will copy gobj's scale as well
 #EffMdl_SpawnSync(ID,gobj,jobj)
 .set  REG_EffectJObj,28
 .set  REG_Pos,27
@@ -349,6 +364,7 @@ EffMdl_UseJointPosFtDir:
   b EffMdl_Exit
 
 EffMdl_FollowJointPos:
+#This will copy gobj's scale as well
 #Pop some arg off the va_list
   addi	r3, sp, 508 + 0x100
   li  r4,1
@@ -362,6 +378,7 @@ EffMdl_FollowJointPos:
   b EffMdl_Exit
 
 EffMdl_FollowJointPosRot:
+#This will copy gobj's scale as well
 #EffMdl_SpawnSync(ID,gobj,jobj)
 #Pop the JOBJ of the va_list
   addi	r3, sp, 508 + 0x100
@@ -526,8 +543,7 @@ PtclGen_UseJointPos_Exit:
 
 PtclGen_FollowJointPos:
 # va_list
-# JOBJ
-
+# -JOBJ
 #Pop jobj pointer off the va_list
   addi	r3, sp, 508 + 0x100
   li  r4,1
@@ -545,8 +561,8 @@ PtclGen_FollowJointPos:
 
 PtclGen_FollowJointPos_FtDir:
 # va_list
-# JOBJ
-# Facing Direction
+# -JOBJ
+# -Facing Direction
 # Create Effect
   mr  r3,REG_EffectID
   addi	r4, sp, 508 + 0x100     # va_list
@@ -567,6 +583,27 @@ PtclGen_FollowJointPos_CopyGObjScale:
 PtclGen_UseJointPosRot:
 PtclGen_UseJointPosRot_Ground:
 PtclGen_UseJointPosFtDir:
+.set  REG_EffectPos,27
+# va_list
+# -Position Vector
+# -Facing Direction
+#Pop position vec ptr off the va_list
+  addi	r3, sp, 508 + 0x100
+  li  r4,1
+  branchl r12,0x80322620
+  lwz REG_EffectPos,0x0(r3)
+#Pop facing direction off the va_list
+  addi	r3, sp, 508 + 0x100
+  li  r4,1
+  branchl r12,0x80322620
+  lwz r3,0x0(r3)
+  lfs f1,0x0(r3)
+# Create Effect
+  mr  r3,REG_EffectID
+  mr  r4,REG_EffectPos
+  branchl r12,0x8005cb34
+  b PtclGen_Exit
+
 PtclGen_UseJointPos_FtDir_Ground:
 PtclGen_Exit:
   restore
