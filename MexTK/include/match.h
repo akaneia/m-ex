@@ -767,28 +767,6 @@ struct Match // static match struct @ 8046b6a0
     int x244;                 // 0x244
     int x248;                 // 0x248
     MatchStandings standings; // 0x24c
-    int x63c;                 // 0x63c
-    int x640;                 // 0x640
-    int x644;                 // 0x644
-    int x648;                 // 0x648
-    int x64c;                 // 0x64c
-    int x650;                 // 0x650
-    int x654;                 // 0x654
-    int x658;                 // 0x658
-    int x65c;                 // 0x65c
-    int x660;                 // 0x660
-    int x664;                 // 0x664
-    int x668;                 // 0x668
-    int x66c;                 // 0x66c
-    int x670;                 // 0x670
-    int x674;                 // 0x674
-    int x678;                 // 0x678
-    int x67c;                 // 0x67c
-    int x680;                 // 0x680
-    int x684;                 // 0x684
-    int x688;                 // 0x688
-    int x68c;                 // 0x68c
-    int x690;                 // 0x690
     int x694;                 // 0x694
     int x698;                 // 0x698
     int x69c;                 // 0x69c

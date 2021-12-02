@@ -2476,7 +2476,7 @@ struct FighterData
         unsigned char x2224_5 : 1;                // 0x8 - 0x2224
         unsigned char x2224_6 : 1;                // 0x4 - 0x2224
         unsigned char x2224_7 : 1;                // 0x2 - 0x2224
-        unsigned char x2224_8 : 1;                // 0x1 - 0x2224
+        unsigned char can_walljump : 1;           // 0x1 - 0x2224
         unsigned char x2225_1 : 1;                // 0x80 - 0x2225
         unsigned char x2225_2 : 1;                // 0x40 - 0x2225
         unsigned char has_model_addition : 1;     // 0x20 - 0x2225  bool for if fighter has a model addition, like kirby copy ability and puff hat
