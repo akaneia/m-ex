@@ -237,34 +237,18 @@ struct MatchCamera
     GXColor erase_color;          // 0x8
     float zoom;                   // 0xc
     float dist_to_bg;             // 0x10
-    int x14;                      // 0x14
-    int x18;                      // 0x18
-    int x1c;                      // 0x1c
-    int x20;                      // 0x20
-    int x24;                      // 0x24
-    int x28;                      // 0x28
-    int x2c;                      // 0x2c
-    int x30;                      // 0x30
-    int x34;                      // 0x34
-    int x38;                      // 0x38
-    int x3c;                      // 0x3c
-    int x40;                      // 0x40
-    int x44;                      // 0x44
-    int x48;                      // 0x48
-    int x4c;                      // 0x4c
-    int x50;                      // 0x50
-    int x54;                      // 0x54
-    int x58;                      // 0x58
-    int x5c;                      // 0x5c
-    int x60;                      // 0x60
-    int x64;                      // 0x64
-    int x68;                      // 0x68
-    int x6c;                      // 0x6c
-    int x70;                      // 0x70
-    int x74;                      // 0x74
-    int x78;                      // 0x78
-    int x7c;                      // 0x7c
-    int x80;                      // 0x80
+    Vec3 x14;                     // 0x14
+    Vec3 x20;                     // 0x20
+    Vec3 x2c;                     // 0x2c
+    Vec3 x38;                     // 0x38
+    float x44;                    // 0x44
+    float x48;                    // 0x48
+    Vec3 x4c;                     // 0x4c
+    Vec3 x58;                     // 0x58
+    Vec3 x64;                     // 0x64
+    Vec3 x70;                     // 0x70
+    float x7c;                    // 0x7c
+    float x80;                    // 0x80
     int x84;                      // 0x84
     int x88;                      // 0x88
     int x8c;                      // 0x8c
