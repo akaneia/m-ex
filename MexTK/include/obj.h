@@ -364,15 +364,15 @@ struct DOBJ
 
 struct JOBJ
 {
-    int hsd_info;     //0x0
-    int class_parent; //0x4
-    JOBJ *sibling;    //0x08
-    JOBJ *parent;     //0x0C
-    JOBJ *child;      //0x10
-    int flags;        //0x14
-    DOBJ *dobj;       //0x18
-    Vec4 rot;         //0x1C 0x20 0x24 0x28
-    Vec3 scale;       //0x2C
+    int hsd_info;     // 0x0
+    int class_parent; // 0x4
+    JOBJ *sibling;    // 0x08
+    JOBJ *parent;     // 0x0C
+    JOBJ *child;      // 0x10
+    int flags;        // 0x14
+    DOBJ *dobj;       // 0x18
+    Vec4 rot;         // 0x1C 0x20 0x24 0x28
+    Vec3 scale;       // 0x2C
     Vec3 trans;       // 0x38
     Mtx rotMtx;       // 0x44
     Vec3 *VEC;        // 0x6C
