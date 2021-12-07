@@ -386,7 +386,9 @@ s32 CARDDeleteAsync(s32 chan, char *fileName, void *callback);
 s32 CARDCreateAsync(s32 chan, char *fileName, u32 size, CARDFileInfo *fileInfo, void *callback);
 s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat *stat, void *callback);
 s32 CARDRead(CARDFileInfo *fileInfo, void *buf, s32 length, s32 offset);
-
+s32 CARDReadAsync(CARDFileInfo *fileInfo, void *buf, s32 length, s32 offset, void *callback);
+s32 CARDWrite(CARDFileInfo *fileInfo, void *buf, s32 length, s32 offset);
+s32 CARDWriteAsync(CARDFileInfo *fileInfo, void *buf, s32 length, s32 offset, void *callback);
 void DCFlushRange(void *startAddr, u32 nBytes);
 void DCInvalidateRange(void *startAddr, u32 nBytes);
 void TRK_FlushCache(void *startAddr, u32 nBytes);
