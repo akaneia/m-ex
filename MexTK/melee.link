@@ -621,6 +621,10 @@
 80342aa8:MTXMultVec
 80023F28:BGM_Play
 8023754C:Nametag_GetText
+803440e8:OSCreateHeap
+80344154:OSDestroyHeap
+80343ef0:OSAllocFromHeap
+80343fec:OSFreeToHeap
 80344168:OSCheckHeap
 80342E94:OSGetConsoleType
 8034C408:OSGetTick
