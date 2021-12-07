@@ -187,6 +187,7 @@ typedef struct MemcardInfo MemcardInfo;
 typedef struct SnapshotInfo SnapshotInfo;
 typedef struct SnapshotList SnapshotList;
 typedef struct MemSnapIconData MemSnapIconData;
+typedef struct MemSaveIconData MemSaveIconData;
 typedef struct Rules1 Rules1;
 typedef struct Rules4 Rules4;
 

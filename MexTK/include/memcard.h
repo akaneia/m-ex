@@ -2095,6 +2095,14 @@ struct MemSnapIconData
     _HSD_ImageDesc *icon;
 };
 
+struct MemSaveIconData
+{
+    _HSD_ImageDesc *banner;
+    _HSD_ImageDesc *icon;
+    _HSD_ImageDesc *all_banner; // unlocked all
+    _HSD_ImageDesc *all_icon;   // unlocked all
+};
+
 struct MemcardSave
 {
     int size;   // size of the data, only used when writing to the card
@@ -2673,52 +2681,52 @@ struct MemcardUnk
 
 struct MemcardInfo
 {
-    void *snap_data;            // 0x0 (should be 256,064 bytes)
-    char file_name[32];         // should end with spaces
-    char file_desc[32];         // should end with spaces
-    MemSnapIconData *icon_data; // 0x44
-    SnapshotList *snap_list;    // 0x48 (should be 2112 bytes) points to an allocation where info on the snapshots present on slot A exists
-    int memcard_probe;          // 0x4c 1 == is present. is updated every controller poll
-    int x50;                    // 0x50
-    int x54;                    // 0x54
-    int x58;                    // 0x58
-    int x5c;                    // 0x5c
-    int x60;                    // 0x60
-    int x64;                    // 0x64
-    int x68;                    // 0x68
-    int x6c;                    // 0x6c
-    int x70;                    // 0x70
-    int x74;                    // 0x74
-    int x78;                    // 0x78
-    int x7c;                    // 0x7c
-    int x80;                    // 0x80
-    int x84;                    // 0x84
-    int x88;                    // 0x88
-    int x8c;                    // 0x8c
-    int x90;                    // 0x90
-    int x94;                    // 0x94
-    int x98;                    // 0x98
-    int x9c;                    // 0x9c
-    int xa0;                    // 0xa0
-    int xa4;                    // 0xa4
-    int xa8;                    // 0xa8
-    int xac;                    // 0xac
-    int xb0;                    // 0xb0
-    int xb4;                    // 0xb4
-    int xb8;                    // 0xb8
-    int xbc;                    // 0xbc
-    int xc0;                    // 0xc0
-    int xc4;                    // 0xc4
-    int xc8;                    // 0xc8
-    int xcc;                    // 0xcc
-    int xd0;                    // 0xd0
-    int xd4;                    // 0xd4
-    int xd8;                    // 0xd8
-    int xdc;                    // 0xdc
-    int xe0;                    // 0xe0
-    int xe4;                    // 0xe4
-    int xe8;                    // 0xe8
-    int xec;                    // 0xec
+    void *snap_data;                 // 0x0 (should be 256,064 bytes)
+    char file_name[32];              // should end with spaces
+    char file_desc[32];              // should end with spaces
+    MemSnapIconData *snap_icon_data; // 0x44
+    SnapshotList *snap_list;         // 0x48 (should be 2112 bytes) points to an allocation where info on the snapshots present on slot A exists
+    int memcard_probe;               // 0x4c 1 == is present. is updated every controller poll
+    int x50;                         // 0x50
+    int x54;                         // 0x54
+    int x58;                         // 0x58
+    MemSaveIconData *save_icon_data; // 0x5c
+    int x60;                         // 0x60
+    int x64;                         // 0x64
+    int x68;                         // 0x68
+    int x6c;                         // 0x6c
+    int x70;                         // 0x70
+    int x74;                         // 0x74
+    int x78;                         // 0x78
+    int x7c;                         // 0x7c
+    int x80;                         // 0x80
+    int x84;                         // 0x84
+    int x88;                         // 0x88
+    int x8c;                         // 0x8c
+    int x90;                         // 0x90
+    int x94;                         // 0x94
+    int x98;                         // 0x98
+    int x9c;                         // 0x9c
+    int xa0;                         // 0xa0
+    int xa4;                         // 0xa4
+    int xa8;                         // 0xa8
+    int xac;                         // 0xac
+    int xb0;                         // 0xb0
+    int xb4;                         // 0xb4
+    int xb8;                         // 0xb8
+    int xbc;                         // 0xbc
+    int xc0;                         // 0xc0
+    int xc4;                         // 0xc4
+    int xc8;                         // 0xc8
+    int xcc;                         // 0xcc
+    int xd0;                         // 0xd0
+    int xd4;                         // 0xd4
+    int xd8;                         // 0xd8
+    int xdc;                         // 0xdc
+    int xe0;                         // 0xe0
+    int xe4;                         // 0xe4
+    int xe8;                         // 0xe8
+    int xec;                         // 0xec
 };
 
 struct Rules1
