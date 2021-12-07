@@ -78,6 +78,8 @@ Loop:
 
         # get func name and output it
           lwz REG_SymbolName, ftX_DebugSym_FuncName (REG_Symbol)
+          cmpwi REG_SymbolName,0
+          beq DOLSymbol_NotFound
           b Output
 
         Symbol_Search_LoopInc:
