@@ -592,6 +592,7 @@
 8001B6F8:Memcard_CheckStatus
 8001BB48:Memcard_CreateSnapshot
 8001D5FC:Memcard_DeleteSnapshot
+803b2fa0:Memcard_Obfuscate
 803B31CC:Memcard_Deobfuscate
 8015CC34:Memcard_GetRules1
 8015cc58:Memcard_GetRules4

@@ -2803,6 +2803,7 @@ void Memcard_DeleteSnapshot(int slot, int index);
 void Memcard_LoadSnapshot(int slot, char *save_id, MemcardSave *memcard_save, char *file_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, int unk);
 int Memcard_CheckStatus(); // returns 11 when operation in effect
 void Memcard_RemovedCallback();
+void Memcard_Obfuscate(void *data, int size);
 void Memcard_Deobfuscate(void *data, int size);
 
 #endif
