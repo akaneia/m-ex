@@ -563,7 +563,7 @@ struct ItemData
     float ecb_left;                                     // 0xc28
     int xc2c;                                           // 0xc2c
     int xc30;                                           // 0xc30
-    struct                                              // 0xc9c
+    struct                                              // dmg, 0xc9c
     {                                                   //
         int dealt;                                      // 0xc34, rounded down
         int xc38;                                       // 0xc38
