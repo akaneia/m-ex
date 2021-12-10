@@ -2801,7 +2801,7 @@ void Memcard_UpdateSnapshotList(int slot);
 void Memcard_ReqSaveCreate(int slot, char *save_id, MemcardSave *memcard_save, MemcardUnk *memcard_unk, char *file_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, int unk);
 void Memcard_DeleteSnapshot(int slot, int index);
 void Memcard_ReqSaveLoad(int slot, char *save_id, MemcardSave *memcard_save, char *file_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, int unk);
-void Memcard_ReqSaveUpdate(int slot, char *save_id, MemcardSave *memcard_save, char *file_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, int unk);
+void Memcard_ReqSaveUpdate(int slot, char *save_id, MemcardSave *memcard_save, char *file_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, void *r9, void *cb);
 int Memcard_CheckStatus(); // returns 11 when operation in effect
 void Memcard_RemovedCallback();
 void Memcard_Obfuscate(void *data, int size);
