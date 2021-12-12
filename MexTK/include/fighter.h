@@ -2753,6 +2753,7 @@ struct FtDamage
 /** Static Variables **/
 
 ftCommonData **stc_ftcommon = (R13 + -0x514C);
+ColAnimDesc **stc_plco_colanimdesc = 0x804D653C;
 GXColor **stc_shieldcolors = (R13 + -0x5194);
 
 /*** Functions ***/

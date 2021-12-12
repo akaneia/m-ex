@@ -144,6 +144,7 @@
 8007D3A8:Fighter_AllowXDrift
 8007B760:Fighter_ApplyIntang
 800BFFD0:Fighter_ApplyColAnim
+800144c8:ColAnim_Apply
 8007500C:Fighter_BoneLookup
 8009A134:Fighter_CheckToIgnorePlatform
 80164840:Fighter_CheckUnlocked

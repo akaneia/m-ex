@@ -96,6 +96,7 @@ typedef struct ptclGen ptclGen;
 typedef struct GeneratorAppSRT GeneratorAppSRT;
 
 // Color
+typedef struct ColAnimDesc ColAnimDesc;
 typedef struct ColorOverlay ColorOverlay;
 
 // Item

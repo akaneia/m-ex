@@ -6,6 +6,11 @@
 
 /*** Structs ***/
 
+struct ColAnimDesc // in PlCo
+{
+    u8 *cmd_data;
+    u8 priority;
+};
 struct ColorOverlay
 {
     int timer;                      // 0x0
@@ -48,5 +53,7 @@ struct ColorOverlay
     unsigned char flag7 : 1;        // 0x7c
     unsigned char flag8 : 1;        // 0x7c
 };
+
+void ColAnim_Apply(ColorOverlay *col, void *colanim_data, int colanim_index, int r6);
 
 #endif
