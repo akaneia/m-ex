@@ -8,8 +8,9 @@
 
 struct ColAnimDesc // in PlCo
 {
-    u8 *cmd_data;
-    u8 priority;
+    u8 *cmd_data; // 0x0
+    u8 priority;  // 0x4
+    u8 x5;        // 0x5, forget what this does
 };
 struct ColorOverlay
 {
@@ -44,14 +45,14 @@ struct ColorOverlay
     float lightblend_alpha;         // 0x70
     float light_angle;              // 0x74
     float light_unk;                // 0x78
-    unsigned char color_enable : 1; // 0x7c
-    unsigned char flag2 : 1;        // 0x7c
-    unsigned char light_enable : 1; // 0x7c
-    unsigned char flag4 : 1;        // 0x7c
-    unsigned char flag5 : 1;        // 0x7c
-    unsigned char flag6 : 1;        // 0x7c
-    unsigned char flag7 : 1;        // 0x7c
-    unsigned char flag8 : 1;        // 0x7c
+    unsigned char color_enable : 1; // 0x7c, 0x80
+    unsigned char flag2 : 1;        // 0x7c, 0x40
+    unsigned char light_enable : 1; // 0x7c, 0x20
+    unsigned char flag4 : 1;        // 0x7c, 0x10
+    unsigned char flag5 : 1;        // 0x7c, 0x08
+    unsigned char flag6 : 1;        // 0x7c, 0x04
+    unsigned char flag7 : 1;        // 0x7c, 0x02
+    unsigned char flag8 : 1;        // 0x7c, 0x01
 };
 
 void ColAnim_Apply(ColorOverlay *col, void *colanim_data, int colanim_index, int r6);
