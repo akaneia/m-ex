@@ -40,6 +40,20 @@ enum MatchState
     MATCHSTATE_EXIT,
 };
 
+enum MatchEndKind
+{
+    MATCHENDKIND_NONE,      // hasn't ended yet?
+    MATCHENDKIND_VSTIME,    // timeout in a VS match
+    MATCHENDKIND_VSGAME,    // successful ending to a VS match
+    MATCHENDKIND_3,         //
+    MATCHENDKIND_1PLOSE,    // used for dying in 1p games
+    MATCHENDKIND_5,         //
+    MATCHENDKIND_1PWIN,     // winning a 1p game
+    MATCHENDKIND_NOCONTEST, //
+    MATCHENDKIND_RETRY,     // stadium retry
+    MATCHENDKIND_OVERRIDE,  // match end was requested by external code
+};
+
 enum MatchPLinks
 {
     MATCHPLINK_SYS,
