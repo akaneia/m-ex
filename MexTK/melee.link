@@ -517,7 +517,7 @@
 80276214:Item_UpdateECBTopN
 80276308:Item_GetWallCollFlags
 80272460:Item_UpdateHitboxDamage
-8027236c:Item_GetAttackerFighterGObj
+8027236c:Item_GiveOwnershipToAttacker
 8037210c:JOBJ_LoadDummy
 8036FB5C:JOBJ_AddAnimAll
 803717A8:JOBJ_AddChild

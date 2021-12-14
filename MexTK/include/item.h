@@ -952,5 +952,5 @@ void Item_ClearVelocity(GOBJ *item);
 void Item_UpdateECBTopN(GOBJ *item);
 int Item_GetWallCollFlags(GOBJ *item);
 void Item_UpdateHitboxDamage(itHit *hit, int dmg, GOBJ *item);
-GOBJ *Item_GetAttackerFighterGObj(GOBJ *item);
+GOBJ *Item_GiveOwnershipToAttacker(GOBJ *item);
 #endif
