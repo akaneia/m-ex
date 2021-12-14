@@ -659,19 +659,34 @@ struct ItemData
     int xd90;                                           // 0xd90
     int xd94;                                           // 0xd94
     int xd98;                                           // 0xd98
-    int xd9c;                                           // 0xd9c
+    float xd9c;                                         // 0xd9c
     int xda0;                                           // 0xda0
-    int xda4;                                           // 0xda4
+    unsigned char xda4_80 : 1;                          // 0xda4, 0x80
+    unsigned char xda4_40 : 1;                          // 0xda4, 0x40
+    unsigned char xda4_20 : 1;                          // 0xda4, 0x20
+    unsigned char xda4_10 : 1;                          // 0xda4, 0x10
+    unsigned char xda4_08 : 1;                          // 0xda4, 0x08
+    unsigned char xda4_04 : 1;                          // 0xda4, 0x04
+    unsigned char xda4_02 : 1;                          // 0xda4, 0x02
+    unsigned char xda4_01 : 1;                          // 0xda4, 0x01
+    unsigned char xda5_80 : 1;                          // 0xda5, 0x80
+    unsigned char xda5_40 : 1;                          // 0xda5, 0x40
+    unsigned char xda5_20 : 1;                          // 0xda5, 0x20
+    unsigned char xda5_10 : 1;                          // 0xda5, 0x10
+    unsigned char xda5_08 : 1;                          // 0xda5, 0x08
+    unsigned char xda5_04 : 1;                          // 0xda5, 0x04
+    unsigned char xda5_02 : 1;                          // 0xda5, 0x02
+    unsigned char xda5_01 : 1;                          // 0xda5, 0x01
     char xda8;                                          // 0xda8
-    char xda9;                                          // 0xda8
-    unsigned char xdaa1 : 1;                            // 0x80 - 0xda8
-    unsigned char show_center_sphere : 1;               // 0x40 - 0xda8
-    unsigned char show_item_pickup : 1;                 // 0x20 - 0xda8
-    unsigned char show_footstool : 1;                   // 0x10 - 0xda8
-    unsigned char xda8_x8 : 1;                          // 0x8 - 0xda8
-    unsigned char show_dynamics : 1;                    // 0x4 - 0xda8
-    unsigned char show_hit : 1;                         // 0x2 - 0xda8
-    unsigned char show_model : 1;                       // 0x1 - 0xda8
+    char xda9;                                          // 0xda9
+    unsigned char xdaa1 : 1;                            // 0x80 - 0xdaa
+    unsigned char show_center_sphere : 1;               // 0x40 - 0xdaa
+    unsigned char show_item_pickup : 1;                 // 0x20 - 0xdaa
+    unsigned char show_footstool : 1;                   // 0x10 - 0xdaa
+    unsigned char xda8_x8 : 1;                          // 0x8 - 0xdaa
+    unsigned char show_dynamics : 1;                    // 0x4 - 0xdaa
+    unsigned char show_hit : 1;                         // 0x2 - 0xdaa
+    unsigned char show_model : 1;                       // 0x1 - 0xdaa
     char xdab;                                          // 0xdab
     struct                                              //
     {                                                   //
@@ -729,7 +744,7 @@ struct ItemData
     unsigned char xdcf4 : 1;                            // 0xdcf, 0x10
     unsigned char xdcf5 : 1;                            // 0xdcf, 0x08
     unsigned char xdcf6 : 1;                            // 0xdcf, 0x04
-    unsigned char xdcf7 : 1;                            // 0xdcf, 0x02
+    unsigned char is_hurt_by_fighter : 1;               // 0xdcf, 0x02, metal box checks this to make sure it was hit directly by a fighter and not their item
     unsigned char xdcf8 : 1;                            // 0xdcf, 0x01
     unsigned char is_footstool : 1;                     // 0xdd0, 0x80
     unsigned char xdd0_x40 : 1;                         // 0xdd0, 0x40
@@ -937,4 +952,5 @@ void Item_ClearVelocity(GOBJ *item);
 void Item_UpdateECBTopN(GOBJ *item);
 int Item_GetWallCollFlags(GOBJ *item);
 void Item_UpdateHitboxDamage(itHit *hit, int dmg, GOBJ *item);
+GOBJ *Item_GetAttackerFighterGObj(GOBJ *item);
 #endif

@@ -2257,7 +2257,7 @@ struct FighterData
     u8 x2071_x0f : 4;                     // 0x2071, 0x0f
     u8 x2072;                             // 0x2072
     u8 x2073;                             // 0x2073
-    int x2074;                            // 0x2074
+    int x2074;                            // 0x2074, this is the start of some struct... present in items as well @ 0xd94
     int x2078;                            // 0x2078
     int x207c;                            // 0x207c
     int x2080;                            // 0x2080
