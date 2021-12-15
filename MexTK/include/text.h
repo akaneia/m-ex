@@ -65,9 +65,9 @@ struct Text
 
 /*** Functions ***/
 
-int Text_CreateCanvas(int unk, int no_create_cam_gobj, int text_gobjkind, int text_gobjsubclass, int text_gobjflags, int text_gxlink, int text_gxpri, int cobj_gxpri); // the optional gobj and cobj_gxlink are used to create a cobj as well. set gobj
-Text *Text_CreateText(int SisIndex, int canvasID);
-Text *Text_CreateText2(int SisIndex, int canvasID, float pos_x, float pos_y, float pos_z, float limit_x, float limit_y);
+int Text_CreateCanvas(int sis_id, int no_create_cam_gobj, int text_gobjkind, int text_gobjsubclass, int text_gobjflags, int text_gxlink, int text_gxpri, int cobj_gxpri); // the optional gobj and cobj_gxlink are used to create a cobj as well. set gobj
+Text *Text_CreateText(int sis_id, int canvasID);
+Text *Text_CreateText2(int sis_id, int canvasID, float pos_x, float pos_y, float pos_z, float limit_x, float limit_y);
 void Text_Destroy(Text *text);
 int Text_AddSubtext(Text *text, float xPos, float yPos, char *string, ...);
 void Text_SetScale(Text *text, int subtext, float x, float y);
