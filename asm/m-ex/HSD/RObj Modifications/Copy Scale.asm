@@ -1,6 +1,6 @@
 #To be inserted @ 8037c050
-.include "../../Globals.s"
-.include "../Header.s"
+.include "../../../Globals.s"
+.include "../../Header.s"
 
 .set  RObj_Scale,8
 
