@@ -612,7 +612,7 @@ struct ItemData
         float xce4;                                     // 0xce4
         float xce8;                                     // 0xce8
         GOBJ *source_fighter;                           // 0xcec
-        GOBJ *source_item;                              // 0xcf0
+        GOBJ *source_item;                              // 0xcf0, is a fighter gobj, but is the owner of the fighter that hit the item
     } dmg;                                              //
     GOBJ *fighter_unk;                                  // 0xcf4, fighter that hit or got hit by this item? idk what to call this
     GOBJ *detected_fighter;                             // 0xcf8, fighter that touched the items detect box. updated @ 800798d4
