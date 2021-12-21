@@ -12,14 +12,14 @@ backup
   lwz r3,0x0(r3)
   load r4,0x40820010
   cmpw r3,r4
-  bne NotFound
+  bne Exit
 
 # check if exists
   bl  FileName
   mflr  r3
   branchl r12,0x8033796c
   cmpwi r3,-1
-  beq NotFound
+  beq Exit
 
 # load file
   bl  FileName
