@@ -186,6 +186,10 @@ blrl
 
 ##############################################
 
+NotFound:
+  li r3,0
+  stw r3,OFST_mexMenu(r13)
+
 Exit:
   restore
   li	r3, 3
