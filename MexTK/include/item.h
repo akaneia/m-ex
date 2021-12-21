@@ -677,6 +677,8 @@ struct ItemData
     unsigned char xda5_04 : 1;                          // 0xda5, 0x04
     unsigned char xda5_02 : 1;                          // 0xda5, 0x02
     unsigned char xda5_01 : 1;                          // 0xda5, 0x01
+    char xda6;                                          // 0xda6
+    char xda7;                                          // 0xda7
     char xda8;                                          // 0xda8
     char xda9;                                          // 0xda9
     unsigned char xdaa1 : 1;                            // 0x80 - 0xdaa
