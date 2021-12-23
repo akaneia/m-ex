@@ -532,6 +532,7 @@
 80011E24:JOBJ_GetChild
 8022F298:JOBJ_GetCurrentMatAnimFrame
 80371BEC:JOBJ_GetDObj
+8000bdb4:JOBJ_GetJointAnimCurrFrame
 8000BE40:JOBJ_GetJointAnimFrameTotal
 8000BDB4:JOBJ_GetJointAnimNextFrame
 8000B1CC:JOBJ_GetWorldPosition

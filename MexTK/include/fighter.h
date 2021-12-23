@@ -648,10 +648,13 @@ struct Playerblock
     u8 tint;             // 0x46
     u8 team;             // 0x47
     u8 controller;       // 0x48
-    u8 cpuLv;
-    u8 cpuKind;
-    u8 handicap;
-    float x50;
+    u8 cpuLv;            // 0x49
+    u8 cpuKind;          // 0x4a
+    u8 handicap;         // 0x4b
+    u8 x4c;              // 0x4c
+    u8 kirby_copy;       // 0x4d, index of kirby copy ability
+    u8 x4e;              // 0x4e
+    u8 x4f;              // 0x4f
     float attack;
     float defense;
     float scale;
@@ -669,10 +672,14 @@ struct Playerblock
     int x9c;
     int stickSmashes[2];
     int tag;
-    u8 flags2;
-    u8 flags3;
-    GOBJ *fighterData;
-    GOBJ *fighterDataSub;
+    int xa8;              // 0xa8
+    u8 xac_80 : 1;        // 0xac, 0x80
+    u8 is_multispawn : 1; // 0xac, 0x40
+    u8 xac_3f : 6;        // 0xac, 0x3f
+    u8 xad;               // 0xad
+    u8 xae;               // 0xae
+    u8 xaf;               // 0xaf
+    GOBJ *fp[2];          // 0xb0
 };
 
 struct PlayerData
