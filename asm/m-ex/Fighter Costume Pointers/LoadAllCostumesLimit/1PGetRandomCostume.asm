@@ -12,3 +12,4 @@
   li r31, 6
 
 Exit:
+  cmpwi r31,0
