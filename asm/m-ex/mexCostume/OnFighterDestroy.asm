@@ -32,7 +32,7 @@ ModelAddDescArr_Loop:
        branchl r12,0x80371590
 
     # Free FtModelAdd
-    lwzx REG_FtModelAdd,r3,r0
+    mr r3, REG_FtModelAdd
     branchl r12,HSD_Free
 
 ModelAddDescArr_LoopAdd:
