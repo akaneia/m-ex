@@ -265,6 +265,7 @@
   .set  Arch_FGM_Files,0x0
   .set  Arch_FGM_Flags,0x4
   .set  Arch_FGM_LookupTable,0x8
+    .set  FGM_LookupTable_Stride,0x4
   .set  Arch_FGM_RuntimeStruct,0xC
     .set  Arch_SSMRuntimeStruct_Header,0x0
     .set  Arch_SSMRuntimeStruct_ToLoadOrig,0x4
