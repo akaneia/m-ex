@@ -12,7 +12,7 @@ backup
   lwz r3,0x0(r3)
   load r4,0x40820010
   cmpw r3,r4
-  bne Exit
+  bne SymbolNotFound
 
 # check if exists
   bl  FileName
