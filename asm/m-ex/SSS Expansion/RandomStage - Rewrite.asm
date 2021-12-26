@@ -12,6 +12,7 @@
   backup
   lwz REG_IconData,OFST_Menu_SSS(rtoc)
   lwz REG_IconCount,OFST_Metadata_SSSIconCount(rtoc)
+  subi REG_IconCount,REG_IconCount,1                    # except the random icon
 
 #Alloc space for n icons
   mr  r3,REG_IconCount
