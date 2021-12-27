@@ -24,8 +24,10 @@ lwz REG_FighterData,0x2C(REG_FighterGObj)
   lwz r3,0x2C(REG_FighterGObj)
   lwz r3,MEX_OrigOwner(r3)
   cmpwi r3,0
-  beq ItemSkip
+  beq Original
   lwz REG_FighterData,0x2C(r3)
+  cmpwi r3,0  # kind of a weird hacky way to find out if the gobj still exists...
+  beq Original
 ItemSkip:
 
 #Check for kirby

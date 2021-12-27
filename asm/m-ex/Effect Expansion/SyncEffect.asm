@@ -30,13 +30,17 @@
 
 lwz REG_FighterData,0x2C(REG_PlayerGObj)
 
-# get fighter gobj if item
+# get gobj if item
   lhz r3,0x0(REG_PlayerGObj)
   cmpwi r3,6
   bne NotItem
   lwz r3,0x2C(REG_PlayerGObj)
   lwz r3,MEX_OrigOwner(r3)
+  cmpwi r3,0
+  beq Injection_Exit
   lwz REG_FighterData,0x2C(r3)
+  cmpwi r3,0
+  beq Injection_Exit
 NotItem:
 
 #Check for kirby
