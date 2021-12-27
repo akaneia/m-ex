@@ -247,8 +247,10 @@ void Coll_ECBCurrToPrev(CollData *coll_data);
 void Coll_InitECB(CollData *coll_data);
 void Coll_SetECBScale(CollData *coll_data, float scale1, float scale2, float scale3, float scale4);
 int ECB_CollGround_PassLedge(CollData *ecb, ECBSize *bones); // returns is touching ground bool
+int ECB_CollGround3(CollData *ecb);
 void ECB_CollAir(CollData *ecb, ECBSize *bones);
 int ECB_CollAir2(CollData *ecb);
+int ECB_CollAir3(CollData *ecb);
 int ECB_CollAirCheckLedge(CollData *ecb);
 int ECB_CollGround(CollData *ecb);
 int ECB_StoreLedgeCheckDirection(CollData *ecb, int ledge_check_dir);

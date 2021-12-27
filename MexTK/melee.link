@@ -127,6 +127,7 @@
 80096CC8:ECB_CheckToFallThroughPlatform
 800475F4:ECB_CollAir
 800471f8:ECB_CollAir2
+800477e0:ECB_CollAir3
 800473cc:ECB_CollAirCheckLedge
 8004b108:ECB_CollGround
 8004B21C:ECB_CollGround_PassLedge
