@@ -125,6 +125,7 @@
 8035dea0:DOBJ_AddAnimAll
 800115F4:Dynamics_DecayWind
 80096CC8:ECB_CheckToFallThroughPlatform
+80048654:ECB_CollGround3
 800475F4:ECB_CollAir
 800471f8:ECB_CollAir2
 800477e0:ECB_CollAir3
