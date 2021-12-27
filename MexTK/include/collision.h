@@ -243,6 +243,7 @@ struct CollDataStage
 };
 
 /*** Functions ***/
+void Coll_CopyPosToECBs(CollData *coll_data, Vec3 *pos);
 void Coll_ECBCurrToPrev(CollData *coll_data);
 void Coll_InitECB(CollData *coll_data);
 void Coll_SetECBScale(CollData *coll_data, float scale1, float scale2, float scale3, float scale4);

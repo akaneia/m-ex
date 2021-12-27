@@ -61,6 +61,7 @@
 803686ac:COBJ_GetInterest
 80368a08:COBJ_GetEyeDistance
 80048160:Coll_CheckLedge
+80043680:Coll_CopyPosToECBs
 80041C8C:Coll_ECBCurrToPrev
 80041EE4:Coll_InitECB
 8004220c:Coll_SetECBScale
