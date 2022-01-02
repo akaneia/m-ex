@@ -2383,78 +2383,78 @@ struct FighterData
         char x2212;                       // x2212
         char x2213;                       // x2213
         //float throw_timerval;                    // 0x2214 - equal to script_event_timer of the attacker
-        char x2214;                              // x2214
-        char x2215;                              // x2215
-        unsigned char x2216_x80 : 1;             // 0x80 - x2216
-        unsigned char x2216_x40 : 1;             // 0x40 - x2216
-        unsigned char is_throwing : 1;           // 0x20 - x2216
-        unsigned char x2216_x10 : 1;             // 0x10 - x2216. also used to change users direction during aerial attacks
-        unsigned char x2216_x08 : 1;             // 0x8 - x2216
-        unsigned char x2216_x04 : 1;             // 0x4 - x2216
-        unsigned char x2216_x02 : 1;             // 0x2 - x2216
-        unsigned char x2216_x01 : 1;             // 0x1 - x2216
-        char x2217;                              // x2217
-        unsigned char x2218_1 : 1;               // 0x80 - x2218
-        unsigned char x2218_2 : 1;               // 0x40 - x2218
-        unsigned char has_rapid_jab : 1;         // 0x20 - x2218
-        unsigned char reflect_enable : 1;        // 0x10 - x2218
-        unsigned char reflect_nochangeowner : 1; // 0x8 - x2218
-        unsigned char x2218_6 : 1;               // 0x4 - x2218
-        unsigned char absorb_enable : 1;         // 0x2 - x2218
-        unsigned char absorb_unk : 1;            // 0x1 - x2218
-        unsigned char persistent_gfx : 1;        // 0x80 is shielding bool. 0x80 - 0x2219
-        unsigned char immune : 1;                // 0x40 - 0x2219
-        unsigned char is_ignore_death : 1;       // 0x20 - 0x2219
-        unsigned char hitbox_active : 1;         // 0x10 - 0x2219
-        unsigned char x2219_5 : 1;               // 0x8 - 0x2219
-        unsigned char freeze : 1;                // 0x4 - 0x2219
-        unsigned char hitlag_unk : 1;            // 0x2 - 0x2219
-        unsigned char hitlag_unk2 : 1;           // 0x1 - 0x2219
-        unsigned char x221a_1 : 1;               // 0x80 - 0x221a
-        unsigned char x221a_2 : 1;               // 0x40 - 0x221a
-        unsigned char hitlag : 1;                // 0x20 - 0x221a
-        unsigned char hitlag_victim : 1;         // 0x10 - 0x221a
-        unsigned char is_fastfall : 1;           // 0x8 - 0x221a
-        unsigned char no_hurt_script : 1;        // 0x4 - 0x221a
-        unsigned char x221a_7 : 1;               // 0x2 - 0x221a
-        unsigned char gfx_persist : 1;           // 0x1 - 0x221a
-        unsigned char shield_enable : 1;         // 0x80 - 0x221b
-        unsigned char shield_x40 : 1;            // 0x40 - 0x221b
-        unsigned char shield_x20 : 1;            // 0x20 - 0x221b
-        unsigned char shield_x10 : 1;            // 0x10 - 0x221b
-        unsigned char shield_x8 : 1;             //  0x8 - 0x221b
-        unsigned char x221b_grab : 1;            // 0x4 - 0x221b, is checked at 80079304, skips some logic
-        unsigned char x221b_7 : 1;               // 0x2 - 0x221b
-        unsigned char is_anchor : 1;             // 0x1 - 0x221b, used for determining which player the anchor is during throw release
-        unsigned char x221c_1 : 1;               // 0x80 - 0x221c
-        unsigned char x221c_2 : 1;               // 0x40 - 0x221c
-        unsigned char x221c_3 : 1;               // 0x20 - 0x221c
-        unsigned char x221c_4 : 1;               // 0x10 - 0x221c
-        unsigned char x221c_5 : 1;               // 0x8 - 0x221c
-        unsigned char x221c_6 : 1;               // 0x4 - 0x221c
-        unsigned char hitstun : 1;               // 0x2 - 0x221c
-        unsigned char ik_orientation : 1;        // 0x1 = 0x221c
-        unsigned char ik_rfoot : 1;              // 0x80 - 0x221d
-        unsigned char ik_lfoot : 1;              // 0x40 - 0x221d
-        unsigned char x221d_3 : 1;               // 0x20 - 0x221d
-        unsigned char input_enable : 1;          // 0x10 - 0x221d
-        unsigned char x221d_5 : 1;               // 0x8 - 0x221d
-        unsigned char nudge_disable : 1;         // 0x4 - 0x221d
-        unsigned char ground_ignore : 1;         // 0x2 - 0x221d
-        unsigned char x221d_8 : 1;               // 0x1 - 0x221d
-        unsigned char invisible : 1;             // 0x80 - 0x221e
-        unsigned char x221e_2 : 1;               // 0x40 - 0x221e
-        unsigned char x221e_3 : 1;               // 0x20 - 0x221e
-        unsigned char item_visible : 1;          // 0x10 - 0x221e
-        unsigned char x221e_5 : 1;               // 0x8 - 0x221e
-        unsigned char x221e_6 : 1;               // 0x4 - 0x221e
-        unsigned char x221e_7 : 1;               // 0x2 - 0x221e
-        unsigned char x221e_8 : 1;               // 0x1 - 0x221e
-        unsigned char is_offscreen : 1;          // 0x80 - 0x221f
-        unsigned char dead : 1;                  // 0x40 - 0x221f
-        unsigned char x221f_3 : 1;               // 0x20 - 0x221f
-        unsigned char sleep : 1;                 // 0x10
-        unsigned char ms : 1;                    // ms = master/slave. is 1 when the player is a slave
+        char x2214;                                    // x2214
+        char x2215;                                    // x2215
+        unsigned char x2216_x80 : 1;                   // 0x80 - x2216
+        unsigned char x2216_x40 : 1;                   // 0x40 - x2216
+        unsigned char is_throwing : 1;                 // 0x20 - x2216
+        unsigned char x2216_x10 : 1;                   // 0x10 - x2216. also used to change users direction during aerial attacks
+        unsigned char x2216_x08 : 1;                   // 0x8 - x2216
+        unsigned char x2216_x04 : 1;                   // 0x4 - x2216
+        unsigned char x2216_x02 : 1;                   // 0x2 - x2216
+        unsigned char x2216_x01 : 1;                   // 0x1 - x2216
+        char x2217;                                    // x2217
+        unsigned char x2218_1 : 1;                     // 0x80 - x2218
+        unsigned char x2218_2 : 1;                     // 0x40 - x2218
+        unsigned char has_rapid_jab : 1;               // 0x20 - x2218
+        unsigned char reflect_enable : 1;              // 0x10 - x2218
+        unsigned char reflect_nochangeowner : 1;       // 0x8 - x2218
+        unsigned char x2218_6 : 1;                     // 0x4 - x2218
+        unsigned char absorb_enable : 1;               // 0x2 - x2218
+        unsigned char absorb_unk : 1;                  // 0x1 - x2218
+        unsigned char persistent_gfx : 1;              // 0x80 is shielding bool. 0x80 - 0x2219
+        unsigned char immune : 1;                      // 0x40 - 0x2219
+        unsigned char is_ignore_death : 1;             // 0x20 - 0x2219
+        unsigned char hitbox_active : 1;               // 0x10 - 0x2219
+        unsigned char x2219_5 : 1;                     // 0x8 - 0x2219
+        unsigned char freeze : 1;                      // 0x4 - 0x2219
+        unsigned char hitlag_unk : 1;                  // 0x2 - 0x2219
+        unsigned char hitlag_unk2 : 1;                 // 0x1 - 0x2219
+        unsigned char x221a_1 : 1;                     // 0x80 - 0x221a
+        unsigned char x221a_2 : 1;                     // 0x40 - 0x221a
+        unsigned char hitlag : 1;                      // 0x20 - 0x221a
+        unsigned char hitlag_victim : 1;               // 0x10 - 0x221a
+        unsigned char is_fastfall : 1;                 // 0x8 - 0x221a
+        unsigned char no_hurt_script : 1;              // 0x4 - 0x221a
+        unsigned char x221a_7 : 1;                     // 0x2 - 0x221a
+        unsigned char gfx_persist : 1;                 // 0x1 - 0x221a
+        unsigned char shield_enable : 1;               // 0x80 - 0x221b
+        unsigned char shield_x40 : 1;                  // 0x40 - 0x221b
+        unsigned char shield_x20 : 1;                  // 0x20 - 0x221b
+        unsigned char shield_x10 : 1;                  // 0x10 - 0x221b
+        unsigned char shield_x8 : 1;                   //  0x8 - 0x221b
+        unsigned char x221b_grab : 1;                  // 0x4 - 0x221b, is checked at 80079304, skips some logic
+        unsigned char x221b_7 : 1;                     // 0x2 - 0x221b
+        unsigned char attacker_attached_to_victim : 1; // 0x1 - 0x221b, used for determining which player the anchor is during throw release
+        unsigned char x221c_1 : 1;                     // 0x80 - 0x221c
+        unsigned char x221c_2 : 1;                     // 0x40 - 0x221c
+        unsigned char x221c_3 : 1;                     // 0x20 - 0x221c
+        unsigned char x221c_4 : 1;                     // 0x10 - 0x221c
+        unsigned char x221c_5 : 1;                     // 0x8 - 0x221c
+        unsigned char x221c_6 : 1;                     // 0x4 - 0x221c
+        unsigned char hitstun : 1;                     // 0x2 - 0x221c
+        unsigned char ik_orientation : 1;              // 0x1 = 0x221c
+        unsigned char ik_rfoot : 1;                    // 0x80 - 0x221d
+        unsigned char ik_lfoot : 1;                    // 0x40 - 0x221d
+        unsigned char x221d_3 : 1;                     // 0x20 - 0x221d
+        unsigned char input_enable : 1;                // 0x10 - 0x221d
+        unsigned char x221d_5 : 1;                     // 0x8 - 0x221d
+        unsigned char nudge_disable : 1;               // 0x4 - 0x221d
+        unsigned char ground_ignore : 1;               // 0x2 - 0x221d
+        unsigned char x221d_8 : 1;                     // 0x1 - 0x221d
+        unsigned char invisible : 1;                   // 0x80 - 0x221e
+        unsigned char x221e_2 : 1;                     // 0x40 - 0x221e
+        unsigned char x221e_3 : 1;                     // 0x20 - 0x221e
+        unsigned char item_visible : 1;                // 0x10 - 0x221e
+        unsigned char x221e_5 : 1;                     // 0x8 - 0x221e
+        unsigned char x221e_6 : 1;                     // 0x4 - 0x221e
+        unsigned char x221e_7 : 1;                     // 0x2 - 0x221e
+        unsigned char x221e_8 : 1;                     // 0x1 - 0x221e
+        unsigned char is_offscreen : 1;                // 0x80 - 0x221f
+        unsigned char dead : 1;                        // 0x40 - 0x221f
+        unsigned char x221f_3 : 1;                     // 0x20 - 0x221f
+        unsigned char sleep : 1;                       // 0x10
+        unsigned char ms : 1;                          // ms = master/slave. is 1 when the player is a slave
         unsigned char x221f_6 : 1;
         unsigned char x221f_7 : 1;
         unsigned char x221f_8 : 1;
@@ -2494,7 +2494,7 @@ struct FighterData
         unsigned char is_stamina : 1;             // 0x1 - 0x2225
         unsigned char x2226_1 : 1;                // 0x80 - 0x2226
         unsigned char x2226_2 : 1;                // 0x40 - 0x2226
-        unsigned char is_robj_child : 1;          // 0x20 - 0x2226, might actually be for skipping grab collision
+        unsigned char is_attached_to_fighter : 1; // 0x20 - 0x2226, might actually be for skipping grab collision
         unsigned char x2226_x10 : 1;              // 0x10 - 0x2226
         unsigned char cloak1 : 1;                 // 0x8 - 0x2226
         unsigned char cloak2 : 1;                 // 0x4 - 0x2226
