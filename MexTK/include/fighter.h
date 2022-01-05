@@ -2217,7 +2217,7 @@ struct FighterData
         u16 vuln;                         // 0x1a6a
         int x1a6c;                        // 0x1a6c
         int x1a70;                        // 0x1a70
-        Vec2 release_pos;                 // 0x1a74
+        Vec2 release_pos;                 // 0x1a74, this is determined when instantiating the player, its actually the offset of XRotN from TopN (800690d0)
         int x1a7c;                        // 0x1a7c
         int x1a80;                        // 0x1a80
         int x1a84;                        // 0x1a84
@@ -2319,7 +2319,7 @@ struct FighterData
     int x2168;                            // 0x2168
     int x216c;                            // 0x216c
     int x2170;                            // 0x2170
-    Vec3 thrown_origin;                   // 0x2174
+    Vec3 thrown_origin;                   // 0x2174, offset of child from parent, used for placing the child when the grab breaks
     int x2180;                            // 0x2180
     int x2184;                            // 0x2184
     int x2188;                            // 0x2188
@@ -2327,7 +2327,7 @@ struct FighterData
     struct cb
     {
         void (*OnGrabFighter_Self)(GOBJ *fighter);   // 0x2190
-        void (*x2194)(GOBJ *fighter);                // 0x2194
+        void (*x2194)(GOBJ *fighter);                // 0x2194, i think this is on grabbed items
         void (*OnGrabFighter_Victim)(GOBJ *fighter); // 0x2198
         void (*IASA)(GOBJ *fighter);                 // 0x219C
         void (*Anim)(GOBJ *fighter);                 // 0x21A0
@@ -2426,7 +2426,7 @@ struct FighterData
         unsigned char x221b_grab : 1;                  // 0x4 - 0x221b, is checked at 80079304, skips some logic
         unsigned char x221b_7 : 1;                     // 0x2 - 0x221b
         unsigned char attacker_attached_to_victim : 1; // 0x1 - 0x221b, used for determining which player the anchor is during throw release
-        unsigned char x221c_1 : 1;                     // 0x80 - 0x221c
+        unsigned char hit_by_grabber : 1;              // 0x80 - 0x221c, is enabled when grab victim is being hit by its grabbers hitbox, signals no damage state for this frame (still grabbed) (set @ 8007a6ec, checked @ 8008edfc)
         unsigned char x221c_2 : 1;                     // 0x40 - 0x221c
         unsigned char x221c_3 : 1;                     // 0x20 - 0x221c
         unsigned char x221c_4 : 1;                     // 0x10 - 0x221c

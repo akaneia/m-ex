@@ -226,8 +226,7 @@ typedef struct PreloadChar PreloadChar;
 typedef struct FtVarKirby FtVarKirby;
 
 // Custom
-typedef struct PRIM PRIM;
+typedef struct Stc_icns Stc_icns;
 typedef struct MEXPlaylist MEXPlaylist;
-typedef struct Translation Translation;
 
 #endif

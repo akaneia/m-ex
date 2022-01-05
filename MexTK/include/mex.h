@@ -35,17 +35,14 @@ typedef enum SSMKind
 
 /*** Structs ***/
 
-struct PRIM
+struct Stc_icns
 {
-    void *data;
+    u16 reserved_num;
+    u16 stride;
+    MatAnimJointDesc *matanimjoint;
+    int custom_stock_num;
+    void *custom_stock_descs;
 };
-
-struct Translation
-{
-    float frame;
-    float value;
-};
-
 struct MEXPlaylist
 {
     u16 bgm;
