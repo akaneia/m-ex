@@ -590,6 +590,8 @@ void JOBJ_Detach(JOBJ *to_attach);
 void AOBJ_ReqAnim(int *aobj, float unk);
 void AOBJ_StopAnim(AOBJ *aobj);
 void AOBJ_SetRate(AOBJ *aobj, float rate);
+void AOBJ_SetFlags(AOBJ *aobj, int flags);
+void AOBJ_ClearFlags(AOBJ *aobj, int flags);
 void DOBJ_SetFlags(DOBJ *dobj, int flags);
 void DOBJ_ClearFlags(DOBJ *dobj, int flags);
 void DOBJ_AddAnimAll(DOBJ *dobj, void *matanim, void *textureanim);
