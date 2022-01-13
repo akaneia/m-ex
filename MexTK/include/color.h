@@ -56,5 +56,6 @@ struct ColorOverlay
 };
 
 void ColAnim_Apply(ColorOverlay *col, void *colanim_data, int colanim_index, int r6);
+void ColAnim_Disable(ColorOverlay *col);
 
 #endif
