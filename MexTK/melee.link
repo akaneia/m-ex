@@ -519,6 +519,10 @@
 80272940:Item_SetJobjHidden
 80272460:Item_SetHitboxDamage
 802725d4:Item_RemoveAllHitboxes
+80271508:Item_SetHurtboxTangibility
+801c8de0:Item_CreateHurtbox
+801c8e08:Item_UpdateHurtboxes
+802799e4:Item_UpdateAnimationAndScriptTimers
 80273454:Item_ClearVelocity
 80276214:Item_UpdateECBTopN
 80276308:Item_GetWallCollFlags

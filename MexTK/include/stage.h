@@ -124,7 +124,7 @@ struct MapData
     unsigned char flag2x01 : 1;        // 0x11, 0x01
     int index;                         // 0x14, map_gobj index
     int x18;                           // 0x18
-    int x1c;                           // 0x1c
+    void *OnDestroyCB;                 // 0x1c
     int live_sfx[8];                   // 0x20, sfx ID's currently playing
     int x40;                           // 0x40
     int x44;                           // 0x44
