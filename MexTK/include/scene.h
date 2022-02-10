@@ -158,7 +158,7 @@ struct ScDataRst
     int x4;
     int x8;
     MatchStandings match_standings; // 0xC
-    u8 unk[0x2278]                  // 0x?
+    u8 unk[0x2278];                 // 0x?
 };
 
 /*** Static Variables ***/

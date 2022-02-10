@@ -845,7 +845,7 @@ struct FtSFX
     int tech;       // 0x24
     int cliffcatch; // 0x28
     int heavy_lift; // 0x2c
-    int catch;      // 0x30
+    int item_catch; // 0x30
     int cheer;      // 0x34
 };
 
@@ -2721,7 +2721,7 @@ struct FtSymbols
     void *x8;            // 0x8
     void *xc;            // 0xc
     void *x10;           // 0x10
-    HSD_Archive *costume // 0x14
+    HSD_Archive *costume;// 0x14
 };
 
 struct FtDatNameLookup

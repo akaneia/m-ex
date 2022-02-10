@@ -10,6 +10,8 @@
 
 typedef s64 OSTime;
 
+char * strrchr ( const char *, int );
+
 // OS Macros
 #define OSRoundUp32B(x) (((u32)(x) + 32 - 1) & ~(32 - 1))
 #define OSRoundDown32B(x) (((u32)(x)) & ~(32 - 1))
@@ -420,17 +422,19 @@ int strncmp(char *str1, char *str2, int size);
 char *strcpy(char *dest, char *src);            // copies the string pointed to, by src to dest.
 char *strncpy(char *dest, char *src, int size); // copies the string pointed to, by src to dest.
 unsigned long int strtoul(const char *str, char **endptr, int base);
-char *strcat(s, append) register char *s;
-register const char *append;
-{
-    char *save = s;
 
-    for (; *s; ++s)
-        ;
-    while (*s++ = *append++)
-        ;
-    return (save);
-}
+// TODO: 
+// char *strcat(s, append) register char *s;
+// register const char *append;
+// {
+//     char *save = s;
+
+//     for (; *s; ++s)
+//         ;
+//     while (*s++ = *append++)
+//         ;
+//     return (save);
+// }
 
 int SFX_Play(int sfxID);
 int SFX_PlayRaw(int sfx, int volume, int pan, int unk, int unk2);

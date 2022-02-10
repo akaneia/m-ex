@@ -199,7 +199,7 @@ void *HSD_MemAlloc(int size);
 void HSD_Free(void *ptr);
 void *HSD_ObjAlloc(HSD_ObjAllocData *obj_def);
 void HSD_ObjFree(HSD_ObjAllocData *obj_def, void *obj);
-void HSD_ClassDestroy(void *class);
+void HSD_ClassDestroy(void *hsd_class);
 void HSD_ImageDescCopyFromEFB(_HSD_ImageDesc *image_desc, int left, int top, int clear_efb); // must be called from a cobj callback!
 void HSD_StartRender(int unk);
 void HSD_SetSpeed(u64 speed);
