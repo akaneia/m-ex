@@ -3001,5 +3001,5 @@ void GXLink_Fighter(GOBJ *f, int pass);
 void Fighter_MultiJump_TurnThink(FighterData *fp, int turn_frames);
 int Fighter_CheckFootstool(GOBJ *f);
 float Fighter_GetSoftLandVelocity(FighterData *fp);
-void Fighter_Transform(GOBJ *f, void *EnterStateCallback)
+void Fighter_Transform(GOBJ *f, void *EnterStateCallback);
 #endif
