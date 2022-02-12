@@ -371,6 +371,7 @@
 800cb6ec:Fighter_MultiJump_TurnThink
 80081a00:Fighter_CheckFootstool
 800d0ec8:Fighter_GetSoftLandVelocity
+8007efc8:Fighter_Transform
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim

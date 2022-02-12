@@ -680,6 +680,7 @@ struct Playerblock
     u8 xae;               // 0xae
     u8 xaf;               // 0xaf
     GOBJ *fp[2];          // 0xb0
+    void *cb_subft_init   // 0xb8, function executed on subfighter after creating them @ 80031c84
 };
 
 struct PlayerData
@@ -1761,7 +1762,7 @@ struct FighterData
         float gravity;                                         // 0x16C
         float terminal_velocity;                               // 0x170
         float aerial_drift_stick_mult;                         // 0x174
-        float aerial_drift_base;                               // 0x178
+        float aerial_drift_base;                               // 0x178, minimum amount of drift, stick mult is added on top of this
         float aerial_drift_max;                                // 0x17C
         float aerial_friction;                                 // 0x180
         float fastfall_velocity;                               // 0x184
@@ -2716,12 +2717,12 @@ struct FtSymbolLookup
 
 struct FtSymbols
 {
-    JOBJ *joint;         // 0x0
-    void *matanim_joint; // 0x4
-    void *x8;            // 0x8
-    void *xc;            // 0xc
-    void *x10;           // 0x10
-    HSD_Archive *costume;// 0x14
+    JOBJ *joint;          // 0x0
+    void *matanim_joint;  // 0x4
+    void *x8;             // 0x8
+    void *xc;             // 0xc
+    void *x10;            // 0x10
+    HSD_Archive *costume; // 0x14
 };
 
 struct FtDatNameLookup
@@ -3000,4 +3001,5 @@ void GXLink_Fighter(GOBJ *f, int pass);
 void Fighter_MultiJump_TurnThink(FighterData *fp, int turn_frames);
 int Fighter_CheckFootstool(GOBJ *f);
 float Fighter_GetSoftLandVelocity(FighterData *fp);
+void Fighter_Transform(GOBJ *f, void *EnterStateCallback)
 #endif
