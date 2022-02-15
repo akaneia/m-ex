@@ -450,10 +450,10 @@ struct MapHead
 
 struct MapGObjDesc
 {
-    JOBJSet jobjset;
-    COBJDesc *cobj;
-    void *x14;
-    void *lobj;
+    JOBJSet jobjset; // 0x0
+    COBJDesc *cobj;  // 0x10
+    void *x14;       // 0x14
+    void *lobj;      // 0x18
     HSD_Fog *fog;
     void *coll_links;
     int coll_links_num;

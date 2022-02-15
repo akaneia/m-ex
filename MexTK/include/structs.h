@@ -221,6 +221,10 @@ typedef struct ScDataRst ScDataRst;
 // Preload
 typedef struct Preload Preload;
 typedef struct PreloadChar PreloadChar;
+typedef struct PreloadEntry PreloadEntry;
+typedef struct PreloadLookup PreloadLookup;
+typedef struct PreloadAllocData PreloadAllocData;
+typedef struct PreloadTable PreloadTable;
 
 // Kirby
 typedef struct FtVarKirby FtVarKirby;
