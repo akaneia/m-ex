@@ -1731,8 +1731,8 @@ struct FighterData
         int xFC;                                               // 0xFC
         int x100;                                              // 0x100
     } phys;                                                    //
-    int *costume_JObjDesc;                                     // 0x104
-    int *costume_archive;                                      // 0x108
+    void *x104;                                                // 0x104
+    JOBJDesc *costume_jobjdesc;                                // 0x108
     ftData *ftData;                                            // 0x10C
     struct attr                                                // 0x110
     {                                                          //
