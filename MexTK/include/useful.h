@@ -10,7 +10,7 @@
 
 typedef s64 OSTime;
 
-char * strrchr ( const char *, int );
+char *strrchr(const char *, int);
 
 // OS Macros
 #define OSRoundUp32B(x) (((u32)(x) + 32 - 1) & ~(32 - 1))
@@ -19,8 +19,9 @@ char * strrchr ( const char *, int );
 #define OSRoundDown512B(x) (((u32)(x)) & ~(512 - 1))         // using this for card reads
 #define OSTicksToMilliseconds(ticks) ((ticks) / ((os_info->bus_clock / 4) / 1000))
 #define OSTicksToMicroseconds(ticks) ((ticks) / ((os_info->bus_clock / 4) / 1000000))
-#define BitCheck(num, bit) !!((num) & (1 << (bit))) // returns 0 or 1
-#define BitCheck(num, bit) !!((num) & (1 << (bit))) // returns 0 or 1
+#define MillisecondsSinceTick(ticks) ((float)OSTicksToMicroseconds(OSGetTick() - save_pre_tick) / 1000) // returns microseconds between tick given and the current tick
+#define BitCheck(num, bit) !!((num) & (1 << (bit)))                                                     // returns 0 or 1
+#define BitCheck(num, bit) !!((num) & (1 << (bit)))                                                     // returns 0 or 1
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
 #define assert(msg) __assert(__FILENAME__, __LINE__, msg)
 #define divide_roundup(dividend, divisor) ((dividend + (divisor / 2)) / divisor)
@@ -423,7 +424,7 @@ char *strcpy(char *dest, char *src);            // copies the string pointed to,
 char *strncpy(char *dest, char *src, int size); // copies the string pointed to, by src to dest.
 unsigned long int strtoul(const char *str, char **endptr, int base);
 
-// TODO: 
+// TODO:
 // char *strcat(s, append) register char *s;
 // register const char *append;
 // {
