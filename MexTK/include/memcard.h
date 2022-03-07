@@ -2798,10 +2798,10 @@ Rules1 *Memcard_GetRules1();
 Rules4 *Memcard_GetRules4();
 void Memcard_InitSnapshotList(void *snap_data, void *snap_list);
 void Memcard_UpdateSnapshotList(int slot);
-void Memcard_ReqSaveCreate(int slot, char *save_id, MemcardSave *memcard_save, MemcardUnk *memcard_unk, char *file_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, int unk);
+void Memcard_ReqSaveCreate(int slot, char *file_name, MemcardSave *memcard_save, MemcardUnk *memcard_unk, char *save_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, int unk);
 void Memcard_DeleteSnapshot(int slot, int index);
-void Memcard_ReqSaveLoad(int slot, char *save_id, MemcardSave *memcard_save, char *file_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, int unk);
-void Memcard_ReqSaveUpdate(int slot, char *save_id, MemcardSave *memcard_save, char *file_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, void *r9, void *cb);
+void Memcard_ReqSaveLoad(int slot, char *file_name, MemcardSave *memcard_save, char *save_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, int unk);
+void Memcard_ReqSaveUpdate(int slot, char *file_name, MemcardSave *memcard_save, char *save_name, _HSD_ImageDesc *banner, _HSD_ImageDesc *icon, void *r9, void *cb);
 int Memcard_CheckStatus(); // returns 11 when operation in effect
 void Memcard_RemovedCallback();
 void Memcard_Obfuscate(void *data, int size);
