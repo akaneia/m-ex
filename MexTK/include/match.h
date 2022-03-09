@@ -197,7 +197,7 @@ struct MatchInit
     PlayerData playerData[6];
 };
 
-struct MatchHUD
+struct MatchHUDElement
 {
     GOBJ *percent;
     GOBJ *insignia;
@@ -218,10 +218,37 @@ struct MatchHUD
     u8 x11;
     u8 x12;
     u8 x13;
-    float x14[3];
-    float percent_digitpos[4]; // 3 digits and the percent sign
-    int x34[8];
-    JOBJ *x54[5];
+    float x14[3];              // 0x14
+    float percent_digitpos[4]; // 0x20, 3 digits and the percent sign
+    int x30[8];                // 0x30
+    JOBJ *x50[5];              // 0x50
+};
+struct MatchHUDStock
+{
+    GOBJ *gobj;
+    JOBJ *jobj[17];
+    int curr_coins;
+    int curr_stocks;
+};
+struct MatchHUD
+{
+    GOBJ *cam_gobj;   // 0x0
+    GOBJ *light_gobj; // 0x4
+    int x8;           // 0x8
+    // the following positions are derived from the ScInfDmg_scene_data symbol in IfAll
+    Vec3 timer_pos;                  // 0xc
+    Vec3 player_hud_pos[6];          // 0x18
+    Vec3 joint8_pos[3];              // 0x60
+    Vec3 joint11_pos[2];             // 0x84
+    u8 x9c[0x54];                    // 0x9c
+    MatchHUDElement element_data[6]; // 0xF0
+    JOBJSet dmgnum_jobjset;          // 0x348
+    JOBJSet dmgmark_jobjset;         // 0x358
+    JOBJSet *ScnInfStc_scene_models; // 0x368
+    u8 x36c[52];                     // 0x36c
+    JOBJSet *stock_jobjset;          // 0x3a0
+    JOBJSet *kocount_jobjset;        // 0x3a4
+    MatchHUDStock stock[6];          //
 };
 
 struct CameraBox
@@ -246,7 +273,7 @@ struct CameraBox
 
 struct MatchCamera
 {
-    int x0;                       // 0x0
+    GOBJ *gobj;                   // 0x0
     int cam_kind;                 // 0x4
     GXColor erase_color;          // 0x8
     float zoom;                   // 0xc
@@ -2703,7 +2730,7 @@ struct Match // static match struct @ 8046b6a0
 
 Match *stc_match = 0x8046b6a0;
 MatchCamera *stc_matchcam = 0x80452c68;
-MatchHUD *stc_matchhud = 0x804a10c8;
+MatchHUD *stc_matchhud = 0x804a0fd8; // 0x804a10c8;
 MatchOffscreen *stc_match_offscreen = 0x804a1df0;
 ExclamData *stc_exclam_data = 0x803f9628; // 8 of these
 HSD_Archive **stc_ifall_archive = 0x804d6d5c;

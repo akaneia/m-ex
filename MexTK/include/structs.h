@@ -75,6 +75,8 @@ typedef struct MatchInit MatchInit;
 typedef struct Match Match;
 typedef struct MatchOffscreen MatchOffscreen;
 typedef struct MatchHUD MatchHUD;
+typedef struct MatchHUDElement MatchHUDElement;
+typedef struct MatchHUDStock MatchHUDStock;
 typedef struct MatchCamera MatchCamera;
 typedef struct CameraBox CameraBox;
 typedef struct MatchStandings MatchStandings;
