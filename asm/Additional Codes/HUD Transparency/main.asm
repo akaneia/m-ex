@@ -5,13 +5,16 @@
 .set REG_GObjData,30
 
 #Manager Data
-.set mgr_size,0x18
+.set mgr_size,0x24
 .set mgr_stockcurr,0x0
 .set mgr_stockfinal,0x4
 .set mgr_insigcurr,0x8
 .set mgr_insigfinal,0xC
 .set mgr_pcntcurr,0x10
 .set mgr_pcntfinal,0x14
+.set mgr_posx,0x18
+.set mgr_posy,0x1c
+.set mgr_posz,0x20
 
 backup
 
@@ -76,12 +79,31 @@ mflr REG_Floats
   li REG_Count,0
   mr REG_ThisHUD,REG_MgrData
 Mgr_InitLoop:
+# check if hud exists
+  load r3, 0x804A10C8
+  mulli r4, REG_Count, 0x68
+  add r3, r3, r4
+  lwz r3,0x0(r3)
+  cmpwi r3, 0
+  beq Mgr_InitInc
+# do stuff
   lfs f1,0x8(REG_Floats)
   stfs f1,mgr_stockfinal(REG_ThisHUD)
   lfs f1,0xC(REG_Floats)
   stfs f1,mgr_insigfinal(REG_ThisHUD)
   lfs f1,0x10(REG_Floats)
   stfs f1,mgr_pcntfinal(REG_ThisHUD)
+# Get this HUD elements pos
+  mr r3,REG_Count
+  branchl r12,0x802f3424
+# Get onscreen coords
+  mr  r4,r3
+  load r3,0x804a0fd8    # get hud camera gobj
+  lwz	r3, 0x0000 (r3)
+  lwz	r3, 0x0028 (r3)   # get hud camera cobj
+  addi r5,REG_ThisHUD, mgr_posx
+  li r6,0
+  branchl r12,0x8000e210
 Mgr_InitInc:
   addi REG_Count,REG_Count,1
   addi REG_ThisHUD,REG_ThisHUD,mgr_size
@@ -160,44 +182,43 @@ MgrColl_FtLoop:
   # Check if colliding with any HUD
   .set REG_Count,22
   .set REG_HUDPos,23
+  .set REG_ThisHUD,24
     li REG_Count,0
   MgrColl_HUDLoop:
-  # Get this HUD elements pos
-    mr r3,REG_Count
-    branchl r12,0x802f3424
-  # Get onscreen coords
-    mr  r4,r3
-    load r3,0x804a0fd8    # get hud camera gobj
-    lwz	r3, 0x0000 (r3)
-    lwz	r3, 0x0028 (r3)   # get hud camera cobj
-    addi r5,sp,0x90
-    li r6,0
-    branchl r12,0x8000e210
+    mulli r3, REG_Count, mgr_size
+    add REG_ThisHUD, REG_MgrData, r3
+  # check if hud exists
+    load r3, 0x804A10C8
+    mulli r4, REG_Count, 0x68
+    add r3, r3, r4
+    lwz r3,0x0(r3)
+    cmpwi r3, 0
+    beq MgrColl_HUDInc
   # Check if fighter is within this HUDs area
   # Boxes go Up, Down, Left, Right
   # ft.left < hud.right
-    lfs f1,0x90(sp)    # hud X
-    lfs f2,0x14(REG_Floats)   # width
+    lfs f1,mgr_posx(REG_ThisHUD)    # hud X
+    lfs f2,0x14(REG_Floats)         # width
     fadds f1,f1,f2
     lfs f2,0x88(sp)
     fcmpo cr0,f2,f1
     bge MgrColl_HUDInc
   # ft.right > hud.left
-    lfs f1,0x90(sp)    # hud X
+    lfs f1,mgr_posx(REG_ThisHUD)    # hud X
     lfs f2,0x14(REG_Floats)   # width
     fsubs f1,f1,f2
     lfs f2,0x8C(sp)
     fcmpo cr0,f2,f1
     ble MgrColl_HUDInc
   # ft.top > hud.bottom
-    lfs f1,0x94(sp)    # hud Y
+    lfs f1,mgr_posy(REG_ThisHUD)    # hud Y
     lfs f2,0x18(REG_Floats)   # height
     fsubs f1,f1,f2
     lfs f2,0x84(sp)
     fcmpo cr0,f2,f1
     ble MgrColl_HUDInc
   # ft.bottom < hud.top
-    lfs f1,0x94(sp)    # hud Y
+    lfs f1,mgr_posy(REG_ThisHUD)    # hud Y
     lfs f2,0x18(REG_Floats)   # height
     fadds f1,f1,f2
     lfs f2,0x80(sp)
@@ -234,6 +255,14 @@ MgrColl_FtCheck:
   MgrUpdate_HUDLoop:
     mulli r3,REG_Count,mgr_size
     add REG_ThisHUD,r3,REG_MgrData
+
+  # check if hud exists
+    load r3, 0x804A10C8
+    mulli r4, REG_Count, 0x68
+    add r3, r3, r4
+    lwz r3,0x0(r3)
+    cmpwi r3, 0
+    beq MgrUpdate_HUDInc
 
     # Update stocks
     load r3,0x804a1380
