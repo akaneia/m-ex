@@ -3003,6 +3003,7 @@ void Fighter_MultiJump_TurnThink(FighterData *fp, int turn_frames);
 int Fighter_CheckFootstool(GOBJ *f);
 float Fighter_GetSoftLandVelocity(FighterData *fp);
 void Fighter_Transform(GOBJ *f, void *EnterStateCallback);
-void Fighter_InitCameraBox(FighterData *fp); // 80076064
-void Fighter_SetSelfDamageSource(GOBJ *f);   // 800788d4
+void Fighter_InitCameraBox(FighterData *fp);                // 80076064
+void Fighter_SetSelfDamageSource(GOBJ *f);                  // 800788d4
+float Fighter_CalcForceApplied(FighterData *fp, void *unk); // 80079ea8
 #endif

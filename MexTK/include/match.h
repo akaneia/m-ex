@@ -2781,5 +2781,4 @@ COBJ *Match_GetCObj();
 float Match_GetDamageRatio();
 void Match_CreateGOExclamation();
 void Match_EnableFighterInputs();
-float Damage_CalcForceApplied(void *unk); // 80079ea8
 #endif

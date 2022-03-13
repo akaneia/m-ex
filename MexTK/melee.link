@@ -374,6 +374,7 @@
 8007efc8:Fighter_Transform
 80076064:Fighter_InitCameraBox
 800788d4:Fighter_SetSelfDamageSource
+80079ea8:Fighter_CalcForceApplied
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
@@ -609,7 +610,6 @@
 8016b248:Match_GetDamageRatio
 8016b7f8:Match_CreateGOExclamation
 800868a4:Match_EnableFighterInputs
-80079ea8:Damage_CalcForceApplied
 8037E708:MatToQuat
 8001B6F8:Memcard_CheckStatus
 8001BB48:Memcard_ReqSaveCreate
