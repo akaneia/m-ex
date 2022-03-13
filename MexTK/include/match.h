@@ -269,6 +269,7 @@ struct CameraBox
     float boundright_proj;  // 0x44
     float boundtop_proj;    // 0x48
     float boundbottom_proj; // 0x4c
+    float x50;              // 0x50
 };
 
 struct MatchCamera
@@ -2780,4 +2781,5 @@ COBJ *Match_GetCObj();
 float Match_GetDamageRatio();
 void Match_CreateGOExclamation();
 void Match_EnableFighterInputs();
+float Damage_CalcForceApplied(void *unk); // 80079ea8
 #endif

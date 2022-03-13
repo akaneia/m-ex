@@ -126,38 +126,7 @@ struct MapData
     int x18;                           // 0x18
     void *OnDestroyCB;                 // 0x1c
     int live_sfx[8];                   // 0x20, sfx ID's currently playing
-    int x40;                           // 0x40
-    int x44;                           // 0x44
-    int x48;                           // 0x48
-    int x4c;                           // 0x4c
-    int x50;                           // 0x50
-    int x54;                           // 0x54
-    int x58;                           // 0x58
-    int x5c;                           // 0x5c
-    int x60;                           // 0x60
-    int x64;                           // 0x64
-    int x68;                           // 0x68
-    int x6c;                           // 0x6c
-    int x70;                           // 0x70
-    int x74;                           // 0x74
-    int x78;                           // 0x78
-    int x7c;                           // 0x7c
-    int x80;                           // 0x80
-    int x84;                           // 0x84
-    int x88;                           // 0x88
-    int x8c;                           // 0x8c
-    int x90;                           // 0x90
-    int x94;                           // 0x94
-    int x98;                           // 0x98
-    int x9c;                           // 0x9c
-    int xa0;                           // 0xa0
-    int xa4;                           // 0xa4
-    int xa8;                           // 0xa8
-    int xac;                           // 0xac
-    int xb0;                           // 0xb0
-    int xb4;                           // 0xb4
-    int xb8;                           // 0xb8
-    int xbc;                           // 0xbc
+    ColorOverlay color;                // 0x40
     int xc0;                           // 0xc0
     u16 xc4;                           // 0xc4
     u8 xc6;                            // 0xc6
@@ -420,7 +389,12 @@ struct Stage
     int endgame2_genpoint;      // 0x720, general point that ended the gamem, used for temple
     int x724;                   // 0x724
     int x728;                   // 0x728
-    int x72C;                   // 0x728
+    struct
+    {
+        GOBJ *gobj; // 0x72c, points to the map gobj
+        Vec3 pos;   // 0x730, current position of hazard
+        float x73c; // 0x73c, unk
+    } catch;
 };
 
 struct GeneralPoints
@@ -564,6 +538,10 @@ void Stage_InitLines(void *coll_data);
 void Stage_InitCatchHazard(GOBJ *map, int unk, void *check_cb);
 void Stage_InitMoveHazard(GOBJ *map, int unk, void *check_cb);
 void Stage_InitDamageHazard(GOBJ *map, int unk, void *check_cb);
+void Stage_InitLineHazardDescUnk(void *unk, LineHazardDesc *hazard_desc); // 0x80008d30
+void Stage_InitColAnim(JOBJ *map_jobj);
+void Stage_ApplyColAnim(GOBJ *map, ColAnimDesc *colanim);
+void Stage_DisableColAnim(GOBJ *map);
 int Stage_GetExternalID();
 int Stage_ExternalToInternal(int ext_id);
 #endif

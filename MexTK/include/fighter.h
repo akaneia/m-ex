@@ -2274,7 +2274,8 @@ struct FighterData
     int x208c;                            // 0x208c
     int x2090;                            // 0x2090
     GOBJ *victim;                         // 0x2094
-    int x2098;                            // 0x2098
+    u16 x2098;                            // 0x2098
+    u16 is_hide_player_indicator;         // 0x209a
     int x209c;                            // 0x209c
     JOBJ *accessory;                      // 0x20a0
     int x20a4;                            // 0x20a4
@@ -3002,4 +3003,6 @@ void Fighter_MultiJump_TurnThink(FighterData *fp, int turn_frames);
 int Fighter_CheckFootstool(GOBJ *f);
 float Fighter_GetSoftLandVelocity(FighterData *fp);
 void Fighter_Transform(GOBJ *f, void *EnterStateCallback);
+void Fighter_InitCameraBox(FighterData *fp); // 80076064
+void Fighter_SetSelfDamageSource(GOBJ *f);   // 800788d4
 #endif

@@ -372,6 +372,8 @@
 80081a00:Fighter_CheckFootstool
 800d0ec8:Fighter_GetSoftLandVelocity
 8007efc8:Fighter_Transform
+80076064:Fighter_InitCameraBox
+800788d4:Fighter_SetSelfDamageSource
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
@@ -607,6 +609,7 @@
 8016b248:Match_GetDamageRatio
 8016b7f8:Match_CreateGOExclamation
 800868a4:Match_EnableFighterInputs
+80079ea8:Damage_CalcForceApplied
 8037E708:MatToQuat
 8001B6F8:Memcard_CheckStatus
 8001BB48:Memcard_ReqSaveCreate
@@ -747,6 +750,10 @@
 800c0764:Stage_InitCatchHazard
 800c06e8:Stage_InitMoveHazard
 800c07f8:Stage_InitDamageHazard
+80008d30:Stage_InitLineHazardDescUnk
+801c94d8:Stage_InitColAnim
+801c9604:Stage_ApplyColAnim
+801c95c4:Stage_DisableColAnim
 801C8138:Stage_MapStateChange
 801c5440:Stage_PlaySFX
 801c54dc:Stage_CheckSFX
