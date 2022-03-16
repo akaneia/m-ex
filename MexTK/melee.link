@@ -382,6 +382,7 @@
 80016BE0:Archive_LoadFile
 80016C64:Archive_LoadInitReturnSymbol
 80016af0:Archive_GetSections
+80016a54:Archive_Init
 80016efc:Archive_Free
 80380358:Archive_GetPublicAddress
 8001819c:File_GetPreloadedFile
@@ -478,6 +479,7 @@
 803624d8:HSD_StateInitTev
 803738d0:HSD_StateInitDirect
 8036c244:HSD_ClearVtxDesc
+8026b40c:Item_IndexStageItem
 80094818:Item_Catch
 80266F3C:Item_CheckIfEnabled
 80276348:Item_CheckIfTouchingWall
@@ -663,6 +665,7 @@
 8033796c:DVDConvertPathToEntrynum
 800161a0:DVDWaitForRead
 8038f6d4:File_Read
+800163d8:File_GetSize
 8001f410:MTH_Init
 8001f800:MTH_Terminate
 8001f67c:MTH_Render

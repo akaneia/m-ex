@@ -190,6 +190,7 @@ HSD_Archive *Archive_LoadFile(char *filename);
 void Archive_LoadInitReturnSymbol(char *filename, void *ptr, ...);                        // input each symbol name pointer sequentially and terminate with 0;
 void Archive_GetSections(HSD_Archive *archive, void *symbol_out, char *symbol_name, ...); // input each symbol name sequentially and terminate with 0;
 void *Archive_GetPublicAddress(HSD_Archive *archive, char *symbol);
+void Archive_Init(HSD_Archive *archive, void *file_data, int size);
 void Archive_Free(HSD_Archive *archive);
 HSD_Archive *File_GetPreloadedFile(char *filename);
 void File_LoadSync(char *filename, void *alloc, int *out_size);

@@ -412,14 +412,18 @@ struct GeneralPointsInfo
 
 struct MapHead
 {
-    GeneralPointsInfo *general_points_info;
-    int general_points_num;
-    MapGObjDesc *map_gobj_desc; // pointer to array of map_gobj_desc's
-    int map_gobj_desc_num;
-    void *splines;
-    int splines_num;
-    void *lights;
-    int lights_num;
+    GeneralPointsInfo *general_points_info; // 0x0
+    int general_points_num;                 // 0x4
+    MapGObjDesc *map_gobj_desc;             // 0x8, pointer to array of map_gobj_desc's
+    int map_gobj_desc_num;                  // 0xC
+    void *splines;                          // 0x10
+    int splines_num;                        // 0x14
+    void *lights;                           // 0x18
+    int lights_num;                         //0x1C
+    void *splines_desc;                     // 0x20
+    int splines_desc_num;                   // 0x24
+    MOBJ **mobj;                            // 0x28
+    int mobj_num;                           // 0x2c
 };
 
 struct MapGObjDesc
@@ -438,8 +442,9 @@ struct MapGObjDesc
 
 struct StageFile
 {
-    HSD_Archive *archive;
-    MapHead *map_head;
+    HSD_Archive *archive; //
+    MapHead *map_head;    //
+    int xc;               // is_secondary? transformations use 1 for this
 };
 
 struct GrDesc
@@ -477,6 +482,12 @@ struct LineHazardDesc
     int element;
     int x1c;
     int sfx;
+};
+
+struct MapItemDesc
+{
+    int index;
+    ItemDesc *desc;
 };
 
 Stage *stc_stage = 0x8049e6c8;

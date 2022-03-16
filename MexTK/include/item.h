@@ -897,7 +897,7 @@ itPublicData **stc_itPublicData = (R13 + -0x4978);
 ItemDesc **stc_itdesc_enemies = (R13 + -0x4968);
 
 /*** Functions ***/
-
+void Item_IndexStageItem(ItemDesc *item_desc, int index);
 void Item_Hold(GOBJ *item, GOBJ *fighter, int boneID);
 void Item_Catch(GOBJ *fighter, int unk);
 void Items_StoreItemDataToCharItemTable(int articleData, int articleID);
