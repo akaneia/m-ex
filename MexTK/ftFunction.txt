@@ -39,8 +39,8 @@ onsmashlw
 onextrstanim
 onindexextresultanim
 demomovelogic
-onthrowfw
-onthrowbk
-onthrowhi
-onthrowlw
+onintrol
+onintror
+onappeal
+oncatch
 gettraildata

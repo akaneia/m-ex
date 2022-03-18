@@ -225,6 +225,10 @@ rtocOffsets:
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup2,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemRelease,-1
+  .hword Arch_FighterFunc,Arch_FighterFunc_onIntroL,-1
+  .hword Arch_FighterFunc,Arch_FighterFunc_onIntroR,-1
+  .hword Arch_FighterFunc,Arch_FighterFunc_onTaunt,-1
+  .hword Arch_FighterFunc,Arch_FighterFunc_onCatch,-1
   .hword Arch_Fighter,Arch_Fighter_BGM,-1
   .hword Arch_Fighter,Arch_Fighter_ViWaitFileNames,-1
   .hword Arch_Scene,Scene_Major,-1

@@ -256,10 +256,10 @@
   .set  Arch_FighterFunc_onGetExtResultAnim,0x98
   .set  Arch_FighterFunc_onIndexExtResultAnim,0x9C
   .set  Arch_FighterFunc_MoveLogicDemo,0xA0
-  .set  Arch_FighterFunc_onThrowF,0xA4
-  .set  Arch_FighterFunc_onThrowB,0xA8
-  .set  Arch_FighterFunc_onThrowHi,0xAC
-  .set  Arch_FighterFunc_onThrowLw,0xB0
+  .set  Arch_FighterFunc_onIntroL,0xA4
+  .set  Arch_FighterFunc_onIntroR,0xA8
+  .set  Arch_FighterFunc_onTaunt,0xAC
+  .set  Arch_FighterFunc_onCatch,0xB0
   .set  Arch_FighterFunc_GetTrailData,0xB4
 .set  Arch_FGM,0x10
   .set  Arch_FGM_Files,0x0
@@ -385,7 +385,11 @@
 .set  OFST_FighterOnItemPickup,0xC0
 .set  OFST_FighterOnItemPickup2,0xC4
 .set  OFST_FighterOnItemRelease,0xC8
-.set  OFST_FighterBGM, OFST_FighterOnItemRelease + 0x4
+.set  OFST_FighterOnIntroL, OFST_FighterOnItemRelease + 0x4
+.set  OFST_FighterOnIntroR, OFST_FighterOnIntroL + 0x4
+.set  OFST_FighterOnTaunt, OFST_FighterOnIntroR + 0x4
+.set  OFST_FighterOnCatch, OFST_FighterOnTaunt + 0x4
+.set  OFST_FighterBGM, OFST_FighterOnCatch + 0x4
 .set  OFST_FighterViWaitFileNames, OFST_FighterBGM + 0x4
 .set  OFST_MajorScenes, OFST_FighterViWaitFileNames + 0x4
 .set  OFST_MinorScenes, OFST_MajorScenes + 0x4
