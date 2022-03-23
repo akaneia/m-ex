@@ -13,7 +13,7 @@
 # we use the last entry in the PlCo bone table 
 # (thrown anim skeleton additional bones @ 0x14)
   lwz r29,OFST_Metadata_FtIntNum(rtoc)
-  addi r29,r29,1
+  # addi r29,r29,1
   b Exit
 
 UseFtKind:

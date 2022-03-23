@@ -183,6 +183,7 @@ struct HSD_Archive
 
 /*** Static Variables ***/
 HSD_VI *stc_HSD_VI = 0x8046b0f0;
+HSD_Update *stc_hsd_update = 0x80479d58;
 
 /*** Functions ***/
 
@@ -209,6 +210,7 @@ void HSD_StateInvalidate(int flags);
 void HSD_StateInitTev();
 void HSD_StateInitDirect(GXVtxFmt vtxfmt, int render_flags);
 void HSD_ClearVtxDesc();
+void HSD_GXProject(COBJ *cobj, Vec3 *in, Vec3 *out, int unk);
 void GX_AllocImageData(_HSD_ImageDesc *image_desc, int width, int height, int fmt, int size); // image data buffer is stored to the image_desc
 void GXTexModeSync();
 void GXPixModeSync();

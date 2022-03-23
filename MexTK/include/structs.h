@@ -63,6 +63,7 @@ typedef struct StageOnGO StageOnGO;
 typedef struct MapData MapData;
 typedef struct MapDesc MapDesc;
 typedef struct StageFile StageFile;
+typedef struct grGroundParam grGroundParam;
 typedef struct GrDesc GrDesc;
 typedef struct GrExtLookup GrExtLookup;
 typedef struct LineHazardDesc LineHazardDesc;

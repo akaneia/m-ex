@@ -94,6 +94,10 @@ typedef enum TeamKind
     TEAMKIND_RED,
     TEAMKIND_BLUE,
     TEAMKIND_GREEN,
+    TEAMKIND_CPUTRAIN, // cpu in training mode is on team 4 o_o
+    TEAMKIND_5,
+    TEAMKIND_6,
+    TEAMKIND_NUM,
 } TeamKind;
 enum CPUType
 {

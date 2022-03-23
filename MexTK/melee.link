@@ -478,6 +478,7 @@
 80361fc4:HSD_StateInvalidate
 803624d8:HSD_StateInitTev
 803738d0:HSD_StateInitDirect
+8000e210:HSD_GXProject
 8036c244:HSD_ClearVtxDesc
 8026b40c:Item_IndexStageItem
 80094818:Item_Catch
@@ -579,6 +580,12 @@
 802FA2D0:KOCount_Update
 803672DC:LObj_LoadDesc
 80011ac4:LObj_LoadAll
+80366d70:LObj_GetPosition
+80366ce8:LObj_SetPosition
+80366e38:LObj_GetInterest
+80366db0:LObj_SetInterest
+803656f8:LObj_ReqAnimAll
+80365678:LObj_AnimAll
 80024E84:Match_AdjustSoundOnPause
 8016B094:Match_CheckIfStock
 8016B168:Match_CheckIfTeams

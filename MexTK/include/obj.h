@@ -517,8 +517,8 @@ struct LOBJ
     } u;
     f32 shininess;
     Vec3 lvec;
-    struct AOBJ *aobj;
-    u32 id; //GXLightID
+    AOBJ *aobj; // 0x48
+    u32 id;     // 0x4c, GXLightID
     //GXLightObj lightobj;      //0x50
     u32 spec_id; //0x90 GXLightID
     //GXLightObj spec_lightobj; //0x94
@@ -634,8 +634,14 @@ void GXLink_Common(GOBJ *gobj, int pass);
 int GX_LookupRenderPass(int pass);
 void GXLink_LObj(GOBJ *gobj, int pass);
 void GXLink_Fog(GOBJ *gobj, int pass);
-void *LObj_LoadDesc(void *lobjdesc);
-void *LObj_LoadAll(void **lobjdesc);
+LOBJ *LObj_LoadDesc(void *lobjdesc);
+LOBJ *LObj_LoadAll(void **lobjdesc);
+int LObj_GetPosition(LOBJ *lobj, Vec3 *pos);
+void LObj_SetPosition(LOBJ *lobj, Vec3 *pos);
+int LObj_GetInterest(LOBJ *lobj, Vec3 *pos);
+void LObj_SetInterest(LOBJ *lobj, Vec3 *pos);
+void LObj_ReqAnimAll(LOBJ *lobj, float frame);
+void LObj_AnimAll(LOBJ *lobj);
 HSD_Fog *Fog_LoadDesc(void *fogdesc);
 DOBJ *JOBJ_GetDObj(JOBJ *jobj);
 void *MOBJ_SetAlpha(DOBJ *dobj, float alpha);

@@ -222,6 +222,50 @@ struct StageOnGO
     void *cb;
 };
 
+struct grGroundParam
+{
+    float scale;                // 0x0
+    int flags;                  // 0x4
+    u16 fov;                    // 0x8
+    int cam_distance_min;       // 0xc
+    int cam_distance_max;       // 0x10
+    int tilt_scale;             // 0x14
+    float y_rotation;           // 0x18
+    float x_rotation;           // 0x1c
+    float fixedness;            // 0x20
+    float bubble_mult;          // 0x24
+    float cam_smoothness;       // 0x28
+    u16 x2c;                    // 0x2c
+    u16 x2e;                    // 0x2e
+    int pause_min_z;            // 0x30
+    int pause_default_z;        // 0x34
+    int pause_max_z;            // 0x38
+    float pause_tilt_max_up;    // 0x3c
+    float pause_tilt_max_down;  // 0x40
+    float pause_tilt_max_left;  // 0x44
+    float pause_tilt_max_right; // 0x48
+    float x4c;                  // 0x4c
+    float cam_fixed_x;          // 0x50
+    float cam_fixed_y;          // 0x54
+    float cam_fixed_z;          // 0x58
+    float cam_fixed_fov;        // 0x5c
+    float cam_fixed_angle_y;    // 0x60
+    float cam_fixed_angle_x;    // 0x64
+    u16 x68;                    // 0x68
+    u16 item_rates[35];         // 0x6a
+    void *bgm_data;             // 0xb0
+    int bgm_num;                // 0xb4
+    int xb8;                    // 0xb8
+    int xbc;                    // 0xbc
+    int xc0;                    // 0xc0
+    int xc4;                    // 0xc4
+    int xc8;                    // 0xc8
+    int xcc;                    // 0xcc
+    int xd0;                    // 0xd0
+    int xd4;                    // 0xd4
+    int xd8;                    // 0xd8
+};
+
 struct Stage
 {
     float cambound_left;                                                  // 0x0
@@ -240,18 +284,18 @@ struct Stage
     float x38;                                                            // 0x38
     float x3c;                                                            // 0x3c
     float x40;                                                            // 0x40
-    int x44;                                                              // 0x44
-    int x48;                                                              // 0x48
-    int x4c;                                                              // 0x4c
-    int x50;                                                              // 0x50
-    int x54;                                                              // 0x54
-    int x58;                                                              // 0x58
-    int x5c;                                                              // 0x5c
-    int x60;                                                              // 0x60
-    int x64;                                                              // 0x64
-    int x68;                                                              // 0x68
-    int x6c;                                                              // 0x6c
-    int x70;                                                              // 0x70
+    float x44;                                                            // 0x44
+    float x48;                                                            // 0x48
+    float x4c;                                                            // 0x4c
+    float x50;                                                            // 0x50
+    float x54;                                                            // 0x54
+    float x58;                                                            // 0x58
+    float x5c;                                                            // 0x5c
+    float x60;                                                            // 0x60
+    float x64;                                                            // 0x64
+    float x68;                                                            // 0x68
+    float x6c;                                                            // 0x6c
+    float x70;                                                            // 0x70
     float blastzoneLeft;                                                  // 0x74
     float blastzoneRight;                                                 // 0x78
     float blastzoneTop;                                                   // 0x7c
@@ -344,51 +388,51 @@ struct Stage
     int x178;                                                             // 0x178
     void (*OnShadowRender)(Vec3 *fighter_pos, int unk, JOBJ *stage_jobj); // 0x17c
     GOBJ *map_gobjs[64];
-    JOBJ *general_points[256];  // 0x280
-    int x680;                   // 0x680
-    int x684;                   // 0x684
-    int x688;                   // 0x688
-    int x68c;                   // 0x68c
-    int x690;                   // 0x690
-    int x694;                   // 0x694
-    int x698;                   // 0x698
-    int x69c;                   // 0x69c
-    int x6a0;                   // 0x6a0
-    StageOnGO *on_go;           // 0x6a4
-    int *itemData;              // 0x6a8
-    int *coll_data;             // 0x6ac
-    int *grGroundParam;         // 0x6b0
-    int *ALDYakuAll;            // 0x6b4
-    int *map_ptcl;              // 0x6b8
-    int *map_texg;              // 0x6bc
-    void *yakumono_param;       // 0x6c0
-    int *map_plit;              // 0x6c4
-    int *x6c8;                  // 0x6c8
-    void *quake_model_set;      // 0x6cc
-    s16 x6d0;                   // 0x6d0
-    s16 targets_hit;            // 0x6d2
-    s16 targets_left;           // 0x6d4
-    int x6d8;                   // 0x6d8
-    int x6dc;                   // 0x6dc
-    int x6e0;                   // 0x6e0
-    int x6e4;                   // 0x6e4
-    int x6e8;                   // 0x6e8
-    int x6ec;                   // 0x6ec
-    int x6f0;                   // 0x6f0
-    int x6f4;                   // 0x6f4
-    int x6f8;                   // 0x6f8
-    int x6fc;                   // 0x6fc
-    int x700;                   // 0x700
-    int x704;                   // 0x704
-    int x708;                   // 0x708
-    float endgame1_boundwidth;  // 0x70c, used for mush king
-    float endgame1_boundheight; // 0x710, used for mush king
-    int endgame1_genpoint;      // 0x714, general point that ended the game, used for mush king
-    float endgame2_boundwidth;  // 0x718, used for temple
-    float endgame2_boundheight; // 0x71c, used for temple
-    int endgame2_genpoint;      // 0x720, general point that ended the gamem, used for temple
-    int x724;                   // 0x724
-    int x728;                   // 0x728
+    JOBJ *general_points[256];    // 0x280
+    int x680;                     // 0x680
+    int x684;                     // 0x684
+    int x688;                     // 0x688
+    int x68c;                     // 0x68c
+    int x690;                     // 0x690
+    int x694;                     // 0x694
+    int x698;                     // 0x698
+    int x69c;                     // 0x69c
+    int x6a0;                     // 0x6a0
+    StageOnGO *on_go;             // 0x6a4
+    int *itemData;                // 0x6a8
+    int *coll_data;               // 0x6ac
+    grGroundParam *grGroundParam; // 0x6b0
+    int *ALDYakuAll;              // 0x6b4
+    int *map_ptcl;                // 0x6b8
+    int *map_texg;                // 0x6bc
+    void *yakumono_param;         // 0x6c0
+    int *map_plit;                // 0x6c4
+    int *x6c8;                    // 0x6c8
+    void *quake_model_set;        // 0x6cc
+    s16 x6d0;                     // 0x6d0
+    s16 targets_hit;              // 0x6d2
+    s16 targets_left;             // 0x6d4
+    int x6d8;                     // 0x6d8
+    int x6dc;                     // 0x6dc
+    int x6e0;                     // 0x6e0
+    int x6e4;                     // 0x6e4
+    int x6e8;                     // 0x6e8
+    int x6ec;                     // 0x6ec
+    int x6f0;                     // 0x6f0
+    int x6f4;                     // 0x6f4
+    int x6f8;                     // 0x6f8
+    int x6fc;                     // 0x6fc
+    int x700;                     // 0x700
+    int x704;                     // 0x704
+    int x708;                     // 0x708
+    float endgame1_boundwidth;    // 0x70c, used for mush king
+    float endgame1_boundheight;   // 0x710, used for mush king
+    int endgame1_genpoint;        // 0x714, general point that ended the game, used for mush king
+    float endgame2_boundwidth;    // 0x718, used for temple
+    float endgame2_boundheight;   // 0x71c, used for temple
+    int endgame2_genpoint;        // 0x720, general point that ended the gamem, used for temple
+    int x724;                     // 0x724
+    int x728;                     // 0x728
     struct
     {
         GOBJ *gobj; // 0x72c, points to the map gobj
@@ -419,7 +463,7 @@ struct MapHead
     void *splines;                          // 0x10
     int splines_num;                        // 0x14
     void *lights;                           // 0x18
-    int lights_num;                         //0x1C
+    int lights_num;                         // 0x1C
     void *splines_desc;                     // 0x20
     int splines_desc_num;                   // 0x24
     MOBJ **mobj;                            // 0x28
@@ -428,16 +472,16 @@ struct MapHead
 
 struct MapGObjDesc
 {
-    JOBJSet jobjset; // 0x0
-    COBJDesc *cobj;  // 0x10
-    void *x14;       // 0x14
-    void *lobj;      // 0x18
-    HSD_Fog *fog;
-    void *coll_links;
-    int coll_links_num;
-    void *x28;
-    void *coll_links2;
-    int coll_links2_num;
+    JOBJSet jobjset;     // 0x0
+    COBJDesc *cobj;      // 0x10
+    void *x14;           // 0x14
+    void *lobj;          // 0x18
+    void *fog_desc;      // 0x1c
+    void *coll_links;    // 0x20
+    int coll_links_num;  // 0x24
+    void *x28;           // 0x28
+    void *coll_links2;   // 0x2c
+    int coll_links2_num; // 0x30
 };
 
 struct StageFile
@@ -494,6 +538,8 @@ Stage *stc_stage = 0x8049e6c8;
 int *ftchkdevice_windnum = R13 + (-0x5128);
 int *ftchkdevice_grabnum = R13 + (-0x512C);
 int *ftchkdevice_dmgnum = R13 + (-0x5130);
+int *stc_gr_ext_cur = 0x804d49e8;
+GrExtLookup *stc_gr_lookup_cur = 0x804d49ec;
 
 /*** Functions ***/
 int Stage_GetRandomExternalID();
