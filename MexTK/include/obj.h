@@ -499,6 +499,37 @@ struct _HSD_LightAttn
     f32 k2;
 };
 
+struct LObjDesc
+{
+    char *class_name;               //0x00
+    LObjDesc *next;                 //0x04
+    u16 flags;                      //0x08
+    u16 attnflags;                  //0x0A
+    GXColor color;                  //0x0C
+    struct _HSD_WObjDesc *position; //0x10
+    struct _HSD_WObjDesc *interest; //0x14
+    union
+    {
+        void *p;
+        f32 *shininess;
+        void *point;
+        void *spot;
+        void *attn;
+    } u;
+};
+struct LightAnim
+{
+    LightAnim *next;
+    struct _HSD_AObjDesc *aobjdesc;
+    struct _HSD_WObjAnim *position_anim;
+    struct _HSD_WObjAnim *interest_anim;
+};
+struct LightGroup
+{
+    LObjDesc *lobj_desc;
+    LightAnim *anim;
+};
+
 struct LOBJ
 {
     HSD_Obj parent;    //0x00
