@@ -184,6 +184,7 @@ struct HSD_Archive
 /*** Static Variables ***/
 HSD_VI *stc_HSD_VI = 0x8046b0f0;
 HSD_Update *stc_hsd_update = 0x80479d58;
+int **stc_rng_seed = 0x804D5F94;
 
 /*** Functions ***/
 
