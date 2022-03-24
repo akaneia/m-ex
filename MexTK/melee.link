@@ -619,6 +619,7 @@
 8016b248:Match_GetDamageRatio
 8016b7f8:Match_CreateGOExclamation
 800868a4:Match_EnableFighterInputs
+80021c48:Match_ApplyScreenColAnim
 8037E708:MatToQuat
 8001B6F8:Memcard_CheckStatus
 8001BB48:Memcard_ReqSaveCreate

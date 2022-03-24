@@ -2736,6 +2736,8 @@ MatchOffscreen *stc_match_offscreen = 0x804a1df0;
 ExclamData *stc_exclam_data = 0x803f9628; // 8 of these
 HSD_Archive **stc_ifall_archive = 0x804d6d5c;
 int *stc_match_canvas = 0x804a1f58;
+GOBJ **stc_match_screencolor_gobj = 0x804d63e0;
+u8 *stc_hud_is_hidden = 0x804D6D6C;
 
 /*** Functions ***/
 CameraBox *CameraBox_Alloc();
@@ -2781,4 +2783,5 @@ COBJ *Match_GetCObj();
 float Match_GetDamageRatio();
 void Match_CreateGOExclamation();
 void Match_EnableFighterInputs();
+void Match_ApplyScreenColAnim(int colanim_index, int unk);
 #endif
