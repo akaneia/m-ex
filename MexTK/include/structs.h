@@ -145,6 +145,7 @@ typedef struct FtCollDesc FtCollDesc;
 typedef struct FtSFX FtSFX;
 typedef struct FtAction FtAction;
 typedef struct ftData ftData;
+typedef struct FtDmgVibrateDesc FtDmgVibrateDesc;
 typedef struct ftCommonData ftCommonData;
 typedef struct FtMultiJumpDesc FtMultiJumpDesc;
 typedef struct ftChkDevice ftChkDevice;

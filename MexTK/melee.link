@@ -375,6 +375,7 @@
 80076064:Fighter_InitCameraBox
 800788d4:Fighter_SetSelfDamageSource
 80079ea8:Fighter_CalcForceApplied
+8008021c:Fighter_UpdateModelShift
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim

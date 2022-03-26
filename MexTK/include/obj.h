@@ -576,7 +576,11 @@ struct JOBJSet
 
 /*** Static Variables ***/
 GOBJList **stc_gobj_list = R13 + (-0x3E74);
-u8 *obj_kind = R13 + -(0x3E55);
+GOBJProc **stc_gobjproc_cur = (R13 + -0x3E68);
+u8 *objkind_cobj = R13 + -(0x3E55);
+u8 *objkind_lobj = R13 + -(0x3E56);
+u8 *objkind_jobj = R13 + -(0x3E57);
+u8 *objkind_fog = R13 + -(0x3E58);
 
 /*** Functions ***/
 int JOBJ_GetWorldPosition(JOBJ *source, Vec3 *add, Vec3 *dest);

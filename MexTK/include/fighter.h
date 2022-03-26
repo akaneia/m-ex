@@ -1159,6 +1159,12 @@ struct CPU
     void *cmdscript_curr;        // 0x554, points to a command in the cmdscript queue
 };
 
+struct FtDmgVibrateDesc
+{
+    Vec2 *offsets;
+    int num;
+};
+
 struct ftCommonData
 {
     float x0;                     // 0x0
@@ -1667,8 +1673,8 @@ struct ftCommonData
     float x7dc;                   // 0x7dc
     float x7e0;                   // 0x7e0
     float x7e4;                   // 0x7e4
-    float x7e8;                   // 0x7e8
-    float x7ec;                   // 0x7ec
+    int meteor_angle_min;         // 0x7e8
+    int meteor_angle_max;         // 0x7ec
     int meteor_delay;             // 0x7f0, immediate delay before any action can occur
     float x7f4;                   // 0x7f4
     float x7f8;                   // 0x7f8
@@ -2092,8 +2098,7 @@ struct FighterData
         int time_since_hit;        // 0x18ac   in frames
         int x18b0;                 // 0x18b0
         float armor;               // 0x18b4
-        int x18b8;                 // 0x18b8
-        int x18bc;                 // 0x18bc
+        Vec2 vibrate_offset;       // 0x18b8
         int x18c0;                 // 0x18c0
         int source_ply;            // 0x18c4   damage source ply number
         int x18c8;                 // 0x18c8
@@ -2108,11 +2113,11 @@ struct FighterData
         u16 atk_instance_hurtby;   // 0x18ec. Last Attack Instance This Player Was Hit by,
         int x18f0;                 // 0x18f0
         int x18f4;                 // 0x18f4
-        u8 x18f8;                  // 0x18f8
+        u8 vibrate_index;          // 0x18f8, which dmg vibration values to use
         u8 x18f9;                  // 0x18f9
-        u16 model_shift_frames;    // 0x18fa
-        u8 x18fc;                  // 0x18fc
-        u8 x18fd;                  // 0x18fd
+        u16 vibrate_timer;         // 0x18fa
+        u8 vibrate_index_cur;      // 0x18fc, index of the current offset
+        u8 vibrate_offset_num;     // 0x18fd, number of different offsets for this dmg vibration index
         Vec2 ground_slope;         // 0x1900
         int x1908;                 // 0x1908
         void *random_sfx_table;    // 0x190c, contains a ptr to an sfx table when requesting a random sfx
@@ -2768,6 +2773,7 @@ struct FtDamage
 ftCommonData **stc_ftcommon = (R13 + -0x514C);
 ColAnimDesc **stc_plco_colanimdesc = 0x804D653C;
 GXColor **stc_shieldcolors = (R13 + -0x5194);
+FtDmgVibrateDesc **stc_dmg_vibrate_desc = (R13 + -0x5170);
 
 /*** Functions ***/
 void ActionStateChange(float startFrame, float animSpeed, float animBlend, GOBJ *fighter, int stateID, int flags1, GOBJ *alt_state_source);
@@ -3010,4 +3016,5 @@ void Fighter_Transform(GOBJ *f, void *EnterStateCallback);
 void Fighter_InitCameraBox(FighterData *fp);                // 80076064
 void Fighter_SetSelfDamageSource(GOBJ *f);                  // 800788d4
 float Fighter_CalcForceApplied(FighterData *fp, void *unk); // 80079ea8
+void Fighter_UpdateModelShift(GOBJ *f);                     // updates the offsets of the model during hitlag and smash charge
 #endif
