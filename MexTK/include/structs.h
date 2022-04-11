@@ -168,6 +168,7 @@ typedef struct DynamicsDesc DynamicsDesc;
 typedef struct DynamicsHitDesc DynamicsHitDesc;
 typedef struct DynamicsBehave DynamicsBehave;
 typedef struct IKParam IKParam;
+typedef struct FtVis FtVis;
 typedef struct ftDynamics ftDynamics;
 
 // Fighter States

@@ -778,6 +778,18 @@ struct IKParam
     float arm_param2;
 };
 
+struct FtVis
+{
+    s8 prev_value; // value before changed, used to restore original visibility
+    s8 index;      // displays the index's dobjs. -1 = hides all dobjs in this table
+
+    /*
+    Fighter Visibility Update @ 80074b6c
+    - Clears hidden flag on all dobjs in the tables
+    - Sets hidden flag on all dobjs in all non-current tables
+    */
+};
+
 struct ftDynamics
 {
     int dynamics_num;                   // number of dynamic bonesets for this fighter
@@ -1927,8 +1939,8 @@ struct FighterData
     int x5E4;                                 // 0x5E4
     FighterBone *bones;                       // 0x5E8
     int bone_num;                             // 0x5EC
-    int bone_arr;                             // 0x5F0
-    u16 dobj_toggle[12];                      // 0x5f4
+    DOBJ **dobj_lookup;                       // 0x5F0
+    FtVis dobj_toggle[12];                    // 0x5f4
     Effect *gfx;                              // 0x60C
     int x610;                                 // 0x610
     int x614;                                 // 0x614
@@ -2438,7 +2450,7 @@ struct FighterData
         unsigned char ik_orientation : 1;              // 0x1 = 0x221c
         unsigned char ik_rfoot : 1;                    // 0x80 - 0x221d
         unsigned char ik_lfoot : 1;                    // 0x40 - 0x221d
-        unsigned char x221d_3 : 1;                     // 0x20 - 0x221d
+        unsigned char ftvis_reqrevert : 1;             // 0x20 - 0x221d, request all ftvis revert to default next state change
         unsigned char input_enable : 1;                // 0x10 - 0x221d
         unsigned char x221d_5 : 1;                     // 0x8 - 0x221d
         unsigned char nudge_disable : 1;               // 0x4 - 0x221d
@@ -2949,8 +2961,11 @@ void Fighter_ClampHorizontalGroundVelocity(FighterData *, float);
 void Fighter_RemoveHeldFighterItem(GOBJ *fighter);
 void Fighter_DestroyAndRemoveHeldFighterItem(GOBJ *fighter);
 void Fighter_Phys_ApplyVerticalAirFriction(FighterData *fighter_data);
-void Fighter_VisTableGet(GOBJ *fighter, int vis_index);
-void Fighter_VisTableSet(GOBJ *fighter, int vis_index, int val); // val = -1 for disable, 0 for enable
+void Fighter_GetVisGroupDefault(GOBJ *fighter, int vis_group);
+void Fighter_SetVisGroupDefault(GOBJ *fighter, int vis_group, s8 index); // sets the default value for this vis group (-1 = hide all)
+void Fighter_SetVisGroupCurrent(GOBJ *fighter, int vis_group, s8 index); // sets the current active value for this vis group (-1 = hide all)
+void Fighter_RevertAllVisGroups(GOBJ *fighter);                          // sets all vis groups to their default values (specified by Fighter_SetVisGroupDefault)
+void Fighter_HideAllVisGroups(GOBJ *fighter);                            // hides all dobjs in all vis group (sets default and current to -1)
 void Fighter_GiveItem(GOBJ *fighter, GOBJ *item);
 void Fighter_ReleaseItemUnk(int ply, int ms, GOBJ *item);
 void Fighter_InitDamageVibrate(FighterData *fp, int dmg, float mult, int current_state, int unk_bool);

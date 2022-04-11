@@ -330,8 +330,11 @@
 800dcfd4:Fighter_BreakGrabUnk
 800dc920:Fighter_BreakGrab
 8007e2d0:Fighter_InitGrab
-80074a4c:Fighter_VisTableSet
-80074a74:Fighter_VisTableGet
+80074a4c:Fighter_SetVisGroupDefault
+80074a74:Fighter_GetVisGroupDefault
+80074a8c:Fighter_RevertAllVisGroups
+80074acc:Fighter_HideAllVisGroups
+80074b0c:Fighter_SetVisGroupCurrent
 800948a8:Fighter_GiveItem
 8003e998:Fighter_ReleaseItemUnk
 80090594:Fighter_InitDamageVibrate
