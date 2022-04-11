@@ -606,9 +606,20 @@ struct PlayerStandings
     int xf8;           // 0xf8
     int xfc;           // 0xfc
 };
+
+struct TeamStandings
+{
+    int death_time; // 0x0, does this contain stocks for the winning team?
+    int x4;         // 0x4
+    u8 placement;   // 0x8
+    u8 x9;          // 0x9
+    u8 xa;          // 0xa
+    u8 xb;          // 0xb
+};
+
 struct MatchStandings
 {
-    int x24c;                         // 0x24c
+    int x0;                           // 0x24c
     u8 end_kind;                      // 0x250
     u8 x5;                            // 0x251
     u8 is_teams;                      // 0x252
@@ -616,26 +627,9 @@ struct MatchStandings
     u8 xc;                            // 0x258
     u8 winner_num;                    // 0x259 is greater than 1 when a tie occurs
     u8 placings[4];                   // 0x25a - 0x25d, array of player indices in order of placement
-    int x260;                         // 0x260
-    int x264;                         // 0x264
-    int x268;                         // 0x268
-    int x26c;                         // 0x26c
-    u8 x270;                          // 0x270
-    u8 x271;                          // 0x271
-    u8 x272;                          // 0x272
-    u8 x273;                          // 0x273
-    int x274;                         // 0x274
-    int x278;                         // 0x278
-    int x27c;                         // 0x27c
-    int x280;                         // 0x280
-    int x284;                         // 0x284
-    int x288;                         // 0x288
-    int x28c;                         // 0x28c
-    int x290;                         // 0x290
-    int x294;                         // 0x294
-    int x298;                         // 0x298
-    int x29c;                         // 0x29c
-    int x2a0;                         // 0x2a0
+    int x14;                          // 0x260
+    int x18;                          // 0x264
+    TeamStandings team_standings[5];  // 0x268
     PlayerStandings ply_standings[6]; // 0x2a4
 };
 
@@ -2738,6 +2732,8 @@ HSD_Archive **stc_ifall_archive = 0x804d6d5c;
 int *stc_match_canvas = 0x804a1f58;
 GOBJ **stc_match_screencolor_gobj = 0x804d63e0;
 u8 *stc_hud_is_hidden = 0x804D6D6C;
+float *stc_match_fgm_volume = R13 + -0x7dbc;
+float *stc_match_bgm_volume = R13 + -0x7db8;
 
 /*** Functions ***/
 CameraBox *CameraBox_Alloc();

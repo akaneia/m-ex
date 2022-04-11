@@ -63,6 +63,78 @@ enum ItemID
     ITEM_KIRBYCUTTER,
     ITEM_KIRBYHAMMER,
     ITEM_KIRBYABILITYSTAR,
+    ITEM_53,
+    ITEM_FOXLASER,
+    ITEM_FALCOLASER,
+    ITEM_FOXILLUSION,
+    ITEM_FALCOPHANTASM,
+    ITEM_LINKBOMB,
+    ITEM_CLINKBOMB,
+    ITEM_LINKBOOMERANG,
+    ITEM_CLINKBOOMERANG,
+    ITEM_LINKHOOKSHOT,
+    ITEM_CLINKHOOKSHOT,
+    ITEM_LINKARROW,
+    ITEM_CLINKARROW,
+    ITEM_NESSPKFIRE,
+    ITEM_NESSPKFLASH1,
+    ITEM_NESSPKFLASH2,
+    ITEM_NESSPKTHUNDER,
+    ITEM_NESSPKTHUNDER1,
+    ITEM_NESSPKTHUNDER2,
+    ITEM_NESSPKTHUNDER3,
+    ITEM_NESSPKTHUNDER4,
+    ITEM_FOXGUN,
+    ITEM_FALCOGUN,
+    ITEM_LINKBOW,
+    ITEM_CLINKBOW,
+    ITEM_PKFLASHEXPLODE,
+    ITEM_SHEIKNEEDLETHROWN,
+    ITEM_SHEIKNEEDLEHELD,
+    ITEM_PIKACHUTHUNDER,
+    ITEM_PICHUTHUNDER,
+    ITEM_MARIOCAPE,
+    ITEM_DRMARIOCAPE,
+    ITEM_SHEIKSMOKE,
+    ITEM_YOSHIEGGTHROWN,
+    ITEM_87,
+    ITEM_YOSHISTAR,
+    ITEM_89,
+    ITEM_90,
+    ITEM_91,
+    ITEM_92,
+    ITEM_SAMUSBOMB,
+    ITEM_SAMUSCHARGESHOT,
+    ITEM_SAMUSMISSILE,
+    ITEM_SAMUSGRAPPLE,
+    ITEM_SHEIKCHAIN,
+    ITEM_PEACHBOMBER,
+    ITEM_PEACHTURNIP,
+    ITEM_BOWSERFLAME,
+    ITEM_NESSBAT,
+    ITEM_NESSYOYO,
+    ITEM_PEACHPARASOL,
+    ITEM_PEACHTOAD,
+    ITEM_LUIGIFIRE,
+    ITEM_ICECLIMBERICE,
+    ITEM_ICECLIMBERBLIZZARD,
+    ITEM_ZELDAFIRE,
+    ITEM_ZELDAFIREEXPLODE,
+    ITEM_110,
+    ITEM_PEACHTOADSPORE,
+    ITEM_MEWTWOSHADOWBALL,
+    ITEM_ICECLIMBERROPE,
+    ITEM_GAWPESTICIDE,
+    ITEM_GAWMANHOLE,
+    ITEM_GAWFIRE,
+    ITEM_GAWPARACHUTE,
+    ITEM_GAWTURTLE,
+    ITEM_GAWSPERKY,
+    ITEM_GAWJUDGE,
+    ITEM_119,
+    ITEM_GAWSAUSAGE,
+    ITEM_CLINKMILK,
+    ITEM_GAWFIREFIGHTER,
 
     // pokemon
     ITEM_POKERANDOM = 160,
@@ -884,11 +956,11 @@ struct ItemData
         int xfc0;                                       // 0xfc0
         int xfc4;                                       // 0xfc4
         int xfc8;                                       // 0xfc8
-        struct                                          //
-        {                                               //
-            GOBJ *fighter_orig;                         // 0xfcc
-        } MEX;                                          //
     } item_var;                                         //
+    struct                                              //
+    {                                                   //
+        GOBJ *fighter_orig;                             // 0xfcc
+    } MEX;
 };
 
 /*** static reference ***/

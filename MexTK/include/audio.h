@@ -82,7 +82,11 @@ void Audio_SyncLoadAll();
 void BGM_DecideMenuBGM();
 int BGM_GetMenuBGM();
 void BGM_Play(int hpsID);
+void BGM_PlayFile(char *filename, int volume, int unk);
+void BGM_Stop();
 int FGM_CheckActive(int fgm_id);
 void FGM_Stop(int fgm_id);
+void FGM_PauseKind(int kind); // pausing in-game pauses kinds 5,6,7,8
+void FGM_ResumeKind(int kind);
 
 #endif

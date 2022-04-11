@@ -43,6 +43,7 @@
 803568C4:CARDUnmount
 803549a0:CARDGetXferredBytes
 80030A50:Match_GetCObj
+8036a290:COBJ_Alloc
 8036A590:COBJ_LoadDesc
 80013B14:COBJ_LoadDescSetScissor
 8036a55c:COBJ_Init
@@ -56,12 +57,15 @@
 8036a110:CObj_SetViewport
 8036a010:CObj_SetScissor
 803687f0:CObj_SetEyePosition
+80368718:CObj_SetInterest
+803699c0:CObj_SetRoll
 8036a6c8:CObj_Release
 80391120:CObj_Destroy
 8036a288:COBJ_GetCurrent
 8036885c:COBJ_GetEyeVector
 803686ac:COBJ_GetInterest
 80368a08:COBJ_GetEyeDistance
+803695f0:COBJ_GetViewingMtx
 80048160:Coll_CheckLedge
 80043680:Coll_CopyPosToECBs
 80041C8C:Coll_ECBCurrToPrev
@@ -144,6 +148,7 @@
 802787B4:Effect_SpawnItEffect
 80278800:Effect_SpawnItEffectLookup
 8005FDDC:Effect_SpawnSync
+80067624:Effect_CheckQueue
 800865d8:Fighter_GetLeftStick
 8007D508:Fighter_AddClampYPosition
 8007D3A8:Fighter_AllowXDrift
@@ -424,6 +429,7 @@
 80390EB8:GX_LookupRenderPass
 8033E78C:GXGetTexBufferSize
 8033F270:GXInvalidateTexAll
+8033c8a8:GXSetTexCoordGen2
 80391070:GXLink_Common
 8026407C:GXLink_Fog
 8026EECC:GXLink_Item
@@ -457,7 +463,7 @@
 80341510:GXSetCurrentMtx
 8000ACFC:Hitbox_CheckIfPreviouslyHit
 80008688:Hitbox_SetAsPreviouslyHit
-8007aff8:Hitbox_DisableAll
+8007aff8:Fighter_HitboxDisableAll
 8037F1B0:HSD_Free
 80375404:HSD_GetHeapID
 800122C8:HSD_ImageDescCopyFromEFB
@@ -479,8 +485,11 @@
 80361fc4:HSD_StateInvalidate
 803624d8:HSD_StateInitTev
 803738d0:HSD_StateInitDirect
+80361bb8:HSD_StateSetZMode
+803623d0:HSD_StateSetNumChans
 8000e210:HSD_GXProject
 8036c244:HSD_ClearVtxDesc
+803620a4:HSD_SetupChannel
 8026b40c:Item_IndexStageItem
 80094818:Item_Catch
 80266F3C:Item_CheckIfEnabled
@@ -656,6 +665,8 @@
 80342418:MTXRotRad
 80342aa8:MTXMultVec
 80023F28:BGM_Play
+80023ed4:BGM_PlayFile
+800236dc:BGM_Stop
 8023754C:Nametag_GetText
 803440e8:OSCreateHeap
 80344154:OSDestroyHeap
@@ -716,6 +727,8 @@
 800237a8:SFX_PlayFullVolume
 80023710:FGM_CheckActive
 800236b8:FGM_Stop
+8038e6c0:FGM_PauseKind
+8038e844:FGM_ResumeKind
 80364340:fmod
 803263D4:sin
 803D7060:SpawnMEXEffect

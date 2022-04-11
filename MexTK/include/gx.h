@@ -465,5 +465,12 @@ u32 GXGetTexBufferSize(
     u32 format,
     GXBool mipmap,
     u8 max_lod);
+void GXSetTexCoordGen2(
+    GXTexCoordID dst_coord,
+    GXTexGenType func,
+    GXTexGenSrc src_param,
+    u32 mtx,
+    GXBool normalize,
+    u32 postmtx);
 
 #endif

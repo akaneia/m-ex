@@ -85,6 +85,7 @@ typedef struct MatchHUDStock MatchHUDStock;
 typedef struct MatchCamera MatchCamera;
 typedef struct CameraBox CameraBox;
 typedef struct MatchStandings MatchStandings;
+typedef struct TeamStandings TeamStandings;
 typedef struct PlayerStandings PlayerStandings;
 typedef struct ExclamData ExclamData;
 
@@ -139,6 +140,7 @@ typedef struct ReflectDesc ReflectDesc;
 typedef struct ShieldDesc ShieldDesc;
 typedef struct AbsorbDesc AbsorbDesc;
 typedef struct AfterImageDesc AfterImageDesc;
+typedef struct FtDmgLog FtDmgLog;
 typedef struct CPULeaderLog CPULeaderLog;
 typedef struct CPU CPU;
 typedef struct FtCollDesc FtCollDesc;

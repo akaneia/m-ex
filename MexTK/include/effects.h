@@ -184,6 +184,7 @@ void Effect_DestroyAll(GOBJ *fighter);
 void Particle_DestroyAll(JOBJ *jobj);
 void Effect_PauseAll(GOBJ *fighter);
 void Effect_ResumeAll(GOBJ *fighter);
+void Effect_CheckQueue(GOBJ *g, Effect **gfx);
 int psRemoveParticleAppSRT(Particle2 *ptcl);
 void psDeletePntJObjwithParticle(Particle2 *ptcl);
 ptclGen *psKillGenerator(ptclGen *gen, ptclGen *unk);

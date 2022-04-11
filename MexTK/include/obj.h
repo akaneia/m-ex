@@ -577,6 +577,7 @@ struct JOBJSet
 /*** Static Variables ***/
 GOBJList **stc_gobj_list = R13 + (-0x3E74);
 GOBJProc **stc_gobjproc_cur = (R13 + -0x3E68);
+u8 *objkind_sobj = R13 + -(0x3D40);
 u8 *objkind_cobj = R13 + -(0x3E55);
 u8 *objkind_lobj = R13 + -(0x3E56);
 u8 *objkind_jobj = R13 + -(0x3E57);
@@ -630,6 +631,7 @@ void AOBJ_ClearFlags(AOBJ *aobj, int flags);
 void DOBJ_SetFlags(DOBJ *dobj, int flags);
 void DOBJ_ClearFlags(DOBJ *dobj, int flags);
 void DOBJ_AddAnimAll(DOBJ *dobj, void *matanim, void *textureanim);
+COBJ *COBJ_Alloc();
 COBJ *COBJ_LoadDesc(COBJDesc *cobj);
 COBJ *COBJ_LoadDescSetScissor(COBJDesc *cobj);
 void COBJ_Init(COBJ *cobj, COBJDesc *cobj_desc); // re-initializes a live cobj using its descriptor
@@ -643,12 +645,15 @@ void CObj_SetOrtho(COBJ *cobj, float top, float bottom, float left, float right)
 void CObj_SetViewport(COBJ *cobj, float left, float right, float top, float bottom);
 void CObj_SetScissor(COBJ *cobj, u16 top, u16 bottom, u16 left, u16 right);
 void CObj_SetEyePosition(COBJ *cobj, Vec3 *pos);
+void CObj_SetInterest(COBJ *cobj, Vec3 *pos);
+void CObj_SetRoll(COBJ *cobj, float roll);
 void CObj_Release(COBJ *cobj);
 void CObj_Destroy(COBJ *cobj);
 COBJ *COBJ_GetCurrent();
 void COBJ_GetEyeVector(COBJ *cobj, Vec3 *eye_vec);
 void COBJ_GetInterest(COBJ *cobj, Vec3 *interest);
 float COBJ_GetEyeDistance(COBJ *cobj);
+void COBJ_GetViewingMtx(COBJ *cobj, Mtx *out);
 GOBJ *GObj_Create(int entity_class, int p_link, int flags);
 void GObj_Destroy(GOBJ *gobj);
 void GObj_AddGXLink(GOBJ *gobj, void *cb, int gx_link, int gx_pri);

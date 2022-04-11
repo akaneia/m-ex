@@ -989,6 +989,18 @@ struct AfterImageDesc
     float offset_bottom; // 0x18
     float offset_top;    // 0x1C
 };
+struct FtDmgLog
+{
+    float direction;     // 0x1844, 0x0
+    int kb_angle;        // 0x1848, 0x4
+    int damaged_hurtbox; // 0x184c, 0x8
+    float force_applied; // 0x1850, 0xc
+    Vec3 collpos;        // 0x1854, 0x10
+    int attribute;       // 0x1860, 0x1c
+    int x1864;           // 0x1864, 0x20
+    GOBJ *source;        // 0x1868, 0x24
+    float percent;       // 0x186c, 0x28
+};
 
 struct HitVictim
 {
@@ -1657,7 +1669,7 @@ struct ftCommonData
     float x79c;                   // 0x79c
     float x7a0;                   // 0x7a0
     float x7a4;                   // 0x7a4
-    float x7a8;                   // 0x7a8
+    float tip_overlap_max;        // 0x7a8 (phantom hit threshold)
     float x7ac;                   // 0x7ac
     float x7b0;                   // 0x7b0
     float x7b4;                   // 0x7b4
@@ -1703,7 +1715,7 @@ struct FighterData
     FtAction *ftaction;                                        // 0x24
     u16 *dynamics_data;                                        // 0x28
     float facing_direction;                                    // 0x2C
-    float facing_direction_repeated;                           // 0x30
+    float facing_direction_prev;                               // 0x30
     Vec3 scale;                                                // 0x34
     int pointer_to_next_linked_list;                           // 0x40
     int pointer_to_0x40__pointer_to_prev_linked_list;          // 0x44
@@ -1810,22 +1822,16 @@ struct FighterData
         float u_air_landing_lag;                               // 0x204
         float d_air_landing_lag;                               // 0x208
         float nametag_height;                                  // 0x20C
-        int x210;                                              // 0x210
+        float wall_tech_x_offset;                              // 0x210
         float wall_jump_horizontal_velocity;                   // 0x214
         float wall_jump_vertical_velocity;                     // 0x218
         int x21C;                                              // 0x21C
         float trophy_scale;                                    // 0x220
-        int x224;                                              // 0x224
-        int x228;                                              // 0x228
-        int x22C;                                              // 0x22C
-        int x230;                                              // 0x230
-        int x234;                                              // 0x234
-        int x238;                                              // 0x238
-        int x23C;                                              // 0x23C
-        int x240;                                              // 0x240
-        int x244;                                              // 0x244
-        int x248;                                              // 0x248
-        int x24C;                                              // 0x24C
+        Vec3 bunny_hood_left_offset;                           // 0x224
+        Vec3 bunny_hood_right_offset;                          // 0x230
+        float bunny_hood_scale;                                // 0x23C
+        Vec3 head_flower_offset;                               // 0x240
+        float head_flower_scale;                               // 0x24C
         int x250;                                              // 0x250
         int x254;                                              // 0x254
         int x258;                                              // 0x258
@@ -1859,11 +1865,14 @@ struct FighterData
     FtMultiJumpDesc *multi_jump_desc;      // 0x2D0
     void *special_attributes;              // 0x2D4
     void *special_attributes2;             // 0x2D8
-    int x2DC;                              // 0x2DC
-    int x2E0;                              // 0x2E0
-    int x2E4;                              // 0x2E4
-    int x2E8;                              // 0x2E8
-    int x2EC;                              // 0x2EC
+    struct                                 // 0x2DC, anim_length_lookup
+    {                                      //
+        float walkslow;                    // 0x2DC
+        float walkmiddle;                  // 0x2E0
+        float walkfast;                    // 0x2E4
+        float guardon;                     // 0x2E8
+        float landing;                     // 0x2EC
+    } anim_length_lookup;                  //
     FtDynamicBoneset dynamics_boneset[10]; // 0x2f0
     int dynamics_num;                      // 0x3E0
     struct script                          //  0x3E4
@@ -2032,7 +2041,7 @@ struct FighterData
     int x90c;                      // 0x90c
     int x910;                      // 0x910
     ftHit hitbox[4];               // 0x914
-    ftHit throw_hitbox[2];         // 0xdf4
+    ftHit throw_hitbox[2];         // 0xdf4,
     ftHit thrown_hitbox;           // 0x1064
     u8 team_unk;                   // 0x119c, friendly fire related
     u8 grabber_ply;                // 0x119D, slot ID of the person grabbing this fighter
@@ -2071,27 +2080,9 @@ struct FighterData
         float percent_temp;        // 0x1838
         int applied;               // 0x183c
         int x1840;                 // 0x1840
-        float direction;           // 0x1844
-        int kb_angle;              // 0x1848
-        int damaged_hurtbox;       // 0x184c
-        float force_applied;       // 0x1850
-        Vec3 collpos;              // 0x1854
-        int attribute;             // 0x1860
-        int x1864;                 // 0x1864
-        GOBJ *source;              // 0x1868
-        int x186c;                 // 0x186c
-        int x1870;                 // 0x1870
-        int x1874;                 // 0x1874
-        int x1878;                 // 0x1878
-        int x187c;                 // 0x187c
-        int x1880;                 // 0x1880
-        int x1884;                 // 0x1884
-        int x1888;                 // 0x1888
-        int x188c;                 // 0x188c
-        int x1890;                 // 0x1890
-        int x1894;                 // 0x1894
-        int x1898;                 // 0x1898
-        int x189c;                 // 0x189c
+        FtDmgLog hit_log;          // 0x1844, info regarding the last solid hit
+        FtDmgLog tip_log;          // 0x1870, info regarding the last phantom hit
+        float tip_hitlag;          // 0x189c, hitlag is stored here during phantom hits @ 8006d774
         int x18a0;                 // 0x18a0
         float kb_mag;              // 0x18a4  kb magnitude
         int x18a8;                 // 0x18a8
@@ -2774,6 +2765,8 @@ ftCommonData **stc_ftcommon = (R13 + -0x514C);
 ColAnimDesc **stc_plco_colanimdesc = 0x804D653C;
 GXColor **stc_shieldcolors = (R13 + -0x5194);
 FtDmgVibrateDesc **stc_dmg_vibrate_desc = (R13 + -0x5170);
+int *stc_ft_hitlog = (R13 + -0x5148); // used as semi-local variables remembering if a solid hit occured @ 8006cbc4
+int *stc_ft_tiplog = (R13 + -0x5144); // used as semi-local variables remembering if a tip hit occured @ 8006cbc4
 
 /*** Functions ***/
 void ActionStateChange(float startFrame, float animSpeed, float animBlend, GOBJ *fighter, int stateID, int flags1, GOBJ *alt_state_source);
@@ -2935,7 +2928,7 @@ void Fighter_SetFacingToStickDirection(FighterData *fighter_data);
 int Fighter_CheckToIgnorePlatform(GOBJ *fighter);
 int Hitbox_CheckIfPreviouslyHit(void *victim_data, ftHit *hitbox);
 void Hitbox_SetAsPreviouslyHit(ftHit *hitbox, int unk, void *victim_data);
-void Hitbox_DisableAll(GOBJ *fighter);
+void Fighter_HitboxDisableAll(GOBJ *fighter);
 int Fighter_CountPlayers();
 void Fighter_InitData(GOBJ *f);
 void Fighter_InitInputs(GOBJ *fighter);
