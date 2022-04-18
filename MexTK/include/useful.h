@@ -376,7 +376,7 @@ int DVDConvertPathToEntrynum(char *file);
 int DVDFastOpen(s32 entrynum, void *dvdFileInfo);
 int DVDConvertPathToEntrynum(char *file);
 int DVDWaitForRead();
-int File_Read(int entrynum, int file_offset, void *buffer, int length, int flags, int r8, void *cb, int r10);
+int File_Read(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index, void *cb, int cb_arg2);
 int File_GetSize(s32 entrynum);
 void memcpy(void *dest, void *source, int size);
 void memset(void *dest, int fill, int size);

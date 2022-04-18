@@ -972,7 +972,7 @@ ItemDesc **stc_itdesc_enemies = (R13 + -0x4968);
 void Item_IndexStageItem(ItemDesc *item_desc, int index);
 void Item_Hold(GOBJ *item, GOBJ *fighter, int boneID);
 void Item_Catch(GOBJ *fighter, int unk);
-void Items_StoreItemDataToCharItemTable(int articleData, int articleID);
+void Item_StoreItemDataToCharItemTable(int articleData, int articleID);
 void Items_StoreTimeout(GOBJ *item, float timeout);
 GOBJ *Item_CreateItem(SpawnItem *item_spawn); // sorry for confusion, use this one for best results
 GOBJ *Item_CreateItem1(SpawnItem *item_spawn);

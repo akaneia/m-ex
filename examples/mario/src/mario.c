@@ -24,11 +24,11 @@ void OnLoad(GOBJ *gobj)
 	int *fighter_items = fighter_data->ftData->items;
 
 	// init fire ball
-	//Items_StoreItemDataToCharItemTable(fighter_items[0], VANILLA_ITEM_FIREBALL);
+	//Item_StoreItemDataToCharItemTable(fighter_items[0], VANILLA_ITEM_FIREBALL);
 	MEX_IndexFighterItem(fighter_data->kind, fighter_items[MEX_ITEM_FIREBALL], MEX_ITEM_FIREBALL);
 
 	// init cape
-	//Items_StoreItemDataToCharItemTable(fighter_items[2], fighter_data->special_attributes[5]);
+	//Item_StoreItemDataToCharItemTable(fighter_items[2], fighter_data->special_attributes[5]);
 	MEX_IndexFighterItem(fighter_data->kind, fighter_items[MEX_ITEM_CAPE], MEX_ITEM_CAPE);
 }
 ///
