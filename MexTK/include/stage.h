@@ -528,6 +528,24 @@ struct LineHazardDesc
     int sfx;
 };
 
+struct LineRange
+{
+    struct
+    {
+        float top;
+        float bottom;
+        float left;
+        float right;
+    } unk;
+    struct
+    {
+        float top;
+        float bottom;
+        float left;
+        float right;
+    } ground;
+};
+
 struct MapItemDesc
 {
     int index;
@@ -540,6 +558,7 @@ int *ftchkdevice_grabnum = R13 + (-0x512C);
 int *ftchkdevice_dmgnum = R13 + (-0x5130);
 int *stc_gr_ext_cur = 0x804d49e8;
 GrExtLookup *stc_gr_lookup_cur = 0x804d49ec;
+LineRange *stc_line_range = 0x80458868;
 
 /*** Functions ***/
 int Stage_GetRandomExternalID();

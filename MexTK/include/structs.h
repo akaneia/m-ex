@@ -71,6 +71,7 @@ typedef struct GrDesc GrDesc;
 typedef struct GrExtLookup GrExtLookup;
 typedef struct LineHazardDesc LineHazardDesc;
 typedef struct MapItemDesc MapItemDesc;
+typedef struct LineRange LineRange;
 typedef struct GeneralPoints GeneralPoints;
 typedef struct GeneralPointsInfo GeneralPointsInfo;
 typedef struct MapGObjDesc MapGObjDesc;
