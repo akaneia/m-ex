@@ -16,6 +16,11 @@ backup
 Loop:
 .set  REG_CurrentGObjData,29
 
+#Ensure entity class 7 as well
+ lhz r3,0x0(REG_CurrentGObj)
+ cmpwi r3,7
+ bne Loop_Inc
+
 #Get Data
   lwz REG_CurrentGObjData,0x2C(REG_CurrentGObj)
 /*

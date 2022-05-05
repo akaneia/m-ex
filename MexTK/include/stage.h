@@ -470,18 +470,25 @@ struct MapHead
     int mobj_num;                           // 0x2c
 };
 
+struct MapCollLink
+{
+    s16 coll_group;
+    s16 unk;
+    s16 jobj_index;
+};
+
 struct MapGObjDesc
 {
-    JOBJSet jobjset;     // 0x0
-    COBJDesc *cobj;      // 0x10
-    void *x14;           // 0x14
-    void *lobj;          // 0x18
-    void *fog_desc;      // 0x1c
-    void *coll_links;    // 0x20
-    int coll_links_num;  // 0x24
-    void *x28;           // 0x28
-    void *coll_links2;   // 0x2c
-    int coll_links2_num; // 0x30
+    JOBJSet jobjset;         // 0x0
+    COBJDesc *cobj;          // 0x10
+    void *x14;               // 0x14
+    void *lobj;              // 0x18
+    void *fog_desc;          // 0x1c
+    MapCollLink *coll_links; // 0x20
+    int coll_links_num;      // 0x24
+    void *x28;               // 0x28
+    void *coll_links2;       // 0x2c
+    int coll_links2_num;     // 0x30
 };
 
 struct StageFile
@@ -569,6 +576,7 @@ void Stage_SetChkDevicePos(float y_pos);
 void Stage_GetChkDevicePos(float *y_pos, float *y_delta);
 float Stage_GetScale();
 int *Stage_GetYakumonoParam();
+void Stage_SetMapJOBJAnim(GOBJ *map, int jobj_index, int flags, int anim_id, float start_frame, float rate);
 void Stage_MapStateChange(GOBJ *map, int map_gobjID, int anim_id);
 int Stage_CheckAnimEnd(GOBJ *map, int jobj_index, int flags);  // 0x1 = unk aobj, 0x2 = material aobj, 0x4 = unk aobj
 int Stage_CheckAnimEnd2(GOBJ *map, int jobj_index, int flags); // 0x1 = unk aobj, 0x2 = material aobj, 0x4 = unk aobj
@@ -609,6 +617,7 @@ float Stage_GetCameraBottom();
 int Stage_GetGeneralPoint(int index, Vec3 *pos);
 void Stage_EnableLineGroup(int index);
 void Stage_DisableLineGroup(int index);
+void Stage_AutoLinkLineGroups();
 void Stage_LinkLineGroups(int group1, int group2);
 void Stage_InitLines(void *coll_data);
 void Stage_InitCatchHazard(GOBJ *map, int unk, void *check_cb);

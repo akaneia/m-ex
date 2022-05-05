@@ -74,6 +74,7 @@ typedef struct MapItemDesc MapItemDesc;
 typedef struct LineRange LineRange;
 typedef struct GeneralPoints GeneralPoints;
 typedef struct GeneralPointsInfo GeneralPointsInfo;
+typedef struct MapCollLink MapCollLink;
 typedef struct MapGObjDesc MapGObjDesc;
 
 // Match

@@ -592,7 +592,7 @@
 802FA5BC:KOCount_Init
 802FA2D0:KOCount_Update
 803672DC:LObj_LoadDesc
-80011ac4:LObj_LoadAll
+80011ac4:LObj_LoadAllC
 80366d70:LObj_GetPosition
 80366ce8:LObj_SetPosition
 80366e38:LObj_GetInterest
@@ -752,6 +752,7 @@
 80057BC0:Stage_DisableLineGroup
 80057638:Stage_EnableLineGroup
 800581dc:Stage_LinkLineGroups
+80058560:Stage_AutoLinkLineGroups
 8022519C:Stage_ExternalToInternal
 80224B80:Stage_GetBlastzoneBottom
 80224B50:Stage_GetBlastzoneLeft
@@ -783,6 +784,7 @@
 801c9604:Stage_ApplyColAnim
 801c95c4:Stage_DisableColAnim
 801C8138:Stage_MapStateChange
+801c7ff8:Stage_SetMapJOBJAnim
 801c5440:Stage_PlaySFX
 801c54dc:Stage_CheckSFX
 800581A4:Stage_SetCeilingCallback
