@@ -2855,7 +2855,6 @@ void Fighter_CollAir_IgnoreLedge(GOBJ *fighter, void *callback);
 int Fighter_CollAir_IgnoreLedge_NoCB(GOBJ *fighter);
 int Fighter_CollAir_SoftLanding(GOBJ *fighter);
 int Fighter_CollAir_DefineECB(GOBJ *fighter, ECBSize *ecb);
-void Fighter_Coll_All(GOBJ *f);
 int Fighter_Coll_CheckToPass(GOBJ *fighter, int floor_type); // usually used as a callback, pass = fall through platform
 int Fighter_IASACheck_CliffCatch(GOBJ *fighter);
 int Fighter_IASACheck_WallJump(GOBJ *fighter);
@@ -2950,7 +2949,7 @@ void Fighter_InitGrab(FighterData *fighter, int is_enable, void *on_grabber, voi
 void Fighter_SetCharacterFlags(GOBJ *fighter, int, int);
 void Fighter_GetECBPosition(GOBJ *fighter, Vec3 *position);
 void Fighter_Phys_AnimationFriction(GOBJ *fighter);
-void Fighter_CollAir(GOBJ *fighter);
+void Fighter_CollAir_IgnoreGround(GOBJ *fighter);
 void Fighter_SetFacingToStickDirection(FighterData *fighter_data);
 void Fighter_ClampHorizontalVelocity(FighterData *fighter_data, float max_vel);
 void Fighter_ClampFallSpeed(FighterData *fighter_data, float max_vel);

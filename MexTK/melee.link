@@ -163,8 +163,6 @@
 8007d468:Fighter_ClampMaxAirDrift
 8007CC78:Fighter_ClampHorizontalGroundVelocity
 8007D440:Fighter_ClampHorizontalVelocity
-80083B68:Fighter_CollCB_JumpAerial
-80083B68:Fighter_Coll_All
 800822A4:Fighter_CollAir_CheckLedge
 800831CC:Fighter_CollAir_GrabFacingLedgeWalljump
 80083a48:Fighter_CollAir_GrabBothLedgesWalljump

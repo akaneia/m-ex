@@ -12,10 +12,7 @@ void OnLoad(GOBJ *gobj)
 	FighterData *fighter_data = gobj->userdata;
 
 	// copy attributes
-	for (int i = 0; i < 0x21; i++)
-	{
-		fighter_data->special_attributes2[i] = fighter_data->ftData->ext_attr[i];
-	}
+	memcpy(fighter_data->special_attributes2, fighter_data->ftData->ext_attr, sizeof(MarioAttr));
 
 	// copy pointer to attributes
 	fighter_data->special_attributes = fighter_data->special_attributes2;

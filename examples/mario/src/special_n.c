@@ -71,7 +71,7 @@ void SpecialN_IASACallback(GOBJ *gobj)
 	// flag0 is set by ftCmd and determines when you can interupt
 	if (script_flags->interruptable != 0)
 	{
-		Fighter_Interrupt_AllGrounded(gobj);
+		Fighter_IASACheck_AllGrounded(gobj);
 	}
 	return;
 }
@@ -138,7 +138,7 @@ void SpecialAirN_IASACallback(GOBJ *gobj)
 	// ftcmd_var.flag0 is set by ftCmd and determines when you can interupt
 	if (script_flags->interruptable != 0)
 	{
-		Fighter_Interrupt_AllAerial(gobj);
+		Fighter_IASACheck_AllAerial(gobj);
 	}
 
 	return;
