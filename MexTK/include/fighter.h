@@ -1087,6 +1087,15 @@ struct FtHurt
     int is_grabbable;             // 0x48
 };
 
+struct FtCoin
+{
+    float size;    // 0x0
+    JOBJ *jobj;    // 0x4
+    Vec3 pos_cur;  // 0x8
+    Vec3 pos_prev; // 0x14
+    Vec3 coll_pos; // 0x20
+};
+
 struct FtAfterImageKey
 {
     Vec3 pos;
@@ -2059,28 +2068,7 @@ struct FighterData
     u8 grabber_ply;                // 0x119D, slot ID of the person grabbing this fighter
     u8 hurt_num;                   // 0x119E, number of hurtboxes
     FtHurt hurtbox[15];            // 0x11A0
-    int x1614;                     // 0x1614
-    int x1618;                     // 0x1618
-    int x161c;                     // 0x161c
-    int x1620;                     // 0x1620
-    int x1624;                     // 0x1624
-    int x1628;                     // 0x1628
-    int x162c;                     // 0x162c
-    int x1630;                     // 0x1630
-    int x1634;                     // 0x1634
-    int x1638;                     // 0x1638
-    int x163c;                     // 0x163c
-    int x1640;                     // 0x1640
-    int x1644;                     // 0x1644
-    int x1648;                     // 0x1648
-    int x164c;                     // 0x164c
-    int x1650;                     // 0x1650
-    int x1654;                     // 0x1654
-    int x1658;                     // 0x1658
-    int x165c;                     // 0x165c
-    int x1660;                     // 0x1660
-    int x1664;                     // 0x1664
-    int x1668;                     // 0x1668
+    FtCoin coinbox[2];             // 0x1614
     int dynamics_hit_num;          // 0x166c
     FtDynamicHit dynamics_hit[11]; // 0x1670
     int x1828;                     // 0x1828
@@ -2132,12 +2120,11 @@ struct FighterData
         int x1924;                 // 0x1924
         int x1928;                 // 0x1928
         int x192c;                 // 0x192c
-        int x1930;                 // 0x1930
-        int x1934;                 // 0x1934
-        int x1938;                 // 0x1938
-        int x193c;                 // 0x193c
-        int x1940;                 // 0x1940
-        int x1944;                 // 0x1944
+        struct                     // 0x1930
+        {                          //
+            Vec3 pos_prev;         // 0x1930
+            Vec3 pos_cur;          // 0x193c
+        } footstool;               //
         int x1948;                 // 0x1948
         int x194c;                 // 0x194c
         int x1950;                 // 0x1950
@@ -2487,7 +2474,7 @@ struct FighterData
         unsigned char x2223_3 : 1;                // 0x20 - 0x2223
         unsigned char x2223_4 : 1;                // 0x10 - 0x2223
         unsigned char x2223_5 : 1;                // 0x8 - 0x2223
-        unsigned char x2223_6 : 1;                // 0x4 - 0x2223
+        unsigned char x2223_6 : 1;                // 0x4 - 0x2223, footstool related? checked @ 800808dc
         unsigned char x2223_7 : 1;                // 0x2 - 0x2223
         unsigned char x2223_8 : 1;                // 0x1 - 0x2223
         unsigned char x2224_1 : 1;                // 0x80 - 0x2224
@@ -2527,7 +2514,7 @@ struct FighterData
         unsigned char x2229_2 : 1;                // 0x40 - 0x2229
         unsigned char x2229_3 : 1;                // 0x20 - 0x2229
         unsigned char x2229_4 : 1;                // 0x10 - 0x2229
-        unsigned char x2229_5 : 1;                // 0x8 - 0x2229
+        unsigned char skip_coin_collcheck : 1;    // 0x8 - 0x2229, this is toggled every frame, checks half of the players every frame to save on cpu
         unsigned char x2229_6 : 1;                // 0x4 - 0x2229
         unsigned char x2229_7 : 1;                // 0x2 - 0x2229
         unsigned char no_reaction_always : 1;     // 0x1 - 0x2229

@@ -138,6 +138,7 @@ typedef struct SubactionHeader SubactionHeader;
 typedef struct ftHit ftHit;
 typedef struct HitVictim HitVictim;
 typedef struct FtHurt FtHurt;
+typedef struct FtCoin FtCoin;
 typedef struct ReflectDesc ReflectDesc;
 typedef struct ShieldDesc ShieldDesc;
 typedef struct AbsorbDesc AbsorbDesc;
