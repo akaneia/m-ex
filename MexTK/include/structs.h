@@ -27,6 +27,11 @@ typedef struct GXColor GXColor;
 typedef struct GXRenderModeObj GXRenderModeObj;
 typedef struct GXPipe GXPipe;
 
+// Audio
+typedef struct BGMData BGMData;
+typedef struct VPB VPB;
+typedef struct AXLive AXLive;
+
 // HSD Objects
 typedef struct HSD_Obj HSD_Obj;
 typedef struct GOBJ GOBJ;

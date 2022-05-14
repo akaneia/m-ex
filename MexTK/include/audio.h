@@ -73,6 +73,31 @@ enum FGMID
     FGM_NULL,
 };
 
+struct BGMData
+{
+    unsigned int unk : 26;
+    unsigned int vbp_index : 6;
+};
+
+struct VPB
+{
+    u8 x0[0x34];
+    float volume;
+    u8 x38[0x18];
+};
+
+struct AXLive
+{
+    u8 x0[0x384];
+    VPB voice_data[100];
+};
+
+BGMData *stc_bgm_data = 0x804D6038; // R13 + -0x5668;
+AXLive *ax_live = 0x804c28e0;
+VPB *stc_voice_data = 0x804c2c64;
+float *stc_fgm_volume = R13 + -0x7dbc;
+float *stc_bgm_volume = R13 + -0x7db8;
+
 char *Nametag_GetText(int tag_index);
 void Audio_ResetCache(int group_index);
 void Audio_QueueFileLoad(int group_index, u64 ssm_index);
