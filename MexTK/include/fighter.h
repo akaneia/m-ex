@@ -719,12 +719,12 @@ struct PlayerData
     // 0xF
     u8 cpuLevel;
     // 0x10
-    u16 damageStart;
-    u16 damageSpawn;  // 0x12
-    u16 staminaStart; // 0x14
-    float attack;     // 0x18
-    float defense;    // 0x1C
-    float scale;      // 0x20
+    u16 damage_spawn;
+    u16 damage_respawn; // 0x12
+    u16 stamina_spawn;  // 0x14
+    float attack;       // 0x18
+    float defense;      // 0x1C
+    float scale;        // 0x20
 };
 
 struct FighterBone
@@ -1953,7 +1953,7 @@ struct FighterData
     Effect *gfx;                              // 0x60C
     int x610;                                 // 0x610
     int x614;                                 // 0x614
-    char player_controller_number;            // 0x618
+    char pad_index;                           // 0x618
     char costume_id;                          // 0x619
     char color_overlay_id;                    // 0x61A
     u8 team;                                  // 0x61B
