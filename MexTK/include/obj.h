@@ -95,11 +95,11 @@
 #define DOBJ_HIDDEN 1
 
 // AOBJ flags
-#define AOBJ_REWINDED (1 << 26)
-#define AOBJ_FIRST_PLAY (1 << 27)
-#define AOBJ_NO_UPDATE (1 << 28)
-#define AOBJ_LOOP (1 << 29)
-#define AOBJ_NO_ANIM (1 << 30)
+#define AOBJ_REWINDED (1 << 26)   // 0x04000000
+#define AOBJ_FIRST_PLAY (1 << 27) // 0x08000000
+#define AOBJ_NO_UPDATE (1 << 28)  // 0x10000000
+#define AOBJ_LOOP (1 << 29)       // 0x20000000
+#define AOBJ_NO_ANIM (1 << 30)    // 0x40000000
 
 // LOBJ flags
 #define LOBJ_AMBIENT (0 << 0)
@@ -265,10 +265,10 @@ struct MOBJ
 {
     int *parent;
     u32 rendermode;
-    TOBJ *tobj;
-    HSD_Material *mat;
-    struct _HSD_PEDesc *pe;
-    AOBJ *aobj;
+    TOBJ *tobj;             // 0x8
+    HSD_Material *mat;      // 0xC
+    struct _HSD_PEDesc *pe; // 0x10
+    AOBJ *aobj;             // 0x14
     /*
     struct _HSD_TObj *ambient_tobj;
     struct _HSD_TObj *specular_tobj;
@@ -576,7 +576,9 @@ struct JOBJSet
 
 /*** Static Variables ***/
 GOBJList **stc_gobj_list = R13 + (-0x3E74);
-GOBJProc **stc_gobjproc_cur = (R13 + -0x3E68);
+u8 *stc_gobj_proc_num = 0x804ce382;            // number of elements in the below array
+GOBJProc ***stc_gobjproc_lookup = 0x804D7840;  // array of gobj procs ptrs
+GOBJProc **stc_gobjproc_cur = (R13 + -0x3E68); // current gobj proc being processed
 u8 *objkind_sobj = R13 + -(0x3D40);
 u8 *objkind_cobj = R13 + -(0x3E55);
 u8 *objkind_lobj = R13 + -(0x3E56);

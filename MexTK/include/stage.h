@@ -106,7 +106,7 @@ struct MapData
 {
     int x0;                            // 0x0
     GOBJ *gobj;                        // 0x4
-    int x8;                            // 0x8
+    void (*post_anim_cb)(GOBJ *map);   // 0x8, this cb is fired after the stage animation is updated
     int xC;                            // 0xC
     unsigned char flagx80 : 1;         // 0x10, 0x80
     unsigned char flagx40 : 1;         // 0x10, 0x40

@@ -23,7 +23,7 @@ struct Effect
     short lifetime;
     char x26;
     char x27;
-    char x28;
+    char x28; // if this is == 2, the effect is not updated
     char x29;
 };
 
@@ -127,7 +127,7 @@ struct GeneratorAppSRT // allocated at 803a42b0
 struct Particle2 // created at 80398c90. dont feel like labelling this, offsets are @ 80398de4
 {
     struct Particle2 *next; // 0x0
-    u32 kind;               // 0x4
+    u32 kind;               // 0x4, actually are flags. 0x800 pauses it
     u8 bank;                // 0x8
     u8 texGroup;            // 0x9
     u8 poseNum;             // 0xa
