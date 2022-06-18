@@ -399,7 +399,7 @@ struct Stage
     int x69c;                     // 0x69c
     int x6a0;                     // 0x6a0
     StageOnGO *on_go;             // 0x6a4
-    int *itemData;                // 0x6a8
+    MapItemDesc **itemdata;       // 0x6a8
     int *coll_data;               // 0x6ac
     grGroundParam *grGroundParam; // 0x6b0
     int *ALDYakuAll;              // 0x6b4

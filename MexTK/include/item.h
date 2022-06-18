@@ -202,13 +202,13 @@ enum ItUnkKind
 
 /*** Structs ***/
 
-typedef struct ItemModelDesc
+struct ItemModelDesc
 {
     JOBJ *model;
     int bone_count;
     int bone_attach_id;
     int bit_field;
-} ItemModelDesc;
+};
 
 struct ItemStateDesc
 {
@@ -218,7 +218,7 @@ struct ItemStateDesc
     void *script;
 };
 
-typedef struct ItemDesc
+struct ItemDesc
 {
     int *common_attributes;
     int *unqiue_attributes;
@@ -226,9 +226,9 @@ typedef struct ItemDesc
     ItemStateDesc *states;
     ItemModelDesc *model;
     int *dynamics;
-} ItemDesc;
+};
 
-typedef struct itCommonData
+struct itCommonData
 {
     int x00;
     int x04;
@@ -318,9 +318,9 @@ typedef struct itCommonData
     float x154;
     float x158;
     float x15C;
-} itCommonData;
+};
 
-typedef struct itPublicData
+struct itPublicData
 {
     itCommonData *common_data;
     ItemDesc **common_items;
@@ -328,7 +328,7 @@ typedef struct itPublicData
     ItemDesc **pokemon_items;
     int *x10;
     int *x14;
-} itPublicData;
+};
 
 struct itData
 {

@@ -33,6 +33,28 @@ PAL100:
 	.set	PlayerBlock_LoadPlayerGObj,0x80034780
 */
 
+
+/*
+Dashback State Variables:
+0x2340 = int, hasInvertedFacingDirection
+0x2344 = float, inputDirection
+0x2348 = float, origFacingDirection
+0x234C = unk, unk
+0x2350 = float, turnTimer
+0x2354 = unk, unk
+0x2358 = int, shouldBufferButtons
+0x235C = int, prevInputs
+
+Original Dashback Functionality Notes:
+800ca0f4: enters turn, lowers hasInvertedFacingDirection flag (keeps original facing direction), lowers shouldBufferButtons flag, sets inputDirection, sets turnTimer to 0, clears prevInputs, saves origFacingDirection
+800c9990: turn animation cb, if turnTimer is above 0... decrements turnTimer
+800c99ac: turn animation cb, if turnTimer is 0 AND if hasInvertedFacingDirection is lowered... it inverts facing direction (now facing the direction inputted), raises hasInvertedFacingDirection and raises shouldBufferButtons
+800c9a38: turn interrupt cb, if hasInvertedFacingDirection is lowered... temporarily inverts facing direction (now facing the direction inputted). this is done so the fighter faces the direction inputted if another action is entered out of turn
+800c9afc: turn interrupt cb, if hasInvertedFacingDirection is lowered... reverts facing direction. this is so shield, taunt, and jump use the original facing direction
+800c9b4c: turn interrupt cb, if shouldBufferButtons is raised AND if origFacingDirection is != 0 AND the stick is 0.8 or further, enter into dash
+800c9bc0: turn interrupt cb, if shouldBufferButtons is raised, lower it. this will happen directly after transitioning to dash as well (confusing because it needs to be raised to enter dash)
+*/
+
 #Original codeline
 	stfs f0,0x2C(REG_PlayerData)    # Entry point, store new facing direction
 

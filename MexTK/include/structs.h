@@ -115,10 +115,10 @@ typedef struct ColAnimDesc ColAnimDesc;
 typedef struct ColorOverlay ColorOverlay;
 
 // Item
-//typedef struct ItemModelDesc;
-//typedef struct ItemDesc;
-//typedef struct itCommonData;
-//typedef struct itPublicData;
+typedef struct ItemModelDesc ItemModelDesc;
+typedef struct ItemDesc ItemDesc;
+typedef struct itCommonData itCommonData;
+typedef struct itPublicData itPublicData;
 typedef struct ItemStateDesc ItemStateDesc;
 typedef struct ItemData ItemData;
 typedef struct ItemState ItemState;
