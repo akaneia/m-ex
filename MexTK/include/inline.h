@@ -13,13 +13,13 @@
 
 /*** Functions ***/
 
-float fabs(float x)
-{
-    if (x < 0)
-        return -x;
-    else
-        return x;
-}
+// float fabs(float x)
+// {
+//     if (x < 0)
+//         return -x;
+//     else
+//         return x;
+// }
 
 int abs(int x)
 {
@@ -302,7 +302,7 @@ float Math_Vec2Angle(Vec2 *a, Vec2 *b)
     return angle;
 }
 
-float pow (float, float);
+// float pow (float, float);
 
 float Math_Vec2Distance(Vec2 *a, Vec2 *b)
 {
@@ -314,15 +314,15 @@ float Math_Vec3Distance(Vec3 *a, Vec3 *b)
     return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2) + pow((a->Z - b->Z), 2));
 }
 
-float fmin(float a, float b)
-{
-    return (((a) < (b)) ? (a) : (b));
-}
+// float fmin(float a, float b)
+// {
+//     return (((a) < (b)) ? (a) : (b));
+// }
 
-float fmax(float a, float b)
-{
-    return (((a) > (b)) ? (a) : (b));
-}
+// float fmax(float a, float b)
+// {
+//     return (((a) > (b)) ? (a) : (b));
+// }
 
 /*---------------------------------------------*
  * GXVertex functions                          *

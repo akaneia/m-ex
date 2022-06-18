@@ -11,11 +11,11 @@
 #define M_NAN ((float)(INFINITY * 0.0F))
 
 /*** Functions ***/
-float fmod(float a, float b);
-float atan(float in);
-float atan2(float y, float x);
-float sin(float x);
-float cos(float x);
+// float fmod(float a, float b);
+// float atan(float in);
+// float atan2(float y, float x);
+// float sin(float x);
+// float cos(float x);
 void MTXLookAt(Mtx *dest, Vec3 *eye, Vec3 *up, Vec3 *target);
 void MTXRotAxisRad(Mtx *m, Vec3 *axis, float rad); // Sets a matrix for rotation about an arbitrary axis whose ( x, y, z ) components are specified by axis.
 void MTXMultVec(Mtx *m, Vec3 *src, Vec3 *dst);     // Post-multiplies a 3D vector or 3D point by a matrix ( m x src = dst ).
