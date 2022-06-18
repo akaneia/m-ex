@@ -962,7 +962,7 @@ struct ftData
     int x3C;
     int x40;
     FtCollDesc *coll;
-    void *items;
+    ItemDesc **items;
     FtSFX *sfx;
     int x50;
     int x54;
