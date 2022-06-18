@@ -178,6 +178,18 @@ typedef struct DynamicsBehave DynamicsBehave;
 typedef struct IKParam IKParam;
 typedef struct FtVis FtVis;
 typedef struct ftDynamics ftDynamics;
+typedef struct FtScript FtScript;
+// typedef struct FtScriptTimerSync FtScriptTimerSync;
+// typedef struct FtScriptTimerAsync FtScriptTimerAsync;
+// typedef struct FtScriptGFX FtScriptGFX;
+// typedef struct FtScriptHit FtScriptHit;
+// typedef struct FtScriptHitClear FtScriptHitClear;
+// typedef struct FtScriptSFX FtScriptSFX;
+// typedef struct FtScriptVuln FtScriptVuln;
+// typedef struct FtScriptEye FtScriptEye;
+// typedef struct FtScriptRumble FtScriptRumble;
+// typedef struct FtScriptColAnimApply FtScriptColAnimApply;
+// typedef struct FtScriptIK FtScriptIK;
 
 // Fighter States
 typedef struct FtCliffCatch FtCliffCatch;

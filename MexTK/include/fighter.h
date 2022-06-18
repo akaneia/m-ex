@@ -568,6 +568,68 @@ enum FtStateNames
     ASID_THROWNCRAZYHAND,
     ASID_BARRELCANNONWAIT,
 };
+enum FtScriptCmd
+{
+    FTSCRIPT_0,
+    FTSCRIPT_1,
+    FTSCRIPT_SYNCTIMER,
+    FTSCRIPT_ASYNCTIMER,
+    FTSCRIPT_4,
+    FTSCRIPT_5,
+    FTSCRIPT_6,
+    FTSCRIPT_7,
+    FTSCRIPT_8,
+    FTSCRIPT_9,
+    FTSCRIPT_GFX,
+    FTSCRIPT_HIT,
+    FTSCRIPT_HITDMG,
+    FTSCRIPT_HITSIZE,
+    FTSCRIPT_HITINTERACTION,
+    FTSCRIPT_HITCLEAR,
+    FTSCRIPT_HITCLEARALL,
+    FTSCRIPT_SFX,
+    FTSCRIPT_SFXSMASH,
+    FTSCRIPT_FLAG,
+    FTSCRIPT_FLAG2,
+    FTSCRIPT_FLAG3,
+    FTSCRIPT_FLAG4,
+    FTSCRIPT_FLAG5,
+    FTSCRIPT_FLAG6,
+    FTSCRIPT_SET,
+    FTSCRIPT_VULNALL,
+    FTSCRIPT_VULNUNK,
+    FTSCRIPT_VULNPART,
+    FTSCRIPT_JABFLAG,
+    FTSCRIPT_JABFLAG2,
+    FTSCRIPT_VISSET,
+    FTSCRIPT_VISCLEAR,
+    FTSCRIPT_VISRESET,
+    FTSCRIPT_THROW,
+    FTSCRIPT_ITEMVIS,
+    FTSCRIPT_ITEMVIS2,
+    FTSCRIPT_INVISIBLE,
+    FTSCRIPT_SFXRANDOM,
+    FTSCRIPT_39,
+    FTSCRIPT_EYE,
+    FTSCRIPT_PARTANIM,
+    FTSCRIPT_42,
+    FTSCRIPT_RUMBLE,
+    FTSCRIPT_44,
+    FTSCRIPT_45,
+    FTSCRIPT_COLANIMAPPLY,
+    FTSCRIPT_COLANIMCLEAR,
+    FTSCRIPT_48,
+    FTSCRIPT_AFTERIMAGE,
+    FTSCRIPT_DYNAMICS,
+    FTSCRIPT_DMGSELF,
+    FTSCRIPT_IK,
+    FTSCRIPT_53,
+    FTSCRIPT_STEPSOUND,
+    FTSCRIPT_SFXGFX,
+    FTSCRIPT_SMASH,
+    FTSCRIPT_57,
+    FTSCRIPT_WIND,
+};
 
 #define ASID_ACTIONABLE 1000
 #define ASID_ACTIONABLEGROUND 1001
@@ -1172,7 +1234,7 @@ struct CPU
     int xc4;                     // 0xc4
     u8 xc8;                      // 0xc8
     int xcc;                     // 0xcc
-    int xd0;                     // 0xd0
+    int xd0;                     // 0xd0CPULeaderLog
     int xd4;                     // 0xd4
     int xd8;                     // 0xd8
     int xdc;                     // 0xdc
@@ -1182,7 +1244,7 @@ struct CPU
     u8 xec;                      // 0xec
     int xf0;                     // 0xf0
     int xf4;                     // 0xf4
-    int xf8;                     // 0xf8, flags
+    int xf8;                     // 0xf8, flags | 0x00000100 is the "isCopy" flag (uses leaders inputs)
     CPULeaderLog leader_log[30]; // 0xfc, contains a log of per frame data about the followers leader
     void *unk_curr;              // 0x444
     void *scenario_curr;         // 0x448, cpu scenario not updated if this contains a pointer @ 800b27b8
@@ -2454,8 +2516,8 @@ struct FighterData
         unsigned char is_offscreen : 1;                // 0x80 - 0x221f
         unsigned char dead : 1;                        // 0x40 - 0x221f
         unsigned char x221f_3 : 1;                     // 0x20 - 0x221f
-        unsigned char sleep : 1;                       // 0x10
-        unsigned char ms : 1;                          // ms = master/slave. is 1 when the player is a slave
+        unsigned char sleep : 1;                       // 0x10 - 0x221f
+        unsigned char ms : 1;                          // 0x08 - 0x221f, ms = master/slave. is 1 when the player is a slave
         unsigned char x221f_6 : 1;
         unsigned char x221f_7 : 1;
         unsigned char x221f_8 : 1;
@@ -2757,6 +2819,206 @@ struct FtDamage
     u8 is_meteor;      // 0x235a
     u8 meteor_lockout; // 0x235b
 };
+
+/** Script Structs **/
+struct FtScript
+{
+    unsigned opcode : 6;
+    union
+    {
+        struct
+        {
+            unsigned time : 26;
+        } timer_sync; // 2
+        struct
+        {
+            unsigned time : 26;
+        } timer_async; // 3
+        struct
+        {
+            unsigned bone : 8;
+            unsigned use_common_bone_id : 1;
+            unsigned destroy_on_state_change : 1;
+            unsigned unk1 : 16;
+            unsigned id : 16;
+            unsigned unk2 : 16;
+            unsigned offset_z : 16;
+            unsigned offset_y : 16;
+            unsigned offset_x : 16;
+            unsigned range_z : 16;
+            unsigned range_y : 16;
+            unsigned range_x : 16;
+        } gfx; // 10
+        struct
+        {
+            unsigned id : 3;
+            unsigned hit_group : 3;
+            unsigned only_hit_grabbed_fighter : 1;
+            unsigned bone : 8;
+            unsigned use_common_bone_id : 1;
+            unsigned dmg : 10;
+            unsigned size : 16;
+            unsigned offset_z : 16;
+            unsigned offset_y : 16;
+            unsigned offset_x : 16;
+            unsigned angle : 9;
+            unsigned kb_growth : 9;
+            unsigned wdsk : 9;
+            unsigned is_hit_items : 1;
+            unsigned ignore_thrown_fighter : 1;
+            unsigned ignore_fighter_scale : 1;
+            unsigned clank_pri : 2;
+            unsigned base_kb : 9;
+            unsigned element : 5;
+            unsigned shield_dmg : 8;
+            unsigned hit_sfx_severity : 3; // weak, moderate, strong
+            unsigned hit_sfx_kind : 5;     // none, punch, kick, sword, coin, bat, fan, elec, fire, yoshi chew, shell hit, energy, peach item, ice
+            unsigned is_hit_grounded_fighter : 1;
+            unsigned is_hit_aerial_fighter : 1;
+        } hit; // 11
+        struct
+        {
+            unsigned null : 26;
+        } hit_clear; // 16
+        struct
+        {
+            unsigned behavior : 8;
+            unsigned unk : 18;
+            unsigned id : 32;
+            unsigned unk2 : 16; // padding?
+            unsigned volume : 8;
+            unsigned pan : 8;
+        } sfx; // 17
+        struct
+        {
+            unsigned kind : 26; // 0 = normal, 1 = invuln, 2 = intang
+        } vuln;                 // 26
+        struct
+        {
+            unsigned do_second : 1;
+            unsigned mat_index1 : 7;
+            unsigned mat_index2 : 7;
+            unsigned mat_frame : 11;
+        } eye; // 40
+        struct
+        {
+            unsigned flag : 1;
+            unsigned value1 : 12;
+            unsigned value2 : 13;
+        } rumble; // 43
+        struct
+        {
+            unsigned id : 8;
+            unsigned time : 18;
+        } colanimapply; // 46
+        struct
+        {
+            unsigned unk : 26;
+        } ik; // 52
+    } __attribute__((__packed__)) u;
+} __attribute__((__packed__));
+/*
+struct FtScriptTimerSync
+{
+    unsigned opcode : 6;
+    unsigned time : 26;
+}; // 2
+struct FtScriptTimerAsync
+{
+    unsigned opcode : 6;
+    unsigned time : 26;
+}; // 3
+struct FtScriptGFX
+{
+    unsigned opcode : 6;
+    unsigned bone : 8;
+    unsigned use_common_bone_id : 1;
+    unsigned destroy_on_state_change : 1;
+    unsigned unk1 : 16;
+    unsigned id : 16;
+    unsigned unk2 : 16;
+    unsigned offset_z : 16;
+    unsigned offset_y : 16;
+    unsigned offset_x : 16;
+    unsigned range_z : 16;
+    unsigned range_y : 16;
+    unsigned range_x : 16;
+}; // 10
+struct FtScriptHit
+{
+    unsigned opcode : 6;
+    unsigned id : 3;
+    unsigned hit_group : 3;
+    unsigned only_hit_grabbed_fighter : 1;
+    unsigned bone : 8;
+    unsigned use_common_bone_id : 1;
+    unsigned dmg : 10;
+    unsigned size : 16;
+    unsigned offset_z : 16;
+    unsigned offset_y : 16;
+    unsigned offset_x : 16;
+    unsigned angle : 9;
+    unsigned kb_growth : 9;
+    unsigned wdsk : 9;
+    unsigned is_hit_items : 1;
+    unsigned ignore_thrown_fighter : 1;
+    unsigned ignore_fighter_scale : 1;
+    unsigned clank_pri : 2;
+    unsigned base_kb : 9;
+    unsigned element : 5;
+    unsigned shield_dmg : 8;
+    unsigned hit_sfx_severity : 3; // weak, moderate, strong
+    unsigned hit_sfx_kind : 5;     // none, punch, kick, sword, coin, bat, fan, elec, fire, yoshi chew, shell hit, energy, peach item, ice
+    unsigned is_hit_grounded_fighter : 1;
+    unsigned is_hit_aerial_fighter : 1;
+}; // 11
+struct FtScriptHitClear
+{
+    unsigned opcode : 6;
+    unsigned null : 26;
+}; // 16
+struct FtScriptSFX
+{
+    unsigned opcode : 6;
+    unsigned behavior : 8;
+    unsigned unk : 18;
+    unsigned id : 32;
+    unsigned unk2 : 16; // padding?
+    unsigned volume : 8;
+    unsigned pan : 8;
+}; // 17
+struct FtScriptVuln
+{
+    unsigned opcode : 6;
+    unsigned kind : 26; // 0 = normal, 1 = invuln, 2 = intang
+};                      // 26
+struct FtScriptEye
+{
+    unsigned opcode : 6;
+    unsigned do_second : 1;
+    unsigned mat_index1 : 7;
+    unsigned mat_index2 : 7;
+    unsigned mat_frame : 11;
+}; // 40
+struct FtScriptRumble
+{
+    unsigned opcode : 6;
+    unsigned flag : 1;
+    unsigned value1 : 12;
+    unsigned value2 : 13;
+}; // 43
+struct FtScriptColAnimApply
+{
+    unsigned opcode : 6;
+    unsigned id : 8;
+    unsigned time : 18;
+}; // 46
+struct FtScriptIK
+{
+    unsigned opcode : 6;
+    unsigned unk : 26;
+}; // 52
+*/
 
 /** Static Variables **/
 
