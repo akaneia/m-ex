@@ -43,6 +43,7 @@
 #define JOBJ_31 (1 << 31)
 
 // MObj Flags
+#define JOBJ_ANIM 0x1
 #define MOBJ_ANIM 0x4
 #define TOBJ_ANIM 0x10
 #define ALL_ANIM 0x7FF
@@ -559,11 +560,21 @@ struct HSD_Fog
 {
     HSD_Obj parent;
     u8 type;           //0x08
-    void *fog_adj;     //0x0C
+    HSD_Fog *fog_adj;  //0x0C
     f32 start;         //0x10
     f32 end;           //0x14
     GXColor color;     //0x18
     struct AOBJ *aobj; //0x1C
+};
+
+struct HSD_FogDesc
+{
+    u8 type;             //0x00
+    HSD_FogDesc *fog_adj;//0x04
+    f32 start;           //0x08
+    f32 end;             //0x0C
+    GXColor color;       //0x10
+    struct AOBJDesc *aobj;      //0x14
 };
 
 struct JOBJSet
@@ -625,6 +636,8 @@ void JOBJ_AttachPositionRotation(JOBJ *to_attach, JOBJ *attach_to);
 GOBJ *JOBJ_LoadSet(int is_hidden, JOBJSet *set, int anim_id, float frame, int gobj_subclass, int gx_link, int is_add_anim, void *cb); // 8019035c
 void JOBJ_AddSetAnim(JOBJ *jobj, JOBJSet *set, int anim_id);                                                                          // 8016895c
 void JOBJ_Detach(JOBJ *to_attach);
+void JOBJ_ResetFromDesc(JOBJ *, JOBJDesc *);
+void JOBJ_RemoveAnimByFlags(JOBJ *, int);
 void AOBJ_ReqAnim(int *aobj, float unk);
 void AOBJ_StopAnim(AOBJ *aobj);
 void AOBJ_SetRate(AOBJ *aobj, float rate);
@@ -688,5 +701,7 @@ HSD_Fog *Fog_LoadDesc(void *fogdesc);
 DOBJ *JOBJ_GetDObj(JOBJ *jobj);
 void *MOBJ_SetAlpha(DOBJ *dobj, float alpha);
 void MOBJ_SetToonTextureImage(_HSD_ImageDesc *);
+void MOBJ_ReqAnim(MOBJ *, float frame);
+void MObj_Anim(MOBJ *);
 void GObj_CopyGXPri(GOBJ *target, GOBJ *source);
 #endif

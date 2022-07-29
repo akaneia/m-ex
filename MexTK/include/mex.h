@@ -25,6 +25,7 @@ enum MEX_GETDATA
     MXDT_FTDAT,          // returns pointer to fighter file struct, indexed by internal ID
     MXDT_FTKINDDESC,     // returns pointer to ftkind desc array, indexed by external ID
     MXDT_FTEMBLEMLOOKUP, // returns pointer to ftkind desc array, indexed by external ID
+    MXDT_MEXDATA,
 };
 
 typedef enum SSMKind
@@ -43,11 +44,58 @@ struct Stc_icns
     int custom_stock_num;
     void *custom_stock_descs;
 };
-struct MEXPlaylist
+
+struct MEXPlaylistEntry
 {
     u16 bgm;
     u16 chance;
 };
+struct MEXPlaylist
+{
+    int entry_count;
+    MEXPlaylistEntry *entries;
+};
+
+typedef struct MexMetaData
+{
+    u8 v_major;
+    u8 v_minor;
+    short flags;
+    int internal_id_count;
+    int external_id_count;
+    int css_icon_count;
+    int internal_stage_count;
+    int external_stage_count;
+    int sss_icon_count;
+    int ssm_count;
+    int bgm_count;
+    int effect_count;
+    int bootup_scene;
+    int last_major;
+    int last_minor;
+    int trophy_count;
+    int trophy_sd_offset;
+} MexMetaData;
+
+typedef struct MexMusicTable
+{
+    char ** filenames;
+    MEXPlaylistEntry *menu_playlist;
+    int menu_playlist_count;
+    char ** labels;
+
+} MexMusicTable;
+
+typedef struct MexData
+{
+    MexMetaData *metadata;
+    int *menu;
+    int *fighter;
+    int *fighter_function;
+    int *ssm;
+    MexMusicTable *music;
+} MexData;
+
 
 /*** Functions ***/
 HSD_Archive *MEX_LoadRelArchive(char *file, void *functions, char *symbol);

@@ -5,7 +5,7 @@
 backup
 
 # check if over
-  cmpwi  r3,16
+  cmpwi  r3,17
   bge Assert
 
 # get jump table
@@ -27,6 +27,7 @@ bl  FtName
 bl  FtDat
 bl  FtKindDesc
 bl  FtEmblemLookup
+bl  MexData
 #*****************************#
 SkipJumpTable:
 #Get effect type
@@ -100,6 +101,9 @@ FtEmblemLookup:
   lwz r3,OFST_mexData(rtoc)
   lwz r3,Arch_Fighter(r3)
   lwz r3,Arch_Fighter_InsigniaIDs(r3)
+  b Exit
+MexData:
+  lwz r3,OFST_mexData(rtoc)
   b Exit
 
 #############################################

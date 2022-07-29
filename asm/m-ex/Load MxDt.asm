@@ -128,6 +128,15 @@ PreloadInit_Loop:
   mflr  r3
   stw r3,OFST_XFunctionLookup(rtoc)
 
+# check MxDt version
+  lwz r3, OFST_Metadata(rtoc)
+  lbz r4, 1(r3) # version minor
+  lbz r3, 0(r3) # version major
+  cmpwi r3, MEXVersionMajor
+  bne VersionError
+  cmpwi r4, MEXVersionMinor
+  bne VersionError
+
   b Exit
 
 tempalloc:
@@ -168,6 +177,10 @@ blrl
 ErrorString:
 blrl
 .string "Error: MxDt.dat not found on disc\n"
+.align 2
+VersionErrorString:
+blrl
+.string "Error: MxDt.dat is out of date; please update with mexTool\n"
 .align 2
 
 
@@ -231,6 +244,9 @@ rtocOffsets:
   .hword Arch_FighterFunc,Arch_FighterFunc_onCatch,-1
   .hword Arch_Fighter,Arch_Fighter_BGM,-1
   .hword Arch_Fighter,Arch_Fighter_ViWaitFileNames,-1
+  .hword Arch_Fighter,Arch_Fighter_ClassicTrophyLookup,-1
+  .hword Arch_Fighter,Arch_Fighter_AdventureTrophyLookup,-1
+  .hword Arch_Fighter,Arch_Fighter_AllStarTrophyLookup,-1
   .hword Arch_Scene,Scene_Major,-1
   .hword Arch_Scene,Scene_Minor,-1
   .hword Arch_Effect,Effect_RuntimeUnk1,-1
@@ -273,11 +289,25 @@ rtocOffsets:
   .hword Arch_Metadata,Arch_Metadata_EffectCount,-1
   .hword Arch_Metadata,Arch_Metadata_TermMajor,-1
   .hword Arch_Metadata,Arch_Metadata_TermMinor,-1
+  .hword Arch_Metadata,Arch_Metadata_TrophyCount,-1
+  .hword Arch_Metadata,Arch_Metadata_TrophySDOff,-1
   .hword Arch_Metadata,Arch_Metadata_GrIntNum,-1
   .hword Arch_Metadata,Arch_Metadata_GrExtNum,-1
   .hword Arch_Metadata,-1
   .hword  -1
   .align 2
+
+VersionError:
+#OSReport
+  bl  VersionErrorString
+  mflr  r3
+  branchl r12,0x803456a8
+#Assert
+  bl  Assert_Name
+  mflr  r3
+  li  r4,0
+  load  r5,0x804d3940
+  branchl r12,0x80388220
 
 FileNotExist:
 #OSReport

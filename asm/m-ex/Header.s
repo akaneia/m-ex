@@ -1,6 +1,9 @@
 .set debug, 0
 
 #Constants
+.set  MEXVersionMajor,1
+.set  MEXVersionMinor,1
+
 .set  PersonalEffectStart,5000  # used for stage effects, need to rework this?
 .set  EffMdlStart,5000
 .set  PtclGenStart,6000
@@ -164,6 +167,8 @@
   .set  Arch_Metadata_BootScene,0x28
   .set  Arch_Metadata_TermMajor,0x2C
   .set  Arch_Metadata_TermMinor,0x30
+  .set  Arch_Metadata_TrophyCount,0x34
+  .set  Arch_Metadata_TrophySDOff,0x38
 .set  Arch_Menu,0x4
   .set  Arch_Menu_MenuParam,0x0
     .set  MenuParam_HandScale,0x0
@@ -214,6 +219,9 @@
     .set RaceTimes_Stride,0x4
   .set  Arch_Fighter_RuntimeIntroParam, 0x70
     .set RuntimeIntroParam_Stride, 0x4
+  .set  Arch_Fighter_ClassicTrophyLookup, 0x74
+  .set  Arch_Fighter_AdventureTrophyLookup, 0x78
+  .set  Arch_Fighter_AllStarTrophyLookup, 0x7C
 .set  Arch_FighterFunc,0xC
   .set  Arch_FighterFunc_onLoad,0x0
   .set  Arch_FighterFunc_onDeath,0x4
@@ -391,7 +399,10 @@
 .set  OFST_FighterOnCatch, OFST_FighterOnTaunt + 0x4
 .set  OFST_FighterBGM, OFST_FighterOnCatch + 0x4
 .set  OFST_FighterViWaitFileNames, OFST_FighterBGM + 0x4
-.set  OFST_MajorScenes, OFST_FighterViWaitFileNames + 0x4
+.set  OFST_ClassicTrophyLookup, OFST_FighterViWaitFileNames + 0x4
+.set  OFST_AdventureTrophyLookup, OFST_ClassicTrophyLookup + 0x4
+.set  OFST_AllStarTrophyLookup, OFST_AdventureTrophyLookup + 0x4
+.set  OFST_MajorScenes, OFST_AllStarTrophyLookup + 0x4
 .set  OFST_MinorScenes, OFST_MajorScenes + 0x4
 .set  OFST_PtclRuntime1, OFST_MinorScenes + 0x4
 .set  OFST_PtclRuntime3, OFST_PtclRuntime1 + 0x4
@@ -433,7 +444,9 @@
 .set  OFST_Metadata_EffectCount,OFST_Metadata_BGMCount+0x4
 .set  OFST_MetaData_TermMajor,OFST_Metadata_EffectCount + 0x4
 .set  OFST_MetaData_TermMinor,OFST_MetaData_TermMajor + 0x4
-.set  OFST_MetaData_GrIntNum,OFST_MetaData_TermMinor+0x4
+.set  OFST_MetaData_TrophyCount,OFST_MetaData_TermMinor + 0x4
+.set  OFST_MetaData_TrophySDOff,OFST_MetaData_TrophyCount+0x4
+.set  OFST_MetaData_GrIntNum,OFST_MetaData_TrophySDOff+0x4
 .set  OFST_MetaData_GrExtNum,OFST_MetaData_GrIntNum+0x4
 .set  OFST_Metadata,OFST_MetaData_GrExtNum+0x4
 .set  OFST_mexData,OFST_Metadata+0x4

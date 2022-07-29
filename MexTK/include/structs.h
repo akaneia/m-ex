@@ -59,6 +59,7 @@ typedef struct LightAnim LightAnim;
 typedef struct LightGroup LightGroup;
 typedef struct LOBJ LOBJ;
 typedef struct HSD_Fog HSD_Fog;
+typedef struct HSD_FogDesc HSD_FogDesc;
 typedef struct JOBJSet JOBJSet;
 
 // Archive
@@ -106,8 +107,8 @@ typedef struct DevText DevText;
 // Effects
 typedef struct Effect Effect;
 typedef struct Particle Particle;
-typedef struct Particle2 Particle2;
 typedef struct ptclGen ptclGen;
+typedef struct ptclGenCallback ptclGenCallback;
 typedef struct GeneratorAppSRT GeneratorAppSRT;
 
 // Color
@@ -263,5 +264,6 @@ typedef struct FtVarKirby FtVarKirby;
 // Custom
 typedef struct Stc_icns Stc_icns;
 typedef struct MEXPlaylist MEXPlaylist;
+typedef struct MEXPlaylistEntry MEXPlaylistEntry;
 
 #endif

@@ -108,14 +108,17 @@ void C_QUATMtx(Vec4 *r, Mtx m)
 
 HSD_Pad *PadGet(int playerIndex, int padType)
 {
-    HSD_Pads *pads;
+    HSD_Pads *pads = 0;
 
     // get the correct pad
     if (padType == PADGET_MASTER)
-        pads = 0x804c1fac;
+        pads = (HSD_Pads *)0x804c1fac;
     else if (padType == PADGET_ENGINE)
-        pads = 0x804c21cc;
+        pads = (HSD_Pads *)0x804c21cc;
 
+    if (pads == 0)
+        return 0;
+        
     return (&pads->pad[playerIndex]);
 }
 

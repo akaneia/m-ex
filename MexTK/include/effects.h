@@ -27,30 +27,10 @@ struct Effect
     char x29;
 };
 
-struct Particle
+struct ptclGenCallback
 {
-    int x0;
-    int x4;
-    int x8;
-    int xc;
-    int x10;
-    int x14;
-    int x18;
-    int x1c;
-    int x20;
-    int x24;
-    int x28;
-    int x2c;
-    int x30;
-    int x34;
-    int x38;
-    int x3c;
-    int x40;
-    int x44;
-    int x48;
-    int x4c;
-    int x50;
-    GeneratorAppSRT *param;
+    void (*cbSpawnParticle)(Particle *);  // x00
+    void (*cbDestroyParticle)(Particle *);// x04
 };
 
 struct ptclGen // allocated at 8039d9c8
@@ -58,7 +38,7 @@ struct ptclGen // allocated at 8039d9c8
     struct ptclGen *next; // 0x0
     int kind;             // x4
     float random;         // x8
-    float xc;             // xc
+    float num_to_spawn;   // xc
     JOBJ *joint;          // x10
     u16 genlife;          // x14
     u16 type;             // x16
@@ -68,7 +48,7 @@ struct ptclGen // allocated at 8039d9c8
     u8 x1b;               // x1b
     u16 instance;         // x1c
     u16 life;             // x1e
-    void *track;          // x20, pointer to track data
+    void *cmdList;        // x20, pointer to track data
     Vec3 pos;             // x24
     Vec3 vel;             // x30
     float gravity;        // x3c
@@ -76,21 +56,23 @@ struct ptclGen // allocated at 8039d9c8
     float size;           // x44
     float radius;         // x48
     float angle;          // x4c
-    int timer;            // x50
-    void *mtx;            // x54, points to an SRT mtx used for transforming the generator while attached to a joint
+    int particle_num;     // x50
+    GeneratorAppSRT *appsrt;// x54, points to an SRT mtx used for transforming the generator while attached to a joint
+    ptclGenCallback *callbacks;  // x58
+    void *x5C;            // x5C
+    Vec3 x60;             // x60
+    Vec3 x6c;             // x6C
+    Vec3 x78;             // x78
+    Vec3 x84;             // x84
+    short rect_flags;     // x90
 };
 
 struct GeneratorAppSRT // allocated at 803a42b0
 {
     int x0;     //x0
     int x4;     //x4
-    int x8;     //x8
-    int xc;     //xc
-    int x10;    //x10
-    int x14;    //x14
-    int x18;    //x18
-    int x1c;    //x1c
-    int x20;    //x20
+    Vec3 pos;   //x8
+    Vec4 rot;   //x14
     Vec3 scale; //x24
     int x30;    //x30
     int x34;    //x34
@@ -124,9 +106,10 @@ struct GeneratorAppSRT // allocated at 803a42b0
     u16 xa2;
 };
 
-struct Particle2 // created at 80398c90. dont feel like labelling this, offsets are @ 80398de4
+// courtesy of psilupan: https://pastebin.com/raw/yQdjypW0
+struct Particle // created at 80398c90. dont feel like labelling this, offsets are @ 80398de4
 {
-    struct Particle2 *next; // 0x0
+    struct Particle *next; // 0x0
     u32 kind;               // 0x4, actually are flags. 0x800 pauses it
     u8 bank;                // 0x8
     u8 texGroup;            // 0x9
@@ -156,21 +139,35 @@ struct Particle2 // created at 80398c90. dont feel like labelling this, offsets 
     u8 aCmpMode;            // 0x56
     u8 aCmpParam1;          // 0x57
     u8 aCmpParam2;          // 0x58
-    void *x5c;
-    void *x60;
-    void *x64;
-    void *x68;
-    void *x6c;
-    void *x70;
-    void *x74;
-    void *x78;
-    void *x7c;
-    void *x80;
-    void *x84;
-    void *x88;
-    void *gen;
-    void *x90;
-    // theres more but i got bored, rest are here courtesy of psilupan: https://pastebin.com/raw/yQdjypW0
+    u8 pJObjOfs;            // 0x59
+    u16 matColCount;     // 0x5A
+    u16 ambColCount;     // 0x5C
+    u16 rotateCount;     // 0x5E
+    float sizeTarget;       // 0x60
+    float rotateTarget;     // 0x64
+    float rotateAcc;        // 0x68
+    u16 primColRemain;   // 0x68
+    u16 envColRemain;    // 0x6A
+    GXColor primColTarget;  // 0x6C
+    GXColor envColTarget;   // 0x70
+    u16 matColRemain;    // 0x74
+    u16 ambColRemain;    // 0x76
+    u16 aCmpRemain;      // 0x78
+    u8 aCmpParam1Target;    // 0x7A
+    u8 aCmpParam2Target;    // 0x7B
+    u8 matRGB;              // 0x7C
+    u8 matA;                // 0x7D
+    u8 ambRGB;              // 0x7E
+    u8 ambA;                // 0x7F
+    u8 matRGBTarget;        // 0x80
+    u8 matATarget;          // 0x81
+    u8 ambRGBTarget;        // 0x82
+    u8 ambATarget;          // 0x83
+    float trail;            // 0x84
+    ptclGen *gen;           // 0x88
+    GeneratorAppSRT *appsrt;// 0x8C
+    void *userdata;         // 0x90
+    void *callback;         // 0x94
 };
 
 /*** Functions ***/
@@ -185,12 +182,12 @@ void Particle_DestroyAll(JOBJ *jobj);
 void Effect_PauseAll(GOBJ *fighter);
 void Effect_ResumeAll(GOBJ *fighter);
 void Effect_CheckQueue(GOBJ *g, Effect **gfx);
-int psRemoveParticleAppSRT(Particle2 *ptcl);
-void psDeletePntJObjwithParticle(Particle2 *ptcl);
+int psRemoveParticleAppSRT(Particle *ptcl);
+void psDeletePntJObjwithParticle(Particle *ptcl);
 ptclGen *psKillGenerator(ptclGen *gen, ptclGen *unk);
 
 u16 *stc_ptclnum = R13 + (-0x3DBE);      // number of pctls alive
-Particle2 **stc_ptcl = 0x804d0908;       // last created ptcl
+Particle **stc_ptcl = 0x804d0908;       // last created ptcl
 ptclGen **stc_ptclgen = R13 + (-0x3DA4); // last created gen
 ptclGen **stc_ptclgencurr = R13 + (-0x3DA8);
 u16 *stc_ptclgennum = R13 + (-0x3DC0);

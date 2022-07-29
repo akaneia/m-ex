@@ -17,6 +17,6 @@
   add REG_Playlist,r3,r4
 
 #Start of playlist
-  lwz r3,0x4(REG_Playlist)
+  mr r3,REG_Playlist
   restore
   blr
