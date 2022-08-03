@@ -169,7 +169,7 @@ struct GOBJ
     GOBJ *nextOrdered;       // 0x10
     GOBJ *previousOrdered;   // 0x14
     GOBJProc *proc;          // 0x18
-    void *gx_cb;             // 0x1C
+    void (*gx_cb)();         // 0x1C
     u64 cobj_links;          // 0x20. this is used to know which cobj to render to
     void *hsd_object;        // 0x28
     void *userdata;          // 0x2C
@@ -684,7 +684,9 @@ int LObj_GetInterest(LOBJ *lobj, Vec3 *pos);
 void LObj_SetInterest(LOBJ *lobj, Vec3 *pos);
 void LObj_ReqAnimAll(LOBJ *lobj, float frame);
 void LObj_AnimAll(LOBJ *lobj);
+void LObj_DeleteCurrentAll(int unk);
 HSD_Fog *Fog_LoadDesc(void *fogdesc);
+void Fog_Set(HSD_Fog *fog);
 DOBJ *JOBJ_GetDObj(JOBJ *jobj);
 void *MOBJ_SetAlpha(DOBJ *dobj, float alpha);
 void MOBJ_SetToonTextureImage(_HSD_ImageDesc *);

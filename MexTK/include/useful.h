@@ -354,8 +354,77 @@ struct JPEGHeader
     int audioSize; // 0xc
 };
 
+struct FSTEntry
+{
+    unsigned int is_dir : 8;           // 0x0
+    unsigned int filename_offset : 24; // 0x1
+    union
+    {
+        struct
+        {
+            u32 startAddr; // 0x4
+            u32 length;    // 0x8
+        } file;
+        struct
+        {
+            u32 x4;            // 0x4
+            u32 last_entrynum; // 0x8
+        } dir;
+    } u;
+};
+struct DVDDiskID
+{
+    char gameName[4];
+    char company[2];
+    u8 diskNumber;
+    u8 gameVersion;
+    u8 streaming;
+    u8 streamingBufSize; // 0 = default
+    u8 padding[14];      // 0's are stored
+    u32 rvlMagic;        // Revolution disk magic number
+    u32 gcMagic;         // GC magic number is here
+};
+struct DVDCommandBlock
+{
+    DVDCommandBlock *next; // 0x00
+    DVDCommandBlock *prev; // 0x04
+    u32 command;           // 0x08
+    s32 state;             // 0x0C
+    u32 offset;            // 0x10
+    u32 length;            // 0x14
+    void *addr;            // 0x18
+    u32 currTransferSize;  // 0x1C
+    u32 transferredSize;   // 0x20
+    DVDDiskID *id;         // 0x24
+    void *callback;        // 0x28
+    void *userData;        // 0x2C
+};
+struct DVDFileInfo
+{
+    DVDCommandBlock cb; // 0x0
+    u32 startAddr;      // disk address of file, 0x30
+    u32 length;         // file size in bytes, 0x34
+    void *callback;     // 0x38
+    void *file;         // 0x3C
+};
+struct DVDDir
+{
+    u32 entryNum;
+    u32 location;
+    u32 next;
+};
+struct DVDDirEntry
+{
+    u32 entryNum;
+    int isDir;
+    char *name;
+};
+
 /*** Static Vars ***/
 OSInfo *os_info = 0x80000000;
+int *stc_fst_totalentrynum = 0x804D7284;
+FSTEntry **stc_fst_entries = 0x804D727C; // -0x4424, indexed by entrynum (0 is always the root directory)
+char **stc_fst_filenames = 0x804D7280;
 
 /*** OS Library ***/
 int OSGetTick();
@@ -373,8 +442,8 @@ void OSFreeToHeap(void *alloc);
 int OSCheckHeap(int heap);
 int OSGetConsoleType();
 int DVDConvertPathToEntrynum(char *file);
-int DVDFastOpen(s32 entrynum, void *dvdFileInfo);
-int DVDConvertPathToEntrynum(char *file);
+int DVDFastOpen(s32 entrynum, DVDFileInfo *dvdFileInfo);
+int DVDClose(DVDFileInfo *dvdFileInfo);
 int DVDWaitForRead();
 int File_Read(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index, void *cb, int cb_arg2);
 int File_GetSize(s32 entrynum);
@@ -426,19 +495,7 @@ int strncmp(char *str1, char *str2, int size);
 char *strcpy(char *dest, char *src);            // copies the string pointed to, by src to dest.
 char *strncpy(char *dest, char *src, int size); // copies the string pointed to, by src to dest.
 unsigned long int strtoul(const char *str, char **endptr, int base);
-
-// TODO:
-// char *strcat(s, append) register char *s;
-// register const char *append;
-// {
-//     char *save = s;
-
-//     for (; *s; ++s)
-//         ;
-//     while (*s++ = *append++)
-//         ;
-//     return (save);
-// }
+int tolower(char in);
 
 int SFX_Play(int sfxID);
 int SFX_PlayRaw(int sfx, int volume, int pan, int unk, int unk2);

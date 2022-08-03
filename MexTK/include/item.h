@@ -352,7 +352,7 @@ struct itCommonAttr
     unsigned char x1_5 : 1;     // 0x1 0x08
     unsigned char cam_kind : 2; // 0x1 0x06, is stored to 0xdcd
     unsigned char x1_8 : 1;     // 0x1 0x01    char flags3; //0x2
-    char flags4;                //0x3
+    char flags4;                // 0x3
     float throw_speed_mult;     // 0x4, speed multiplier at which this item is thrown at
     int x8;                     //
     float spin_speed;           //
@@ -785,7 +785,7 @@ struct ItemData
     u16 xdca5 : 1;                                      // 0xdca 0x08
     u16 can_hold : 1;                                   // 0xdca 0x04
     u16 xdca7 : 1;                                      // 0xdca 0x02
-    u16 rotate_axis : 3;                                // 0xdcb,
+    u16 rotate_axis : 3;                                // 0xdcb, 0x18
     u16 flags4 : 2;                                     // 0xdcb, 0x30
     u16 can_nudge : 1;                                  // 0xdcb, 0x08
     u16 xdcb_7 : 3;                                     // 0xdcb, 0x07

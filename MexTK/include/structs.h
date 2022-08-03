@@ -1,7 +1,7 @@
 #ifndef MEX_H_STRUCTS
 #define MEX_H_STRUCTS
 
-/* 
+/*
  *  defines typedefs for structs used throughout m-ex
  */
 
@@ -21,6 +21,12 @@ typedef struct MTHPlayParam MTHPlayParam;
 typedef struct MTHHeader MTHHeader;
 typedef struct MTHPlayback MTHPlayback;
 typedef struct JPEGHeader JPEGHeader;
+typedef struct DVDDiskID DVDDiskID;
+typedef struct DVDCommandBlock DVDCommandBlock;
+typedef struct DVDFileInfo DVDFileInfo;
+typedef struct DVDDir DVDDir;
+typedef struct DVDDirEntry DVDDirEntry;
+typedef struct FSTEntry FSTEntry;
 
 // GX
 typedef struct GXColor GXColor;
@@ -194,6 +200,7 @@ typedef struct FtScript FtScript;
 // Fighter States
 typedef struct FtCliffCatch FtCliffCatch;
 typedef struct FtDamage FtDamage;
+typedef struct FtDead FtDead;
 
 // CSS
 typedef struct CSSBackup CSSBackup;
@@ -256,6 +263,10 @@ typedef struct PreloadEntry PreloadEntry;
 typedef struct PreloadLookup PreloadLookup;
 typedef struct PreloadAllocData PreloadAllocData;
 typedef struct PreloadTable PreloadTable;
+
+// 1P
+typedef struct ClassicLineupDesc ClassicLineupDesc;
+typedef struct ClassicLineup ClassicLineup;
 
 // Kirby
 typedef struct FtVarKirby FtVarKirby;

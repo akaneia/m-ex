@@ -118,69 +118,69 @@ struct MatchInit
     unsigned char isShowLRAStart : 1;     // 0x04
     unsigned char isHidePauseHUD : 1;     // 0x02
     unsigned char timerRunOnPause : 1;    // 0x01
-    //byte 0x4
+    // byte 0x4
     unsigned char unk11 : 1;             // 0x80
     unsigned char isCheckStockSteal : 1; // 0x40
     unsigned char isRunStockLogic : 1;   // 0x20
     unsigned char unk1f : 5;             // 0x1f
-    //byte 0x5
+    // byte 0x5
     unsigned char no_check_end : 1;        // 0x80
     unsigned char isSkipUnkStockCheck : 1; // 0x40
     unsigned char no_hit : 1;              // 0x20
     unsigned char unk12 : 5;               // 0x01
     // byte 0x6
     u8 bombRain; // 0xFF
-    //byte 0x7
+    // byte 0x7
     u8 unk13; // 0xFF
-    //byte 0x8
+    // byte 0x8
     u8 is_teams; // 0xFF
-    //byte 0x9
+    // byte 0x9
     u8 use_ko_count; // 0xFF
-    //byte 0xA
+    // byte 0xA
     u8 unk14; // 0xFF
-    //byte 0xB
+    // byte 0xB
     s8 itemFreq; // 0xFF
-    //byte 0xC
+    // byte 0xC
     u8 unk15; // 0xFF
-    //byte 0xD
+    // byte 0xD
     u8 unk16; // 0xFF
-    //byte 0xE
+    // byte 0xE
     u16 stage; // 0xFFFF
-    //byte 0x10
+    // byte 0x10
     int timerSeconds : 32; // 0xFFFFFFFF
-    //byte 0x14
+    // byte 0x14
     u8 timerSubSeconds; // 0xFF
-    //0x18
+    // 0x18
     int unk17; // 0xFFFFFFFF
-    //0x1C
+    // 0x1C
     unsigned long long itemSwitch : 64; // 0xFFFFFFFF FFFFFFFF
-    //byte 0x24
+    // byte 0x24
     int unk18; // 0xFFFFFFFF
-    //0x28
+    // 0x28
     float quake_mult;
-    //0x2C
+    // 0x2C
     float dmg_ratio;
-    //0x30
+    // 0x30
     float match_speed;
-    //0x34
+    // 0x34
     int x34;
-    //0x38
+    // 0x38
     int x38;
-    //0x3C
+    // 0x3C
     int x3c;
-    //0x40
+    // 0x40
     void *onStartMelee;
-    //0x44
+    // 0x44
     void *onMatchFrame1;
-    //0x48
+    // 0x48
     void *onMatchFrame2;
-    //0x4c
+    // 0x4c
     void *onMatchEnd;
-    //0x50
+    // 0x50
     int x50;
-    //0x54
+    // 0x54
     void *onCheckPause;
-    //0x58
+    // 0x58
     int x58;
 
     /*
@@ -207,14 +207,14 @@ struct MatchHUDElement
     u16 xc;
     u8 xe;
     u8 xf;
-    unsigned char is_removed : 1; // 0x80 - 0x10
-    unsigned char x10_2 : 1;      // 0x40 - 0x10
-    unsigned char x10_3 : 1;      // 0x20 - 0x10
-    unsigned char x10_4 : 1;      // 0x10 - 0x10
+    unsigned char is_removed : 1; // 0x80 - 0x10, related to destruction of percent digits
+    unsigned char x10_40 : 1;     // 0x40 - 0x10, related to destruction of percent digits
+    unsigned char x10_20 : 1;     // 0x20 - 0x10
+    unsigned char x10_10 : 1;     // 0x10 - 0x10
     unsigned char is_hidden : 1;  // 0x08 - 0x10
-    unsigned char x10_6 : 1;      // 0x04 - 0x10
-    unsigned char x10_7 : 1;      // 0x02 - 0x10
-    unsigned char x10_8 : 1;      // 0x01 - 0x10
+    unsigned char x10_04 : 1;     // 0x04 - 0x10
+    unsigned char x10_02 : 1;     // 0x02 - 0x10,
+    unsigned char x10_01 : 1;     // 0x01 - 0x10
     u8 x11;
     u8 x12;
     u8 x13;
@@ -240,7 +240,9 @@ struct MatchHUD
     Vec3 player_hud_pos[6];          // 0x18
     Vec3 joint8_pos[3];              // 0x60
     Vec3 joint11_pos[2];             // 0x84
-    u8 x9c[0x54];                    // 0x9c
+    void *x9c;                       // 0x9c
+    GOBJ *timer_gobj;                // 0xA0
+    u8 xa4[0x4C];                    // 0xA4
     MatchHUDElement element_data[6]; // 0xF0
     JOBJSet dmgnum_jobjset;          // 0x348
     JOBJSet dmgmark_jobjset;         // 0x358
@@ -271,248 +273,259 @@ struct CameraBox
     float boundbottom_proj; // 0x4c
     float x50;              // 0x50
 };
-
 struct MatchCamera
 {
-    GOBJ *gobj;                   // 0x0
-    int cam_kind;                 // 0x4
-    GXColor erase_color;          // 0x8
-    float zoom;                   // 0xc
-    float dist_to_bg;             // 0x10
-    Vec3 x14;                     // 0x14
-    Vec3 x20;                     // 0x20
-    Vec3 x2c;                     // 0x2c
-    Vec3 x38;                     // 0x38
-    float x44;                    // 0x44
-    float x48;                    // 0x48
-    Vec3 x4c;                     // 0x4c
-    Vec3 x58;                     // 0x58
-    Vec3 x64;                     // 0x64
-    Vec3 x70;                     // 0x70
-    float x7c;                    // 0x7c
-    float x80;                    // 0x80
-    int x84;                      // 0x84
-    int x88;                      // 0x88
-    int x8c;                      // 0x8c
-    int x90;                      // 0x90
-    int x94;                      // 0x94
-    int x98;                      // 0x98
-    int x9c;                      // 0x9c
-    int xa0;                      // 0xa0
-    int xa4;                      // 0xa4
-    int xa8;                      // 0xa8
-    int xac;                      // 0xac
-    int xb0;                      // 0xb0
-    int xb4;                      // 0xb4
-    int xb8;                      // 0xb8
-    int xbc;                      // 0xbc
-    int xc0;                      // 0xc0
-    int xc4;                      // 0xc4
-    int xc8;                      // 0xc8
-    int xcc;                      // 0xcc
-    int xd0;                      // 0xd0
-    int xd4;                      // 0xd4
-    int xd8;                      // 0xd8
-    int xdc;                      // 0xdc
-    int xe0;                      // 0xe0
-    int xe4;                      // 0xe4
-    int xe8;                      // 0xe8
-    int xec;                      // 0xec
-    int xf0;                      // 0xf0
-    int xf4;                      // 0xf4
-    int xf8;                      // 0xf8
-    int xfc;                      // 0xfc
-    int x100;                     // 0x100
-    int x104;                     // 0x104
-    int x108;                     // 0x108
-    int x10c;                     // 0x10c
-    int x110;                     // 0x110
-    int x114;                     // 0x114
-    int x118;                     // 0x118
-    int x11c;                     // 0x11c
-    int x120;                     // 0x120
-    int x124;                     // 0x124
-    int x128;                     // 0x128
-    int x12c;                     // 0x12c
-    int x130;                     // 0x130
-    int x134;                     // 0x134
-    int x138;                     // 0x138
-    int x13c;                     // 0x13c
-    int x140;                     // 0x140
-    int x144;                     // 0x144
-    int x148;                     // 0x148
-    int x14c;                     // 0x14c
-    int x150;                     // 0x150
-    int x154;                     // 0x154
-    int x158;                     // 0x158
-    int x15c;                     // 0x15c
-    int x160;                     // 0x160
-    int x164;                     // 0x164
-    int x168;                     // 0x168
-    int x16c;                     // 0x16c
-    int x170;                     // 0x170
-    int x174;                     // 0x174
-    int x178;                     // 0x178
-    int x17c;                     // 0x17c
-    int x180;                     // 0x180
-    int x184;                     // 0x184
-    int x188;                     // 0x188
-    int x18c;                     // 0x18c
-    int x190;                     // 0x190
-    int x194;                     // 0x194
-    int x198;                     // 0x198
-    int x19c;                     // 0x19c
-    int x1a0;                     // 0x1a0
-    int x1a4;                     // 0x1a4
-    int x1a8;                     // 0x1a8
-    int x1ac;                     // 0x1ac
-    int x1b0;                     // 0x1b0
-    int x1b4;                     // 0x1b4
-    int x1b8;                     // 0x1b8
-    int x1bc;                     // 0x1bc
-    int x1c0;                     // 0x1c0
-    int x1c4;                     // 0x1c4
-    int x1c8;                     // 0x1c8
-    int x1cc;                     // 0x1cc
-    int x1d0;                     // 0x1d0
-    int x1d4;                     // 0x1d4
-    int x1d8;                     // 0x1d8
-    int x1dc;                     // 0x1dc
-    int x1e0;                     // 0x1e0
-    int x1e4;                     // 0x1e4
-    int x1e8;                     // 0x1e8
-    int x1ec;                     // 0x1ec
-    int x1f0;                     // 0x1f0
-    int x1f4;                     // 0x1f4
-    int x1f8;                     // 0x1f8
-    int x1fc;                     // 0x1fc
-    int x200;                     // 0x200
-    int x204;                     // 0x204
-    int x208;                     // 0x208
-    int x20c;                     // 0x20c
-    int x210;                     // 0x210
-    int x214;                     // 0x214
-    int x218;                     // 0x218
-    int x21c;                     // 0x21c
-    int x220;                     // 0x220
-    int x224;                     // 0x224
-    int x228;                     // 0x228
-    int x22c;                     // 0x22c
-    int x230;                     // 0x230
-    int x234;                     // 0x234
-    int x238;                     // 0x238
-    int x23c;                     // 0x23c
-    int x240;                     // 0x240
-    int x244;                     // 0x244
-    int x248;                     // 0x248
-    int x24c;                     // 0x24c
-    int x250;                     // 0x250
-    int x254;                     // 0x254
-    int x258;                     // 0x258
-    int x25c;                     // 0x25c
-    int x260;                     // 0x260
-    int x264;                     // 0x264
-    int x268;                     // 0x268
-    int x26c;                     // 0x26c
-    int x270;                     // 0x270
-    int x274;                     // 0x274
-    int x278;                     // 0x278
-    int x27c;                     // 0x27c
-    int x280;                     // 0x280
-    int x284;                     // 0x284
-    int x288;                     // 0x288
-    int x28c;                     // 0x28c
-    int x290;                     // 0x290
-    int x294;                     // 0x294
-    int x298;                     // 0x298
-    int x29c;                     // 0x29c
-    int x2a0;                     // 0x2a0
-    int x2a4;                     // 0x2a4
-    int x2a8;                     // 0x2a8
-    int x2ac;                     // 0x2ac
-    int x2b0;                     // 0x2b0
-    int x2b4;                     // 0x2b4
-    int x2b8;                     // 0x2b8
-    int x2bc;                     // 0x2bc
-    int x2c0;                     // 0x2c0
-    int x2c4;                     // 0x2c4
-    int x2c8;                     // 0x2c8
-    int x2cc;                     // 0x2cc
-    int x2d0;                     // 0x2d0
-    int x2d4;                     // 0x2d4
-    int x2d8;                     // 0x2d8
-    int x2dc;                     // 0x2dc
-    int x2e0;                     // 0x2e0
-    int x2e4;                     // 0x2e4
-    int x2e8;                     // 0x2e8
-    float freecam_tilt_vertical;  // 0x2ec, uses radians
-    int x2f0;                     // 0x2f0
-    int x2f4;                     // 0x2f4
-    float freecam_zoommax;        // 0x2f8
-    float freecam_zoommin;        // 0x2fc
-    int x300;                     // 0x300
-    int x304;                     // 0x304
-    Vec3 freecam_pos;             // 0x308
-    Vec3 freecam_offset;          // 0x314                // 0x314
-    Vec2 freecam_rotate;          // 0x320
-    Vec3 freecam_fov;             // 0x328
-    int x334;                     // 0x334
-    int x338;                     // 0x338
-    int x33c;                     // 0x33c
-    int x340;                     // 0x340
-    int x344;                     // 0x344
-    int x348;                     // 0x348
-    int x34c;                     // 0x34c
-    int x350;                     // 0x350
-    int x354;                     // 0x354
-    int x358;                     // 0x358
-    int x35c;                     // 0x35c
-    int x360;                     // 0x360
-    int x364;                     // 0x364
-    int x368;                     // 0x368
-    int x36c;                     // 0x36c
-    int x370;                     // 0x370
-    int x374;                     // 0x374
-    int x378;                     // 0x378
-    int x37c;                     // 0x37c
-    int x380;                     // 0x380
-    int x384;                     // 0x384
-    int x388;                     // 0x388
-    int x38c;                     // 0x38c
-    int x390;                     // 0x390
-    int x394;                     // 0x394
-    char x398;                    // 0x398
-    unsigned char x399x80 : 1;    // 0x399, 0x80
-    unsigned char x399x40 : 1;    // 0x399, 0x40
-    unsigned char x399x20 : 1;    // 0x399, 0x20
-    unsigned char show_coll : 1;  // 0x399, 0x10
-    unsigned char x399x08 : 1;    // 0x399, 0x08
-    unsigned char hide_stage : 1; // 0x399, 0x04
-    unsigned char x399x02 : 1;    // 0x399, 0x02
-    unsigned char x399x01 : 1;    // 0x399, 0x01
-    char x39a;                    // 0x39a
-    char x39b;                    // 0x39b
-    int x39c;                     // 0x39c
-    int x3a0;                     // 0x3a0
-    int x3a4;                     // 0x3a4
-    int x3a8;                     // 0x3a8
-    int x3ac;                     // 0x3ac
-    int x3b0;                     // 0x3b0
-    int x3b4;                     // 0x3b4
-    int x3b8;                     // 0x3b8
-    int x3bc;                     // 0x3bc
-    int x3c0;                     // 0x3c0
-    int x3c4;                     // 0x3c4
-    int x3c8;                     // 0x3c8
-    int x3cc;                     // 0x3cc
-    int x3d0;                     // 0x3d0
-    int x3d4;                     // 0x3d4
-    Vec3 devcam_pos;              // 0x3d8
-    Vec3 devcam_rot;              // 0x3e4
-    float devcam_fov;             // 0x3f0
-    int x3f4;                     // 0x3f4
-    int x3f8;                     // 0x3f8
-    int x3fc;                     // 0x3fc
+    GOBJ *gobj;                            // 0x0
+    int cam_kind;                          // 0x4
+    GXColor erase_color;                   // 0x8
+    float zoom;                            // 0xc
+    float dist_to_bg;                      // 0x10
+    Vec3 x14;                              // 0x14
+    Vec3 x20;                              // 0x20
+    Vec3 x2c;                              // 0x2c
+    Vec3 x38;                              // 0x38
+    float x44;                             // 0x44
+    float x48;                             // 0x48
+    Vec3 x4c;                              // 0x4c
+    Vec3 x58;                              // 0x58
+    Vec3 x64;                              // 0x64
+    Vec3 x70;                              // 0x70
+    float x7c;                             // 0x7c
+    float x80;                             // 0x80
+    int x84;                               // 0x84
+    int x88;                               // 0x88
+    int x8c;                               // 0x8c
+    int x90;                               // 0x90
+    int x94;                               // 0x94
+    int x98;                               // 0x98
+    int x9c;                               // 0x9c
+    int xa0;                               // 0xa0
+    int xa4;                               // 0xa4
+    int xa8;                               // 0xa8
+    int xac;                               // 0xac
+    int xb0;                               // 0xb0
+    int xb4;                               // 0xb4
+    int xb8;                               // 0xb8
+    int xbc;                               // 0xbc
+    int xc0;                               // 0xc0
+    int xc4;                               // 0xc4
+    int xc8;                               // 0xc8
+    int xcc;                               // 0xcc
+    int xd0;                               // 0xd0
+    int xd4;                               // 0xd4
+    int xd8;                               // 0xd8
+    int xdc;                               // 0xdc
+    int xe0;                               // 0xe0
+    int xe4;                               // 0xe4
+    int xe8;                               // 0xe8
+    int xec;                               // 0xec
+    int xf0;                               // 0xf0
+    int xf4;                               // 0xf4
+    int xf8;                               // 0xf8
+    int xfc;                               // 0xfc
+    int x100;                              // 0x100
+    int x104;                              // 0x104
+    int x108;                              // 0x108
+    int x10c;                              // 0x10c
+    int x110;                              // 0x110
+    int x114;                              // 0x114
+    int x118;                              // 0x118
+    int x11c;                              // 0x11c
+    int x120;                              // 0x120
+    int x124;                              // 0x124
+    int x128;                              // 0x128
+    int x12c;                              // 0x12c
+    int x130;                              // 0x130
+    int x134;                              // 0x134
+    int x138;                              // 0x138
+    int x13c;                              // 0x13c
+    int x140;                              // 0x140
+    int x144;                              // 0x144
+    int x148;                              // 0x148
+    int x14c;                              // 0x14c
+    int x150;                              // 0x150
+    int x154;                              // 0x154
+    int x158;                              // 0x158
+    int x15c;                              // 0x15c
+    int x160;                              // 0x160
+    int x164;                              // 0x164
+    int x168;                              // 0x168
+    int x16c;                              // 0x16c
+    int x170;                              // 0x170
+    int x174;                              // 0x174
+    int x178;                              // 0x178
+    int x17c;                              // 0x17c
+    int x180;                              // 0x180
+    int x184;                              // 0x184
+    int x188;                              // 0x188
+    int x18c;                              // 0x18c
+    int x190;                              // 0x190
+    int x194;                              // 0x194
+    int x198;                              // 0x198
+    int x19c;                              // 0x19c
+    int x1a0;                              // 0x1a0
+    int x1a4;                              // 0x1a4
+    int x1a8;                              // 0x1a8
+    int x1ac;                              // 0x1ac
+    int x1b0;                              // 0x1b0
+    int x1b4;                              // 0x1b4
+    int x1b8;                              // 0x1b8
+    int x1bc;                              // 0x1bc
+    int x1c0;                              // 0x1c0
+    int x1c4;                              // 0x1c4
+    int x1c8;                              // 0x1c8
+    int x1cc;                              // 0x1cc
+    int x1d0;                              // 0x1d0
+    int x1d4;                              // 0x1d4
+    int x1d8;                              // 0x1d8
+    int x1dc;                              // 0x1dc
+    int x1e0;                              // 0x1e0
+    int x1e4;                              // 0x1e4
+    int x1e8;                              // 0x1e8
+    int x1ec;                              // 0x1ec
+    int x1f0;                              // 0x1f0
+    int x1f4;                              // 0x1f4
+    int x1f8;                              // 0x1f8
+    int x1fc;                              // 0x1fc
+    int x200;                              // 0x200
+    int x204;                              // 0x204
+    int x208;                              // 0x208
+    int x20c;                              // 0x20c
+    int x210;                              // 0x210
+    int x214;                              // 0x214
+    int x218;                              // 0x218
+    int x21c;                              // 0x21c
+    int x220;                              // 0x220
+    int x224;                              // 0x224
+    int x228;                              // 0x228
+    int x22c;                              // 0x22c
+    int x230;                              // 0x230
+    int x234;                              // 0x234
+    int x238;                              // 0x238
+    int x23c;                              // 0x23c
+    int x240;                              // 0x240
+    int x244;                              // 0x244
+    int x248;                              // 0x248
+    int x24c;                              // 0x24c
+    int x250;                              // 0x250
+    int x254;                              // 0x254
+    int x258;                              // 0x258
+    int x25c;                              // 0x25c
+    int x260;                              // 0x260
+    int x264;                              // 0x264
+    int x268;                              // 0x268
+    int x26c;                              // 0x26c
+    int x270;                              // 0x270
+    int x274;                              // 0x274
+    int x278;                              // 0x278
+    int x27c;                              // 0x27c
+    int x280;                              // 0x280
+    int x284;                              // 0x284
+    int x288;                              // 0x288
+    int x28c;                              // 0x28c
+    int x290;                              // 0x290
+    int x294;                              // 0x294
+    int x298;                              // 0x298
+    int x29c;                              // 0x29c
+    int x2a0;                              // 0x2a0
+    int x2a4;                              // 0x2a4
+    int x2a8;                              // 0x2a8
+    int x2ac;                              // 0x2ac
+    int x2b0;                              // 0x2b0
+    int x2b4;                              // 0x2b4
+    int x2b8;                              // 0x2b8
+    int x2bc;                              // 0x2bc
+    float cam_;                            // 0x2c0
+    int x2c4;                              // 0x2c4
+    int x2c8;                              // 0x2c8
+    int x2cc;                              // 0x2cc
+    int x2d0;                              // 0x2d0
+    int x2d4;                              // 0x2d4
+    int x2d8;                              // 0x2d8
+    int x2dc;                              // 0x2dc
+    int x2e0;                              // 0x2e0
+    int x2e4;                              // 0x2e4
+    int x2e8;                              // 0x2e8
+    float freecam_tilt_vertical;           // 0x2ec, uses radians
+    int x2f0;                              // 0x2f0
+    int x2f4;                              // 0x2f4
+    float freecam_zoommax;                 // 0x2f8
+    float freecam_zoommin;                 // 0x2fc
+    int x300;                              // 0x300
+    int x304;                              // 0x304
+    Vec3 freecam_pos;                      // 0x308
+    Vec3 freecam_offset;                   // 0x314                // 0x314
+    Vec2 freecam_rotate;                   // 0x320
+    Vec3 freecam_fov;                      // 0x328
+    int x334;                              // 0x334
+    int x338;                              // 0x338
+    int x33c;                              // 0x33c
+    int x340;                              // 0x340
+    int x344;                              // 0x344
+    int x348;                              // 0x348
+    int x34c;                              // 0x34c
+    int x350;                              // 0x350
+    int x354;                              // 0x354
+    int x358;                              // 0x358
+    int x35c;                              // 0x35c
+    int x360;                              // 0x360
+    int x364;                              // 0x364
+    int x368;                              // 0x368
+    int x36c;                              // 0x36c
+    int x370;                              // 0x370
+    int x374;                              // 0x374
+    int x378;                              // 0x378
+    int x37c;                              // 0x37c
+    int x380;                              // 0x380
+    int x384;                              // 0x384
+    int x388;                              // 0x388
+    int x38c;                              // 0x38c
+    int x390;                              // 0x390
+    int x394;                              // 0x394
+    unsigned char x398_80 : 1;             // 0x398
+    unsigned char x398_40 : 1;             // 0x398
+    unsigned char hide_stage2 : 1;         // 0x398, 0x20
+    unsigned char hide_effects : 1;        // 0x398, 0x10
+    unsigned char hide_lighting : 1;       // 0x398, 0x08
+    unsigned char hide_background : 1;     // 0x398
+    unsigned char item_render_flags : 2;   // 0x398, 0x03
+    unsigned char map_render_flags : 2;    // 0x399, 0xC0, stage gobjs compare this to their render flags and only render if they match
+    unsigned char x399x20 : 1;             // 0x399, 0x20
+    unsigned char show_coll : 1;           // 0x399, 0x10
+    unsigned char show_cam_blastzones : 1; // 0x399, 0x08
+    unsigned char hide_stage : 1;          // 0x399, 0x04
+    unsigned char x399_02 : 1;             // 0x399, 0x02
+    unsigned char x399_01 : 1;             // 0x399, 0x01
+    unsigned char x39a_80 : 1;             // 0x39a, 0x80
+    unsigned char x39a_40 : 1;             // 0x39a, 0x40
+    unsigned char show_item_spawns : 1;    // 0x39a, 0x20
+    unsigned char x39a_10 : 1;             // 0x39a, 0x10
+    unsigned char x39a_08 : 1;             // 0x39a, 0x80
+    unsigned char x39a_04 : 1;             // 0x39a, 0x40
+    unsigned char x39a_02 : 1;             // 0x39a, 0x20
+    unsigned char x39a_01 : 1;             // 0x39a, 0x10
+    char x39b;                             // 0x39b
+    int x39c;                              // 0x39c
+    int x3a0;                              // 0x3a0
+    int x3a4;                              // 0x3a4
+    int x3a8;                              // 0x3a8
+    int x3ac;                              // 0x3ac
+    int x3b0;                              // 0x3b0
+    int x3b4;                              // 0x3b4
+    int x3b8;                              // 0x3b8
+    int x3bc;                              // 0x3bc
+    int x3c0;                              // 0x3c0
+    int x3c4;                              // 0x3c4
+    int x3c8;                              // 0x3c8
+    int x3cc;                              // 0x3cc
+    int x3d0;                              // 0x3d0
+    int x3d4;                              // 0x3d4
+    Vec3 devcam_pos;                       // 0x3d8
+    Vec3 devcam_rot;                       // 0x3e4
+    float devcam_fov;                      // 0x3f0
+    int x3f4;                              // 0x3f4
+    int x3f8;                              // 0x3f8
+    int x3fc;                              // 0x3fc
 };
 
 struct MatchOffscreen
@@ -2780,4 +2793,5 @@ float Match_GetDamageRatio();
 void Match_CreateGOExclamation();
 void Match_EnableFighterInputs();
 void Match_ApplyScreenColAnim(int colanim_index, int unk);
+void Match_SetStageRenderFlags(int flags);
 #endif

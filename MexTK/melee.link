@@ -214,6 +214,7 @@
 800c3be8:Fighter_EnterAirCatch
 8009794c:Fighter_EnterDownBound
 800cbbc0:Fighter_EnterJumpAerial
+800d3bc8:Fighter_EnterDeadDown
 800d3e40:Fighter_EnterDeadUp
 80086d40:Fighter_RumbleController
 8007F694:Fighter_GetBaseScale
@@ -286,6 +287,7 @@
 80088328:Fighter_PlayVoiceSFX2
 8009E0A8:Fighter_ProcDynamics
 8009e7b4:Fighter_CheckToEnableDynamics
+8009e0d4:Fighter_FreeAllDynamics
 8007CADC:Fighter_QueueAllowXDrift
 8007592C:Fighter_SetBoneRotX
 80075AF0:Fighter_SetBoneRotY
@@ -381,6 +383,7 @@
 800788d4:Fighter_SetSelfDamageSource
 80079ea8:Fighter_CalcForceApplied
 8008021c:Fighter_UpdateModelShift
+8007b7a4:Fighter_GivePersistentIntangibility
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
@@ -394,6 +397,7 @@
 8001819c:File_GetPreloadedFile
 8001668c:File_LoadSync
 8037DC38:Fog_LoadDesc
+8037d970:Fog_Set
 8006F238:FrameTimerCheck
 8039069C:GObj_AddGXLink
 80390A70:GObj_AddObject
@@ -596,6 +600,7 @@
 80366db0:LObj_SetInterest
 803656f8:LObj_ReqAnimAll
 80365678:LObj_AnimAll
+80366654:LObj_DeleteCurrentAll
 80024E84:Match_AdjustSoundOnPause
 8016B094:Match_CheckIfStock
 8016B168:Match_CheckIfTeams
@@ -630,6 +635,7 @@
 8016b7f8:Match_CreateGOExclamation
 800868a4:Match_EnableFighterInputs
 80021c48:Match_ApplyScreenColAnim
+800310a0:Match_SetStageRenderFlags
 8037E708:MatToQuat
 8001B6F8:Memcard_CheckStatus
 8001BB48:Memcard_ReqSaveCreate
@@ -683,6 +689,8 @@
 80322e54:cvt_dbl_usll
 80322e54:__fixunsdfdi
 8033796c:DVDConvertPathToEntrynum
+80337c60:DVDFastOpen
+80337cd4:DVDClose
 800161a0:DVDWaitForRead
 8038f6d4:File_Read
 800163d8:File_GetSize
@@ -800,6 +808,7 @@
 803258A8:strncmp
 80325A0C:strncpy
 80325B24:strtoul
+80323588:tolower
 8006EBA4:Fighter_AdvanceScript
 803A6B98:Text_AddSubtext
 803A5798:Text_Alloc
@@ -837,6 +846,7 @@
 800119DC:Wind_FighterCreate
 80011A50:Wind_StageCreate
 8027B5B0:Zako_Create
+801b2ba4:ClassicMode_GetNextNonDuplicateLineupDesc
 803F0A48:stc_css_data
 804D6CB0:stc_css_minorscene
 804D6CF8:stc_css_regtagnum
