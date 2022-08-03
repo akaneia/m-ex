@@ -16,11 +16,11 @@ struct ColorOverlay
 {
     int timer;                      // 0x0
     int pri;                        // 0x4  this colanims priority, lower = will persist
-    int *ptr1;                      // 0x8
+    void *ptr1;                     // 0x8
     int loop;                       // 0xc
-    int *ptr2;                      // 0x10
+    void *ptr2;                     // 0x10
     int x14;                        // 0x14
-    int *alloc;                     // 0x18
+    void *alloc;                    // 0x18
     int x1c;                        // 0x1c
     int x20;                        // 0x20
     int x24;                        // 0x24
@@ -34,7 +34,7 @@ struct ColorOverlay
     float colorblend_green;         // 0x44
     float colorblend_blue;          // 0x48
     float colorblend_alpha;         // 0x4C
-    GXColor light_color;            //0x50
+    GXColor light_color;            // 0x50
     float light_red;                // 0x54
     float light_green;              // 0x58
     float light_blue;               // 0x5C

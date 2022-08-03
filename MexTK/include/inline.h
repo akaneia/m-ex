@@ -305,8 +305,6 @@ float Math_Vec2Angle(Vec2 *a, Vec2 *b)
     return angle;
 }
 
-// float pow (float, float);
-
 float Math_Vec2Distance(Vec2 *a, Vec2 *b)
 {
     return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2));

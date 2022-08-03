@@ -104,7 +104,7 @@ void SpawnMEXEffect(int effectID, int fighter, int arg1, int arg2, int arg3, int
 int MEX_GetFtItemID(GOBJ *f, int item_id);
 int MEX_GetGrItemID(int item_id);
 int MEX_GetSSMID(SSMKind ssm_kind, int kind); // ssm_kind, 0 = fighter, 1 = stage | kind is the c_kind / gr_kind
-void SFX_PlayStageSFX(int sfx_id);
+void SFX_PlayStageSFX(int sfx_id);            // use index relative to the ssm (start at 0)
 void *calloc(int size);
 MEXPlaylist *MEX_GetPlaylist();
 //void KirbyStateChange(GOBJ *fighter, int state, float startFrame, float animSpeed, float animBlend);

@@ -863,7 +863,7 @@ struct ftDynamics
 
 struct FtDynamicBoneset
 {
-    int apply_phys_num;     // if this is 256, dyanmics are not processed
+    int apply_anim_num;     // if this is 256, dyanmics are not processed
     DynamicBoneset boneset; // 0x4
 };
 
@@ -2445,7 +2445,7 @@ struct FighterData
         char x2211;                       // x2211
         char x2212;                       // x2212
         char x2213;                       // x2213
-        //float throw_timerval;                    // 0x2214 - equal to script_event_timer of the attacker
+        // float throw_timerval;                    // 0x2214 - equal to script_event_timer of the attacker
         char x2214;                                    // x2214
         char x2215;                                    // x2215
         unsigned char x2216_x80 : 1;                   // 0x80 - x2216
@@ -2820,6 +2820,10 @@ struct FtDamage
     u8 meteor_lockout; // 0x235b
 };
 
+struct FtDead
+{
+    int timer;
+};
 /** Script Structs **/
 struct FtScript
 {
@@ -3048,6 +3052,7 @@ void Fighter_EnterSleep(GOBJ *fighter, int ms);
 void Fighter_EnterEntry(GOBJ *fighter);
 void Fighter_EnterDownBound(GOBJ *f);
 void Fighter_EnterJumpAerial(GOBJ *f);
+void Fighter_EnterDeadDown(GOBJ *f);
 void Fighter_EnterDeadUp(GOBJ *f);
 int Fighter_CheckNearbyLedges(GOBJ *fighter);
 int Fighter_CheckForOtherFighterOnLedge(GOBJ *fighter);
@@ -3162,6 +3167,7 @@ void Fighter_SetScale(GOBJ *fighter, float scale);
 void Fighter_InitDynamics(FighterData *fighter_data);
 void Fighter_ProcDynamics(GOBJ *fighter);
 void Fighter_CheckToEnableDynamics(FighterData *fp, u16 *dynamics_data);
+void Fighter_FreeAllDynamics(FighterData *fighter_data);
 float Fighter_GetKnockbackAngle(FighterData *fighter_data);
 void Fighter_UpdateCameraBox(GOBJ *fighter);
 void Fighter_SetAllHurtboxesNotUpdated(GOBJ *fighter);
@@ -3273,4 +3279,5 @@ void Fighter_InitCameraBox(FighterData *fp);                // 80076064
 void Fighter_SetSelfDamageSource(GOBJ *f);                  // 800788d4
 float Fighter_CalcForceApplied(FighterData *fp, void *unk); // 80079ea8
 void Fighter_UpdateModelShift(GOBJ *f);                     // updates the offsets of the model during hitlag and smash charge
+void Fighter_GivePersistentIntangibility(GOBJ *f, int frames);
 #endif

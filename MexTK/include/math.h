@@ -33,7 +33,7 @@ float Vec2_Normalize(Vec2 *v);
 float Vec3_Normalize(Vec3 *v);
 void Vec2_Add(Vec2 *a, Vec2 *b);
 Vec3 *Vec3_CrossDirection(Vec3 *a, Vec3 *b, Vec3 *axb);
-//void MTXQuat(Mtx *m, Vec4 *dest);           // quat to matrix
+// void MTXQuat(Mtx *m, Vec4 *dest);           // quat to matrix
 void HSD_MkRotationMtx(Mtx *dest, Vec4 *v); // quat to rot matrix
 void HSD_MtxGetScale(Mtx *m, Vec3 *dest);
 void HSD_MtxGetRotation(Mtx *m, Vec3 *dest);

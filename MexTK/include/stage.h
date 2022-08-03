@@ -116,14 +116,14 @@ struct MapData
     unsigned char is_check_shadow : 1; // 0x10, 0x04, will run the "shadow check" per fighter to see if a fighter's shadow should be drawn
     unsigned char flagx2 : 1;          // 0x10, 0x02
     unsigned char flagx1 : 1;          // 0x10, 0x01
-    unsigned char gx_unk2 : 3;         // 0x11, 0x80
+    unsigned char render_flags : 3;    // 0x11, 0xE0, compares this to the match render flags and only render if they match
     unsigned char flag2x10 : 1;        // 0x11, 0x10
     unsigned char flag2x08 : 1;        // 0x11, 0x08
     unsigned char flag2x04 : 1;        // 0x11, 0x04, will run the "shadow check" per fighter to see if a fighter's shadow should be drawn
     unsigned char flag2x02 : 1;        // 0x11, 0x02
     unsigned char flag2x01 : 1;        // 0x11, 0x01
     int index;                         // 0x14, map_gobj index
-    int x18;                           // 0x18
+    GOBJ *camera_gobj;                 // 0x18
     void *OnDestroyCB;                 // 0x1c
     int live_sfx[8];                   // 0x20, sfx ID's currently playing
     ColorOverlay color;                // 0x40
@@ -394,10 +394,7 @@ struct Stage
     int x688;                     // 0x688
     int x68c;                     // 0x68c
     int x690;                     // 0x690
-    int x694;                     // 0x694
-    int x698;                     // 0x698
-    int x69c;                     // 0x69c
-    int x6a0;                     // 0x6a0
+    COBJ *cobj[4];                // 0x694, indexed @ 801c2bd4
     StageOnGO *on_go;             // 0x6a4
     MapItemDesc **itemdata;       // 0x6a8
     int *coll_data;               // 0x6ac
@@ -439,6 +436,7 @@ struct Stage
         Vec3 pos;   // 0x730, current position of hazard
         float x73c; // 0x73c, unk
     } catch;
+    int x740; // 0x740, unk, used by onett cars only? 801c5784
 };
 
 struct GeneralPoints
