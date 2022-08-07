@@ -3135,8 +3135,8 @@ void Fighter_Phys_UseAnimPos(GOBJ *fighter);
 void Fighter_Phys_UseAnimPosAndStick(GOBJ *fighter);
 void Fighter_SetGrounded(FighterData *fighter);
 void Fighter_SetGrounded2(FighterData *fighter);
-void Fighter_SetAirborne(FighterData *fighter);
-void Fighter_SetAirborneNoJumps(FighterData *fighter_data);
+void Fighter_SetAirborne(FighterData *fighter);             // locks ecb for 10 frames
+void Fighter_SetAirborneNoJumps(FighterData *fighter_data); // locks ecb for 5 frames
 void Fighter_LoseGroundJump(FighterData *fighter_data);
 void Fighter_KillAllVelocity(GOBJ *fighter);
 void Fighter_AdvanceScript(GOBJ *fighter);
