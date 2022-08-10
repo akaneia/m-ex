@@ -247,6 +247,7 @@ rtocOffsets:
   .hword Arch_Fighter,Arch_Fighter_ClassicTrophyLookup,-1
   .hword Arch_Fighter,Arch_Fighter_AdventureTrophyLookup,-1
   .hword Arch_Fighter,Arch_Fighter_AllStarTrophyLookup,-1
+  .hword Arch_Fighter,Arch_Fighter_EndingFallScale,-1
   .hword Arch_Scene,Scene_Major,-1
   .hword Arch_Scene,Scene_Minor,-1
   .hword Arch_Effect,Effect_RuntimeUnk1,-1

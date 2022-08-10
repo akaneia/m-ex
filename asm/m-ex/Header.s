@@ -222,6 +222,7 @@
   .set  Arch_Fighter_ClassicTrophyLookup, 0x74
   .set  Arch_Fighter_AdventureTrophyLookup, 0x78
   .set  Arch_Fighter_AllStarTrophyLookup, 0x7C
+  .set  Arch_Fighter_EndingFallScale, 0x80
 .set  Arch_FighterFunc,0xC
   .set  Arch_FighterFunc_onLoad,0x0
   .set  Arch_FighterFunc_onDeath,0x4
@@ -402,7 +403,8 @@
 .set  OFST_ClassicTrophyLookup, OFST_FighterViWaitFileNames + 0x4
 .set  OFST_AdventureTrophyLookup, OFST_ClassicTrophyLookup + 0x4
 .set  OFST_AllStarTrophyLookup, OFST_AdventureTrophyLookup + 0x4
-.set  OFST_MajorScenes, OFST_AllStarTrophyLookup + 0x4
+.set  OFST_TrophyFallScale, OFST_AllStarTrophyLookup + 0x4
+.set  OFST_MajorScenes, OFST_TrophyFallScale + 0x4
 .set  OFST_MinorScenes, OFST_MajorScenes + 0x4
 .set  OFST_PtclRuntime1, OFST_MinorScenes + 0x4
 .set  OFST_PtclRuntime3, OFST_PtclRuntime1 + 0x4
