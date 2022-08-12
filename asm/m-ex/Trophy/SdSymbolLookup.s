@@ -1,5 +1,11 @@
 .macro sdlookup sd_index
 
+backup
+
+# backup r3 and r4
+mr r10, r3
+mr r11, r4
+
 # sd file
   lis r3, 0x804d
   ori r3, r3, 0x1110
@@ -22,5 +28,11 @@ blrl
 .align 2
 
 ExitLookup:
+
+# restore r3 and r4
+mr r10, r3
+mr r11, r4
+
+restore
 
 .endm
