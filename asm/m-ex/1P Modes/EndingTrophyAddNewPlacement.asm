@@ -2,7 +2,7 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-  cmpwi r4, 0x18
+  cmpwi r4, 0x19
   bne OriginalPosition
 
 NewPosition:
