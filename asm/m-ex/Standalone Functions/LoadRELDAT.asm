@@ -49,6 +49,7 @@ mexPatch_Skip:
   branchl r12,0x80328f50
 
   mr r3,REG_Header
+  mr r4,REG_mexData
   restore
   blr
 
