@@ -470,7 +470,8 @@
 .set  MEX_UCFPrevX, MEX_UCFCurrX + 0x1   #1 byte
 .set  MEX_UCF2fX, MEX_UCFPrevX + 0x1   #1 byte
 .set  MEX_align, MEX_UCF2fX + 0x1   #1 byte
-.set  MEX_FtModelAdd_num, MEX_align + 0x1   #4 bytes
+.set  MEX_Costume_ptr, MEX_align + 0x1   #4 bytes
+.set  MEX_FtModelAdd_num, MEX_Costume_ptr + 0x4   #4 bytes
 .set  MEX_FtModelAdd_ptr, MEX_FtModelAdd_num + 0x4   #4 bytes
 .set  MEX_FighterDataEnd, MEX_FtModelAdd_ptr + 0x4
 

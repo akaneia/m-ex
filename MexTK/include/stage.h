@@ -397,7 +397,7 @@ struct Stage
     COBJ *cobj[4];                // 0x694, indexed @ 801c2bd4
     StageOnGO *on_go;             // 0x6a4
     MapItemDesc **itemdata;       // 0x6a8
-    int *coll_data;               // 0x6ac
+    CollDataStage *coll_data;     // 0x6ac
     grGroundParam *grGroundParam; // 0x6b0
     int *ALDYakuAll;              // 0x6b4
     int *map_ptcl;                // 0x6b8
@@ -617,7 +617,7 @@ void Stage_EnableLineGroup(int index);
 void Stage_DisableLineGroup(int index);
 void Stage_AutoLinkLineGroups();
 void Stage_LinkLineGroups(int group1, int group2);
-void Stage_InitLines(void *coll_data);
+void Stage_InitLines(CollDataStage *coll_data);
 void Stage_InitCatchHazard(GOBJ *map, int unk, void *check_cb);
 void Stage_InitMoveHazard(GOBJ *map, int unk, void *check_cb);
 void Stage_InitDamageHazard(GOBJ *map, int unk, void *check_cb);

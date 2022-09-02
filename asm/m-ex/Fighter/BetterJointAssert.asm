@@ -5,6 +5,10 @@
 .set REG_FighterData,29
 .set REG_JointNum,28
 
+# get c_kind
+  lbz r3, 0xC(REG_FighterData)
+  branchl r0, 0x80032330
+  mr r0,r3
 # Output string
   bl ErrorString
   mflr r3
@@ -12,7 +16,6 @@
   lwz r4, OFST_mexData(rtoc)
   lwz r4, Arch_Fighter(r4)
   lwz r4, Arch_Fighter_NameText(r4)
-  lwz r0, 0x4(REG_FighterData)
   mulli r0,r0,4
   lwzx r4,r4,r0
 # get costume filename
@@ -37,5 +40,5 @@
 
 ErrorString:
 blrl
-.string "%s's costume \"%s\" has %d joints\nshould have %d joints\n"
+.string "%s's costume \"%s\" has %d joints,\nshould have %d joints\n"
 .align 2

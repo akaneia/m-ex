@@ -1917,7 +1917,7 @@ struct FighterData
         float head_flower_scale;                               // 0x24C
         int x250;                                              // 0x250
         int x254;                                              // 0x254
-        int x258;                                              // 0x258
+        int unk_walljump;                                      // 0x258,
         float bubble_ratio;                                    // 0x25C
         int x260;                                              // 0x260
         int x264;                                              // 0x264
@@ -2001,7 +2001,7 @@ struct FighterData
     int x5C0;                                 // 0x5C0
     int x5C4;                                 // 0x5C4
     int x5C8;                                 // 0x5C8
-    int x5CC;                                 // 0x5CC
+    int texanim_num;                          // 0x5CC, number of texture anims this fighter has
     int x5D0;                                 // 0x5D0
     int x5D4;                                 // 0x5D4
     int x5D8;                                 // 0x5D8
@@ -2352,8 +2352,11 @@ struct FighterData
     } afterimage;                         //
     int x2104;                            // 0x2104
     int x2108;                            // 0x2108
-    int x210c;                            // 0x210c
-    int x2110;                            // 0x2110
+    struct                                // 0x210c
+    {                                     //
+        s8 timer;                         // 0x210c, Set to 0 when contact with a wall (other conditions necessary)
+        float direction;                  // 0x2110
+    } wall;                               //
     struct smash                          // 0x2114
     {                                     //
         int state;                        // 0x2114 0 = none, 1 = pre-charge, 2 = charging, 3 = release
@@ -2705,18 +2708,19 @@ struct FighterData
     {                              //
         int anim_owner;            // 0x23ec
         u8 ucf_stick_x[3];         // 0x23f0
-        int costume_num;           // 0x23f4, number of mexCostumes active
-        void **costumes;           // 0x23f8, pointer to mexCostume lookup table
+        void *costume;             // 0x23f4, pointer to mexCostume symbol
+        int accessory_num;         // 0x23f8, number of mexCostume accessories active
+        void **accessories;        // 0x23fc, pointer to mexCostume accessories
     } MEX;                         //
-    struct TM                      // 0x23fc
+    struct TM                      // 0x2400
     {                              //
-        s16 state_frame;           // 0x23fc, how many frames the player has been in this state
-        s16 state_frame_hitlag;    // 0x23fe, how many frames the player has been in this state, counting hitlag
-        s16 shield_frame;          // 0x2400, how many frames the player has been shielding
-        u16 state_prev[6];         // 0x2402,
-        u16 state_prev_frames[6];  // 0x2408,
-        u16 last_move_hurt;        // 0x240e, Previous Move Instance Hit By
-        u16 vuln_frames;           // 0x2410, how many frames the fighter has been vulnerable
+        s16 state_frame;           // 0x2400, how many frames the player has been in this state
+        s16 state_frame_hitlag;    // 0x2402, how many frames the player has been in this state, counting hitlag
+        s16 shield_frame;          // 0x2404, how many frames the player has been shielding
+        u16 state_prev[6];         // 0x2406,
+        u16 state_prev_frames[6];  // 0x240c,
+        u16 last_move_hurt;        // 0x2410, Previous Move Instance Hit By
+        u16 vuln_frames;           // 0x2412, how many frames the fighter has been vulnerable
         u16 can_fastfall_frames;   // how many frames the fighter has been able to fast fall
         int post_hitstun_frames;   // frames fighter has been out of hitstun
         GOBJ *fighter_hurt_shield; // pointer to the fighter who's shield this fighter hit
@@ -3266,7 +3270,7 @@ void Fighter_PlaySFX(FighterData *fp, int sfxid, int volume, int pitch);
 void Fighter_EnterFallOrWait(GOBJ *fighter_gobj);
 void Fighter_EnterTech(GOBJ *gobj);
 void Fighter_EnterSpecialFallLoseJumps(GOBJ *fighter_gobj, int can_fastfall, int can_not_noimpactland, int can_not_interrupt, float aerial_drift_mult, float landing_lag);
-void Fighter_RumbleController(FighterData *fighter_gobj, int unk1, int unk2);
+void Fighter_RumbleController(GOBJ *f, int unk1, int unk2);
 void Fighter_GetLeftStick(GOBJ *fighter_gobj, float *stick_x, float *stick_y);
 void Fighter_ClampMaxAirDrift(FighterData *fighter_gobj);
 void Fighter_UpdateHitboxDamage(ftHit *hit, int dmg, GOBJ *f);

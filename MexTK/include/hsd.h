@@ -54,17 +54,17 @@ enum DebugLevel
 
 struct HSD_ObjAllocData
 {
-    u32 flags;                     //0x00 - Technically 2 diff flags
-    void *freehead;                //0x04
-    u32 used;                      //0x08
-    u32 free;                      //0x0C
-    u32 peak;                      //0x10
-    u32 num_limit;                 //0x14
-    u32 heap_limit_size;           //0x18
-    u32 heap_limit_num;            //0x1C
-    u32 size;                      //0x20
-    u32 align;                     //0x24
-    struct HSD_ObjAllocData *next; //0x28
+    u32 flags;                     // 0x00 - Technically 2 diff flags
+    void *freehead;                // 0x04
+    u32 used;                      // 0x08
+    u32 free;                      // 0x0C
+    u32 peak;                      // 0x10
+    u32 num_limit;                 // 0x14
+    u32 heap_limit_size;           // 0x18
+    u32 heap_limit_num;            // 0x1C
+    u32 size;                      // 0x20
+    u32 align;                     // 0x24
+    struct HSD_ObjAllocData *next; // 0x28
 };
 
 struct HSD_Material
@@ -110,50 +110,50 @@ struct HSD_Pads
 struct HSD_Update
 {
     // 0x80479d58
-    u32 sys_frames_pre;                   //0x0
-    u32 sys_frames_post;                  //0x4
-    u32 engine_frames;                    //0x8
-    u32 change_scene;                     //0xC
-    unsigned char flag1 : 1;              //0x10 - 0x80
-    unsigned char flag2 : 1;              //0x10 - 0x40
-    unsigned char flag3 : 1;              //0x10 - 0x20
-    unsigned char flag4 : 1;              //0x10 - 0x10
-    unsigned char flag5 : 1;              //0x10 - 0x08
-    unsigned char flag6 : 1;              //0x10 - 0x04
-    unsigned char pause_game : 1;         //0x10 - 0x02
-    unsigned char pause_develop : 1;      //0x10 - 0x01
-    unsigned char flag9 : 1;              //0x11 - 0x80
-    unsigned char flag10 : 1;             //0x11 - 0x40
-    unsigned char flag11 : 1;             //0x11 - 0x20
-    unsigned char flag12 : 1;             //0x11 - 0x10
-    unsigned char flag13 : 1;             //0x11 - 0x08
-    unsigned char flag14 : 1;             //0x11 - 0x04
-    unsigned char pause_game_prev : 1;    //0x11 - 0x02
-    unsigned char pause_develop_prev : 1; //0x11 - 0x01
-    unsigned char flag17 : 1;             //0x12 - 0x80
-    unsigned char flag18 : 1;             //0x12 - 0x40
-    unsigned char flag19 : 1;             //0x12 - 0x20
-    unsigned char flag20 : 1;             //0x12 - 0x10
-    unsigned char flag21 : 1;             //0x12 - 0x08
-    unsigned char flag22 : 1;             //0x12 - 0x04
-    unsigned char flag23 : 1;             //0x12 - 0x02
-    unsigned char advance : 1;            //0x12 - 0x01
-    unsigned char flag24 : 1;             //0x12 - 0x80
-    unsigned char flag25 : 1;             //0x12 - 0x40
-    unsigned char flag26 : 1;             //0x12 - 0x20
-    unsigned char flag27 : 1;             //0x12 - 0x10
-    unsigned char flag28 : 1;             //0x12 - 0x08
-    unsigned char flag29 : 1;             //0x12 - 0x04
-    unsigned char flag30 : 1;             //0x12 - 0x02
-    unsigned char advance_prev : 1;       //0x12 - 0x01
-    int (*checkPause)();                  //0x14 returns 1 when toggling pause
-    int (*checkAdvance)();                //0x18 returns 1 when advancing frame
-    u32 x1c;                              //0x1C
+    u32 sys_frames_pre;                   // 0x0
+    u32 sys_frames_post;                  // 0x4
+    u32 engine_frames;                    // 0x8
+    u32 change_scene;                     // 0xC
+    unsigned char flag1 : 1;              // 0x10 - 0x80
+    unsigned char flag2 : 1;              // 0x10 - 0x40
+    unsigned char flag3 : 1;              // 0x10 - 0x20
+    unsigned char flag4 : 1;              // 0x10 - 0x10
+    unsigned char flag5 : 1;              // 0x10 - 0x08
+    unsigned char flag6 : 1;              // 0x10 - 0x04
+    unsigned char pause_game : 1;         // 0x10 - 0x02
+    unsigned char pause_develop : 1;      // 0x10 - 0x01
+    unsigned char flag9 : 1;              // 0x11 - 0x80
+    unsigned char flag10 : 1;             // 0x11 - 0x40
+    unsigned char flag11 : 1;             // 0x11 - 0x20
+    unsigned char flag12 : 1;             // 0x11 - 0x10
+    unsigned char flag13 : 1;             // 0x11 - 0x08
+    unsigned char flag14 : 1;             // 0x11 - 0x04
+    unsigned char pause_game_prev : 1;    // 0x11 - 0x02
+    unsigned char pause_develop_prev : 1; // 0x11 - 0x01
+    unsigned char flag17 : 1;             // 0x12 - 0x80
+    unsigned char flag18 : 1;             // 0x12 - 0x40
+    unsigned char flag19 : 1;             // 0x12 - 0x20
+    unsigned char flag20 : 1;             // 0x12 - 0x10
+    unsigned char flag21 : 1;             // 0x12 - 0x08
+    unsigned char flag22 : 1;             // 0x12 - 0x04
+    unsigned char flag23 : 1;             // 0x12 - 0x02
+    unsigned char advance : 1;            // 0x12 - 0x01
+    unsigned char flag24 : 1;             // 0x12 - 0x80
+    unsigned char flag25 : 1;             // 0x12 - 0x40
+    unsigned char flag26 : 1;             // 0x12 - 0x20
+    unsigned char flag27 : 1;             // 0x12 - 0x10
+    unsigned char flag28 : 1;             // 0x12 - 0x08
+    unsigned char flag29 : 1;             // 0x12 - 0x04
+    unsigned char flag30 : 1;             // 0x12 - 0x02
+    unsigned char advance_prev : 1;       // 0x12 - 0x01
+    int (*checkPause)();                  // 0x14 returns 1 when toggling pause
+    int (*checkAdvance)();                // 0x18 returns 1 when advancing frame
+    u32 x1c;                              // 0x1C
     u32 x20;
     u32 x24;
     u32 x28;
     u32 x2c;
-    void (*onFrame)(); //0x30
+    void (*onFrame)(); // 0x30
 };
 
 struct HSD_VI
@@ -173,18 +173,19 @@ struct HSD_Archive
     int archive_vers;    // idk for sure sometimes 001B
     int unk1;            //
     int unk2;            //
-    int *general_points; //0x20 = pointer to the "general points"
-    int *reloc_table;    //pointer to relocation table in memory
-    int *symbols1;       //pointer to symbol pointers and name offsets
-    int *refsymmbols;    //pointer to reference symbol info in memory
-    int *symbols2;       //pointer to symbol list in memory
-    int *file_start;     //pointer to the header of the dat
+    int *general_points; // 0x20 = pointer to the "general points"
+    int *reloc_table;    // pointer to relocation table in memory
+    int *symbols1;       // pointer to symbol pointers and name offsets
+    int *refsymmbols;    // pointer to reference symbol info in memory
+    int *symbols2;       // pointer to symbol list in memory
+    int *file_start;     // pointer to the header of the dat
 };
 
 /*** Static Variables ***/
 HSD_VI *stc_HSD_VI = 0x8046b0f0;
 HSD_Update *stc_hsd_update = 0x80479d58;
 int **stc_rng_seed = 0x804D5F94;
+HSD_Pad *stc_engine_pads = (HSD_Pad *)0x804c21cc;
 
 /*** Functions ***/
 

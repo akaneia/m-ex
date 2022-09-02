@@ -6,36 +6,21 @@ backup
 
 .set REG_ModelAddDescArr,28
 .set REG_FighterData,29
-.set REG_CostumeArchive,30
 .set REG_FighterGObj,31
 
-
   lwz REG_FighterGObj,0x0(REG_FighterData)
-
-# Get costume dat archive
-  lwz r3,0x4(REG_FighterData)
-  lwz r4,OFST_Char_CostumeRuntimePointers(rtoc)
-  mulli r3,r3,RuntimeCostumePointers_Stride
-  lwzx r3,r3,r4
-  lbz	r0, 0x0619 (REG_FighterData)
-  mulli r0,r0,RuntimeCostumePointersSub_Stride
-  add r3,r3,r0
-  lwz REG_CostumeArchive,0x14(r3)
-
 
 ######################
 ## MODELADD DESCARR ##
 ######################
 
 ModelAddDescArr_Check:
-# Get custom string name
-  mr r3,REG_CostumeArchive
-  bl mexCostume_Symbol
-  mflr r4
-  branchl r12,0x80380358
 # Check if costume has an mexCostume symbol
+  lwz r3, MEX_Costume_ptr(REG_FighterData)
   cmpwi r3,0
-  beq NoModelAdd
+  beq NoMexCostume
+# Save ptr to mexCostume
+  stw r3, MEX_Costume_ptr(REG_FighterData)
 # Check if costume has a modelAdd node
   addi REG_ModelAddDescArr,r3,mexCostume_modeladd
   lwz r0,mdAddDescArr_num(REG_ModelAddDescArr)
@@ -284,6 +269,10 @@ blrl
 .string "error: costume %s uses more than 11 dynamics hits\n"
 .align 2
 ###############################################
+
+NoMexCostume:
+  li r0,0
+  stw r0,MEX_Costume_ptr(REG_FighterData)
 
 NoModelAdd:
   li r0,0
