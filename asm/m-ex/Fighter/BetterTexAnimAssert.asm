@@ -39,7 +39,7 @@
 
 ErrorString:
 blrl
-.string "%s's costume \"%s\" is missing texanim\nfor joint %d\n"
+.string "%s's costume \"%s\" is missing texanim\nfor object %d\n"
 .align 2
 
 ##################################
