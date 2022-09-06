@@ -965,8 +965,8 @@ struct ItemData
 
 /*** static reference ***/
 
-itPublicData **stc_itPublicData = (R13 + -0x4978);
-ItemDesc **stc_itdesc_enemies = (R13 + -0x4968);
+static itPublicData **stc_itPublicData = (R13 + -0x4978);
+static ItemDesc **stc_itdesc_enemies = (R13 + -0x4968);
 
 /*** Functions ***/
 void Item_IndexStageItem(ItemDesc *item_desc, int index);

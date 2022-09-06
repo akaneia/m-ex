@@ -182,10 +182,10 @@ struct HSD_Archive
 };
 
 /*** Static Variables ***/
-HSD_VI *stc_HSD_VI = 0x8046b0f0;
-HSD_Update *stc_hsd_update = 0x80479d58;
-int **stc_rng_seed = 0x804D5F94;
-HSD_Pad *stc_engine_pads = (HSD_Pad *)0x804c21cc;
+static HSD_VI *stc_HSD_VI = 0x8046b0f0;
+static HSD_Update *stc_hsd_update = 0x80479d58;
+static int **stc_rng_seed = 0x804D5F94;
+static HSD_Pad *stc_engine_pads = (HSD_Pad *)0x804c21cc;
 
 /*** Functions ***/
 

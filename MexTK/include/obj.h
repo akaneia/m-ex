@@ -385,7 +385,7 @@ struct JOBJ
 
 struct WOBJ
 {
-    void *parent;
+    HSD_Obj parent;
     u32 flags;  //0x08
     Vec3 pos;   //0xC
     AOBJ *aobj; //0x18
@@ -586,15 +586,15 @@ struct JOBJSet
 };
 
 /*** Static Variables ***/
-GOBJList **stc_gobj_list = R13 + (-0x3E74);
-u8 *stc_gobj_proc_num = 0x804ce382;            // number of elements in the below array
-GOBJProc ***stc_gobjproc_lookup = 0x804D7840;  // array of gobj procs ptrs
-GOBJProc **stc_gobjproc_cur = (R13 + -0x3E68); // current gobj proc being processed
-u8 *objkind_sobj = R13 + -(0x3D40);
-u8 *objkind_cobj = R13 + -(0x3E55);
-u8 *objkind_lobj = R13 + -(0x3E56);
-u8 *objkind_jobj = R13 + -(0x3E57);
-u8 *objkind_fog = R13 + -(0x3E58);
+static GOBJList **stc_gobj_list = R13 + (-0x3E74);
+static u8 *stc_gobj_proc_num = 0x804ce382;            // number of elements in the below array
+static GOBJProc ***stc_gobjproc_lookup = 0x804D7840;  // array of gobj procs ptrs
+static GOBJProc **stc_gobjproc_cur = (R13 + -0x3E68); // current gobj proc being processed
+static u8 *objkind_sobj = R13 + -(0x3D40);
+static u8 *objkind_cobj = R13 + -(0x3E55);
+static u8 *objkind_lobj = R13 + -(0x3E56);
+static u8 *objkind_jobj = R13 + -(0x3E57);
+static u8 *objkind_fog = R13 + -(0x3E58);
 
 /*** Functions ***/
 int JOBJ_GetWorldPosition(JOBJ *source, Vec3 *add, Vec3 *dest);

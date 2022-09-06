@@ -90,19 +90,19 @@ void Text_InitSisHeap();
 
 /*** Variables ***/
 // Text data
-int *stc_textheap_size = (int *)(R13 + (-0x3d38));
-TextAllocInfo **stc_textheap_start = (TextAllocInfo **)(R13 + (-0x3d34));
-TextAllocInfo **stc_textheap_next = (TextAllocInfo **)(R13 + (-0x3d30));
-TextAllocInfo **stc_textheap_first = (TextAllocInfo **)(R13 + (-0x3d2c));
+static int *stc_textheap_size = (int *)(R13 + (-0x3d38));
+static TextAllocInfo **stc_textheap_start = (TextAllocInfo **)(R13 + (-0x3d34));
+static TextAllocInfo **stc_textheap_next = (TextAllocInfo **)(R13 + (-0x3d30));
+static TextAllocInfo **stc_textheap_first = (TextAllocInfo **)(R13 + (-0x3d2c));
 
 // Text object
-TextAllocInfo **stc_textobj_first = (TextAllocInfo **)(R13 + (-0x3d28));
+static TextAllocInfo **stc_textobj_first = (TextAllocInfo **)(R13 + (-0x3d28));
 
 // Text canvas
-TextAllocInfo **stc_textcanvas_first = (TextAllocInfo **)(R13 + (-0x3d24));
+static TextAllocInfo **stc_textcanvas_first = (TextAllocInfo **)(R13 + (-0x3d24));
 
 // Sis Library
-HSD_Archive **stc_sis_archives = (HSD_Archive **)0x804d1110; // array of sis file archive pointers
-void **stc_sis_data = (void **)0x804d1124;            // array of loaded sis data
+static HSD_Archive **stc_sis_archives = (HSD_Archive **)0x804d1110; // array of sis file archive pointers
+static void **stc_sis_data = (void **)0x804d1124;            // array of loaded sis data
 
 #endif

@@ -557,13 +557,13 @@ struct MapItemDesc
     ItemDesc *desc;
 };
 
-Stage *stc_stage = 0x8049e6c8;
-int *ftchkdevice_windnum = R13 + (-0x5128);
-int *ftchkdevice_grabnum = R13 + (-0x512C);
-int *ftchkdevice_dmgnum = R13 + (-0x5130);
-int *stc_gr_ext_cur = 0x804d49e8;
-GrExtLookup *stc_gr_lookup_cur = 0x804d49ec;
-LineRange *stc_line_range = 0x80458868;
+static Stage *stc_stage = 0x8049e6c8;
+static int *ftchkdevice_windnum = R13 + (-0x5128);
+static int *ftchkdevice_grabnum = R13 + (-0x512C);
+static int *ftchkdevice_dmgnum = R13 + (-0x5130);
+static int *stc_gr_ext_cur = 0x804d49e8;
+static GrExtLookup *stc_gr_lookup_cur = 0x804d49ec;
+static LineRange *stc_line_range = 0x80458868;
 
 /*** Functions ***/
 int Stage_GetRandomExternalID();
@@ -578,8 +578,8 @@ void Stage_SetMapJOBJAnim(GOBJ *map, int jobj_index, int flags, int anim_id, flo
 void Stage_MapStateChange(GOBJ *map, int map_gobjID, int anim_id);
 int Stage_CheckAnimEnd(GOBJ *map, int jobj_index, int flags);  // 0x1 = unk aobj, 0x2 = material aobj, 0x4 = unk aobj
 int Stage_CheckAnimEnd2(GOBJ *map, int jobj_index, int flags); // 0x1 = unk aobj, 0x2 = material aobj, 0x4 = unk aobj
-void Stage_PlaySFX(GOBJ *map, int live_index, int sfx_id);
-int Stage_CheckSFX(GOBJ *map, int live_index);
+void Stage_PlaySFX(MapData *map, int live_index, int sfx_id);
+int Stage_CheckSFX(MapData *map, int live_index);
 void Dynamics_DecayWind();
 GOBJ *Stage_CreateMapGObj(int mapgobjID);
 void Stage_DestroyMapGObj(GOBJ *map_gobj);

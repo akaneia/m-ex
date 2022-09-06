@@ -186,10 +186,10 @@ int psRemoveParticleAppSRT(Particle *ptcl);
 void psDeletePntJObjwithParticle(Particle *ptcl);
 ptclGen *psKillGenerator(ptclGen *gen, ptclGen *unk);
 
-u16 *stc_ptclnum = R13 + (-0x3DBE);      // number of pctls alive
-Particle **stc_ptcl = 0x804d0908;       // last created ptcl
-ptclGen **stc_ptclgen = R13 + (-0x3DA4); // last created gen
-ptclGen **stc_ptclgencurr = R13 + (-0x3DA8);
-u16 *stc_ptclgennum = R13 + (-0x3DC0);
+static u16 *stc_ptclnum = R13 + (-0x3DBE);      // number of pctls alive
+static Particle **stc_ptcl = 0x804d0908;       // last created ptcl
+static ptclGen **stc_ptclgen = R13 + (-0x3DA4); // last created gen
+static ptclGen **stc_ptclgencurr = R13 + (-0x3DA8);
+static u16 *stc_ptclgennum = R13 + (-0x3DC0);
 
 #endif

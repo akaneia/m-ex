@@ -92,11 +92,11 @@ struct AXLive
     VPB voice_data[100];
 };
 
-BGMData *stc_bgm_data = 0x804D6038; // R13 + -0x5668;
-AXLive *ax_live = 0x804c28e0;
-VPB *stc_voice_data = 0x804c2c64;
-float *stc_fgm_volume = R13 + -0x7dbc;
-float *stc_bgm_volume = R13 + -0x7db8;
+static BGMData *stc_bgm_data = 0x804D6038; // R13 + -0x5668;
+static AXLive *ax_live = 0x804c28e0;
+static VPB *stc_voice_data = 0x804c2c64;
+static float *stc_fgm_volume = R13 + -0x7dbc;
+static float *stc_bgm_volume = R13 + -0x7db8;
 
 char *Nametag_GetText(int tag_index);
 void Audio_ResetCache(int group_index);

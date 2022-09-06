@@ -1162,7 +1162,7 @@ struct FtAfterImageKey
 {
     Vec3 pos;
     Vec3 rot;
-} FtAfterImageKey;
+};
 
 struct CPULeaderLog
 {
@@ -3030,12 +3030,12 @@ struct FtScriptIK
 
 /** Static Variables **/
 
-ftCommonData **stc_ftcommon = (R13 + -0x514C);
-ColAnimDesc **stc_plco_colanimdesc = 0x804D653C;
-GXColor **stc_shieldcolors = (R13 + -0x5194);
-FtDmgVibrateDesc **stc_dmg_vibrate_desc = (R13 + -0x5170);
-int *stc_ft_hitlog = (R13 + -0x5148); // used as semi-local variables remembering if a solid hit occured @ 8006cbc4
-int *stc_ft_tiplog = (R13 + -0x5144); // used as semi-local variables remembering if a tip hit occured @ 8006cbc4
+static ftCommonData **stc_ftcommon = (R13 + -0x514C);
+static ColAnimDesc **stc_plco_colanimdesc = 0x804D653C;
+static GXColor **stc_shieldcolors = (R13 + -0x5194);
+static FtDmgVibrateDesc **stc_dmg_vibrate_desc = (R13 + -0x5170);
+static int *stc_ft_hitlog = (R13 + -0x5148); // used as semi-local variables remembering if a solid hit occured @ 8006cbc4
+static int *stc_ft_tiplog = (R13 + -0x5144); // used as semi-local variables remembering if a tip hit occured @ 8006cbc4
 
 /*** Functions ***/
 void ActionStateChange(float startFrame, float animSpeed, float animBlend, GOBJ *fighter, int stateID, int flags1, GOBJ *alt_state_source);

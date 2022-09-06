@@ -421,10 +421,10 @@ struct DVDDirEntry
 };
 
 /*** Static Vars ***/
-OSInfo *os_info = 0x80000000;
-int *stc_fst_totalentrynum = 0x804D7284;
-FSTEntry **stc_fst_entries = 0x804D727C; // -0x4424, indexed by entrynum (0 is always the root directory)
-char **stc_fst_filenames = 0x804D7280;
+static OSInfo *os_info = 0x80000000;
+static int *stc_fst_totalentrynum = 0x804D7284;
+static FSTEntry **stc_fst_entries = 0x804D727C; // -0x4424, indexed by entrynum (0 is always the root directory)
+static char **stc_fst_filenames = 0x804D7280;
 
 /*** OS Library ***/
 int OSGetTick();

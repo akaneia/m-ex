@@ -167,7 +167,7 @@ struct MatchInit
     // 0x38
     int x38;
     // 0x3C
-    int x3c;
+    int x3c; // something fixed camera
     // 0x40
     void *onStartMelee;
     // 0x44
@@ -177,7 +177,7 @@ struct MatchInit
     // 0x4c
     void *onMatchEnd;
     // 0x50
-    int x50;
+    void *onMatchStart;
     // 0x54
     void *onCheckPause;
     // 0x58
@@ -2736,17 +2736,17 @@ struct Match // static match struct @ 8046b6a0
     MatchInit match;          // 0x24c8
 };
 
-Match *stc_match = 0x8046b6a0;
-MatchCamera *stc_matchcam = 0x80452c68;
-MatchHUD *stc_matchhud = 0x804a0fd8; // 0x804a10c8;
-MatchOffscreen *stc_match_offscreen = 0x804a1df0;
-ExclamData *stc_exclam_data = 0x803f9628; // 8 of these
-HSD_Archive **stc_ifall_archive = 0x804d6d5c;
-int *stc_match_canvas = 0x804a1f58;
-GOBJ **stc_match_screencolor_gobj = 0x804d63e0;
-u8 *stc_hud_is_hidden = 0x804D6D6C;
-float *stc_match_fgm_volume = R13 + -0x7dbc;
-float *stc_match_bgm_volume = R13 + -0x7db8;
+static Match *stc_match = 0x8046b6a0;
+static MatchCamera *stc_matchcam = 0x80452c68;
+static MatchHUD *stc_matchhud = 0x804a0fd8; // 0x804a10c8;
+static MatchOffscreen *stc_match_offscreen = 0x804a1df0;
+static ExclamData *stc_exclam_data = 0x803f9628; // 8 of these
+static HSD_Archive **stc_ifall_archive = 0x804d6d5c;
+static int *stc_match_canvas = 0x804a1f58;
+static GOBJ **stc_match_screencolor_gobj = 0x804d63e0;
+static u8 *stc_hud_is_hidden = 0x804D6D6C;
+static float *stc_match_fgm_volume = R13 + -0x7dbc;
+static float *stc_match_bgm_volume = R13 + -0x7db8;
 
 /*** Functions ***/
 CameraBox *CameraBox_Alloc();

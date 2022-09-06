@@ -21,7 +21,7 @@
 //         return x;
 // }
 
-int abs(int x)
+static inline int abs(int x)
 {
     if (x < 0)
         return -x;
@@ -29,7 +29,7 @@ int abs(int x)
         return x;
 }
 
-void enterKnockback(GOBJ *fighter, int angle, float mag)
+static void enterKnockback(GOBJ *fighter, int angle, float mag)
 {
     FighterData *fighter_data = ((FighterData *)fighter->userdata);
 
@@ -48,12 +48,12 @@ void enterKnockback(GOBJ *fighter, int angle, float mag)
     return;
 }
 
-void null()
+static inline void null()
 {
     return;
 }
 
-void C_QUATMtx(Vec4 *r, Mtx m)
+static void C_QUATMtx(Vec4 *r, Mtx m)
 {
     /*---------------------------------------------------------------------------*
    Name:         QUATMtx
@@ -106,7 +106,7 @@ void C_QUATMtx(Vec4 *r, Mtx m)
     }
 }
 
-HSD_Pad *PadGet(int playerIndex, int padType)
+static HSD_Pad *PadGet(int playerIndex, int padType)
 {
     HSD_Pads *pads = 0;
 
@@ -122,7 +122,7 @@ HSD_Pad *PadGet(int playerIndex, int padType)
     return (&pads->pad[playerIndex]);
 }
 
-float JOBJ_GetAnimFrame(JOBJ *joint)
+static float JOBJ_GetAnimFrame(JOBJ *joint)
 {
     // check for AOBJ in jobj
     JOBJ *jobj;
@@ -174,7 +174,7 @@ float JOBJ_GetAnimFrame(JOBJ *joint)
     return -1;
 }
 
-AOBJ *JOBJ_GetFirstAOBJ(JOBJ *jobj)
+static AOBJ *JOBJ_GetFirstAOBJ(JOBJ *jobj)
 {
     // check for AOBJ in this jobj
 
@@ -235,7 +235,7 @@ AOBJ *JOBJ_GetFirstAOBJ(JOBJ *jobj)
     return 0;
 }
 
-AOBJ *JOBJ_GetJointAOBJ(JOBJ *jobj)
+static AOBJ *JOBJ_GetJointAOBJ(JOBJ *jobj)
 {
     // check for AOBJ in this jobj
 
@@ -264,7 +264,7 @@ AOBJ *JOBJ_GetJointAOBJ(JOBJ *jobj)
     return 0;
 }
 
-DOBJ *JOBJ_GetDObjChild(JOBJ *joint, int dobj_index)
+static DOBJ *JOBJ_GetDObjChild(JOBJ *joint, int dobj_index)
 {
 
     int count = 0;
@@ -284,7 +284,7 @@ DOBJ *JOBJ_GetDObjChild(JOBJ *joint, int dobj_index)
     return dobj;
 }
 
-float Math_Vec2Angle(Vec2 *a, Vec2 *b)
+static float Math_Vec2Angle(Vec2 *a, Vec2 *b)
 {
     // get angle
     // float angle = atan((b->Y - a->Y) / (b->X - a->X));
@@ -305,12 +305,12 @@ float Math_Vec2Angle(Vec2 *a, Vec2 *b)
     return angle;
 }
 
-float Math_Vec2Distance(Vec2 *a, Vec2 *b)
+static float Math_Vec2Distance(Vec2 *a, Vec2 *b)
 {
     return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2));
 }
 
-float Math_Vec3Distance(Vec3 *a, Vec3 *b)
+static float Math_Vec3Distance(Vec3 *a, Vec3 *b)
 {
     return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2) + pow((a->Z - b->Z), 2));
 }
@@ -328,188 +328,188 @@ float Math_Vec3Distance(Vec3 *a, Vec3 *b)
 /*---------------------------------------------*
  * GXVertex functions                          *
  *---------------------------------------------*/
-void GXPosition3f32(f32 x, f32 y, f32 z)
+static inline void GXPosition3f32(f32 x, f32 y, f32 z)
 {
     gx_pipe->d.F32 = x;
     gx_pipe->d.F32 = y;
     gx_pipe->d.F32 = z;
 }
-void GXPosition3u16(u16 x, u16 y, u16 z)
+static inline void GXPosition3u16(u16 x, u16 y, u16 z)
 {
     gx_pipe->d.U16 = x;
     gx_pipe->d.U16 = y;
     gx_pipe->d.U16 = z;
 }
-void GXPosition3s16(s16 x, s16 y, s16 z)
+static inline void GXPosition3s16(s16 x, s16 y, s16 z)
 {
     gx_pipe->d.S16 = x;
     gx_pipe->d.S16 = y;
     gx_pipe->d.S16 = z;
 }
-void GXPosition3u8(u8 x, u8 y, u8 z)
+static inline void GXPosition3u8(u8 x, u8 y, u8 z)
 {
     gx_pipe->d.U8 = x;
     gx_pipe->d.U8 = y;
     gx_pipe->d.U8 = z;
 }
-void GXPosition3s8(s8 x, s8 y, s8 z)
+static inline void GXPosition3s8(s8 x, s8 y, s8 z)
 {
     gx_pipe->d.S8 = x;
     gx_pipe->d.S8 = y;
     gx_pipe->d.S8 = z;
 }
-void GXPosition2f32(f32 x, f32 y)
+static inline void GXPosition2f32(f32 x, f32 y)
 {
     gx_pipe->d.F32 = x;
     gx_pipe->d.F32 = y;
 }
-void GXPosition2u16(u16 x, u16 y)
+static inline void GXPosition2u16(u16 x, u16 y)
 {
     gx_pipe->d.U16 = x;
     gx_pipe->d.U16 = y;
 }
-void GXPosition2s16(s16 x, s16 y)
+static inline void GXPosition2s16(s16 x, s16 y)
 {
 
     gx_pipe->d.S16 = x;
     gx_pipe->d.S16 = y;
 }
-void GXPosition2u8(u8 x, u8 y)
+static inline void GXPosition2u8(u8 x, u8 y)
 {
     gx_pipe->d.U8 = x;
     gx_pipe->d.U8 = y;
 }
-void GXPosition2s8(s8 x, s8 y)
+static inline void GXPosition2s8(s8 x, s8 y)
 {
     gx_pipe->d.S8 = x;
     gx_pipe->d.S8 = y;
 }
-void GXPosition1x16(u16 index)
+static inline void GXPosition1x16(u16 index)
 {
     gx_pipe->d.U16 = index;
 }
-void GXPosition1x8(u8 index)
+static inline void GXPosition1x8(u8 index)
 {
     gx_pipe->d.U8 = index;
 }
 
-void GXNormal3f32(f32 x, f32 y, f32 z)
+static inline void GXNormal3f32(f32 x, f32 y, f32 z)
 {
     gx_pipe->d.F32 = x;
     gx_pipe->d.F32 = y;
     gx_pipe->d.F32 = z;
 }
-void GXNormal3s16(s16 x, s16 y, s16 z)
+static inline void GXNormal3s16(s16 x, s16 y, s16 z)
 {
     gx_pipe->d.S16 = x;
     gx_pipe->d.S16 = y;
     gx_pipe->d.S16 = z;
 }
-void GXNormal3s8(s8 x, s8 y, s8 z)
+static inline void GXNormal3s8(s8 x, s8 y, s8 z)
 {
     gx_pipe->d.S8 = x;
     gx_pipe->d.S8 = y;
     gx_pipe->d.S8 = z;
 }
-void GXNormal1x16(u16 index)
+static inline void GXNormal1x16(u16 index)
 {
     gx_pipe->d.U32 = index;
 }
-void GXNormal1x8(u8 index)
+static inline void GXNormal1x8(u8 index)
 {
     gx_pipe->d.U8 = index;
 }
 
-void GXColor4u8(u8 r, u8 g, u8 b, u8 a)
+static inline void GXColor4u8(u8 r, u8 g, u8 b, u8 a)
 {
     gx_pipe->d.U8 = r;
     gx_pipe->d.U8 = g;
     gx_pipe->d.U8 = b;
     gx_pipe->d.U8 = a;
 }
-void GXColor3u8(u8 r, u8 g, u8 b)
+static inline void GXColor3u8(u8 r, u8 g, u8 b)
 {
     gx_pipe->d.U8 = r;
     gx_pipe->d.U8 = g;
     gx_pipe->d.U8 = b;
 }
-void GXColor1u32(u32 clr)
+static inline void GXColor1u32(u32 clr)
 {
     gx_pipe->d.U32 = clr;
 }
-void GXColor1u16(u16 clr)
+static inline void GXColor1u16(u16 clr)
 {
     gx_pipe->d.U16 = clr;
 }
-void GXColor1x16(u16 index)
+static inline void GXColor1x16(u16 index)
 {
     gx_pipe->d.U16 = index;
 }
-void GXColor1x8(u8 index)
+static inline void GXColor1x8(u8 index)
 {
     gx_pipe->d.U8 = index;
 }
 
-void GXTexCoord2f32(f32 s, f32 t)
+static inline void GXTexCoord2f32(f32 s, f32 t)
 {
     gx_pipe->d.F32 = s;
     gx_pipe->d.F32 = t;
 }
-void GXTexCoord2u16(u16 s, u16 t)
+static inline void GXTexCoord2u16(u16 s, u16 t)
 {
     gx_pipe->d.U16 = s;
     gx_pipe->d.U16 = t;
 }
-void GXTexCoord2s16(s16 s, s16 t)
+static inline void GXTexCoord2s16(s16 s, s16 t)
 {
     gx_pipe->d.S16 = s;
     gx_pipe->d.S16 = t;
 }
-void GXTexCoord2u8(u8 s, u8 t)
+static inline void GXTexCoord2u8(u8 s, u8 t)
 {
     gx_pipe->d.U8 = s;
     gx_pipe->d.U8 = t;
 }
-void GXTexCoord2s8(s8 s, s8 t)
+static inline void GXTexCoord2s8(s8 s, s8 t)
 {
     gx_pipe->d.S8 = s;
     gx_pipe->d.S8 = t;
 }
-void GXTexCoord1f32(f32 s, f32 t)
+static inline void GXTexCoord1f32(f32 s, f32 t)
 {
     gx_pipe->d.F32 = s;
     gx_pipe->d.F32 = t;
 }
-void GXTexCoord1u16(u16 s, u16 t)
+static inline void GXTexCoord1u16(u16 s, u16 t)
 {
     gx_pipe->d.U16 = s;
     gx_pipe->d.U16 = t;
 }
-void GXTexCoord1s16(s16 s, s16 t)
+static inline void GXTexCoord1s16(s16 s, s16 t)
 {
     gx_pipe->d.S16 = s;
     gx_pipe->d.S16 = t;
 }
-void GXTexCoord1u8(u8 s, u8 t)
+static inline void GXTexCoord1u8(u8 s, u8 t)
 {
     gx_pipe->d.U8 = s;
     gx_pipe->d.U8 = t;
 }
-void GXTexCoord1s8(s8 s, s8 t)
+static inline void GXTexCoord1s8(s8 s, s8 t)
 {
     gx_pipe->d.S8 = s;
     gx_pipe->d.S8 = t;
 }
-void GXTexCoord1x16(u16 index)
+static inline void GXTexCoord1x16(u16 index)
 {
     gx_pipe->d.U16 = index;
 }
-void GXTexCoord1x8(u8 index)
+static inline void GXTexCoord1x8(u8 index)
 {
     gx_pipe->d.U8 = index;
 }
 
-void GX_Draw(float x, float y, float z, GXColor *color)
+static inline void GX_Draw(float x, float y, float z, GXColor *color)
 {
     gx_pipe->d.F32 = x;
     gx_pipe->d.F32 = y;
