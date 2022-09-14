@@ -1,9 +1,8 @@
 .set debug, 0
-
-#Constants
 .set  MEXVersionMajor,1
 .set  MEXVersionMinor,1
 
+#Constants
 .set  PersonalEffectStart,5000  # used for stage effects, need to rework this?
 .set  EffMdlStart,5000
 .set  PtclGenStart,6000
@@ -137,15 +136,19 @@
   .set mdAddDesc_modelvisdesc_table, 0x4
 .set mdAddDesc_dynamicshitnum, 0x18
 .set mdAddDesc_dynamicshitdesc, 0x1C
+.set mdAddDesc_animjoint, 0x20
+.set mdAddDesc_matanimjoint, 0x24
+.set mdAddDesc_script, 0x28
 
 #FtModelAdd
-.set mdAdd_size, 0x30
+.set mdAdd_size, mdAdd_scriptdata + 0x80 # 0x30
 .set mdAdd_JOBJ, 0x0
 .set mdAdd_attachbone, 0x4
 .set mdAdd_DOBJLookup, 0x8
   .set mdAdd_bonenum, 0x0
   .set mdAdd_dobjarr, 0x4
 .set mdAdd_ftpartsvis, 0x10
+.set mdAdd_scriptdata, 0x30
 
 #Scene Data
 .set  MajorStride,0x18
@@ -394,17 +397,9 @@
 .set  OFST_FighterOnItemPickup,0xC0
 .set  OFST_FighterOnItemPickup2,0xC4
 .set  OFST_FighterOnItemRelease,0xC8
-.set  OFST_FighterOnIntroL, OFST_FighterOnItemRelease + 0x4
-.set  OFST_FighterOnIntroR, OFST_FighterOnIntroL + 0x4
-.set  OFST_FighterOnTaunt, OFST_FighterOnIntroR + 0x4
-.set  OFST_FighterOnCatch, OFST_FighterOnTaunt + 0x4
-.set  OFST_FighterBGM, OFST_FighterOnCatch + 0x4
+.set  OFST_FighterBGM, OFST_FighterOnItemRelease + 0x4
 .set  OFST_FighterViWaitFileNames, OFST_FighterBGM + 0x4
-.set  OFST_ClassicTrophyLookup, OFST_FighterViWaitFileNames + 0x4
-.set  OFST_AdventureTrophyLookup, OFST_ClassicTrophyLookup + 0x4
-.set  OFST_AllStarTrophyLookup, OFST_AdventureTrophyLookup + 0x4
-.set  OFST_TrophyFallScale, OFST_AllStarTrophyLookup + 0x4
-.set  OFST_MajorScenes, OFST_TrophyFallScale + 0x4
+.set  OFST_MajorScenes, OFST_FighterViWaitFileNames + 0x4
 .set  OFST_MinorScenes, OFST_MajorScenes + 0x4
 .set  OFST_PtclRuntime1, OFST_MinorScenes + 0x4
 .set  OFST_PtclRuntime3, OFST_PtclRuntime1 + 0x4
@@ -446,17 +441,30 @@
 .set  OFST_Metadata_EffectCount,OFST_Metadata_BGMCount+0x4
 .set  OFST_MetaData_TermMajor,OFST_Metadata_EffectCount + 0x4
 .set  OFST_MetaData_TermMinor,OFST_MetaData_TermMajor + 0x4
-.set  OFST_MetaData_TrophyCount,OFST_MetaData_TermMinor + 0x4
-.set  OFST_MetaData_TrophySDOff,OFST_MetaData_TrophyCount+0x4
-.set  OFST_MetaData_GrIntNum,OFST_MetaData_TrophySDOff+0x4
+.set  OFST_MetaData_GrIntNum,OFST_MetaData_TermMinor+0x4
 .set  OFST_MetaData_GrExtNum,OFST_MetaData_GrIntNum+0x4
 .set  OFST_Metadata,OFST_MetaData_GrExtNum+0x4
+
 .set  OFST_mexData,OFST_Metadata+0x4
 
 #Gross bullshit I don't want here
 .set  OFST_EasterEgg,OFST_mexData + 0x4
 .set  OFST_HeapRuntime,OFST_EasterEgg + 0x8
 
+# NOTE: the following are out of order to prevent incompatibility 
+# with slippi's m-ex and akaneia 0.82 m-ex
+#Trophy stuff 
+.set  OFST_ClassicTrophyLookup, OFST_HeapRuntime + 0x4
+.set  OFST_AdventureTrophyLookup, OFST_ClassicTrophyLookup + 0x4
+.set  OFST_AllStarTrophyLookup, OFST_AdventureTrophyLookup + 0x4
+.set  OFST_TrophyFallScale, OFST_AllStarTrophyLookup + 0x4
+.set  OFST_MetaData_TrophyCount,OFST_TrophyFallScale + 0x4
+.set  OFST_MetaData_TrophySDOff,OFST_MetaData_TrophyCount+0x4
+# Fighter state hooks
+.set  OFST_FighterOnIntroL, OFST_MetaData_TrophySDOff + 0x4
+.set  OFST_FighterOnIntroR, OFST_FighterOnIntroL + 0x4
+.set  OFST_FighterOnTaunt, OFST_FighterOnIntroR + 0x4
+.set  OFST_FighterOnCatch, OFST_FighterOnTaunt + 0x4
 
 # Fighter Data
 .set FighterDataOrigSize, 0x23ec

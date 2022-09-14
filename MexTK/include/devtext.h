@@ -10,8 +10,7 @@ struct DevText
 {
     int x0;                   // 0x0
     int x4;                   // 0x4
-    int x8;                   // 0x8
-    int xc;                   // 0xc
+    Vec2 scale;               // 0x8
     GXColor bg_color;         // 0x10
     int x14;                  // 0x14
     int x18;                  // 0x18
