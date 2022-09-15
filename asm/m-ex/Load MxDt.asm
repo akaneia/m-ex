@@ -73,9 +73,16 @@ CopyPointers_Loop:
 #Get offset of rtoc
   mulli REG_currOffset,REG_Count,4
 CopyPointers_InitWalkLoop:
-#If no more, exit
+#Get next
   lhz r3,0x2(REG_Offsets)
   extsh r3,r3
+#Check to skip this one
+  cmpwi r3,-2
+  bne CopyPointers_CheckEnd
+  addi REG_Offsets,REG_Offsets,2
+  b CopyPointers_IncLoop
+CopyPointers_CheckEnd:
+#If no more, exit
   cmpwi r3,-1
   beq CopyPointers_Exit
   mr  REG_currArchOffset,REG_mexData
@@ -238,16 +245,9 @@ rtocOffsets:
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemPickup2,-1
   .hword Arch_FighterFunc,Arch_FighterFunc_OnItemRelease,-1
-  .hword Arch_FighterFunc,Arch_FighterFunc_onIntroL,-1
-  .hword Arch_FighterFunc,Arch_FighterFunc_onIntroR,-1
-  .hword Arch_FighterFunc,Arch_FighterFunc_onTaunt,-1
-  .hword Arch_FighterFunc,Arch_FighterFunc_onCatch,-1
+
   .hword Arch_Fighter,Arch_Fighter_BGM,-1
   .hword Arch_Fighter,Arch_Fighter_ViWaitFileNames,-1
-  .hword Arch_Fighter,Arch_Fighter_ClassicTrophyLookup,-1
-  .hword Arch_Fighter,Arch_Fighter_AdventureTrophyLookup,-1
-  .hword Arch_Fighter,Arch_Fighter_AllStarTrophyLookup,-1
-  .hword Arch_Fighter,Arch_Fighter_EndingFallScale,-1
   .hword Arch_Scene,Scene_Major,-1
   .hword Arch_Scene,Scene_Minor,-1
   .hword Arch_Effect,Effect_RuntimeUnk1,-1
@@ -290,11 +290,29 @@ rtocOffsets:
   .hword Arch_Metadata,Arch_Metadata_EffectCount,-1
   .hword Arch_Metadata,Arch_Metadata_TermMajor,-1
   .hword Arch_Metadata,Arch_Metadata_TermMinor,-1
-  .hword Arch_Metadata,Arch_Metadata_TrophyCount,-1
-  .hword Arch_Metadata,Arch_Metadata_TrophySDOff,-1
   .hword Arch_Metadata,Arch_Metadata_GrIntNum,-1
   .hword Arch_Metadata,Arch_Metadata_GrExtNum,-1
   .hword Arch_Metadata,-1
+
+# adding a "null" here to skip these, code places these ptrs
+# see "incompatibility" in Header.s to see why this is...
+  .hword -2 # mexData
+  .hword -2 # easter egg
+  .hword -2 # heap runtime
+
+  .hword Arch_Fighter,Arch_Fighter_ClassicTrophyLookup,-1
+  .hword Arch_Fighter,Arch_Fighter_AdventureTrophyLookup,-1
+  .hword Arch_Fighter,Arch_Fighter_AllStarTrophyLookup,-1
+  .hword Arch_Fighter,Arch_Fighter_EndingFallScale,-1
+
+  .hword Arch_Metadata,Arch_Metadata_TrophyCount,-1
+  .hword Arch_Metadata,Arch_Metadata_TrophySDOff,-1
+
+  .hword Arch_FighterFunc,Arch_FighterFunc_onIntroL,-1
+  .hword Arch_FighterFunc,Arch_FighterFunc_onIntroR,-1
+  .hword Arch_FighterFunc,Arch_FighterFunc_onTaunt,-1
+  .hword Arch_FighterFunc,Arch_FighterFunc_onCatch,-1
+
   .hword  -1
   .align 2
 
