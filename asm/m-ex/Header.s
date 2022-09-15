@@ -449,7 +449,7 @@
 
 #Gross bullshit I don't want here
 .set  OFST_EasterEgg,OFST_mexData + 0x4
-.set  OFST_HeapRuntime,OFST_EasterEgg + 0x8
+.set  OFST_HeapRuntime,OFST_EasterEgg + 0x4
 
 # NOTE: the following are out of order to prevent incompatibility 
 # with slippi's m-ex and akaneia 0.82 m-ex
