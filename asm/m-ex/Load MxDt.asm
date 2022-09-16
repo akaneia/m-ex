@@ -298,6 +298,7 @@ rtocOffsets:
 # see "incompatibility" in Header.s to see why this is...
   .hword -2 # mexData
   .hword -2 # easter egg
+  .hword -2 # easter egg2 apparently
   .hword -2 # heap runtime
 
   .hword Arch_Fighter,Arch_Fighter_ClassicTrophyLookup,-1
@@ -307,11 +308,6 @@ rtocOffsets:
 
   .hword Arch_Metadata,Arch_Metadata_TrophyCount,-1
   .hword Arch_Metadata,Arch_Metadata_TrophySDOff,-1
-
-  .hword Arch_FighterFunc,Arch_FighterFunc_onIntroL,-1
-  .hword Arch_FighterFunc,Arch_FighterFunc_onIntroR,-1
-  .hword Arch_FighterFunc,Arch_FighterFunc_onTaunt,-1
-  .hword Arch_FighterFunc,Arch_FighterFunc_onCatch,-1
 
   .hword  -1
   .align 2

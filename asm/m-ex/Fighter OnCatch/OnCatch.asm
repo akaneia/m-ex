@@ -7,10 +7,12 @@
 
   lwz REG_PlayerData,0x2c(REG_PlayerGObj)
 #Check for an onCatch function
-  lwz r0,OFST_FighterOnCatch(rtoc)
+  lwz r3,OFST_mexData(rtoc)
+  lwz r3,Arch_FighterFunc(r3)
+  lwz r3,Arch_FighterFunc_onCatch(r3)
   lwz r4,0x4(REG_PlayerData)
   mulli r4,r4,4
-  lwzx  r12,r4,r0
+  lwzx  r12,r3,r4
   cmpwi r12,0
   beq Exit
 #Branch to function

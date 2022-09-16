@@ -449,7 +449,7 @@
 
 #Gross bullshit I don't want here
 .set  OFST_EasterEgg,OFST_mexData + 0x4
-.set  OFST_HeapRuntime,OFST_EasterEgg + 0x4
+.set  OFST_HeapRuntime,OFST_EasterEgg + 0x8
 
 # NOTE: the following are out of order to prevent incompatibility 
 # with slippi's m-ex and akaneia 0.82 m-ex
@@ -460,11 +460,6 @@
 .set  OFST_TrophyFallScale, OFST_AllStarTrophyLookup + 0x4
 .set  OFST_MetaData_TrophyCount,OFST_TrophyFallScale + 0x4
 .set  OFST_MetaData_TrophySDOff,OFST_MetaData_TrophyCount+0x4
-# Fighter state hooks
-.set  OFST_FighterOnIntroL, OFST_MetaData_TrophySDOff + 0x4
-.set  OFST_FighterOnIntroR, OFST_FighterOnIntroL + 0x4
-.set  OFST_FighterOnTaunt, OFST_FighterOnIntroR + 0x4
-.set  OFST_FighterOnCatch, OFST_FighterOnTaunt + 0x4
 
 # Fighter Data
 .set FighterDataOrigSize, 0x23ec
