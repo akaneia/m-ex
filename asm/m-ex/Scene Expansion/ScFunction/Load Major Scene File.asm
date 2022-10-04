@@ -12,6 +12,10 @@
 
 backup
 
+# check if major was found
+  cmpwi REG_MajorScene, 0
+  beq NoScene
+
 # check if major has a file
   lwz  r3,0x14(REG_MajorScene)
   cmpwi r3,0
@@ -199,6 +203,24 @@ blrl
 ErrorString:
 blrl
 .string "error: major scene file %s does not exist\n"
+.align 2
+###############################################
+
+NoScene:
+#OSReport
+  bl  ErrorString_NoScene
+  mflr  r3
+  mr r4, r27
+  branchl r12,0x803456a8
+#Assert
+  bl  Assert_Name
+  mflr  r3
+  li  r4,0
+  load  r5,0x804d3940
+  branchl r12,0x80388220
+ErrorString_NoScene:
+blrl
+.string "error: major scene %d does not exist in MxDt\n"
 .align 2
 ###############################################
 
