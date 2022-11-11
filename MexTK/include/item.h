@@ -649,7 +649,7 @@ struct ItemData
         int xc58;                                       // 0xc58
         int xc5c;                                       // 0xc5c
         int xc60;                                       // 0xc60
-        GOBJ *reflect;                                  // 0xc64
+        GOBJ *reflect;                                  // 0xc64, pointer to the gobj that reflected this item, is removed after processing the reflection
         float xc68;                                     // 0xc68
         int xc6c;                                       // 0xc6c
         int xc70;                                       // 0xc70

@@ -83,6 +83,49 @@ enum MatchPLinks
     MATCHPLINK_DEVTEXT,
 };
 
+enum MatchGXLinks
+{
+    MATCHGX_LIGHT,
+    MATCHGX_POKEMONITOR,
+    MATCHGX_FODREFLECT,
+    MATCHGX_STAGE,
+    MATCHGX_4,
+    MATCHGX_FIGHTER,
+    MATCHGX_ITEM,
+    MATCHGX_EFFECT,   // in-game effects
+    MATCHGX_HUDPTCL,  // effects used on hud, like stock disappearing
+    MATCHGX_HUDTAGS,  // nametag jobj and text
+    MATCHGX_HUDLIGHT, // also used for coin lighting? 802ff060
+    MATCHGX_HUD,      // stocks, percent, insignia, timer, READY, etc
+    MATCHGX_12,
+    MATCHGX_13,
+    MATCHGX_14,
+    MATCHGX_COIN,
+    MATCHGX_SCREENCOLANIM,
+    MATCHGX_DEVELOPTEXT,
+};
+
+enum HitAttributes // these belong to items *and* fighters so im putting them here
+{
+    HITATTR_NORMAL,
+    HITATTR_FIRE,
+    HITATTR_ELEC,
+    HITATTR_SLASH,
+    HITATTR_COIN,
+    HITATTR_ICE,
+    HITATTR_SLEEPSHORT,
+    HITATTR_SLEEPLONG,
+    HITATTR_BURY,
+    HITATTR_BURY2,
+    HITATTR_SPIN,
+    HITATTR_EMPTY,
+    HITATTR_DISABLE,
+    HITATTR_DARK,
+    HITATTR_SCREW,
+    HITATTR_FLOWER,
+    HITATTR_NULL,
+};
+
 /*** Structs ***/
 
 struct MatchInit
@@ -146,10 +189,10 @@ struct MatchInit
     u8 unk16; // 0xFF
     // byte 0xE
     u16 stage; // 0xFFFF
-    // byte 0x10
-    int timerSeconds : 32; // 0xFFFFFFFF
+    // word 0x10
+    int timer_seconds; // 0xFFFFFFFF
     // byte 0x14
-    u8 timerSubSeconds; // 0xFF
+    u8 timer_subseconds; // 0xFF
     // 0x18
     int unk17; // 0xFFFFFFFF
     // 0x1C
@@ -650,6 +693,8 @@ struct Match // static match struct @ 8046b6a0
 {
     u8 state;                 // 0x0
     u8 pauser;                // 0x1
+    u8 x2;                    // 0x2
+    u8 x3;                    // 0x3
     u8 x4;                    // 0x4
     u8 x5;                    // 0x5
     u8 request_match_end;     // 0x6, will override match end logic and set kind to

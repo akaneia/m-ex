@@ -225,8 +225,8 @@ struct TOBJ
 {
     HSD_Obj parent;
     TOBJ *next;
-    u32 id;                           //GXTexMapID
-    u32 src;                          //GXTexGenSrc 0x10
+    u32 id;                           // GXTexMapID
+    u32 src;                          // GXTexGenSrc 0x10
     u32 mtxid;                        // 0x14
     Vec4 rotate;                      // 0x18
     Vec3 scale;                       // 0x28
@@ -247,19 +247,19 @@ struct TOBJ
     struct _HSD_Tlut **tluttbl;
     u8 tlut_no;
     Mtx mtx;
-    u32 coord; //GXTexCoordID
+    u32 coord; // GXTexCoordID
     struct _HSD_TObjTev *tev;
 };
 
 struct AOBJ
 {
-    u32 flags;
-    f32 curr_frame;
-    f32 rewind_frame;
-    f32 end_frame;
-    f32 framerate;
-    struct _HSD_FObj *fobj;
-    struct _HSD_Obj *hsd_obj;
+    u32 flags;                // 0x0
+    f32 curr_frame;           // 0x4
+    f32 rewind_frame;         // 0x8
+    f32 end_frame;            // 0xC
+    f32 framerate;            // 0x10
+    struct _HSD_FObj *fobj;   // 0x14
+    struct _HSD_Obj *hsd_obj; // 0x18, points to spline data
 };
 
 struct MOBJ
@@ -285,21 +285,21 @@ struct MOBJ
 
 struct JOBJDesc
 {
-    char *class_name;       //0x00
-    u32 flags;              //0x04
-    struct JOBJDesc *child; //0x08
-    struct JOBJDesc *next;  //0x0C
+    char *class_name;       // 0x00
+    u32 flags;              // 0x04
+    struct JOBJDesc *child; // 0x08
+    struct JOBJDesc *next;  // 0x0C
     union
     {
         struct _HSD_DObjDesc *dobjdesc;
         struct _HSD_Spline *spline;
         struct _HSD_SList *ptcl;
-    } u;                            //0x10
-    Vec3 rotation;                  //0x14 - 0x1C
-    Vec3 scale;                     //0x20 - 0x28
-    Vec3 position;                  //0x2C - 0x34
-    Mtx mtx;                        //0x38
-    struct _HSD_RObjDesc *robjdesc; //0x3C
+    } u;                            // 0x10
+    Vec3 rotation;                  // 0x14 - 0x1C
+    Vec3 scale;                     // 0x20 - 0x28
+    Vec3 position;                  // 0x2C - 0x34
+    Mtx mtx;                        // 0x38
+    struct _HSD_RObjDesc *robjdesc; // 0x3C
 };
 
 struct MatAnimJointDesc
@@ -311,21 +311,21 @@ struct MatAnimJointDesc
 
 struct COBJDesc
 {
-    char *class_name;                    //0x00
-    u16 flags;                           //0x04
-    u16 projection_type;                 //0x06
-    u16 viewport_left;                   //0x08
-    u16 viewport_right;                  //0x0A
-    u16 viewport_top;                    //0x0C
-    u16 viewport_bottom;                 //0x0E
-    u32 scissor_lr;                      //0x10
-    u32 scissor_tb;                      //0x14
-    struct _HSD_WObjDesc *eye_desc;      //0x18
-    struct _HSD_WObjDesc *interest_desc; //0x1C
-    f32 roll;                            //0x20
-    Vec3 *vector;                        //0x24
-    f32 near;                            //0x28
-    f32 far;                             //0x2C
+    char *class_name;                    // 0x00
+    u16 flags;                           // 0x04
+    u16 projection_type;                 // 0x06
+    u16 viewport_left;                   // 0x08
+    u16 viewport_right;                  // 0x0A
+    u16 viewport_top;                    // 0x0C
+    u16 viewport_bottom;                 // 0x0E
+    u32 scissor_lr;                      // 0x10
+    u32 scissor_tb;                      // 0x14
+    struct _HSD_WObjDesc *eye_desc;      // 0x18
+    struct _HSD_WObjDesc *interest_desc; // 0x1C
+    f32 roll;                            // 0x20
+    Vec3 *vector;                        // 0x24
+    f32 near;                            // 0x28
+    f32 far;                             // 0x2C
     union
     {
         struct
@@ -355,11 +355,11 @@ struct COBJDesc
 struct DOBJ
 {
     int parent;
-    DOBJ *next; //0x04
-    MOBJ *mobj; //0x08
-    int *pobj;  //0x0C
-    AOBJ *aobj; //0x10
-    u32 flags;  //0x14
+    DOBJ *next; // 0x04
+    MOBJ *mobj; // 0x08
+    int *pobj;  // 0x0C
+    AOBJ *aobj; // 0x10
+    u32 flags;  // 0x14
     u32 unk;
 };
 
@@ -386,33 +386,33 @@ struct JOBJ
 struct WOBJ
 {
     HSD_Obj parent;
-    u32 flags;  //0x08
-    Vec3 pos;   //0xC
-    AOBJ *aobj; //0x18
-    void *robj; //0x1C
+    u32 flags;  // 0x08
+    Vec3 pos;   // 0xC
+    AOBJ *aobj; // 0x18
+    void *robj; // 0x1C
 };
 
 struct COBJ
 {
     HSD_Obj parent;      // 0x0
-    u32 flags;           //0x08
-    f32 viewport_left;   //0x0C
-    f32 viewport_right;  //0x10
-    f32 viewport_top;    //0x14
-    f32 viewport_bottom; //0x18
-    u16 scissor_left;    //0x1C
-    u16 scissor_right;   //0x1E
-    u16 scissor_top;     //0x20
-    u16 scissor_bottom;  //0x22
-    WOBJ *eye_position;  //0x24
-    WOBJ *interest;      //0x28
+    u32 flags;           // 0x08
+    f32 viewport_left;   // 0x0C
+    f32 viewport_right;  // 0x10
+    f32 viewport_top;    // 0x14
+    f32 viewport_bottom; // 0x18
+    u16 scissor_left;    // 0x1C
+    u16 scissor_right;   // 0x1E
+    u16 scissor_top;     // 0x20
+    u16 scissor_bottom;  // 0x22
+    WOBJ *eye_position;  // 0x24
+    WOBJ *interest;      // 0x28
     union
     {
-        f32 roll; //0x28
-        Vec3 up;  //0x28 - 0x34
+        f32 roll; // 0x28
+        Vec3 up;  // 0x28 - 0x34
     } u;
-    f32 near; //0x3C
-    f32 far;  //0x40
+    f32 near; // 0x3C
+    f32 far;  // 0x40
     union
     {
         struct
@@ -437,10 +437,10 @@ struct COBJ
             f32 right;
         } ortho;
     } projection_param;
-    u8 projection_type; //0x50
-    Mtx view_mtx;       //0x54
-    AOBJ *aobj;         //0x84
-    Mtx proj_mtx;       //0x88
+    u8 projection_type; // 0x50
+    Mtx view_mtx;       // 0x54
+    AOBJ *aobj;         // 0x84
+    Mtx proj_mtx;       // 0x88
 };
 
 struct _HSD_ImageDesc
@@ -502,13 +502,13 @@ struct _HSD_LightAttn
 
 struct LObjDesc
 {
-    char *class_name;               //0x00
-    LObjDesc *next;                 //0x04
-    u16 flags;                      //0x08
-    u16 attnflags;                  //0x0A
-    GXColor color;                  //0x0C
-    struct _HSD_WObjDesc *position; //0x10
-    struct _HSD_WObjDesc *interest; //0x14
+    char *class_name;               // 0x00
+    LObjDesc *next;                 // 0x04
+    u16 flags;                      // 0x08
+    u16 attnflags;                  // 0x0A
+    GXColor color;                  // 0x0C
+    struct _HSD_WObjDesc *position; // 0x10
+    struct _HSD_WObjDesc *interest; // 0x14
     union
     {
         void *p;
@@ -533,14 +533,14 @@ struct LightGroup
 
 struct LOBJ
 {
-    HSD_Obj parent;    //0x00
-    u16 flags;         //0x08
-    u16 priority;      //0x0A
-    struct LOBJ *next; //0x0C
-    GXColor color;     //0x10
-    GXColor hw_color;  //0x14
-    WOBJ *position;    //0x18
-    WOBJ *interest;    //0x1C
+    HSD_Obj parent;    // 0x00
+    u16 flags;         // 0x08
+    u16 priority;      // 0x0A
+    struct LOBJ *next; // 0x0C
+    GXColor color;     // 0x10
+    GXColor hw_color;  // 0x14
+    WOBJ *position;    // 0x18
+    WOBJ *interest;    // 0x1C
     union
     {
         _HSD_LightPoint point;
@@ -551,30 +551,30 @@ struct LOBJ
     Vec3 lvec;
     AOBJ *aobj; // 0x48
     u32 id;     // 0x4c, GXLightID
-    //GXLightObj lightobj;      //0x50
-    u32 spec_id; //0x90 GXLightID
-    //GXLightObj spec_lightobj; //0x94
+    // GXLightObj lightobj;      //0x50
+    u32 spec_id; // 0x90 GXLightID
+    // GXLightObj spec_lightobj; //0x94
 };
 
 struct HSD_Fog
 {
     HSD_Obj parent;
-    u8 type;           //0x08
-    HSD_Fog *fog_adj;  //0x0C
-    f32 start;         //0x10
-    f32 end;           //0x14
-    GXColor color;     //0x18
-    struct AOBJ *aobj; //0x1C
+    u8 type;           // 0x08
+    HSD_Fog *fog_adj;  // 0x0C
+    f32 start;         // 0x10
+    f32 end;           // 0x14
+    GXColor color;     // 0x18
+    struct AOBJ *aobj; // 0x1C
 };
 
 struct HSD_FogDesc
 {
-    u8 type;             //0x00
-    HSD_FogDesc *fog_adj;//0x04
-    f32 start;           //0x08
-    f32 end;             //0x0C
-    GXColor color;       //0x10
-    struct AOBJDesc *aobj;      //0x14
+    u8 type;               // 0x00
+    HSD_FogDesc *fog_adj;  // 0x04
+    f32 start;             // 0x08
+    f32 end;               // 0x0C
+    GXColor color;         // 0x10
+    struct AOBJDesc *aobj; // 0x14
 };
 
 struct JOBJSet
@@ -585,16 +585,25 @@ struct JOBJSet
     void **shapeaninjoint;
 };
 
+struct HSD_SObjDesc
+{
+    JOBJSet **jobjset;
+    COBJDesc **cobjdesc;
+    LightGroup *lights;
+    HSD_FogDesc *fog;
+};
+
 /*** Static Variables ***/
-static GOBJList **stc_gobj_list = R13 + (-0x3E74);
-static u8 *stc_gobj_proc_num = 0x804ce382;            // number of elements in the below array
-static GOBJProc ***stc_gobjproc_lookup = 0x804D7840;  // array of gobj procs ptrs
-static GOBJProc **stc_gobjproc_cur = (R13 + -0x3E68); // current gobj proc being processed
-static u8 *objkind_sobj = R13 + -(0x3D40);
-static u8 *objkind_cobj = R13 + -(0x3E55);
-static u8 *objkind_lobj = R13 + -(0x3E56);
-static u8 *objkind_jobj = R13 + -(0x3E57);
-static u8 *objkind_fog = R13 + -(0x3E58);
+GOBJList **stc_gobj_list = R13 + (-0x3E74);
+GOBJ ***stc_gobj_lookup = R13 + (-0x3E74);
+u8 *stc_gobj_proc_num = 0x804ce382;            // number of elements in the below array
+GOBJProc ***stc_gobjproc_lookup = 0x804D7840;  // array of gobj procs ptrs
+GOBJProc **stc_gobjproc_cur = (R13 + -0x3E68); // current gobj proc being processed
+u8 *objkind_sobj = R13 + -(0x3D40);
+u8 *objkind_cobj = R13 + -(0x3E55);
+u8 *objkind_lobj = R13 + -(0x3E56);
+u8 *objkind_jobj = R13 + -(0x3E57);
+u8 *objkind_fog = R13 + -(0x3E58);
 
 /*** Functions ***/
 int JOBJ_GetWorldPosition(JOBJ *source, Vec3 *add, Vec3 *dest);
@@ -659,7 +668,8 @@ void CObj_EndCurrent();
 void CObj_SetOrtho(COBJ *cobj, float top, float bottom, float left, float right);
 void CObj_SetViewport(COBJ *cobj, float left, float right, float top, float bottom);
 void CObj_SetScissor(COBJ *cobj, u16 top, u16 bottom, u16 left, u16 right);
-void CObj_SetEyePosition(COBJ *cobj, Vec3 *pos);
+void CObj_SetEyePosition(COBJ *cobj, Vec3 *eye_pos);
+void COBJ_GetEyePosition(COBJ *cobj, Vec3 *eye_pos);
 void CObj_SetInterest(COBJ *cobj, Vec3 *pos);
 void CObj_SetRoll(COBJ *cobj, float roll);
 void CObj_Release(COBJ *cobj);

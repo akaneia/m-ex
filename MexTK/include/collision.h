@@ -125,29 +125,31 @@ struct CollData
 
 struct CollGroupDesc // exists in stage file
 {
-    u16 floor_start;
+    u16 floor_start; // 0x0
     u16 floor_num;
-    u16 ceil_start;
+    u16 ceil_start; // 0x4
     u16 ceil_num;
-    u16 rwall_start;
+    u16 rwall_start; // 0x8
     u16 rwall_num;
-    u16 lwall_start;
+    u16 lwall_start; // 0xC
     u16 lwall_num;
-    u16 dyn_start;
+    u16 dyn_start; // 0x10
     u16 dyn_num;
-    Vec2 area_min; // 0x10
-    Vec2 area_max; // 0x18
-    u16 vert_start;
-    u16 vert_num;
+    Vec2 area_min;  // 0x14
+    Vec2 area_max;  // 0x1C
+    u16 vert_start; // 0x24
+    u16 vert_num;   // 0x26
 };
 
-struct CollGroup // exists in heap
+struct CollGroup // runtime struct
 {
-    CollGroup *next;
-    CollGroupDesc *desc;
-    int x8;               // flags
-    u16 ray_id;           // id of the last raycast
-    u16 xe;               // flags
+    CollGroup *next;      // 0x0
+    CollGroupDesc *desc;  // 0x4
+    u16 x8 : 15;          // 0x8, unk
+    u16 is_enabled : 1;   // 0x8, bit 0x01
+    u16 xa;               // unk, padding maybe
+    u16 ray_id;           // 0xC, id of the last raycast
+    u16 xe;               // 0xE, flags
     Vec2 area_min;        // 0x10
     Vec2 area_max;        // 0x18
     JOBJ *jobj;           // 0x20
@@ -155,10 +157,9 @@ struct CollGroup // exists in heap
     void *map_data_floor; // 0x28
     void *cb_ceil;        // 0x2C
     void *map_data_ceil;  // 0x30
-    int x34;              // 0x34
 };
 
-struct CollLineInfo
+struct CollLineDesc // exists in stage file
 {
     s16 vert_prev;          // 0x0
     s16 vert_next;          // 0x2
@@ -167,43 +168,43 @@ struct CollLineInfo
     s16 line_prev_altgroup; // 0x8
     s16 line_next_altgroup; // 0xA
     u8 xc;
-    u8 xd_1 : 1;     // 0xD, 0x8000
-    u8 xd_2 : 1;     // 0xD, 0x8000
-    u8 xd_3 : 1;     // 0xD, 0x8000
-    u8 disabled : 1; // 0xD, 0x8000
-    u8 is_left : 1;  // 0xD, 0x8000
-    u8 is_right : 1; // 0xD, 0x8000
-    u8 is_ceil : 1;  // 0xD, 0x0200
-    u8 is_floor : 1; // 0xD, 0x8000
-    u8 xe_1 : 1;     // 0xE, 0x8000
-    u8 xe_2 : 1;     // 0xE, 0x8000
-    u8 xe_3 : 1;     // 0xE, 0x8000
-    u8 xe_4 : 1;     // 0xE, 0x8000
-    u8 xe_5 : 1;     // 0xE, 0x8000
-    u8 is_drop : 1;  // 0xE, 0x8000
-    u8 is_ledge : 1; // 0xE, 0x0200
-    u8 is_unk : 1;   // 0xE, 0x8000
-    u8 material;
+    u8 xd_1 : 1;     // 0xD, 0x80
+    u8 xd_2 : 1;     // 0xD, 0x40
+    u8 xd_3 : 1;     // 0xD, 0x20
+    u8 disabled : 1; // 0xD, 0x10
+    u8 is_left : 1;  // 0xD, 0x08
+    u8 is_right : 1; // 0xD, 0x04
+    u8 is_ceil : 1;  // 0xD, 0x02
+    u8 is_floor : 1; // 0xD, 0x01
+    u8 xe_1 : 1;     // 0xE, 0x80
+    u8 xe_2 : 1;     // 0xE, 0x40
+    u8 xe_3 : 1;     // 0xE, 0x20
+    u8 xe_4 : 1;     // 0xE, 0x10
+    u8 xe_5 : 1;     // 0xE, 0x08
+    u8 is_drop : 1;  // 0xE, 0x04
+    u8 is_ledge : 1; // 0xE, 0x02
+    u8 is_unk : 1;   // 0xE, 0x01
+    u8 material;     // 0xF,
 };
 
-struct CollLine
+struct CollLine // runtime struct
 {
-    CollLineInfo *info;
-    u8 x4;             // 0x4
-    u8 x5_1 : 1;       // 0x5
-    u8 x5_2 : 1;       // 0x5
-    u8 x5_3 : 1;       // 0x5
-    u8 x5_4 : 1;       // 0x5
-    u8 x5_5 : 1;       // 0x5
-    u8 x5_6 : 1;       // 0x5
-    u8 x5_7 : 1;       // 0x5
-    u8 is_enabled : 1; // 0x5
-    u8 x6;             // 0x6
-    u8 x7 : 4;         // 0x7
-    u8 is_rwall : 1;   // 0x7, 0x8
-    u8 is_lwall : 1;   // 0x7, 0x4
-    u8 is_ceil : 1;    // 0x7, 0x2
-    u8 is_floor : 1;   // 0x7, 0x1
+    CollLineDesc *desc; // 0x0, (previously info)
+    u8 x4;              // 0x4
+    u8 x5_x80 : 1;      // 0x5, 0x80
+    u8 x5_x40 : 1;      // 0x5, 0x40
+    u8 x5_x20 : 1;      // 0x5, 0x20
+    u8 x5_x10 : 1;      // 0x5, 0x10
+    u8 x5_x08 : 1;      // 0x5, 0x08
+    u8 x5_x04 : 1;      // 0x5, 0x04
+    u8 x5_x02 : 1;      // 0x5, 0x02
+    u8 is_enabled : 1;  // 0x5, 0x01
+    u8 x6;              // 0x6
+    u8 x7 : 4;          // 0x7
+    u8 is_rwall : 1;    // 0x7, 0x8
+    u8 is_lwall : 1;    // 0x7, 0x4
+    u8 is_ceil : 1;     // 0x7, 0x2
+    u8 is_floor : 1;    // 0x7, 0x1
 };
 
 struct CollVert
@@ -224,22 +225,32 @@ struct CollLineUnk
 
 struct CollDataStage
 {
-    void *verts;
-    int vert_num;
-    void *lines;
-    int line_num;
-    u16 floor_start;
-    u16 floor_num;
-    u16 ceil_start;
-    u16 ceil_num;
-    u16 rwall_start;
-    u16 rwall_num;
-    u16 lwall_start;
-    u16 lwall_num;
-    u16 dyn_start;
-    u16 dyn_num;
-    void *groups;
-    int group_num;
+    Vec2 *verts;           // 0x0, array of vec2's
+    int vert_num;          // 0x4
+    CollLineDesc *lines;   // 0x8, array of line descs
+    int line_num;          // 0xC
+    u16 floor_start;       // 0x10
+    u16 floor_num;         // 0x12
+    u16 ceil_start;        // 0x14
+    u16 ceil_num;          // 0x16
+    u16 rwall_start;       // 0x18
+    u16 rwall_num;         // 0x1a
+    u16 lwall_start;       // 0x1c
+    u16 lwall_num;         // 0x1e
+    u16 dyn_start;         // 0x20
+    u16 dyn_num;           // 0x22
+    CollGroupDesc *groups; // 0x24
+    int group_num;         // 0x28
+};
+
+struct CollLineConnection // runtime struct, is created @ 8005a7cc, static array of these for each line direction @ 80458e88
+{
+    CollLineConnection *next; // 0x0
+    int x4;                   // 0x4
+    Vec3 start_pos;           // 0x8
+    Vec3 end_pos;             // 0x14
+    int x20;                  // 0x20
+    int x24;                  // 0x24
 };
 
 /*** Functions ***/
@@ -274,5 +285,6 @@ static CollGroup **stc_collgroup = R13 + (-0x51E0);
 static CollLine **stc_collline = R13 + (-0x51E4);
 static CollVert **stc_collvert = R13 + (-0x51E8);
 static CollDataStage **stc_colldata = R13 + (-0x51EC);
+CollLineConnection **stc_first_line_connect = 0x80458e88;
 
 #endif

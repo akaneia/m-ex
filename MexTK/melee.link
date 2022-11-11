@@ -56,6 +56,7 @@
 8036a194:CObj_SetOrtho
 8036a110:CObj_SetViewport
 8036a010:CObj_SetScissor
+80368784:COBJ_GetEyePosition
 803687f0:CObj_SetEyePosition
 80368718:CObj_SetInterest
 803699c0:CObj_SetRoll
@@ -299,6 +300,7 @@
 8007AF28:Fighter_SetAllHurtboxesNotUpdated
 8007D9FC:Fighter_SetFacingToStickDirection
 80034E8C:Fighter_SetFallNum
+80034d78:Fighter_GetFallNum
 8007D6A4:Fighter_SetGrounded
 8007D7FC:Fighter_SetGrounded2
 80034330:Fighter_SetHUDDamage
@@ -384,6 +386,7 @@
 80079ea8:Fighter_CalcForceApplied
 8008021c:Fighter_UpdateModelShift
 8007b7a4:Fighter_GivePersistentIntangibility
+80160968:Fighter_GetPlyHUDColor
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
