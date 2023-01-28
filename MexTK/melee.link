@@ -207,6 +207,7 @@
 800D5600:Fighter_EnterRebirthWait
 800D4F24:Fighter_EnterSleep
 80096900:Fighter_EnterSpecialFall
+800969D8:Fighter_EnterSpecialFallBlend
 800D5CB0:Fighter_EnterSpecialLanding
 8008A2BC:Fighter_EnterWait
 8007d92c:Fighter_EnterFallOrWait

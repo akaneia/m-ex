@@ -59,15 +59,15 @@ enum CSSExitKind
 /*** Structs ***/
 struct CSSBackup
 {
-    u8 c_kind;  // 0x0
-    u8 costume; // 0x1
-    u8 nametag; // 0x2
-    u8 event;   // 0x3
-    u8 port;    // 0x4
-    u8 x5;      // 0x5
-    u8 x6;      // 0x6
-    u8 x7;      // 0x7
-    u8 x8;      // 0x8
+    u8 c_kind;  //0x0
+    u8 costume; //0x1
+    u8 nametag; //0x2
+    u8 event;   //0x3
+    u8 port;    //0x4
+    u8 x5;      //0x5
+    u8 x6;      //0x6
+    u8 x7;      //0x7
+    u8 x8;      //0x8
 };
 
 struct MnSelectChrDataTable
@@ -191,7 +191,7 @@ struct MnSlChrTagData
     Text *namelist;     // 0x4, used when opening the tag window
     float x8;           // 0x8
     float scroll_amt;   // xC, Text Y Offset to scroll up each frame
-    float scroll_force; // x10
+    float scroll_force; //x10
     int timer;          // x14, state timer
     u8 next_tag;        // 0x18, index of next empty tag
     u8 port;

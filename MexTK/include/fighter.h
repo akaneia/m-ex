@@ -2,6 +2,7 @@
 #define MEX_H_FIGHTER
 
 #include "structs.h"
+#include "ftcommon_var.h"
 #include "datatypes.h"
 #include "obj.h"
 #include "gx.h"
@@ -164,6 +165,54 @@ enum FtPri
 #define ASC_4000000 0x4000000
 #define ASC_8000000 0x8000000
 #define ASC_NOANIM 0x20000000
+
+#define FIGHTER_FASTFALL_PRESERVE 0x1
+#define FIGHTER_GFX_PRESERVE 0x2
+#define FIGHTER_HITSTATUS_COLANIM_PRESERVE 0x4 // Preserve full body collision state //
+#define FIGHTER_HIT_NOUPDATE 0x8 // Keep hitboxes
+#define FIGHTER_MODEL_NOUPDATE 0x10 // Ignore model state change (?) 
+#define FIGHTER_ANIMVEL_NOUPDATE 0x20
+#define FIGHTER_UNK_0x40 0x40
+#define FIGHTER_MATANIM_NOUPDATE 0x80 // Ignore switching to character's "hurt" textures (?) //
+#define FIGHTER_THROW_EXCEPTION_NOUPDATE 0x100 // Resets thrower GObj pointer to NULL if false? //
+#define FIGHTER_SFX_PRESERVE 0x200
+#define FIGHTER_PARASOL_NOUPDATE 0x400 // Ignore Parasol state change //
+#define FIGHTER_RUMBLE_NOUPDATE 0x800 // Ignore rumble update? //
+#define FIGHTER_COLANIM_NOUPDATE 0x1000
+#define FIGHTER_ACCESSORY_PRESERVE 0x2000 // Keep respawn platform? //
+#define FIGHTER_CMD_UPDATE 0x4000 // Run all Subaction Events up to the current animation frame //
+#define FIGHTER_NAMETAGVIS_NOUPDATE 0x8000
+#define FIGHTER_PART_HITSTATUS_COLANIM_PRESERVE 0x10000 // Assume this is for individual bones? //
+#define FIGHTER_SWORDTRAIL_PRESERVE 0x20000
+#define FIGHTER_ITEMVIS_NOUPDATE 0x40000 // Used by Ness during Up/Down Smash, I suppose this is what the flag does //
+#define FIGHTER_SKIP_UNK_0x2222 0x80000 // Skips updating bit 0x20 of 0x2222? //
+#define FIGHTER_PHYS_UNKUPDATE 0x100000
+#define FIGHTER_FREEZESTATE 0x200000 // Sets anim rate to 0x and some other stuff
+#define FIGHTER_MODELPART_VIS_NOUPDATE 0x400000
+#define FIGHTER_METALB_NOUPDATE 0x800000
+#define FIGHTER_UNK_0x1000000 0x1000000
+#define FIGHTER_ATTACKCOUNT_NOUPDATE 0x2000000
+#define FIGHTER_MODEL_FLAG_NOUPDATE 0x4000000
+#define FIGHTER_UNK_0x2227 0x8000000
+#define FIGHTER_HITSTUN_FLAG_NOUPDATE 0x10000000
+#define FIGHTER_ANIM_NOUPDATE 0x20000000 // Keeps current fp animation?
+#define FIGHTER_UNK_0x40000000 0x40000000 // Unused?
+#define FIGHTER_UNK_0x80000000 0x80000000 // Unused?
+
+
+#define CLIFFCATCH_BOTH 0
+#define CLIFFCATCH_LEFT -1
+#define CLIFFCATCH_RIGHT 1
+
+// Ternary macro for fcmpo-based facing direction check 
+
+#define CLIFFCATCH_O(fp) \
+((fp)->facing_direction < 0.0F) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
+
+// Ternary macro for fcmpu-based facing direction check
+
+#define CLIFFCATCH_U(fp) \
+((fp)->facing_direction != 1.0F) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
 
 enum FtCommonBone
 {
@@ -692,35 +741,10 @@ enum Ft_AttackKind
     ATKKIND_49,
     ATKKIND_DOWNATTACKU,
     ATKKIND_DOWNATTACKD,
-    ATKKIND_PUMMEL,
-    ATKKIND_FTHROW,
-    ATKKIND_BTHROW,
-    ATKKIND_UPTHROW,
-    ATKKIND_DTHROW,
-    ATKKIND_57,
-    ATKKIND_58,
-    ATKKIND_59,
-    ATKKIND_60,
 };
-typedef enum FtStateKind
-{
-    FTSTATEKIND_FREE,        // generally actionable states, like wait, run, jump
-    FTSTATEKIND_DEFENSE,     // shield, roll, airdodge
-    FTSTATEKIND_ATTACK,      // common attacks like jabs, tilts, and ledge attacks
-    FTSTATEKIND_SPECIAL,     // any special state
-    FTSTATEKIND_4,           //
-    FTSTATEKIND_DAMAGE,      // damage states, including, mewtwo confuse, shield break,
-    FTSTATEKIND_DOWNED,      // downed animations, incuding downbound, downback/forward, downattack,
-    FTSTATEKIND_PASSIVE,     // tech animations, such as in place, left, right, walltech, and ceiling tech
-    FTSTATEKIND_REFLECTWALL, // but also passing through a platform??
-    FTSTATEKIND_LEDGE,       //
-    FTSTATEKIND_CATCH,       // any grab/throw related state, like catch, catchdash, catchwait, throwf
-    FTSTATEKIND_CAPTURE,     // any state related to being grabbed, like capture, thrown, etc
-    FTSTATEKIND_12,          // entry animation, respawn animation, damagesong, bury
-    FTSTATEKIND_DEAD,        // dead states, including star and screen ko
-} FtStateKind;
 
 /*** Structs ***/
+
 struct Playerblock
 {
     int state;           // 0x00 = not present, 0x02 = HMN, 0x03 = CPU
@@ -771,25 +795,9 @@ struct Playerblock
     u8 xae;               // 0xae
     u8 xaf;               // 0xaf
     GOBJ *fp[2];          // 0xb0
-    void *cb_subft_init;  // 0xb8, function executed on subfighter after creating them @ 80031c84
-    struct                // 0xbc, stale moves
-    {                     //
-        int cur;          // Zero-Indexed. Rolls over after 9. Increments after each write.
-        s16 queue[10];    // array of attack indices
-    } stale_moves;        //
-    struct                // 0xE8
-    {                     //
-        u8 x0[0xcb4];     // 0x0
-        int killer_ply;   // 0xcb8, 6 == none
-        u8 xcbc[0x60];    //
-        struct            // 0xd1c
-        {                 //
-            int running;  // 0xd1c
-            int airborne; //
-            int grounded; //
-        } time;           //
-    } stats;
+    void *cb_subft_init   // 0xb8, function executed on subfighter after creating them @ 80031c84
 };
+
 struct PlayerData
 {
     // byte 0x0
@@ -1085,9 +1093,6 @@ struct AbsorbDesc
     int bone;     // x00
     Vec3 pos;     // x04
     float radius; // x10
-    float x14;    // x14
-    float x18;    // x18
-    float x1C;    // x1C
 };
 
 struct AfterImageDesc
@@ -1303,523 +1308,523 @@ struct FtDmgVibrateDesc
 
 struct ftCommonData
 {
-    float x0;                        // 0x0
-    float x4;                        // 0x4
-    float x8;                        // 0x8
-    float xc;                        // 0xc
-    float x10;                       // 0x10
-    float x14;                       // 0x14
-    float x18;                       // 0x18
-    int meteor_lockout;              // 0x1c
-    float lstick_tilt;               // 0x20
-    float x24;                       // 0x24
-    float x28;                       // 0x28
-    float x2c;                       // 0x2c
-    float x30;                       // 0x30
-    float x34;                       // 0x34
-    float x38;                       // 0x38
-    float x3c;                       // 0x3c
-    float x40;                       // 0x40
-    float x44;                       // 0x44
-    float x48;                       // 0x48
-    float x4c;                       // 0x4c
-    float x50;                       // 0x50
-    float x54;                       // 0x54
-    float x58;                       // 0x58
-    float x5c;                       // 0x5c
-    float x60;                       // 0x60
-    float x64;                       // 0x64
-    float x68;                       // 0x68
-    float friction_mult;             // 0x6c
-    float jumpaerial_lsticky;        // 0x70
-    int jumpaerial_lsticktimer;      // 0x74
-    float x78;                       // 0x78
-    float x7c;                       // 0x7c
-    float x80;                       // 0x80
-    float x84;                       // 0x84
-    float x88;                       // 0x88
-    float x8c;                       // 0x8c
-    float lstick_rebirthfall;        // 0x90
-    float x94;                       // 0x94
-    float x98;                       // 0x98
-    float x9c;                       // 0x9c
-    float xa0;                       // 0xa0
-    float xa4;                       // 0xa4
-    float xa8;                       // 0xa8
-    float xac;                       // 0xac
-    float xb0;                       // 0xb0
-    float xb4;                       // 0xb4
-    float xb8;                       // 0xb8
-    float xbc;                       // 0xbc
-    float xc0;                       // 0xc0
-    float xc4;                       // 0xc4
-    float xc8;                       // 0xc8
-    float xcc;                       // 0xcc
-    float xd0;                       // 0xd0
-    float xd4;                       // 0xd4
-    float xd8;                       // 0xd8
-    float xdc;                       // 0xdc
-    float xe0;                       // 0xe0
-    float xe4;                       // 0xe4
-    float xe8;                       // 0xe8
-    float xec;                       // 0xec
-    float xf0;                       // 0xf0
-    float xf4;                       // 0xf4
-    float xf8;                       // 0xf8
-    float xfc;                       // 0xfc
-    float kb_mult;                   // 0x100
-    float armor_min;                 // 0x104, kb reduction via armor cant go below this value
-    float x108;                      // 0x108
-    float x10c;                      // 0x10c
-    float x110;                      // 0x110
-    float x114;                      // 0x114
-    float x118;                      // 0x118
-    float x11c;                      // 0x11c
-    float x120;                      // 0x120
-    float kb_reduction_crouch;       // 0x124
-    float x128;                      // 0x128
-    float x12c;                      // 0x12c
-    float x130;                      // 0x130
-    float x134;                      // 0x134
-    float x138;                      // 0x138
-    float x13c;                      // 0x13c
-    float x140;                      // 0x140
-    float x144;                      // 0x144
-    float x148;                      // 0x148
-    float x14c;                      // 0x14c
-    float x150;                      // 0x150
-    float x154;                      // 0x154
-    float x158;                      // 0x158
-    float x15c;                      // 0x15c
-    float x160;                      // 0x160
-    float x164;                      // 0x164
-    float x168;                      // 0x168
-    float kb_maxVelX;                // 0x16c
-    float x170;                      // 0x170
-    float x174;                      // 0x174
-    float x178;                      // 0x178
-    float x17c;                      // 0x17c
-    float x180;                      // 0x180
-    float x184;                      // 0x184
-    float x188;                      // 0x188
-    float x18c;                      // 0x18c
-    float x190;                      // 0x190
-    float hitlag_max;                // 0x194
-    float x198;                      // 0x198
-    float x19c;                      // 0x19c
-    float x1a0;                      // 0x1a0
-    float hitlag_elec;               // 0x1a4
-    float tdi_maxAngle;              // 0x1a8
-    float x1ac;                      // 0x1ac
-    float x1b0;                      // 0x1b0
-    float x1b4;                      // 0x1b4
-    float x1b8;                      // 0x1b8
-    float kb_bounceDecay;            // 0x1bc
-    float x1c0;                      // 0x1c0
-    float x1c4;                      // 0x1c4
-    float x1c8;                      // 0x1c8
-    float x1cc;                      // 0x1cc
-    float x1d0;                      // 0x1d0
-    float x1d4;                      // 0x1d4
-    float x1d8;                      // 0x1d8
-    float x1dc;                      // 0x1dc
-    float x1e0;                      // 0x1e0
-    float x1e4;                      // 0x1e4
-    float x1e8;                      // 0x1e8
-    float x1ec;                      // 0x1ec
-    float x1f0;                      // 0x1f0
-    float x1f4;                      // 0x1f4
-    float x1f8;                      // 0x1f8
-    float x1fc;                      // 0x1fc
-    float x200;                      // 0x200
-    float kb_frameDecay;             // 0x204
-    float x208;                      // 0x208
-    float x20c;                      // 0x20c
-    float x210;                      // 0x210
-    float x214;                      // 0x214
-    float x218;                      // 0x218
-    float x21c;                      // 0x21c
-    float x220;                      // 0x220
-    float x224;                      // 0x224
-    float x228;                      // 0x228
-    float x22c;                      // 0x22c
-    float x230;                      // 0x230
-    float x234;                      // 0x234
-    float x238;                      // 0x238
-    float x23c;                      // 0x23c
-    float x240;                      // 0x240
-    float x244;                      // 0x244
-    float x248;                      // 0x248
-    float x24c;                      // 0x24c
-    float x250;                      // 0x250
-    float x254;                      // 0x254
-    float x258;                      // 0x258
-    float x25c;                      // 0x25c
-    float x260;                      // 0x260
-    float x264;                      // 0x264
-    float x268;                      // 0x268
-    float x26c;                      // 0x26c
-    float x270;                      // 0x270
-    float x274;                      // 0x274
-    float x278;                      // 0x278
-    float x27c;                      // 0x27c
-    float x280;                      // 0x280
-    float x284;                      // 0x284
-    float x288;                      // 0x288
-    float x28c;                      // 0x28c
-    float x290;                      // 0x290
-    float x294;                      // 0x294
-    float x298;                      // 0x298
-    float x29c;                      // 0x29c
-    float x2a0;                      // 0x2a0
-    float x2a4;                      // 0x2a4
-    float x2a8;                      // 0x2a8
-    float x2ac;                      // 0x2ac
-    float x2b0;                      // 0x2b0
-    float x2b4;                      // 0x2b4
-    float x2b8;                      // 0x2b8
-    float x2bc;                      // 0x2bc
-    float x2c0;                      // 0x2c0
-    float x2c4;                      // 0x2c4
-    float x2c8;                      // 0x2c8
-    float x2cc;                      // 0x2cc
-    float x2d0;                      // 0x2d0
-    float x2d4;                      // 0x2d4
-    float x2d8;                      // 0x2d8
-    float x2dc;                      // 0x2dc
-    float x2e0;                      // 0x2e0
-    float x2e4;                      // 0x2e4
-    float x2e8;                      // 0x2e8
-    float x2ec;                      // 0x2ec
-    float x2f0;                      // 0x2f0
-    float x2f4;                      // 0x2f4
-    float x2f8;                      // 0x2f8
-    float x2fc;                      // 0x2fc
-    float x300;                      // 0x300
-    float x304;                      // 0x304
-    float x308;                      // 0x308
-    float x30c;                      // 0x30c
-    float x310;                      // 0x310
-    float x314;                      // 0x314
-    float x318;                      // 0x318
-    float x31c;                      // 0x31c
-    float x320;                      // 0x320
-    float x324;                      // 0x324
-    float x328;                      // 0x328
-    float x32c;                      // 0x32c
-    float x330;                      // 0x330
-    float x334;                      // 0x334
-    float escapeair_vel;             // 0x338
-    float escapeair_veldecaymult;    // 0x33c
-    float x340;                      // 0x340
-    float x344;                      // 0x344
-    float x348;                      // 0x348
-    float x34c;                      // 0x34c
-    float x350;                      // 0x350
-    float grab_mash_min;             // 0x354
-    float grab_mash_per_handicap;    // 0x358
-    float grab_max_handicap;         // 0x35c
-    float grab_placing_mult;         // 0x360
-    float grab_placing_max;          // 0x364
-    float grab_mash_mult;            // 0x368
-    float x36c;                      // 0x36c
-    float x370;                      // 0x370
-    float x374;                      // 0x374
-    float x378;                      // 0x378
-    float x37c;                      // 0x37c
-    float x380;                      // 0x380
-    float x384;                      // 0x384
-    float x388;                      // 0x388
-    float x38c;                      // 0x38c
-    float x390;                      // 0x390
-    float x394;                      // 0x394
-    float x398;                      // 0x398
-    float x39c;                      // 0x39c
-    float x3a0;                      // 0x3a0
-    float grab_mash_per_frame;       // 0x3a4
-    float grab_mash_per_input;       // 0x3a8
-    float x3ac;                      // 0x3ac
-    float grab_wiggle_per_input;     // 0x3b0
-    float grab_wiggle_rate;          // 0x3b4
-    float x3b8;                      // 0x3b8
-    float x3bc;                      // 0x3bc
-    float x3c0;                      // 0x3c0
-    float x3c4;                      // 0x3c4
-    float x3c8;                      // 0x3c8
-    float x3cc;                      // 0x3cc
-    float x3d0;                      // 0x3d0
-    float x3d4;                      // 0x3d4
-    float x3d8;                      // 0x3d8
-    float x3dc;                      // 0x3dc
-    float x3e0;                      // 0x3e0
-    float x3e4;                      // 0x3e4
-    float x3e8;                      // 0x3e8
-    float x3ec;                      // 0x3ec
-    float x3f0;                      // 0x3f0
-    float x3f4;                      // 0x3f4
-    float x3f8;                      // 0x3f8
-    float x3fc;                      // 0x3fc
-    float x400;                      // 0x400
-    float x404;                      // 0x404
-    float x408;                      // 0x408
-    float x40c;                      // 0x40c
-    float x410;                      // 0x410
-    float x414;                      // 0x414
-    float x418;                      // 0x418
-    float x41c;                      // 0x41c
-    float x420;                      // 0x420
-    float x424;                      // 0x424
-    float x428;                      // 0x428
-    float x42c;                      // 0x42c
-    float x430;                      // 0x430
-    float x434;                      // 0x434
-    float x438;                      // 0x438
-    float x43c;                      // 0x43c
-    float x440;                      // 0x440
-    float x444;                      // 0x444
-    float x448;                      // 0x448
-    float x44c;                      // 0x44c
-    float x450;                      // 0x450
-    float zjostle_frame;             // 0x45c
-    float zjostle_max;               // 0x460
-    float ms_zjostle_frame;          // 0x45c
-    float ms_zjostle_max;            // 0x460
-    float x464;                      // 0x464
-    float x468;                      // 0x468
-    float x46c;                      // 0x46c
-    float x470;                      // 0x470
-    float x474;                      // 0x474
-    float x478;                      // 0x478
-    float x47c;                      // 0x47c
-    float x480;                      // 0x480
-    float x484;                      // 0x484
-    float x488;                      // 0x488
-    float x48c;                      // 0x48c
-    float x490;                      // 0x490
-    float x494;                      // 0x494
-    float x498;                      // 0x498
-    int cliff_invuln_time;           // 0x49c
-    float x4a0;                      // 0x4a0
-    float x4a4;                      // 0x4a4
-    float x4a8;                      // 0x4a8
-    float x4ac;                      // 0x4ac
-    float asdi_mag;                  // 0x4b0
-    float x4b4;                      // 0x4b4
-    float x4b8;                      // 0x4b8
-    float asdi_units;                // 0x4bc
-    float x4c0;                      // 0x4c0
-    float x4c4;                      // 0x4c4
-    float x4c8;                      // 0x4c8
-    float x4cc;                      // 0x4cc
-    float x4d0;                      // 0x4d0
-    float x4d4;                      // 0x4d4
-    float x4d8;                      // 0x4d8
-    float x4dc;                      // 0x4dc
-    float x4e0;                      // 0x4e0
-    float x4e4;                      // 0x4e4
-    float x4e8;                      // 0x4e8
-    float x4ec;                      // 0x4ec
-    float x4f0;                      // 0x4f0
-    float x4f4;                      // 0x4f4
-    float x4f8;                      // 0x4f8
-    float x4fc;                      // 0x4fc
-    int dead_timer;                  // 0x500
-    float x504;                      // 0x504
-    float x508;                      // 0x508
-    float x50c;                      // 0x50c
-    float x510;                      // 0x510
-    float x514;                      // 0x514
-    float x518;                      // 0x518
-    float x51c;                      // 0x51c
-    float x520;                      // 0x520
-    float x524;                      // 0x524
-    float x528;                      // 0x528
-    float x52c;                      // 0x52c
-    float x530;                      // 0x530
-    float x534;                      // 0x534
-    float x538;                      // 0x538
-    float x53c;                      // 0x53c
-    float x540;                      // 0x540
-    float x544;                      // 0x544
-    float x548;                      // 0x548
-    float x54c;                      // 0x54c
-    float x550;                      // 0x550
-    float x554;                      // 0x554
-    float x558;                      // 0x558
-    float x55c;                      // 0x55c
-    float x560;                      // 0x560
-    float x564;                      // 0x564
-    float x568;                      // 0x568
-    float x56c;                      // 0x56c
-    float x570;                      // 0x570
-    float x574;                      // 0x574
-    float x578;                      // 0x578
-    float x57c;                      // 0x57c
-    float x580;                      // 0x580
-    float x584;                      // 0x584
-    float x588;                      // 0x588
-    float x58c;                      // 0x58c
-    float x590;                      // 0x590
-    float x594;                      // 0x594
-    float x598;                      // 0x598
-    float x59c;                      // 0x59c
-    float x5a0;                      // 0x5a0
-    float x5a4;                      // 0x5a4
-    float x5a8;                      // 0x5a8
-    float x5ac;                      // 0x5ac
-    float x5b0;                      // 0x5b0
-    float x5b4;                      // 0x5b4
-    float x5b8;                      // 0x5b8
-    float x5bc;                      // 0x5bc
-    float x5c0;                      // 0x5c0
-    float x5c4;                      // 0x5c4
-    float x5c8;                      // 0x5c8
-    float x5cc;                      // 0x5cc
-    float x5d0;                      // 0x5d0
-    float x5d4;                      // 0x5d4
-    float x5d8;                      // 0x5d8
-    float x5dc;                      // 0x5dc
-    float x5e0;                      // 0x5e0
-    float x5e4;                      // 0x5e4
-    float x5e8;                      // 0x5e8
-    float x5ec;                      // 0x5ec
-    float x5f0;                      // 0x5f0
-    float x5f4;                      // 0x5f4
-    float x5f8;                      // 0x5f8
-    float x5fc;                      // 0x5fc
-    float x600;                      // 0x600
-    float x604;                      // 0x604
-    float x608;                      // 0x608
-    float x60c;                      // 0x60c
-    float x610;                      // 0x610
-    float x614;                      // 0x614
-    float x618;                      // 0x618
-    float x61c;                      // 0x61c
-    float x620;                      // 0x620
-    float x624;                      // 0x624
-    float x628;                      // 0x628
-    float x62c;                      // 0x62c
-    float x630;                      // 0x630
-    float x634;                      // 0x634
-    float x638;                      // 0x638
-    float x63c;                      // 0x63c
-    float x640;                      // 0x640
-    float x644;                      // 0x644
-    float x648;                      // 0x648
-    float x64c;                      // 0x64c
-    float x650;                      // 0x650
-    float x654;                      // 0x654
-    float x658;                      // 0x658
-    float x65c;                      // 0x65c
-    float x660;                      // 0x660
-    float x664;                      // 0x664
-    float x668;                      // 0x668
-    float x66c;                      // 0x66c
-    float x670;                      // 0x670
-    float x674;                      // 0x674
-    float x678;                      // 0x678
-    float x67c;                      // 0x67c
-    float x680;                      // 0x680
-    float x684;                      // 0x684
-    float x688;                      // 0x688
-    float x68c;                      // 0x68c
-    float x690;                      // 0x690
-    float x694;                      // 0x694
-    float x698;                      // 0x698
-    float x69c;                      // 0x69c
-    float x6a0;                      // 0x6a0
-    float x6a4;                      // 0x6a4
-    float x6a8;                      // 0x6a8
-    float x6ac;                      // 0x6ac
-    float x6b0;                      // 0x6b0
-    float x6b4;                      // 0x6b4
-    float x6b8;                      // 0x6b8
-    float x6bc;                      // 0x6bc
-    float x6c0;                      // 0x6c0
-    float x6c4;                      // 0x6c4
-    float x6c8;                      // 0x6c8
-    float x6cc;                      // 0x6cc
-    float x6d0;                      // 0x6d0
-    float x6d4;                      // 0x6d4
-    float x6d8;                      // 0x6d8
-    float x6dc;                      // 0x6dc
-    float x6e0;                      // 0x6e0
-    float x6e4;                      // 0x6e4
-    float x6e8;                      // 0x6e8
-    float x6ec;                      // 0x6ec
-    float unk_additional_armor;      // 0x6f0
-    float x6f4;                      // 0x6f4
-    float x6f8;                      // 0x6f8
-    float x6fc;                      // 0x6fc
-    float x700;                      // 0x700
-    float x704;                      // 0x704
-    float x708;                      // 0x708
-    float x70c;                      // 0x70c
-    float x710;                      // 0x710
-    float x714;                      // 0x714
-    float kb_reduction_ice;          // 0x718
-    float x71c;                      // 0x71c
-    float x720;                      // 0x720
-    float x724;                      // 0x724
-    float x728;                      // 0x728
-    float x72c;                      // 0x72c
-    float x730;                      // 0x730
-    float x734;                      // 0x734
-    float x738;                      // 0x738
-    float x73c;                      // 0x73c
-    float x740;                      // 0x740
-    float x744;                      // 0x744
-    float x748;                      // 0x748
-    float x74c;                      // 0x74c
-    float x750;                      // 0x750
-    float x754;                      // 0x754
-    float x758;                      // 0x758
-    float x75c;                      // 0x75c
-    float x760;                      // 0x760
-    float x764;                      // 0x764
-    float x768;                      // 0x768
-    float x76c;                      // 0x76c
-    float x770;                      // 0x770
-    float x774;                      // 0x774
-    float x778;                      // 0x778
-    float x77c;                      // 0x77c
-    float x780;                      // 0x780
-    float x784;                      // 0x784
-    float x788;                      // 0x788
-    float x78c;                      // 0x78c
-    float x790;                      // 0x790
-    float x794;                      // 0x794
-    float x798;                      // 0x798
-    float x79c;                      // 0x79c
-    float x7a0;                      // 0x7a0
-    float x7a4;                      // 0x7a4
-    float tip_overlap_max;           // 0x7a8 (phantom hit threshold)
-    float x7ac;                      // 0x7ac
-    float x7b0;                      // 0x7b0
-    float x7b4;                      // 0x7b4
-    float x7b8;                      // 0x7b8
-    float x7bc;                      // 0x7bc
-    float x7c0;                      // 0x7c0
-    float kb_multiplier_smashcharge; // 0x7c4
-    float x7c8;                      // 0x7c8
-    float x7cc;                      // 0x7cc
-    float x7d0;                      // 0x7d0
-    float x7d4;                      // 0x7d4
-    float x7d8;                      // 0x7d8
-    float x7dc;                      // 0x7dc
-    float x7e0;                      // 0x7e0
-    float x7e4;                      // 0x7e4
-    int meteor_angle_min;            // 0x7e8
-    int meteor_angle_max;            // 0x7ec
-    int meteor_delay;                // 0x7f0, immediate delay before any action can occur
-    float x7f4;                      // 0x7f4
-    float x7f8;                      // 0x7f8
-    float x7fc;                      // 0x7fc
-    float x800;                      // 0x800
-    float x804;                      // 0x804
-    float x808;                      // 0x808
-    float x80c;                      // 0x80c
-    float x810;                      // 0x810
+    float x0;                     // 0x0
+    float x4;                     // 0x4
+    float x8;                     // 0x8
+    float xc;                     // 0xc
+    float x10;                    // 0x10
+    float x14;                    // 0x14
+    float x18;                    // 0x18
+    int meteor_lockout;           // 0x1c
+    float lstick_tilt;            // 0x20
+    float x24;                    // 0x24
+    float x28;                    // 0x28
+    float x2c;                    // 0x2c
+    float x30;                    // 0x30
+    float x34;                    // 0x34
+    float x38;                    // 0x38
+    float x3c;                    // 0x3c
+    float x40;                    // 0x40
+    float x44;                    // 0x44
+    float x48;                    // 0x48
+    float x4c;                    // 0x4c
+    float x50;                    // 0x50
+    float x54;                    // 0x54
+    float x58;                    // 0x58
+    float x5c;                    // 0x5c
+    float x60;                    // 0x60
+    float x64;                    // 0x64
+    float x68;                    // 0x68
+    float friction_mult;          // 0x6c
+    float jumpaerial_lsticky;     // 0x70
+    int jumpaerial_lsticktimer;   // 0x74
+    float x78;                    // 0x78
+    float x7c;                    // 0x7c
+    float x80;                    // 0x80
+    float x84;                    // 0x84
+    float x88;                    // 0x88
+    float x8c;                    // 0x8c
+    float lstick_rebirthfall;     // 0x90
+    float x94;                    // 0x94
+    float x98;                    // 0x98
+    float x9c;                    // 0x9c
+    float xa0;                    // 0xa0
+    float xa4;                    // 0xa4
+    float xa8;                    // 0xa8
+    float xac;                    // 0xac
+    float xb0;                    // 0xb0
+    float xb4;                    // 0xb4
+    float xb8;                    // 0xb8
+    float xbc;                    // 0xbc
+    float xc0;                    // 0xc0
+    float xc4;                    // 0xc4
+    float xc8;                    // 0xc8
+    float xcc;                    // 0xcc
+    float xd0;                    // 0xd0
+    float xd4;                    // 0xd4
+    float xd8;                    // 0xd8
+    float xdc;                    // 0xdc
+    float xe0;                    // 0xe0
+    float xe4;                    // 0xe4
+    float xe8;                    // 0xe8
+    float xec;                    // 0xec
+    float xf0;                    // 0xf0
+    float xf4;                    // 0xf4
+    float xf8;                    // 0xf8
+    float xfc;                    // 0xfc
+    float kb_mult;                // 0x100
+    float x104;                   // 0x104
+    float x108;                   // 0x108
+    float x10c;                   // 0x10c
+    float x110;                   // 0x110
+    float x114;                   // 0x114
+    float x118;                   // 0x118
+    float x11c;                   // 0x11c
+    float x120;                   // 0x120
+    float x124;                   // 0x124
+    float x128;                   // 0x128
+    float x12c;                   // 0x12c
+    float x130;                   // 0x130
+    float x134;                   // 0x134
+    float x138;                   // 0x138
+    float x13c;                   // 0x13c
+    float x140;                   // 0x140
+    float x144;                   // 0x144
+    float x148;                   // 0x148
+    float x14c;                   // 0x14c
+    float x150;                   // 0x150
+    float x154;                   // 0x154
+    float x158;                   // 0x158
+    float x15c;                   // 0x15c
+    float x160;                   // 0x160
+    float x164;                   // 0x164
+    float x168;                   // 0x168
+    float kb_maxVelX;             // 0x16c
+    float x170;                   // 0x170
+    float x174;                   // 0x174
+    float x178;                   // 0x178
+    float x17c;                   // 0x17c
+    float x180;                   // 0x180
+    float x184;                   // 0x184
+    float x188;                   // 0x188
+    float x18c;                   // 0x18c
+    float x190;                   // 0x190
+    float hitlag_max;             // 0x194
+    float x198;                   // 0x198
+    float x19c;                   // 0x19c
+    float x1a0;                   // 0x1a0
+    float hitlag_elec;            // 0x1a4
+    float tdi_maxAngle;           // 0x1a8
+    float x1ac;                   // 0x1ac
+    float x1b0;                   // 0x1b0
+    float x1b4;                   // 0x1b4
+    float x1b8;                   // 0x1b8
+    float kb_bounceDecay;         // 0x1bc
+    float x1c0;                   // 0x1c0
+    float x1c4;                   // 0x1c4
+    float x1c8;                   // 0x1c8
+    float x1cc;                   // 0x1cc
+    float x1d0;                   // 0x1d0
+    float x1d4;                   // 0x1d4
+    float x1d8;                   // 0x1d8
+    float x1dc;                   // 0x1dc
+    float x1e0;                   // 0x1e0
+    float x1e4;                   // 0x1e4
+    float x1e8;                   // 0x1e8
+    float x1ec;                   // 0x1ec
+    float x1f0;                   // 0x1f0
+    float x1f4;                   // 0x1f4
+    float x1f8;                   // 0x1f8
+    float x1fc;                   // 0x1fc
+    float x200;                   // 0x200
+    float kb_frameDecay;          // 0x204
+    float x208;                   // 0x208
+    float x20c;                   // 0x20c
+    float x210;                   // 0x210
+    float x214;                   // 0x214
+    float x218;                   // 0x218
+    float x21c;                   // 0x21c
+    float x220;                   // 0x220
+    float x224;                   // 0x224
+    float x228;                   // 0x228
+    float x22c;                   // 0x22c
+    float x230;                   // 0x230
+    float x234;                   // 0x234
+    float x238;                   // 0x238
+    float x23c;                   // 0x23c
+    float x240;                   // 0x240
+    float x244;                   // 0x244
+    float x248;                   // 0x248
+    float x24c;                   // 0x24c
+    float x250;                   // 0x250
+    float x254;                   // 0x254
+    float x258;                   // 0x258
+    float x25c;                   // 0x25c
+    float x260;                   // 0x260
+    float x264;                   // 0x264
+    float x268;                   // 0x268
+    float x26c;                   // 0x26c
+    float x270;                   // 0x270
+    float x274;                   // 0x274
+    float x278;                   // 0x278
+    float x27c;                   // 0x27c
+    float x280;                   // 0x280
+    float x284;                   // 0x284
+    float x288;                   // 0x288
+    float x28c;                   // 0x28c
+    float x290;                   // 0x290
+    float x294;                   // 0x294
+    float x298;                   // 0x298
+    float x29c;                   // 0x29c
+    float x2a0;                   // 0x2a0
+    float x2a4;                   // 0x2a4
+    float x2a8;                   // 0x2a8
+    float x2ac;                   // 0x2ac
+    float x2b0;                   // 0x2b0
+    float x2b4;                   // 0x2b4
+    float x2b8;                   // 0x2b8
+    float x2bc;                   // 0x2bc
+    float x2c0;                   // 0x2c0
+    float x2c4;                   // 0x2c4
+    float x2c8;                   // 0x2c8
+    float x2cc;                   // 0x2cc
+    float x2d0;                   // 0x2d0
+    float x2d4;                   // 0x2d4
+    float x2d8;                   // 0x2d8
+    float x2dc;                   // 0x2dc
+    float x2e0;                   // 0x2e0
+    float x2e4;                   // 0x2e4
+    float x2e8;                   // 0x2e8
+    float x2ec;                   // 0x2ec
+    float x2f0;                   // 0x2f0
+    float x2f4;                   // 0x2f4
+    float x2f8;                   // 0x2f8
+    float x2fc;                   // 0x2fc
+    float x300;                   // 0x300
+    float x304;                   // 0x304
+    float x308;                   // 0x308
+    float x30c;                   // 0x30c
+    float x310;                   // 0x310
+    float x314;                   // 0x314
+    float x318;                   // 0x318
+    float x31c;                   // 0x31c
+    float x320;                   // 0x320
+    float x324;                   // 0x324
+    float x328;                   // 0x328
+    float x32c;                   // 0x32c
+    float x330;                   // 0x330
+    float x334;                   // 0x334
+    float escapeair_vel;          // 0x338
+    float escapeair_veldecaymult; // 0x33c
+    float x340;                   // 0x340
+    float x344;                   // 0x344
+    float x348;                   // 0x348
+    float x34c;                   // 0x34c
+    float x350;                   // 0x350
+    float grab_mash_min;          // 0x354
+    float grab_mash_per_handicap; // 0x358
+    float grab_max_handicap;      // 0x35c
+    float grab_placing_mult;      // 0x360
+    float grab_placing_max;       // 0x364
+    float grab_mash_mult;         // 0x368
+    float x36c;                   // 0x36c
+    float x370;                   // 0x370
+    float x374;                   // 0x374
+    float x378;                   // 0x378
+    float x37c;                   // 0x37c
+    float x380;                   // 0x380
+    float x384;                   // 0x384
+    float x388;                   // 0x388
+    float x38c;                   // 0x38c
+    float x390;                   // 0x390
+    float x394;                   // 0x394
+    float x398;                   // 0x398
+    float x39c;                   // 0x39c
+    float x3a0;                   // 0x3a0
+    float grab_mash_per_frame;    // 0x3a4
+    float grab_mash_per_input;    // 0x3a8
+    float x3ac;                   // 0x3ac
+    float grab_wiggle_per_input;  // 0x3b0
+    float grab_wiggle_rate;       // 0x3b4
+    float x3b8;                   // 0x3b8
+    float x3bc;                   // 0x3bc
+    float x3c0;                   // 0x3c0
+    float x3c4;                   // 0x3c4
+    float x3c8;                   // 0x3c8
+    float x3cc;                   // 0x3cc
+    float x3d0;                   // 0x3d0
+    float x3d4;                   // 0x3d4
+    float x3d8;                   // 0x3d8
+    float x3dc;                   // 0x3dc
+    float x3e0;                   // 0x3e0
+    float x3e4;                   // 0x3e4
+    float x3e8;                   // 0x3e8
+    float x3ec;                   // 0x3ec
+    float x3f0;                   // 0x3f0
+    float x3f4;                   // 0x3f4
+    float x3f8;                   // 0x3f8
+    float x3fc;                   // 0x3fc
+    float x400;                   // 0x400
+    float x404;                   // 0x404
+    float x408;                   // 0x408
+    float x40c;                   // 0x40c
+    float x410;                   // 0x410
+    float x414;                   // 0x414
+    float x418;                   // 0x418
+    float x41c;                   // 0x41c
+    float x420;                   // 0x420
+    float x424;                   // 0x424
+    float x428;                   // 0x428
+    float x42c;                   // 0x42c
+    float x430;                   // 0x430
+    float x434;                   // 0x434
+    float x438;                   // 0x438
+    float x43c;                   // 0x43c
+    float x440;                   // 0x440
+    float x444;                   // 0x444
+    float x448;                   // 0x448
+    float x44c;                   // 0x44c
+    float x450;                   // 0x450
+    float zjostle_frame;          // 0x45c
+    float zjostle_max;            // 0x460
+    float ms_zjostle_frame;       // 0x45c
+    float ms_zjostle_max;         // 0x460
+    float x464;                   // 0x464
+    float x468;                   // 0x468
+    float x46c;                   // 0x46c
+    float x470;                   // 0x470
+    float x474;                   // 0x474
+    float x478;                   // 0x478
+    float x47c;                   // 0x47c
+    float x480;                   // 0x480
+    float x484;                   // 0x484
+    float x488;                   // 0x488
+    float x48c;                   // 0x48c
+    float x490;                   // 0x490
+    float x494;                   // 0x494
+    float x498;                   // 0x498
+    int cliff_invuln_time;        // 0x49c
+    float x4a0;                   // 0x4a0
+    float x4a4;                   // 0x4a4
+    float x4a8;                   // 0x4a8
+    float x4ac;                   // 0x4ac
+    float asdi_mag;               // 0x4b0
+    float x4b4;                   // 0x4b4
+    float x4b8;                   // 0x4b8
+    float asdi_units;             // 0x4bc
+    float x4c0;                   // 0x4c0
+    float x4c4;                   // 0x4c4
+    float x4c8;                   // 0x4c8
+    float x4cc;                   // 0x4cc
+    float x4d0;                   // 0x4d0
+    float x4d4;                   // 0x4d4
+    float x4d8;                   // 0x4d8
+    float x4dc;                   // 0x4dc
+    float x4e0;                   // 0x4e0
+    float x4e4;                   // 0x4e4
+    float x4e8;                   // 0x4e8
+    float x4ec;                   // 0x4ec
+    float x4f0;                   // 0x4f0
+    float x4f4;                   // 0x4f4
+    float x4f8;                   // 0x4f8
+    float x4fc;                   // 0x4fc
+    float x500;                   // 0x500
+    float x504;                   // 0x504
+    float x508;                   // 0x508
+    float x50c;                   // 0x50c
+    float x510;                   // 0x510
+    float x514;                   // 0x514
+    float x518;                   // 0x518
+    float x51c;                   // 0x51c
+    float x520;                   // 0x520
+    float x524;                   // 0x524
+    float x528;                   // 0x528
+    float x52c;                   // 0x52c
+    float x530;                   // 0x530
+    float x534;                   // 0x534
+    float x538;                   // 0x538
+    float x53c;                   // 0x53c
+    float x540;                   // 0x540
+    float x544;                   // 0x544
+    float x548;                   // 0x548
+    float x54c;                   // 0x54c
+    float x550;                   // 0x550
+    float x554;                   // 0x554
+    float x558;                   // 0x558
+    float x55c;                   // 0x55c
+    float x560;                   // 0x560
+    float x564;                   // 0x564
+    float x568;                   // 0x568
+    float x56c;                   // 0x56c
+    float x570;                   // 0x570
+    float x574;                   // 0x574
+    float x578;                   // 0x578
+    float x57c;                   // 0x57c
+    float x580;                   // 0x580
+    float x584;                   // 0x584
+    float x588;                   // 0x588
+    float x58c;                   // 0x58c
+    float x590;                   // 0x590
+    float x594;                   // 0x594
+    float x598;                   // 0x598
+    float x59c;                   // 0x59c
+    float x5a0;                   // 0x5a0
+    float x5a4;                   // 0x5a4
+    float x5a8;                   // 0x5a8
+    float x5ac;                   // 0x5ac
+    float x5b0;                   // 0x5b0
+    float x5b4;                   // 0x5b4
+    float x5b8;                   // 0x5b8
+    float x5bc;                   // 0x5bc
+    float x5c0;                   // 0x5c0
+    float x5c4;                   // 0x5c4
+    float x5c8;                   // 0x5c8
+    float x5cc;                   // 0x5cc
+    float x5d0;                   // 0x5d0
+    float x5d4;                   // 0x5d4
+    float x5d8;                   // 0x5d8
+    float x5dc;                   // 0x5dc
+    float x5e0;                   // 0x5e0
+    float x5e4;                   // 0x5e4
+    float x5e8;                   // 0x5e8
+    float x5ec;                   // 0x5ec
+    float x5f0;                   // 0x5f0
+    float x5f4;                   // 0x5f4
+    float x5f8;                   // 0x5f8
+    float x5fc;                   // 0x5fc
+    float x600;                   // 0x600
+    float x604;                   // 0x604
+    float x608;                   // 0x608
+    float x60c;                   // 0x60c
+    float x610;                   // 0x610
+    float x614;                   // 0x614
+    float x618;                   // 0x618
+    float x61c;                   // 0x61c
+    float x620;                   // 0x620
+    float x624;                   // 0x624
+    float x628;                   // 0x628
+    float x62c;                   // 0x62c
+    float x630;                   // 0x630
+    float x634;                   // 0x634
+    float x638;                   // 0x638
+    float x63c;                   // 0x63c
+    float x640;                   // 0x640
+    float x644;                   // 0x644
+    float x648;                   // 0x648
+    float x64c;                   // 0x64c
+    float x650;                   // 0x650
+    float x654;                   // 0x654
+    float x658;                   // 0x658
+    float x65c;                   // 0x65c
+    float x660;                   // 0x660
+    float x664;                   // 0x664
+    float x668;                   // 0x668
+    float x66c;                   // 0x66c
+    float x670;                   // 0x670
+    float x674;                   // 0x674
+    float x678;                   // 0x678
+    float x67c;                   // 0x67c
+    float x680;                   // 0x680
+    float x684;                   // 0x684
+    float x688;                   // 0x688
+    float x68c;                   // 0x68c
+    float x690;                   // 0x690
+    float x694;                   // 0x694
+    float x698;                   // 0x698
+    float x69c;                   // 0x69c
+    float x6a0;                   // 0x6a0
+    float x6a4;                   // 0x6a4
+    float x6a8;                   // 0x6a8
+    float x6ac;                   // 0x6ac
+    float x6b0;                   // 0x6b0
+    float x6b4;                   // 0x6b4
+    float x6b8;                   // 0x6b8
+    float x6bc;                   // 0x6bc
+    float x6c0;                   // 0x6c0
+    float x6c4;                   // 0x6c4
+    float x6c8;                   // 0x6c8
+    float x6cc;                   // 0x6cc
+    float x6d0;                   // 0x6d0
+    float x6d4;                   // 0x6d4
+    float x6d8;                   // 0x6d8
+    float x6dc;                   // 0x6dc
+    float x6e0;                   // 0x6e0
+    float x6e4;                   // 0x6e4
+    float x6e8;                   // 0x6e8
+    float x6ec;                   // 0x6ec
+    float x6f0;                   // 0x6f0
+    float x6f4;                   // 0x6f4
+    float x6f8;                   // 0x6f8
+    float x6fc;                   // 0x6fc
+    float x700;                   // 0x700
+    float x704;                   // 0x704
+    float x708;                   // 0x708
+    float x70c;                   // 0x70c
+    float x710;                   // 0x710
+    float x714;                   // 0x714
+    float x718;                   // 0x718
+    float x71c;                   // 0x71c
+    float x720;                   // 0x720
+    float x724;                   // 0x724
+    float x728;                   // 0x728
+    float x72c;                   // 0x72c
+    float x730;                   // 0x730
+    float x734;                   // 0x734
+    float x738;                   // 0x738
+    float x73c;                   // 0x73c
+    float x740;                   // 0x740
+    float x744;                   // 0x744
+    float x748;                   // 0x748
+    float x74c;                   // 0x74c
+    float x750;                   // 0x750
+    float x754;                   // 0x754
+    float x758;                   // 0x758
+    float x75c;                   // 0x75c
+    float x760;                   // 0x760
+    float x764;                   // 0x764
+    float x768;                   // 0x768
+    float x76c;                   // 0x76c
+    float x770;                   // 0x770
+    float x774;                   // 0x774
+    float x778;                   // 0x778
+    float x77c;                   // 0x77c
+    float x780;                   // 0x780
+    float x784;                   // 0x784
+    float x788;                   // 0x788
+    float x78c;                   // 0x78c
+    float x790;                   // 0x790
+    float x794;                   // 0x794
+    float x798;                   // 0x798
+    float x79c;                   // 0x79c
+    float x7a0;                   // 0x7a0
+    float x7a4;                   // 0x7a4
+    float tip_overlap_max;        // 0x7a8 (phantom hit threshold)
+    float x7ac;                   // 0x7ac
+    float x7b0;                   // 0x7b0
+    float x7b4;                   // 0x7b4
+    float x7b8;                   // 0x7b8
+    float x7bc;                   // 0x7bc
+    float x7c0;                   // 0x7c0
+    float x7c4;                   // 0x7c4
+    float x7c8;                   // 0x7c8
+    float x7cc;                   // 0x7cc
+    float x7d0;                   // 0x7d0
+    float x7d4;                   // 0x7d4
+    float x7d8;                   // 0x7d8
+    float x7dc;                   // 0x7dc
+    float x7e0;                   // 0x7e0
+    float x7e4;                   // 0x7e4
+    int meteor_angle_min;         // 0x7e8
+    int meteor_angle_max;         // 0x7ec
+    int meteor_delay;             // 0x7f0, immediate delay before any action can occur
+    float x7f4;                   // 0x7f4
+    float x7f8;                   // 0x7f8
+    float x7fc;                   // 0x7fc
+    float x800;                   // 0x800
+    float x804;                   // 0x804
+    float x808;                   // 0x808
+    float x80c;                   // 0x80c
+    float x810;                   // 0x810
 };
 
 struct FighterData
@@ -2136,7 +2141,7 @@ struct FighterData
         float rate;  // 0x89C, current speed rate of the animation
         int x8a0;    // 0x8a0
         float blend; // 0x8a4, current interpolation value of the animation
-        int x8a8;    // 0x8a8
+        float current_blend;    // 0x8a8
     } state;
     JOBJ *anim_skeleton;           // 0x8ac
     int x8b0;                      // 0x8b0
@@ -2190,8 +2195,8 @@ struct FighterData
         float kb_mag;              // 0x18a4  kb magnitude
         int x18a8;                 // 0x18a8
         int time_since_hit;        // 0x18ac   in frames
-        float armor_unk;           // 0x18b0, is prioritized over the armor below
-        float armor;               // 0x18b4, used by yoshi double jump
+        int x18b0;                 // 0x18b0
+        float armor;               // 0x18b4
         Vec2 vibrate_offset;       // 0x18b8
         int x18c0;                 // 0x18c0
         int source_ply;            // 0x18c4   damage source ply number
@@ -2256,7 +2261,7 @@ struct FighterData
         int ledge_intang_left;     // 0x1990
         int respawn_intang_left;   // 0x1994
     } hurtstatus;                  //
-    struct shield                  // melee only logs the highest damage dealing shield attack for that frame
+    struct shield
     {
         float health;          // 0x1998
         float lightshield_amt; // 0x199c
@@ -2307,7 +2312,7 @@ struct FighterData
         int dmg_taken;                    // 0x1a44
         int hits_taken;                   // 0x1a48
     } absorb_hit;                         //
-    struct                                // 0x1a4c
+    struct grab                           // 0x1a4c
     {                                     //
         float grab_timer;                 // 0x1a4c
         int x1a50;                        // 0x1a50
@@ -2363,7 +2368,7 @@ struct FighterData
     int atk_kind;                         // 0x2068, non attacks have id 1
     int x206c;                            // 0x206c
     u8 x2070;                             // 0x2070
-    u8 state_kind : 4;                    // 0x2071, 0xf0
+    u8 x2071_xf0 : 4;                     // 0x2071, 0xf0
     u8 x2071_x0f : 4;                     // 0x2071, 0x0f
     u8 x2072;                             // 0x2072
     u8 x2073;                             // 0x2073
@@ -2471,10 +2476,10 @@ struct FighterData
     unsigned char show_model : 1;         // 0x1 - x21fc_
     struct ftcmd_var                      // 0x2200
     {                                     //
-        int flag0;                        // 0x2200
-        int flag1;                        // 0x2204
-        int flag2;                        // 0x2208
-        int flag3;                        // 0x220C
+        unsigned int flag0;                        // 0x2200
+        unsigned int flag1;                        // 0x2204
+        unsigned int flag2;                        // 0x2208
+        unsigned int flag3;                        // 0x220C
     } ftcmd_var;                          //
     struct flags                          // 0x2210
     {                                     //
@@ -2535,7 +2540,7 @@ struct FighterData
         unsigned char attacker_attached_to_victim : 1; // 0x1 - 0x221b, used for determining which player the anchor is during throw release
         unsigned char hit_by_grabber : 1;              // 0x80 - 0x221c, is enabled when grab victim is being hit by its grabbers hitbox, signals no damage state for this frame (still grabbed) (set @ 8007a6ec, checked @ 8008edfc)
         unsigned char x221c_2 : 1;                     // 0x40 - 0x221c
-        unsigned char x221c_3 : 1;                     // 0x20 - 0x221c
+        unsigned char is_powershield : 1;              // 0x20 - 0x221c, responsible for allowing powershield on melee attacks
         unsigned char x221c_4 : 1;                     // 0x10 - 0x221c
         unsigned char x221c_5 : 1;                     // 0x8 - 0x221c
         unsigned char x221c_6 : 1;                     // 0x4 - 0x221c
@@ -2566,7 +2571,14 @@ struct FighterData
         unsigned char x221f_7 : 1;
         unsigned char x221f_8 : 1;
         char can_input_multijump;                 // 0x2220
-        char flags_2221;                          // 0x2221
+        unsigned char x2221_0 : 1;                    // 0x80 - 0x2221
+        unsigned char x2221_1 : 1;                    // 0x40 - 0x2221
+        unsigned char x2221_2 : 1;                    // 0x20 - 0x2221
+        unsigned char x2221_3 : 1;                    // 0x10 - 0x2221
+        unsigned char x2221_4 : 1;                    // 0x8 - 0x2221
+        unsigned char x2221_5 : 1;                    // 0x4 - 0x2221
+        unsigned char x2221_6 : 1;                    // 0x2 - 0x2221
+        unsigned char x2221_7 : 1;                    // 0x1 - 0x2221
         unsigned char x2222_1 : 1;                // 0x80 - 0x2222
         unsigned char is_multijump : 1;           // 0x40 - 0x2222
         unsigned char x2222_grab : 1;             // 0x20 - 0x2222
@@ -2582,7 +2594,7 @@ struct FighterData
         unsigned char x2223_5 : 1;                // 0x8 - 0x2223
         unsigned char x2223_6 : 1;                // 0x4 - 0x2223, footstool related? checked @ 800808dc
         unsigned char x2223_7 : 1;                // 0x2 - 0x2223
-        unsigned char x2223_8 : 1;                // 0x1 - 0x2223, related to armor @ 8008d9f8
+        unsigned char x2223_8 : 1;                // 0x1 - 0x2223
         unsigned char x2224_1 : 1;                // 0x80 - 0x2224
         unsigned char x2224_2 : 1;                // 0x40 - 0x2224
         unsigned char stamina_dead : 1;           // 0x20 - 0x2224
@@ -2597,7 +2609,7 @@ struct FighterData
         unsigned char x2225_4 : 1;                // 0x10 - 0x2225
         unsigned char x2225_5 : 1;                // 0x8 - 0x2225
         unsigned char x2225_6 : 1;                // 0x4 - 0x2225
-        unsigned char is_mute_voice : 1;          // 0x2 - 0x2225
+        unsigned char x2225_7 : 1;                // 0x2 - 0x2225
         unsigned char is_stamina : 1;             // 0x1 - 0x2225
         unsigned char x2226_1 : 1;                // 0x80 - 0x2226
         unsigned char x2226_2 : 1;                // 0x40 - 0x2226
@@ -2610,28 +2622,21 @@ struct FighterData
         char flags_2227;                          // 0x2227
         char x2228_1 : 1;                         // 0x80 - 0x2228
         char x2228_2 : 1;                         // 0x40 - 0x2228
-        char use_sandbag_logic : 1;               // 0x20 - 0x2228, only sandbag uses this! ignores death and forces missed tech @ 80097d58
+        char x2228_3 : 1;                         // 0x20 - 0x2228, checked on missing tech @ 80097d58
         char x2228_4 : 1;                         // 0x10 - 0x2228
         char x2228_5 : 1;                         // 0x08 - 0x2228
-        char is_ignore_death3 : 1;                // 0x04 - 0x2228
+        char x2228_6 : 1;                         // 0x04 - 0x2228
         char used_tether : 1;                     // 0x02 - 0x2228
         char x2228_8 : 1;                         // 0x01 - 0x2228
         unsigned char x2229_1 : 1;                // 0x80 - 0x2229
         unsigned char x2229_2 : 1;                // 0x40 - 0x2229
         unsigned char x2229_3 : 1;                // 0x20 - 0x2229
-        unsigned char is_ignore_offscreen : 1;    // 0x10 - 0x2229
+        unsigned char x2229_4 : 1;                // 0x10 - 0x2229
         unsigned char skip_coin_collcheck : 1;    // 0x8 - 0x2229, this is toggled every frame, checks half of the players every frame to save on cpu
         unsigned char x2229_6 : 1;                // 0x4 - 0x2229
         unsigned char x2229_7 : 1;                // 0x2 - 0x2229
         unsigned char no_reaction_always : 1;     // 0x1 - 0x2229
-        unsigned char x222a_x80 : 1;              // 0x80 - 0x222a
-        unsigned char is_ignore_death2 : 1;       // 0x40 - 0x222a
-        unsigned char x222a_x20 : 1;              // 0x20 - 0x222a
-        unsigned char x222a_x10 : 1;              // 0x10 - 0x222a
-        unsigned char x222a_x08 : 1;              // 0x08 - 0x222a
-        unsigned char x222a_x04 : 1;              // 0x04 - 0x222a
-        unsigned char x222a_x02 : 1;              // 0x02 - 0x222a
-        unsigned char x222a_x01 : 1;              // 0x01 - 0x222a
+        char flags_222A;                          // 0x222A
         char flags_222B;                          // 0x222B
     } flags;                                      //
     struct fighter_var                            // 0x222c
@@ -2871,15 +2876,11 @@ struct FtDamage
     u8 is_meteor;      // 0x235a
     u8 meteor_lockout; // 0x235b
 };
-struct FtLanding
-{
-    int is_actionable; // 0x2340
-};
+
 struct FtDead
 {
     int timer;
 };
-
 /** Script Structs **/
 struct FtScript
 {
@@ -3082,12 +3083,12 @@ struct FtScriptIK
 
 /** Static Variables **/
 
-ftCommonData **stc_ftcommon = (R13 + -0x514C);
-ColAnimDesc **stc_plco_colanimdesc = 0x804D653C;
-GXColor **stc_shieldcolors = (R13 + -0x5194);
-FtDmgVibrateDesc **stc_dmg_vibrate_desc = (R13 + -0x5170);
-int *stc_ft_hitlog = (R13 + -0x5148); // used as semi-local variables remembering if a solid hit occured @ 8006cbc4
-int *stc_ft_tiplog = (R13 + -0x5144); // used as semi-local variables remembering if a tip hit occured @ 8006cbc4
+static ftCommonData **stc_ftcommon = (R13 + -0x514C);
+static ColAnimDesc **stc_plco_colanimdesc = 0x804D653C;
+static GXColor **stc_shieldcolors = (R13 + -0x5194);
+static FtDmgVibrateDesc **stc_dmg_vibrate_desc = (R13 + -0x5170);
+static int *stc_ft_hitlog = (R13 + -0x5148); // used as semi-local variables remembering if a solid hit occured @ 8006cbc4
+static int *stc_ft_tiplog = (R13 + -0x5144); // used as semi-local variables remembering if a tip hit occured @ 8006cbc4
 
 /*** Functions ***/
 void ActionStateChange(float startFrame, float animSpeed, float animBlend, GOBJ *fighter, int stateID, int flags1, GOBJ *alt_state_source);
@@ -3102,6 +3103,7 @@ void Fighter_EnterAirCatch(GOBJ *fighter);
 void Fighter_EnterFall(GOBJ *fighter);
 void Fighter_EnterFallAerial(GOBJ *fighter);
 void Fighter_EnterSpecialFall(GOBJ *fighter, int can_fastfall, int no_soft_landing, int can_interrupt_landing, float air_drift_multiplier, float landing_frames);
+void Fighter_EnterSpecialFallBlend(GOBJ *fighter, int can_fastfall, int no_soft_landing, int can_interrupt_landing, float air_drift_multiplier, float landing_frames, float anim_blend);
 void Fighter_EnterLanding(GOBJ *fighter);
 void Fighter_EnterSpecialLanding(GOBJ *fighter, int unk, float state_length);
 void Fighter_EnterSleep(GOBJ *fighter, int ms);
@@ -3144,7 +3146,6 @@ void Fighter_SetStaminaHP(int ply, int hp);
 int Fighter_CheckStaminaMode(int ply);
 void Fighter_SetStaminaMode(int ply, int is_stamina);
 void Fighter_SetFallNum(int index, int ms, int falls);
-int Fighter_GetFallNum(int index, int ms);
 void Fighter_EnableCollUpdate(FighterData *fighter);
 void Fighter_EnterDamageState(GOBJ *fighter, int stateID, float frame);
 s8 Fighter_BoneLookup(FighterData *fighter, int boneID);
@@ -3229,6 +3230,7 @@ float Fighter_GetKnockbackAngle(FighterData *fighter_data);
 void Fighter_UpdateCameraBox(GOBJ *fighter);
 void Fighter_SetAllHurtboxesNotUpdated(GOBJ *fighter);
 void Fighter_UpdateHurtboxes(FighterData *fighter_data);
+void Fighter_UpdateHandAnim(GOBJ* fighter, int unk);
 void Fighter_UpdateIK(GOBJ *fighter);
 void Fighter_ColorRemove(FighterData *fighter_data, int color_kind);
 void Fighter_CPUInitialize(FighterData *fighter_data, int cpu_kind, int cpu_level, int unk);
@@ -3312,7 +3314,7 @@ void Fighter_SetAnimRate(GOBJ *f, float rate);
 int Fighter_CheckJumpInput(GOBJ *f);
 void Fighter_SetEyeTexture(GOBJ *f, int material_index, float frame);
 void Fighter_GetECBCenter(GOBJ *f, Vec3 *center_pos);
-void Fighter_ApplyPartAnim(GOBJ *f, int part_id, int anim_id);
+void Fighter_ApplyPartAnim(GOBJ *f, int part_id, int anim_id, float blend);
 void Fighter_SetHoldKind(GOBJ *f, int r4, int r5);
 void Fighter_ApplyHandAnim(GOBJ *f, int r4);
 void Fighter_CheckToRespawn(int ply, int ms);
@@ -3337,5 +3339,4 @@ void Fighter_SetSelfDamageSource(GOBJ *f);                  // 800788d4
 float Fighter_CalcForceApplied(FighterData *fp, void *unk); // 80079ea8
 void Fighter_UpdateModelShift(GOBJ *f);                     // updates the offsets of the model during hitlag and smash charge
 void Fighter_GivePersistentIntangibility(GOBJ *f, int frames);
-GXColor Fighter_GetPlyHUDColor(int ply); // used for lupe, pokemon stadium text color, results viewport broder
 #endif
