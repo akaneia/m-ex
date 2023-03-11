@@ -25,7 +25,7 @@ addi	REG_SFXID, r4, 0
   cmpwi REG_SFXID,5000
   blt Original
 #Check if item has an owner
-  lwz REG_FighterData,0x518(REG_ItemData)
+  lwz REG_FighterData,0xfcc(REG_ItemData)
   cmpwi REG_FighterData, 0
   beq Original
   lwz REG_FighterData,0x2C(REG_FighterData)
