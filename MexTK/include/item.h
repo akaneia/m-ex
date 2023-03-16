@@ -769,7 +769,7 @@ struct ItemData
         int flag3;                                      // 0xdb4
         int flag4;                                      // 0xdb8
         int flag5;                                      // 0xdbc
-    } ftcmd_var;                                        //
+    } itcmd_var;                                        //
     int xdc0;                                           // 0xdc0
     int xdc4;                                           // 0xdc4
     u8 xdc8 : 8;                                        // 0xdc8
@@ -1031,4 +1031,5 @@ void Item_UpdateECBTopN(GOBJ *item);
 int Item_GetWallCollFlags(GOBJ *item);
 void Item_UpdateHitboxDamage(itHit *hit, int dmg, GOBJ *item);
 GOBJ *Item_GiveOwnershipToAttacker(GOBJ *item);
+char Item_GetHoldKind(GOBJ *item);
 #endif

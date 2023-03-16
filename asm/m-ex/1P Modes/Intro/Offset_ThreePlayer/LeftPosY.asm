@@ -1,10 +1,10 @@
-#To be inserted @ 80183d2c
+#To be inserted @ 80183a00
 .include "../../../../Globals.s"
 .include "../../../Header.s"
 .include "../GetGmIntroTable.s"
 
 # check if custom ftDemoIntro file is loaded for this fighter
-  lbz	r12, 0 (r25)
+  lbz	r12, 0 (r26)
   branchl r11, GetGMIntroTable
   cmpwi r11,0
   beq NoCustom
@@ -15,7 +15,7 @@
 
 NoCustom:
 # original
-  lfs	f1, 0x0070 (r4)
+  lfs	f1, 0x06ac (r4)
 
 Exit:
   li r11,1

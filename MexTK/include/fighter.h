@@ -150,20 +150,38 @@ enum FtPri
 };
 
 // action state flags
-#define ASC_PRESERVE_FASTFALL 0x1
-#define ASC_PRESERVE_GFX 0x2
-#define ASC_PRESERVE_HITBOX 0x8
-#define ASC_PRESERVE_VELOCITY 0x20
-#define ASC_PRESERVE_EYE 0x80
-#define ASC_PRESERVE_SFX 0x200
-#define ASC_PRESERVE_COLANIM 0x1000
-#define ASC_SKIP_SCRIPT 0x4000
-#define ASC_PRESERVE_VISIBILITY 0x40000
-#define ASC_80000 0x80000
-#define ASC_400000 0x400000
-#define ASC_4000000 0x4000000
-#define ASC_8000000 0x8000000
-#define ASC_NOANIM 0x20000000
+#define FIGHTER_FASTFALL_PRESERVE 0x1
+#define FIGHTER_GFX_PRESERVE 0x2
+#define FIGHTER_HITSTATUS_COLANIM_PRESERVE 0x4 // Preserve full body collision state //
+#define FIGHTER_HIT_NOUPDATE 0x8 // Keep hitboxes
+#define FIGHTER_MODEL_NOUPDATE 0x10 // Ignore model state change (?) 
+#define FIGHTER_ANIMVEL_NOUPDATE 0x20
+#define FIGHTER_UNK_0x40 0x40
+#define FIGHTER_MATANIM_NOUPDATE 0x80 // Ignore switching to character's "hurt" textures (?) //
+#define FIGHTER_THROW_EXCEPTION_NOUPDATE 0x100 // Resets thrower GObj pointer to NULL if false? //
+#define FIGHTER_SFX_PRESERVE 0x200
+#define FIGHTER_PARASOL_NOUPDATE 0x400 // Ignore Parasol state change //
+#define FIGHTER_RUMBLE_NOUPDATE 0x800 // Ignore rumble update? //
+#define FIGHTER_COLANIM_NOUPDATE 0x1000
+#define FIGHTER_ACCESSORY_PRESERVE 0x2000 // Keep respawn platform? //
+#define FIGHTER_CMD_UPDATE 0x4000 // Run all Subaction Events up to the current animation frame //
+#define FIGHTER_NAMETAGVIS_NOUPDATE 0x8000
+#define FIGHTER_PART_HITSTATUS_COLANIM_PRESERVE 0x10000 // Assume this is for individual bones? //
+#define FIGHTER_SWORDTRAIL_PRESERVE 0x20000
+#define FIGHTER_ITEMVIS_NOUPDATE 0x40000 // Used by Ness during Up/Down Smash, I suppose this is what the flag does //
+#define FIGHTER_SKIP_UNK_0x2222 0x80000 // Skips updating bit 0x20 of 0x2222? //
+#define FIGHTER_PHYS_UNKUPDATE 0x100000
+#define FIGHTER_FREEZESTATE 0x200000 // Sets anim rate to 0x and some other stuff
+#define FIGHTER_MODELPART_VIS_NOUPDATE 0x400000
+#define FIGHTER_METALB_NOUPDATE 0x800000
+#define FIGHTER_UNK_0x1000000 0x1000000
+#define FIGHTER_ATTACKCOUNT_NOUPDATE 0x2000000
+#define FIGHTER_MODEL_FLAG_NOUPDATE 0x4000000
+#define FIGHTER_UNK_0x2227 0x8000000
+#define FIGHTER_HITSTUN_FLAG_NOUPDATE 0x10000000
+#define FIGHTER_ANIM_NOUPDATE 0x20000000 // Keeps current fp animation?
+#define FIGHTER_UNK_0x40000000 0x40000000 // Unused?
+#define FIGHTER_UNK_0x80000000 0x80000000 // Unused?
 
 enum FtCommonBone
 {
@@ -1085,9 +1103,6 @@ struct AbsorbDesc
     int bone;     // x00
     Vec3 pos;     // x04
     float radius; // x10
-    float x14;    // x14
-    float x18;    // x18
-    float x1C;    // x1C
 };
 
 struct AfterImageDesc
@@ -2136,7 +2151,7 @@ struct FighterData
         float rate;  // 0x89C, current speed rate of the animation
         int x8a0;    // 0x8a0
         float blend; // 0x8a4, current interpolation value of the animation
-        int x8a8;    // 0x8a8
+        float current_blend;    // 0x8a8
     } state;
     JOBJ *anim_skeleton;           // 0x8ac
     int x8b0;                      // 0x8b0
@@ -3208,6 +3223,7 @@ void Fighter_SetBoneRotZ(FighterData *fighter, int bone, float angle);
 void Fighter_PlayPositionalSFX(FighterData *fp, int sfxID, int volume, int balance);
 void Fighter_PlayVoiceSFX(FighterData *fighter, int sfxID, int volume, int balance);
 void Fighter_PlayVoiceSFX2(FighterData *fighter, int sfxID, int volume, int balance);
+void Fighter_DestroyVoiceSFX(FighterData *fighter);
 void Fighter_ApplyColAnim(FighterData *fighter_data, int overlay, int unk);
 void Fighter_UpdateOverlay(GOBJ *fighter);
 void Fighter_DisableBlend(GOBJ *fighter, int animd_id);
@@ -3322,7 +3338,7 @@ void Fighter_EnableAbsorbUpdate(GOBJ *fighter_gobj);
 void Fighter_PlaySFX(FighterData *fp, int sfxid, int volume, int pitch);
 void Fighter_EnterFallOrWait(GOBJ *fighter_gobj);
 void Fighter_EnterTech(GOBJ *gobj);
-void Fighter_EnterSpecialFallLoseJumps(GOBJ *fighter_gobj, int can_fastfall, int can_not_noimpactland, int can_not_interrupt, float aerial_drift_mult, float landing_lag);
+void Fighter_EnterSpecialFallLoseJumps(GOBJ *fighter_gobj, int can_fastfall, int can_not_noimpactland, int can_not_interrupt, float aerial_drift_mult, float landing_lag, float blend);
 void Fighter_RumbleController(GOBJ *f, int unk1, int unk2);
 void Fighter_GetLeftStick(GOBJ *fighter_gobj, float *stick_x, float *stick_y);
 void Fighter_ClampMaxAirDrift(FighterData *fighter_gobj);

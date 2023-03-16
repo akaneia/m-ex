@@ -245,7 +245,7 @@ struct TOBJ
     AOBJ *aobj;                       // 0x64
     struct _HSD_ImageDesc **imagetbl;
     struct _HSD_Tlut **tluttbl;
-    u8 tlut_no;
+    int tlut_no;
     Mtx mtx;
     u32 coord; // GXTexCoordID
     struct _HSD_TObjTev *tev;
@@ -452,6 +452,15 @@ struct _HSD_ImageDesc
     u32 mipmap;
     f32 minLOD;
     f32 maxLOD;
+};
+
+struct _HSD_Tlut
+{
+    void *tlut_ptr;
+    u32 format;
+    u32 gxtlut;
+    u16 colorcount;
+    u16 x0E;
 };
 
 struct _HSD_LightPoint

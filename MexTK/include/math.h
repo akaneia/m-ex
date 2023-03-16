@@ -44,5 +44,6 @@ float sqrtf(float num);
 void MTXRotRad(Mtx m, char axis, f32 rad);
 float Vec2_CalculateAngle(Vec2 *a, Vec2 *b);
 float Vec3_CalculateAngle(Vec3 *a, Vec3 *b);
+void Vec3_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle);
 
 #endif

@@ -77,6 +77,14 @@ typedef struct MexMetaData
     int trophy_sd_offset;
 } MexMetaData;
 
+typedef struct MexMenuData
+{
+    int *params;
+    MnSlChrIcon *css_icons;
+    void *sss_icons;
+    void *sss_bitfields;
+} MexMenuData;
+
 typedef struct MexMusicTable
 {
     char ** filenames;
@@ -86,21 +94,47 @@ typedef struct MexMusicTable
 
 } MexMusicTable;
 
+typedef struct MexStageSound
+{
+    char ssmid;
+    char reverb;
+    char x03;
+} MexStageSound;
+
+typedef struct MexStageTable
+{
+    void *id_table;
+    MexStageSound *sound_table;
+    void *collision_table;
+    void *item_table;
+    void *name_table;
+    void *playlist_table;
+} MexStageTable;
+
 typedef struct MexData
 {
     MexMetaData *metadata;
-    int *menu;
-    int *fighter;
-    int *fighter_function;
-    int *ssm;
+    MexMenuData *menu;
+    void *fighter;
+    void *fighter_function;
+    void *ssm;
     MexMusicTable *music;
+    void *effect;
+    void *item;
+    void *kirby;
+    void *kirby_function;
+    MexStageTable *stage;
+    void *stage_function;
+    void *scene;
+    void *misc;
 } MexData;
 
 
 /*** Functions ***/
 HSD_Archive *MEX_LoadRelArchive(char *file, void *functions, char *symbol);
 void MEX_IndexFighterItem(int fighter_kind, ItemDesc *itemdesc, int item_id);
-void SpawnMEXEffect(int effectID, int fighter, int arg1, int arg2, int arg3, int arg4, int arg5);
+// void SpawnMEXEffect(int effectID, int fighter, int arg1, int arg2, int arg3, int arg4, int arg5);
+float Mex_GetStockIconFrame(int internal_id, int costume_id);
 int MEX_GetFtItemID(GOBJ *f, int item_id);
 int MEX_GetGrItemID(int item_id);
 int MEX_GetSSMID(SSMKind ssm_kind, int kind); // ssm_kind, 0 = fighter, 1 = stage | kind is the c_kind / gr_kind

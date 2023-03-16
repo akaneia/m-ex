@@ -286,6 +286,7 @@
 80088148:Fighter_PlayPositionalSFX
 800881D8:Fighter_PlayVoiceSFX
 80088328:Fighter_PlayVoiceSFX2
+80088770:Fighter_DestroyVoiceSFX
 8009E0A8:Fighter_ProcDynamics
 8009e7b4:Fighter_CheckToEnableDynamics
 8009e0d4:Fighter_FreeAllDynamics
@@ -539,6 +540,7 @@
 80273030:Item_ReflectVelocity
 8026ae60:Item_GenerateHitExceptionID
 8026b2b4:Item_CheckHeavy
+8026b320:Item_GetHoldKind
 8026b3a8:Item_SetUngrabbable
 80272940:Item_SetJobjHidden
 80272460:Item_SetHitboxDamage
@@ -746,7 +748,7 @@
 8038e844:FGM_ResumeKind
 80364340:fmod
 803263D4:sin
-803D7060:SpawnMEXEffect
+803D7060:Mex_GetStockIconFrame
 80323CF4:sprintf
 8000D5BC:sqrtf
 801A5754:SSS_InitMinorData
@@ -850,6 +852,7 @@
 80342aa8:VECMult
 8000D790:Vec2_CalculateAngle
 8000D620:Vec3_CalculateAngle
+8000D8F4:Vec3_RotateAboutUnitAxis
 800119DC:Wind_FighterCreate
 80011A50:Wind_StageCreate
 8027B5B0:Zako_Create
