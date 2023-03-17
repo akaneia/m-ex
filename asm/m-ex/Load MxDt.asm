@@ -1,13 +1,17 @@
 #To be inserted at 803753b0
 .include "../Globals.s"
 .include "Header.s"
+.include "Load MxPt.s"
 
 .set  REG_HeapLo,31
-.set  REG_FileSize,28
+.set  REG_HeapSize,28
 .set  REG_File,27
 .set  REG_HeapID,26
 .set  REG_Header,25
 .set  REG_mexData,24
+
+.set  REG_MxPtSize,23
+.set  REG_MxDtSize,22
 
 backup
 
@@ -17,28 +21,41 @@ backup
   branchl r12,0x8033796c
   cmpwi r3,-1
   beq FileNotExist
-#Get size of MnDt.dat
+#Get size of MxDt.dat
   bl  FileName
   mflr  r3
   branchl r12,0x800163d8
-  addi  REG_FileSize,r3,0
+  mr REG_HeapSize,r3
+  mr REG_MxDtSize,r3
 #Align
-  addi  REG_FileSize,REG_FileSize,31
-  rlwinm	REG_FileSize, REG_FileSize, 0, 0, 26
+  addi  REG_HeapSize,REG_HeapSize,31
+  rlwinm	REG_HeapSize, REG_HeapSize, 0, 0, 26
+
+#Add Alloc for MxPt
+  MxPt_GetSize 
+  mr REG_MxPtSize, r3
+#Add MxPt size to heap
+  add REG_HeapSize, REG_HeapSize, REG_MxPtSize
+#Align Again
+  addi  REG_HeapSize,REG_HeapSize,31
+  rlwinm	REG_HeapSize, REG_HeapSize, 0, 0, 26
+
 #Create heap of this size
-  add r4,REG_HeapLo,REG_FileSize     #heap hi = start + filesize
-  addi  r4,r4,32*5              #plus 96 for header
+  add r4,REG_HeapLo,REG_HeapSize     #heap hi = start + filesize
+  addi  r4,r4,32*5              #plus 96 for mxdt header
+  addi  r4,r4,32*5              #plus 96 for mxpt header
   mr  r3,REG_HeapLo                  #heap lo = start
   mr  REG_HeapLo,r4             #new start = heap hi
   branchl r12,0x803440e8
   mr  REG_HeapID,r3
+
 #Alloc header
   li  r4,68
   branchl r12,0x80343ef0
   mr  REG_Header,r3
 #Alloc from this heap
   mr  r3,REG_HeapID
-  mr  r4,REG_FileSize
+  mr  r4,REG_MxDtSize
   branchl r12,0x80343ef0
   mr  REG_File,r3
 #Load file here
@@ -115,11 +132,6 @@ PreloadInit_Loop:
   cmpwi r5,8
   blt PreloadInit_Loop
 
-#Flush instruction cache so code can be run from this file
-  mr  r3,REG_File
-  mr  r4,REG_FileSize
-  branchl r12,0x80328f50
-
 # TEMP #
 # set last major num
   #li  r3,45
@@ -143,6 +155,17 @@ PreloadInit_Loop:
   bne VersionError
   cmpwi r4, MEXVersionMinor
   bne VersionError
+
+# load and setup MxPt file
+  cmpwi REG_MxPtSize, 0
+  beq Skip_PxPt
+  MxPt_Load
+Skip_PxPt:
+
+#Flush instruction cache so code can be run from this file
+  mr  r3,REG_File
+  mr  r4,REG_HeapSize
+  branchl r12,0x80328f50
 
   b Exit
 
@@ -335,6 +358,15 @@ FileNotExist:
   li  r4,0
   load  r5,0x804d3940
   branchl r12,0x80388220
+
+FileName_MxPt:
+blrl
+.string "MxPt.dat"
+.align 2
+SymbolName_MxPt:
+blrl
+.string "mexPatch"
+.align 2
 
 Exit:
   mr  r3,REG_HeapLo
