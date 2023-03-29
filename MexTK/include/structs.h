@@ -56,6 +56,7 @@ typedef struct COBJ COBJ;
 typedef struct COBJDesc COBJDesc;
 typedef struct _HSD_ImageDesc _HSD_ImageDesc;
 typedef struct _HSD_Tlut _HSD_Tlut;
+typedef struct _HSD_TObjTev _HSD_TObjTev;
 typedef struct _HSD_LightPoint _HSD_LightPoint;
 typedef struct _HSD_LightPointDesc _HSD_LightPointDesc;
 typedef struct _HSD_LightSpot _HSD_LightSpot;

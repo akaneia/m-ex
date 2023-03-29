@@ -50,11 +50,28 @@ struct MEXPlaylistEntry
     u16 bgm;
     u16 chance;
 };
+
 struct MEXPlaylist
 {
     int entry_count;
     MEXPlaylistEntry *entries;
 };
+
+typedef struct MexCostumeRuntime
+{
+    JOBJDesc *joint_desc;
+    MatAnimJointDesc *matanim_desc;
+    int x08;
+    int x0C;
+    int x10;
+    HSD_Archive *archive;
+} MexCostumeRuntime;
+
+typedef struct MexCostumeRuntimeDesc
+{
+    MexCostumeRuntime *runtimes;
+    int count;
+} MexCostumeRuntimeDesc;
 
 typedef struct MexMetaData
 {

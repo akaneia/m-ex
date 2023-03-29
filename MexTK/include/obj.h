@@ -463,6 +463,34 @@ struct _HSD_Tlut
     u16 x0E;
 };
 
+struct _HSD_TObjTev
+{
+    u8 color_op;
+    u8 alpha_op;
+    u8 color_bias;
+    u8 alpha_bias;
+
+    u8 color_scale;
+    u8 alpha_scale;
+    u8 color_clamp;
+    u8 alpha_clamp;
+
+    u8 color_a;
+    u8 color_b;
+    u8 color_c;
+    u8 color_d;
+
+    u8 alpha_a;
+    u8 alpha_b;
+    u8 alpha_c;
+    u8 alpha_d;
+
+    GXColor constant;
+    GXColor tev0;
+    GXColor tev1;
+    uint flags;
+};
+
 struct _HSD_LightPoint
 {
     f32 cutoff;
