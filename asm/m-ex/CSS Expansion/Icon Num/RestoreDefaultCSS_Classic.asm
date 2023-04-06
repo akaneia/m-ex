@@ -1,6 +1,6 @@
-#To be inserted @ 801b3e04
+#To be inserted @ 801b34c8
 .include "../../../Globals.s"
 .include "../../Header.s"
 
-lwz r5,OFST_Metadata_CSSIconCount(rtoc)
-addi r5,r5,1
+lwz r0,OFST_Metadata_CSSIconCount(rtoc)
+addi r0,r0,1
