@@ -314,6 +314,7 @@
 8003254C:Fighter_SetSlotType
 80033C60:Fighter_SetStocks
 80088478:Fighter_PlaySFX
+80182df0:Fighter_PlayVoiceSFX
 80033ce0:Fighter_LoseStock
 800d34e0:Fighter_DeathLogic
 800d331c:Fighter_RunOnDeathCallbacks

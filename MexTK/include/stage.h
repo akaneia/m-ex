@@ -599,8 +599,8 @@ Particle *Stage_SpawnEffectPos(int gfxID, int efFileID, Vec3 *pos);
 Particle *Stage_SpawnEffectJointPos(int gfxID, int efFileID, JOBJ *pos);
 Particle *Stage_SpawnEffectJointPos2(int gfxID, int efFileID, JOBJ *pos);
 int GrColl_RaycastGround(Vec3 *coll_pos, int *line_index, int *line_kind, Vec3 *unk1, Vec3 *unk2, Vec3 *unk3, Vec3 *unk4, void *cb, float from_x, float from_y, float to_x, float to_y, float unk5); // make unk5
-int GrColl_RaycastUnk(Vec3 *coll_pos, int *line_index, int *line_kind, void *unk, void *cb, void *unk2, float from_x, float from_y, float to_x, float to_y);                                         // unk = 0, unk2 = -1;
-int GrColl_RaycastAll(Vec3 *coll_pos, int *line_index, int *line_kind, void *unk, void *cb, void *unk2, float from_x, float from_y, float to_x, float to_y);
+int GrColl_RaycastUnk(Vec3 *coll_pos, int *line_index, int *line_kind, Vec3 *direction, void *cb, void *unk2, float from_x, float from_y, float to_x, float to_y);                                         // unk = 0, unk2 = -1;
+int GrColl_RaycastAll(Vec3 *coll_pos, int *line_index, int *line_kind, Vec3 *direction, void *cb, void *unk2, float from_x, float from_y, float to_x, float to_y);
 GOBJ *Zako_Create(int item_id, Vec3 *pos, JOBJ *jobj, Vec3 *velocity, int isMovingItem);
 GOBJ *Stage_CreateMapItem(MapData *map_data, int takeDamageSFXKind, int state, JOBJ *joint, Vec3 *pos, int unk_bool, void *onGiveDamage, void *onTakeDamage); // this function creates an item of id 0xA0, its a generic ID used across multiple stages. its mainly used for giving a joint a hurtbox/hitbox and an onTakeDamage callback.
 int Stage_CheckForNearbyFighters(Vec3 *pos, float radius);

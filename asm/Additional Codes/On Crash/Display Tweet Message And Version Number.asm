@@ -85,7 +85,7 @@ blrl
 
 Version:
 blrl
-.string "v0.90\n"
+.string "v0.91\n"
 .align 2
 
 ResetCombo:
