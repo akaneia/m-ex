@@ -68,7 +68,6 @@ typedef struct LightGroup LightGroup;
 typedef struct LOBJ LOBJ;
 typedef struct HSD_Fog HSD_Fog;
 typedef struct HSD_FogDesc HSD_FogDesc;
-typedef struct HSD_SObjDesc HSD_SObjDesc;
 typedef struct JOBJSet JOBJSet;
 
 // Archive
@@ -204,7 +203,6 @@ typedef struct FtScript FtScript;
 // Fighter States
 typedef struct FtCliffCatch FtCliffCatch;
 typedef struct FtDamage FtDamage;
-typedef struct FtLanding FtLanding;
 typedef struct FtDead FtDead;
 
 // CSS
@@ -238,12 +236,11 @@ typedef struct Rules4 Rules4;
 // Collision
 typedef struct CollData CollData;
 typedef struct ECBSize ECBSize;
-typedef struct CollLineDesc CollLineDesc;
+typedef struct CollLineInfo CollLineInfo;
 typedef struct CollLine CollLine;
 typedef struct CollVert CollVert;
 typedef struct CollLineUnk CollLineUnk;
 typedef struct CollDataStage CollDataStage;
-typedef struct CollLineConnection CollLineConnection;
 typedef struct CollGroupDesc CollGroupDesc;
 typedef struct CollGroup CollGroup;
 

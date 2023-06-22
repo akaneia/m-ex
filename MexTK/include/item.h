@@ -573,8 +573,8 @@ struct ItemData
     int x544;                                           // 0x544
     ColorOverlay color;                                 // 0x548
     int x5c8;                                           // 0x5c8
-    int x5cc;                                           // 0x5cc
-    int x5d0;                                           // 0x5d0
+    float anim_speed;                                   // 0x5cc, frame speed multiplier
+    float anim_frame;                                   // 0x5d0, current frame of animation
     itHit hitbox[4];                                    // 0x5d4
     int hit_exception_id;                               // 0xac4, cannot hit items with a matching index
     int hurt_num;                                       // 0xac8
@@ -649,10 +649,10 @@ struct ItemData
         int xc58;                                       // 0xc58
         int xc5c;                                       // 0xc5c
         int xc60;                                       // 0xc60
-        GOBJ *reflect;                                  // 0xc64, pointer to the gobj that reflected this item, is removed after processing the reflection
+        GOBJ *reflect;                                  // 0xc64
         float xc68;                                     // 0xc68
         int xc6c;                                       // 0xc6c
-        int xc70;                                       // 0xc70
+        float xc70;                                     // 0xc70
         int xc74;                                       // 0xc74
         int xc78;                                       // 0xc78
         int xc7c;                                       // 0xc7c
@@ -710,7 +710,7 @@ struct ItemData
     float spin_speed;                                   // 0xd3c
     int xd40;                                           // 0xd40
     float lifetime;                                     // 0xd44
-    int xd48;                                           // 0xd48
+    float half_lifetime;                                // 0xd48
     int xd4c;                                           // 0xd4c
     int land_num;                                       // 0xd50
     int throw_num;                                      // 0xd54
@@ -762,7 +762,7 @@ struct ItemData
     unsigned char show_hit : 1;                         // 0x2 - 0xdaa
     unsigned char show_model : 1;                       // 0x1 - 0xdaa
     char xdab;                                          // 0xdab
-    struct                                              //
+    struct itcmd_var                                    //
     {                                                   //
         int flag1;                                      // 0xdac
         int flag2;                                      // 0xdb0

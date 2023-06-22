@@ -4,6 +4,8 @@
 #include "structs.h"
 #include "datatypes.h"
 
+#define DEG_RAD32 0.01745329238474369F
+#define HALF_PI32 1.5707963705062866F
 #define HUGE_ENUF 1e+300 // _HUGE_ENUF*_HUGE_ENUF must overflow
 #define INFINITY ((float)(HUGE_ENUF * HUGE_ENUF))
 #define M_PI (3.14159265358979323846)
