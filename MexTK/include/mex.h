@@ -25,7 +25,8 @@ enum MEX_GETDATA
     MXDT_FTDAT,          // returns pointer to fighter file struct, indexed by internal ID
     MXDT_FTKINDDESC,     // returns pointer to ftkind desc array, indexed by external ID
     MXDT_FTEMBLEMLOOKUP, // returns pointer to ftkind desc array, indexed by external ID
-    MXDT_MEXDATA,
+    MXDT_MEXDATA,        //
+    MXDT_PRELOADHEAP,    // returns pointer to PreloadHeap
 };
 
 typedef enum SSMKind
@@ -72,6 +73,23 @@ typedef struct MexCostumeRuntimeDesc
     MexCostumeRuntime *runtimes;
     int count;
 } MexCostumeRuntimeDesc;
+typedef struct MEXFunctionTable
+{
+    int index;       // 0x0
+    int code_offset; // 0x4
+} MEXFunctionTable;
+
+typedef struct MEXFunction
+{
+    u8 *code;                           // 0x0
+    int *instruction_reloc_table;       // 0x4
+    int instruction_reloc_table_num;    // 0x8
+    MEXFunctionTable *func_reloc_table; // 0xC
+    int func_reloc_table_num;           // 0x10
+    int code_size;                      // 0x14
+    int debug_symbol_num;               // 0x18
+    void *debug_symbol;                 // 0x1c
+} MEXFunction;
 
 typedef struct MexMetaData
 {
@@ -104,10 +122,10 @@ typedef struct MexMenuData
 
 typedef struct MexMusicTable
 {
-    char ** filenames;
+    char **filenames;
     MEXPlaylistEntry *menu_playlist;
     int menu_playlist_count;
-    char ** labels;
+    char **labels;
 
 } MexMusicTable;
 
@@ -146,7 +164,6 @@ typedef struct MexData
     void *misc;
 } MexData;
 
-
 /*** Functions ***/
 HSD_Archive *MEX_LoadRelArchive(char *file, void *functions, char *symbol);
 void MEX_IndexFighterItem(int fighter_kind, ItemDesc *itemdesc, int item_id);
@@ -155,11 +172,28 @@ float Mex_GetStockIconFrame(int internal_id, int costume_id);
 int MEX_GetFtItemID(GOBJ *f, int item_id);
 int MEX_GetGrItemID(int item_id);
 int MEX_GetSSMID(SSMKind ssm_kind, int kind); // ssm_kind, 0 = fighter, 1 = stage | kind is the c_kind / gr_kind
-void SFX_PlayStageSFX(int sfx_id);            // use index relative to the ssm (start at 0)
+void MEX_RelocRelArchive(void *xFunction);
+void SFX_PlayStageSFX(int sfx_id); // use index relative to the ssm (start at 0)
 void *calloc(int size);
 MEXPlaylist *MEX_GetPlaylist();
-//void KirbyStateChange(GOBJ *fighter, int state, float startFrame, float animSpeed, float animBlend);
+// void KirbyStateChange(GOBJ *fighter, int state, float startFrame, float animSpeed, float animBlend);
 void KirbyStateChange(float anim_start_frame, float anim_rate, float anim_blend, GOBJ *f, int state_id, int flags, GOBJ *alt_state_source);
 void *MEX_GetKirbyCpData(int copy_id);
 void *MEX_GetData(int index);
+
+void MEX_InitRELDAT(HSD_Archive *archive, char *symbol_name, int *return_func_array)
+{
+    MEXFunction *mex_function = Archive_GetPublicAddress(archive, symbol_name);
+
+    // reloc instructions
+    MEX_RelocRelArchive(mex_function);
+
+    // reloc function pointers
+    for (int i = 0; i < mex_function->func_reloc_table_num; i++)
+    {
+        MEXFunctionTable *this_func = &mex_function->func_reloc_table[i];
+        return_func_array[i] = &mex_function->code[this_func->code_offset];
+    }
+}
+
 #endif

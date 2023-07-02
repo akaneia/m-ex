@@ -163,22 +163,64 @@ struct HSD_VI
     int is_prog;
 };
 
+// struct HSD_Archive
+// {
+//     int file_size;       // size of file
+//     int *reloc_offset;   // pointer to relocation table offset?
+//     int reloc_num;       // number of entries on the rleoc table
+//     int symbol_num;      // total number of symbols
+//     int refsymbol_num;   // number of reference symbols
+//     int archive_vers;    // idk for sure sometimes 001B
+//     int unk1;            //
+//     int unk2;            //
+//     int *general_points; // 0x20 = pointer to the "general points"
+//     int *reloc_table;    // pointer to relocation table in memory
+//     int *symbols1;       // pointer to symbol pointers and name offsets
+//     int *refsymmbols;    // pointer to reference symbol info in memory
+//     int *symbols2;       // pointer to symbol list in memory
+//     int *file_start;     // pointer to the header of the dat
+// };
+
+struct HSD_ArchiveHeader
+{
+    u32 file_size; /* 0x00 */
+    u32 data_size; /* 0x04 */
+    u32 nb_reloc;  /* 0x08 */
+    u32 nb_public; /* 0x0C */
+    u32 nb_extern; /* 0x10 */
+    u8 version[4]; /* 0x14 */
+    u32 pad[2];    /* 0x18 */
+};
+
+struct HSD_ArchiveRelocationInfo
+{
+    u32 offset;
+};
+
+struct HSD_ArchivePublicInfo
+{
+    u32 offset; /* 0x00 */
+    u32 symbol; /* 0x04 */
+};
+
+struct HSD_ArchiveExternInfo
+{
+    u32 offset; /* 0x00 */
+    u32 symbol; /* 0x04 */
+};
+
 struct HSD_Archive
 {
-    int file_size;       // size of file
-    int *reloc_offset;   // pointer to relocation table offset?
-    int reloc_num;       // number of entries on the rleoc table
-    int symbol_num;      // total number of symbols
-    int refsymbol_num;   // number of reference symbols
-    int archive_vers;    // idk for sure sometimes 001B
-    int unk1;            //
-    int unk2;            //
-    int *general_points; // 0x20 = pointer to the "general points"
-    int *reloc_table;    // pointer to relocation table in memory
-    int *symbols1;       // pointer to symbol pointers and name offsets
-    int *refsymmbols;    // pointer to reference symbol info in memory
-    int *symbols2;       // pointer to symbol list in memory
-    int *file_start;     // pointer to the header of the dat
+    struct HSD_ArchiveHeader header;              /* 0x00 */
+    u8 *data;                                     /* 0x20 */
+    struct HSD_ArchiveRelocationInfo *reloc_info; /* 0x24 */
+    struct HSD_ArchivePublicInfo *public_info;    /* 0x28 */
+    struct HSD_ArchiveExternInfo *extern_info;    /* 0x2C */
+    char *symbols;                                /* 0x30 */
+    struct HSD_Archive *next;                     /* 0x34 */
+    char *name;                                   /* 0x38 */
+    u32 flags;                                    /* 0x3C */
+    void *top_ptr;                                /* 0x40 */
 };
 
 /*** Static Variables ***/
@@ -196,7 +238,7 @@ void *Archive_GetPublicAddress(HSD_Archive *archive, char *symbol);
 void Archive_Init(HSD_Archive *archive, void *file_data, int size);
 void Archive_Free(HSD_Archive *archive);
 HSD_Archive *File_GetPreloadedFile(char *filename);
-void File_LoadSync(char *filename, void *alloc, int *out_size);
+void Archive_LoadSync(char *filename, void *alloc, int *out_size);
 int HSD_Randi(int max);
 float HSD_Randf();
 void *HSD_MemAlloc(int size);
@@ -216,6 +258,7 @@ void HSD_StateSetNumChans(u8 nChans);
 void HSD_SetupChannel(void *unk);
 void HSD_ClearVtxDesc();
 void HSD_GXProject(COBJ *cobj, Vec3 *in, Vec3 *out, int unk);
+void HSD_UpdateDiscAndCardStatus();
 void GX_AllocImageData(_HSD_ImageDesc *image_desc, int width, int height, int fmt, int size); // image data buffer is stored to the image_desc
 void GXTexModeSync();
 void GXPixModeSync();

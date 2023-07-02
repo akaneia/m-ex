@@ -2,6 +2,8 @@
 .include "../Globals.s"
 .include "Header.s"
 
+# prioritizing the load of IfAll because it contains useful assets that can be used anywhere
+
 stw	r0, 0x0054 (sp)
 
 # copy struct onto stack

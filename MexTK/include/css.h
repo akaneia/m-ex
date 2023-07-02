@@ -306,13 +306,13 @@ static JOBJ **stc_css_cameramodel;        // -0x49D4
 static CSSCursor **stc_css_cursors;       // 0x804a0bc0
 static CSSPuck **stc_css_pucks;           // 0x804a0bd0
 
-static s8 *stc_css_hmnport;                      // -0x49B0
-static s8 *stc_css_cpuport;                      // -0x49AF
+static s8 *stc_css_hmnport = 0x804D68C0;         // -0x49B0
+static s8 *stc_css_cpuport = 0x804D6CF1;         // -0x49AF
 static u8 *stc_css_delay;                        // -0x49AE
 static u8 *stc_css_exitkind;                     // -0x49AA
 static u8 *stc_css_maxply;                       // -0x49AB
 static u8 *stc_css_is_ready_timer;               // -0x49A9
-static u8 *stc_css_singeplyport;                 // -0x4DE0
+static u8 *stc_css_singeplyport = 0x804D6CF0;    // -0x4DE0
 static u8 *stc_menu_singeplyport;                // -0x4DB8
 static Text **stc_css_ply1_combo_text;           // -0x49C4
 static Text **stc_css_ply2_combo_text;           // -0x49C0
@@ -329,8 +329,8 @@ static u8 *stc_css_unkarr;                       // 0x804d50c8
 
 /*** Functions ***/
 void MainMenu_CamRotateThink(GOBJ *gobj);
-int MainMenu_GetPadDown(int controller_index);
-u64 MainMenu_GetPadRapid(int controller_index);
+int MainMenu_GetPadDown(int controller_index);  // returns HSD_BUTTON vals
+u64 MainMenu_GetPadRapid(int controller_index); // returns HSD_BUTTON vals
 int MainMenu_CheckForLRA();
 void MainMenu_DestroyAllTextCanvases(); // destroys all SIS canvases
 void CSS_FreeText();                    //

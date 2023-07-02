@@ -13,6 +13,17 @@ typedef enum FGMGroup
     FGMGROUP_1P,        // ending, 1pend
 } FGMGroup;
 
+typedef enum FGM_Main
+{
+    FGMMAIN_CS_CANCEL = 172,
+    FGMMAIN_CS_KETTEI,
+    FGMMAIN_CS_MV,
+    FGMMAIN_CS_BEEP1,
+    FGMMAIN_INFOBEEP,
+    FGMMAIN_PAUSE,
+
+} FGM_Main;
+
 enum FGMID
 {
     FGM_MAIN,

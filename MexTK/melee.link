@@ -2,8 +2,6 @@
 80323938:memmove
 80323DC8:_vsprintf
 800693AC:ActionStateChange
-80085E50:Animation_GetAddress
-8001E8F8:Animation_GetLength
 8036410C:AOBJ_ReqAnim
 8036530C:AOBJ_SetRate
 8036414C:AOBJ_StopAnim
@@ -67,6 +65,7 @@
 803686ac:COBJ_GetInterest
 80368a08:COBJ_GetEyeDistance
 803695f0:COBJ_GetViewingMtx
+80369688:COBJ_SetupViewingMtx
 80048160:Coll_CheckLedge
 80043680:Coll_CopyPosToECBs
 80041C8C:Coll_ECBCurrToPrev
@@ -243,7 +242,9 @@
 80034524:Fighter_SetStaminaHP
 80034634:Fighter_CheckStaminaMode
 800346a8:Fighter_SetStaminaMode
-80085FD4:Fighter_GetSubactionHeader
+80085FD4:Fighter_GetFtAction
+80085E50:Fighter_GetAnimData
+8001E8F8:Fighter_GetAnimLength
 8003418C:Fighter_GetSubcharGObj
 8007DB24:Fighter_GFXRemoveAll
 8006CC7C:Fighter_GiveDamage
@@ -400,7 +401,7 @@
 80016efc:Archive_Free
 80380358:Archive_GetPublicAddress
 8001819c:File_GetPreloadedFile
-8001668c:File_LoadSync
+8001668c:Archive_LoadSync
 8037DC38:Fog_LoadDesc
 8037d970:Fog_Set
 8006F238:FrameTimerCheck
@@ -497,6 +498,7 @@
 80361bb8:HSD_StateSetZMode
 803623d0:HSD_StateSetNumChans
 8000e210:HSD_GXProject
+800195d0:HSD_UpdateDiscAndCardStatus
 8036c244:HSD_ClearVtxDesc
 803620a4:HSD_SetupChannel
 8026b40c:Item_IndexStageItem
@@ -664,6 +666,7 @@
 800031F4:memcpy
 80003100:memset
 803d709c:MEX_LoadRelArchive
+803d7074:MEX_RelocRelArchive
 803D7094:MEX_GetData
 803D7088:MEX_GetFtItemID
 803D708C:MEX_GetGrItemID
@@ -680,6 +683,7 @@
 80342690:MTXQuat
 80342418:MTXRotRad
 80342aa8:MTXMultVec
+80342954:MTXLightPerspective
 80023F28:BGM_Play
 80023ed4:BGM_PlayFile
 800236dc:BGM_Stop
@@ -703,6 +707,7 @@
 80337cd4:DVDClose
 800161a0:DVDWaitForRead
 8038f6d4:File_Read
+800161c4:File_ReadSync
 800163d8:File_GetSize
 8001f410:MTH_Init
 8001f800:MTH_Terminate
@@ -718,6 +723,14 @@
 801A45E8:Pause_CheckStatus
 8007D4B8:Fighter_Phys_ApplyVerticalAirFriction
 8001822C:Preload_GetTable
+800178e8:Preload_CreateEntry
+80017740:Preload_CreateEntryByEntrynum
+80017ab0:Preload_RequestLoadEntry
+800174e8:Preload_FreeEntry
+8001819c:Preload_GetArchive
+80017040:Preload_GetArchive_Init_ReturnSymbols
+80017ebc:Preload_GetArchiveByEntrynum
+800187f4:Preload_CheckFileStatus
 80018254:Preload_Update
 800174bc:Preload_Invalidate
 8039D048:psDeletePntJObjwithParticle

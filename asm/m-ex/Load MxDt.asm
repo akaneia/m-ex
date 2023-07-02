@@ -181,7 +181,7 @@ blrl
 .long -1    # pointer to runtime struct
 .long 0     # start address for this heap
 .long 0     # heap size
-.long 1     # unk
+.long 1     # isActive? is referenced @ 80015d0c when freeing a preloaded file. if this is 1 it will properly free up the preload entry
 .long 1     # isDisable, creates the heap when this is 0
 .long 1     # bool, is set to 0 after heap is created
 .endr

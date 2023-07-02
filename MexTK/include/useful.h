@@ -20,8 +20,10 @@ char *strrchr(const char *, int);
 #define OSTicksToMilliseconds(ticks) ((ticks) / ((os_info->bus_clock / 4) / 1000))
 #define OSTicksToMicroseconds(ticks) ((ticks) / ((os_info->bus_clock / 4) / 1000000))
 #define MillisecondsSinceTick(ticks) ((float)OSTicksToMicroseconds(OSGetTick() - ticks) / 1000) // returns microseconds between tick given and the current tick
-#define BitCheck(num, bit) !!((num) & (1 << (bit)))                                             // returns 0 or 1
-#define BitCheck(num, bit) !!((num) & (1 << (bit)))                                             // returns 0 or 1
+#define BytesToKB(bytes) ((float)bytes / 1000.0)
+#define BytesToMB(bytes) ((float)bytes / 1000000.0)
+#define BitCheck(num, bit) !!((num) & (1 << (bit))) // returns 0 or 1
+#define BitCheck(num, bit) !!((num) & (1 << (bit))) // returns 0 or 1
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
 #define assert(msg) __assert(__FILENAME__, __LINE__, msg)
 #define divide_roundup(dividend, divisor) ((dividend + (divisor / 2)) / divisor)
@@ -425,7 +427,7 @@ struct DVDDirEntry
 static OSInfo *os_info = 0x80000000;
 static int *stc_fst_totalentrynum = 0x804D7284;
 static FSTEntry **stc_fst_entries = 0x804D727C; // -0x4424, indexed by entrynum (0 is always the root directory)
-static char **stc_fst_filenames = 0x804D7280;
+static char **stc_fst_filenames = 0x804D7280;   // use FSTEntry.filename_offset to find an entrynums name
 
 /*** OS Library ***/
 int OSGetTick();
@@ -447,6 +449,7 @@ int DVDFastOpen(s32 entrynum, DVDFileInfo *dvdFileInfo);
 int DVDClose(DVDFileInfo *dvdFileInfo);
 int DVDWaitForRead();
 int File_Read(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index, void *cb, int cb_arg2);
+int File_ReadSync(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index);
 int File_GetSize(s32 entrynum);
 void memcpy(void *dest, void *source, int size);
 void memset(void *dest, int fill, int size);

@@ -117,6 +117,9 @@ stmw    LastREG,0x8(r1)
   add REG_MenuDef, r3, r4
 
 # ensure it has options first
+  lbz   r3, MenuDef_OptNum (REG_MenuDef)
+  cmpwi r3,0
+  beq Menu_NotFound
   lwz   r3, MenuDef_OptDef (REG_MenuDef)
   cmpwi r3,0
   beq Menu_NotFound

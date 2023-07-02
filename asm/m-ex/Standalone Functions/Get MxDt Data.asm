@@ -5,7 +5,7 @@
 backup
 
 # check if over
-  cmpwi  r3,17
+  cmpwi  r3,18
   bge Assert
 
 # get jump table
@@ -28,6 +28,7 @@ bl  FtDat
 bl  FtKindDesc
 bl  FtEmblemLookup
 bl  MexData
+bl  HeapRuntime
 #*****************************#
 SkipJumpTable:
 #Get effect type
@@ -105,6 +106,11 @@ FtEmblemLookup:
 MexData:
   lwz r3,OFST_mexData(rtoc)
   b Exit
+HeapRuntime:
+  lwz r3,OFST_HeapRuntime(rtoc)
+  b Exit
+
+  
 
 #############################################
 Assert:

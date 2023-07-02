@@ -28,6 +28,14 @@ backup
   beq FileNoExist
   mr REG_EntryNum,r3
 
+/*
+NOTE: im "allocating" this heap manually because
+the game needs access to the major scene functions
+before any heap initialization code runs, making it
+impossible to do this properly. im stealing
+from the main heap memory to get around this.
+*/
+
 # get file size
   lwz  r3,0x14(REG_MajorScene)
   branchl   r12,0x800163d8
@@ -59,6 +67,12 @@ backup
 
 # update heap size
   stw r3, ((6) * 0x1C) + 0x10 + 0xC (r5)
+
+# enable heap
+# cannot do this unfortunately, the game will try to 
+# create it and crash because its not a proper heap
+    #li r4, 0
+    #stw r4, ((6) * 0x1C) + 0x10 + 0x18 (r5)
 
 # init some load bool
   li	r0, 0
@@ -235,6 +249,12 @@ NoFile:
     addi r3,r3,0x10
     li  r4,0
     stw r4, ((6) * 0x1C) + 0xC (r3)
+# disable heap
+# cannot do this unfortunately, the game will try to 
+# destroy it and crash because its not a proper heap
+    #li r4, 1
+    #stw r4, ((6) * 0x1C) + 0x18 (r3)
+
 
 Exit:
     restore

@@ -19,6 +19,7 @@
 
 # Exit
     mr    r0,r4
+    li r6, -1
     b   Exit
 
 FileName:
@@ -29,31 +30,31 @@ blrl
 HeapSetup:
 blrl
 # unk
-.long 2     # heap ID
+.long 2     # heap ID (PreloadHeapKind in m-ex header)
 .long 1     # heap location
 .long 6     # heap priority
 .long 0x800     # heap size
 
-# ifall
-.long 3     # heap ID
+# persistent (ifall, itco, efco, efmndata, etc)
+.long 3     # heap ID (PreloadHeapKind in m-ex header)
 .long 1     # heap location
 .long 2     # heap priority
 .long 0x4fa690     # heap size
 
 # fighter cache
-.long 4     # heap ID
+.long 4     # heap ID (PreloadHeapKind in m-ex header)
 .long 2     # heap location
 .long 6     # heap priority
 .long 6599680 - FighterHeapReduction # heap size
 
 # animation cache
-.long 5     # heap ID
+.long 5     # heap ID (PreloadHeapKind in m-ex header)
 .long 4     # heap location
 .long 6     # heap priority
 .long 0x96c800     # heap size
 
 # CUSTOM scene file heap
-.long 6     # heap ID
+.long 6     # heap ID (PreloadHeapKind in m-ex header)
 .long 1     # heap location
 .long 3     # heap to start after
 .long 0x20     # heap size

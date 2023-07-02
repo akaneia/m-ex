@@ -243,11 +243,11 @@ struct TOBJ
     struct _HSD_Tlut *tlut;           // 0x5C
     struct _HSD_TexLODDesc *lod;      // 0x60
     AOBJ *aobj;                       // 0x64
-    struct _HSD_ImageDesc **imagetbl;
-    struct _HSD_Tlut **tluttbl;
-    int tlut_no;
-    Mtx mtx;
-    u32 coord; // GXTexCoordID
+    struct _HSD_ImageDesc **imagetbl; // 0x68
+    struct _HSD_Tlut **tluttbl;       // 0x6C
+    int tlut_no;                      // 0x70
+    Mtx mtx;                          // 0x74
+    u32 coord;                        // GXTexCoordID
     struct _HSD_TObjTev *tev;
 };
 
@@ -716,6 +716,7 @@ void COBJ_GetEyeVector(COBJ *cobj, Vec3 *eye_vec);
 void COBJ_GetInterest(COBJ *cobj, Vec3 *interest);
 float COBJ_GetEyeDistance(COBJ *cobj);
 void COBJ_GetViewingMtx(COBJ *cobj, Mtx *out);
+Mtx *COBJ_SetupViewingMtx(COBJ *cobj);
 GOBJ *GObj_Create(int entity_class, int p_link, int flags);
 void GObj_Destroy(GOBJ *gobj);
 void GObj_AddGXLink(GOBJ *gobj, void *cb, int gx_link, int gx_pri);

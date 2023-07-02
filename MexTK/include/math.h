@@ -19,6 +19,7 @@ float cos(float x);
 void MTXLookAt(Mtx *dest, Vec3 *eye, Vec3 *up, Vec3 *target);
 void MTXRotAxisRad(Mtx *m, Vec3 *axis, float rad); // Sets a matrix for rotation about an arbitrary axis whose ( x, y, z ) components are specified by axis.
 void MTXMultVec(Mtx *m, Vec3 *src, Vec3 *dst);     // Post-multiplies a 3D vector or 3D point by a matrix ( m x src = dst ).
+void MTXLightPerspective(Mtx *m, float fovy, float aspect, float scaleS, float scaleT, float transS, float transT);
 void VECNormalize(Vec3 *src, Vec3 *dest);
 void VECScale(Vec3 *src, Vec3 *dst, float scale);
 void VECAdd(Vec3 *a, Vec3 *b, Vec3 *ab);

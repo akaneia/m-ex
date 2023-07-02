@@ -6,13 +6,13 @@
 #include "match.h"
 
 // Scene Enums
-enum HEAP_KIND
+enum SCENE_HEAP_KIND
 {
-    HEAPKIND_UNK0,
-    HEAPKIND_UNK1,
-    HEAPKIND_UNK2,
-    HEAPKIND_UNK3,
-    HEAPKIND_UNK4,
+    SCENEHEAPKIND_UNK0,
+    SCENEHEAPKIND_UNK1,
+    SCENEHEAPKIND_UNK2,
+    SCENEHEAPKIND_UNK3, // shrinks main heap, enables fighter cache?
+    SCENEHEAPKIND_UNK4,
 };
 enum MINOR_KIND
 {
@@ -125,7 +125,7 @@ struct MajorScene
 struct MinorScene
 {
     u8 minor_id;        // is 255 for last entry
-    u8 heap_kind;       // heap behavior
+    u8 heap_kind;       // heap behavior, (2)
     void *minor_prep;   // inits data for this minor (major exclusive)
     void *minor_decide; // decides next minor scene
     u8 minor_kind;      // index for a re-useable list of scene functions. contains a load, think, and leave function.
@@ -143,7 +143,7 @@ struct SceneInfo
     u8 minor_prev; // 0x5
 };
 
-struct ScDataVS
+struct ScDataVS // should really call this FightData... fight meaning the in-game scene
 {
     u8 x8;                // 0x0
     u8 x9;                // 0x1

@@ -11,6 +11,9 @@
 #include "math.h"
 #include "useful.h"
 
+/*** Macros ***/
+#define GetElementsIn(arr) sizeof(arr) / sizeof(arr[0])
+
 /*** Functions ***/
 
 // float fabs(float x)
@@ -119,7 +122,7 @@ static HSD_Pad *PadGet(int playerIndex, int padType)
 
     if (pads == 0)
         return 0;
-        
+
     return (&pads->pad[playerIndex]);
 }
 

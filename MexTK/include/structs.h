@@ -73,6 +73,11 @@ typedef struct JOBJSet JOBJSet;
 
 // Archive
 typedef struct HSD_Archive HSD_Archive;
+typedef struct HSD_ArchiveHeader HSD_ArchiveHeader;
+typedef struct HSD_ArchiveRelocationInfo HSD_ArchiveRelocationInfo;
+typedef struct HSD_ArchivePublicInfo HSD_ArchivePublicInfo;
+typedef struct HSD_ArchiveExternInfo HSD_ArchiveExternInfo;
+typedef struct HSD_Archive HSD_Archive;
 typedef struct MapHead MapHead;
 
 // Stage
@@ -149,7 +154,6 @@ typedef struct FighterBone FighterBone;
 typedef struct Playerblock Playerblock;
 typedef struct PlayerData PlayerData;
 typedef struct FtState FtState;
-typedef struct SubactionHeader SubactionHeader;
 typedef struct ftHit ftHit;
 typedef struct HitVictim HitVictim;
 typedef struct FtHurt FtHurt;
@@ -164,6 +168,7 @@ typedef struct CPU CPU;
 typedef struct FtCollDesc FtCollDesc;
 typedef struct FtSFX FtSFX;
 typedef struct FtAction FtAction;
+typedef struct Figatree Figatree;
 typedef struct ftData ftData;
 typedef struct FtDmgVibrateDesc FtDmgVibrateDesc;
 typedef struct ftCommonData ftCommonData;
@@ -210,7 +215,7 @@ typedef struct FtDead FtDead;
 // CSS
 typedef struct CSSBackup CSSBackup;
 typedef struct MnSelectChrDataTable MnSelectChrDataTable;
-typedef struct VSMinorData VSMinorData;
+typedef struct VSMinorData VSMinorData; // is the css minor data
 typedef struct SSSMinorData SSSMinorData;
 typedef struct CSSCursor CSSCursor;
 typedef struct CSSPuck CSSPuck;
@@ -263,6 +268,8 @@ typedef struct ScDataVS ScDataVS;
 typedef struct ScDataRst ScDataRst;
 
 // Preload
+typedef struct PreloadHeapLookup PreloadHeapLookup;
+typedef struct PreloadHeap PreloadHeap;
 typedef struct Preload Preload;
 typedef struct PreloadChar PreloadChar;
 typedef struct PreloadEntry PreloadEntry;

@@ -588,10 +588,10 @@ enum FtStateNames
 };
 enum FtScriptCmd
 {
-    FTSCRIPT_0,
-    FTSCRIPT_1,
+    FTSCRIPT_END,
     FTSCRIPT_SYNCTIMER,
     FTSCRIPT_ASYNCTIMER,
+    FTSCRIPT_3,
     FTSCRIPT_4,
     FTSCRIPT_5,
     FTSCRIPT_6,
@@ -719,6 +719,33 @@ enum Ft_AttackKind
     ATKKIND_58,
     ATKKIND_59,
     ATKKIND_60,
+    ATKKIND_61,
+    ATKKIND_62,
+    ATKKIND_63,
+    ATKKIND_64,
+    ATKKIND_65,
+    ATKKIND_66,
+    ATKKIND_67,
+    ATKKIND_68,
+    ATKKIND_69,
+    ATKKIND_70,
+    ATKKIND_71,
+    ATKKIND_72,
+    ATKKIND_73,
+    ATKKIND_74,
+    ATKKIND_75,
+    ATKKIND_76,
+    ATKKIND_77,
+    ATKKIND_78,
+    ATKKIND_79,
+    ATKKIND_80,
+    ATKKIND_81,
+    ATKKIND_82,
+    ATKKIND_83,
+    ATKKIND_84,
+    ATKKIND_85,
+    ATKKIND_86,
+    ATKKIND_87,
 };
 typedef enum FtStateKind
 {
@@ -851,9 +878,18 @@ struct PlayerData
 struct FighterBone
 {
     JOBJ *joint;
-    JOBJ *joint2; // used for interpolation
-    int flags;
-    int flags2;
+    JOBJ *joint2;         // used for interpolation
+    int is_dynamic : 1;   // 0x8, 0x80
+    int is_active : 1;    // 0x8, 0x40
+    int x8_20 : 1;        // 0x8, 0x20, related to it being a runtime bone? is checked at 8006f544
+    int is_unk : 1;       // 0x8, 0x10, function 80074ee8 sets this flag on TransN, XRotN, YRotN, ThrowN
+    int is_unk_2 : 1;     // 0x8, 0x08, function 80074ee8 sets this flag on TransN, Extra
+    int no_anim : 1;      // 0x8, 0x04, will not animate the bone when set
+    int x8_03FFFFFF : 26; // 0x8, unk
+    int depth : 8;        // 0xC, 0xFF000000, number of parents to get to root
+    int dobj_start : 7;   // 0xC, 0x00FE0000, first dobj belonging to this joint. (most every dobj belongs to joint 0, so this is usually equal to the total number of dobjs for subsequent joints)
+    int xC_0001 : 1;      // 0xC, 0x00010000
+    int xC_0000FFFF : 16; // 0xC, 0x0000FFFF, unk
 };
 
 struct DynamicsDesc
@@ -1044,15 +1080,6 @@ struct ftChkDevice // 80459a68
     void *check;
 };
 
-struct SubactionHeader
-{
-    char *symbol;
-    int animOffset;
-    int animSize;
-    int *subactionData;
-    int flags;
-};
-
 struct FtState
 {
     int action_id;
@@ -1072,8 +1099,17 @@ struct FtAction
     int anim_offset;   // offset of the anim data in plxxaj
     int anim_size;     // size of the animation data
     void *script;      // pointer to the script data for this action
-    int flags;
-    void *anim_data; // pointer to the animation data in ARAM
+    int flags;         //
+    void *anim_data;   // pointer to the animation data in ARAM
+};
+
+struct Figatree // this is the data contained in PlyX5K_Share_ACTION_X_figatree.dat (which is stored in the AJ file in ARAM, confusing i know)
+{
+    int kind;        // 0x0
+    int x4;          // 0x4
+    float frame_num; // 0x8, total number of frames in this animation
+    void *nodes;     // 0xC
+    void *tracks;    // 0x10
 };
 
 struct ReflectDesc
@@ -2029,7 +2065,7 @@ struct FighterData
     ColorOverlay color[3];                 // 0x408
     void *LObj;                            // 0x588
     int anim_num;                          // 0x58C
-    void *anim_curr_flags_ptr;             // 0x590
+    Figatree *figatree_curr;               // 0x590, pointer to the FtAnim struct
     struct                                 // 0x594
     {
         u32 transn_phys_update : 1;       // 0x80000000, gives fighter speed based on transN offset
@@ -2189,7 +2225,7 @@ struct FighterData
     FtCoin coinbox[2];             // 0x1614
     int dynamics_hit_num;          // 0x166c
     FtDynamicHit dynamics_hit[11]; // 0x1670
-    int x1828;                     // 0x1828
+    float x1828;                   // 0x1828
     struct dmg                     // 0x182c
     {                              //
         int behavior;              // 0x182c
@@ -2201,7 +2237,7 @@ struct FighterData
         FtDmgLog hit_log;          // 0x1844, info regarding the last solid hit
         FtDmgLog tip_log;          // 0x1870, info regarding the last phantom hit
         float tip_hitlag;          // 0x189c, hitlag is stored here during phantom hits @ 8006d774
-        int x18a0;                 // 0x18a0
+        float tip_force_applied;   // 0x18a0, used to check if a tip happened this frame
         float kb_mag;              // 0x18a4  kb magnitude
         int x18a8;                 // 0x18a8
         int time_since_hit;        // 0x18ac   in frames
@@ -2888,7 +2924,7 @@ struct FtDamage
 };
 struct FtLanding
 {
-    int is_actionable; // 0x2340
+    int can_interrupt; // 0x2340
 };
 struct FtDead
 {
@@ -3107,9 +3143,9 @@ int *stc_ft_tiplog = (R13 + -0x5144); // used as semi-local variables rememberin
 /*** Functions ***/
 void ActionStateChange(float startFrame, float animSpeed, float animBlend, GOBJ *fighter, int stateID, int flags1, GOBJ *alt_state_source);
 void Fighter_UpdateBonePos(FighterData *fighter_data, int unk);
-void *Animation_GetAddress(FighterData *fighter, int animID);
-SubactionHeader *Fighter_GetSubactionHeader(FighterData *fighter, int animID);
-float Animation_GetLength(int animAddress);
+FtAction *Fighter_GetFtAction(FighterData *fighter, int action_id); // returns the desired ft action entry stored in the dat file
+Figatree *Fighter_GetAnimData(FighterData *fighter, int action_id); // this will request the anim data from the AJ file in ARAM and overwrite the current animation!
+float Fighter_GetAnimLength(Figatree *ft_anim);
 void Fighter_EnterLightThrow(GOBJ *fighter, int stateID);
 void Fighter_EnterDamageFall(GOBJ *fighter);
 void Fighter_EnterWait(GOBJ *fighter);
