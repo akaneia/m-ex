@@ -14,56 +14,59 @@ struct TextAllocInfo
     void *prev; // 0x4,
     int size;   // 0x8 data remaining after this alloc?
     // data after this....
-    u8 xc; // 0xC data ?
-    u8 xd; // 0xD
+    u8 xc;      // 0xC data ?
+    u8 xd;      // 0xD
     u8 gx_link; // 0xE
-    u8 gx_pri; // 0xF
+    u8 gx_pri;  // 0xF
 };
 
 struct Text
 {
-    Vec3 trans;  // 0x0-0xC
-    Vec2 aspect; // 0xC-0x14 CHANGE THIS TO BOUND
-    int x14;
-    int x18;
-    int x1c;
-    int x20;
-    Vec2 scale; // 0x24-0x2C
-    int x2C;
-    GXColor color;
-    Vec2 stretch;  // 0x34-0x3C
-    int x3c;       // 0x3c
-    int x40;       // 0x40
-    int x44;       // 0x44
-    u8 use_aspect; // 0x48
-    u8 kerning;    // 0x49
-    u8 align;      // 0x4a
-    u8 x4b;
-    u8 x4c;
-    u8 hidden; // 0x4D
-    u8 x4e;
-    u8 sis_id; // 0x4F, id of the premade text file to use
-    int x50;
+    Vec3 trans;  // 0x0-0xC, affects entire viewport
+    Vec2 aspect; // 0xC-0x14 CHANGE THIS TO BOUND, affects entire viewport
+    float x14;
+    Vec3 x18;                 // 0x18-0x24, acts as an offset for aspect? used @ 803a88e8 when x4e is enabled
+    Vec2 viewport_scale;      // 0x24-0x2C, scales entire viewport including text (was orignally scale)
+    GXColor viewport_color;   // 0x2c, if the alpha value is != 0, uses an additional GXSetTevAlphaIn call @ 803a87f8 if enabled. background is the size of the aspect
+    GXColor color;            // 0x30
+    Vec2 scale;               // 0x34-0x3C scales just the text. (was originally stretch)
+    float x3c;                // 0x3c
+    float x40;                // 0x40
+    u16 x44;                  // 0x44
+    u16 x46;                  // 0x46
+    u8 use_aspect;            // 0x48
+    u8 kerning;               // 0x49
+    u8 align;                 // 0x4a
+    u8 x4b;                   //
+    u8 x4c;                   // 0x4C, if set to 1, enables the depth buffer when rendering? (803a85a0)
+    u8 hidden;                // 0x4D
+    u8 x4e;                   // enables some alternate form of scaling? 803a88e8
+    u8 sis_id;                // 0x4F, id of the premade text file to use
+    void *x50;                // some buffer alloc'd @ 803a5ba0
     GOBJ *gobj;               // 0x54
     void *callback;           // 0x58, read at 803a878c
     u8 *text_start;           // 0x5C, start parsing text data at this ptr
     u8 *text_end;             // 0x60, stops parsing text data at this ptr
     TextAllocInfo *allocInfo; // 0x64
     void *x68;                // 0x68, some alloc used for dialogue?
-    u16 x6c;                  // 0x6c
+    u16 x6c;                  // 0x6c, flags of some kind
     u16 x6e;                  // 0x6e
-    int x70;                  // 0x70
-    int x74;                  // 0x74
-    int x78;                  // 0x78
-    int x7c;                  // 0x7c
-    int x80;                  // 0x80
-    int x84;                  // 0x84
-    int x88;                  // 0x88
-    int x8c;                  // 0x8c
-    int x90;                  // 0x90
+    float x70;                // 0x70
+    float x74;                // 0x74
+    float x78;                // 0x78
+    float x7c;                // 0x7c
+    float x80;                // 0x80
+    float x84;                // 0x84
+    float x88;                // 0x88
+    GXColor x8c;              // 0x8c, temp color storage when processing text opcodes. 803a8d7c
+    u16 x90;                  // 0x90
+    u16 x92;                  // 0x92
     int x94;                  // 0x94
     int char_display_num;     // 0x98, how many characters to display
     u8 is_fit;                // 0x9c
+    u8 x9d;                   // 0x9d
+    u8 x9e;                   // 0x9e, checked per character, 1 and 2 are valid inputs. updates the float @ x70
+    u8 x9f;                   // 0x9f
     int x100;                 // 0x100
 };
 
@@ -103,6 +106,6 @@ static TextAllocInfo **stc_textcanvas_first = (TextAllocInfo **)(R13 + (-0x3d24)
 
 // Sis Library
 static HSD_Archive **stc_sis_archives = (HSD_Archive **)0x804d1110; // array of sis file archive pointers
-static void **stc_sis_data = (void **)0x804d1124;            // array of loaded sis data
+static void **stc_sis_data = (void **)0x804d1124;                   // array of loaded sis data
 
 #endif
