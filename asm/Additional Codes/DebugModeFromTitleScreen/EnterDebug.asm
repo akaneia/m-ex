@@ -8,9 +8,13 @@ bge DebugModeOn
 
 # check for debug menu
   rlwinm.	r3, r0, 0, 0x800
-  beq Exit
-
-# enter debug menu
+  beq CheckSoundTest
   branch r0, 0x801b0920
+
+CheckSoundTest:
+# check for sound test menu
+  rlwinm.	r3, r0, 0, 0x400
+  beq Exit
+  branch r0, 0x801b090c
 
 Exit:
