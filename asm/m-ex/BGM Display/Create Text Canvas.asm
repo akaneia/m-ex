@@ -1,4 +1,4 @@
-#To be inserted @ 802ff064
+#To be inserted @ 802f3a48
 .include "../../Globals.s"
 .include "../Header.s"
 
@@ -14,6 +14,8 @@ backup
 # get ifall archive info
   load r3,0x804d6d5c
   lwz r3,0x0(r3)
+  cmpwi r3,0
+  beq Exit
 # get symbol from ifall
   bl  BGMSymbol
   mflr r4
@@ -22,7 +24,7 @@ backup
   beq Exit
 #Create Text Canvas on this CObj
   li r3,2
-  mr r4,REG_GObj
+  li r4,-1
   li r5,14
   li r6,15
   li r7,0
@@ -39,5 +41,5 @@ blrl
 
 Exit:
   restore
-  li	r3, 14
+  lwz	r0, 0x002C (sp)
   

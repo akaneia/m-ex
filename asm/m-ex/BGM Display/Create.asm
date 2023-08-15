@@ -99,7 +99,7 @@ backup
   li r3,2
   #load r4,0x804a1f58
   #lwz r4,0x0(r4)
-  li r4,1     # shit code, cause i dont want to store a static variable
+  li r4,2     # shit code, cause i dont want to store a static variable
   branchl r12,0x803a6754
   mr REG_Text,r3
   stw REG_Text,0x0(REG_Userdata)
