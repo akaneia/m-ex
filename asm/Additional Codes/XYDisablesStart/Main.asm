@@ -4,8 +4,11 @@
 #Check if pressing start
   rlwinm. r3,r0,0,0x1000
   beq Injection_Exit
-  #Check if also holding X+Y
-  rlwinm. r3,r0,0,0xC00
+  #Check if also holding X
+  rlwinm. r3,r0,0,0x400
+  beq Injection_Exit
+  #Check if also holding Y
+  rlwinm. r3,r0,0,0x800
   beq Injection_Exit
 #Remove the start input
   li  r3,0
