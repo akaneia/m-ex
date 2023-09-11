@@ -371,7 +371,7 @@ struct itCommonAttr
     float ecb_bot;              // 0x44
     float ecb_right;            // 0x48
     float ecb_left;             // 0x4c
-    int x50;                    // 0x50
+    float weight;               // 0x50
     int x54;                    // 0x54
     int x58;                    // 0x58
     int x5c;                    // 0x5c
@@ -666,7 +666,7 @@ struct ItemData
         int total;                                      // 0xc9c
         int recent;                                     // 0xca0
         int xca4;                                       // 0xca4
-        int xca8;                                       // 0xca8, hitlag related
+        int xca8;                                       // 0xca8, hitlag related, stems from the damage dealt 8026a41c
         int angle;                                      // 0xcac
         int source_ply;                                 // 0xcb0, damage source ply number
         int xcb4;                                       // 0xcb4
@@ -684,9 +684,9 @@ struct ItemData
         float xce4;                                     // 0xce4
         float xce8;                                     // 0xce8
         GOBJ *source_fighter;                           // 0xcec
-        GOBJ *source_item;                              // 0xcf0, is a fighter gobj, but is the owner of the fighter that hit the item
+        GOBJ *source_item;                              // 0xcf0, is a fighter gobj, but is the owner of the item that hit the item
     } dmg;                                              //
-    GOBJ *fighter_unk;                                  // 0xcf4, fighter that hit or got hit by this item? idk what to call this
+    GOBJ *hit_fighter;                                  // 0xcf4, fighter that got hit by, shielded, or hit this item. is removed after processing the damage callbacks
     GOBJ *detected_fighter;                             // 0xcf8, fighter that touched the items detect box. updated @ 800798d4
     int xcfc;                                           // 0xcfc
     GOBJ *grabbed_fighter;                              // 0xd00
@@ -788,7 +788,8 @@ struct ItemData
     u16 rotate_axis : 3;                                // 0xdcb, 0x18
     u16 flags4 : 2;                                     // 0xdcb, 0x30
     u16 can_nudge : 1;                                  // 0xdcb, 0x08
-    u16 xdcb_7 : 3;                                     // 0xdcb, 0x07
+    u16 xdcb_5 : 2;                                     // 0xdcb, 0x06
+    u16 xdcb_7 : 1;                                     // 0xdcb, 0x01
     unsigned char xdcc1 : 1;                            // 0xdcc, 0x80
     unsigned char xdcc2 : 1;                            // 0xdcc, 0x40
     unsigned char xdcc3 : 1;                            // 0xdcc, 0x20
@@ -801,9 +802,9 @@ struct ItemData
     unsigned char no_play_hold_drop_throw_sfx : 1;      // 0xdcd, 0x20
     unsigned char xdcd4 : 1;                            // 0xdcd, 0x10
     unsigned char xdcd5 : 1;                            // 0xdcd, 0x08
-    unsigned char xdcd6 : 1;                            // 0xdcd, 0x04
-    unsigned char xdcd7 : 1;                            // 0xdcd, 0x02
-    unsigned char xdcd8 : 1;                            // 0xdcd, 0x01
+    unsigned char xdcd6 : 1;                            // 0xdcd, 0x04 (function 80275444 sets this when some items hit ground)
+    unsigned char xdcd7 : 1;                            // 0xdcd, 0x02 (function 80275444 sets this when some items hit ground)
+    unsigned char xdcd8 : 1;                            // 0xdcd, 0x01 (function 80275444 sets this when some items hit ground)
     unsigned char xdce1 : 1;                            // 0xdce, 0x80
     unsigned char xdce2 : 1;                            // 0xdce, 0x40
     unsigned char xdce3 : 1;                            // 0xdce, 0x20
