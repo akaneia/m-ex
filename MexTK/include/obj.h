@@ -309,6 +309,15 @@ struct MatAnimJointDesc
     void *matanim;
 };
 
+struct AnimJointDesc
+{
+    AnimJointDesc *child;
+    AnimJointDesc *next;
+    void *aobj;
+    int flags;
+    int flags2;
+};
+
 struct COBJDesc
 {
     char *class_name;                    // 0x00

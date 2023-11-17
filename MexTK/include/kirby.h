@@ -22,4 +22,9 @@ struct FtVarKirby
     FtPartsVis ftparts_vis; // 0x2250
 };
 
+void AS_CaptureWaitKirbyItem(GOBJ *item);
+void AS_CaptureWaitKirby(GOBJ *);
+void Kirby_ResetCopyCharVars(GOBJ *fighter, int ft_kind);
+void Kirby_ExecuteAbilityLossFunction(GOBJ *fighter, int ft_kind);
+
 #endif

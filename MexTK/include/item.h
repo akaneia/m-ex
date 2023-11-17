@@ -691,7 +691,10 @@ struct ItemData
     int xcfc;                                           // 0xcfc
     GOBJ *grabbed_fighter;                              // 0xd00
     GOBJ *attacker_item;                                // 0xd04
-    int xd08;                                           // 0xd08
+    u8 xd08;                                           // 0xd08
+    u8 xd09;                                           // 0xd09
+    u8 xd0A;                                           // 0xd0A
+    u8 xd0B;                                           // 0xd0B
     GOBJ *xd0c;                                         // 0xd0c
     int xd10;                                           // 0xd10
     struct                                              // cb
@@ -1021,6 +1024,7 @@ int Item_GenerateHitExceptionID();
 int Item_CheckHeavy(GOBJ *item);
 void Item_SetUngrabbable(GOBJ *item);
 void Item_SetJobjHidden(GOBJ *item);
+float Item_GetHitboxDamage(GOBJ *item);
 void Item_SetHitboxDamage(itHit *hitbox, int damage, GOBJ *item);
 void Item_RemoveAllHitboxes(GOBJ *item);
 void Item_SetHurtboxTangibility(GOBJ *item, int tangibility);
@@ -1028,9 +1032,12 @@ void Item_CreateHurtbox(GOBJ *item, float x1, float y1, float z1, float x2, floa
 void Item_UpdateHurtboxes(GOBJ *item);
 void Item_UpdateAnimationAndScriptTimers(GOBJ *item);
 void Item_ClearVelocity(GOBJ *item);
+void Item_ResetVelocity(GOBJ *item);
 void Item_UpdateECBTopN(GOBJ *item);
 int Item_GetWallCollFlags(GOBJ *item);
 void Item_UpdateHitboxDamage(itHit *hit, int dmg, GOBJ *item);
 GOBJ *Item_GiveOwnershipToAttacker(GOBJ *item);
 char Item_GetHoldKind(GOBJ *item);
+float Item_GetDistanceFromPointSquared(GOBJ *item, Vec3 *position);
+void Item_DestroyAndRemovedGrabbed(GOBJ *item, int flag, float damage);
 #endif

@@ -47,6 +47,7 @@ typedef struct GXList GXList;
 typedef struct JOBJ JOBJ;
 typedef struct JOBJDesc JOBJDesc;
 typedef struct MatAnimJointDesc MatAnimJointDesc;
+typedef struct AnimJointDesc AnimJointDesc;
 typedef struct DOBJ DOBJ;
 typedef struct TOBJ TOBJ;
 typedef struct AOBJ AOBJ;

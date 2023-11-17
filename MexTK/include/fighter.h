@@ -1364,13 +1364,13 @@ struct ftCommonData
     int meteor_lockout;              // 0x1c
     float lstick_tilt;               // 0x20
     float x24;                       // 0x24
-    float x28;                       // 0x28
-    float x2c;                       // 0x2c
+    float walk_anim_mid_percentage;  // 0x28
+    float walk_anim_fast_percentage; // 0x2c
     float x30;                       // 0x30
     float x34;                       // 0x34
     float x38;                       // 0x38
-    float x3c;                       // 0x3c
-    float x40;                       // 0x40
+    float dash_min_stick;            // 0x3c
+    int dash_min_stick_tilt;         // 0x40
     float x44;                       // 0x44
     float x48;                       // 0x48
     float x4c;                       // 0x4c
@@ -1988,7 +1988,7 @@ struct FighterData
         int x1E0;                                              // 0x1E0
         int x1E4;                                              // 0x1E4
         int x1E8;                                              // 0x1E8
-        int x1EC;                                              // 0x1EC
+        float kirby_star_scaling;                              // 0x1EC
         float kirby_b_star_damage;                             // 0x1F0
         float normal_landing_lag;                              // 0x1F4
         float n_air_landing_lag;                               // 0x1F8
@@ -2365,7 +2365,7 @@ struct FighterData
         int x1a54;                        // 0x1a54
         GOBJ *attacker;                   // 0x1a58
         GOBJ *victim;                     // 0x1a5c
-        int x1a60;                        // 0x1a60
+        GOBJ *item;                        // 0x1a60
         int x1a64;                        // 0x1a64
         u16 x1a68;                        // 0x1a68
         u16 vuln;                         // 0x1a6a
@@ -2745,10 +2745,11 @@ struct FighterData
     int x2304;                     // 0x2304
     int x2308;                     // 0x2308
     int x230c;                     // 0x230c
-    int x2310;                     // 0x2310
-    int x2314;                     // 0x2314
-    int x2318;                     // 0x2318
-    int x231c;                     // 0x231c
+    u16 x2310;                     // 0x2310
+    u16 x2312;                     // 0x2312
+    float x2314;                   // 0x2314
+    float x2318;                   // 0x2318
+    float x231c;                   // 0x231c
     int x2320;                     // 0x2320
     int stage_internal;            // 0x2324 so stupid, used for decrementing hazard immunity
     int x2328;                     // 0x2328
@@ -3208,6 +3209,7 @@ void Fighter_ExitHitlag(GOBJ *fighter);
 int FrameTimerCheck(GOBJ *fighter);
 void Fighter_EnterMiscPassState(float start_frame, GOBJ *fighter, int state, int flags);
 int Fighter_CollGround_PassLedge(GOBJ *fighter);
+void Fighter_CollGround_PassLedgeCB(GOBJ *fighter, void *callback);
 int Fighter_CollGround_StopLedge(GOBJ *fighter); // returns is_grounded
 void Fighter_CollGround_StopLedge_EnterFall(GOBJ *fighter);
 int Fighter_CollAir_GrabFacingLedgeWalljump(GOBJ *fighter, void *perFrame, void *onLand); // this will handle entering cliffcatch / walljump. all in one collision func
@@ -3358,7 +3360,7 @@ void Fighter_DamageRumble(FighterData *fp, int dmg);                            
 void Fighter_RumbleExecute(FighterData *fp, int strength, int unk);
 void Fighter_CheckKnockbackModifiers(FighterData *fp); // 8008d930
 int Fighter_GetCurrentPlacing(int ply);
-void Fighter_StoreGrabBreakout(FighterData *fp, float amt);
+void Fighter_StoreGrabBreakout(FighterData *fp, int flags, float amt);
 int Fighter_CheckGrabBreakout(FighterData *fp, float mash_amt); // returns 1 if inputted something
 void Fighter_SetAnimRate(GOBJ *f, float rate);
 int Fighter_CheckJumpInput(GOBJ *f);
@@ -3380,6 +3382,17 @@ void Fighter_RumbleController(GOBJ *f, int unk1, int unk2);
 void Fighter_GetLeftStick(GOBJ *fighter_gobj, float *stick_x, float *stick_y);
 void Fighter_ClampMaxAirDrift(FighterData *fighter_gobj);
 void Fighter_UpdateHitboxDamage(ftHit *hit, int dmg, GOBJ *f);
+void Fighter_GetCollisionSlope(GOBJ *fighter, Vec3 *position);
+void Fighter_ThrowVictim(GOBJ *f, GOBJ *victim, int param_3);
+void Fighter_StoreAccessoryJObj(FighterData *fd, JOBJDesc *jobj_desc);
+void Fighter_ResetModelScale(GOBJ *fighter);
+void Fighter_AddPlayerException(FighterData *fd, GOBJ *target);
+void Fighter_EnterCaptureCut(GOBJ *fighter);
+void Fighter_EnterCatchCut(GOBJ *fighter, int victim_enter_capturecut);
+void Fighter_SetGrabbableFlag(GOBJ *fighter, int);
+float Fighter_GetDistanceFromPointSquared(GOBJ *fighter, Vec3 *position);
+int Fighter_CheckNotWalkInput(GOBJ *fighter);
+int Fighter_CheckWalkInput(GOBJ *fighter);
 void GXLink_Fighter(GOBJ *f, int pass);
 void Fighter_MultiJump_TurnThink(FighterData *fp, int turn_frames);
 int Fighter_CheckFootstool(GOBJ *f);

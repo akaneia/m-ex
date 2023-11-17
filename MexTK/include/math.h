@@ -10,6 +10,27 @@
 #define M_1DEGREE (0.0174533)
 #define M_NAN ((float)(INFINITY * 0.0F))
 
+/// @brief 
+/// @param v
+/// @return the absolute value of a given float
+inline float fabs(float v)
+{
+    if (v < 0)
+        return -v;
+    else
+        return v;
+}
+/// @brief 
+/// @param v a float value
+/// @return the sign of x
+inline float sign(float v)
+{
+    if (v >= 0.0) 
+        return 1.0;
+    else 
+        return -1.0;
+}
+
 /*** Functions ***/
 // float fmod(float a, float b);
 // float atan(float in);
