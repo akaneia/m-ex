@@ -1,6 +1,7 @@
 #ifndef MEX_H_COLOR
 #define MEX_H_COLOR
 
+#include "gx.h"
 #include "structs.h"
 #include "datatypes.h"
 

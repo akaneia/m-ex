@@ -56,6 +56,7 @@ enum MatchEndKind
 
 enum MatchPLinks
 {
+    // the game whitelists p_links 0,2,16,18,19,20,21,22,24+ to run on match pause
     MATCHPLINK_SYS,
     MATCHPLINK_1,
     MATCHPLINK_2,
@@ -86,7 +87,7 @@ enum MatchPLinks
 enum MatchGXLinks
 {
     MATCHGX_LIGHT,
-    MATCHGX_POKEMONITOR,
+    MATCHGX_POKEMONITOR, // hrc signs use this as well
     MATCHGX_FODREFLECT,
     MATCHGX_STAGE,
     MATCHGX_4,

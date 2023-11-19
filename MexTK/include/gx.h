@@ -424,6 +424,7 @@ void GXBegin(GXPrimitive type, GXVtxFmt vtxfmt, u16 nverts);
 void GXEnd();
 void GXPixModeSync();
 void GXInvalidateTexAll();
+void GXInvalidateVtxCache();
 void GXSetAlphaCompare(
     GXCompare func0, u8 reference0,
     GXAlphaOperation operation,

@@ -159,7 +159,7 @@ struct HSD_Obj
 struct GOBJ
 {
     short entity_class;      // 0x0
-    char p_link;             // 0x2
+    char p_link;             // 0x2, used to classify similar gobjs together.
     char gx_link;            // 0x3. 0-63 are gx. 64+ are reserved for camera objects
     char p_priority;         // 0x4
     char gx_pri;             // 0x5
@@ -381,13 +381,18 @@ struct JOBJ
     JOBJ *child;      // 0x10
     int flags;        // 0x14
     DOBJ *dobj;       // 0x18
-    Vec4 rot;         // 0x1C 0x20 0x24 0x28
-    Vec3 scale;       // 0x2C
-    Vec3 trans;       // 0x38
-    Mtx rotMtx;       // 0x44
-    Vec3 *VEC;        // 0x6C
-    Mtx *MTX;         // 0x78
-    AOBJ *aobj;       // 0x7C
+    //  union {        // 0x18
+    //     void* ptcl;
+    //     DOBJ* dobj;
+    //     HSD_Spline* spline;
+    // } u;
+    Vec4 rot;   // 0x1C 0x20 0x24 0x28
+    Vec3 scale; // 0x2C
+    Vec3 trans; // 0x38
+    Mtx rotMtx; // 0x44
+    Vec3 *VEC;  // 0x6C
+    Mtx *MTX;   // 0x78
+    AOBJ *aobj; // 0x7C
     int *RObj;
     JOBJDesc *desc;
 };
@@ -640,16 +645,16 @@ struct HSD_SObjDesc
 };
 
 /*** Static Variables ***/
-GOBJList **stc_gobj_list = R13 + (-0x3E74);
-GOBJ ***stc_gobj_lookup = R13 + (-0x3E74);
-u8 *stc_gobj_proc_num = 0x804ce382;            // number of elements in the below array
-GOBJProc ***stc_gobjproc_lookup = 0x804D7840;  // array of gobj procs ptrs
-GOBJProc **stc_gobjproc_cur = (R13 + -0x3E68); // current gobj proc being processed
-u8 *objkind_sobj = R13 + -(0x3D40);
-u8 *objkind_cobj = R13 + -(0x3E55);
-u8 *objkind_lobj = R13 + -(0x3E56);
-u8 *objkind_jobj = R13 + -(0x3E57);
-u8 *objkind_fog = R13 + -(0x3E58);
+static GOBJList **stc_gobj_list = R13 + (-0x3E74);
+static GOBJ ***stc_gobj_lookup = R13 + (-0x3E74);
+static u8 *stc_gobj_proc_num = 0x804ce382;            // number of elements in the below array
+static GOBJProc ***stc_gobjproc_lookup = 0x804D7840;  // array of gobj procs ptrs
+static GOBJProc **stc_gobjproc_cur = (R13 + -0x3E68); // current gobj proc being processed
+static u8 *objkind_sobj = R13 + -(0x3D40);
+static u8 *objkind_cobj = R13 + -(0x3E55);
+static u8 *objkind_lobj = R13 + -(0x3E56);
+static u8 *objkind_jobj = R13 + -(0x3E57);
+static u8 *objkind_fog = R13 + -(0x3E58);
 
 /*** Functions ***/
 int JOBJ_GetWorldPosition(JOBJ *source, Vec3 *add, Vec3 *dest);
@@ -688,8 +693,8 @@ void JOBJ_CompileTEVAllMOBJ(JOBJ *joint);
 void JObj_DispAll(JOBJ *joint, Mtx *vmtx, int flags, int rendermode);
 void JOBJ_AttachPosition(JOBJ *to_attach, JOBJ *attach_to);
 void JOBJ_AttachPositionRotation(JOBJ *to_attach, JOBJ *attach_to);
-GOBJ *JOBJ_LoadSet(int is_hidden, JOBJSet *set, int anim_id, float frame, int gobj_subclass, int gx_link, int is_add_anim, void *cb); // 8019035c
-void JOBJ_AddSetAnim(JOBJ *jobj, JOBJSet *set, int anim_id);                                                                          // 8016895c
+GOBJ *JOBJ_LoadSet(int is_hidden, JOBJSet *set, int anim_id, float frame, int p_link, int gx_link, int is_add_anim, void *cb); // 8019035c
+void JOBJ_AddSetAnim(JOBJ *jobj, JOBJSet *set, int anim_id);                                                                   // 8016895c
 void JOBJ_Detach(JOBJ *to_attach);
 void JOBJ_ResetFromDesc(JOBJ *, JOBJDesc *);
 void JOBJ_RemoveAnimByFlags(JOBJ *, int);
@@ -709,6 +714,7 @@ void CObjThink_Common(GOBJ *gobj);
 int CObj_SetCurrent(COBJ *cobj);
 void CObj_SetEraseColor(int r, int g, int b, int a);
 void CObj_EraseScreen(COBJ *cobj, int unk, int unk2, int unk3);
+void CObj_UpdateAll();
 void CObj_RenderGXLinks(GOBJ *gobj, int render_mode);
 void CObj_EndCurrent();
 void CObj_SetOrtho(COBJ *cobj, float top, float bottom, float left, float right);
@@ -726,14 +732,14 @@ void COBJ_GetInterest(COBJ *cobj, Vec3 *interest);
 float COBJ_GetEyeDistance(COBJ *cobj);
 void COBJ_GetViewingMtx(COBJ *cobj, Mtx *out);
 Mtx *COBJ_SetupViewingMtx(COBJ *cobj);
-GOBJ *GObj_Create(int entity_class, int p_link, int flags);
+GOBJ *GObj_Create(int entity_class, int p_link, int p_priority);
 void GObj_Destroy(GOBJ *gobj);
 void GObj_AddGXLink(GOBJ *gobj, void *cb, int gx_link, int gx_pri);
 void GObj_DestroyGXLink(GOBJ *gobj);
 void GObj_GXReorder(GOBJ *gobj, int unk);
 void GObj_AddProc(GOBJ *gobj, void *callback, int priority);
 void GObj_RemoveProc(GOBJ *gobj);
-void GObj_AddObject(GOBJ *gobj, u8 unk, void *object);
+void GObj_AddObject(GOBJ *gobj, u8 obj_kind, void *object);
 void GObj_FreeObject(GOBJ *gobj);
 void GObj_AddUserData(GOBJ *gobj, int userDataKind, void *destructor, void *userData);
 void GOBJ_InitCamera(GOBJ *gobj, void *cb, int gx_pri);
@@ -742,6 +748,7 @@ void *GObj_AddRenderObject(GOBJ *gobj, int width, int height);
 void GObj_ProcUnk(GOBJ *gobj);
 void GObj_DestroyByPLink(int p_link);                           // destroys all gobjs with p_link X
 void GObj_DestroyByPLinkRange(int p_link_low, int p_link_high); // destroys all gobjs of p_link_low -> p_link_high
+void GObj_UpdateAll();
 void GXLink_Common(GOBJ *gobj, int pass);
 int GX_LookupRenderPass(int pass);
 void GXLink_LObj(GOBJ *gobj, int pass);

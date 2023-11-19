@@ -32,6 +32,27 @@ static inline int abs(int x)
         return x;
 }
 
+static float ceil(float x)
+{
+    int integerPart = x; // Get the integer part of the number
+
+    if (x == (float)integerPart)
+    {
+        // No fractional part, return the number as is
+        return x;
+    }
+    else if (x > 0)
+    {
+        // Positive number with a fractional part, return the next integer
+        return integerPart + 1;
+    }
+    else
+    {
+        // Negative number with a fractional part, return the current integer
+        return integerPart;
+    }
+}
+
 static void enterKnockback(GOBJ *fighter, int angle, float mag)
 {
     FighterData *fighter_data = ((FighterData *)fighter->userdata);
@@ -40,7 +61,7 @@ static void enterKnockback(GOBJ *fighter, int angle, float mag)
     fighter_data->dmg.hit_log.force_applied = mag;
     fighter_data->dmg.hit_log.kb_angle = angle;
     fighter_data->dmg.hit_log.direction = fighter_data->facing_direction;
-    fighter_data->dmg.hit_log.damaged_hurtbox = 0;
+    fighter_data->dmg.hit_log.hurt_kind = 0;
     fighter_data->dmg.applied = 0;
     fighter_data->dmg.hit_log.attribute = 0;
     fighter_data->dmg.hit_log.collpos.X = fighter_data->phys.pos.X;

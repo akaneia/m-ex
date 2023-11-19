@@ -77,8 +77,8 @@ enum ItemID
     ITEM_LINKARROW,
     ITEM_CLINKARROW,
     ITEM_NESSPKFIRE,
-    ITEM_NESSPKFLASH1,
-    ITEM_NESSPKFLASH2,
+    ITEM_NESSPKFIREEXPLODE,
+    ITEM_NESSPKFLASH,
     ITEM_NESSPKTHUNDER,
     ITEM_NESSPKTHUNDER1,
     ITEM_NESSPKTHUNDER2,
@@ -88,7 +88,7 @@ enum ItemID
     ITEM_FALCOGUN,
     ITEM_LINKBOW,
     ITEM_CLINKBOW,
-    ITEM_PKFLASHEXPLODE,
+    ITEM_NESSPKFLASHEXPLODE,
     ITEM_SHEIKNEEDLETHROWN,
     ITEM_SHEIKNEEDLEHELD,
     ITEM_PIKACHUTHUNDER,
@@ -549,9 +549,26 @@ struct ItemData
     int xac;                                            // 0xac
     int xb0;                                            // 0xb0
     int xb4;                                            // 0xb4
-    void *it_cb;                                        // 0xb8, global item callbacks
+    struct                                              //
+    {                                                   //
+        ItemState *item_states;                         // 0x0
+        void (*OnCreate)(GOBJ *item);                   // 0x4
+        void (*OnDestroy)(GOBJ *item);                  // 0x8
+        void (*OnPickup)(GOBJ *item);                   // 0xC
+        void (*OnDrop)(GOBJ *item);                     // 0x10
+        void (*OnThrow)(GOBJ *item);                    // 0x14
+        int (*OnGiveDamage)(GOBJ *item);                // 0x18, returns isDestroy
+        int (*OnTakeDamage)(GOBJ *item);                // 0x1c, returns isDestroy
+        void (*OnEnterAir)(GOBJ *item);                 // 0x20
+        void (*OnReflect)(GOBJ *item);                  // 0x24
+        void (*x28)(GOBJ *item);                        // 0x28
+        void (*x2c)(GOBJ *item);                        // 0x2c
+        int (*OnShieldBounce)(GOBJ *item);              // 0x30, returns isDestroy
+        int (*OnShieldHit)(GOBJ *item);                 // 0x34, returns isDestroy
+        void (*x38)(GOBJ *item);                        // 0x38
+    } *it_func;                                         // 0xb8, persistent item callbacks
     ItemState *item_states;                             // 0xbc
-    int air_state;                                      // 0xc0, also air state?? 802e4ff4 octorock
+    int air_state;                                      // 0xc0
     itData *itData;                                     // 0xc4
     JOBJ *joint;                                        // 0xc8
     itCommonAttr *common_attr;                          // 0xcc
@@ -645,10 +662,10 @@ struct ItemData
         int xc48;                                       // 0xc48
         int xc4c;                                       // 0xc4c
         int xc50;                                       // 0xc50
-        int xc54;                                       // 0xc54
-        int xc58;                                       // 0xc58
-        int xc5c;                                       // 0xc5c
-        int xc60;                                       // 0xc60
+        float shield_hit_angle;                         // 0xc54, angle at which the projectile touched the shield? 80077854
+        float shield_hit_xc58;                          // 0xc58
+        float shield_hit_xc5c;                          // 0xc5c
+        float shield_hit_xc60;                          // 0xc60
         GOBJ *reflect;                                  // 0xc64, pointer to the gobj that reflected this item, is removed after processing the reflection
         float xc68;                                     // 0xc68
         int xc6c;                                       // 0xc6c
@@ -691,10 +708,10 @@ struct ItemData
     int xcfc;                                           // 0xcfc
     GOBJ *grabbed_fighter;                              // 0xd00
     GOBJ *attacker_item;                                // 0xd04
-    u8 xd08;                                           // 0xd08
-    u8 xd09;                                           // 0xd09
-    u8 xd0A;                                           // 0xd0A
-    u8 xd0B;                                           // 0xd0B
+    u8 xd08;                                            // 0xd08
+    u8 xd09;                                            // 0xd09
+    u8 xd0A;                                            // 0xd0A
+    u8 xd0B;                                            // 0xd0B
     GOBJ *xd0c;                                         // 0xd0c
     int xd10;                                           // 0xd10
     struct                                              // cb
@@ -813,7 +830,7 @@ struct ItemData
     unsigned char xdce3 : 1;                            // 0xdce, 0x20
     unsigned char xdce4 : 1;                            // 0xdce, 0x10
     unsigned char xdce5 : 1;                            // 0xdce, 0x08
-    unsigned char xdce6 : 1;                            // 0xdce, 0x04
+    unsigned char xdce6 : 1;                            // 0xdce, 0x04, is checked when determining if an item should bounce off a shield 80269df0
     unsigned char is_detect : 1;                        // 0xdce, 0x02, is flipped when a detect hitbox comes in contact with a hurtbox
     unsigned char xdce8 : 1;                            // 0xdce, 0x01
     unsigned char xdcf1 : 1;                            // 0xdcf, 0x80

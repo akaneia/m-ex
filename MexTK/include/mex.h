@@ -173,7 +173,7 @@ int MEX_GetFtItemID(GOBJ *f, int item_id);
 int MEX_GetGrItemID(int item_id);
 int MEX_GetSSMID(SSMKind ssm_kind, int kind); // ssm_kind, 0 = fighter, 1 = stage | kind is the c_kind / gr_kind
 void MEX_RelocRelArchive(void *xFunction);
-void SFX_PlayStageSFX(int sfx_id); // use index relative to the ssm (start at 0)
+int SFX_PlayStageSFX(int sfx_id); // use index relative to the ssm (start at 0)
 void *calloc(int size);
 MEXPlaylist *MEX_GetPlaylist();
 // void KirbyStateChange(GOBJ *fighter, int state, float startFrame, float animSpeed, float animBlend);
@@ -181,7 +181,7 @@ void KirbyStateChange(float anim_start_frame, float anim_rate, float anim_blend,
 void *MEX_GetKirbyCpData(int copy_id);
 void *MEX_GetData(int index);
 
-void MEX_InitRELDAT(HSD_Archive *archive, char *symbol_name, int *return_func_array)
+static void MEX_InitRELDAT(HSD_Archive *archive, char *symbol_name, int *return_func_array)
 {
     MEXFunction *mex_function = Archive_GetPublicAddress(archive, symbol_name);
 
@@ -194,6 +194,16 @@ void MEX_InitRELDAT(HSD_Archive *archive, char *symbol_name, int *return_func_ar
         MEXFunctionTable *this_func = &mex_function->func_reloc_table[i];
         return_func_array[i] = &mex_function->code[this_func->code_offset];
     }
+}
+static int MEX_PlayStageSoundRaw(int sfxid, int volume, int panning)
+{
+    // get soundbank id
+    MexData *md = MEX_GetData(MXDT_MEXDATA);
+    int internal_id = Stage_ExternalToInternal(Stage_GetExternalID());
+    int bank = md->stage->sound_table[internal_id].ssmid * 10000;
+
+    // play sound
+    return SFX_PlayRaw(bank + sfxid, volume, panning, 0, 6);
 }
 
 #endif

@@ -50,6 +50,13 @@ enum DebugLevel
     DB_DEVELOP,       //
 };
 
+enum PauseKind
+{
+    PAUSEKIND_OFF,  // off
+    PAUSEKIND_SYS,  // debug pause (uses Z to frame advance)
+    PAUSEKIND_GAME, // match pause (i dont think any other scene uses this?)
+};
+
 /*** Structs ***/
 
 struct HSD_ObjAllocData
@@ -149,8 +156,7 @@ struct HSD_Update
     int (*checkPause)();                  // 0x14 returns 1 when toggling pause
     int (*checkAdvance)();                // 0x18 returns 1 when advancing frame
     u32 x1c;                              // 0x1C
-    u32 x20;
-    u32 x24;
+    u64 plink_whitelist;                  // 0x20, code @ 801a4eac determines which gobj plinks to allow when changing the pause state.
     u32 x28;
     u32 x2c;
     void (*onFrame)(); // 0x30
@@ -257,8 +263,14 @@ void HSD_StateSetZMode(GXBool compare_enable, GXCompare func, GXBool update_enab
 void HSD_StateSetNumChans(u8 nChans);
 void HSD_SetupChannel(void *unk);
 void HSD_ClearVtxDesc();
+void HSD_VICopyXFBASync();
 void HSD_GXProject(COBJ *cobj, Vec3 *in, Vec3 *out, int unk);
 void HSD_UpdateDiscAndCardStatus();
+void HSD_PadFlushQueue(int);
+void HSD_PadRenewStatus();
+void HSD_PadRenewMasterStatus();
+void HSD_PadRenewCopyStatus();
+void HSD_PadRenewUpdateStruct();
 void GX_AllocImageData(_HSD_ImageDesc *image_desc, int width, int height, int fmt, int size); // image data buffer is stored to the image_desc
 void GXTexModeSync();
 void GXPixModeSync();

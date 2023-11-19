@@ -153,23 +153,23 @@ enum FtPri
 #define FIGHTER_FASTFALL_PRESERVE 0x1
 #define FIGHTER_GFX_PRESERVE 0x2
 #define FIGHTER_HITSTATUS_COLANIM_PRESERVE 0x4 // Preserve full body collision state //
-#define FIGHTER_HIT_NOUPDATE 0x8 // Keep hitboxes
-#define FIGHTER_MODEL_NOUPDATE 0x10 // Ignore model state change (?) 
+#define FIGHTER_HIT_NOUPDATE 0x8               // Keep hitboxes
+#define FIGHTER_MODEL_NOUPDATE 0x10            // Ignore model state change (?)
 #define FIGHTER_ANIMVEL_NOUPDATE 0x20
 #define FIGHTER_UNK_0x40 0x40
-#define FIGHTER_MATANIM_NOUPDATE 0x80 // Ignore switching to character's "hurt" textures (?) //
+#define FIGHTER_MATANIM_NOUPDATE 0x80          // Ignore switching to character's "hurt" textures (?) //
 #define FIGHTER_THROW_EXCEPTION_NOUPDATE 0x100 // Resets thrower GObj pointer to NULL if false? //
 #define FIGHTER_SFX_PRESERVE 0x200
 #define FIGHTER_PARASOL_NOUPDATE 0x400 // Ignore Parasol state change //
-#define FIGHTER_RUMBLE_NOUPDATE 0x800 // Ignore rumble update? //
+#define FIGHTER_RUMBLE_NOUPDATE 0x800  // Ignore rumble update? //
 #define FIGHTER_COLANIM_NOUPDATE 0x1000
 #define FIGHTER_ACCESSORY_PRESERVE 0x2000 // Keep respawn platform? //
-#define FIGHTER_CMD_UPDATE 0x4000 // Run all Subaction Events up to the current animation frame //
+#define FIGHTER_CMD_UPDATE 0x4000         // Run all Subaction Events up to the current animation frame //
 #define FIGHTER_NAMETAGVIS_NOUPDATE 0x8000
 #define FIGHTER_PART_HITSTATUS_COLANIM_PRESERVE 0x10000 // Assume this is for individual bones? //
 #define FIGHTER_SWORDTRAIL_PRESERVE 0x20000
 #define FIGHTER_ITEMVIS_NOUPDATE 0x40000 // Used by Ness during Up/Down Smash, I suppose this is what the flag does //
-#define FIGHTER_SKIP_UNK_0x2222 0x80000 // Skips updating bit 0x20 of 0x2222? //
+#define FIGHTER_SKIP_UNK_0x2222 0x80000  // Skips updating bit 0x20 of 0x2222? //
 #define FIGHTER_PHYS_UNKUPDATE 0x100000
 #define FIGHTER_FREEZESTATE 0x200000 // Sets anim rate to 0x and some other stuff
 #define FIGHTER_MODELPART_VIS_NOUPDATE 0x400000
@@ -179,11 +179,11 @@ enum FtPri
 #define FIGHTER_MODEL_FLAG_NOUPDATE 0x4000000
 #define FIGHTER_UNK_0x2227 0x8000000
 #define FIGHTER_HITSTUN_FLAG_NOUPDATE 0x10000000
-#define FIGHTER_ANIM_NOUPDATE 0x20000000 // Keeps current fp animation?
+#define FIGHTER_ANIM_NOUPDATE 0x20000000  // Keeps current fp animation?
 #define FIGHTER_UNK_0x40000000 0x40000000 // Unused?
 #define FIGHTER_UNK_0x80000000 0x80000000 // Unused?
 
-enum FtCommonBone
+enum FtCommonBoneNames
 {
     TopN,
     TransN,
@@ -1005,22 +1005,28 @@ struct FtDynamicHit
     int bone_index; // 0x1694, 0x24
 };
 
+struct FtSFXArr
+{
+    int num;
+    int *sfx_ids;
+};
+
 struct FtSFX
 {
-    int x0;         // 0x0
-    int death;      // 0x4
-    int metal_box;  // 0x8
-    int star_ko;    // 0xc
-    int jump;       // 0x10
-    int jump_air;   // 0x14
-    int escape;     // 0x18
-    int x1c;        // 0x1c
-    int x20;        // 0x20
-    int tech;       // 0x24
-    int cliffcatch; // 0x28
-    int heavy_lift; // 0x2c
-    int item_catch; // 0x30
-    int cheer;      // 0x34
+    FtSFXArr *smash;     // 0x0
+    int death;           // 0x4
+    int metal_box;       // 0x8
+    int star_ko;         // 0xc
+    int jump;            // 0x10
+    int jump_air;        // 0x14
+    int escape;          // 0x18
+    FtSFXArr *light_hit; // 0x1c
+    FtSFXArr *heavy_hit; // 0x20
+    int tech;            // 0x24
+    int cliffcatch;      // 0x28
+    int heavy_lift;      // 0x2c
+    int item_catch;      // 0x30
+    int cheer;           // 0x34
 };
 
 struct FtCollDesc
@@ -1159,7 +1165,7 @@ struct FtDmgLog
 {
     float direction;     // 0x1844, 0x0
     int kb_angle;        // 0x1848, 0x4
-    int damaged_hurtbox; // 0x184c, 0x8
+    int hurt_kind;       // 0x184c, 0x8. 0 = low, 1 = mid, 2 = hi (previously was called damaged_hurtbox)
     float force_applied; // 0x1850, 0xc
     Vec3 collpos;        // 0x1854, 0x10
     int attribute;       // 0x1860, 0x1c
@@ -1352,6 +1358,13 @@ struct FtDmgVibrateDesc
     int num;
 };
 
+struct ftCommonBone
+{
+    u8 *x0;
+    u8 *x4;
+    int bone_num;
+};
+
 struct ftCommonData
 {
     float x0;                        // 0x0
@@ -1443,9 +1456,9 @@ struct ftCommonData
     float x158;                      // 0x158
     float x15c;                      // 0x15c
     float x160;                      // 0x160
-    float x164;                      // 0x164
-    float x168;                      // 0x168
-    float kb_maxVelX;                // 0x16c
+    float kb_maxVelX;                // 0x164
+    float hitlag_mult;               // 0x168
+    float hitlag_base;               // 0x16c, is 0 in vanilla
     float x170;                      // 0x170
     float x174;                      // 0x174
     float x178;                      // 0x178
@@ -1892,19 +1905,8 @@ struct FighterData
     float facing_direction;                                    // 0x2C
     float facing_direction_prev;                               // 0x30
     Vec3 scale;                                                // 0x34
-    int pointer_to_next_linked_list;                           // 0x40
-    int pointer_to_0x40__pointer_to_prev_linked_list;          // 0x44
-    int length_of_linked_list;                                 // 0x48
-    int x4c;                                                   // 0x4C
-    int x50;                                                   // 0x50
-    int x54;                                                   // 0x54
-    int x58;                                                   // 0x58
-    int x5C;                                                   // 0x5C
-    int x60;                                                   // 0x60
-    int x64;                                                   // 0x64
-    int x68;                                                   // 0x68
-    int x6C;                                                   // 0x6C
-    int x70;                                                   // 0x70
+    int x40;                                                   // 0x40
+    Mtx temp_mtx;                                              // 0x44
     struct phys                                                // 0x74
     {                                                          //
         Vec3 anim_vel;                                         // 0x74
@@ -1972,7 +1974,7 @@ struct FighterData
         float initial_shield_size;                             // 0x1A0
         float shield_break_initial_velocity;                   // 0x1A4
         int rapid_jab_window;                                  // 0x1A8
-        int x1AC;                                              // 0x1AC
+        float rebound_frames;                                  // 0x1AC
         int x1B0;                                              // 0x1B0
         int x1B4;                                              // 0x1B4
         float ledge_jump_horizontal_velocity;                  // 0x1B8
@@ -1988,7 +1990,7 @@ struct FighterData
         int x1E0;                                              // 0x1E0
         int x1E4;                                              // 0x1E4
         int x1E8;                                              // 0x1E8
-        float kirby_star_scaling;                              // 0x1EC
+        int kirby_star_scaling;                                // 0x1EC
         float kirby_b_star_damage;                             // 0x1F0
         float normal_landing_lag;                              // 0x1F4
         float n_air_landing_lag;                               // 0x1F8
@@ -2182,132 +2184,132 @@ struct FighterData
     CameraBox *cameraBox;                     // 0x890
     struct state
     {
-        float frame; // 0x894, current frame of the animation
-        int x898;    // 0x898
-        float rate;  // 0x89C, current speed rate of the animation
-        int x8a0;    // 0x8a0
-        float blend; // 0x8a4, current interpolation value of the animation
-        float current_blend;    // 0x8a8
+        float frame;         // 0x894, current frame of the animation
+        int x898;            // 0x898
+        float rate;          // 0x89C, current speed rate of the animation
+        int x8a0;            // 0x8a0
+        float blend;         // 0x8a4, current interpolation value of the animation
+        float current_blend; // 0x8a8
     } state;
-    JOBJ *anim_skeleton;           // 0x8ac
-    int x8b0;                      // 0x8b0
-    int x8b4;                      // 0x8b4
-    int x8b8;                      // 0x8b8
-    int x8bc;                      // 0x8bc
-    int curr_hold_anim;            // 0x8c0
-    int x8c4;                      // 0x8c4
-    int x8c8;                      // 0x8c8
-    int x8cc;                      // 0x8cc
-    int x8d0;                      // 0x8d0
-    int x8d4;                      // 0x8d4
-    int x8d8;                      // 0x8d8
-    int x8dc;                      // 0x8dc
-    int x8e0;                      // 0x8e0
-    int x8e4;                      // 0x8e4
-    int x8e8;                      // 0x8e8
-    int x8ec;                      // 0x8ec
-    int x8f0;                      // 0x8f0
-    int x8f4;                      // 0x8f4
-    int x8f8;                      // 0x8f8
-    int x8fc;                      // 0x8fc
-    int x900;                      // 0x900
-    int x904;                      // 0x904
-    int x908;                      // 0x908
-    int x90c;                      // 0x90c
-    int x910;                      // 0x910
-    ftHit hitbox[4];               // 0x914
-    ftHit throw_hitbox[2];         // 0xdf4,
-    ftHit thrown_hitbox;           // 0x1064
-    u8 team_unk;                   // 0x119c, friendly fire related
-    u8 grabber_ply;                // 0x119D, slot ID of the person grabbing this fighter
-    u8 hurt_num;                   // 0x119E, number of hurtboxes
-    FtHurt hurtbox[15];            // 0x11A0
-    FtCoin coinbox[2];             // 0x1614
-    int dynamics_hit_num;          // 0x166c
-    FtDynamicHit dynamics_hit[11]; // 0x1670
-    float x1828;                   // 0x1828
-    struct dmg                     // 0x182c
-    {                              //
-        int behavior;              // 0x182c
-        float percent;             // 0x1830
-        int x1834;                 // 0x1834
-        float percent_temp;        // 0x1838
-        int applied;               // 0x183c
-        int x1840;                 // 0x1840
-        FtDmgLog hit_log;          // 0x1844, info regarding the last solid hit
-        FtDmgLog tip_log;          // 0x1870, info regarding the last phantom hit
-        float tip_hitlag;          // 0x189c, hitlag is stored here during phantom hits @ 8006d774
-        float tip_force_applied;   // 0x18a0, used to check if a tip happened this frame
-        float kb_mag;              // 0x18a4  kb magnitude
-        int x18a8;                 // 0x18a8
-        int time_since_hit;        // 0x18ac   in frames
-        float armor_unk;           // 0x18b0, is prioritized over the armor below
-        float armor;               // 0x18b4, used by yoshi double jump
-        Vec2 vibrate_offset;       // 0x18b8
-        int x18c0;                 // 0x18c0
-        int source_ply;            // 0x18c4   damage source ply number
-        int x18c8;                 // 0x18c8
-        int x18cc;                 // 0x18cc
-        int x18d0;                 // 0x18d0
-        int x18d4;                 // 0x18d4
-        int x18d8;                 // 0x18d8
-        int x18dc;                 // 0x18dc
-        int x18e0;                 // 0x18e0
-        int x18e4;                 // 0x18e4
-        int x18e8;                 // 0x18e8
-        u16 atk_instance_hurtby;   // 0x18ec. Last Attack Instance This Player Was Hit by,
-        int x18f0;                 // 0x18f0
-        int x18f4;                 // 0x18f4
-        u8 vibrate_index;          // 0x18f8, which dmg vibration values to use
-        u8 x18f9;                  // 0x18f9
-        u16 vibrate_timer;         // 0x18fa
-        u8 vibrate_index_cur;      // 0x18fc, index of the current offset
-        u8 vibrate_offset_num;     // 0x18fd, number of different offsets for this dmg vibration index
-        Vec2 ground_slope;         // 0x1900
-        int x1908;                 // 0x1908
-        void *random_sfx_table;    // 0x190c, contains a ptr to an sfx table when requesting a random sfx
-        int x1910;                 // 0x1910
-        int x1914;                 // 0x1914
-        int x1918;                 // 0x1918
-        int x191c;                 // 0x191c
-        int x1920;                 // 0x1920
-        int x1924;                 // 0x1924
-        int x1928;                 // 0x1928
-        int x192c;                 // 0x192c
-        struct                     // 0x1930
-        {                          //
-            Vec3 pos_prev;         // 0x1930
-            Vec3 pos_cur;          // 0x193c
-        } footstool;               //
-        int x1948;                 // 0x1948
-        int x194c;                 // 0x194c
-        int x1950;                 // 0x1950
-        float x1954;               // 0x1954,
-        float hitlag_env_frames;   // 0x1958, Environment Hitlag Counter (used for peachs castle switches)
-        float hitlag_frames;       // 0x195c
-        float vibrate_mult;        // 0x1960
-        float x1964;               // 0x1964
-    } dmg;                         //
-    struct jump                    // 0x1968
-    {                              //
-        char jumps_used;           // 0x1968
-        char walljumps_used;       // 0x1969
-    } jump;                        //
-    float hitlag_mult;             // 0x196c
-    int x1970;                     // 0x1970
-    GOBJ *item_held;               // 0x1974
-    GOBJ *x1978;                   // 0x1978
-    int x197c;                     // 0x197c
-    GOBJ *item_head;               // 0x1980
-    GOBJ *item_held_spec;          // 0x1984, special held item
-    struct hurtstatus              // 0x1988
-    {                              //
-        int script;                // 0x1988
-        int game;                  // 0x198c
-        int ledge_intang_left;     // 0x1990
-        int respawn_intang_left;   // 0x1994
-    } hurtstatus;                  //
-    struct shield                  // melee only logs the highest damage dealing shield attack for that frame
+    JOBJ *anim_skeleton;                   // 0x8ac
+    int x8b0;                              // 0x8b0
+    int x8b4;                              // 0x8b4
+    int x8b8;                              // 0x8b8
+    int x8bc;                              // 0x8bc
+    int curr_hold_anim;                    // 0x8c0
+    int x8c4;                              // 0x8c4
+    int x8c8;                              // 0x8c8
+    int x8cc;                              // 0x8cc
+    int x8d0;                              // 0x8d0
+    int x8d4;                              // 0x8d4
+    int x8d8;                              // 0x8d8
+    int x8dc;                              // 0x8dc
+    int x8e0;                              // 0x8e0
+    int x8e4;                              // 0x8e4
+    int x8e8;                              // 0x8e8
+    int x8ec;                              // 0x8ec
+    int x8f0;                              // 0x8f0
+    int x8f4;                              // 0x8f4
+    int x8f8;                              // 0x8f8
+    int x8fc;                              // 0x8fc
+    int x900;                              // 0x900
+    int x904;                              // 0x904
+    int x908;                              // 0x908
+    int x90c;                              // 0x90c
+    int x910;                              // 0x910
+    ftHit hitbox[4];                       // 0x914
+    ftHit throw_hitbox[2];                 // 0xdf4,
+    ftHit thrown_hitbox;                   // 0x1064
+    u8 team_unk;                           // 0x119c, friendly fire related
+    u8 grabber_ply;                        // 0x119D, slot ID of the person grabbing this fighter
+    u8 hurt_num;                           // 0x119E, number of hurtboxes
+    FtHurt hurtbox[15];                    // 0x11A0
+    FtCoin coinbox[2];                     // 0x1614
+    int dynamics_hit_num;                  // 0x166c
+    FtDynamicHit dynamics_hit[11];         // 0x1670
+    float x1828;                           // 0x1828
+    struct dmg                             // 0x182c
+    {                                      //
+        int behavior;                      // 0x182c
+        float percent;                     // 0x1830
+        int x1834;                         // 0x1834
+        float percent_temp;                // 0x1838
+        int applied;                       // 0x183c
+        int x1840;                         // 0x1840
+        FtDmgLog hit_log;                  // 0x1844, info regarding the last solid hit
+        FtDmgLog tip_log;                  // 0x1870, info regarding the last phantom hit
+        float tip_hitlag;                  // 0x189c, hitlag is stored here during phantom hits @ 8006d774
+        float tip_force_applied;           // 0x18a0, used to check if a tip happened this frame
+        float kb_mag;                      // 0x18a4  kb magnitude
+        int x18a8;                         // 0x18a8
+        int time_since_hit;                // 0x18ac   in frames
+        float armor_unk;                   // 0x18b0, is prioritized over the armor below
+        float armor;                       // 0x18b4, used by yoshi double jump
+        Vec2 vibrate_offset;               // 0x18b8
+        int x18c0;                         // 0x18c0
+        int source_ply;                    // 0x18c4   damage source ply number
+        int x18c8;                         // 0x18c8
+        int x18cc;                         // 0x18cc
+        int x18d0;                         // 0x18d0
+        int x18d4;                         // 0x18d4
+        int x18d8;                         // 0x18d8
+        int x18dc;                         // 0x18dc
+        int x18e0;                         // 0x18e0
+        int x18e4;                         // 0x18e4
+        int x18e8;                         // 0x18e8
+        u16 atk_instance_hurtby;           // 0x18ec. Last Attack Instance This Player Was Hit by,
+        int x18f0;                         // 0x18f0
+        int x18f4;                         // 0x18f4
+        u8 vibrate_index;                  // 0x18f8, which dmg vibration values to use
+        u8 x18f9;                          // 0x18f9
+        u16 vibrate_timer;                 // 0x18fa
+        u8 vibrate_index_cur;              // 0x18fc, index of the current offset
+        u8 vibrate_offset_num;             // 0x18fd, number of different offsets for this dmg vibration index
+        Vec2 ground_slope;                 // 0x1900
+        int x1908;                         // 0x1908
+        void *random_sfx_table;            // 0x190c, contains a ptr to an sfx table when requesting a random sfx
+        int x1910;                         // 0x1910
+        int x1914;                         // 0x1914
+        int x1918;                         // 0x1918
+        float dmg_based_rebound_rate_mult; // 0x191c, updated @ 80077aec (when hitting projectile). is equal to 3 + (damageDealt * 0.3)
+        int x1920;                         // 0x1920
+        int x1924;                         // 0x1924
+        int x1928;                         // 0x1928
+        int x192c;                         // 0x192c
+        struct                             // 0x1930
+        {                                  //
+            Vec3 pos_prev;                 // 0x1930
+            Vec3 pos_cur;                  // 0x193c
+        } footstool;                       //
+        int x1948;                         // 0x1948
+        int x194c;                         // 0x194c
+        int x1950;                         // 0x1950
+        float x1954;                       // 0x1954,
+        float hitlag_env_frames;           // 0x1958, Environment Hitlag Counter (used for peachs castle switches)
+        float hitlag_frames;               // 0x195c
+        float vibrate_mult;                // 0x1960
+        float x1964;                       // 0x1964
+    } dmg;                                 //
+    struct jump                            // 0x1968
+    {                                      //
+        char jumps_used;                   // 0x1968
+        char walljumps_used;               // 0x1969
+    } jump;                                //
+    float hitlag_mult;                     // 0x196c
+    int x1970;                             // 0x1970
+    GOBJ *item_held;                       // 0x1974
+    GOBJ *x1978;                           // 0x1978
+    int x197c;                             // 0x197c
+    GOBJ *item_head;                       // 0x1980
+    GOBJ *item_held_spec;                  // 0x1984, special held item
+    struct hurtstatus                      // 0x1988
+    {                                      //
+        int script;                        // 0x1988
+        int game;                          // 0x198c
+        int ledge_intang_left;             // 0x1990
+        int respawn_intang_left;           // 0x1994
+    } hurtstatus;                          //
+    struct shield                          // melee only logs the highest damage dealing shield attack for that frame
     {
         float health;          // 0x1998
         float lightshield_amt; // 0x199c
@@ -2365,7 +2367,7 @@ struct FighterData
         int x1a54;                        // 0x1a54
         GOBJ *attacker;                   // 0x1a58
         GOBJ *victim;                     // 0x1a5c
-        GOBJ *item;                        // 0x1a60
+        GOBJ *item;                       // 0x1a60
         int x1a64;                        // 0x1a64
         u16 x1a68;                        // 0x1a68
         u16 vuln;                         // 0x1a6a
@@ -2586,7 +2588,7 @@ struct FighterData
         unsigned char attacker_attached_to_victim : 1; // 0x1 - 0x221b, used for determining which player the anchor is during throw release
         unsigned char hit_by_grabber : 1;              // 0x80 - 0x221c, is enabled when grab victim is being hit by its grabbers hitbox, signals no damage state for this frame (still grabbed) (set @ 8007a6ec, checked @ 8008edfc)
         unsigned char x221c_2 : 1;                     // 0x40 - 0x221c
-        unsigned char x221c_3 : 1;                     // 0x20 - 0x221c
+        unsigned char is_powershield : 1;              // 0x20 - 0x221c
         unsigned char x221c_4 : 1;                     // 0x10 - 0x221c
         unsigned char x221c_5 : 1;                     // 0x8 - 0x221c
         unsigned char x221c_6 : 1;                     // 0x4 - 0x221c
@@ -2605,7 +2607,7 @@ struct FighterData
         unsigned char x221e_3 : 1;                     // 0x20 - 0x221e
         unsigned char item_visible : 1;                // 0x10 - 0x221e
         unsigned char x221e_5 : 1;                     // 0x8 - 0x221e
-        unsigned char x221e_6 : 1;                     // 0x4 - 0x221e
+        unsigned char invisible_script : 1;            // 0x4 - 0x221e
         unsigned char x221e_7 : 1;                     // 0x2 - 0x221e
         unsigned char x221e_8 : 1;                     // 0x1 - 0x221e
         unsigned char is_offscreen : 1;                // 0x80 - 0x221f
@@ -2752,8 +2754,8 @@ struct FighterData
     float x231c;                   // 0x231c
     int x2320;                     // 0x2320
     int stage_internal;            // 0x2324 so stupid, used for decrementing hazard immunity
-    int x2328;                     // 0x2328
-    int x232c;                     // 0x232c
+    int line_damage_immunity;      // 0x2328, frames in which fighter is immune to line damage
+    int ftchkdevice_immunity;      // 0x232c, frames in which fighter is immune to chkdevice damage (brinstar lava)
     int x2330;                     // 0x2330
     int x2334;                     // 0x2334
     int x2338;                     // 0x2338
@@ -2919,7 +2921,7 @@ struct FtDamage
     int x2350;
     float x2354;
     u8 x2358;
-    u8 x2359;
+    u8 hit_env_kind;   // 0x2359, 0 = none, 1 = ground 2 = wall, 3 = ceiling
     u8 is_meteor;      // 0x235a
     u8 meteor_lockout; // 0x235b
 };
@@ -2940,11 +2942,11 @@ struct FtScript
     {
         struct
         {
-            unsigned time : 26;
+            unsigned frames : 26;
         } timer_sync; // 2
         struct
         {
-            unsigned time : 26;
+            unsigned frame : 26;
         } timer_async; // 3
         struct
         {
@@ -2981,7 +2983,7 @@ struct FtScript
             unsigned ignore_fighter_scale : 1;
             unsigned clank_pri : 2;
             unsigned base_kb : 9;
-            unsigned element : 5;
+            unsigned attribute : 5;
             unsigned shield_dmg : 8;
             unsigned hit_sfx_severity : 3; // weak, moderate, strong
             unsigned hit_sfx_kind : 5;     // none, punch, kick, sword, coin, bat, fan, elec, fire, yoshi chew, shell hit, energy, peach item, ice
@@ -2990,8 +2992,22 @@ struct FtScript
         } hit; // 11
         struct
         {
+            unsigned id : 3;
+            unsigned dmg : 23;
+        } hit_update_dmg; // 12
+        struct
+        {
+            unsigned id : 3;
+            unsigned size : 23;
+        } hit_update_size; // 13
+        struct
+        {
+            unsigned id : 26;
+        } hit_clear; // 15
+        struct
+        {
             unsigned null : 26;
-        } hit_clear; // 16
+        } hit_clear_all; // 16
         struct
         {
             unsigned behavior : 8;
@@ -3133,15 +3149,17 @@ struct FtScriptIK
 */
 
 /** Static Variables **/
-
-ftCommonData **stc_ftcommon = (R13 + -0x514C);
-ColAnimDesc **stc_plco_colanimdesc = 0x804D653C;
-GXColor **stc_shieldcolors = (R13 + -0x5194);
-FtDmgVibrateDesc **stc_dmg_vibrate_desc = (R13 + -0x5170);
-int *stc_ft_hitlog = (R13 + -0x5148); // used as semi-local variables remembering if a solid hit occured @ 8006cbc4
-int *stc_ft_tiplog = (R13 + -0x5144); // used as semi-local variables remembering if a tip hit occured @ 8006cbc4
+static ftCommonBone ***stc_ftbone = (R13 + -0x515C);
+static ftCommonData **stc_ftcommon = (R13 + -0x514C);
+static ColAnimDesc **stc_plco_colanimdesc = 0x804D653C;
+static GXColor **stc_shieldcolors = (R13 + -0x5194);
+static FtDmgVibrateDesc **stc_dmg_vibrate_desc = (R13 + -0x5170);
+static int *stc_ft_hitlog = (R13 + -0x5148); // used as semi-local variables remembering if a solid hit occured @ 8006cbc4
+static int *stc_ft_tiplog = (R13 + -0x5144); // used as semi-local variables remembering if a tip hit occured @ 8006cbc4
 
 /*** Functions ***/
+GOBJ *Fighter_Create(PlayerData *pd);
+GOBJ *Fighter_Create2(PlayerData *pd);
 void ActionStateChange(float startFrame, float animSpeed, float animBlend, GOBJ *fighter, int stateID, int flags1, GOBJ *alt_state_source);
 void Fighter_UpdateBonePos(FighterData *fighter_data, int unk);
 FtAction *Fighter_GetFtAction(FighterData *fighter, int action_id); // returns the desired ft action entry stored in the dat file
@@ -3219,9 +3237,16 @@ void Fighter_CollAir_IgnoreLedge(GOBJ *fighter, void *callback);
 int Fighter_CollAir_IgnoreLedge_NoCB(GOBJ *fighter);
 int Fighter_CollAir_SoftLanding(GOBJ *fighter);
 int Fighter_CollAir_DefineECB(GOBJ *fighter, ECBSize *ecb);
+int Fighter_Coll_DamageState(GOBJ *fighter);
 int Fighter_Coll_CheckToPass(GOBJ *fighter, int floor_type); // usually used as a callback, pass = fall through platform
 int Fighter_IASACheck_CliffCatch(GOBJ *fighter);
 int Fighter_IASACheck_WallJump(GOBJ *fighter);
+int Fighter_IASACheck_TechRoll(GOBJ *fighter);
+int Fighter_IASACheck_TechInPlace(GOBJ *fighter);
+int Fighter_IASACheck_StaminaDead(GOBJ *fighter);
+int Fighter_IASACheck_WallTechJump(GOBJ *fighter);
+int Fighter_IASACheck_CeilingTech(GOBJ *fighter);
+int Fighter_IASACheck_WallCeilingReflect(GOBJ *fighter);
 int Fighter_IASACheck_JumpAerial(GOBJ *fighter);
 int Fighter_IASACheck_JumpF(GOBJ *fighter);
 int Fighter_IASACheck_PassConditions(GOBJ *fighter);
@@ -3333,7 +3358,7 @@ void Fighter_RevertAllVisGroups(GOBJ *fighter);                          // sets
 void Fighter_HideAllVisGroups(GOBJ *fighter);                            // hides all dobjs in all vis group (sets default and current to -1)
 void Fighter_GiveItem(GOBJ *fighter, GOBJ *item);
 void Fighter_ReleaseItemUnk(int ply, int ms, GOBJ *item);
-void Fighter_InitDamageVibrate(FighterData *fp, int dmg, float mult, int current_state, int unk_bool);
+void Fighter_InitDamageVibrate(FighterData *fp, int dmg_attr, int dmg, float mult, int pre_hurt_state, int unk_bool);
 float Fighter_CalcHitlagFrames(int dmg, int state_id, float mult);
 void Fighter_LoadAnimation(FighterData *fp, FighterData *fp_source, int anim_id);
 void Fighter_ApplyAnimation(GOBJ *f, float start_frame, float speed, float blend);
@@ -3360,7 +3385,7 @@ void Fighter_DamageRumble(FighterData *fp, int dmg);                            
 void Fighter_RumbleExecute(FighterData *fp, int strength, int unk);
 void Fighter_CheckKnockbackModifiers(FighterData *fp); // 8008d930
 int Fighter_GetCurrentPlacing(int ply);
-void Fighter_StoreGrabBreakout(FighterData *fp, int flags, float amt);
+void Fighter_StoreGrabBreakout(FighterData *fp, float amt);
 int Fighter_CheckGrabBreakout(FighterData *fp, float mash_amt); // returns 1 if inputted something
 void Fighter_SetAnimRate(GOBJ *f, float rate);
 int Fighter_CheckJumpInput(GOBJ *f);
@@ -3377,6 +3402,7 @@ void Fighter_PlaySFX(FighterData *fp, int sfxid, int volume, int pitch);
 void Fighter_PlayVoiceSFX(FighterData *fp, int sfxid, int volume, int pitch);
 void Fighter_EnterFallOrWait(GOBJ *fighter_gobj);
 void Fighter_EnterTech(GOBJ *gobj);
+int Fighter_CheckTechInput(GOBJ *f);
 void Fighter_EnterSpecialFallLoseJumps(GOBJ *fighter_gobj, int can_fastfall, int can_not_noimpactland, int can_not_interrupt, float aerial_drift_mult, float landing_lag, float blend);
 void Fighter_RumbleController(GOBJ *f, int unk1, int unk2);
 void Fighter_GetLeftStick(GOBJ *fighter_gobj, float *stick_x, float *stick_y);
@@ -3403,5 +3429,7 @@ void Fighter_SetSelfDamageSource(GOBJ *f);                  // 800788d4
 float Fighter_CalcForceApplied(FighterData *fp, void *unk); // 80079ea8
 void Fighter_UpdateModelShift(GOBJ *f);                     // updates the offsets of the model during hitlag and smash charge
 void Fighter_GivePersistentIntangibility(GOBJ *f, int frames);
+void Fighter_TDI(FighterData *fp);
+void Fighter_PlayQueuedDamageSounds(FighterData *fp);
 GXColor Fighter_GetPlyHUDColor(int ply); // used for lupe, pokemon stadium text color, results viewport broder
 #endif

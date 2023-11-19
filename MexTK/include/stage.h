@@ -1,6 +1,7 @@
 #ifndef MEX_H_STAGE
 #define MEX_H_STAGE
 
+#include "color.h"
 #include "structs.h"
 #include "datatypes.h"
 #include "hsd.h"
@@ -134,9 +135,10 @@ struct MapData
     int xc8;                           // 0xc8
     int xcc;                           // 0xcc
     int xd0;                           // 0xd0
-    int xd4;                           // 0xd4
-    int xd8;                           // 0xd8
-    int xdc;                           // 0xdc
+    // pretty sure map_var actually starts here? rofl
+    int xd4; // 0xd4
+    int xd8; // 0xd8
+    int xdc; // 0xdc
     struct
     {
         int mapVar0; // 0xe0
@@ -225,7 +227,10 @@ struct StageOnGO
 struct grGroundParam
 {
     float scale;                // 0x0
-    int flags;                  // 0x4
+    u8 x4;                      // 0x4
+    u8 shadow_alpha;            // 0x5
+    u8 x6;                      // 0x6
+    u8 x7;                      // 0x7
     u16 fov;                    // 0x8
     int cam_distance_min;       // 0xc
     int cam_distance_max;       // 0x10
@@ -582,6 +587,7 @@ void Stage_PlaySFX(MapData *map, int live_index, int sfx_id);
 int Stage_CheckSFX(MapData *map, int live_index);
 void Dynamics_DecayWind();
 GOBJ *Stage_CreateMapGObj(int mapgobjID);
+GOBJ *Stage_CreateMapGObjDefineIndex(JOBJ *jobjdesc, int map_index);
 void Stage_DestroyMapGObj(GOBJ *map_gobj);
 void *GXLink_Stage(GOBJ *gobj, int pass);
 GOBJ *Stage_GetMapGObj(int mapgobjID);
@@ -589,7 +595,7 @@ JOBJ *Stage_GetMapGObjJObj(GOBJ *mapgobj, int jointIndex);
 int Stage_GetLinesGroup(int line);
 int Stage_GetLinesUnk(int line);
 int Stage_GetLinesDirection(int line);
-void Stage_SetGroundCallback(int group, void *userdata, void *callback);
+void Stage_SetGroundCallback(int group, void *userdata, void (*OnStand)(MapData *mp, int group_index, CollData *coll_data, int weight, int time));
 void Stage_ClearGroundCallback(int group);
 void Stage_SetCeilingCallback(int group, void *userdata, void *callback);
 void Stage_InitMovingColl(JOBJ *mapjoint, int mapgobjID);
@@ -599,11 +605,12 @@ Particle *Stage_SpawnEffectPos(int gfxID, int efFileID, Vec3 *pos);
 Particle *Stage_SpawnEffectJointPos(int gfxID, int efFileID, JOBJ *pos);
 Particle *Stage_SpawnEffectJointPos2(int gfxID, int efFileID, JOBJ *pos);
 int GrColl_RaycastGround(Vec3 *coll_pos, int *line_index, int *line_kind, Vec3 *unk1, Vec3 *unk2, Vec3 *unk3, Vec3 *unk4, void *cb, float from_x, float from_y, float to_x, float to_y, float unk5); // make unk5
-int GrColl_RaycastUnk(Vec3 *coll_pos, int *line_index, int *line_kind, Vec3 *direction, void *cb, void *unk2, float from_x, float from_y, float to_x, float to_y);                                         // unk = 0, unk2 = -1;
+int GrColl_RaycastUnk(Vec3 *coll_pos, int *line_index, int *line_kind, Vec3 *direction, void *cb, void *unk2, float from_x, float from_y, float to_x, float to_y);                                   // unk = 0, unk2 = -1;
 int GrColl_RaycastAll(Vec3 *coll_pos, int *line_index, int *line_kind, Vec3 *direction, void *cb, void *unk2, float from_x, float from_y, float to_x, float to_y);
 GOBJ *Zako_Create(int item_id, Vec3 *pos, JOBJ *jobj, Vec3 *velocity, int isMovingItem);
 GOBJ *Stage_CreateMapItem(MapData *map_data, int takeDamageSFXKind, int state, JOBJ *joint, Vec3 *pos, int unk_bool, void *onGiveDamage, void *onTakeDamage); // this function creates an item of id 0xA0, its a generic ID used across multiple stages. its mainly used for giving a joint a hurtbox/hitbox and an onTakeDamage callback.
 int Stage_CheckForNearbyFighters(Vec3 *pos, float radius);
+ptclGen *Stage_CreatePtclGen(int ptcl_index, int bank_index, Vec3 *pos);
 float Stage_GetBlastzoneRight();
 float Stage_GetBlastzoneLeft();
 float Stage_GetBlastzoneTop();
@@ -619,7 +626,7 @@ void Stage_AutoLinkLineGroups();
 void Stage_LinkLineGroups(int group1, int group2);
 void Stage_InitLines(CollDataStage *coll_data);
 void Stage_InitCatchHazard(GOBJ *map, int unk, void *check_cb);
-void Stage_InitMoveHazard(GOBJ *map, int unk, void *check_cb);
+void Stage_InitMoveHazard(GOBJ *map, int unk, int (*check_cb)(GOBJ *m, GOBJ *f, Vec3 *queued_velocity)); // returns is_apply_velocity
 void Stage_InitDamageHazard(GOBJ *map, int unk, void *check_cb);
 void Stage_InitLineHazardDescUnk(void *unk, LineHazardDesc *hazard_desc); // 0x80008d30
 void Stage_InitColAnim(JOBJ *map_jobj);

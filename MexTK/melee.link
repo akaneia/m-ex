@@ -1,6 +1,8 @@
 80388220:__assert
 80323938:memmove
 80323DC8:_vsprintf
+80068e98:Fighter_Create
+800be7e0:Fighter_Create2
 800693AC:ActionStateChange
 8036410C:AOBJ_ReqAnim
 8036530C:AOBJ_SetRate
@@ -49,6 +51,7 @@
 80368458:CObj_SetCurrent
 80374a88:CObj_SetEraseColor
 803676f8:CObj_EraseScreen
+80390fc0:CObj_UpdateAll
 80390ed0:CObj_RenderGXLinks
 80368608:CObj_EndCurrent
 8036a194:CObj_SetOrtho
@@ -175,6 +178,7 @@
 80084104:Fighter_CollGround_StopLedge_EnterFall
 800827A0:Fighter_CollGround_StopLedge
 80096cc8:Fighter_Coll_CheckToPass
+80081dd4:Fighter_Coll_DamageState
 800C0200:Fighter_ColorRemove
 8016B558:Fighter_CountPlayers
 800A101C:Fighter_CPUInitialize
@@ -211,6 +215,7 @@
 8008A2BC:Fighter_EnterWait
 8007d92c:Fighter_EnterFallOrWait
 80097d40:Fighter_EnterTech
+800986b0:Fighter_CheckTechInput
 800969d8:Fighter_EnterSpecialFallLoseJumps
 800c3be8:Fighter_EnterAirCatch
 8009794c:Fighter_EnterDownBound
@@ -253,6 +258,12 @@
 8006CF5C:Fighter_GiveHeal
 80081298:Fighter_IASACheck_CliffCatch
 8008169c:Fighter_IASACheck_WallJump
+80098928:Fighter_IASACheck_TechRoll
+8009872c:Fighter_IASACheck_TechInPlace
+80097d40:Fighter_IASACheck_StaminaDead
+800c1d38:Fighter_IASACheck_WallTechJump
+800c23a0:Fighter_IASACheck_CeilingTech
+800c17cc:Fighter_IASACheck_WallCeilingReflect
 800CB870:Fighter_IASACheck_JumpAerial
 800CAED0:Fighter_IASACheck_JumpF
 80099F1C:Fighter_IASACheck_PassConditions
@@ -401,6 +412,8 @@
 80079ea8:Fighter_CalcForceApplied
 8008021c:Fighter_UpdateModelShift
 8007b7a4:Fighter_GivePersistentIntangibility
+8008e5a4:Fighter_TDI
+80090718:Fighter_PlayQueuedDamageSounds
 80160968:Fighter_GetPlyHUDColor
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
@@ -434,6 +447,7 @@
 80390cd4:GObj_ProcUnk
 8022f0f0:GObj_DestroyByPLink
 8022f138:GObj_DestroyByPLinkRange
+80390cfc:GObj_UpdateAll
 80054ED8:GrColl_CheckIfLineEnabled
 80056C54:GrColl_CrawlGround
 80044164:GrColl_SearchLedgeLeft
@@ -450,6 +464,7 @@
 800121FC:GX_AllocImageData
 80390EB8:GX_LookupRenderPass
 8033E78C:GXGetTexBufferSize
+8033c898:GXInvalidateVtxCache
 8033F270:GXInvalidateTexAll
 8033c8a8:GXSetTexCoordGen2
 80391070:GXLink_Common
@@ -511,7 +526,14 @@
 803623d0:HSD_StateSetNumChans
 8000e210:HSD_GXProject
 800195d0:HSD_UpdateDiscAndCardStatus
+80376d04:HSD_PadFlushQueue
+80377ce8:HSD_PadRenewStatus
+8037750c:HSD_PadRenewMasterStatus
+803779c0:HSD_PadRenewCopyStatus
+80377b54:HSD_PadRenewUpdateStruct
+801a3a74:HSD_PadRenewUpdateStruct2
 8036c244:HSD_ClearVtxDesc
+803761c0:HSD_VICopyXFBASync
 803620a4:HSD_SetupChannel
 8026b40c:Item_IndexStageItem
 80094818:Item_Catch
@@ -704,9 +726,11 @@
 80342418:MTXRotRad
 80342aa8:MTXMultVec
 80342954:MTXLightPerspective
-80023F28:BGM_Play
 80023ed4:BGM_PlayFile
+80023F28:BGM_Play
 800236dc:BGM_Stop
+8038e9a8:BGM_Pause
+8038e9e0:BGM_Resume
 8023754C:Nametag_GetText
 803440e8:OSCreateHeap
 80344154:OSDestroyHeap
@@ -720,6 +744,7 @@
 8034C668:OSTicksToCalendarTime
 8034376c:OSCreateAlarm
 80343a30:OSSetPeriodicAlarm
+80343aac:OSCancelAlarm
 80322e54:cvt_dbl_usll
 80322e54:__fixunsdfdi
 8033796c:DVDConvertPathToEntrynum
@@ -753,12 +778,16 @@
 800187f4:Preload_CheckFileStatus
 80018254:Preload_Update
 800174bc:Preload_Invalidate
+80398614:Particle_InitFile
 8039D048:psDeletePntJObjwithParticle
 8039D3AC:psKillGenerator
+803984f4:psInitDataBanks
 803421D0:PSMTXCopy
 803421a4:PSMTXIdentity
 80342204:PSMTXConcat
 803A4344:psRemoveParticleAppSRT
+8039f05c:psCreateGeneratorID
+8039efac:psCreateGeneratorIDJObj
 801a4310:Scene_GetCurrentMajor
 801a42c4:Scene_GetCurrentMinor
 801a42e8:Scene_SetNextMajor
@@ -778,6 +807,8 @@
 800237a8:SFX_PlayFullVolume
 80023710:FGM_CheckActive
 800236b8:FGM_Stop
+8038d3b8:FGM_SetVolume
+8038d2b4:FGM_SetPanning
 8038e6c0:FGM_PauseKind
 8038e844:FGM_ResumeKind
 80364340:fmod
@@ -794,7 +825,9 @@
 801C83D0:Stage_CheckAnimEnd
 801C84A4:Stage_CheckAnimEnd2
 801C9EE8:Stage_CheckForNearbyFighters
+801c96f8:Stage_CreatePtclGen
 80223908:Stage_CreateMapGObj
+801c1a20:Stage_CreateMapGObjDefineIndex
 802E6AEC:Stage_CreateMapItem
 801C4A08:Stage_DestroyMapGObj
 80057BC0:Stage_DisableLineGroup
