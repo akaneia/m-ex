@@ -1,4 +1,8 @@
 #include "mario.h"
+#include "special_n.c"
+#include "special_s.c"
+#include "special_hi.c"
+#include "special_lw.c"
 
 ///////////////////////
 //    Mario Basic    //

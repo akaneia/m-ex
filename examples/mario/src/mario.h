@@ -1,4 +1,7 @@
-#include "../../../MexTK/mex.h"
+#ifndef MN_SSS_H
+#define MN_SSS_H
+
+#include "mex.h"
 
 ///////////////////////
 //      m-ex IDs     //
@@ -178,3 +181,5 @@ void SpecialAirLw_AnimationCallback(GOBJ *gobj);
 void SpecialAirLw_IASACallback(GOBJ *gobj);
 void SpecialAirLw_PhysicCallback(GOBJ *gobj);
 void SpecialAirLw_CollisionCallback(GOBJ *gobj);
+
+#endif
