@@ -18,7 +18,7 @@ int OnHitShieldBounce(GOBJ *gobj)
 
     int direction = 0;
 
-    VECMultAndAdd(&item_data->self_vel, &item_data->dmg.xc58);
+    VECMultAndAdd(&item_data->self_vel, &item_data->dmg.shield_hit_xc58);
 
     float x_vel = item_data->self_vel.X;
     if (x_vel < 0)
@@ -47,7 +47,7 @@ int OnHitShieldBounce(GOBJ *gobj)
         direction = 1;
     }
 
-    //0x800436d8(&item_data->coll_data, direction);
+    // 0x800436d8(&item_data->coll_data, direction);
     item_data->coll_data.flags1 = item_data->coll_data.flags1 & 0xFFFF0000 | (short)direction;
 
     return 0;

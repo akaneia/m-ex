@@ -40,8 +40,8 @@ int OnPickup(GOBJ *gobj)
 {
     ItemData *item_data = gobj->userdata;
 
-    item_data->ftcmd_var.flag1 = 0;
-    item_data->ftcmd_var.flag2 = 0;
+    item_data->itcmd_var.flag1 = 0;
+    item_data->itcmd_var.flag2 = 0;
 
     if (item_data->fighter_gobj)
     {
@@ -84,15 +84,15 @@ int Cape_AnimCallback(GOBJ *gobj)
 {
     ItemData *item_data = gobj->userdata;
 
-    if (item_data->ftcmd_var.flag1 != 0)
+    if (item_data->itcmd_var.flag1 != 0)
     {
-        item_data->ftcmd_var.flag1 = 0;
+        item_data->itcmd_var.flag1 = 0;
         Effect_SpawnAsync(gobj, (int)gobj->userdata + 0xbc0, 0, 0x47d, *(int *)(item_data->xbbc + 0x40));
     }
 
-    if (item_data->ftcmd_var.flag2 != 0)
+    if (item_data->itcmd_var.flag2 != 0)
     {
-        item_data->ftcmd_var.flag2 = 0;
+        item_data->itcmd_var.flag2 = 0;
         Effect_SpawnAsync(gobj, (int)gobj->userdata + 0xbc0, 0, 0x47e, *(int *)(item_data->xbbc + 0x18));
     }
 
