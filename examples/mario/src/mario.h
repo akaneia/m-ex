@@ -1,5 +1,5 @@
-#ifndef MN_SSS_H
-#define MN_SSS_H
+#ifndef FT_MARIO_H
+#define FT_MARIO_H
 
 #include "mex.h"
 
