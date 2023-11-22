@@ -186,8 +186,6 @@
 8007B23C:Fighter_CreateReflect
 800921DC:Fighter_CreateShieldGFX
 8007b2c4:Fighter_CreateAbsorb
-800e13f8:Fighter_RemoveHeldFighterItem
-800e1368:Fighter_DestroyAndRemoveHeldFighterItem
 8008A6D8:Fighter_DisableBlend
 8007D5BC:Fighter_EnableCollUpdate
 8007AEF8:Fighter_EnableReflectUpdate
@@ -222,6 +220,8 @@
 800cbbc0:Fighter_EnterJumpAerial
 800d3bc8:Fighter_EnterDeadDown
 800d3e40:Fighter_EnterDeadUp
+800d3680:Fighter_EnterDeadLeft
+800d3950:Fighter_EnterDeadRight
 80086d40:Fighter_RumbleController
 8007F694:Fighter_GetBaseScale
 80075e78:Fighter_GetBoneRotX
@@ -573,7 +573,7 @@
 80275158:Item_SetLifeTimer
 8026D9A0:Item_UpdatePositionCollision
 80268E5C:ItemStateChange
-8026b724:Item_EnableUnknownFlag
+8026b724:Item_EnableHitlagFlag
 80273030:Item_ReflectVelocity
 8026ae60:Item_GenerateHitExceptionID
 8026b2b4:Item_CheckHeavy

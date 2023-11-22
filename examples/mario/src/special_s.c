@@ -1,88 +1,91 @@
 #include "mario.h"
+
 ///////////////////////
 //  Inital SpecialS  //
 ///////////////////////
-/// SpecialS
-/// 0x800E1450
-///
-void SpecialS(GOBJ *gobj)
+
+/// @brief Original: 0x800E1450
+/// @param fighter 
+void SpecialS(GOBJ *fighter)
 {
-	FighterData *fighter_data = gobj->userdata;
-	SpecialSFtCmd *script_flags = &fighter_data->ftcmd_var;
-	SpecialSVar *state_var = &fighter_data->state_var;
+	FighterData *fighter_data = fighter->userdata;
+	SpecialSFtCmd *script_var = Fighter_GetScriptVars(fighter);
+	SpecialSVar *state_var = Fighter_GetStateVars(fighter);
 
 	// stop y velocity
 	fighter_data->phys.self_vel.Y = 0;
 
 	// switch to special s state and update subaction
-	ActionStateChange(0, 1, 0, gobj, STATE_SPECIALS, 0, 0);
-	Fighter_AdvanceScript(gobj);
+	ActionStateChange(0, 1, 0, fighter, STATE_SPECIALS, 0, 0);
+	Fighter_AdvanceScript(fighter);
 
 	// clear flags that are going to be used by this action
-	script_flags->create_wind = 0;
-	script_flags->enable_reflect = 0;
-	script_flags->spawn_cape = 0;
+	script_var->create_wind = 0;
+	script_var->enable_reflect = 0;
+	script_var->spawn_cape = 0;
 	state_var->reflect_enabled = 0;
 
 	// set the accessory callback for mario's cape
 	// this function will spawn the cape item in mario's hand
-	fighter_data->cb.Accessory4 = MarioCapeThink;
+	fighter_data->cb.Accessory4 = SpecialS_SpawnCapeThink;
 	return;
 }
-/// SpecialSAir
-/// 0x800E14C8
-///
-void SpecialAirS(GOBJ *gobj)
+
+/// @brief Original: 0x800E14C8
+/// @param fighter 
+void SpecialAirS(GOBJ *fighter)
 {
-	FighterData *fighter_data = gobj->userdata;
-	MarioAttr *mrAttr = fighter_data->special_attributes;
-	SpecialSFtCmd *script_flags = &fighter_data->ftcmd_var;
-	SpecialSVar *state_var = &fighter_data->state_var;
+	FighterData *fighter_data = fighter->userdata;
+	MarioAttr *mrAttr = Fighter_GetSpecialAttributes(fighter);
+	SpecialSFtCmd *script_var = Fighter_GetScriptVars(fighter);
+	SpecialSVar *state_var = Fighter_GetStateVars(fighter);
 
 	// slow down x velocity by rate defined in special attributes
 	fighter_data->phys.self_vel.X = fighter_data->phys.self_vel.X / mrAttr->specialS_horizontal_momentum;
 
 	// change to aerial special s state and update subaction
-	ActionStateChange(0, 1, 0, gobj, STATE_SPECIALSAIR, 0, 0);
-	Fighter_AdvanceScript(gobj);
+	ActionStateChange(0, 1, 0, fighter, STATE_SPECIALSAIR, 0, 0);
+	Fighter_AdvanceScript(fighter);
 
 	// clear flags that are going to be used by this action
-	script_flags->create_wind = 0;
-	script_flags->enable_reflect = 0;
-	script_flags->spawn_cape = 0;
+	script_var->create_wind = 0;
+	script_var->enable_reflect = 0;
+	script_var->spawn_cape = 0;
 	state_var->reflect_enabled = 0;
 
 	// set the accessory callback for mario's cape
 	// this function will spawn the cape item in mario's hand
-	fighter_data->cb.Accessory4 = MarioCapeThink;
+	fighter_data->cb.Accessory4 = SpecialS_SpawnCapeThink;
 	return;
 }
+
 //////////////////////
 //       Misc       //
 //////////////////////
-///
-/// 0x802b2560
-///
-GOBJ *CreateCape(double facing_direction, GOBJ *fighter_gobj, Vec3 *position, int bone_index, int kind)
+
+/// @brief Original: 0x802b2560 Spawns the cape item with the given parameters
+/// @param fighter fighter GOBJ
+/// @param position position to spawn item at
+/// @param bone_index bone index to attach item to
+/// @param kind kind of item to spawn
+/// @param facing_direction direction the fighter is facing
+/// @return a GOBJ containing the newly created Item
+GOBJ *SpecialS_SpawnCape(GOBJ *fighter, Vec3 *position, int bone_index, int kind, float facing_direction)
 {
 	// initialize spawn struct for cape
-	SpawnItem spawnItem;
-	spawnItem.parent_gobj = fighter_gobj;
-	spawnItem.parent_gobj2 = fighter_gobj;
-	spawnItem.it_kind = kind;
-	spawnItem.pos.X = position->X;
-	spawnItem.pos.Y = position->Y;
-	spawnItem.pos.Z = position->Z;
-	spawnItem.pos2.X = position->X;
-	spawnItem.pos2.Y = position->Y;
-	spawnItem.pos2.Z = position->Z;
-	spawnItem.vel.X = 0;
-	spawnItem.vel.Y = 0;
-	spawnItem.vel.Z = 0;
-	spawnItem.facing_direction = facing_direction;
-	spawnItem.damage = 0;
-	spawnItem.unk6 = 0;
-	spawnItem.is_raycast_below = 1;
+	SpawnItem spawnItem = 
+	{
+		.parent_gobj = fighter,
+		.parent_gobj2 = fighter,
+		.it_kind = kind,
+		.pos = *position,
+		.pos2 = *position,
+		.vel = {0, 0, 0},
+		.facing_direction = facing_direction,
+		.damage = 0,
+		.unk6 = 0,
+		.is_raycast_below = 1,
+	};
 
 	// create cape item
 	GOBJ *item = Item_CreateItem1(&spawnItem);
@@ -91,313 +94,374 @@ GOBJ *CreateCape(double facing_direction, GOBJ *fighter_gobj, Vec3 *position, in
 	if (item != 0)
 	{
 		// have mario hold the item
-		Item_Hold(item, fighter_gobj, bone_index);
+		Item_Hold(item, fighter, bone_index);
 
 		// copy develop mode stuff
-		Item_CopyDevelopState(item, fighter_gobj);
+		Item_CopyDevelopState(item, fighter);
 	}
+
 	return item;
 }
-///
-///
-///
-void DestroyCape(GOBJ *gobj)
+
+/// @brief destroys the Cape item and removes reference to it in fighter
+/// @param gobj 
+void SpecialS_OnDamagedCB(GOBJ *fighter)
 {
-	Fighter_DestroyAndRemoveHeldFighterItem(gobj);
+	FighterData *fd = (FighterData *)fighter->userdata;
+	MarioCharVar *char_var = Fighter_GetFighterVars(fighter);
+
+	// clear hitlag flag for cape
+	if (char_var->item_cape)
+	{
+		// clear reference to cape item
+		char_var->item_cape = 0;
+
+		// clear callbacks
+		fd->cb.OnDeath_State = 0;
+		fd->cb.OnTakeDamage = 0;
+
+		// destroy cape
+		Item_Destroy(char_var->item_cape);
+	}
 	return;
 }
-///
-///
-///
-void UnknownCapeExitHitlag(GOBJ *gobj)
+
+/// @brief disables cape items hitlag
+/// @param fighter 
+void SpecialS_ExitHitlagCB(GOBJ *fighter)
 {
-	FighterData *fighter_data = gobj->userdata;
+	MarioCharVar *char_var = Fighter_GetFighterVars(fighter);
 
-	// ft_var5 stores the cape item gobj
-	if (fighter_data->fighter_var.ft_var5 != 0)
+	// clear hitlag flag for cape
+	if (char_var->item_cape)
 	{
-		void (*UnknownItemFunction)(GOBJ * item_gobj) = (void *)0x8026b73c;
-
-		UnknownItemFunction(fighter_data->fighter_var.ft_var5);
+		Item_ClearHitlagFlag(char_var->item_cape);
 	}
 
 	return;
 }
-///
-///
-///
-void CapeEnableUnknownHitbox3Flag(GOBJ *gobj)
-{
-	FighterData *fighter_data = gobj->userdata;
 
-	// ft_var5 stores the cape item gobj
-	if (fighter_data->fighter_var.ft_var5 != 0)
+/// @brief enables cape items hitlag
+/// @param fighter 
+void SpecialS_EnterHitlagCB(GOBJ *fighter)
+{
+	MarioCharVar *char_var = Fighter_GetFighterVars(fighter);
+
+	// enable hitlag flag for cape
+	if (char_var->item_cape)
 	{
-		Item_EnableUnknownFlag(fighter_data->fighter_var.ft_var5);
+		Item_EnableHitlagFlag(char_var->item_cape);
 	}
 	return;
 }
-///
-///
-///
-void MarioCapeThink(GOBJ *gobj)
+
+/// @brief checks for script flag to be set and spawns cape item
+/// @param fighter 
+void SpecialS_SpawnCapeThink(GOBJ *fighter)
 {
-	FighterData *fighter_data = gobj->userdata;
-	MarioAttr *mrAttr = fighter_data->special_attributes;
-	SpecialSFtCmd *script_flags = &fighter_data->ftcmd_var;
+	FighterData *fd = fighter->userdata;
+	MarioCharVar *char_var = Fighter_GetFighterVars(fighter);
+	MarioAttr *mrAttr = Fighter_GetSpecialAttributes(fighter);
+	SpecialSFtCmd *script_var = Fighter_GetScriptVars(fighter);
 
 	// this flag is used to track if the cape has been spawned already
-	if (script_flags->spawn_cape == 0)
+	if (script_var->spawn_cape == 0)
 	{
-		script_flags->spawn_cape = 1;
+		script_var->spawn_cape = 1;
 
 		// get the index of mario's right holding bone (RHaveN)
-		int bone_index = Fighter_BoneLookup(fighter_data, RHaveN);
+		int bone_index = Fighter_BoneLookup(fd, RHaveN);
 
 		// get the position of this bone
 		Vec3 pos;
-		JOBJ_GetWorldPosition(fighter_data->bones[bone_index].joint, 0, &pos);
+		JOBJ_GetWorldPosition(fd->bones[bone_index].joint, 0, &pos);
 
 		// create the cape item
 		// cape kind was originally stored in mario's attributes
-		int mex_cape_kind = MEX_GetFtItemID(gobj, MEX_ITEM_CAPE);
-		GOBJ *cape = CreateCape(fighter_data->facing_direction, gobj, &pos, bone_index, mex_cape_kind); // mrAttr->cape_item_kind);
+		int mex_cape_kind = MEX_GetFtItemID(fighter, MEX_ITEM_CAPE);
+		GOBJ *cape = SpecialS_SpawnCape(fighter, &pos, bone_index, mex_cape_kind, fd->facing_direction);
 
 		// store the cape pointer to a ft_var5 and the special help item location
-		fighter_data->fighter_var.ft_var5 = cape;
-		fighter_data->item_held_spec = cape;
+		char_var->item_cape = cape;
+		fd->item_held_spec = cape;
 
 		// if the cape successully spawned, set the callbacks to remove it
-		if (fighter_data->fighter_var.ft_var5 != 0)
+		if (char_var->item_cape != 0)
 		{
-			fighter_data->cb.OnDeath_State = DestroyCape;
-			fighter_data->cb.OnTakeDamage = DestroyCape;
+			fd->cb.OnDeath_State = SpecialS_OnDamagedCB;
+			fd->cb.OnTakeDamage = SpecialS_OnDamagedCB;
 		}
 
-		//
-		fighter_data->cb.EnterHitlag = CapeEnableUnknownHitbox3Flag;
-		fighter_data->cb.ExitHitlag = UnknownCapeExitHitlag;
+		// set hitlag callbacks
+		fd->cb.EnterHitlag = SpecialS_EnterHitlagCB;
+		fd->cb.ExitHitlag = SpecialS_ExitHitlagCB;
 
 		// clear the accessory callback so this function will no longer be called
-		fighter_data->cb.Accessory4 = (void *)0x0;
-	}
-	return;
-}
-///////////////////////
-// Grounded SpecialS //
-///////////////////////
-///
-/// 0x800E1550
-///
-void SpecialS_AnimationCallback(GOBJ *gobj)
-{
-	// return to wait animation after animation ends
-	if (FrameTimerCheck(gobj) == 0)
-	{
-		Fighter_EnterWait(gobj);
+		fd->cb.Accessory4 = 0;
 	}
 
 	return;
 }
-///
-/// 0x800E15C8
-///
-void SpecialS_IASACallback(GOBJ *gobj)
+
+/// @brief checks to enable item reflection and updates its position
+/// @param fighter 
+void Mario_ReflectionThink(GOBJ *fighter)
 {
-	return;
-}
-///
-/// 0x800E15D0
-///
-void SpecialS_PhysicCallback(GOBJ *gobj)
-{
-	FighterData *fighter_data = gobj->userdata;
-	MarioAttr *mrAttr = fighter_data->special_attributes;
-	SpecialSVar *state_var = &fighter_data->state_var;
-	SpecialSFtCmd *script_flags = &fighter_data->ftcmd_var;
-
-	// ftCmd sets this subaction flag
-	// creates wind when it is set
-	if (script_flags->create_wind == 1)
-	{
-		script_flags->create_wind = 2;
-
-		// i'm not sure why the Hip bone, but that's what it uses
-		int bone_index = Fighter_BoneLookup(fighter_data, HipN);
-
-		// get this bones position
-		Vec3 bone_position;
-		JOBJ_GetWorldPosition(fighter_data->bones[bone_index].joint, 0, &bone_position);
-
-		// move the position forward a little
-		bone_position.X += 3 * fighter_data->facing_direction;
-
-		// create wind at this position
-		Wind_FighterCreate(&bone_position, 0.9f, 0.02f, 1.0471976f, 0x78);
-	}
-
-	// apply friction
-	Fighter_PhysGround_ApplyFriction(gobj);
-
+	FighterData *fd = fighter->userdata;
+	MarioAttr *mrAttr = Fighter_GetSpecialAttributes(fighter);
+	SpecialSVar *state_var = Fighter_GetStateVars(fighter);
+	SpecialSFtCmd *script_var = Fighter_GetScriptVars(fighter);
+	
 	// create the reflect bubble when flags are set
-	if ((script_flags->enable_reflect == 1) && (state_var->reflect_enabled == 0))
+	if (script_var->enable_reflect == 1 && state_var->reflect_enabled == 0)
 	{
 		state_var->reflect_enabled = 1;
-		Fighter_CreateReflect(gobj, &mrAttr->reflect_data, 0);
+		Fighter_CreateReflect(fighter, &mrAttr->reflect_data, 0);
 	}
-	else if ((script_flags->enable_reflect == 0) && (state_var->reflect_enabled == 1))
+	else if (script_var->enable_reflect == 0 && state_var->reflect_enabled == 1)
 	{
 		state_var->reflect_enabled = 0;
-		fighter_data->flags.reflect_enable = 0;
+		fd->flags.reflect_enable = 0;
 	}
 
 	// update the reflect so that it follows fighter
-	Fighter_EnableReflectUpdate(gobj);
-	return;
+	Fighter_EnableReflectUpdate(fighter);
 }
-///
-/// 0x800e18b8
-///
-void SpecialS_EnterAir(GOBJ *gobj)
+
+/// @brief creates a gust of wind from mario
+/// @param fighter 
+void Mario_CreateCapeWind(GOBJ *fighter)
 {
-	FighterData *fighter_data = gobj->userdata;
-	SpecialSVar *state_var = &fighter_data->state_var;
-	SpecialSFtCmd *script_flags = &fighter_data->ftcmd_var;
+	FighterData *fd = fighter->userdata;
 
-	// set fighter to air state
-	Fighter_SetAirborne(fighter_data);
+	// i'm not sure why the Hip bone, but that's what it uses
+	int bone_index = Fighter_BoneLookup(fd, HipN);
 
-	// enter air state
-	ActionStateChange(fighter_data->state.frame, 1, 0, gobj, STATE_SPECIALSAIR, 0xc4c508c, 0);
+	// get this bones position
+	Vec3 bone_position;
+	JOBJ_GetWorldPosition(fd->bones[bone_index].joint, 0, &bone_position);
 
-	//
-	if (script_flags->create_wind == 1)
-	{
-		script_flags->create_wind = 2;
-	}
+	// move the position forward a little
+	bone_position.X += 3 * fd->facing_direction;
 
-	//
-	if (state_var->reflect_enabled != 0)
+	// create wind at this position
+	Wind_FighterCreate(&bone_position, 120, 0.9f, 0.02f, 1.0471976f);
+}
+
+/// @brief Initializes callbacks for SpecialS, should be called after state changes
+/// @param fighter 
+void SpecialS_InitCallbacks(GOBJ *fighter)
+{
+	FighterData *fighter_data = fighter->userdata;
+	SpecialSVar *state_var = Fighter_GetStateVars(fighter);
+	MarioCharVar *char_var = Fighter_GetFighterVars(fighter);
+
+	// check if reflect has already been set
+	// and enable reflection if it has
+	if (state_var->reflect_enabled)
 	{
 		fighter_data->flags.reflect_enable = 1;
 	}
 
 	// if cape is set then make sure the damage callbacks are set
 	// these callbacks will remove the cape when mario is hit or dies
-	// ft_var5 stores the cape item gobj
-	if (fighter_data->fighter_var.ft_var5 != 0)
+	if (char_var->item_cape != 0)
 	{
-		fighter_data->cb.OnDeath_State = DestroyCape;
-		fighter_data->cb.OnTakeDamage = DestroyCape;
+		fighter_data->cb.OnDeath_State = SpecialS_OnDamagedCB;
+		fighter_data->cb.OnTakeDamage = SpecialS_OnDamagedCB;
 	}
 
-	//
-	fighter_data->cb.EnterHitlag = CapeEnableUnknownHitbox3Flag;
-	fighter_data->cb.ExitHitlag = UnknownCapeExitHitlag;
+	// set hitlag callbacks for cape
+	fighter_data->cb.EnterHitlag = SpecialS_EnterHitlagCB;
+	fighter_data->cb.ExitHitlag = SpecialS_ExitHitlagCB;
 
-	// cape is created in this function
-	fighter_data->cb.Accessory4 = MarioCapeThink;
+	// set cape spawn accessory
+	fighter_data->cb.Accessory4 = SpecialS_SpawnCapeThink;
+}
+
+///////////////////////
+// Grounded SpecialS //
+///////////////////////
+
+/// @brief Original: 0x800E1550
+/// @param fighter 
+void SpecialS_AnimationCallback(GOBJ *fighter)
+{
+	// return to wait animation after animation ends
+	if (FrameTimerCheck(fighter) == 0)
+	{
+		Fighter_EnterWait(fighter);
+	}
+
 	return;
 }
-///
-/// 0x800E1840
-///
-void SpecialS_CollisionCallback(GOBJ *gobj)
+
+/// @brief Original: 0x800E15C8
+/// @param fighter 
+void SpecialS_IASACallback(GOBJ *fighter)
+{
+	return;
+}
+
+/// @brief Original: 0x800E15D0
+/// @param fighter 
+void SpecialS_PhysicCallback(GOBJ *fighter)
+{
+	FighterData *fighter_data = fighter->userdata;
+	MarioAttr *mrAttr = Fighter_GetSpecialAttributes(fighter);
+	SpecialSVar *state_var = Fighter_GetStateVars(fighter);
+	SpecialSFtCmd *script_var = Fighter_GetScriptVars(fighter);
+
+	// ftCmd sets this subaction flag
+	// creates wind when it is set
+	if (script_var->create_wind == 1)
+	{
+		script_var->create_wind = 2;
+		Mario_CreateCapeWind(fighter);
+	}
+
+	// apply friction
+	Fighter_PhysGround_ApplyFriction(fighter);
+
+	// process reflection 
+	Mario_ReflectionThink(fighter);
+
+	return;
+}
+
+/// @brief Original: 0x800e18b8
+/// @param fighter 
+void SpecialS_PassLedge(GOBJ *fighter)
+{
+	FighterData *fighter_data = fighter->userdata;
+	SpecialSVar *state_var = Fighter_GetStateVars(fighter);
+	SpecialSFtCmd *script_var = Fighter_GetScriptVars(fighter);
+	MarioCharVar *char_var = Fighter_GetFighterVars(fighter);
+
+	// set fighter to air state
+	Fighter_SetAirborne(fighter_data);
+
+	// enter air state
+	ActionStateChange(fighter_data->state.frame, 1, 0, 
+		fighter, 
+		STATE_SPECIALSAIR, 
+		SPECIALS_TRANSITION_FLAGS, 
+		0);
+
+	// disable ability to spawn wind
+	// this prevents the little extra 
+	// jump mario gets from this move
+	// from occuring
+	if (script_var->create_wind == 1)
+	{
+		script_var->create_wind = 2;
+	}
+
+	// re initialize callbacks after state change
+	SpecialS_InitCallbacks(fighter);
+
+	return;
+}
+
+/// @brief Original: 0x800E1840
+/// @param fighter 
+void SpecialS_CollisionCallback(GOBJ *fighter)
 {
 	// enter aerial state when falling off ledge
-	if (Fighter_CollGround_StopLedge(gobj) == 0)
+	if (Fighter_CollGround_StopLedge(fighter) == 0)
 	{
-		SpecialS_EnterAir(gobj);
+		SpecialS_PassLedge(fighter);
 	}
 
 	return;
 }
+
 ///////////////////////
 //  Aerial SpecialS  //
 ///////////////////////
-///
-/// 0x800E158C
-///
-void SpecialAirS_AnimationCallback(GOBJ *gobj)
+
+/// @brief Original: 0x800E158C
+/// @param fighter 
+void SpecialAirS_AnimationCallback(GOBJ *fighter)
 {
 	// enter fall state when animation ends
-	if (FrameTimerCheck(gobj) == 0)
+	if (FrameTimerCheck(fighter) == 0)
 	{
-		Fighter_EnterFall(gobj);
+		Fighter_EnterFall(fighter);
 	}
 
 	return;
 }
-///
-/// 0x800E15CC
-///
-void SpecialAirS_IASACallback(GOBJ *gobj)
+
+/// @brief Original: 0x800E15CC
+/// @param fighter 
+void SpecialAirS_IASACallback(GOBJ *fighter)
 {
 	return;
 }
-///
-/// 0x800E16E0
-///
-void SpecialAirS_PhysicCallback(GOBJ *gobj)
-{
-	FighterData *fighter_data = gobj->userdata;
-	MarioAttr *mrAttr = fighter_data->special_attributes;
-	SpecialSVar *state_var = &fighter_data->state_var;
-	SpecialSFtCmd *script_flags = &fighter_data->ftcmd_var;
 
-	if (script_flags->create_wind == 0)
+/// @brief Original: 0x800E16E0
+/// @param fighter 
+void SpecialAirS_PhysicCallback(GOBJ *fighter)
+{
+	FighterData *fd = fighter->userdata;
+	MarioAttr *mrAttr = Fighter_GetSpecialAttributes(fighter);
+	SpecialSVar *state_var = Fighter_GetStateVars(fighter);
+	SpecialSFtCmd *script_var = Fighter_GetScriptVars(fighter);
+	MarioCharVar *char_var = Fighter_GetFighterVars(fighter);
+
+	// apply physics based on script flag
+	switch (script_var->create_wind)
 	{
-		Fighter_Phys_ApplyVerticalAirFriction(fighter_data);
-	}
-	else
-	{
-		if (script_flags->create_wind == 1)
+		case 0:
 		{
-			script_flags->create_wind = 2;
-			if (fighter_data->fighter_var.ft_var4 == 0)
+			// apply physics
+			Fighter_Phys_ApplyVerticalAirFriction(fd);
+		}
+		break;
+		case 1:
+		{
+			// check to apply extra jump momentum
+			script_var->create_wind = 2;
+			if (char_var->var4 == 0)
 			{
-				fighter_data->fighter_var.ft_var4 = 1;
-				fighter_data->phys.self_vel.Y = mrAttr->specialS_vertical_momentum;
+				char_var->var4 = 1;
+				fd->phys.self_vel.Y = mrAttr->specialS_vertical_momentum;
 			}
 			else
 			{
-				fighter_data->phys.self_vel.Y = 0;
+				fd->phys.self_vel.Y = 0;
 			}
-			int bone_index = Fighter_BoneLookup(fighter_data, 4);
 
-			Vec3 pos;
-			JOBJ_GetWorldPosition(fighter_data->bones[bone_index].joint, 0, &pos);
-
-			pos.X += 3 * fighter_data->facing_direction;
-
-			Wind_FighterCreate(&pos, 0.9f, 0.1f, 1.0471976f, 0x78);
+			// create wind effect
+			Mario_CreateCapeWind(fighter);
+			
+			// apply physics
+			Fighter_PhysAir_ApplyGravity(fd, mrAttr->specialS_gravity, mrAttr->specialS_gravity_limit);
 		}
-
-		Fighter_PhysAir_ApplyGravity(fighter_data, mrAttr->specialS_gravity, mrAttr->specialS_gravity_limit);
+		break;
+		case 2:
+		{
+			// apply physics
+			Fighter_PhysAir_ApplyGravity(fd, mrAttr->specialS_gravity, mrAttr->specialS_gravity_limit);
+		}
+		break;
 	}
 
-	Fighter_PhysAir_DecayXVelocity(fighter_data, mrAttr->specialS_horizontal_velocity);
+	// apply horizontal friction
+	Fighter_PhysAir_DecayXVelocity(fd, mrAttr->specialS_horizontal_friction);
 
-	if ((script_flags->enable_reflect == 1) && (state_var->reflect_enabled == 0))
-	{
-		state_var->reflect_enabled = 1;
-		Fighter_CreateReflect(gobj, &mrAttr->reflect_data, 0);
-	}
-	else if ((script_flags->enable_reflect == 0) && (state_var->reflect_enabled == 1))
-	{
-		state_var->reflect_enabled = 0;
-		fighter_data->flags.reflect_enable = 0;
-	}
+	// process reflection
+	Mario_ReflectionThink(fighter);
 
-	Fighter_EnableReflectUpdate(gobj);
 	return;
 }
-///
-/// 0x800e198c
-///
-void SpecialAirS_CollisionCallback_StateChange(GOBJ *gobj)
+
+/// @brief Original: 0x800e198c
+/// @param fighter 
+void SpecialAirS_TouchGround(GOBJ *fighter)
 {
-	FighterData *fighter_data = gobj->userdata;
+	FighterData *fighter_data = fighter->userdata;
 	SpecialSVar *state_var = &fighter_data->state_var;
 
 	fighter_data->fighter_var.ft_var4 = 0;
@@ -406,38 +470,26 @@ void SpecialAirS_CollisionCallback_StateChange(GOBJ *gobj)
 	Fighter_SetGrounded2(fighter_data);
 
 	// change into grounded special state and preserve frame
-	ActionStateChange(fighter_data->state.frame, 1, 0, gobj, STATE_SPECIALS, 0xc4c508c, 0);
+	ActionStateChange(fighter_data->state.frame, 1, 0, 
+		fighter, 
+		STATE_SPECIALS, 
+		SPECIALS_TRANSITION_FLAGS, 
+		0);
 
-	// enable reflect flag if stateVar has been set
-	if (state_var->reflect_enabled != 0)
-	{
-		fighter_data->flags.reflect_enable = 1;
-	}
+	// re initialize callbacks after state change
+	SpecialS_InitCallbacks(fighter);
 
-	// ft_var5 stores the cape item gobj
-	if (fighter_data->fighter_var.ft_var5 != 0)
-	{
-		fighter_data->cb.OnDeath_State = DestroyCape;
-		fighter_data->cb.OnTakeDamage = DestroyCape;
-	}
-
-	// re-set enter and exit hitlag events
-	fighter_data->cb.EnterHitlag = CapeEnableUnknownHitbox3Flag;
-	fighter_data->cb.ExitHitlag = UnknownCapeExitHitlag;
-
-	// re-set cape accessory callback
-	fighter_data->cb.Accessory4 = MarioCapeThink;
 	return;
 }
-///
-/// 0x800E187C
-///
-void SpecialAirS_CollisionCallback(GOBJ *gobj)
+
+/// @brief Original: 0x800E187C
+/// @param fighter 
+void SpecialAirS_CollisionCallback(GOBJ *fighter)
 {
 	// if fighter collides with ground switch to grounded state
-	if (Fighter_CollAir_IgnoreLedge_NoCB(gobj) != 0)
+	if (Fighter_CollAir_IgnoreLedge_NoCB(fighter) != 0)
 	{
-		SpecialAirS_CollisionCallback_StateChange(gobj);
+		SpecialAirS_TouchGround(fighter);
 	}
 	return;
 }

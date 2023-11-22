@@ -622,18 +622,8 @@ struct ItemData
     int xbb0;                                           // 0xbb0
     int xbb4;                                           // 0xbb4
     int xbb8;                                           // 0xbb8
-    int xbbc;                                           // 0xbbc
-    int xbc0;                                           // 0xbc0
-    int xbc4;                                           // 0xbc4
-    int xbc8;                                           // 0xbc8
-    int xbcc;                                           // 0xbcc
-    int xbd0;                                           // 0xbd0
-    int xbd4;                                           // 0xbd4
-    int xbd8;                                           // 0xbd8
-    int xbdc;                                           // 0xbdc
-    int xbe0;                                           // 0xbe0
-    int xbe4;                                           // 0xbe4
-    int xbe8;                                           // 0xbe8
+    JOBJ **bones;                                       // 0xbbc
+    Effect effect;                                      // 0xbc0
     int xbec;                                           // 0xbec
     int xbf0;                                           // 0xbf0
     int xbf4;                                           // 0xbf4
@@ -1026,12 +1016,12 @@ int Item_CheckIfEnabled(); // returns bool regarding if items are enabled for th
 int Item_GetGroundAirState(GOBJ *item);
 void Item_UpdatePhysAndColl(GOBJ *item);
 void Item_ProjectileVelocityCalculate(GOBJ *item, float fall_speed, float max_fall_speed);
-void Item_PlayOnDestroySFXAgain(ItemData *, int sfxid, int volume, int unk);
+void Item_PlayOnDestroySFXAgain(ItemData *, int sfxid, int volume, int panning);
 void Item_UpdatePositionCollision(GOBJ *item);
 void Item_ScaleToPlayerSize(GOBJ *item);
 void Item_AnimateAndUpdateSubactions(GOBJ *item);
 void Barrel_EnterBreak(GOBJ *item);
-void Item_EnableUnknownFlag(GOBJ *item);
+void Item_EnableHitlagFlag(GOBJ *item);
 void Item_ReflectVelocity(GOBJ *item);
 void Item_Throw(GOBJ *item, float unk, Vec3 *pos, Vec3 *vel);
 JOBJ *Item_GetHeldBone(GOBJ *item);

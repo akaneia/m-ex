@@ -22,7 +22,7 @@ void OnLoad(GOBJ *gobj)
 	fighter_data->special_attributes = fighter_data->special_attributes2;
 
 	// get fighter item pointer
-	int *fighter_items = fighter_data->ftData->items;
+	ItemDesc **fighter_items = fighter_data->ftData->items;
 
 	// init fire ball
 	//Item_StoreItemDataToCharItemTable(fighter_items[0], VANILLA_ITEM_FIREBALL);
@@ -38,17 +38,18 @@ void OnLoad(GOBJ *gobj)
 void OnSpawn(GOBJ *gobj)
 {
 	FighterData *fighter_data = gobj->userdata;
+	MarioCharVar *charvar = &fighter_data->fighter_var;
 
 	// clear the fighter flags
 	Fighter_SetCharacterFlags(gobj, 0, 0);
 
 	// reset character variables 1-6
-	fighter_data->fighter_var.ft_var1 = 9;
-	fighter_data->fighter_var.ft_var2 = 9;
-	fighter_data->fighter_var.ft_var3 = 0;
-	fighter_data->fighter_var.ft_var4 = 0;
-	fighter_data->fighter_var.ft_var5 = 0;
-	fighter_data->fighter_var.ft_var6 = 0;
+	charvar->var1 = 9;
+	charvar->var2 = 9;
+	charvar->var3 = 0;
+	charvar->var4 = 0;
+	charvar->item_cape = 0;
+	charvar->var6 = 0;
 	return;
 }
 ///

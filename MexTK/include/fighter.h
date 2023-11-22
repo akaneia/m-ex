@@ -1990,7 +1990,7 @@ struct FighterData
         int x1E0;                                              // 0x1E0
         int x1E4;                                              // 0x1E4
         int x1E8;                                              // 0x1E8
-        int kirby_star_scaling;                                // 0x1EC
+        float kirby_star_scaling;                                // 0x1EC
         float kirby_b_star_damage;                             // 0x1F0
         float normal_landing_lag;                              // 0x1F4
         float n_air_landing_lag;                               // 0x1F8
@@ -3180,6 +3180,8 @@ void Fighter_EnterDownBound(GOBJ *f);
 void Fighter_EnterJumpAerial(GOBJ *f);
 void Fighter_EnterDeadDown(GOBJ *f);
 void Fighter_EnterDeadUp(GOBJ *f);
+void Fighter_EnterDeadLeft(GOBJ *f);
+void Fighter_EnterDeadRight(GOBJ *f);
 int Fighter_CheckNearbyLedges(GOBJ *fighter);
 int Fighter_CheckForOtherFighterOnLedge(GOBJ *fighter);
 void Fighter_EnterCliffCatch(GOBJ *fighter);
@@ -3348,8 +3350,6 @@ void Fighter_QueueAllowXDrift(FighterData *fighter_data, float unk, float accel,
 void Fighter_AllowXDrift(FighterData *fighter_data, float unk, float accel, float max_vel);
 void Fighter_AddClampYPosition(FighterData *fighter_data, float amt, float max);
 void Fighter_ClampHorizontalGroundVelocity(FighterData *, float);
-void Fighter_RemoveHeldFighterItem(GOBJ *fighter);
-void Fighter_DestroyAndRemoveHeldFighterItem(GOBJ *fighter);
 void Fighter_Phys_ApplyVerticalAirFriction(FighterData *fighter_data);
 void Fighter_GetVisGroupDefault(GOBJ *fighter, int vis_group);
 void Fighter_SetVisGroupDefault(GOBJ *fighter, int vis_group, s8 index); // sets the default value for this vis group (-1 = hide all)
@@ -3358,7 +3358,7 @@ void Fighter_RevertAllVisGroups(GOBJ *fighter);                          // sets
 void Fighter_HideAllVisGroups(GOBJ *fighter);                            // hides all dobjs in all vis group (sets default and current to -1)
 void Fighter_GiveItem(GOBJ *fighter, GOBJ *item);
 void Fighter_ReleaseItemUnk(int ply, int ms, GOBJ *item);
-void Fighter_InitDamageVibrate(FighterData *fp, int dmg_attr, int dmg, float mult, int pre_hurt_state, int unk_bool);
+void Fighter_InitDamageVibrate(FighterData *fp, int dmg_attr, int dmg, float mult, int pre_hurt_state, int air_state);
 float Fighter_CalcHitlagFrames(int dmg, int state_id, float mult);
 void Fighter_LoadAnimation(FighterData *fp, FighterData *fp_source, int anim_id);
 void Fighter_ApplyAnimation(GOBJ *f, float start_frame, float speed, float blend);
@@ -3385,7 +3385,7 @@ void Fighter_DamageRumble(FighterData *fp, int dmg);                            
 void Fighter_RumbleExecute(FighterData *fp, int strength, int unk);
 void Fighter_CheckKnockbackModifiers(FighterData *fp); // 8008d930
 int Fighter_GetCurrentPlacing(int ply);
-void Fighter_StoreGrabBreakout(FighterData *fp, float amt);
+void Fighter_StoreGrabBreakout(FighterData *fp, int flag, float amt);
 int Fighter_CheckGrabBreakout(FighterData *fp, float mash_amt); // returns 1 if inputted something
 void Fighter_SetAnimRate(GOBJ *f, float rate);
 int Fighter_CheckJumpInput(GOBJ *f);

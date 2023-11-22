@@ -1,143 +1,164 @@
 #include "mario.h"
+
 ////////////////////////
-//        Cape        //
+//  Helper Functions  //
 ////////////////////////
-///
-/// 0x800e132c
-///
-void RemoveCapeItem(GOBJ *gobj)
+
+/// @brief Original: 0x800e132c removes reference to cape item from fighter
+/// @param fighter 
+void Mario_RemoveCapeItem(GOBJ *fighter)
 {
-    Fighter_RemoveHeldFighterItem(gobj);
+    FighterData *fd = (FighterData *)fighter->userdata;
+	MarioCharVar *charvar = (MarioCharVar *)&fd->fighter_var;
 
-    FighterData *fighter_data = gobj->userdata;
+    // clear hitlag flag
+    if (charvar->item_cape != 0)
+        Item_ClearHitlagFlag(charvar->item_cape);
 
-    fighter_data->fighter_var.ft_var5 = 0;
+    // clear reference to cape item
+    charvar->item_cape = 0;
 
-    fighter_data->cb.OnDeath_State = 0x0;
-    fighter_data->cb.OnTakeDamage = 0x0;
+    // clear callbacks
+    fd->cb.OnDeath_State = 0;
+    fd->cb.OnTakeDamage = 0;
     return;
 }
-///
-/// OnDestroy 0x802B2644
-///
-int OnDestroy(GOBJ *gobj)
+
+////////////////////////
+//   Item Functions   //
+////////////////////////
+
+/// @brief Original: 0x802B2644
+/// @param item 
+/// @return true if item should be destroyed and false otherwise
+bool OnDestroy(GOBJ *item)
 {
-    ItemData *item_data = gobj->userdata;
+    ItemData *id = (ItemData *)item->userdata;
+    GOBJ *fighter = id->fighter_gobj;
 
-    GOBJ *fighter_gobj = item_data->fighter_gobj;
-
-    if (fighter_gobj)
-    {
-        RemoveCapeItem(fighter_gobj);
+    // check if fighter is not null
+    if (fighter)
+    {   
+        // remove cape from fighter
+        Mario_RemoveCapeItem(fighter);
     }
 
-    return 0;
+    return false;
 }
-///
-/// OnPickup 0x802B2700
-///
-int OnPickup(GOBJ *gobj)
+
+/// @brief Original: 0x802B2700
+/// @param item 
+/// @return true if item should be destroyed and false otherwise
+bool OnPickup(GOBJ *item)
 {
-    ItemData *item_data = gobj->userdata;
+    ItemData *id = item->userdata;
+    CapeItCmdFlags *flags = Item_GetItCmdFlags(item);
 
-    item_data->itcmd_var.flag1 = 0;
-    item_data->itcmd_var.flag2 = 0;
+    // clear itcmd flags
+    // these flags are set via action scripts
+    // within the fighter's files
+    flags->spawn_effect1 = 0;
+    flags->spawn_effect2 = 0;
 
-    if (item_data->fighter_gobj)
+    // check if item is held by fighter
+    if (id->fighter_gobj)
     {
-        if (Item_GetGroundAirState(gobj) == 1)
-        {
-            ItemStateChange(gobj, 1, 2);
+        // check if item is grounded or airborne
+        if (Item_GetGroundAirState(item) == 1)
+        {   
+            // enter airborne animation state
+            ItemStateChange(item, 1, 2);
         }
         else
-        {
-            ItemStateChange(gobj, 0, 2);
+        {   
+            // enter grounded animation state
+            ItemStateChange(item, 0, 2);
         }
-        Item_AnimateAndUpdateSubactions(gobj);
-        Item_ScaleToPlayerSize(gobj);
+
+        // apply first frame of animation and subaction immediatly
+        Item_AnimateAndUpdateSubactions(item);
+
+        // scale cape to fighter's size
+        Item_ScaleToPlayerSize(item);
     }
 
-    return 0;
+    return false;
 }
 
-// OnUnknown3 0x802B2870
-
-///
-/// 0x800e1428
-///
-int IsSpecialS_State(GOBJ *gobj)
+/// @brief Original: 0x802B2870
+/// @param item 
+/// @param fighter 
+void OnUnknown3(GOBJ *item, GOBJ *fighter)
 {
-    FighterData *fighter_data = gobj->userdata;
+    Item_RemoveFighterReference(item, fighter);
+    return;
+}
 
-    int state = fighter_data->state_id;
+////////////////////////
+//  State Functions   //
+////////////////////////
 
+/// @brief Original: 0x800e1428 Checks if the fighters current state is valid
+/// @param fighter 
+/// @return true if fighter is not in valid SPECIALS state and false otherwise
+bool Mario_NotInSpecialS(GOBJ *fighter)
+{
+    FighterData *fd = fighter->userdata;
+
+    int state = fd->state_id;
+    
     if (state >= STATE_SPECIALS &&
         state <= STATE_SPECIALSAIR)
-        return 0;
+        return false;
 
-    return 1;
+    return true;
 }
-///
-/// 0x802B2788
-///
-int Cape_AnimCallback(GOBJ *gobj)
+
+/// @brief Original: 0x802B2788
+/// @param gobj 
+/// @return true if item should be destroyed and false otherwise
+bool Cape_AnimCallback(GOBJ *item)
 {
-    ItemData *item_data = gobj->userdata;
+    ItemData *id = (ItemData *)item->userdata;
+    CapeItCmdFlags *flags = Item_GetItCmdFlags(item);
 
-    if (item_data->itcmd_var.flag1 != 0)
+    // check to spawn effects
+    // these flags get set via the items script within the files
+    if (flags->spawn_effect1)
     {
-        item_data->itcmd_var.flag1 = 0;
-        Effect_SpawnAsync(gobj, (int)gobj->userdata + 0xbc0, 0, 0x47d, *(int *)(item_data->xbbc + 0x40));
+        flags->spawn_effect1 = 0;
+        Effect_SpawnAsync(item, &id->effect, 0, VANILLA_EFFECT_CAPE1, id->bones[16]);
+    }
+    if (flags->spawn_effect2)
+    {
+        flags->spawn_effect2 = 0;
+        Effect_SpawnAsync(item, &id->effect, 0, VANILLA_EFFECT_CAPE2, id->bones[6]);
     }
 
-    if (item_data->itcmd_var.flag2 != 0)
-    {
-        item_data->itcmd_var.flag2 = 0;
-        Effect_SpawnAsync(gobj, (int)gobj->userdata + 0xbc0, 0, 0x47e, *(int *)(item_data->xbbc + 0x18));
-    }
-
-    GOBJ *fighter_gobj = item_data->fighter_gobj;
-    int return_var;
-
-    if (fighter_gobj == 0x0)
-    {
-        return_var = 1;
-    }
-    else
-    {
-        return_var = IsSpecialS_State(fighter_gobj);
-    }
-
-    if (return_var == 0)
-    {
-        return_var = 0;
-    }
-    else
-    {
-        if (fighter_gobj != 0x0)
-        {
-            RemoveCapeItem(fighter_gobj);
-        }
-        return_var = 1;
-    }
-
-    return return_var;
+    // check if fighter is null or not in special s state
+    // destroy the item in those cases
+    GOBJ *fighter = id->fighter_gobj;
+    bool destroy_item = fighter == 0 || Mario_NotInSpecialS(fighter);
+    return destroy_item;
 }
-///
-/// item states
-///
-__attribute__((used)) static struct ItemState item_state_table[] =
+
+/// @brief \
+This is the state struct that will get referenced when calling ItemStateChange\
+The added attribute tag is necessary to prevent this structure from getting\
+optimized away by certain compiler versions
+__attribute__((used)) 
+static struct ItemState item_state_table[] =
+{
     {
-        {
-            0,                 // anim ID
-            Cape_AnimCallback, // anim callback
-            0,                 // phys callback
-            0,                 // coll callback
-        },
-        {
-            1,                 // anim ID
-            Cape_AnimCallback, // anim callback
-            0,                 // phys callback
-            0,                 // coll callback
-        },
+        .state = 0,
+        .animCallback = Cape_AnimCallback,
+        .physCallback = 0,
+        .collCallback = 0,
+    },
+    {
+        .state = 1,
+        .animCallback = Cape_AnimCallback,
+        .physCallback = 0,
+        .collCallback = 0,
+    }
 };
