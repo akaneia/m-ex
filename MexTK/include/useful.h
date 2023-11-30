@@ -1,7 +1,7 @@
 #ifndef MEX_H_USEFUL
 #define MEX_H_USEFUL
 
-#include <stdarg.h>
+// #include <stdarg.h>
 
 #include "structs.h"
 #include "datatypes.h"
@@ -27,8 +27,8 @@ char *strrchr(const char *, int);
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
 #define assert(msg) __assert(__FILENAME__, __LINE__, msg)
 #define divide_roundup(dividend, divisor) ((dividend + (divisor / 2)) / divisor)
-#define MTXDegToRad(a) ((a)*0.01745329252f)
-#define MTXRadToDeg(a) ((a)*57.29577951f)
+#define MTXDegToRad(a) ((a) * 0.01745329252f)
+#define MTXRadToDeg(a) ((a) * 57.29577951f)
 #define SYS_BASE_CACHED (0x80000000)
 #define SYS_BASE_UNCACHED (0xC0000000)
 #define MEM_VIRTUAL_TO_PHYSICAL(x) (((u32)(x)) & ~SYS_BASE_UNCACHED) /*!< Cast virtual address to physical address, e.g. 0x8xxxxxxx -> 0x0xxxxxxx */
@@ -436,6 +436,7 @@ void OSTicksToCalendarTime(u64 time, OSCalendarTime *td);
 u64 cvt_dbl_usll(float num);
 void OSCreateAlarm(OSAlarm *alarm);
 void OSSetPeriodicAlarm(OSAlarm *alarm, OSTime start, OSTime period, void *handler);
+void OSCancelAlarm(OSAlarm *alarm);
 void OSReport(char *, ...);
 void __assert(char *file, int line, char *assert);
 int OSCreateHeap(void *heap_lo, void *heap_hi);
@@ -451,8 +452,8 @@ int DVDWaitForRead();
 int File_Read(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index, void *cb, int cb_arg2);
 int File_ReadSync(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index);
 int File_GetSize(s32 entrynum);
-void memcpy(void *dest, void *source, int size);
-void memset(void *dest, int fill, int size);
+// void memcpy(void *dest, void *source, int size);
+// void memset(void *dest, int fill, int size);
 s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat *stat);
 s32 CARDMountAsync(s32 chan, void *workArea, void *detachCallback, void *attachCallback);
 s32 CARDUnmount(s32 chan);
@@ -473,7 +474,7 @@ s32 CARDGetXferredBytes(s32 chan);
 void DCFlushRange(void *startAddr, u32 nBytes);
 void DCInvalidateRange(void *startAddr, u32 nBytes);
 void TRK_FlushCache(void *startAddr, u32 nBytes);
-int memcmp(void *buf1, void *buf2, u32 nBytes);
+// int memcmp(void *buf1, void *buf2, u32 nBytes);
 void blr();
 void blr2();
 
@@ -490,16 +491,16 @@ void HSD_SetHeapID(int heap);
 
 /** String Library **/
 #define vsprintf(buffer, format, args) _vsprintf(buffer, -1, format, args)
-int sprintf(char *s, const char *format, ...);
-int _vsprintf(char *str, int unk, const char *format, va_list arg);
-int strlen(char *str);
-char *strchr(char *str, char c); // searches for the first occurrence of the character c (an unsigned char) in the string pointed to by the argument str.
-int strcmp(char *str1, char *str2);
-int strncmp(char *str1, char *str2, int size);
-char *strcpy(char *dest, char *src);            // copies the string pointed to, by src to dest.
-char *strncpy(char *dest, char *src, int size); // copies the string pointed to, by src to dest.
-unsigned long int strtoul(const char *str, char **endptr, int base);
-int tolower(char in);
+// int sprintf(char *s, const char *format, ...);
+// int _vsprintf(char *str, int unk, const char *format, va_list arg);
+// int strlen(char *str);
+// char *strchr(char *str, char c); // searches for the first occurrence of the character c (an unsigned char) in the string pointed to by the argument str.
+// int strcmp(char *str1, char *str2);
+// int strncmp(char *str1, char *str2, int size);
+// char *strcpy(char *dest, char *src);            // copies the string pointed to, by src to dest.
+// char *strncpy(char *dest, char *src, int size); // copies the string pointed to, by src to dest.
+// unsigned long int strtoul(const char *str, char **endptr, int base);
+// int tolower(char in);
 
 int SFX_Play(int sfxID);
 int SFX_PlayRaw(int sfx, int volume, int pan, int unk, int unk2);

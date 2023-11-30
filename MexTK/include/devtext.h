@@ -9,7 +9,10 @@
 struct DevText
 {
     int x0;                   // 0x0
-    int x4;                   // 0x4
+    u8 width;                 // 0x4
+    u8 height;                // 0x5
+    u8 cursor_x;              // 0x6
+    u8 cursor_y;              // 0x7
     Vec2 scale;               // 0x8
     GXColor bg_color;         // 0x10
     int x14;                  // 0x14
@@ -22,7 +25,7 @@ struct DevText
     char show_background : 1; // 0x26
     char show_cursor : 1;     // 0x26
     char x27;                 // 0x27
-    int x28;                  // 0x28
+    u8 *text_data;            // 0x28
     int x2c;                  // 0x2c
     DevText *next;            // 0x30
     int x34;                  // 0x34

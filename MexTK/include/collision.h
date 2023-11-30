@@ -50,7 +50,7 @@ struct CollData
     int ledge_right;           // 0x44, ledge ID in contact with
     int ignore_group;          // 0x48  ignores this line group during collision
     int check_group;           // 0x4c  checks only this line group during collision
-    float x50;                 // 0x50
+    float weight;              // 0x50
     float cliffgrab_width;     // 0x54
     float cliffgrab_y_offset;  // 0x58
     float cliffgrab_height;    // 0x5c
@@ -285,6 +285,6 @@ static CollGroup **stc_collgroup = R13 + (-0x51E0);
 static CollLine **stc_collline = R13 + (-0x51E4);
 static CollVert **stc_collvert = R13 + (-0x51E8);
 static CollDataStage **stc_colldata = R13 + (-0x51EC);
-CollLineConnection **stc_first_line_connect = 0x80458e88;
+static CollLineConnection **stc_first_line_connect = 0x80458e88;
 
 #endif
