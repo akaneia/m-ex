@@ -27,12 +27,17 @@ StageSearch_Init:
 StageSearch_Loop:
   mulli r3,REG_Count,SSS_Stride
   add r4,r3,REG_IconData
-  lwz r3,0x4(r4)          #Check if was selected this session
-  cmpwi r3,0
-  blt StageSearch_IncLoop
-  lbz r3,0xA(r4)          #Check if is enabled
+  lbz     r3,0x4(r4)      #Check if was selected this session
+  rlwinm. r0,r3,0,0x80         
+  bne StageSearch_IncLoop
+/*
+  lbz r3,0xA(r4)          #Check if is enabled in random stage select
   branchl r12,0x80164330
   cmpwi r3,0
+  beq StageSearch_IncLoop
+*/
+  lbz     r3,0x4(r4)      #Check if is enabled in random stage select
+  rlwinm. r0,r3,0,0x40       
   beq StageSearch_IncLoop
 #Is eligible
   stbx  REG_Count,REG_Index,REG_EligibleIcons
@@ -51,8 +56,10 @@ StageSearch_IncLoop:
 StageReset_Loop:
   mulli r4,r5,SSS_Stride
   add r4,r4,REG_IconData
-  li  r3,0
-  stw r3,0x4(r4)
+  lbz     r0,0x4(r4)
+  li      r3,0
+  rlwimi  r0,r3,0,0x80
+  stb     r0,0x4(r4)
 StageReset_IncLoop:
   subi  r5,r5,1
   cmpwi r5,0
@@ -67,8 +74,9 @@ StageRoll:
 #Set selected status
   mulli r4,REG_RandomIcon,SSS_Stride
   add r4,r4,REG_IconData
-  li  r3,-1
-  stw r3,0x4(r4)
+  lbz     r0,0x4(r4)
+  ori     r0,r0,0x80
+  stb     r0,0x4(r4)
 
 FreeMem:
   mr  r3,REG_EligibleIcons
