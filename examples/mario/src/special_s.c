@@ -113,9 +113,6 @@ void SpecialS_OnDamagedCB(GOBJ *fighter)
 	// clear hitlag flag for cape
 	if (char_var->item_cape)
 	{
-		// clear reference to cape item
-		char_var->item_cape = 0;
-
 		// clear callbacks
 		fd->cb.OnDeath_State = 0;
 		fd->cb.OnTakeDamage = 0;

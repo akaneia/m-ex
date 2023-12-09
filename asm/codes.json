@@ -1,0 +1,1184 @@
+{
+  "codes": [
+    {
+      "name": "Initialize Item Data",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "80268754",
+          "annotation": "Initialize Item Data",
+          "sourceFile": "Additional\\Initialize Item Data.asm"
+        }
+      ]
+    },
+    {
+      "name": "Initialize Stage Data",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "801c154c",
+          "annotation": "Initialize Stage Data",
+          "sourceFile": "Additional\\Initialize Stage Data.asm"
+        }
+      ]
+    },
+    {
+      "name": "Use Save Banner #1",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8001c838",
+          "annotation": "Use Save Banner #1",
+          "sourceFile": "Additional\\Use Save Banner #1.asm"
+        }
+      ]
+    },
+    {
+      "name": "Disable Special Records",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "80173eec",
+          "annotation": "Disable Special Messages",
+          "sourceFile": "Additional\\Disable Special Records\\Disable Special Messages.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80172898",
+          "annotation": "Disable Trophy Messages",
+          "sourceFile": "Additional\\Disable Special Records\\Disable Trophy Messages.asm"
+        }
+      ]
+    },
+    {
+      "name": "On Crash",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "80160154",
+          "annotation": "Clear Bootup OSReports",
+          "sourceFile": "Additional\\On Crash\\Clear Bootup OSReports.asm"
+        },
+        {
+          "type": "inject",
+          "address": "801fe738",
+          "annotation": "Disable Brinstar OSReport",
+          "sourceFile": "Additional\\On Crash\\Disable Brinstar OSReport.asm"
+        },
+        {
+          "type": "inject",
+          "address": "800a0080",
+          "annotation": "Disable Effect AnimList OSReport",
+          "sourceFile": "Additional\\On Crash\\Disable Effect AnimList OSReport.asm"
+        },
+        {
+          "type": "inject",
+          "address": "801f3500",
+          "annotation": "Disable Fourside OSReport",
+          "sourceFile": "Additional\\On Crash\\Disable Fourside OSReport.asm"
+        },
+        {
+          "type": "inject",
+          "address": "801f35c0",
+          "annotation": "Disable Fourside OSReport2",
+          "sourceFile": "Additional\\On Crash\\Disable Fourside OSReport2.asm"
+        },
+        {
+          "type": "inject",
+          "address": "801c3a84",
+          "annotation": "Disable PS OSReport",
+          "sourceFile": "Additional\\On Crash\\Disable PS OSReport.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80202a40",
+          "annotation": "Disable YoshisIsland OSReport",
+          "sourceFile": "Additional\\On Crash\\Disable YoshisIsland OSReport.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80394a6c",
+          "annotation": "Display Tweet Message And Version Number",
+          "sourceFile": "Additional\\On Crash\\Display Tweet Message And Version Number.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80228aec",
+          "annotation": "Dont Output Compile Date on Assert",
+          "sourceFile": "Additional\\On Crash\\Dont Output Compile Date on Assert.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80228bf0",
+          "annotation": "Dont Output Compile Date on Invalid Read",
+          "sourceFile": "Additional\\On Crash\\Dont Output Compile Date on Invalid Read.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80397878",
+          "annotation": "Enable OSReport Print to Screen",
+          "sourceFile": "Additional\\On Crash\\Enable OSReport Print to Screen.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80394afc",
+          "annotation": "Only Show First 8 Lines of Stack",
+          "sourceFile": "Additional\\On Crash\\Only Show First 8 Lines of Stack.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80397c10",
+          "annotation": "Reboot With LRAStart",
+          "sourceFile": "Additional\\On Crash\\Reboot With LRAStart.asm"
+        }
+      ]
+    },
+    {
+      "name": "Skip Memcard Prompt",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "801af6f4",
+          "annotation": "Skip Memcard Prompt",
+          "sourceFile": "Additional\\Skip Memcard Prompt\\Skip Memcard Prompt.asm"
+        }
+      ]
+    },
+    {
+      "name": "TextTransparency",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "803a9220",
+          "annotation": "add alpha tev",
+          "sourceFile": "Additional\\TextTransparency\\add alpha tev.asm"
+        },
+        {
+          "type": "inject",
+          "address": "803a8d90",
+          "annotation": "copy alpha to 0x8c",
+          "sourceFile": "Additional\\TextTransparency\\copy alpha to 0x8c.asm"
+        }
+      ]
+    },
+    {
+      "name": "Unlock Everything",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8015ee98",
+          "annotation": "Unlock All-Star",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock All-Star.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8015eddc",
+          "annotation": "Unlock Sound Test",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock Sound Test.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80164b14",
+          "annotation": "Spoof All Characters as Unlocked",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock All Characters\\Spoof All Characters as Unlocked.asm"
+        },
+        {
+          "type": "inject",
+          "address": "801648f4",
+          "annotation": "Spoof Individual Characters as Unlocked",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock All Characters\\Spoof Individual Characters as Unlocked.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8015ee4c",
+          "annotation": "Unlock Random Stage Select",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock All Rules\\Unlock Random Stage Select.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8015ee14",
+          "annotation": "Unlock Score Display",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock All Rules\\Unlock Score Display.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8015d968",
+          "annotation": "Special Messages 1",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock All Special Messages\\Special Messages 1.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8015d9d8",
+          "annotation": "Special Messages 2",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock All Special Messages\\Special Messages 2.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8017229c",
+          "annotation": "Spoof No Pending Messages 2",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock All Special Messages\\Spoof No Pending Messages 2.asm"
+        },
+        {
+          "type": "inject",
+          "address": "801737b0",
+          "annotation": "Spoof No Pending Messages",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock All Special Messages\\Spoof No Pending Messages.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80164658",
+          "annotation": "Spoof All Stages Unlocked",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock All Stages\\Spoof All Stages Unlocked.asm"
+        },
+        {
+          "type": "inject",
+          "address": "801644e8",
+          "annotation": "Spoof Individual Stage Unlocked",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock All Stages\\Spoof Individual Stage Unlocked.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8015f6f8",
+          "annotation": "Fill Save Data",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock All Trophies\\Fill Save Data.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8030490c",
+          "annotation": "Have 99 of Every Trophy",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock All Trophies\\Have 99 of Every Trophy.asm"
+        },
+        {
+          "type": "inject",
+          "address": "803044f0",
+          "annotation": "Spoof All Trophies as Unlocked",
+          "sourceFile": "Additional\\Unlock Everything\\Unlock All Trophies\\Spoof All Trophies as Unlocked.asm"
+        }
+      ]
+    },
+    {
+      "name": "Allow Staling in Develop Mode",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "80089250",
+          "annotation": "Allow Staling in Develop Mode",
+          "sourceFile": "debug\\Allow Staling in Develop Mode.asm"
+        }
+      ]
+    },
+    {
+      "name": "AlwaysSpawnItemsDevelopMode",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8022632c",
+          "annotation": "AlwaysSpawnItemsDevelopMode",
+          "sourceFile": "debug\\AlwaysSpawnItemsDevelopMode.asm"
+        }
+      ]
+    },
+    {
+      "name": "Hitbox Color Changes Based On Damage",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "80009fa4",
+          "annotation": "Hitbox Color Changes Based On Damage",
+          "sourceFile": "debug\\Hitbox Color Changes Based On Damage.asm"
+        }
+      ]
+    },
+    {
+      "name": "Collision Link Draw Order Fix [Punkline]",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "80030288",
+          "annotation": "New Draw Location",
+          "sourceFile": "debug\\Collision Link Draw Order Fix [Punkline]\\New Draw Location.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8005a2ec",
+          "annotation": "Remove Original Draw",
+          "sourceFile": "debug\\Collision Link Draw Order Fix [Punkline]\\Remove Original Draw.asm"
+        }
+      ]
+    },
+    {
+      "name": "Debug Item Spawns",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "80089250",
+          "annotation": "Allow Staling in Develop Mode",
+          "sourceFile": "debug\\Debug Item Spawns\\Allow Staling in Develop Mode.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80225a10",
+          "annotation": "Starting Item is Null",
+          "sourceFile": "debug\\Debug Item Spawns\\Starting Item is Null.asm"
+        }
+      ]
+    },
+    {
+      "name": "Debug Mode Codes",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "803fa258",
+          "annotation": "Debug Language is English by Default",
+          "sourceFile": "debug\\Debug Mode Codes\\Debug Language is English by Default.asm"
+        },
+        {
+          "type": "inject",
+          "address": "801B0A14",
+          "annotation": "Exiting Debug Goes to Main Menu",
+          "sourceFile": "debug\\Debug Mode Codes\\Exiting Debug Goes to Main Menu.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8022D638",
+          "annotation": "Tournament Mode Goes to Debug",
+          "sourceFile": "debug\\Debug Mode Codes\\Tournament Mode Goes to Debug.asm"
+        }
+      ]
+    },
+    {
+      "name": "DebugModeFromTitleScreen",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "801b0940",
+          "annotation": "EnterDebug",
+          "sourceFile": "debug\\DebugModeFromTitleScreen\\EnterDebug.asm"
+        },
+        {
+          "type": "inject",
+          "address": "801a1cc4",
+          "annotation": "InputCheck",
+          "sourceFile": "debug\\DebugModeFromTitleScreen\\InputCheck.asm"
+        }
+      ]
+    },
+    {
+      "name": "Display Animation Name for Special Moves in Develop Mode",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "80226acc",
+          "annotation": "Display Animation Name for Special Moves in Develop Mode",
+          "sourceFile": "debug\\Display Animation Name for Special Moves in Develop Mode\\Display Animation Name for Special Moves in Develop Mode.asm"
+        }
+      ]
+    },
+    {
+      "name": "Display Ungrabbable Hurtboxes",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8000a284",
+          "annotation": "Main",
+          "sourceFile": "debug\\Display Ungrabbable Hurtboxes\\Main.asm"
+        }
+      ]
+    },
+    {
+      "name": "Hide Player GFX When Hitboxes Enabled",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8005c040",
+          "annotation": "Hide Existing Model GFX",
+          "sourceFile": "debug\\Hide Player GFX When Hitboxes Enabled\\Hide Existing Model GFX.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8005FE30",
+          "annotation": "Hide GFX When Hitboxes Enabled",
+          "sourceFile": "debug\\Hide Player GFX When Hitboxes Enabled\\Hide GFX When Hitboxes Enabled.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8007a430",
+          "annotation": "Hide OnHit GFX When Hitboxes Enabled 2",
+          "sourceFile": "debug\\Hide Player GFX When Hitboxes Enabled\\Hide OnHit GFX When Hitboxes Enabled 2.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8007a180",
+          "annotation": "Hide OnHit GFX When Hitboxes Enabled",
+          "sourceFile": "debug\\Hide Player GFX When Hitboxes Enabled\\Hide OnHit GFX When Hitboxes Enabled.asm"
+        }
+      ]
+    },
+    {
+      "name": "Hold Z for Rapid Frame Advance",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8016bbd4",
+          "annotation": "P1 - Check Rapid Fire Input",
+          "sourceFile": "debug\\Hold Z for Rapid Frame Advance\\P1 - Check Rapid Fire Input.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8016bc00",
+          "annotation": "P2 - Check Rapid Fire Input",
+          "sourceFile": "debug\\Hold Z for Rapid Frame Advance\\P2 - Check Rapid Fire Input.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8016bc2c",
+          "annotation": "P3 - Check Rapid Fire Input",
+          "sourceFile": "debug\\Hold Z for Rapid Frame Advance\\P3 - Check Rapid Fire Input.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8016bc58",
+          "annotation": "P4 - Check Rapid Fire Input",
+          "sourceFile": "debug\\Hold Z for Rapid Frame Advance\\P4 - Check Rapid Fire Input.asm"
+        }
+      ]
+    },
+    {
+      "name": "Misc Hitbox Visualizer",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "800593b0",
+          "annotation": "Always Draw TopN For Items",
+          "sourceFile": "debug\\Misc Hitbox Visualizer\\Always Draw TopN For Items.asm"
+        },
+        {
+          "type": "inject",
+          "address": "800593dc",
+          "annotation": "Display Chain ECBs - GObj 7",
+          "sourceFile": "debug\\Misc Hitbox Visualizer\\Display Chain ECBs - GObj 7.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80080638",
+          "annotation": "Main",
+          "sourceFile": "debug\\Misc Hitbox Visualizer\\Main.asm"
+        }
+      ]
+    },
+    {
+      "name": "Performance Measure",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "801a5044",
+          "annotation": "CObj - Begin",
+          "sourceFile": "debug\\Performance Measure\\CObj - Begin.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80391018",
+          "annotation": "CObj- Output",
+          "sourceFile": "debug\\Performance Measure\\CObj- Output.asm"
+        },
+        {
+          "type": "inject",
+          "address": "801a4fa0",
+          "annotation": "GObjProc - Begin",
+          "sourceFile": "debug\\Performance Measure\\GObjProc - Begin.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80390dfc",
+          "annotation": "GObjProc - Output",
+          "sourceFile": "debug\\Performance Measure\\GObjProc - Output.asm"
+        }
+      ]
+    },
+    {
+      "name": "Physics Display",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "80225554",
+          "annotation": "Main",
+          "sourceFile": "debug\\Physics Display\\Main.asm"
+        }
+      ]
+    },
+    {
+      "name": "Toggle Focused Player in Develop Mode Camera",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "802276f4",
+          "annotation": "Switch Focused Player in Develop Mode",
+          "sourceFile": "debug\\Toggle Focused Player in Develop Mode Camera\\Switch Focused Player in Develop Mode.asm"
+        }
+      ]
+    },
+    {
+      "name": "Disable FoD in Doubles",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "80266ce0",
+          "annotation": "Disable FoD in Doubles",
+          "sourceFile": "gameplay\\Disable FoD in Doubles.asm"
+        }
+      ]
+    },
+    {
+      "name": "Disable FoD Reflection",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8008114c",
+          "annotation": "Disable FoD Reflection",
+          "sourceFile": "gameplay\\Disable FoD Reflection.asm"
+        }
+      ]
+    },
+    {
+      "name": "Hide Nametag When Invisible",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "802fccd8",
+          "annotation": "Hide Nametag When Invisible",
+          "sourceFile": "gameplay\\Hide Nametag When Invisible.asm"
+        }
+      ]
+    },
+    {
+      "name": "Neutral Spawn",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8016e510",
+          "annotation": "Neutral Spawn",
+          "sourceFile": "gameplay\\Neutral Spawn.asm"
+        }
+      ]
+    },
+    {
+      "name": "CSS KO Star Codes",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8016ebac",
+          "annotation": "Calculate KO Stars Upon Exiting Dairantou",
+          "sourceFile": "gameplay\\CSS KO Star Codes\\Calculate KO Stars Upon Exiting Dairantou.asm"
+        },
+        {
+          "type": "inject",
+          "address": "801a5600",
+          "annotation": "Disable KO Star Deletion When Leaving CSS",
+          "sourceFile": "gameplay\\CSS KO Star Codes\\Disable KO Star Deletion When Leaving CSS.asm"
+        }
+      ]
+    },
+    {
+      "name": "Enable C Stick Always",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8002b0f8",
+          "annotation": "1P Camera",
+          "sourceFile": "gameplay\\Enable C Stick Always\\1P Camera.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8002a124",
+          "annotation": "1P Camera2",
+          "sourceFile": "gameplay\\Enable C Stick Always\\1P Camera2.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8006ae00",
+          "annotation": "Enable CStick for CPU in Debug",
+          "sourceFile": "gameplay\\Enable C Stick Always\\Enable CStick for CPU in Debug.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8006ae9c",
+          "annotation": "PlayerThink_Interrupt1",
+          "sourceFile": "gameplay\\Enable C Stick Always\\PlayerThink_Interrupt1.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8006ae04",
+          "annotation": "PlayerThink_Interrupt2",
+          "sourceFile": "gameplay\\Enable C Stick Always\\PlayerThink_Interrupt2.asm"
+        },
+        {
+          "type": "inject",
+          "address": "802274f0",
+          "annotation": "Rotate Camera with Dpad Down and C Stick - Initiate",
+          "sourceFile": "gameplay\\Enable C Stick Always\\Rotate Camera with Dpad Down and C Stick - Initiate.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80227b70",
+          "annotation": "Rotate Camera with Dpad Down and C Stick",
+          "sourceFile": "gameplay\\Enable C Stick Always\\Rotate Camera with Dpad Down and C Stick.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8006AE90",
+          "annotation": "Spoof Debug Level as 0 for Human C Stick Inputs",
+          "sourceFile": "gameplay\\Enable C Stick Always\\Spoof Debug Level as 0 for Human C Stick Inputs.asm"
+        }
+      ]
+    },
+    {
+      "name": "Game Modes",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "801ba3d4",
+          "annotation": "Disable Invisible Melee",
+          "sourceFile": "legacy\\Game Modes\\Iron Man\\Disable Invisible Melee.asm"
+        },
+        {
+          "type": "inject",
+          "address": "801ba344",
+          "annotation": "Initialize Lineups",
+          "sourceFile": "legacy\\Game Modes\\Iron Man\\Initialize Lineups.asm"
+        },
+        {
+          "type": "inject",
+          "address": "801ba410",
+          "annotation": "Load Next Match",
+          "sourceFile": "legacy\\Game Modes\\Iron Man\\Load Next Match.asm"
+        }
+      ]
+    },
+    {
+      "name": "Disable Rumble on Unplug",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "803775a4",
+          "annotation": "Disable Rumble on Unplug",
+          "sourceFile": "menu\\Disable Rumble on Unplug.asm"
+        }
+      ]
+    },
+    {
+      "name": "DPad Down to Random Stage",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8026325c",
+          "annotation": "DPad Down to Random Stage",
+          "sourceFile": "menu\\DPad Down to Random Stage.asm"
+        }
+      ]
+    },
+    {
+      "name": "Enable 1P in VS Mode No Time",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "80263064",
+          "annotation": "Enable 1P in VS Mode No Time",
+          "sourceFile": "menu\\Enable 1P in VS Mode No Time.asm"
+        }
+      ]
+    },
+    {
+      "name": "Hold A\u002BB for Salty Runback \u002B Hold A\u002BX for Random Stage \u002B Skip Result Screen",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "801a5b14",
+          "annotation": "Hold A\u002BB for Salty Runback \u002B Hold A\u002BX for Random Stage \u002B Skip Result Screen",
+          "sourceFile": "menu\\Hold A\u002BB for Salty Runback \u002B Hold A\u002BX for Random Stage \u002B Skip Result Screen.asm"
+        }
+      ]
+    },
+    {
+      "name": "L\u002BR\u002BA Returns to CSS During SSS",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8025B8BC",
+          "annotation": "L\u002BR\u002BA Returns to CSS During SSS",
+          "sourceFile": "menu\\L\u002BR\u002BA Returns to CSS During SSS.asm"
+        }
+      ]
+    },
+    {
+      "name": "Last Unplug Closes All CSS Doors",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "802605e4",
+          "annotation": "Last Unplug Closes All CSS Doors",
+          "sourceFile": "menu\\Last Unplug Closes All CSS Doors.asm"
+        }
+      ]
+    },
+    {
+      "name": "Unplugging Closes CSS Door",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "802605fc",
+          "annotation": "Unplugging Closes CSS Door",
+          "sourceFile": "menu\\Unplugging Closes CSS Door.asm"
+        }
+      ]
+    },
+    {
+      "name": "BGM Display",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "802f3a48",
+          "annotation": "Create Text Canvas",
+          "sourceFile": "menu\\BGM Display\\Create Text Canvas.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8016e980",
+          "annotation": "Create",
+          "sourceFile": "menu\\BGM Display\\Create.asm"
+        }
+      ]
+    },
+    {
+      "name": "Longer Nametags",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8023c710",
+          "annotation": "8Characters1",
+          "sourceFile": "menu\\Longer Nametags\\8 Letter Tags\\8Characters1.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8023c320",
+          "annotation": "8Characters2",
+          "sourceFile": "menu\\Longer Nametags\\8 Letter Tags\\8Characters2.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8023c6c4",
+          "annotation": "8Characters3",
+          "sourceFile": "menu\\Longer Nametags\\8 Letter Tags\\8Characters3.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8023cf9c",
+          "annotation": "8Characters4",
+          "sourceFile": "menu\\Longer Nametags\\8 Letter Tags\\8Characters4.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8023E0A4",
+          "annotation": "Adjust Cursor Position",
+          "sourceFile": "menu\\Longer Nametags\\8 Letter Tags\\Adjust Cursor Position.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8023cf74",
+          "annotation": "Character Spacing",
+          "sourceFile": "menu\\Longer Nametags\\8 Letter Tags\\Character Spacing.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8023cb08",
+          "annotation": "Copy 8 Characters1",
+          "sourceFile": "menu\\Longer Nametags\\8 Letter Tags\\Copy 8 Characters1.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8023c02c",
+          "annotation": "Copy 8 Characters2",
+          "sourceFile": "menu\\Longer Nametags\\8 Letter Tags\\Copy 8 Characters2.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80167810",
+          "annotation": "Disable Tag Rumble - Ignore Tag Rumble",
+          "sourceFile": "menu\\Longer Nametags\\8 Letter Tags\\Disable Tag Rumble - Ignore Tag Rumble.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8023c12c",
+          "annotation": "Disable Tag Rumble - Init",
+          "sourceFile": "menu\\Longer Nametags\\8 Letter Tags\\Disable Tag Rumble - Init.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80248c8c",
+          "annotation": "Disable Tag Rumble - RumbleLoad",
+          "sourceFile": "menu\\Longer Nametags\\8 Letter Tags\\Disable Tag Rumble - RumbleLoad.asm"
+        },
+        {
+          "type": "inject",
+          "address": "802477f8",
+          "annotation": "Disable Tag Rumble - RumbleThink",
+          "sourceFile": "menu\\Longer Nametags\\8 Letter Tags\\Disable Tag Rumble - RumbleThink.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8023e9e4",
+          "annotation": "ZeroNametagText",
+          "sourceFile": "menu\\Longer Nametags\\8 Letter Tags\\ZeroNametagText.asm"
+        },
+        {
+          "type": "inject",
+          "address": "802fcfc8",
+          "annotation": "Main",
+          "sourceFile": "menu\\Longer Nametags\\Scale Nametag BG\\Main.asm"
+        }
+      ]
+    },
+    {
+      "name": "Random CSS Music v2",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "801a45a8",
+          "annotation": "roll on bootup",
+          "sourceFile": "menu\\Random CSS Music v2\\roll on bootup.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8016eba8",
+          "annotation": "roll on match end",
+          "sourceFile": "menu\\Random CSS Music v2\\roll on match end.asm"
+        }
+      ]
+    },
+    {
+      "name": "Rumble Off",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "803d4a70",
+          "annotation": "Rumble Off",
+          "sourceFile": "menu\\Rumble Off\\Rumble Off.asm"
+        }
+      ]
+    },
+    {
+      "name": "Winners Names are Gold on CSS",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "80265220",
+          "annotation": "Change Name Color",
+          "sourceFile": "menu\\Winners Names are Gold on CSS\\Change Name Color.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8016ea30",
+          "annotation": "Remember Who LRA Started",
+          "sourceFile": "menu\\Winners Names are Gold on CSS\\Remember Who LRA Started.asm"
+        }
+      ]
+    },
+    {
+      "name": "Faster CSS Load",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "802641B0",
+          "annotation": "Faster CSS Load",
+          "sourceFile": "qol\\Faster CSS Load.asm"
+        }
+      ]
+    },
+    {
+      "name": "Stage Music = 50 50",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "801C26B0",
+          "annotation": "Stage Music = 50 50",
+          "sourceFile": "qol\\Stage Music = 50 50.asm"
+        }
+      ]
+    },
+    {
+      "name": "Better Camera [Achilles,UnclePunch]",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8002cb30",
+          "annotation": "C-Stick Pans Camera",
+          "sourceFile": "qol\\Better Camera [Achilles,UnclePunch]\\C-Stick Pans Camera.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8002f5bc",
+          "annotation": "Unrestricted Camera",
+          "sourceFile": "qol\\Better Camera [Achilles,UnclePunch]\\Unrestricted Camera.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8002c6e4",
+          "annotation": "C-Stick Can Pan Off Screen - Bottom",
+          "sourceFile": "qol\\Better Camera [Achilles,UnclePunch]\\C-Stick Can Pan Off Screen\\C-Stick Can Pan Off Screen - Bottom.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8002c6bc",
+          "annotation": "C-Stick Can Pan Off Screen - Left",
+          "sourceFile": "qol\\Better Camera [Achilles,UnclePunch]\\C-Stick Can Pan Off Screen\\C-Stick Can Pan Off Screen - Left.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8002c6a8",
+          "annotation": "C-Stick Can Pan Off Screen - Right",
+          "sourceFile": "qol\\Better Camera [Achilles,UnclePunch]\\C-Stick Can Pan Off Screen\\C-Stick Can Pan Off Screen - Right.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8002c6d0",
+          "annotation": "C-Stick Can Pan Off Screen - Top",
+          "sourceFile": "qol\\Better Camera [Achilles,UnclePunch]\\C-Stick Can Pan Off Screen\\C-Stick Can Pan Off Screen - Top.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8002cf34",
+          "annotation": "Pause Camera Snaps To Off Screen Players - Always Onscreen",
+          "sourceFile": "qol\\Better Camera [Achilles,UnclePunch]\\Pause Camera Snaps To Off Screen Players\\Pause Camera Snaps To Off Screen Players - Always Onscreen.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8002c5f0",
+          "annotation": "Pause Camera Snaps To Off Screen Players",
+          "sourceFile": "qol\\Better Camera [Achilles,UnclePunch]\\Pause Camera Snaps To Off Screen Players\\Pause Camera Snaps To Off Screen Players.asm"
+        }
+      ]
+    },
+    {
+      "name": "Default Tournament Settings",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "803D4A4C",
+          "annotation": "4 Stocks",
+          "sourceFile": "qol\\Default Tournament Settings\\4 Stocks.asm"
+        },
+        {
+          "type": "inject",
+          "address": "803D4A50",
+          "annotation": "8 Minutes",
+          "sourceFile": "qol\\Default Tournament Settings\\8 Minutes.asm"
+        },
+        {
+          "type": "inject",
+          "address": "803D4A60",
+          "annotation": "No Items",
+          "sourceFile": "qol\\Default Tournament Settings\\No Items.asm"
+        },
+        {
+          "type": "inject",
+          "address": "803D4A48",
+          "annotation": "Stock Mode",
+          "sourceFile": "qol\\Default Tournament Settings\\Stock Mode.asm"
+        },
+        {
+          "type": "inject",
+          "address": "803D4A78",
+          "annotation": "Tournament Stages",
+          "sourceFile": "qol\\Default Tournament Settings\\Tournament Stages.asm"
+        }
+      ]
+    },
+    {
+      "name": "Disable Movies",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "80182fbc",
+          "annotation": "Title InGame Demo",
+          "sourceFile": "qol\\Disable Movies\\Title InGame Demo.asm"
+        }
+      ]
+    },
+    {
+      "name": "HUD Transparency",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "802f6690",
+          "annotation": "main",
+          "sourceFile": "qol\\HUD Transparency\\main.asm"
+        }
+      ]
+    },
+    {
+      "name": "Idle Screen",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "80302788",
+          "annotation": "Main",
+          "sourceFile": "qol\\Idle Screen\\Main.asm"
+        }
+      ]
+    },
+    {
+      "name": "Limit Costume ID",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "8016ded4",
+          "annotation": "costume id",
+          "sourceFile": "qol\\Limit Costume ID\\costume id.asm"
+        }
+      ]
+    },
+    {
+      "name": "UCF 0",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "800C9A44",
+          "annotation": "UCF DB",
+          "sourceFile": "qol\\UCF 0.8\\UCF DB.asm"
+        },
+        {
+          "type": "inject",
+          "address": "800998A4",
+          "annotation": "UCF SD",
+          "sourceFile": "qol\\UCF 0.8\\UCF SD.asm"
+        },
+        {
+          "type": "inject",
+          "address": "802662D0",
+          "annotation": "UCF Text",
+          "sourceFile": "qol\\UCF 0.8\\UCF Text.asm"
+        },
+        {
+          "type": "inject",
+          "address": "800908f4",
+          "annotation": "UCF Tumble",
+          "sourceFile": "qol\\UCF 0.8\\UCF Tumble.asm"
+        }
+      ]
+    },
+    {
+      "name": "XYDisablesStart",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "803775bc",
+          "annotation": "Main",
+          "sourceFile": "qol\\XYDisablesStart\\Main.asm"
+        }
+      ]
+    }
+  ]
+}
