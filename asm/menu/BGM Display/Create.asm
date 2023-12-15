@@ -1,6 +1,6 @@
 #To be inserted @ 8016e980
 .include "../../Globals.s"
-.include "../Header.s"
+.include "../../m-ex/Header.s"
 
 .set REG_Symbol,31
 .set REG_GObj,30

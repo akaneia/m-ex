@@ -1,7 +1,7 @@
 {
   "codes": [
     {
-      "name": "Initialize Item Data",
+      "name": "!ADDITIONAL | Initialize Item Data",
       "authors": [],
       "description": [],
       "build": [
@@ -9,12 +9,12 @@
           "type": "inject",
           "address": "80268754",
           "annotation": "Initialize Item Data",
-          "sourceFile": "Additional\\Initialize Item Data.asm"
+          "sourceFile": "additional\\Initialize Item Data.asm"
         }
       ]
     },
     {
-      "name": "Initialize Stage Data",
+      "name": "!ADDITIONAL | Initialize Stage Data",
       "authors": [],
       "description": [],
       "build": [
@@ -22,12 +22,12 @@
           "type": "inject",
           "address": "801c154c",
           "annotation": "Initialize Stage Data",
-          "sourceFile": "Additional\\Initialize Stage Data.asm"
+          "sourceFile": "additional\\Initialize Stage Data.asm"
         }
       ]
     },
     {
-      "name": "Use Save Banner #1",
+      "name": "!ADDITIONAL | Use Save Banner #1",
       "authors": [],
       "description": [],
       "build": [
@@ -35,12 +35,12 @@
           "type": "inject",
           "address": "8001c838",
           "annotation": "Use Save Banner #1",
-          "sourceFile": "Additional\\Use Save Banner #1.asm"
+          "sourceFile": "additional\\Use Save Banner #1.asm"
         }
       ]
     },
     {
-      "name": "Disable Special Records",
+      "name": "!ADDITIONAL | Disable Special Records",
       "authors": [],
       "description": [],
       "build": [
@@ -48,18 +48,18 @@
           "type": "inject",
           "address": "80173eec",
           "annotation": "Disable Special Messages",
-          "sourceFile": "Additional\\Disable Special Records\\Disable Special Messages.asm"
+          "sourceFile": "additional\\Disable Special Records\\Disable Special Messages.asm"
         },
         {
           "type": "inject",
           "address": "80172898",
           "annotation": "Disable Trophy Messages",
-          "sourceFile": "Additional\\Disable Special Records\\Disable Trophy Messages.asm"
+          "sourceFile": "additional\\Disable Special Records\\Disable Trophy Messages.asm"
         }
       ]
     },
     {
-      "name": "On Crash",
+      "name": "!ADDITIONAL | On Crash",
       "authors": [],
       "description": [],
       "build": [
@@ -67,84 +67,84 @@
           "type": "inject",
           "address": "80160154",
           "annotation": "Clear Bootup OSReports",
-          "sourceFile": "Additional\\On Crash\\Clear Bootup OSReports.asm"
+          "sourceFile": "additional\\On Crash\\Clear Bootup OSReports.asm"
         },
         {
           "type": "inject",
           "address": "801fe738",
           "annotation": "Disable Brinstar OSReport",
-          "sourceFile": "Additional\\On Crash\\Disable Brinstar OSReport.asm"
+          "sourceFile": "additional\\On Crash\\Disable Brinstar OSReport.asm"
         },
         {
           "type": "inject",
           "address": "800a0080",
           "annotation": "Disable Effect AnimList OSReport",
-          "sourceFile": "Additional\\On Crash\\Disable Effect AnimList OSReport.asm"
+          "sourceFile": "additional\\On Crash\\Disable Effect AnimList OSReport.asm"
         },
         {
           "type": "inject",
           "address": "801f3500",
           "annotation": "Disable Fourside OSReport",
-          "sourceFile": "Additional\\On Crash\\Disable Fourside OSReport.asm"
+          "sourceFile": "additional\\On Crash\\Disable Fourside OSReport.asm"
         },
         {
           "type": "inject",
           "address": "801f35c0",
           "annotation": "Disable Fourside OSReport2",
-          "sourceFile": "Additional\\On Crash\\Disable Fourside OSReport2.asm"
+          "sourceFile": "additional\\On Crash\\Disable Fourside OSReport2.asm"
         },
         {
           "type": "inject",
           "address": "801c3a84",
           "annotation": "Disable PS OSReport",
-          "sourceFile": "Additional\\On Crash\\Disable PS OSReport.asm"
+          "sourceFile": "additional\\On Crash\\Disable PS OSReport.asm"
         },
         {
           "type": "inject",
           "address": "80202a40",
           "annotation": "Disable YoshisIsland OSReport",
-          "sourceFile": "Additional\\On Crash\\Disable YoshisIsland OSReport.asm"
+          "sourceFile": "additional\\On Crash\\Disable YoshisIsland OSReport.asm"
         },
         {
           "type": "inject",
           "address": "80394a6c",
           "annotation": "Display Tweet Message And Version Number",
-          "sourceFile": "Additional\\On Crash\\Display Tweet Message And Version Number.asm"
+          "sourceFile": "additional\\On Crash\\Display Tweet Message And Version Number.asm"
         },
         {
           "type": "inject",
           "address": "80228aec",
           "annotation": "Dont Output Compile Date on Assert",
-          "sourceFile": "Additional\\On Crash\\Dont Output Compile Date on Assert.asm"
+          "sourceFile": "additional\\On Crash\\Dont Output Compile Date on Assert.asm"
         },
         {
           "type": "inject",
           "address": "80228bf0",
           "annotation": "Dont Output Compile Date on Invalid Read",
-          "sourceFile": "Additional\\On Crash\\Dont Output Compile Date on Invalid Read.asm"
+          "sourceFile": "additional\\On Crash\\Dont Output Compile Date on Invalid Read.asm"
         },
         {
           "type": "inject",
           "address": "80397878",
           "annotation": "Enable OSReport Print to Screen",
-          "sourceFile": "Additional\\On Crash\\Enable OSReport Print to Screen.asm"
+          "sourceFile": "additional\\On Crash\\Enable OSReport Print to Screen.asm"
         },
         {
           "type": "inject",
           "address": "80394afc",
           "annotation": "Only Show First 8 Lines of Stack",
-          "sourceFile": "Additional\\On Crash\\Only Show First 8 Lines of Stack.asm"
+          "sourceFile": "additional\\On Crash\\Only Show First 8 Lines of Stack.asm"
         },
         {
           "type": "inject",
           "address": "80397c10",
           "annotation": "Reboot With LRAStart",
-          "sourceFile": "Additional\\On Crash\\Reboot With LRAStart.asm"
+          "sourceFile": "additional\\On Crash\\Reboot With LRAStart.asm"
         }
       ]
     },
     {
-      "name": "Skip Memcard Prompt",
+      "name": "!ADDITIONAL | Skip Memcard Prompt",
       "authors": [],
       "description": [],
       "build": [
@@ -152,12 +152,12 @@
           "type": "inject",
           "address": "801af6f4",
           "annotation": "Skip Memcard Prompt",
-          "sourceFile": "Additional\\Skip Memcard Prompt\\Skip Memcard Prompt.asm"
+          "sourceFile": "additional\\Skip Memcard Prompt\\Skip Memcard Prompt.asm"
         }
       ]
     },
     {
-      "name": "TextTransparency",
+      "name": "!ADDITIONAL | TextTransparency",
       "authors": [],
       "description": [],
       "build": [
@@ -165,18 +165,18 @@
           "type": "inject",
           "address": "803a9220",
           "annotation": "add alpha tev",
-          "sourceFile": "Additional\\TextTransparency\\add alpha tev.asm"
+          "sourceFile": "additional\\TextTransparency\\add alpha tev.asm"
         },
         {
           "type": "inject",
           "address": "803a8d90",
           "annotation": "copy alpha to 0x8c",
-          "sourceFile": "Additional\\TextTransparency\\copy alpha to 0x8c.asm"
+          "sourceFile": "additional\\TextTransparency\\copy alpha to 0x8c.asm"
         }
       ]
     },
     {
-      "name": "Unlock Everything",
+      "name": "!ADDITIONAL | Unlock Everything",
       "authors": [],
       "description": [],
       "build": [
@@ -184,96 +184,96 @@
           "type": "inject",
           "address": "8015ee98",
           "annotation": "Unlock All-Star",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All-Star.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All-Star.asm"
         },
         {
           "type": "inject",
           "address": "8015eddc",
           "annotation": "Unlock Sound Test",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock Sound Test.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock Sound Test.asm"
         },
         {
           "type": "inject",
           "address": "80164b14",
           "annotation": "Spoof All Characters as Unlocked",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Characters\\Spoof All Characters as Unlocked.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Characters\\Spoof All Characters as Unlocked.asm"
         },
         {
           "type": "inject",
           "address": "801648f4",
           "annotation": "Spoof Individual Characters as Unlocked",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Characters\\Spoof Individual Characters as Unlocked.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Characters\\Spoof Individual Characters as Unlocked.asm"
         },
         {
           "type": "inject",
           "address": "8015ee4c",
           "annotation": "Unlock Random Stage Select",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Rules\\Unlock Random Stage Select.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Rules\\Unlock Random Stage Select.asm"
         },
         {
           "type": "inject",
           "address": "8015ee14",
           "annotation": "Unlock Score Display",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Rules\\Unlock Score Display.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Rules\\Unlock Score Display.asm"
         },
         {
           "type": "inject",
           "address": "8015d968",
           "annotation": "Special Messages 1",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Special Messages\\Special Messages 1.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Special Messages\\Special Messages 1.asm"
         },
         {
           "type": "inject",
           "address": "8015d9d8",
           "annotation": "Special Messages 2",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Special Messages\\Special Messages 2.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Special Messages\\Special Messages 2.asm"
         },
         {
           "type": "inject",
           "address": "8017229c",
           "annotation": "Spoof No Pending Messages 2",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Special Messages\\Spoof No Pending Messages 2.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Special Messages\\Spoof No Pending Messages 2.asm"
         },
         {
           "type": "inject",
           "address": "801737b0",
           "annotation": "Spoof No Pending Messages",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Special Messages\\Spoof No Pending Messages.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Special Messages\\Spoof No Pending Messages.asm"
         },
         {
           "type": "inject",
           "address": "80164658",
           "annotation": "Spoof All Stages Unlocked",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Stages\\Spoof All Stages Unlocked.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Stages\\Spoof All Stages Unlocked.asm"
         },
         {
           "type": "inject",
           "address": "801644e8",
           "annotation": "Spoof Individual Stage Unlocked",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Stages\\Spoof Individual Stage Unlocked.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Stages\\Spoof Individual Stage Unlocked.asm"
         },
         {
           "type": "inject",
           "address": "8015f6f8",
           "annotation": "Fill Save Data",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Trophies\\Fill Save Data.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Trophies\\Fill Save Data.asm"
         },
         {
           "type": "inject",
           "address": "8030490c",
           "annotation": "Have 99 of Every Trophy",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Trophies\\Have 99 of Every Trophy.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Trophies\\Have 99 of Every Trophy.asm"
         },
         {
           "type": "inject",
           "address": "803044f0",
           "annotation": "Spoof All Trophies as Unlocked",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Trophies\\Spoof All Trophies as Unlocked.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Trophies\\Spoof All Trophies as Unlocked.asm"
         }
       ]
     },
     {
-      "name": "Allow Staling in Develop Mode",
+      "name": "!DEBUG | Allow Staling in Develop Mode",
       "authors": [],
       "description": [],
       "build": [
@@ -286,7 +286,7 @@
       ]
     },
     {
-      "name": "AlwaysSpawnItemsDevelopMode",
+      "name": "!DEBUG | AlwaysSpawnItemsDevelopMode",
       "authors": [],
       "description": [],
       "build": [
@@ -299,7 +299,7 @@
       ]
     },
     {
-      "name": "Hitbox Color Changes Based On Damage",
+      "name": "!DEBUG | Hitbox Color Changes Based On Damage",
       "authors": [],
       "description": [],
       "build": [
@@ -312,8 +312,10 @@
       ]
     },
     {
-      "name": "Collision Link Draw Order Fix [Punkline]",
-      "authors": [],
+      "name": "!DEBUG | Collision Link Draw Order Fix",
+      "authors": [
+        "Punkline"
+      ],
       "description": [],
       "build": [
         {
@@ -331,16 +333,10 @@
       ]
     },
     {
-      "name": "Debug Item Spawns",
+      "name": "!DEBUG | Debug Item Spawns",
       "authors": [],
       "description": [],
       "build": [
-        {
-          "type": "inject",
-          "address": "80089250",
-          "annotation": "Allow Staling in Develop Mode",
-          "sourceFile": "debug\\Debug Item Spawns\\Allow Staling in Develop Mode.asm"
-        },
         {
           "type": "inject",
           "address": "80225a10",
@@ -350,7 +346,7 @@
       ]
     },
     {
-      "name": "Debug Mode Codes",
+      "name": "!DEBUG | Debug Mode Codes",
       "authors": [],
       "description": [],
       "build": [
@@ -375,7 +371,7 @@
       ]
     },
     {
-      "name": "DebugModeFromTitleScreen",
+      "name": "!DEBUG | DebugModeFromTitleScreen",
       "authors": [],
       "description": [],
       "build": [
@@ -394,7 +390,7 @@
       ]
     },
     {
-      "name": "Display Animation Name for Special Moves in Develop Mode",
+      "name": "!DEBUG | Display Animation Name for Special Moves in Develop Mode",
       "authors": [],
       "description": [],
       "build": [
@@ -407,7 +403,7 @@
       ]
     },
     {
-      "name": "Display Ungrabbable Hurtboxes",
+      "name": "!DEBUG | Display Ungrabbable Hurtboxes",
       "authors": [],
       "description": [],
       "build": [
@@ -420,7 +416,7 @@
       ]
     },
     {
-      "name": "Hide Player GFX When Hitboxes Enabled",
+      "name": "!DEBUG | Hide Player GFX When Hitboxes Enabled",
       "authors": [],
       "description": [],
       "build": [
@@ -451,7 +447,7 @@
       ]
     },
     {
-      "name": "Hold Z for Rapid Frame Advance",
+      "name": "!DEBUG | Hold Z for Rapid Frame Advance",
       "authors": [],
       "description": [],
       "build": [
@@ -482,7 +478,7 @@
       ]
     },
     {
-      "name": "Misc Hitbox Visualizer",
+      "name": "!DEBUG | Misc Hitbox Visualizer",
       "authors": [],
       "description": [],
       "build": [
@@ -507,7 +503,7 @@
       ]
     },
     {
-      "name": "Performance Measure",
+      "name": "!DEBUG | Performance Measure",
       "authors": [],
       "description": [],
       "build": [
@@ -538,7 +534,7 @@
       ]
     },
     {
-      "name": "Physics Display",
+      "name": "!DEBUG | Physics Display",
       "authors": [],
       "description": [],
       "build": [
@@ -551,7 +547,7 @@
       ]
     },
     {
-      "name": "Toggle Focused Player in Develop Mode Camera",
+      "name": "!DEBUG | Toggle Focused Player in Develop Mode Camera",
       "authors": [],
       "description": [],
       "build": [
@@ -564,7 +560,7 @@
       ]
     },
     {
-      "name": "Disable FoD in Doubles",
+      "name": "!GAMEPLAY | Disable FoD in Doubles",
       "authors": [],
       "description": [],
       "build": [
@@ -577,7 +573,7 @@
       ]
     },
     {
-      "name": "Disable FoD Reflection",
+      "name": "!GAMEPLAY | Disable FoD Reflection",
       "authors": [],
       "description": [],
       "build": [
@@ -590,7 +586,7 @@
       ]
     },
     {
-      "name": "Hide Nametag When Invisible",
+      "name": "!GAMEPLAY | Hide Nametag When Invisible",
       "authors": [],
       "description": [],
       "build": [
@@ -603,7 +599,7 @@
       ]
     },
     {
-      "name": "Neutral Spawn",
+      "name": "!GAMEPLAY | Neutral Spawn",
       "authors": [],
       "description": [],
       "build": [
@@ -616,7 +612,7 @@
       ]
     },
     {
-      "name": "CSS KO Star Codes",
+      "name": "!GAMEPLAY | CSS KO Star Codes",
       "authors": [],
       "description": [],
       "build": [
@@ -635,7 +631,7 @@
       ]
     },
     {
-      "name": "Enable C Stick Always",
+      "name": "!GAMEPLAY | Enable C Stick Always",
       "authors": [],
       "description": [],
       "build": [
@@ -690,32 +686,7 @@
       ]
     },
     {
-      "name": "Game Modes",
-      "authors": [],
-      "description": [],
-      "build": [
-        {
-          "type": "inject",
-          "address": "801ba3d4",
-          "annotation": "Disable Invisible Melee",
-          "sourceFile": "legacy\\Game Modes\\Iron Man\\Disable Invisible Melee.asm"
-        },
-        {
-          "type": "inject",
-          "address": "801ba344",
-          "annotation": "Initialize Lineups",
-          "sourceFile": "legacy\\Game Modes\\Iron Man\\Initialize Lineups.asm"
-        },
-        {
-          "type": "inject",
-          "address": "801ba410",
-          "annotation": "Load Next Match",
-          "sourceFile": "legacy\\Game Modes\\Iron Man\\Load Next Match.asm"
-        }
-      ]
-    },
-    {
-      "name": "Disable Rumble on Unplug",
+      "name": "!MENU | Disable Rumble on Unplug",
       "authors": [],
       "description": [],
       "build": [
@@ -728,7 +699,7 @@
       ]
     },
     {
-      "name": "DPad Down to Random Stage",
+      "name": "!MENU | DPad Down to Random Stage",
       "authors": [],
       "description": [],
       "build": [
@@ -741,7 +712,7 @@
       ]
     },
     {
-      "name": "Enable 1P in VS Mode No Time",
+      "name": "!MENU | Enable 1P in VS Mode No Time",
       "authors": [],
       "description": [],
       "build": [
@@ -754,7 +725,7 @@
       ]
     },
     {
-      "name": "Hold A\u002BB for Salty Runback \u002B Hold A\u002BX for Random Stage \u002B Skip Result Screen",
+      "name": "!MENU | Hold A\u002BB for Salty Runback \u002B Hold A\u002BX for Random Stage \u002B Skip Result Screen",
       "authors": [],
       "description": [],
       "build": [
@@ -767,7 +738,7 @@
       ]
     },
     {
-      "name": "L\u002BR\u002BA Returns to CSS During SSS",
+      "name": "!MENU | L\u002BR\u002BA Returns to CSS During SSS",
       "authors": [],
       "description": [],
       "build": [
@@ -780,7 +751,7 @@
       ]
     },
     {
-      "name": "Last Unplug Closes All CSS Doors",
+      "name": "!MENU | Last Unplug Closes All CSS Doors",
       "authors": [],
       "description": [],
       "build": [
@@ -793,7 +764,7 @@
       ]
     },
     {
-      "name": "Unplugging Closes CSS Door",
+      "name": "!MENU | Unplugging Closes CSS Door",
       "authors": [],
       "description": [],
       "build": [
@@ -806,7 +777,7 @@
       ]
     },
     {
-      "name": "BGM Display",
+      "name": "!MENU | BGM Display",
       "authors": [],
       "description": [],
       "build": [
@@ -825,7 +796,7 @@
       ]
     },
     {
-      "name": "Longer Nametags",
+      "name": "!MENU | Longer Nametags",
       "authors": [],
       "description": [],
       "build": [
@@ -916,7 +887,7 @@
       ]
     },
     {
-      "name": "Random CSS Music v2",
+      "name": "!MENU | Random CSS Music v2",
       "authors": [],
       "description": [],
       "build": [
@@ -935,7 +906,7 @@
       ]
     },
     {
-      "name": "Rumble Off",
+      "name": "!MENU | Rumble Off",
       "authors": [],
       "description": [],
       "build": [
@@ -948,7 +919,7 @@
       ]
     },
     {
-      "name": "Winners Names are Gold on CSS",
+      "name": "!MENU | Winners Names are Gold on CSS",
       "authors": [],
       "description": [],
       "build": [
@@ -967,7 +938,7 @@
       ]
     },
     {
-      "name": "Faster CSS Load",
+      "name": "!QOL | Faster CSS Load",
       "authors": [],
       "description": [],
       "build": [
@@ -980,7 +951,7 @@
       ]
     },
     {
-      "name": "Stage Music = 50 50",
+      "name": "!QOL | Stage Music = 50 50",
       "authors": [],
       "description": [],
       "build": [
@@ -993,8 +964,10 @@
       ]
     },
     {
-      "name": "Better Camera [Achilles,UnclePunch]",
-      "authors": [],
+      "name": "!QOL | Better Camera",
+      "authors": [
+        "Achilles,UnclePunch"
+      ],
       "description": [],
       "build": [
         {
@@ -1048,7 +1021,7 @@
       ]
     },
     {
-      "name": "Default Tournament Settings",
+      "name": "!QOL | Default Tournament Settings",
       "authors": [],
       "description": [],
       "build": [
@@ -1085,7 +1058,7 @@
       ]
     },
     {
-      "name": "Disable Movies",
+      "name": "!QOL | Disable Movies",
       "authors": [],
       "description": [],
       "build": [
@@ -1098,7 +1071,7 @@
       ]
     },
     {
-      "name": "HUD Transparency",
+      "name": "!QOL | HUD Transparency",
       "authors": [],
       "description": [],
       "build": [
@@ -1111,7 +1084,7 @@
       ]
     },
     {
-      "name": "Idle Screen",
+      "name": "!QOL | Idle Screen",
       "authors": [],
       "description": [],
       "build": [
@@ -1124,7 +1097,7 @@
       ]
     },
     {
-      "name": "Limit Costume ID",
+      "name": "!QOL | Limit Costume ID",
       "authors": [],
       "description": [],
       "build": [
@@ -1137,7 +1110,7 @@
       ]
     },
     {
-      "name": "UCF 0",
+      "name": "!QOL | UCF 0",
       "authors": [],
       "description": [],
       "build": [
@@ -1168,7 +1141,7 @@
       ]
     },
     {
-      "name": "XYDisablesStart",
+      "name": "!QOL | XYDisablesStart",
       "authors": [],
       "description": [],
       "build": [
