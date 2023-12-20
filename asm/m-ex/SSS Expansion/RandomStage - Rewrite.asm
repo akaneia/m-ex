@@ -39,6 +39,17 @@ StageSearch_Loop:
   lbz     r3,0x4(r4)      #Check if is enabled in random stage select
   rlwinm. r0,r3,0,0x40       
   beq StageSearch_IncLoop
+# exclude fod during doubles
+  lbz r3,0xb(r4)
+  branchl r0,0x8022519c
+  cmpwi r3, 12
+  bne StageSearch_Eligible
+# check if doubles
+  lwz r3,-0x4a10(r13)
+  lbz r3,0x18(r3)
+  rlwinm. r0,r3,0,0x01
+  bne StageSearch_IncLoop
+StageSearch_Eligible:
 #Is eligible
   stbx  REG_Count,REG_Index,REG_EligibleIcons
   addi  REG_Index,REG_Index,1
