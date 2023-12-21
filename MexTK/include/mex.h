@@ -58,6 +58,28 @@ struct MEXPlaylist
     MEXPlaylistEntry *entries;
 };
 
+struct MexCostumeDesc // this is the symbol in the file
+{
+
+    void *costume_vis_lookup; // 0x0
+    void *costume_mat_lookup; // 0x4
+    int accessory_num;        // 0x8
+    struct MexCostumeDescAccessory
+    {
+        JOBJDesc *joint_desc;
+        int bone_index;
+        int dynamic_num;
+        DynamicsDesc **dynamic_desc;
+        int ftparts_num;
+        FtPartsVis *ftparts;
+        int dynamic_hit_num;
+        DynamicsHitDesc **dynamic_hit_desc;
+        AnimJointDesc *animjointdesc;
+        MatAnimJointDesc *matanimjointdesc;
+        FtScript *script;
+    } **accessories;
+};
+
 typedef struct MexCostumeRuntime
 {
     JOBJDesc *joint_desc;

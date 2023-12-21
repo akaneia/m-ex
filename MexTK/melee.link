@@ -273,8 +273,6 @@
 80075650:Fighter_IndexFtPartsDObjs
 80068354:Fighter_InitData
 800867e8:Fighter_InitInputs
-8009CF84:Fighter_InitDynamics
-80011710:Fighter_InitDynamicsBoneset
 8007487C:Fighter_InitFtPartsModel
 80074148:Fighter_InitPObj
 80074170:Fighter_InitPObj2
@@ -813,6 +811,7 @@
 8038e844:FGM_ResumeKind
 80364340:fmod
 803263D4:sin
+803265a8:log
 803D7060:Mex_GetStockIconFrame
 80323CF4:sprintf
 8000D5BC:sqrtf
@@ -924,6 +923,9 @@
 80011A50:Wind_StageCreate
 8027B5B0:Zako_Create
 801b2ba4:ClassicMode_GetNextNonDuplicateLineupDesc
+8000fd48:Dynamics_InitBones
+80011710:Dynamics_InitParams
+8001044c:Dynamics_UpdateBoneset
 803F0A48:stc_css_data
 804D6CB0:stc_css_minorscene
 804D6CF8:stc_css_regtagnum

@@ -88,12 +88,13 @@
 #define RENDER_ALPHA_VTX (2 << RENDER_ALPHA_SHIFT)
 #define RENDER_ALPHA_BOTH (3 << RENDER_ALPHA_SHIFT)
 #define RENDER_SHADOW (1 << 26)
-#define RENDER_ZMODE_ALWAYS (1 << 27)
-#define RENDER_NO_ZUPDATE (1 << 29)
-#define RENDER_XLU (1 << 30)
+#define RENDER_ZMODE_ALWAYS (1 << 27) // 0x08000000
+#define RENDER_NO_ZUPDATE (1 << 29)   // 0x20000000
+#define RENDER_XLU (1 << 30)          // 0x40000000
 
 // DOBJ flags
-#define DOBJ_HIDDEN 1
+#define DOBJ_HIDDEN (1 << 0)           // 0x00000001
+#define DOBJ_RENDER_ORDER_UNK (1 << 2) // 0x00000004
 
 // AOBJ flags
 #define AOBJ_REWINDED (1 << 26)   // 0x04000000

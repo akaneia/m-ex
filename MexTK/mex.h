@@ -6,7 +6,7 @@
 
 #include "include/1p.h"
 #include "include/audio.h"
-#include "include/boneset.h"
+#include "include/dynamics.h"
 #include "include/match.h"
 #include "include/collision.h"
 #include "include/color.h"

@@ -288,7 +288,7 @@ struct VPB
     u8 xb;                  // 0xb
     AXVPB *axvpb;           // 0xc
     AXVPB *axvpb2;          // 0x10
-    float pitch_x14;        // 0x14, are combined together to set ratioHi of AXPBSRC @ 8038b244
+    float freq;             // 0x14, are combined together to set ratioHi of AXPBSRC @ 8038b244
     float pitch_x18;        // 0x18, are combined together to set ratioHi of AXPBSRC @ 8038b244
     float pitch_x1c;        // 0x1c, are combined together to set ratioHi of AXPBSRC @ 8038b244
     VPB *prev;              // 0x20, is equal to the previous value of stc_bgm_vpb, before it was replaced with a ptr to this one
@@ -326,6 +326,12 @@ static int *stc_bgm_curPlayingHpsChunkHeaderIndex = R13 + -0x3f2c; // index of t
 static u8 *stc_bgm_isLoadingHPSChunk = R13 + -0x3f28;              // flag that indicates an hps chunk is being loaded
 static int *stc_bgm_aramAlloc = R13 + -0x3f20;                     // start of the 3 hps chunk circular buffer
 static int *stc_fgm_tick = R13 + -0x3f14;                          // how many times fgm audio has been updated (incremented @ 8038ad44)
+
+int SFX_Play(int sfxID);
+int SFX_PlayRaw(int sfx, int volume, int pan, int unk, int unk2);
+int SFX_PlayCommon(int sfxID);
+int SFX_PlayCrowd(int sfxID);
+void SFX_StopCrowd();
 
 char *Nametag_GetText(int tag_index);
 void Audio_ResetCache(int group_index);

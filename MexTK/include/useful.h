@@ -5,7 +5,6 @@
 
 #include "structs.h"
 #include "datatypes.h"
-#include "fighter.h"
 #include "devtext.h"
 
 typedef s64 OSTime;
@@ -501,13 +500,6 @@ void HSD_SetHeapID(int heap);
 // char *strncpy(char *dest, char *src, int size); // copies the string pointed to, by src to dest.
 // unsigned long int strtoul(const char *str, char **endptr, int base);
 // int tolower(char in);
-
-int SFX_Play(int sfxID);
-int SFX_PlayRaw(int sfx, int volume, int pan, int unk, int unk2);
-int SFX_PlayCommon(int sfxID);
-int SFX_PlayCrowd(int sfxID);
-void SFX_StopCrowd();
-void SFX_StopAllFighterSFX(FighterData *fighter_data);
 
 void DevelopMode_ResetCursorXY(DevText *text, int x, int y);
 void Develop_UpdateMatchHotkeys();

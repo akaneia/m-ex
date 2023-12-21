@@ -188,8 +188,8 @@ typedef struct FtPartsLookup FtPartsLookup;
 typedef struct FtPartsVisLookup FtPartsVisLookup;
 typedef struct FtSymbolLookup FtSymbolLookup;
 typedef struct FtDynamicBoneset FtDynamicBoneset;
-typedef struct FtDynamicRoot FtDynamicRoot;
-typedef struct FtDynamicHit FtDynamicHit;
+typedef struct DynamicBoneData DynamicBoneData;
+typedef struct DynamicHit DynamicHit;
 typedef struct DynamicsDesc DynamicsDesc;
 typedef struct DynamicsHitDesc DynamicsHitDesc;
 typedef struct DynamicsBehave DynamicsBehave;
@@ -291,5 +291,7 @@ typedef struct FtVarKirby FtVarKirby;
 typedef struct Stc_icns Stc_icns;
 typedef struct MEXPlaylist MEXPlaylist;
 typedef struct MEXPlaylistEntry MEXPlaylistEntry;
+typedef struct MexCostumeDesc MexCostumeDesc;
+typedef struct MexCostumeDescAccessory MexCostumeDescAccessory;
 
 #endif

@@ -6,6 +6,7 @@
 #include "obj.h"
 #include "gx.h"
 #include "color.h"
+#include "dynamics.h"
 
 // Item IDs
 enum ItemID
@@ -507,7 +508,7 @@ struct ItDynamics
 struct ItDynamicBoneset
 {
     int apply_phys_num;     // if this is 256, dyanmics are not processed
-    JOBJ *root_bone;        // 0x4
+    JOBJ *root_bone;        // 0x4, is referenced when adding aobjs @ 80268c24, im guessing to skip adding the anims for dyn bones
     DynamicBoneset boneset; // 0x8
 };
 
@@ -601,8 +602,8 @@ struct ItemData
     int xb5c;                                           // 0xb5c
     int xb60;                                           // 0xb60
     int xb64;                                           // 0xb64
-    int dynamics_xb68;                                  // 0xb68
-    int xb6c;                                           // 0xb6c
+    int dynamics_xb68;                                  // 0xb68, dynamic_hit_num?
+    int xb6c;                                           // 0xb6c, dynamic hit
     int xb70;                                           // 0xb70
     int xb74;                                           // 0xb74
     int xb78;                                           // 0xb78
