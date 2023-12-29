@@ -7,6 +7,7 @@
 #include "gx.h"
 #include "color.h"
 #include "dynamics.h"
+#include <stdbool.h>
 
 // Item IDs
 enum ItemID
@@ -1048,4 +1049,14 @@ GOBJ *Item_GiveOwnershipToAttacker(GOBJ *item);
 char Item_GetHoldKind(GOBJ *item);
 float Item_GetDistanceFromPointSquared(GOBJ *item, Vec3 *position);
 void Item_DestroyAndRemovedGrabbed(GOBJ *item, int flag, float damage);
+
+/// @brief removes all references to specificed fighter from item
+/// @param item
+/// @param fighter
+/// @return TRUE if fighter reference was removed and FALSE otherwise
+bool Item_RemoveFighterReference(GOBJ *item, GOBJ *fighter);
+
+/// @brief updates item flags related to hitlag TODO: better description
+/// @param item
+void Item_ClearHitlagFlag(GOBJ *item);
 #endif

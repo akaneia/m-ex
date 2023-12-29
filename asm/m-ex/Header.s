@@ -460,6 +460,7 @@
 .set  OFST_TrophyFallScale, OFST_AllStarTrophyLookup + 0x4
 .set  OFST_MetaData_TrophyCount,OFST_TrophyFallScale + 0x4
 .set  OFST_MetaData_TrophySDOff,OFST_MetaData_TrophyCount+0x4
+.set  OFST_MexPatch,OFST_MetaData_TrophySDOff+0x4
 
 # Fighter Data
 .set FighterDataOrigSize, 0x23ec

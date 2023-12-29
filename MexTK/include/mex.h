@@ -27,6 +27,7 @@ enum MEX_GETDATA
     MXDT_FTEMBLEMLOOKUP, // returns pointer to ftkind desc array, indexed by external ID
     MXDT_MEXDATA,        //
     MXDT_PRELOADHEAP,    // returns pointer to PreloadHeap
+    MXPT_FILE,       // returns pointer to Archive data for MxPt if it exists
 };
 
 typedef enum SSMKind
@@ -58,28 +59,6 @@ struct MEXPlaylist
     MEXPlaylistEntry *entries;
 };
 
-struct MexCostumeDesc // this is the symbol in the file
-{
-
-    void *costume_vis_lookup; // 0x0
-    void *costume_mat_lookup; // 0x4
-    int accessory_num;        // 0x8
-    struct MexCostumeDescAccessory
-    {
-        JOBJDesc *joint_desc;
-        int bone_index;
-        int dynamic_num;
-        DynamicsDesc **dynamic_desc;
-        int ftparts_num;
-        FtPartsVis *ftparts;
-        int dynamic_hit_num;
-        DynamicsHitDesc **dynamic_hit_desc;
-        AnimJointDesc *animjointdesc;
-        MatAnimJointDesc *matanimjointdesc;
-        FtScript *script;
-    } **accessories;
-};
-
 typedef struct MexCostumeRuntime
 {
     JOBJDesc *joint_desc;
@@ -95,22 +74,37 @@ typedef struct MexCostumeRuntimeDesc
     MexCostumeRuntime *runtimes;
     int count;
 } MexCostumeRuntimeDesc;
+
+typedef struct MEXInstructionTable
+{
+    u32 cmd : 8;            // 0x0
+    u32 code_offset : 24;   // 0x01
+    uint reloc_offset;       // 0x4
+} MEXInstructionTable;
+
 typedef struct MEXFunctionTable
 {
     int index;       // 0x0
-    int code_offset; // 0x4
+    uint code_offset; // 0x4
 } MEXFunctionTable;
+
+typedef struct MEXDebugSymbol
+{
+    uint code_offset;       // 0x0
+    uint code_length;       // 0x4
+    char *symbol;           // 0x8
+} MEXDebugSymbol;
 
 typedef struct MEXFunction
 {
-    u8 *code;                           // 0x0
-    int *instruction_reloc_table;       // 0x4
-    int instruction_reloc_table_num;    // 0x8
-    MEXFunctionTable *func_reloc_table; // 0xC
-    int func_reloc_table_num;           // 0x10
-    int code_size;                      // 0x14
-    int debug_symbol_num;               // 0x18
-    void *debug_symbol;                 // 0x1c
+    u8 *code;                                       // 0x0
+    MEXInstructionTable *instruction_reloc_table;   // 0x4
+    int instruction_reloc_table_num;                // 0x8
+    MEXFunctionTable *func_reloc_table;             // 0xC
+    int func_reloc_table_num;                       // 0x10
+    int code_size;                                  // 0x14
+    int debug_symbol_num;                           // 0x18
+    MEXDebugSymbol *debug_symbol;                   // 0x1c
 } MEXFunction;
 
 typedef struct MexMetaData

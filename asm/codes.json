@@ -9,7 +9,7 @@
           "type": "inject",
           "address": "80268754",
           "annotation": "Initialize Item Data",
-          "sourceFile": "Additional\\Initialize Item Data.asm"
+          "sourceFile": "additional\\Initialize Item Data.asm"
         }
       ]
     },
@@ -22,7 +22,7 @@
           "type": "inject",
           "address": "801c154c",
           "annotation": "Initialize Stage Data",
-          "sourceFile": "Additional\\Initialize Stage Data.asm"
+          "sourceFile": "additional\\Initialize Stage Data.asm"
         }
       ]
     },
@@ -35,7 +35,7 @@
           "type": "inject",
           "address": "8001c838",
           "annotation": "Use Save Banner #1",
-          "sourceFile": "Additional\\Use Save Banner #1.asm"
+          "sourceFile": "additional\\Use Save Banner #1.asm"
         }
       ]
     },
@@ -48,13 +48,13 @@
           "type": "inject",
           "address": "80173eec",
           "annotation": "Disable Special Messages",
-          "sourceFile": "Additional\\Disable Special Records\\Disable Special Messages.asm"
+          "sourceFile": "additional\\Disable Special Records\\Disable Special Messages.asm"
         },
         {
           "type": "inject",
           "address": "80172898",
           "annotation": "Disable Trophy Messages",
-          "sourceFile": "Additional\\Disable Special Records\\Disable Trophy Messages.asm"
+          "sourceFile": "additional\\Disable Special Records\\Disable Trophy Messages.asm"
         }
       ]
     },
@@ -67,79 +67,79 @@
           "type": "inject",
           "address": "80160154",
           "annotation": "Clear Bootup OSReports",
-          "sourceFile": "Additional\\On Crash\\Clear Bootup OSReports.asm"
+          "sourceFile": "additional\\On Crash\\Clear Bootup OSReports.asm"
         },
         {
           "type": "inject",
           "address": "801fe738",
           "annotation": "Disable Brinstar OSReport",
-          "sourceFile": "Additional\\On Crash\\Disable Brinstar OSReport.asm"
+          "sourceFile": "additional\\On Crash\\Disable Brinstar OSReport.asm"
         },
         {
           "type": "inject",
           "address": "800a0080",
           "annotation": "Disable Effect AnimList OSReport",
-          "sourceFile": "Additional\\On Crash\\Disable Effect AnimList OSReport.asm"
+          "sourceFile": "additional\\On Crash\\Disable Effect AnimList OSReport.asm"
         },
         {
           "type": "inject",
           "address": "801f3500",
           "annotation": "Disable Fourside OSReport",
-          "sourceFile": "Additional\\On Crash\\Disable Fourside OSReport.asm"
+          "sourceFile": "additional\\On Crash\\Disable Fourside OSReport.asm"
         },
         {
           "type": "inject",
           "address": "801f35c0",
           "annotation": "Disable Fourside OSReport2",
-          "sourceFile": "Additional\\On Crash\\Disable Fourside OSReport2.asm"
+          "sourceFile": "additional\\On Crash\\Disable Fourside OSReport2.asm"
         },
         {
           "type": "inject",
           "address": "801c3a84",
           "annotation": "Disable PS OSReport",
-          "sourceFile": "Additional\\On Crash\\Disable PS OSReport.asm"
+          "sourceFile": "additional\\On Crash\\Disable PS OSReport.asm"
         },
         {
           "type": "inject",
           "address": "80202a40",
           "annotation": "Disable YoshisIsland OSReport",
-          "sourceFile": "Additional\\On Crash\\Disable YoshisIsland OSReport.asm"
+          "sourceFile": "additional\\On Crash\\Disable YoshisIsland OSReport.asm"
         },
         {
           "type": "inject",
           "address": "80394a6c",
           "annotation": "Display Tweet Message And Version Number",
-          "sourceFile": "Additional\\On Crash\\Display Tweet Message And Version Number.asm"
+          "sourceFile": "additional\\On Crash\\Display Tweet Message And Version Number.asm"
         },
         {
           "type": "inject",
           "address": "80228aec",
           "annotation": "Dont Output Compile Date on Assert",
-          "sourceFile": "Additional\\On Crash\\Dont Output Compile Date on Assert.asm"
+          "sourceFile": "additional\\On Crash\\Dont Output Compile Date on Assert.asm"
         },
         {
           "type": "inject",
           "address": "80228bf0",
           "annotation": "Dont Output Compile Date on Invalid Read",
-          "sourceFile": "Additional\\On Crash\\Dont Output Compile Date on Invalid Read.asm"
+          "sourceFile": "additional\\On Crash\\Dont Output Compile Date on Invalid Read.asm"
         },
         {
           "type": "inject",
           "address": "80397878",
           "annotation": "Enable OSReport Print to Screen",
-          "sourceFile": "Additional\\On Crash\\Enable OSReport Print to Screen.asm"
+          "sourceFile": "additional\\On Crash\\Enable OSReport Print to Screen.asm"
         },
         {
           "type": "inject",
           "address": "80394afc",
           "annotation": "Only Show First 8 Lines of Stack",
-          "sourceFile": "Additional\\On Crash\\Only Show First 8 Lines of Stack.asm"
+          "sourceFile": "additional\\On Crash\\Only Show First 8 Lines of Stack.asm"
         },
         {
           "type": "inject",
           "address": "80397c10",
           "annotation": "Reboot With LRAStart",
-          "sourceFile": "Additional\\On Crash\\Reboot With LRAStart.asm"
+          "sourceFile": "additional\\On Crash\\Reboot With LRAStart.asm"
         }
       ]
     },
@@ -152,7 +152,7 @@
           "type": "inject",
           "address": "801af6f4",
           "annotation": "Skip Memcard Prompt",
-          "sourceFile": "Additional\\Skip Memcard Prompt\\Skip Memcard Prompt.asm"
+          "sourceFile": "additional\\Skip Memcard Prompt\\Skip Memcard Prompt.asm"
         }
       ]
     },
@@ -165,13 +165,13 @@
           "type": "inject",
           "address": "803a9220",
           "annotation": "add alpha tev",
-          "sourceFile": "Additional\\TextTransparency\\add alpha tev.asm"
+          "sourceFile": "additional\\TextTransparency\\add alpha tev.asm"
         },
         {
           "type": "inject",
           "address": "803a8d90",
           "annotation": "copy alpha to 0x8c",
-          "sourceFile": "Additional\\TextTransparency\\copy alpha to 0x8c.asm"
+          "sourceFile": "additional\\TextTransparency\\copy alpha to 0x8c.asm"
         }
       ]
     },
@@ -184,110 +184,91 @@
           "type": "inject",
           "address": "8015ee98",
           "annotation": "Unlock All-Star",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All-Star.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All-Star.asm"
         },
         {
           "type": "inject",
           "address": "8015eddc",
           "annotation": "Unlock Sound Test",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock Sound Test.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock Sound Test.asm"
         },
         {
           "type": "inject",
           "address": "80164b14",
           "annotation": "Spoof All Characters as Unlocked",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Characters\\Spoof All Characters as Unlocked.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Characters\\Spoof All Characters as Unlocked.asm"
         },
         {
           "type": "inject",
           "address": "801648f4",
           "annotation": "Spoof Individual Characters as Unlocked",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Characters\\Spoof Individual Characters as Unlocked.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Characters\\Spoof Individual Characters as Unlocked.asm"
         },
         {
           "type": "inject",
           "address": "8015ee4c",
           "annotation": "Unlock Random Stage Select",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Rules\\Unlock Random Stage Select.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Rules\\Unlock Random Stage Select.asm"
         },
         {
           "type": "inject",
           "address": "8015ee14",
           "annotation": "Unlock Score Display",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Rules\\Unlock Score Display.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Rules\\Unlock Score Display.asm"
         },
         {
           "type": "inject",
           "address": "8015d968",
           "annotation": "Special Messages 1",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Special Messages\\Special Messages 1.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Special Messages\\Special Messages 1.asm"
         },
         {
           "type": "inject",
           "address": "8015d9d8",
           "annotation": "Special Messages 2",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Special Messages\\Special Messages 2.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Special Messages\\Special Messages 2.asm"
         },
         {
           "type": "inject",
           "address": "8017229c",
           "annotation": "Spoof No Pending Messages 2",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Special Messages\\Spoof No Pending Messages 2.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Special Messages\\Spoof No Pending Messages 2.asm"
         },
         {
           "type": "inject",
           "address": "801737b0",
           "annotation": "Spoof No Pending Messages",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Special Messages\\Spoof No Pending Messages.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Special Messages\\Spoof No Pending Messages.asm"
         },
         {
           "type": "inject",
           "address": "80164658",
           "annotation": "Spoof All Stages Unlocked",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Stages\\Spoof All Stages Unlocked.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Stages\\Spoof All Stages Unlocked.asm"
         },
         {
           "type": "inject",
           "address": "801644e8",
           "annotation": "Spoof Individual Stage Unlocked",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Stages\\Spoof Individual Stage Unlocked.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Stages\\Spoof Individual Stage Unlocked.asm"
         },
         {
           "type": "inject",
           "address": "8015f6f8",
           "annotation": "Fill Save Data",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Trophies\\Fill Save Data.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Trophies\\Fill Save Data.asm"
         },
         {
           "type": "inject",
           "address": "8030490c",
           "annotation": "Have 99 of Every Trophy",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Trophies\\Have 99 of Every Trophy.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Trophies\\Have 99 of Every Trophy.asm"
         },
         {
           "type": "inject",
           "address": "803044f0",
           "annotation": "Spoof All Trophies as Unlocked",
-          "sourceFile": "Additional\\Unlock Everything\\Unlock All Trophies\\Spoof All Trophies as Unlocked.asm"
-        }
-      ]
-    },
-    {
-      "name": "!ADDITIONAL CODES | Debug Mode Codes",
-      "authors": [],
-      "description": [],
-      "build": [
-        {
-          "type": "inject",
-          "address": "801a4fa4",
-          "annotation": "NewCall",
-          "sourceFile": "Additional Codes\\Debug Mode Codes\\HSDUpdate At End of Frame\\NewCall.asm"
-        },
-        {
-          "type": "inject",
-          "address": "801a4f94",
-          "annotation": "RemoveOrig",
-          "sourceFile": "Additional Codes\\Debug Mode Codes\\HSDUpdate At End of Frame\\RemoveOrig.asm"
+          "sourceFile": "additional\\Unlock Everything\\Unlock All Trophies\\Spoof All Trophies as Unlocked.asm"
         }
       ]
     },

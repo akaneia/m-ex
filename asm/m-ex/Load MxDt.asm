@@ -363,10 +363,6 @@ FileName_MxPt:
 blrl
 .string "MxPt.dat"
 .align 2
-SymbolName_MxPt:
-blrl
-.string "mexPatch"
-.align 2
 
 Exit:
   mr  r3,REG_HeapLo

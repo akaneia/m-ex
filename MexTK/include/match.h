@@ -166,7 +166,9 @@ struct MatchInit
     unsigned char unk11 : 1;             // 0x80
     unsigned char isCheckStockSteal : 1; // 0x40
     unsigned char isRunStockLogic : 1;   // 0x20
-    unsigned char unk1f : 5;             // 0x1f
+    unsigned char x4_10 : 1;             // 0x10
+    unsigned char x4_08 : 1;             // 0x08
+    unsigned char unk1f : 3;             // 0x1f
     // byte 0x5
     unsigned char no_check_end : 1;        // 0x80
     unsigned char isSkipUnkStockCheck : 1; // 0x40
@@ -701,6 +703,9 @@ struct Match // static match struct @ 8046b6a0
     u8 request_match_end;     // 0x6, will override match end logic and set kind to
     u8 x7;                    // 0x7
     u8 end_kind;              // 0x8
+    u8 x9;              // 0x8
+    u8 xA;              // 0x8
+    u8 xB;              // 0x8
     int xc;                   // 0xc
     int end_sfx_announcer;    // 0x10
     int end_sfx_crowd;        // 0x14

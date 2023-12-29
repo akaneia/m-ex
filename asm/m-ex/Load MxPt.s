@@ -25,7 +25,6 @@ File_Found:
 .macro MxPt_Load
 
 .set  REG_HeapID,26
-.set  REG_mexPatch,26
 .set  REG_Header,25
 .set  REG_MxPtFILE,22
 .set  REG_MxPtSize,23
@@ -35,6 +34,7 @@ File_Found:
   li  r4,68
   branchl r12,0x80343ef0
   mr  REG_Header,r3
+  stw REG_Header, OFST_MexPatch(rtoc)
 #Alloc from this heap
   mr  r3,REG_HeapID
   mr  r4,REG_MxPtSize
@@ -51,21 +51,48 @@ File_Found:
   mr  r3,REG_Header   #store header
   mr  r4,REG_MxPtFILE      #file
   branchl r12,0x80016a54
-#Get symbol offset
-  mr  r3,REG_Header
-  bl  SymbolName_MxPt
-  mflr  r4
-  branchl r12,0x80380358
-  mr.  REG_mexPatch,r3
-  beq mexPatch_Skip
-#Reloc
-  mr r3,REG_mexPatch
+
+# loop over all symbols in file
+
+.set  REG_STRTBL,26
+.set  REG_OFFSET,23
+
+# get reloc offset
+  lwz r3, 0x04(REG_Header)
+  add r3, r3, REG_MxPtFILE
+  addi REG_OFFSET, r3, 0x20
+# get string table size to skip over
+  lwz REG_STRTBL, 0x08(REG_Header)
+  mulli REG_STRTBL, REG_STRTBL, 4
+# skip reloc table
+  add REG_OFFSET, REG_OFFSET, REG_STRTBL
+
+.set REG_SYMBOL,25
+.set REG_LOOP,26
+
+# get number of symbols
+  lwz REG_LOOP, 0x0C(REG_Header)
+  subi REG_LOOP, REG_LOOP, 1
+
+SymbolLoop:
+  mr r3, REG_LOOP
+  mulli r3, r3, 0x08
+  add r3, r3, REG_OFFSET
+  lwz r3, 0(r3)
+  addi r3, r3, 0x20
+  add REG_SYMBOL, r3, REG_MxPtFILE
+# relocate
+  mr r3, REG_SYMBOL
   branchl r12,Reloc
-#Overload
-  mr  r3,REG_mexPatch
+# overload
+  mr r3, REG_SYMBOL
   li  r4,0
   li  r5,0
   bl  Overload
+  subi REG_LOOP, REG_LOOP, 1
+  cmpwi REG_LOOP, 0
+  bge SymbolLoop
+
 mexPatch_Skip:
   b End_Load
 
@@ -95,6 +122,9 @@ Overload_Loop:
   add REG_ThisElement,r3,REG_RelocTable
 #Check if using index or function address
   lwz r3,FunctionRelocTable_ReplaceThis(REG_ThisElement)
+  rlwinm r4,r3,0,0,0
+  cmpwi r4,0
+  beq Overload_IncLoop
 #Get ram offset for code
   lwz r4,FunctionRelocTable_ReplaceWith(REG_ThisElement)
   add r4,r4,REG_Code

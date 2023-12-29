@@ -8,6 +8,15 @@
 #define MEMCARD_BANNER_SIZE 0x1800
 #define MEMCARD_ICON_SIZE 0x400
 
+enum MemCardStatus
+{
+    MEMCARD_STATUS_0,
+    MEMCARD_STATUS_FILE_ALREADY_EXISTS,
+    MEMCARD_STATUS_2,
+    MEMCARD_STATUS_3,
+    MEMCARD_STATUS_FILE_NOT_FOUND,
+};
+
 /*** Enums ***/
 enum LanguageKind
 {
@@ -2779,6 +2788,7 @@ struct Rules4
     u8 x14;          // 0x14
     u8 x15;          // 0x15
     u8 language;     // 0x16
+    u32 stage_switch; // 0x18
 };
 
 /*** Static Variables ***/

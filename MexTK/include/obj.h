@@ -426,8 +426,8 @@ struct COBJ
         f32 roll; // 0x28
         Vec3 up;  // 0x28 - 0x34
     } u;
-    f32 near; // 0x3C
-    f32 far;  // 0x40
+    f32 near; // 0x38
+    f32 far;  // 0x3C
     union
     {
         struct
@@ -738,7 +738,7 @@ void GObj_Destroy(GOBJ *gobj);
 void GObj_AddGXLink(GOBJ *gobj, void *cb, int gx_link, int gx_pri);
 void GObj_DestroyGXLink(GOBJ *gobj);
 void GObj_GXReorder(GOBJ *gobj, int unk);
-void GObj_AddProc(GOBJ *gobj, void *callback, int priority);
+GOBJProc *GObj_AddProc(GOBJ *gobj, void *callback, int priority);
 void GObj_RemoveProc(GOBJ *gobj);
 void GObj_AddObject(GOBJ *gobj, u8 obj_kind, void *object);
 void GObj_FreeObject(GOBJ *gobj);
