@@ -128,11 +128,24 @@ typedef struct MexMetaData
     int trophy_sd_offset;
 } MexMetaData;
 
+typedef struct MnSlMapIcon
+{
+    JOBJ *runtime_joint;
+    int flags;
+    byte icon_state;
+    byte preview_id;
+    byte random_select_stage_id;
+
+    Vec2 cursor_size;
+    Vec2 outline_size;
+    int external_id;
+} MnSlMapIcon;
+
 typedef struct MexMenuData
 {
     int *params;
     MnSlChrIcon *css_icons;
-    void *sss_icons;
+    MnSlMapIcon *sss_icons;
     void *sss_bitfields;
 } MexMenuData;
 
@@ -158,8 +171,8 @@ typedef struct MexStageTable
     MexStageSound *sound_table;
     void *collision_table;
     void *item_table;
-    void *name_table;
-    void *playlist_table;
+    char **name_table;
+    MEXPlaylist *playlist_table;
 } MexStageTable;
 
 typedef struct MexData
@@ -211,6 +224,36 @@ static void MEX_InitRELDAT(HSD_Archive *archive, char *symbol_name, int *return_
         return_func_array[i] = &mex_function->code[this_func->code_offset];
     }
 }
+/// @brief 
+/// @param stc_icns 
+/// @param c_kind 
+/// @param costume_id 
+/// @return 
+static float MEX_GetStockIconFrame(Stc_icns *stc_icns, int c_kind, int costume_id)
+{
+    FtKindDesc *ftkind_desc = MEX_GetData(MXDT_FTKINDDESC);
+    int ft_kind = ftkind_desc[c_kind].ft_main;
+
+    int ftkind_num = MEX_GetData(MXDT_FTINTNUM);
+    float stock_frame;
+
+    // check for special fighter
+    if (ft_kind >= (ftkind_num - (33 - FTKIND_MASTERHAND)) &&
+        ft_kind <= (ftkind_num - (33 - FTKIND_SANDBAG)))
+    {
+        static u8 special_ft_stock[] = {3, 2, 1, 1, 5, 6};
+        stock_frame = special_ft_stock[ft_kind];
+    }
+    else
+        stock_frame = stc_icns->reserved_num + (costume_id * stc_icns->stride) + ft_kind;
+
+    return stock_frame;
+}
+/// @brief 
+/// @param sfxid 
+/// @param volume 
+/// @param panning 
+/// @return 
 static int MEX_PlayStageSoundRaw(int sfxid, int volume, int panning)
 {
     // get soundbank id

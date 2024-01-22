@@ -120,11 +120,41 @@ Overload_Loop:
 #Get this element
   mulli r3,REG_Count,8
   add REG_ThisElement,r3,REG_RelocTable
-#Check if using index or function address
+
+#Extract top two bits to determine type
   lwz r3,FunctionRelocTable_ReplaceThis(REG_ThisElement)
-  rlwinm r4,r3,0,0,0
-  cmpwi r4,0
-  beq Overload_IncLoop
+  rlwinm r4,r3,2,30,31 # 8065eabc
+  rlwinm r3,r3,0,2,29
+  oris r3,r3,0x8000
+
+#These flags determine injection type
+  cmpwi r4, 1 # branch link instruction
+  beq Override_BranchLink
+  cmpwi r4, 2 # branch instruction
+  beq Override_Branch
+  cmpwi r4, 3 # replace instruction
+  beq Override_Replace
+b Overload_IncLoop
+
+Override_Replace:
+#Get ram offset for code
+  lwz r4,FunctionRelocTable_ReplaceWith(REG_ThisElement)
+  stw r4,0x0(r3)         #place instruction
+  b Overload_IncLoop
+
+Override_BranchLink:
+#Get ram offset for code
+  lwz r4,FunctionRelocTable_ReplaceWith(REG_ThisElement)
+  add r4,r4,REG_Code
+#Store branch to this code
+  sub r4,r4,r3                          #Difference relative to branch addr
+  rlwinm  r4,r4,0,6,29                  #extract bits for offset
+  oris  r4,r4,0x4800                    #Create branch instruction from it
+  ori r4,r4,0x0001                      #make instruction branch link
+  stw r4,0x0(r3)         #place branch instruction
+  b Overload_IncLoop
+
+Override_Branch:
 #Get ram offset for code
   lwz r4,FunctionRelocTable_ReplaceWith(REG_ThisElement)
   add r4,r4,REG_Code

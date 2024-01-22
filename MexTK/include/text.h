@@ -10,8 +10,8 @@
 
 struct TextAllocInfo
 {
-    void *next; // 0x0
-    void *prev; // 0x4,
+    u8 *next; // 0x0
+    u8 *prev; // 0x4,
     int size;   // 0x8 data remaining after this alloc?
     // data after this....
     u8 xc;      // 0xC data ?

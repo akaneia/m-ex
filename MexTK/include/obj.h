@@ -185,7 +185,13 @@ struct GOBJProc
     GOBJProc *next;
     GOBJProc *prev;
     char s_link;            // 0xC
-    char flags;             // 0xD
+    char x0d_80 : 1;        // 0xD
+    char x0d_40 : 1;         
+    char proc_index : 2;
+    char x0d_08 : 1;         
+    char x0d_04 : 1;         
+    char x0d_02 : 1;         
+    char x0d_01 : 1;         
     GOBJ *parentGOBJ;       // 0x10
     void (*cb)(GOBJ *gobj); // function callback
 };
@@ -455,7 +461,7 @@ struct COBJ
     u8 projection_type; // 0x50
     Mtx view_mtx;       // 0x54
     AOBJ *aobj;         // 0x84
-    Mtx proj_mtx;       // 0x88
+    Mtx *proj_mtx;       // 0x88
 };
 
 struct _HSD_ImageDesc

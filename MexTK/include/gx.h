@@ -412,7 +412,7 @@ typedef enum GXColorSrc
     Vertex
 } GXColorSrc;
 
-static volatile GXPipe *gx_pipe;
+static volatile GXPipe *gx_pipe = 0xCC008000;
 
 void GXSetColor(GXColor *color);
 void GXSetZMode(
