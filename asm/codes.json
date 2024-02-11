@@ -1117,26 +1117,50 @@
         {
           "type": "inject",
           "address": "800C9A44",
-          "annotation": "UCF DB",
-          "sourceFile": "qol\\UCF 0.8\\UCF DB.asm"
+          "annotation": "UCF Dashback",
+          "sourceFile": "qol\\UCF 0.84\\UCF Dashback.asm"
+        },
+        {
+          "type": "inject",
+          "address": "800D65EC",
+          "annotation": "UCF DBOOC SquatRv Fix",
+          "sourceFile": "qol\\UCF 0.84\\UCF DBOOC SquatRv Fix.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8006B460",
+          "annotation": "UCF Pad Buffer \u002B 1.0 Cardinals",
+          "sourceFile": "qol\\UCF 0.84\\UCF Pad Buffer \u002B 1.0 Cardinals.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8008E54C",
+          "annotation": "UCF SDI",
+          "sourceFile": "qol\\UCF 0.84\\UCF SDI.asm"
+        },
+        {
+          "type": "inject",
+          "address": "8009A0B8",
+          "annotation": "UCF Shield Drop Extended",
+          "sourceFile": "qol\\UCF 0.84\\UCF Shield Drop Extended.asm"
         },
         {
           "type": "inject",
           "address": "800998A4",
-          "annotation": "UCF SD",
-          "sourceFile": "qol\\UCF 0.8\\UCF SD.asm"
+          "annotation": "UCF Shield Drop",
+          "sourceFile": "qol\\UCF 0.84\\UCF Shield Drop.asm"
         },
         {
           "type": "inject",
-          "address": "802662D0",
-          "annotation": "UCF Text",
-          "sourceFile": "qol\\UCF 0.8\\UCF Text.asm"
+          "address": "80093294",
+          "annotation": "UCF Shield SDI",
+          "sourceFile": "qol\\UCF 0.84\\UCF Shield SDI.asm"
         },
         {
           "type": "inject",
-          "address": "800908f4",
+          "address": "800908F4",
           "annotation": "UCF Tumble",
-          "sourceFile": "qol\\UCF 0.8\\UCF Tumble.asm"
+          "sourceFile": "qol\\UCF 0.84\\UCF Tumble.asm"
         }
       ]
     },
