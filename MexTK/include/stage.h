@@ -12,7 +12,7 @@
 #define map_isBG 0x40000000
 #define map_isUnk 0x80000000
 
-enum GrInternal
+typedef enum GrInternal
 {
     GRKIND_DUMMY,
     GRKIND_TEST,
@@ -52,8 +52,8 @@ enum GrInternal
     GRKIND_ADVTE,
     GRKIND_BATTLE,
     GRKIND_FD,
-};
-enum GrExternal
+} GrInternal;
+typedef enum GrExternal
 {
     GRKINDEXT_DUMMY,
     GRKINDEXT_TEST,
@@ -88,7 +88,7 @@ enum GrExternal
     GRKINDEXT_OLDKONGO,
     GRKINDEXT_BATTLE,
     GRKINDEXT_FD,
-};
+} GrExternal;
 
 /*** Structs ***/
 
@@ -323,7 +323,7 @@ struct Stage
     u8 x87_04 : 1;                                                        // 0x87
     u8 x87_02 : 1;                                                        // 0x87, 0x02
     u8 x87_01 : 1;                                                        // 0x87
-    int kind;                                                             // 0x88
+    GrInternal kind;                                                      // 0x88
     u8 flags2x80 : 1;                                                     // 0x8c
     u8 flags2x40 : 1;                                                     // 0x8c
     u8 flags2x20 : 1;                                                     // 0x8c
@@ -489,7 +489,7 @@ struct MapGObjDesc
     void *fog_desc;          // 0x1c
     MapCollLink *coll_links; // 0x20
     int coll_links_num;      // 0x24
-    void *x28;               // 0x28
+    u8 *anim_behave;         // 0x28, points to an array of u8 that will override some of the animations behvaior (like enabling loop). executes the code @ 801c82a8
     void *coll_links2;       // 0x2c
     int coll_links2_num;     // 0x30
 };
@@ -504,14 +504,14 @@ struct StageFile
 struct GrDesc
 {
     int internal_id;
-    void *map_gobj_functions;
+    MapDesc *map_desc;
     char *filename;
-    void *onInit;
+    void (*onInit)();
     void *x10;
-    void *onLoad;
-    void *onGo;
+    void (*onLoad)();
+    void (*onGo)();
     void *x1c;
-    void *line_damage_check;
+    void (*LineDamageCheck)(int line_id);
     void *x24;
     int x28;
     void *x2c;

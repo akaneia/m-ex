@@ -303,8 +303,9 @@ struct CameraBox
 {
     void *alloc;            // 0x0
     CameraBox *next;        // 0x4
-    int kind;               // 0x8 2 = only focus if close to center
-    u8 flags;               // 0xC
+    int kind;               // 0x8 1 = disabled, 2 = only focus if close to center
+    u8 flags_x80 : 1;       // 0xC 0x80
+    u8 is_disable : 1;      // 0xC 0x40
     Vec3 cam_pos;           // 0x10
     Vec3 bone_pos;          // 0x1c
     float direction;        // 0x28
@@ -703,9 +704,9 @@ struct Match // static match struct @ 8046b6a0
     u8 request_match_end;     // 0x6, will override match end logic and set kind to
     u8 x7;                    // 0x7
     u8 end_kind;              // 0x8
-    u8 x9;              // 0x8
-    u8 xA;              // 0x8
-    u8 xB;              // 0x8
+    u8 x9;                    // 0x8
+    u8 xa;                    // 0x8
+    u8 xb;                    // 0x8
     int xc;                   // 0xc
     int end_sfx_announcer;    // 0x10
     int end_sfx_crowd;        // 0x14

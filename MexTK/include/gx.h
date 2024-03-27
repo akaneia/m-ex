@@ -412,7 +412,26 @@ typedef enum GXColorSrc
     Vertex
 } GXColorSrc;
 
+struct
+{
+    u8 x0[0x1400];
+    struct
+    {
+        u8 x0[0x54];
+        int x54;
+        int x58;
+        int status;
+    } xfb[2]; // 0x1400
+    u8 x14c0[0x114];
+    int x15d4;
+    int x15d8;
+    int x15dc;
+    int x15e0;
+    int idx;
+} VIUnknown;
+
 static volatile GXPipe *gx_pipe = 0xCC008000;
+static VIUnknown *_p = 0x804c0980;
 
 void GXSetColor(GXColor *color);
 void GXSetZMode(
@@ -474,4 +493,9 @@ void GXSetTexCoordGen2(
     GXBool normalize,
     u32 postmtx);
 
+void VIWaitForRetrace();
+void VIConfigure(GXRenderModeObj *rm);
+void VISetPostRetraceCallback(void *cb);
+void GXWaitDrawDone();
+void GXSetDrawDone();
 #endif

@@ -42,6 +42,9 @@
 80358724:CARDSetStatusAsync
 803568C4:CARDUnmount
 803549a0:CARDGetXferredBytes
+8034da00:PADRead
+8034d5e8:PADReset
+8034ddac:SISetSamplingRate
 80030A50:Match_GetCObj
 8036a290:COBJ_Alloc
 8036A590:COBJ_LoadDesc
@@ -155,7 +158,7 @@
 8007D508:Fighter_AddClampYPosition
 8007D3A8:Fighter_AllowXDrift
 8007B760:Fighter_ApplyIntang
-800BFFD0:Fighter_ApplyColAnim
+800BFFD0:Fighter_ColAnim_Apply
 800144c8:ColAnim_Apply
 80014498:ColAnim_Disable
 8007500C:Fighter_BoneLookup
@@ -179,7 +182,7 @@
 800827A0:Fighter_CollGround_StopLedge
 80096cc8:Fighter_Coll_CheckToPass
 80081dd4:Fighter_Coll_DamageState
-800C0200:Fighter_ColorRemove
+800C0200:Fighter_ColAnim_Remove
 8016B558:Fighter_CountPlayers
 800A101C:Fighter_CPUInitialize
 8000FD48:Fighter_CreateDynamicsBoneset
@@ -273,8 +276,6 @@
 80075650:Fighter_IndexFtPartsDObjs
 80068354:Fighter_InitData
 800867e8:Fighter_InitInputs
-8009CF84:Fighter_InitDynamics
-80011710:Fighter_InitDynamicsBoneset
 8007487C:Fighter_InitFtPartsModel
 80074148:Fighter_InitPObj
 80074170:Fighter_InitPObj2
@@ -339,7 +340,7 @@
 800A0DA4:Fighter_UpdateHurtboxes
 8006C5F4:Fighter_UpdateIK
 80086A8C:Fighter_UpdateOnscreenBool
-800C0408:Fighter_UpdateOverlay
+800C0408:Fighter_ColAnim_Update
 800D54A4:Fighter_UpdateRebirthPlatformPos
 80091E78:Fighter_UpdateShieldGFX
 800bda74:Fighter_GetCollisionSlope
@@ -429,6 +430,7 @@
 8001668c:Archive_LoadSync
 8037DC38:Fog_LoadDesc
 8037d970:Fog_Set
+8037e04c:Fog_Release
 8006F238:FrameTimerCheck
 8039069C:GObj_AddGXLink
 80390A70:GObj_AddObject
@@ -452,10 +454,10 @@
 80056C54:GrColl_CrawlGround
 80044164:GrColl_SearchLedgeLeft
 800443c4:GrColl_SearchLedgeRight
-80054158:GrColl_GetLedgeLeft
-80053ECC:GrColl_GetLedgeLeft2
-80053FF4:GrColl_GetLedgeRight
-80053DA4:GrColl_GetLedgeRight2
+80053ECC:GrColl_GetGroundLineEndLeft
+80053DA4:GrColl_GetGroundLineEndRight
+80054158:GrColl_GetGroundLineEndLeft_AllGroups
+80053FF4:GrColl_GetGroundLineEndRight_AllGroups
 80054DFC:GrColl_GetLineSlope
 800567C0:GrColl_GetPosDifference
 8004F008:GrColl_RaycastGround
@@ -498,6 +500,11 @@
 80340e38:GXSetZCompLoc
 80341494:GXLoadPosMtxImm
 80341510:GXSetCurrentMtx
+8034f314:VIWaitForRetrace
+8034f7dc:VIConfigure
+8034ebd0:VISetPostRetraceCallback
+8033ccd0:GXWaitDrawDone
+8033cc38:GXSetDrawDone
 8000ACFC:Hitbox_CheckIfPreviouslyHit
 80008688:Hitbox_SetAsPreviouslyHit
 8007aff8:Fighter_HitboxDisableAll
@@ -533,8 +540,13 @@
 80377b54:HSD_PadRenewUpdateStruct
 801a3a74:HSD_PadRenewUpdateStruct2
 8036c244:HSD_ClearVtxDesc
-803761c0:HSD_VICopyXFBASync
 803620a4:HSD_SetupChannel
+803786f0:HSD_PadRumbleInterpret
+803761c0:HSD_VICopyXFBASync
+80375c34:HSD_VIPostRetraceCallback
+80375e60:HSD_VIGetDrawDoneWaitingFlag
+80375e70:HSD_VIGetXFBDrawEnable
+80375f74:HSD_VICopyEFB2XFBPtr
 8026b40c:Item_IndexStageItem
 80094818:Item_Catch
 80266F3C:Item_CheckIfEnabled
@@ -655,6 +667,7 @@
 803656f8:LObj_ReqAnimAll
 80365678:LObj_AnimAll
 80366654:LObj_DeleteCurrentAll
+80366bd4:LObj_RemoveAll
 80024E84:Match_AdjustSoundOnPause
 8016B094:Match_CheckIfStock
 8016B168:Match_CheckIfTeams
@@ -733,6 +746,7 @@
 800236dc:BGM_Stop
 8038e9a8:BGM_Pause
 8038e9e0:BGM_Resume
+8038b81c:BGM_SetVolume
 8023754C:Nametag_GetText
 803440e8:OSCreateHeap
 80344154:OSDestroyHeap
@@ -740,6 +754,8 @@
 80343fec:OSFreeToHeap
 80344168:OSCheckHeap
 80342E94:OSGetConsoleType
+80347364:OSDisableInterrupts
+8034738c:OSRestoreInterrupts
 8034C408:OSGetTick
 8034C3F0:OSGetTime
 803456A8:OSReport
@@ -747,6 +763,7 @@
 8034376c:OSCreateAlarm
 80343a30:OSSetPeriodicAlarm
 80343aac:OSCancelAlarm
+80345254:OSClearContext
 80322e54:cvt_dbl_usll
 80322e54:__fixunsdfdi
 8033796c:DVDConvertPathToEntrynum

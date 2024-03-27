@@ -73,6 +73,12 @@ char *strrchr(const char *, int);
 #define CARD_RESULT_CANCELED -14
 #define CARD_RESULT_FATAL_ERROR -128
 
+// PAD
+#define PAD_CHAN0_BIT 0x80000000
+#define PAD_CHAN1_BIT 0x40000000
+#define PAD_CHAN2_BIT 0x20000000
+#define PAD_CHAN3_BIT 0x10000000
+
 // VI
 #define VI_XFBMODE_SF 0
 #define VI_XFBMODE_DF 1
@@ -212,6 +218,22 @@ struct OSAlarm
     OSTime period;
     OSTime start;
 };
+struct OSContext
+{
+    u32 gprs[0x20];          // r0-r31
+    u32 cr;                  // 0x80
+    u32 lr;                  // 0x84
+    u32 ctr;                 // 0x88
+    u32 xer;                 // 0x8c
+    u64 fprs[0x20];          // f0-f31
+    u64 fpscr;               // 0x190
+    u32 srr0;                // 0x198 - saved PC
+    u32 srr1;                // 0x19c - saved MSR
+    u16 state;               // 0x1a2; last bit means OSSaveFPUContext was called, second last bit means the GPRs were saved by the exception handler
+    u64 gqrs[4];             // 0x1a4
+    u64 pairedSingles[0x20]; // starting at 0x1c8
+};
+
 struct CARDStat
 {
     // read-only (Set by CARDGetStatus)
@@ -422,11 +444,33 @@ struct DVDDirEntry
     char *name;
 };
 
+typedef struct PADStatus
+{
+    u16 button;      // 0x0, Or-ed PAD_BUTTON_* and PAD_TRIGGER_* bits
+    s8 stickX;       // 0x2, -128 <= stickX       <= 127
+    s8 stickY;       // 0x3, -128 <= stickY       <= 127
+    s8 substickX;    // 0x4, -128 <= substickX    <= 127
+    s8 substickY;    // 0x5, -128 <= substickY    <= 127
+    u8 triggerLeft;  // 0x6,   0 <= triggerLeft  <= 255
+    u8 triggerRight; // 0x7,   0 <= triggerRight <= 255
+    u8 analogA;      // 0x8,   0 <= analogA      <= 255
+    u8 analogB;      // 0x9,   0 <= analogB      <= 255
+    s8 err;          // 0xa, one of PAD_ERR_* number
+} PADStatus;
+
+struct FileReadParam
+{
+    u8 xc0 : 2; // 0xc0
+    u8 x38 : 3; // 0x38
+    u8 x07 : 3; // 0x07, 0 = unk, 1 = using dram address, 2 = unk, 3 = using aram address, evidenced by 80016708
+};
+
 /*** Static Vars ***/
 static OSInfo *os_info = 0x80000000;
 static int *stc_fst_totalentrynum = 0x804D7284;
 static FSTEntry **stc_fst_entries = 0x804D727C; // -0x4424, indexed by entrynum (0 is always the root directory)
 static char **stc_fst_filenames = 0x804D7280;   // use FSTEntry.filename_offset to find an entrynums name
+static int *stc_si_sampling_rate = 0x804D740C;
 
 /*** OS Library ***/
 int OSGetTick();
@@ -444,12 +488,15 @@ void *OSAllocFromHeap(int heap_id);
 void OSFreeToHeap(void *alloc);
 int OSCheckHeap(int heap);
 int OSGetConsoleType();
+int OSDisableInterrupts(void);
+int OSRestoreInterrupts(int enable);
+void OSClearContext(OSContext *ctx);
 int DVDConvertPathToEntrynum(char *file);
 int DVDFastOpen(s32 entrynum, DVDFileInfo *dvdFileInfo);
 int DVDClose(DVDFileInfo *dvdFileInfo);
 int DVDWaitForRead();
-int File_Read(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index, void *cb, int cb_arg2);
-int File_ReadSync(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index);
+int File_Read(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index, void *cb, int cb_arg2); // just use 0x21 for flags if dram, 0x23 if aram, 1 for unk_index
+int File_ReadSync(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index);                    // just use 0x21 for flags if dram, 0x23 if aram, 1 for unk_index
 int File_GetSize(s32 entrynum);
 // void memcpy(void *dest, void *source, int size);
 // void memset(void *dest, int fill, int size);
@@ -470,6 +517,9 @@ s32 CARDReadAsync(CARDFileInfo *fileInfo, void *buf, s32 length, s32 offset, voi
 s32 CARDWrite(CARDFileInfo *fileInfo, void *buf, s32 length, s32 offset);
 s32 CARDWriteAsync(CARDFileInfo *fileInfo, void *buf, s32 length, s32 offset, void *callback);
 s32 CARDGetXferredBytes(s32 chan);
+u32 PADRead(PADStatus *status);
+u32 PADReset(u32 mask); // use PAD_CHANX_BIT
+void SISetSamplingRate(int msec);
 void DCFlushRange(void *startAddr, u32 nBytes);
 void DCInvalidateRange(void *startAddr, u32 nBytes);
 void TRK_FlushCache(void *startAddr, u32 nBytes);

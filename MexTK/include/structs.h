@@ -15,6 +15,7 @@ typedef struct OSInfo OSInfo;
 typedef struct OSCalendarTime OSCalendarTime;
 typedef struct CARDStat CARDStat;
 typedef struct OSAlarm OSAlarm;
+typedef struct OSContext OSContext;
 typedef struct CARDFileInfo CARDFileInfo;
 typedef struct RGB565 RGB565;
 typedef struct MTHPlayParam MTHPlayParam;
@@ -27,11 +28,13 @@ typedef struct DVDFileInfo DVDFileInfo;
 typedef struct DVDDir DVDDir;
 typedef struct DVDDirEntry DVDDirEntry;
 typedef struct FSTEntry FSTEntry;
+typedef struct FileReadParam FileReadParam;
 
 // GX
 typedef struct GXColor GXColor;
 typedef struct GXRenderModeObj GXRenderModeObj;
 typedef struct GXPipe GXPipe;
+typedef struct VIUnknown VIUnknown;
 
 // Audio
 typedef struct BGMData BGMData;
@@ -262,6 +265,7 @@ typedef struct HSD_Pads HSD_Pads;
 typedef struct HSD_Update HSD_Update;
 typedef struct HSD_VI HSD_VI;
 typedef struct HSD_ObjAllocData HSD_ObjAllocData;
+typedef struct HSD_PollData HSD_PollData;
 
 // Scene
 typedef struct MajorScene MajorScene;

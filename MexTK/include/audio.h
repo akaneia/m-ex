@@ -16,6 +16,8 @@ typedef enum FGMGroup
 typedef enum FGM_Main
 {
     FGMMAIN_KAIFUKU = 125,
+    FGMMAIN_SCORECOUNT,
+    FGMMAIN_COIN_GET = 147,
     FGMMAIN_CS_CANCEL = 172,
     FGMMAIN_CS_KETTEI,
     FGMMAIN_CS_MV,
@@ -235,6 +237,28 @@ typedef struct _AXVPB
     AXPB pb;             // 0x138, write params to this PB 0x
 } AXVPB;
 
+typedef struct FGMLive // i really need to look into this more
+{
+    u8 x0[0x8];      // 0x0
+    int flags;       // 0x8
+    int index;       // 0xc, index in the FGMLive array
+    int x10 : 24;    // 0x10, if this is -1, the FGM is not playing yet, still queued
+    u16 sound_index; // 0x14 local to the bank
+    u16 x16;         // 0x16
+    u8 x18;          // 0x18
+    u8 priority;     // 0x19
+    u8 volume;       // 0x1a
+    u8 x1b;          // 0x1b
+    u8 x1c;          // 0x1c
+    u8 x1d;          // 0x1d
+    u8 x1e;          // 0x1e
+    u8 x1f;          // 0x1f
+    u8 x20[0x9];     // 0x20
+    u8 x29;          // 0x29, reverb maybe
+    u8 x2a[0xa];     // 0x2a
+
+} FGMLive;
+
 typedef struct HPSHeader
 {
     char magic[8];               // 0x0
@@ -266,7 +290,7 @@ typedef struct HPSChunkHeader
     int x1c;              // 0x1c
 } HPSChunkHeader;
 
-struct BGMData
+struct BGMData // this name sucks, dont know enough about it to rename it
 {
     unsigned int unk : 26;
     unsigned int vbp_index : 6;
@@ -305,11 +329,13 @@ struct VPB
 struct AXLive
 {
     u8 x0[0x384];                        // 0x0
-    VPB voice_data[79];                  // 0x384
-    u8 x1c34[0x2c];                      // 0x1c34
+    VPB voice_data[64];                  // 0x384
+    u8 x1784[0xc0];                      // 0x1784, some constants
+    BGMData bgm_data_lookup[263];        // 0x1844, array of BGMData corresponding to SFX that were played with an instance_slot param > 0 when calling SFX_PlayRaw. this is used to stop previous instances when playing the same sfx
     HPSChunkHeader hps_chunk_headers[3]; // 0x1c60, circular buffer of 3 most recent hps headers
 };
 
+static FGMLive *fgm_live = 0x804c45a0; // points to an array of ? FGMLive structs
 static AXLive *ax_live = 0x804c28e0;
 static VPB *stc_voice_data = 0x804c2c64;
 static float *stc_fgm_volume = R13 + -0x7dbc;
@@ -326,9 +352,10 @@ static int *stc_bgm_curPlayingHpsChunkHeaderIndex = R13 + -0x3f2c; // index of t
 static u8 *stc_bgm_isLoadingHPSChunk = R13 + -0x3f28;              // flag that indicates an hps chunk is being loaded
 static int *stc_bgm_aramAlloc = R13 + -0x3f20;                     // start of the 3 hps chunk circular buffer
 static int *stc_fgm_tick = R13 + -0x3f14;                          // how many times fgm audio has been updated (incremented @ 8038ad44)
+static FGMLive *stc_last_fgmlive = R13 + -0x3f0c;                  // points to the most recently created FGMLive struct
 
 int SFX_Play(int sfxID);
-int SFX_PlayRaw(int sfx, int volume, int pan, int unk, int unk2);
+int SFX_PlayRaw(int sfx, int volume, int pan, int instance_slot, int fgm_kind); // any instance_slot other than 0 will remember the current instance and destroy it if another is requested to play with that slot
 int SFX_PlayCommon(int sfxID);
 int SFX_PlayCrowd(int sfxID);
 void SFX_StopCrowd();
@@ -346,6 +373,7 @@ void BGM_Play(int hpsID);
 void BGM_Stop();
 void BGM_Pause();
 void BGM_Resume();
+void BGM_SetVolume(float volume); // 0 - 1
 int FGM_CheckActive(u32 fgm_id);
 void FGM_Stop(u32 fgm_id);
 int FGM_SetVolume(u32 sfxid, u8 volume);

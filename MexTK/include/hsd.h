@@ -50,12 +50,14 @@ enum DebugLevel
     DB_DEVELOP,       //
 };
 
-enum PauseKind
+typedef enum PauseKind
 {
-    PAUSEKIND_OFF,  // off
-    PAUSEKIND_SYS,  // debug pause (uses Z to frame advance)
-    PAUSEKIND_GAME, // match pause (i dont think any other scene uses this?)
-};
+    PAUSEKIND_OFF,      // off
+    PAUSEKIND_SYS,      // debug pause (uses Z to frame advance)
+    PAUSEKIND_GAME,     // match pause (i dont think any other scene uses this?) allows p_links 0(sys),2,16,18(matchcam),19(misccam),20(hudcam),21(coincam),22(screenflashcam),24(devtext)+ to run
+    PAUSEKIND_3,        // unknown what uses this, it whitelists everything
+    PAUSEKIND_MATCHEND, // is used when the match ends, it allows p_links 0(sys),2,12(effect2),13(mapmisc),14(misc),15(hud),16,17,18(matchcam),19,20,21,22,24+ to run
+} PauseKind;
 
 /*** Structs ***/
 
@@ -106,7 +108,7 @@ struct HSD_Pad
     float x38;           // 0x38
     float x3c;           // 0x3c
     u8 x40;              // 0x40
-    u8 status;           // 0x41   0 = plugged, -1 = unplugged
+    s8 status;           // 0x41   0 = plugged, -1 = unplugged
 };
 
 struct HSD_Pads
@@ -121,14 +123,7 @@ struct HSD_Update
     u32 sys_frames_post;                  // 0x4
     u32 engine_frames;                    // 0x8
     u32 change_scene;                     // 0xC
-    unsigned char flag1 : 1;              // 0x10 - 0x80
-    unsigned char flag2 : 1;              // 0x10 - 0x40
-    unsigned char flag3 : 1;              // 0x10 - 0x20
-    unsigned char flag4 : 1;              // 0x10 - 0x10
-    unsigned char flag5 : 1;              // 0x10 - 0x08
-    unsigned char flag6 : 1;              // 0x10 - 0x04
-    unsigned char pause_game : 1;         // 0x10 - 0x02
-    unsigned char pause_develop : 1;      // 0x10 - 0x01
+    u8 pause_kind;                        // 0x10, see enum PauseKind
     unsigned char flag9 : 1;              // 0x11 - 0x80
     unsigned char flag10 : 1;             // 0x11 - 0x40
     unsigned char flag11 : 1;             // 0x11 - 0x20
@@ -228,12 +223,26 @@ struct HSD_Archive
     u32 flags;                                    /* 0x3C */
     void *top_ptr;                                /* 0x40 */
 };
+struct HSD_PollData // unofficial name, not sure what its actually called
+{
+    u8 pad_status_num;             // array size of pad_status
+    u8 x1;                         //
+    u8 index;                      // 0x2 index of next pad_status buffer to write to
+    u8 x3;                         //
+    u8 x4;                         //
+    u8 x5;                         //
+    u8 x6;                         //
+    u8 x7;                         //
+    PADStatus (*pad_status)[5][4]; // 0x8, circular buffer of recent pad statuses. array of 5
+};
 
 /*** Static Variables ***/
 static HSD_VI *stc_HSD_VI = 0x8046b0f0;
 static HSD_Update *stc_hsd_update = 0x80479d58;
 static int **stc_rng_seed = 0x804D5F94;
 static HSD_Pad *stc_engine_pads = (HSD_Pad *)0x804c21cc;
+static u64 *stc_pause_plink_whitelists = 0x803da888; // array of u64 bitfields defining which gobj p_links should run for the corresponding PauseKind
+static HSD_PollData *stc_hsd_polldata = 0x804c1f78;
 
 /*** Functions ***/
 
@@ -263,7 +272,10 @@ void HSD_StateSetZMode(GXBool compare_enable, GXCompare func, GXBool update_enab
 void HSD_StateSetNumChans(u8 nChans);
 void HSD_SetupChannel(void *unk);
 void HSD_ClearVtxDesc();
-void HSD_VICopyXFBASync();
+void HSD_VICopyXFBASync(int unk);
+int HSD_VIGetDrawDoneWaitingFlag();
+int HSD_VIGetXFBDrawEnable();
+void HSD_VICopyEFB2XFBPtr(void *, int, int);
 void HSD_GXProject(COBJ *cobj, Vec3 *in, Vec3 *out, int unk);
 void HSD_UpdateDiscAndCardStatus();
 void HSD_PadFlushQueue(int);
@@ -271,6 +283,8 @@ void HSD_PadRenewStatus();
 void HSD_PadRenewMasterStatus();
 void HSD_PadRenewCopyStatus();
 void HSD_PadRenewUpdateStruct();
+void HSD_PadRumbleInterpret();
+void HSD_VIPostRetraceCallback(int unk);
 void GX_AllocImageData(_HSD_ImageDesc *image_desc, int width, int height, int fmt, int size); // image data buffer is stored to the image_desc
 void GXTexModeSync();
 void GXPixModeSync();

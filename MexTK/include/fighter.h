@@ -765,6 +765,12 @@ typedef enum FtStateKind
     FTSTATEKIND_12,          // entry animation, respawn animation, damagesong, bury
     FTSTATEKIND_DEAD,        // dead states, including star and screen ko
 } FtStateKind;
+typedef enum FtHurtKind
+{
+    FTHURTKIND_VULN,       // vulnerable
+    FTHURTKIND_INTANGIBLE, // cannot be hit
+    FTHURTKIND_INVINCIBLE, // can be hit, does not take damage
+} FtHurtKind;
 
 /*** Structs ***/
 struct Playerblock
@@ -781,7 +787,7 @@ struct Playerblock
     int x3C;
     float initialFacing; // 0x40
     u8 costume;          // 0x44
-    u8 x45;              // 0x45
+    u8 color_accent;     // 0x45, will correspond to port color when ffa and team color when teams
     u8 tint;             // 0x46
     u8 team;             // 0x47
     u8 controller;       // 0x48
@@ -792,14 +798,14 @@ struct Playerblock
     u8 kirby_copy;       // 0x4d, index of kirby copy ability
     u8 x4e;              // 0x4e
     u8 x4f;              // 0x4f
-    float attack;
-    float defense;
-    float scale;
-    u16 damage;
-    u16 initialDamage;
-    u16 stamina;
-    int falls[2];
-    int ko[6];
+    float attack;        // 0x50
+    float defense;       // 0x54
+    float scale;         // 0x58
+    u16 damage;          // 0x5c
+    u16 initialDamage;   // 0x5e
+    u16 stamina;         // 0x60
+    int falls[2];        // 0x68
+    int ko[6];           // 0x70
     int x88;
     u16 selfDestructs;
     u8 stocks;
@@ -2014,7 +2020,7 @@ struct FighterData
     int pointer_to_0x460;                  // 0x400
     int pointer_to_0x3c0;                  // 0x404
     ColorOverlay color[3];                 // 0x408
-    void *LObj;                            // 0x588
+    LOBJ *LObj;                            // 0x588
     int anim_num;                          // 0x58C
     Figatree *figatree_curr;               // 0x590, pointer to the FtAnim struct
     struct                                 // 0x594
@@ -2251,13 +2257,16 @@ struct FighterData
     int x197c;                             // 0x197c
     GOBJ *item_head;                       // 0x1980
     GOBJ *item_held_spec;                  // 0x1984, special held item
-    struct hurtstatus                      // 0x1988
+    struct hurt                            // 0x1988
     {                                      //
-        int script;                        // 0x1988
-        int game;                          // 0x198c
-        int ledge_intang_left;             // 0x1990
-        int respawn_intang_left;           // 0x1994
-    } hurtstatus;                          //
+        int kind_script;                   // 0x1988, hurtkind set by action script
+        int kind_game;                     // 0x198c, hurtkind set directly by game code (respawn, ledge, etc)
+        struct                             //
+        {                                  //
+            int ledge;                     // 0x1990
+            int respawn;                   // 0x1994
+        } intang_frames;                   // amount of intangibility frames remaining
+    } hurt;                                //
     struct shield                          // melee only logs the highest damage dealing shield attack for that frame
     {
         float health;          // 0x1998
@@ -2512,7 +2521,7 @@ struct FighterData
         unsigned char absorb_enable : 1;               // 0x2 - x2218
         unsigned char absorb_unk : 1;                  // 0x1 - x2218
         unsigned char persistent_gfx : 1;              // 0x80 is shielding bool. 0x80 - 0x2219
-        unsigned char immune : 1;                      // 0x40 - 0x2219
+        unsigned char immune : 1;                      // 0x40 - 0x2219, will skip all hit collision logic when raised (8006cbbc)
         unsigned char is_ignore_death : 1;             // 0x20 - 0x2219
         unsigned char hitbox_active : 1;               // 0x10 - 0x2219
         unsigned char x2219_5 : 1;                     // 0x8 - 0x2219
@@ -3238,8 +3247,9 @@ void Fighter_PlayPositionalSFX(FighterData *fp, int sfxID, int volume, int balan
 void Fighter_PlayVoiceSFX(FighterData *fighter, int sfxID, int volume, int balance);
 void Fighter_PlayVoiceSFX2(FighterData *fighter, int sfxID, int volume, int balance);
 void Fighter_DestroyVoiceSFX(FighterData *fighter);
-void Fighter_ApplyColAnim(FighterData *fighter_data, int overlay, int unk);
-void Fighter_UpdateOverlay(GOBJ *fighter);
+void Fighter_ColAnim_Apply(FighterData *fighter_data, int colanim_kind, int unk); // will apply the color_anim specified
+void Fighter_ColAnim_Remove(FighterData *fighter_data, int colanim_kind);         // will remove the color_anim specified
+void Fighter_ColAnim_Update(GOBJ *fighter);                                       // fighter gobj callback, will step colanim logic forward one frame. (you probably dont need to call this!)
 void Fighter_DisableBlend(GOBJ *fighter, int animd_id);
 void Fighter_UpdateDynamics(GOBJ *fighter, u16 *dynamic_struct);
 void Fighter_ZeroCPUInputs(FighterData *fighter_data);
@@ -3251,7 +3261,6 @@ int Fighter_GetCostumeID(int ply);
 int Fighter_GetHandicap(int ply);
 float Fighter_GetBaseScale(FighterData *fighter);
 void Fighter_SetScale(GOBJ *fighter, float scale);
-void Fighter_InitDynamics(FighterData *fighter_data);
 void Fighter_ProcDynamics(GOBJ *fighter);
 void Fighter_CheckToEnableDynamics(FighterData *fp, u16 *dynamics_data);
 void Fighter_FreeAllDynamics(FighterData *fighter_data);
@@ -3260,7 +3269,6 @@ void Fighter_UpdateCameraBox(GOBJ *fighter);
 void Fighter_SetAllHurtboxesNotUpdated(GOBJ *fighter);
 void Fighter_UpdateHurtboxes(FighterData *fighter_data);
 void Fighter_UpdateIK(GOBJ *fighter);
-void Fighter_ColorRemove(FighterData *fighter_data, int color_kind);
 void Fighter_CPUInitialize(FighterData *fighter_data, int cpu_kind, int cpu_level, int unk);
 int Fighter_GetCPUKind(int ply);
 int Fighter_SetCPUKind(int ply, int cpu_kind);

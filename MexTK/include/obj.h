@@ -184,14 +184,14 @@ struct GOBJProc
     GOBJ *parent;
     GOBJProc *next;
     GOBJProc *prev;
-    char s_link;            // 0xC
-    char x0d_80 : 1;        // 0xD
-    char x0d_40 : 1;         
+    char s_link;     // 0xC
+    char x0d_80 : 1; // 0xD
+    char x0d_40 : 1;
     char proc_index : 2;
-    char x0d_08 : 1;         
-    char x0d_04 : 1;         
-    char x0d_02 : 1;         
-    char x0d_01 : 1;         
+    char x0d_08 : 1;
+    char x0d_04 : 1;
+    char x0d_02 : 1;
+    char x0d_01 : 1;
     GOBJ *parentGOBJ;       // 0x10
     void (*cb)(GOBJ *gobj); // function callback
 };
@@ -461,7 +461,7 @@ struct COBJ
     u8 projection_type; // 0x50
     Mtx view_mtx;       // 0x54
     AOBJ *aobj;         // 0x84
-    Mtx *proj_mtx;       // 0x88
+    Mtx *proj_mtx;      // 0x88
 };
 
 struct _HSD_ImageDesc
@@ -648,7 +648,7 @@ struct HSD_SObjDesc
     JOBJSet **jobjset;
     COBJDesc **cobjdesc;
     LightGroup *lights;
-    HSD_FogDesc *fog;
+    HSD_FogDesc **fog;
 };
 
 /*** Static Variables ***/
@@ -674,7 +674,7 @@ void JOBJ_RemoveAll(JOBJ *joint);
 void JOBJ_Remove(JOBJ *joint);
 void JOBJ_GetChild(JOBJ *joint, JOBJ **ptr, int index, ...);
 void JOBJ_AddChild(JOBJ *parent, JOBJ *child);
-void JOBJ_AddNext(JOBJ *parent, JOBJ *child);
+void JOBJ_AddNext(JOBJ *next, JOBJ *prev);
 float JOBJ_GetCurrentMatAnimFrame(JOBJ *joint);
 void JOBJ_SetFlags(JOBJ *joint, int flags);
 void JOBJ_SetFlagsAll(JOBJ *joint, int flags);
@@ -769,8 +769,10 @@ void LObj_SetInterest(LOBJ *lobj, Vec3 *pos);
 void LObj_ReqAnimAll(LOBJ *lobj, float frame);
 void LObj_AnimAll(LOBJ *lobj);
 void LObj_DeleteCurrentAll(int unk);
+void LObj_RemoveAll(LOBJ *lobj);
 HSD_Fog *Fog_LoadDesc(void *fogdesc);
 void Fog_Set(HSD_Fog *fog);
+void Fog_Release(HSD_Fog *fog);
 DOBJ *JOBJ_GetDObj(JOBJ *jobj);
 void *MOBJ_SetAlpha(DOBJ *dobj, float alpha);
 void MOBJ_SetToonTextureImage(_HSD_ImageDesc *);
