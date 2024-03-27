@@ -412,7 +412,7 @@ typedef enum GXColorSrc
     Vertex
 } GXColorSrc;
 
-struct
+struct VIUnknown
 {
     u8 x0[0x1400];
     struct
@@ -428,7 +428,7 @@ struct
     int x15dc;
     int x15e0;
     int idx;
-} VIUnknown;
+};
 
 static volatile GXPipe *gx_pipe = 0xCC008000;
 static VIUnknown *_p = 0x804c0980;
