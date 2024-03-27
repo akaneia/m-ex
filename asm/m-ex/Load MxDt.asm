@@ -167,6 +167,10 @@ Skip_PxPt:
   mr  r4,REG_HeapSize
   branchl r12,0x80328f50
 
+#Destroy this heap
+  mr  r3,REG_HeapID
+  branchl r12,0x80344154
+
   b Exit
 
 tempalloc:
