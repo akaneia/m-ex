@@ -321,7 +321,7 @@ EffMdl_UseJointPosRot:
 
 EffMdl_UseJointPosFtDir:
 #This will copy gobj's scale as well
-#EffMdl_SpawnSync(ID,gobj,jobj)
+#EffMdl_SpawnSync(ID,gobj,pos,facing_dir)
 .set  REG_EffectJObj,28
 .set  REG_Pos,27
 #Pop the pos off the va_list
