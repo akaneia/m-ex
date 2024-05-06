@@ -24,6 +24,87 @@
 //         return x;
 // }
 
+static inline GOBJ *GOBJ_EZCreator(int entity_class, int p_link, int flags, int data_size, void *data_destructor, int obj_kind, void *obj_desc, void *proc_cb, int proc_pri, void *gx_cb, int gx_link, int gx_pri)
+{
+    GOBJ *g = GObj_Create(entity_class, p_link, flags);
+
+    if (data_size)
+    {
+        void *gp = HSD_MemAlloc(data_size);
+        memset(gp, 0, data_size);
+        GObj_AddUserData(g, 4, data_destructor, gp);
+    }
+
+    if (obj_desc)
+    {
+        void *obj;
+        if (obj_kind == *objkind_jobj)
+            obj = JOBJ_LoadJoint(obj_desc);
+        else if (obj_kind == *objkind_fog)
+            obj = Fog_LoadDesc(obj_desc);
+        else if (obj_kind == *objkind_lobj)
+            obj = LObj_LoadDesc(obj_desc);
+        else if (obj_kind == *objkind_cobj)
+            obj = COBJ_LoadDescSetScissor(obj_desc);
+
+        GObj_AddObject(g, obj_kind, obj);
+
+        if (obj_kind == *objkind_cobj)
+            GOBJ_InitCamera(g, gx_cb, gx_pri);
+        else if (obj_kind == *objkind_jobj)
+            GObj_AddGXLink(g, gx_cb, gx_link, gx_pri);
+    }
+    else if (gx_cb)
+        GObj_AddGXLink(g, gx_cb, gx_link, gx_pri);
+
+    if (proc_cb)
+        GObj_AddProc(g, proc_cb, proc_pri);
+
+    return g;
+}
+
+static inline float lerp(float start, float end, float t)
+{
+    // clamp
+    if (t < 0)
+        t = 0;
+    else if (t > 1)
+        t = 1;
+
+    return start + t * (end - start);
+}
+
+static inline DOBJ *JOBJ_GetDObjIndex(JOBJ *root, int joint_idx, int dobj_idx)
+{
+    JOBJ *this_joint = root;
+    int this_joint_id = 0;
+    while (this_joint_id < joint_idx)
+    {
+        if (this_joint->sibling)
+            this_joint = this_joint->sibling;
+        else if (this_joint->child)
+            this_joint = this_joint->child;
+        else
+            return 0;
+
+        this_joint_id++;
+    }
+
+    DOBJ *this_dobj = this_joint->dobj;
+    int this_dobj_id = 0;
+    while (this_dobj_id < dobj_idx)
+    {
+        if (this_dobj->next)
+            this_dobj = this_dobj->next;
+        else
+            return 0;
+
+        this_dobj_id++;
+    }
+
+    return this_dobj;
+}
+
 static inline int abs(int x)
 {
     if (x < 0)

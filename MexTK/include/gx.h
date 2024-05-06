@@ -412,6 +412,133 @@ typedef enum GXColorSrc
     Vertex
 } GXColorSrc;
 
+typedef enum GXGamma
+{
+    GX_GM_1_0,
+    GX_GM_1_7,
+    GX_GM_2_2,
+} GXGamma;
+
+typedef enum GXPixelFmt
+{
+    GX_PF_RGB8_Z24,
+    GX_PF_RGBA6_Z24,
+    GX_PF_RGB565_Z16,
+    GX_PF_Z24,
+    GX_PF_Y8,
+    GX_PF_U8,
+    GX_PF_V8,
+    GX_PF_YUV420
+
+} GXPixelFmt;
+
+typedef enum GXZFmt16
+{
+    GX_ZC_LINEAR,
+    GX_ZC_NEAR,
+    GX_ZC_MID,
+    GX_ZC_FAR
+
+} GXZFmt16;
+
+typedef enum GXLightID
+{
+    GX_LIGHT0 = 0x001,
+    GX_LIGHT1 = 0x002,
+    GX_LIGHT2 = 0x004,
+    GX_LIGHT3 = 0x008,
+    GX_LIGHT4 = 0x010,
+    GX_LIGHT5 = 0x020,
+    GX_LIGHT6 = 0x040,
+    GX_LIGHT7 = 0x080,
+    GX_MAX_LIGHT = 0x100,
+    GX_LIGHT_NULL = 0x000
+} GXLightID;
+
+typedef enum GXDiffuseFn
+{
+    GX_DF_NONE = 0,
+    GX_DF_SIGN,
+    GX_DF_CLAMP
+
+} GXDiffuseFn;
+
+typedef enum GXAttnFn
+{
+    GX_AF_SPEC = 0, // use specular attenuation
+    GX_AF_SPOT = 1, // use distance/spotlight attenuation
+    GX_AF_NONE      // attenuation is off
+
+} GXAttnFn;
+
+typedef enum GXTevColorArg
+{
+    GX_CC_CPREV,
+    GX_CC_APREV,
+    GX_CC_C0,
+    GX_CC_A0,
+    GX_CC_C1,
+    GX_CC_A1,
+    GX_CC_C2,
+    GX_CC_A2,
+    GX_CC_TEXC,
+    GX_CC_TEXA,
+    GX_CC_RASC,
+    GX_CC_RASA,
+    GX_CC_ONE,
+    GX_CC_HALF,
+    GX_CC_QUARTER,
+    GX_CC_ZERO,
+
+    GX_CC_TEXRRR,
+    GX_CC_TEXGGG,
+    GX_CC_TEXBBB
+} GXTevColorArg;
+
+typedef enum GXTevAlphaArg
+{
+    GX_CA_APREV,
+    GX_CA_A0,
+    GX_CA_A1,
+    GX_CA_A2,
+    GX_CA_TEXA,
+    GX_CA_RASA,
+    GX_CA_ONE,
+    GX_CA_ZERO
+} GXTevAlphaArg;
+
+typedef enum GXTevOp
+{
+    GX_TEV_ADD,
+    GX_TEV_SUB
+} GXTevOp;
+
+typedef enum GXTevBias
+{
+    GX_TB_ZERO,
+    GX_TB_ADDHALF,
+    GX_TB_SUBHALF,
+    GX_MAX_TEVBIAS
+} GXTevBias;
+
+typedef enum GXTevScale
+{
+    GX_CS_SCALE_1,
+    GX_CS_SCALE_2,
+    GX_CS_SCALE_4,
+    GX_CS_DIVIDE_2,
+    GX_MAX_TEVSCALE
+} GXTevScale;
+
+typedef enum GXTevRegID
+{
+    GX_TEVPREV = 0,
+    GX_TEVREG0,
+    GX_TEVREG1,
+    GX_TEVREG2,
+    GX_MAX_TEVREG
+} GXTevRegID;
+
 struct VIUnknown
 {
     u8 x0[0x1400];
@@ -434,10 +561,7 @@ static volatile GXPipe *gx_pipe = 0xCC008000;
 static VIUnknown *_p = 0x804c0980;
 
 void GXSetColor(GXColor *color);
-void GXSetZMode(
-    GXBool compare_enable,
-    GXCompare func,
-    GXBool update_enable);
+void GXSetZMode(GXBool compare_enable, GXCompare func, GXBool update_enable);
 void GXSetLineWidth(u8 width, int tex_offsets);
 void GXBegin(GXPrimitive type, GXVtxFmt vtxfmt, u16 nverts);
 void GXEnd();
@@ -454,44 +578,30 @@ void GXSetBlendMode(
 void GXSetColorUpdate(GXBool enable);
 void GXSetAlphaUpdate(GXBool enable);
 void GXSetZCompLoc(GXBool enable);
+void GXSetDstAlpha(GXBool enable, u8 alpha);
+void GXSetChanMatColor(GXChannelID chan, GXColor *mat_color);
+void GXSetChanAmbColor(GXChannelID chan, GXColor *amb_color);
 void GXSetNumTexGens(u8 nTexGens);
 void GX_blr(int, int);
 void GXSetNumTevStages(u8 stages);
-void GXSetTevOrder(
-    GXTevStageID stage,
-    GXTexCoordID coord,
-    GXTexMapID map,
-    GXChannelID color);
+void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map, GXChannelID color);
+void GXSetTevColorIn(GXTevStageID stage, GXTevColorArg a, GXTevColorArg b, GXTevColorArg c, GXTevColorArg d);
+void GXSetTevAlphaIn(GXTevStageID stage, GXTevAlphaArg a, GXTevAlphaArg b, GXTevAlphaArg c, GXTevAlphaArg d);
+void GXSetTevColorOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale scale, GXBool clamp, GXTevRegID out_reg);
+void GXSetTevAlphaOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale scale, GXBool clamp, GXTevRegID out_reg);
 void GXSetTevOp(GXTevStageID stage, GXTevMode mode);
 void GXSetNumChans(u8 nChans);
-void GXSetChanCtrl(
-    GXChannelID chan,
-    GXBool enable,
-    GXColorSrc amb_src,
-    GXColorSrc mat_src,
-    int light_mask,
-    int diff_fn,
-    int attn_fn);
+void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorSrc mat_src, GXLightID light_mask, GXDiffuseFn diff_fn, GXAttnFn attn_fn);
 void GXSetCullMode(GXCullMode cull_mode);
 void GXClearVtxDesc();
-void GXSetVtxAttrFmt(GXVtxFmt vtxfmt, GXAttribute attribute,
-                     GXComponentContents contents, GXComponentType type, u8 fracBits);
+void GXSetVtxAttrFmt(GXVtxFmt vtxfmt, GXAttribute attribute, GXComponentContents contents, GXComponentType type, u8 fracBits);
 void GXSetVtxDesc(GXAttribute attribute, GXAttributeType type);
 void GXLoadPosMtxImm(Mtx, GXPosNormMtx);
 void GXSetCurrentMtx(GXPosNormMtx);
-u32 GXGetTexBufferSize(
-    u16 width,
-    u16 height,
-    u32 format,
-    GXBool mipmap,
-    u8 max_lod);
-void GXSetTexCoordGen2(
-    GXTexCoordID dst_coord,
-    GXTexGenType func,
-    GXTexGenSrc src_param,
-    u32 mtx,
-    GXBool normalize,
-    u32 postmtx);
+u32 GXGetTexBufferSize(u16 width, u16 height, u32 format, GXBool mipmap, u8 max_lod);
+void GXSetTexCoordGen2(GXTexCoordID dst_coord, GXTexGenType func, GXTexGenSrc src_param, u32 mtx, GXBool normalize, u32 postmtx);
+void GXSetViewport(f32 xOrig, f32 yOrig, f32 wd, f32 ht, f32 nearZ, f32 farZ);
+void GXSetDispCopyGamma(GXGamma gamma);
 
 void VIWaitForRetrace();
 void VIConfigure(GXRenderModeObj *rm);

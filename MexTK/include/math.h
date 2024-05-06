@@ -10,7 +10,7 @@
 #define M_1DEGREE (0.0174533)
 #define M_NAN ((float)(INFINITY * 0.0F))
 
-/// @brief 
+/// @brief
 /// @param v
 /// @return the absolute value of a given float
 inline float fabs(float v)
@@ -20,15 +20,22 @@ inline float fabs(float v)
     else
         return v;
 }
-/// @brief 
+/// @brief
 /// @param v a float value
 /// @return the sign of x
 inline float sign(float v)
 {
-    if (v >= 0.0) 
+    if (v >= 0.0)
         return 1.0;
-    else 
+    else
         return -1.0;
+}
+/// @brief
+/// @param v a pointer to a 2d vector
+/// @return the magnitude of the vector
+inline float Vec2_Magnitude(Vec2 *v)
+{
+    return fabs(v->X) + fabs(v->Y);
 }
 
 /*** Functions ***/
@@ -37,6 +44,7 @@ inline float sign(float v)
 float atan2(float y, float x);
 float sin(float x);
 float cos(float x);
+void MTXOrtho(Mtx44 m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 f); //
 void MTXLookAt(Mtx *dest, Vec3 *eye, Vec3 *up, Vec3 *target);
 void MTXRotAxisRad(Mtx *m, Vec3 *axis, float rad); // Sets a matrix for rotation about an arbitrary axis whose ( x, y, z ) components are specified by axis.
 void MTXMultVec(Mtx *m, Vec3 *src, Vec3 *dst);     // Post-multiplies a 3D vector or 3D point by a matrix ( m x src = dst ).
@@ -66,6 +74,6 @@ float sqrtf(float num);
 void MTXRotRad(Mtx m, char axis, f32 rad);
 float Vec2_CalculateAngle(Vec2 *a, Vec2 *b);
 float Vec3_CalculateAngle(Vec3 *a, Vec3 *b);
-void Vec3_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle);
+void Vec3_RotateAboutUnitAxis(Vec3 *v, Vec3 *axis, float angle);
 
 #endif

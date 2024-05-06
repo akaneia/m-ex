@@ -465,12 +465,20 @@ struct FileReadParam
     u8 x07 : 3; // 0x07, 0 = unk, 1 = using dram address, 2 = unk, 3 = using aram address, evidenced by 80016708
 };
 
+typedef struct SIXYLookup
+{
+    u16 line;
+    u8 cnt;
+    u8 x3;
+} SIXYLookup;
+
 /*** Static Vars ***/
 static OSInfo *os_info = 0x80000000;
 static int *stc_fst_totalentrynum = 0x804D7284;
 static FSTEntry **stc_fst_entries = 0x804D727C; // -0x4424, indexed by entrynum (0 is always the root directory)
 static char **stc_fst_filenames = 0x804D7280;   // use FSTEntry.filename_offset to find an entrynums name
 static int *stc_si_sampling_rate = 0x804D740C;
+static SIXYLookup *stc_si_xy = 0x80402ca0;
 
 /*** OS Library ***/
 int OSGetTick();
@@ -519,7 +527,9 @@ s32 CARDWriteAsync(CARDFileInfo *fileInfo, void *buf, s32 length, s32 offset, vo
 s32 CARDGetXferredBytes(s32 chan);
 u32 PADRead(PADStatus *status);
 u32 PADReset(u32 mask); // use PAD_CHANX_BIT
+void SISetXY(u16 line, u8 cnt);
 void SISetSamplingRate(int msec);
+void SIEnablePolling(int mask);
 void DCFlushRange(void *startAddr, u32 nBytes);
 void DCInvalidateRange(void *startAddr, u32 nBytes);
 void TRK_FlushCache(void *startAddr, u32 nBytes);

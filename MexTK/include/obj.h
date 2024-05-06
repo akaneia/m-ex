@@ -6,15 +6,15 @@
 #include "gx.h"
 
 // JObj Flags
-#define JOBJ_SKELETON (1 << 0)
-#define JOBJ_SKELETON_ROOT (1 << 1)
-#define JOBJ_ENVELOPE_MODEL (1 << 2)
-#define JOBJ_CLASSICAL_SCALING (1 << 3)
-#define JOBJ_HIDDEN (1 << 4)
-#define JOBJ_PTCL (1 << 5)
-#define JOBJ_MTX_DIRTY (1 << 6)
-#define JOBJ_LIGHTING (1 << 7)
-#define JOBJ_TEXGEN (1 << 8)
+#define JOBJ_SKELETON (1 << 0)          // 0x00000001
+#define JOBJ_SKELETON_ROOT (1 << 1)     // 0x00000002
+#define JOBJ_ENVELOPE_MODEL (1 << 2)    // 0x00000004
+#define JOBJ_CLASSICAL_SCALING (1 << 3) // 0x00000008
+#define JOBJ_HIDDEN (1 << 4)            // 0x00000010
+#define JOBJ_PTCL (1 << 5)              // 0x00000020
+#define JOBJ_MTX_DIRTY (1 << 6)         // 0x00000040
+#define JOBJ_LIGHTING (1 << 7)          // 0x00000080
+#define JOBJ_TEXGEN (1 << 8)            // 0x00000100
 #define JOBJ_BILLBOARD (1 << 9)
 #define JOBJ_VBILLBOARD (2 << 9)
 #define JOBJ_HBILLBOARD (3 << 9)
@@ -25,7 +25,7 @@
 #define JOBJ_FLIP_IK (1 << 15)
 #define JOBJ_SPECULAR (1 << 16)
 #define JOBJ_USE_QUATERNION (1 << 17)
-#define JOBJ_OPA (1 << 18)
+#define JOBJ_OPA (1 << 18) // only rendered with gx pass 3
 #define JOBJ_XLU (1 << 19)
 #define JOBJ_TEXEDGE (1 << 20)
 #define JOBJ_NULL (0 << 21)
@@ -37,7 +37,7 @@
 #define JOBJ_MTS_INDEPEND_SRT (1 << 25)
 #define JOBJ_GENERALFLAG (1 << 26)
 #define JOBJ_GENERALFLAG2 (1 << 27)
-#define JOBJ_ROOT_OPA (1 << 28)
+#define JOBJ_ROOT_OPA (1 << 28) // only rendered with gx pass 3
 #define JOBJ_ROOT_XLU (1 << 29)
 #define JOBJ_ROOT_TEXEDGE (1 << 30)
 #define JOBJ_31 (1 << 31)
@@ -66,31 +66,31 @@
 #define RENDER_DIFFUSE_MAT (1 << RENDER_DIFFUSE_SHIFT)
 #define RENDER_DIFFUSE_VTX (2 << RENDER_DIFFUSE_SHIFT)
 #define RENDER_DIFFUSE_BOTH (3 << RENDER_DIFFUSE_SHIFT)
-#define RENDER_CONSTANT (1 << 0)
-#define RENDER_VERTEX (1 << 1)
-#define RENDER_DIFFUSE (1 << 2)
-#define RENDER_SPECULAR (1 << 3)
+#define RENDER_CONSTANT (1 << 0) // 0x00000001
+#define RENDER_VERTEX (1 << 1)   // 0x00000002
+#define RENDER_DIFFUSE (1 << 2)  // 0x00000004
+#define RENDER_SPECULAR (1 << 3) // 0x00000008
 #define CHANNEL_FIELD (RENDER_CONSTANT | RENDER_VERTEX | RENDER_DIFFUSE | RENDER_SPECULAR)
-#define RENDER_TEX0 (1 << 4)
-#define RENDER_TEX1 (1 << 5)
-#define RENDER_TEX2 (1 << 6)
-#define RENDER_TEX3 (1 << 7)
-#define RENDER_TEX4 (1 << 8)
-#define RENDER_TEX5 (1 << 9)
-#define RENDER_TEX6 (1 << 10)
-#define RENDER_TEX7 (1 << 11)
+#define RENDER_TEX0 (1 << 4)  // 0x00000010
+#define RENDER_TEX1 (1 << 5)  // 0x00000020
+#define RENDER_TEX2 (1 << 6)  // 0x00000040
+#define RENDER_TEX3 (1 << 7)  // 0x00000080
+#define RENDER_TEX4 (1 << 8)  // 0x00000100
+#define RENDER_TEX5 (1 << 9)  // 0x00000200
+#define RENDER_TEX6 (1 << 10) // 0x00000400
+#define RENDER_TEX7 (1 << 11) // 0x00000800
 #define RENDER_TEXTURES (RENDER_TEX0 | RENDER_TEX1 | RENDER_TEX2 | RENDER_TEX3 | RENDER_TEX4 | RENDER_TEX5 | RENDER_TEX6 | RENDER_TEX7)
-#define RENDER_TOON (1 << 12)
-#define RENDER_ALPHA_SHIFT 13
-#define RENDER_ALPHA_BITS (3 << RENDER_ALPHA_SHIFT)
-#define RENDER_ALPHA_COMPAT (0 << RENDER_ALPHA_SHIFT)
-#define RENDER_ALPHA_MAT (1 << RENDER_ALPHA_SHIFT)
-#define RENDER_ALPHA_VTX (2 << RENDER_ALPHA_SHIFT)
-#define RENDER_ALPHA_BOTH (3 << RENDER_ALPHA_SHIFT)
-#define RENDER_SHADOW (1 << 26)
-#define RENDER_ZMODE_ALWAYS (1 << 27) // 0x08000000
-#define RENDER_NO_ZUPDATE (1 << 29)   // 0x20000000
-#define RENDER_XLU (1 << 30)          // 0x40000000
+#define RENDER_TOON (1 << 12)                         // 0x00001000
+#define RENDER_ALPHA_SHIFT 13                         //
+#define RENDER_ALPHA_BITS (3 << RENDER_ALPHA_SHIFT)   // 0x00006000
+#define RENDER_ALPHA_COMPAT (0 << RENDER_ALPHA_SHIFT) //
+#define RENDER_ALPHA_MAT (1 << RENDER_ALPHA_SHIFT)    // 0x00002000
+#define RENDER_ALPHA_VTX (2 << RENDER_ALPHA_SHIFT)    // 0x00004000
+#define RENDER_ALPHA_BOTH (3 << RENDER_ALPHA_SHIFT)   // 0x00006000
+#define RENDER_SHADOW (1 << 26)                       // 0x04000000
+#define RENDER_ZMODE_ALWAYS (1 << 27)                 // 0x08000000
+#define RENDER_NO_ZUPDATE (1 << 29)                   // 0x20000000
+#define RENDER_XLU (1 << 30)                          // 0x40000000
 
 // DOBJ flags
 #define DOBJ_HIDDEN (1 << 0)           // 0x00000001
@@ -694,7 +694,7 @@ float JOBJ_GetJointAnimCurrFrame(JOBJ *joint);
 float JOBJ_GetJointAnimFrameTotal(JOBJ *joint);
 float JOBJ_GetJointAnimNextFrame(JOBJ *joint);
 void JOBJ_SetAllMOBJFlags(JOBJ *joint, int flags);
-void JOBJ_EnableFlagAllMOBJ(JOBJ *joint, int flags); // enables this flag for all mobjs
+void JOBJ_SetFlagAllMOBJ(JOBJ *joint, int flags); // enables this flag for all mobjs
 int JOBJ_CheckAObjEnd(JOBJ *joint);
 void JOBJ_CompileTEVAllMOBJ(JOBJ *joint);
 void JObj_DispAll(JOBJ *joint, Mtx *vmtx, int flags, int rendermode);

@@ -243,6 +243,7 @@ static int **stc_rng_seed = 0x804D5F94;
 static HSD_Pad *stc_engine_pads = (HSD_Pad *)0x804c21cc;
 static u64 *stc_pause_plink_whitelists = 0x803da888; // array of u64 bitfields defining which gobj p_links should run for the corresponding PauseKind
 static HSD_PollData *stc_hsd_polldata = 0x804c1f78;
+static GXPixelFmt *stc_hsd_pixelfmt = 0x804d76c8;
 
 /*** Functions ***/
 
@@ -271,6 +272,7 @@ void HSD_StateInitDirect(GXVtxFmt vtxfmt, int render_flags);
 void HSD_StateSetZMode(GXBool compare_enable, GXCompare func, GXBool update_enable);
 void HSD_StateSetNumChans(u8 nChans);
 void HSD_SetupChannel(void *unk);
+void HSD_StateSetColorUpdate(GXBool update_enable); // This function enables or disables color-buffer updates when rendering into the Embedded Frame Buffer (EFB)
 void HSD_ClearVtxDesc();
 void HSD_VICopyXFBASync(int unk);
 int HSD_VIGetDrawDoneWaitingFlag();

@@ -2782,12 +2782,12 @@ struct Rules1
 
 struct Rules4
 {
-    u64 x0;          // 0x0
-    u64 item_switch; // 0x8
-    int x10;         // 0x10
-    u8 x14;          // 0x14
-    u8 x15;          // 0x15
-    u8 language;     // 0x16
+    u64 x0;           // 0x0
+    u64 item_switch;  // 0x8
+    int x10;          // 0x10
+    u8 x14;           // 0x14
+    u8 x15;           // 0x15
+    u8 language;      // 0x16
     u32 stage_switch; // 0x18
 };
 

@@ -185,6 +185,10 @@ void Effect_CheckQueue(GOBJ *g, Effect **gfx);
 void Particle_InitFile(void *ptcl, void *texg, int r5);
 ptclGen *psCreateGeneratorID(int linkno, int bank_no, int ptcl_index);                 // 8039f05c
 ptclGen *psCreateGeneratorIDJObj(int linkno, int bank_no, int ptcl_index, JOBJ *jobj); // 8039efac
+void psInterpretParticles(u32 blacklist_link_nos);                                     // input is a bitfield, shifted left by 16 bits!
+void psExecGenerator(u32 blacklist_link_nos);                                          // input is a bitfield, shifted left by 16 bits!
+void psDispParticles(u32 whitelist_link_nos, int pass);                                // input is a bitfield
+GeneratorAppSRT *psAddGeneratorAppSRT(ptclGen *ptcl_gen, int unk);
 int psRemoveParticleAppSRT(Particle *ptcl);
 void psDeletePntJObjwithParticle(Particle *ptcl);
 ptclGen *psKillGenerator(ptclGen *gen, ptclGen *unk);

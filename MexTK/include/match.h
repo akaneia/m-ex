@@ -86,7 +86,7 @@ enum MatchPLinks
 
 enum MatchGXLinks
 {
-    MATCHGX_LIGHT,
+    MATCHGX_LIGHT,       // fog too i think?
     MATCHGX_POKEMONITOR, // hrc signs use this as well
     MATCHGX_FODREFLECT,
     MATCHGX_STAGE,
@@ -106,7 +106,7 @@ enum MatchGXLinks
     MATCHGX_DEVELOPTEXT,
 };
 
-enum HitAttributes // these belong to items *and* fighters so im putting them here
+typedef enum HitAttribute // these belong to items *and* fighters so im putting them here
 {
     HITATTR_NORMAL,
     HITATTR_FIRE,
@@ -125,7 +125,27 @@ enum HitAttributes // these belong to items *and* fighters so im putting them he
     HITATTR_SCREW,
     HITATTR_FLOWER,
     HITATTR_NULL,
-};
+} HitAttribute;
+
+typedef enum HitSFXKind // these belong to items *and* fighters so im putting them here
+{
+    HITSFX_NONE,
+    HITSFX_PUNCH,
+    HITSFX_KICK,
+    HITSFX_SWORD,
+    HITSFX_COIN,
+    HITSFX_BAT,
+    HITSFX_FAN,
+    HITSFX_ELEC,
+    HITSFX_FIRE,
+    HITSFX_CHEW,
+    HITSFX_SHELL,
+    HITSFX_ENERGY,
+    HITSFX_PEACHITEM,
+    HITSFX_ICE,
+    HITSFX_14,
+    HITSFX_15,
+} HitSFXKind;
 
 /*** Structs ***/
 
@@ -529,12 +549,12 @@ struct MatchCamera
     int x38c;                              // 0x38c
     int x390;                              // 0x390
     int x394;                              // 0x394
-    unsigned char x398_80 : 1;             // 0x398
-    unsigned char x398_40 : 1;             // 0x398
+    unsigned char hide_fighters : 1;       // 0x398, 0x80
+    unsigned char hide_items : 1;          // 0x398, 0x40
     unsigned char hide_stage2 : 1;         // 0x398, 0x20
     unsigned char hide_effects : 1;        // 0x398, 0x10
     unsigned char hide_lighting : 1;       // 0x398, 0x08
-    unsigned char hide_background : 1;     // 0x398
+    unsigned char hide_background : 1;     // 0x398, 0x04
     unsigned char item_render_flags : 2;   // 0x398, 0x03
     unsigned char map_render_flags : 2;    // 0x399, 0xC0, stage gobjs compare this to their render flags and only render if they match
     unsigned char x399x20 : 1;             // 0x399, 0x20

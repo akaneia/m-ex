@@ -44,8 +44,10 @@
 803549a0:CARDGetXferredBytes
 8034da00:PADRead
 8034d5e8:PADReset
+8034a0f0:SISetXY
 8034ddac:SISetSamplingRate
-80030A50:Match_GetCObj
+8034a150:SIEnablePolling
+:Match_GetCObj
 8036a290:COBJ_Alloc
 8036A590:COBJ_LoadDesc
 80013B14:COBJ_LoadDescSetScissor
@@ -77,6 +79,7 @@
 80041C8C:Coll_ECBCurrToPrev
 80041EE4:Coll_InitECB
 8004220c:Coll_SetECBScale
+8004ca6c:Coll_GetCurrGroundsFrictionMult
 8004CAA0:Collision_CheckCeilingCollision
 8004CB78:Collision_CheckGroundCollision
 8004CB30:Collision_CheckLeftWallCollision
@@ -469,6 +472,8 @@
 8033c898:GXInvalidateVtxCache
 8033F270:GXInvalidateTexAll
 8033c8a8:GXSetTexCoordGen2
+803416ec:GXSetViewport
+8033db30:GXSetDispCopyGamma
 80391070:GXLink_Common
 8026407C:GXLink_Fog
 8026EECC:GXLink_Item
@@ -493,11 +498,18 @@
 80340518:GX_blr
 8034051c:GXSetAlphaCompare
 803405f0:GXSetTevOrder
+8033ff68:GXSetTevColorIn
+8033ffe8:GXSetTevAlphaIn
+8034006c:GXSetTevColorOp
+8034012c:GXSetTevAlphaOp
 80340790:GXSetNumTevStages
 80340c3c:GXSetBlendMode
 80340d40:GXSetColorUpdate
 80340d80:GXSetAlphaUpdate
 80340e38:GXSetZCompLoc
+80340fc8:GXSetDstAlpha
+8033e3f4:GXSetChanMatColor
+8033e28c:GXSetChanAmbColor
 80341494:GXLoadPosMtxImm
 80341510:GXSetCurrentMtx
 8034f314:VIWaitForRetrace
@@ -541,6 +553,7 @@
 801a3a74:HSD_PadRenewUpdateStruct2
 8036c244:HSD_ClearVtxDesc
 803620a4:HSD_SetupChannel
+80361d6c:HSD_StateSetColorUpdate
 803786f0:HSD_PadRumbleInterpret
 803761c0:HSD_VICopyXFBASync
 80375c34:HSD_VIPostRetraceCallback
@@ -642,7 +655,7 @@
 80371D9C:JOBJ_SetFlagsAll
 803732E8:JOBJ_SetMtxDirtySub
 80373078:JOBJ_SetupMtxSub
-80011c18:JOBJ_EnableFlagAllMOBJ
+80011c18:JOBJ_SetFlagAllMOBJ
 80213250:JOBJ_CompileTEVAllMOBJ
 8000c1c0:JOBJ_AttachPosition
 8000c2f8:JOBJ_AttachPositionRotation
@@ -735,6 +748,7 @@
 80363b8c:MOBJ_SetToonTextureImage
 80362e98:MOBJ_ReqAnim
 803630fc:MObj_Anim
+80342cbc:MTXOrtho
 80342734:MTXLookAt
 80342530:MTXRotAxisRad
 80342690:MTXQuat
@@ -804,9 +818,13 @@
 803421D0:PSMTXCopy
 803421a4:PSMTXIdentity
 80342204:PSMTXConcat
+803a4294:psAddGeneratorAppSRT
 803A4344:psRemoveParticleAppSRT
 8039f05c:psCreateGeneratorID
 8039efac:psCreateGeneratorIDJObj
+8039ceac:psInterpretParticles
+8039ee24:psExecGenerator
+803a0088:psDispParticles
 801a4310:Scene_GetCurrentMajor
 801a42c4:Scene_GetCurrentMinor
 801a42e8:Scene_SetNextMajor
