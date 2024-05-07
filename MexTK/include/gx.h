@@ -608,4 +608,40 @@ void VIConfigure(GXRenderModeObj *rm);
 void VISetPostRetraceCallback(void *cb);
 void GXWaitDrawDone();
 void GXSetDrawDone();
+
+/*
+######################
+## Inline Functions ##
+######################
+*/
+static inline void GX_PeekZ(u16 x, u16 y, u32 *z)
+{
+    u32 regval;
+
+    regval = 0xc8000000 | (_SHIFTL(x, 2, 10));
+    regval = (regval & ~0x3FF000) | (_SHIFTL(y, 12, 10));
+    regval = (regval & ~0xC00000) | 0x400000;
+    *z = *(u32 *)regval;
+}
+static inline void GX_PeekARGB(u16 x, u16 y, GXColor *col)
+{
+    u32 regval, val;
+
+    regval = 0xc8000000 | (_SHIFTL(x, 2, 10));
+    regval = (regval & ~0x3FF000) | (_SHIFTL(y, 12, 10));
+    val = *(u32 *)regval;
+    col->a = _SHIFTR(val, 24, 8);
+    col->r = _SHIFTR(val, 16, 8);
+    col->g = _SHIFTR(val, 8, 8);
+    col->b = val & 0xff;
+}
+static inline void GX_PokeARGB(u16 x, u16 y, GXColor color)
+{
+    u32 regval;
+
+    regval = 0xc8000000 | (_SHIFTL(x, 2, 10));
+    regval = (regval & ~0x3FF000) | (_SHIFTL(y, 12, 10));
+    *(u32 *)regval = _SHIFTL(color.a, 24, 8) | _SHIFTL(color.r, 16, 8) | _SHIFTL(color.g, 8, 8) | (color.b & 0xff);
+}
+
 #endif
