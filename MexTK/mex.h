@@ -4,6 +4,8 @@
 #include "include/structs.h"
 #include "include/datatypes.h"
 
+#include "include/useful.h"
+#include "include/gx.h"
 #include "include/1p.h"
 #include "include/audio.h"
 #include "include/dynamics.h"
@@ -27,6 +29,5 @@
 #include "include/scene.h"
 #include "include/stage.h"
 #include "include/text.h"
-#include "include/useful.h"
 
 #endif

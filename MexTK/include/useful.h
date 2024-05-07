@@ -5,7 +5,6 @@
 
 #include "structs.h"
 #include "datatypes.h"
-#include "devtext.h"
 
 typedef s64 OSTime;
 
@@ -30,9 +29,11 @@ char *strrchr(const char *, int);
 #define MTXRadToDeg(a) ((a) * 57.29577951f)
 #define SYS_BASE_CACHED (0x80000000)
 #define SYS_BASE_UNCACHED (0xC0000000)
-#define MEM_VIRTUAL_TO_PHYSICAL(x) (((u32)(x)) & ~SYS_BASE_UNCACHED) /*!< Cast virtual address to physical address, e.g. 0x8xxxxxxx -> 0x0xxxxxxx */
-#define MEM_PHYSICAL_TO_K0(x) (void *)((u32)(x) + SYS_BASE_CACHED)   /*!< Cast physical address to cached virtual address, e.g. 0x0xxxxxxx -> 0x8xxxxxxx */
-#define LOG_ADDR(x) OSReport("%08x\n", x)                            /*!< Cast physical address to cached virtual address, e.g. 0x0xxxxxxx -> 0x8xxxxxxx */
+#define LOG_ADDR(x) OSReport("%08x\n", x)                                 //
+#define MEM_VIRTUAL_TO_PHYSICAL(x) (((u32)(x)) & ~SYS_BASE_UNCACHED)      /*!< Cast virtual address to physical address, e.g. 0x8xxxxxxx -> 0x0xxxxxxx */
+#define MEM_PHYSICAL_TO_K0(x) (void *)((u32)(x) + SYS_BASE_CACHED)        /*!< Cast physical address to cached virtual address, e.g. 0x0xxxxxxx -> 0x8xxxxxxx */
+#define _SHIFTL(v, s, w) ((u32)(((u32)(v) & ((0x01 << (w)) - 1)) << (s))) // mask the first w bits of v before lshifting
+#define _SHIFTR(v, s, w) ((u32)(((u32)(v) >> (s)) & ((0x01 << (w)) - 1))) // rshift v and mask the first w bits afterwards
 
 /** Console Definitions */ //
 #define OS_CONSOLE_RETAIL4 0x00000004
@@ -560,9 +561,6 @@ void HSD_SetHeapID(int heap);
 // char *strncpy(char *dest, char *src, int size); // copies the string pointed to, by src to dest.
 // unsigned long int strtoul(const char *str, char **endptr, int base);
 // int tolower(char in);
-
-void DevelopMode_ResetCursorXY(DevText *text, int x, int y);
-void Develop_UpdateMatchHotkeys();
 
 void Wind_StageCreate(Vec3 *pos, int duration, float radius, float lifetime, float angle);
 void Wind_FighterCreate(Vec3 *pos, int duration, float radius, float lifetime, float angle);

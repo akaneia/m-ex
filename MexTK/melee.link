@@ -124,7 +124,7 @@
 80227CAC:DevCam_AdjustZoom
 80008FC8:Develop_DrawSphere
 80225754:Develop_UpdateMatchHotkeys
-80302A3C:DevelopMode_ResetCursorXY
+80302A3C:DevelopText_ResetCursorXY
 80302810:DevelopText_Activate
 80302D4C:DevelopText_AddString
 80302834:DevelopText_CreateDataTable

@@ -1012,8 +1012,8 @@ struct ftData
     int x24;
     int x28;
     ftDynamics *dynamics; // 0x2C
-    int hurtbox;
-    int *center_bubble;
+    int hurtbox;          // 0x30
+    int *center_bubble;   // 0x34
     int x38;
     int x3C;
     int x40;

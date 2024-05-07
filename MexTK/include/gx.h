@@ -3,7 +3,7 @@
 
 #include "structs.h"
 #include "datatypes.h"
-#include "gx.h"
+#include "useful.h"
 
 struct GXColor
 {
