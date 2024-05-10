@@ -585,7 +585,6 @@ int Stage_CheckAnimEnd(GOBJ *map, int jobj_index, int flags);  // 0x1 = unk aobj
 int Stage_CheckAnimEnd2(GOBJ *map, int jobj_index, int flags); // 0x1 = unk aobj, 0x2 = material aobj, 0x4 = unk aobj
 void Stage_PlaySFX(MapData *map, int live_index, int sfx_id);
 int Stage_CheckSFX(MapData *map, int live_index);
-void Dynamics_DecayWind();
 GOBJ *Stage_CreateMapGObj(int mapgobjID);
 GOBJ *Stage_CreateMapGObjDefineIndex(JOBJ *jobjdesc, int map_index);
 void Stage_DestroyMapGObj(GOBJ *map_gobj);

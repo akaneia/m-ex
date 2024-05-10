@@ -498,6 +498,7 @@
 80340518:GX_blr
 8034051c:GXSetAlphaCompare
 803405f0:GXSetTevOrder
+803401ec:GXSetTevColor
 8033ff68:GXSetTevColorIn
 8033ffe8:GXSetTevAlphaIn
 8034006c:GXSetTevColorOp

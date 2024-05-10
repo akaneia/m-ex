@@ -720,7 +720,7 @@ void COBJ_Init(COBJ *cobj, COBJDesc *cobj_desc); // re-initializes a live cobj u
 void CObjThink_Common(GOBJ *gobj);
 int CObj_SetCurrent(COBJ *cobj);
 void CObj_SetEraseColor(int r, int g, int b, int a);
-void CObj_EraseScreen(COBJ *cobj, int unk, int unk2, int unk3);
+void CObj_EraseScreen(COBJ *cobj, GXBool color_update_enable, GXBool alpha_update_enable, GXBool depth_update_enable);
 void CObj_UpdateAll();
 void CObj_RenderGXLinks(GOBJ *gobj, int render_mode);
 void CObj_EndCurrent();

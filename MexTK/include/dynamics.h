@@ -71,5 +71,5 @@ struct DynamicHit
 void Dynamics_InitBones(JOBJ *joint, DynamicBoneset *boneset, int bone_num);
 void Dynamics_InitParams(void *dyn_desc_params, DynamicBoneset *boneset);
 void Dynamics_UpdateBoneset(DynamicBoneset *boneset, float f1, DynamicHit *dynamics_hit, int dynamics_hit_num, int r6, int r7, int r8, int r9); // 8001044c
-
+void Dynamics_DecayWind();
 #endif
