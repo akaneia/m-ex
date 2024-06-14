@@ -6,41 +6,41 @@
 #include "gx.h"
 
 // JObj Flags
-#define JOBJ_SKELETON (1 << 0)          // 0x00000001
-#define JOBJ_SKELETON_ROOT (1 << 1)     // 0x00000002
-#define JOBJ_ENVELOPE_MODEL (1 << 2)    // 0x00000004
-#define JOBJ_CLASSICAL_SCALING (1 << 3) // 0x00000008
-#define JOBJ_HIDDEN (1 << 4)            // 0x00000010
-#define JOBJ_PTCL (1 << 5)              // 0x00000020
-#define JOBJ_MTX_DIRTY (1 << 6)         // 0x00000040
-#define JOBJ_LIGHTING (1 << 7)          // 0x00000080
-#define JOBJ_TEXGEN (1 << 8)            // 0x00000100
-#define JOBJ_BILLBOARD (1 << 9)
-#define JOBJ_VBILLBOARD (2 << 9)
-#define JOBJ_HBILLBOARD (3 << 9)
-#define JOBJ_RBILLBOARD (4 << 9)
-#define JOBJ_INSTANCE (1 << 12)
-#define JOBJ_PBILLBOARD (1 << 13)
-#define JOBJ_SPLINE (1 << 14)
-#define JOBJ_FLIP_IK (1 << 15)
-#define JOBJ_SPECULAR (1 << 16)
-#define JOBJ_USE_QUATERNION (1 << 17)
-#define JOBJ_OPA (1 << 18) // only rendered with gx pass 3
-#define JOBJ_XLU (1 << 19)
-#define JOBJ_TEXEDGE (1 << 20)
-#define JOBJ_NULL (0 << 21)
-#define JOBJ_JOINT1 (1 << 21)
-#define JOBJ_JOINT2 (2 << 21)
-#define JOBJ_EFFECTOR (3 << 21)
-#define JOBJ_USER_DEFINED_MTX (1 << 23)
-#define JOBJ_MTX_INDEPEND_PARENT (1 << 24)
-#define JOBJ_MTS_INDEPEND_SRT (1 << 25)
-#define JOBJ_GENERALFLAG (1 << 26)
-#define JOBJ_GENERALFLAG2 (1 << 27)
-#define JOBJ_ROOT_OPA (1 << 28) // only rendered with gx pass 3
-#define JOBJ_ROOT_XLU (1 << 29)
-#define JOBJ_ROOT_TEXEDGE (1 << 30)
-#define JOBJ_31 (1 << 31)
+#define JOBJ_SKELETON (1 << 0)             // 0x00000001
+#define JOBJ_SKELETON_ROOT (1 << 1)        // 0x00000002
+#define JOBJ_ENVELOPE_MODEL (1 << 2)       // 0x00000004
+#define JOBJ_CLASSICAL_SCALING (1 << 3)    // 0x00000008
+#define JOBJ_HIDDEN (1 << 4)               // 0x00000010
+#define JOBJ_PTCL (1 << 5)                 // 0x00000020
+#define JOBJ_MTX_DIRTY (1 << 6)            // 0x00000040
+#define JOBJ_LIGHTING (1 << 7)             // 0x00000080
+#define JOBJ_TEXGEN (1 << 8)               // 0x00000100
+#define JOBJ_BILLBOARD (1 << 9)            // 0x00000200
+#define JOBJ_VBILLBOARD (2 << 9)           // 0x00000400
+#define JOBJ_HBILLBOARD (3 << 9)           // 0x00000600
+#define JOBJ_RBILLBOARD (4 << 9)           // 0x00000800
+#define JOBJ_INSTANCE (1 << 12)            // 0x00001000
+#define JOBJ_PBILLBOARD (1 << 13)          // 0x00002000
+#define JOBJ_SPLINE (1 << 14)              // 0x00004000
+#define JOBJ_FLIP_IK (1 << 15)             // 0x00008000
+#define JOBJ_SPECULAR (1 << 16)            // 0x00010000
+#define JOBJ_USE_QUATERNION (1 << 17)      // 0x00020000
+#define JOBJ_OPA (1 << 18)                 // 0x00040000 only rendered with gx pass 3
+#define JOBJ_XLU (1 << 19)                 // 0x00080000
+#define JOBJ_TEXEDGE (1 << 20)             // 0x00100000
+#define JOBJ_NULL (0 << 21)                // 0x00000000
+#define JOBJ_JOINT1 (1 << 21)              // 0x00100000
+#define JOBJ_JOINT2 (2 << 21)              // 0x00200000
+#define JOBJ_EFFECTOR (3 << 21)            // 0x00300000
+#define JOBJ_USER_DEFINED_MTX (1 << 23)    // 0x00800000
+#define JOBJ_MTX_INDEPEND_PARENT (1 << 24) // 0x01000000
+#define JOBJ_MTS_INDEPEND_SRT (1 << 25)    // 0x02000000
+#define JOBJ_GENERALFLAG (1 << 26)         // 0x04000000
+#define JOBJ_GENERALFLAG2 (1 << 27)        // 0x08000000
+#define JOBJ_ROOT_OPA (1 << 28)            // 0x10000000 only rendered with gx pass 3
+#define JOBJ_ROOT_XLU (1 << 29)            // 0x20000000
+#define JOBJ_ROOT_TEXEDGE (1 << 30)        // 0x40000000
+#define JOBJ_31 (1 << 31)                  // 0x80000000
 
 // MObj Flags
 #define JOBJ_ANIM 0x1
@@ -95,6 +95,14 @@
 // DOBJ flags
 #define DOBJ_HIDDEN (1 << 0)           // 0x00000001
 #define DOBJ_RENDER_ORDER_UNK (1 << 2) // 0x00000004
+
+// POBJ flags
+#define POBJ_ANIM (1 << 3)
+#define POBJ_SKIN (0 << 12)
+#define POBJ_SHAPEANIM (1 << 12)
+#define POBJ_ENVELOPE (2 << 12)
+#define POBJ_CULLFRONT (1 << 14)
+#define POBJ_CULLBACK (1 << 15)
 
 // AOBJ flags
 #define AOBJ_REWINDED (1 << 26)   // 0x04000000
@@ -368,12 +376,55 @@ struct COBJDesc
     } projection_param;
 };
 
+struct HSD_VtxDescList
+{
+    GXAttribute attr;             // 0x0
+    GXAttributeType attr_type;    // 0x4
+    GXComponentContents comp_cnt; // 0x8
+    GXComponentType comp_type;    // 0xc
+    u8 frac;                      // 0x10
+    u16 stride;                   // 0x12
+    void *vertex;                 // 0x14
+};
+
+struct POBJDesc
+{
+    char *class_name;
+    struct POBJDesc *next;
+    struct _HSD_VtxDescList *verts;
+    u16 flags;
+    u16 n_display;
+    u8 *display;
+    union
+    {
+        JOBJDesc *joint;
+        void *shape_set;
+        void **envelope_p;
+    } u;
+};
+struct POBJ
+{
+    int parent;                    // 0x0
+    POBJ *next;                    // 0x4
+    struct HSD_VtxDescList *verts; // 0x8
+    u16 flags;                     // 0xC
+    u16 n_display;                 // 0xE
+    u8 *display;                   // 0x10, u8 primitive, u8 vtxcnt, u16* indices
+    union                          // 0x14
+    {
+        JOBJ *jobj;
+        void *shape_set;
+        void *envelope_list;
+    } u;
+    AOBJ *aobj; // 0x18
+};
+
 struct DOBJ
 {
     int parent;
     DOBJ *next; // 0x04
     MOBJ *mobj; // 0x08
-    int *pobj;  // 0x0C
+    POBJ *pobj; // 0x0C
     AOBJ *aobj; // 0x10
     u32 flags;  // 0x14
     u32 unk;
@@ -697,7 +748,7 @@ void JOBJ_SetAllMOBJFlags(JOBJ *joint, int flags);
 void JOBJ_SetFlagAllMOBJ(JOBJ *joint, int flags); // enables this flag for all mobjs
 int JOBJ_CheckAObjEnd(JOBJ *joint);
 void JOBJ_CompileTEVAllMOBJ(JOBJ *joint);
-void JObj_DispAll(JOBJ *joint, Mtx *vmtx, int flags, int rendermode);
+void JObj_DispAll(JOBJ *joint, Mtx *vmtx, int rendermode, int mobj_flags);
 void JOBJ_AttachPosition(JOBJ *to_attach, JOBJ *attach_to);
 void JOBJ_AttachPositionRotation(JOBJ *to_attach, JOBJ *attach_to);
 GOBJ *JOBJ_LoadSet(int is_hidden, JOBJSet *set, int anim_id, float frame, int p_link, int gx_link, int is_add_anim, void *cb); // 8019035c

@@ -276,7 +276,7 @@ struct RGB565
 };
 struct MTHPlayParam
 {
-    int on_frame; // which mth frame to begin applying this frame
+    int on_frame; // frame to apply the below frame rate (offset from last frame rate change)
     int rate;     // in game frames per mth frame
 };
 struct MTHHeader
@@ -315,9 +315,9 @@ struct MTHPlayback
     void *x6c;                // 0x6c
     void *x70;                // 0x70
     void *x74;                // 0x74
-    void *x78;                // 0x78
+    int x78;                  // 0x78
     void *x7c;                // 0x7c
-    void *x80;                // 0x80
+    int x80;                  // 0x80
     void *x84;                // 0x84
     void *x88;                // 0x88
     void *x8c;                // 0x8c

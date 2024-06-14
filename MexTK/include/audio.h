@@ -346,6 +346,7 @@ static int *stc_bgm_data_seed = R13 + -0x3f50;                     // is used to
 static int *stc_bgm_tick = R13 + -0x3f44;                          // how many times bgm audio has been updated (incremented @ 8038ad44)
 static BGMData *stc_bgm_data2 = R13 + -0x3f40;                     // contains some data about the bgm, including its voice_index
 static int *stc_bgm_entrynum = R13 + -0x3f3c;                      // entrynum of the hps file currently playing again
+static int *stc_bgm_is_playing = R13 + -0x5668;                    // is -1 when not playing
 static int *stc_bgm_curLoadingHpsChunkHeaderIndex = R13 + -0x3f38; // index of the cur hps chunk header loaded (0-2 circular buffer)
 static int *stc_bgm_lastLoadedHPSChunkIndex = R13 + -0x3f34;       // index of the most recent hps chunk loaded (0-2 circular buffer), changes after hps chunk is loaded @ 8038ad6c
 static int *stc_bgm_curPlayingHpsChunkHeaderIndex = R13 + -0x3f2c; // index of the cur hps chunk header playing (0-2 circular buffer)

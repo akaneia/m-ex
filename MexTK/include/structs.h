@@ -33,6 +33,7 @@ typedef struct FileReadParam FileReadParam;
 // GX
 typedef struct GXColor GXColor;
 typedef struct GXRenderModeObj GXRenderModeObj;
+typedef struct GXTexObj GXTexObj;
 typedef struct GXPipe GXPipe;
 typedef struct VIUnknown VIUnknown;
 
@@ -51,6 +52,9 @@ typedef struct JOBJ JOBJ;
 typedef struct JOBJDesc JOBJDesc;
 typedef struct MatAnimJointDesc MatAnimJointDesc;
 typedef struct AnimJointDesc AnimJointDesc;
+typedef struct HSD_VtxDescList HSD_VtxDescList;
+typedef struct POBJ POBJ;
+typedef struct POBJDesc POBJDesc;
 typedef struct DOBJ DOBJ;
 typedef struct TOBJ TOBJ;
 typedef struct AOBJ AOBJ;
@@ -268,7 +272,8 @@ typedef struct HSD_ObjAllocData HSD_ObjAllocData;
 typedef struct HSD_PollData HSD_PollData;
 
 // Scene
-typedef struct MajorScene MajorScene;
+typedef struct MajorSceneDesc MajorSceneDesc;
+typedef struct MinorSceneDesc MinorSceneDesc;
 typedef struct MinorScene MinorScene;
 typedef struct SceneInfo SceneInfo;
 typedef struct ScDataVS ScDataVS;

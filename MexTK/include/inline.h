@@ -10,6 +10,7 @@
 #include "hsd.h"
 #include "math.h"
 #include "useful.h"
+#include "scene.h"
 
 /*** Macros ***/
 #define GetElementsIn(arr) sizeof(arr) / sizeof(arr[0])
@@ -23,6 +24,34 @@
 //     else
 //         return x;
 // }
+
+static inline MinorKind Scene_GetCurrentMinorKind()
+{
+    MajorSceneDesc *this_major = Scene_GetMajorSceneDesc();
+    int major_curr = Scene_GetCurrentMajor();
+    int major_terminator = ((MexData *)MEX_GetData(MXDT_MEXDATA))->metadata->last_major;
+
+    // find current major
+    while (this_major->major_id != major_terminator)
+    {
+        if (this_major->major_id == major_curr)
+        {
+            // find current minor
+            MinorScene *this_minor = this_major->minor_scene_arr;
+            int minor_curr = Scene_GetCurrentMinor();
+            while (this_minor->minor_id != -1)
+            {
+                if (this_minor->minor_id == minor_curr)
+                    return this_minor->minor_kind;
+
+                this_minor++;
+            }
+        }
+        this_major++;
+    }
+
+    return -1;
+}
 
 static inline GOBJ *GOBJ_EZCreator(int entity_class, int p_link, int flags, int data_size, void *data_destructor, int obj_kind, void *obj_desc, void *proc_cb, int proc_pri, void *gx_cb, int gx_link, int gx_pri)
 {

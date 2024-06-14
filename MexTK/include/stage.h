@@ -90,6 +90,14 @@ typedef enum GrExternal
     GRKINDEXT_FD,
 } GrExternal;
 
+typedef enum MapRenderKind
+{
+    MAP_RENDERKIND_FG,      // foreground, rendered third
+    MAP_RENDERKIND_FGTRANS, // foreground with transparency, rendered second
+    MAP_RENDERKIND_BG,      // background, rendered first
+    MAP_RENDERKIND_HIGHPRI, // rendered above everything (fighters effects stage etc)
+} MapRenderKind;
+
 /*** Structs ***/
 
 struct MapDesc
@@ -117,7 +125,7 @@ struct MapData
     unsigned char is_check_shadow : 1; // 0x10, 0x04, will run the "shadow check" per fighter to see if a fighter's shadow should be drawn
     unsigned char flagx2 : 1;          // 0x10, 0x02
     unsigned char flagx1 : 1;          // 0x10, 0x01
-    unsigned char render_flags : 3;    // 0x11, 0xE0, compares this to the match render flags and only render if they match
+    unsigned char render_kind : 3;     // 0x11, 0xE0, compares this to the current match render kind and only renders if they match
     unsigned char flag2x10 : 1;        // 0x11, 0x10
     unsigned char flag2x08 : 1;        // 0x11, 0x08
     unsigned char flag2x04 : 1;        // 0x11, 0x04, will run the "shadow check" per fighter to see if a fighter's shadow should be drawn
@@ -129,13 +137,13 @@ struct MapData
     int live_sfx[8];                   // 0x20, sfx ID's currently playing
     ColorOverlay color;                // 0x40
     int xc0;                           // 0xc0
-    u16 xc4;                           // 0xc4
-    u8 xc6;                            // 0xc6
-    u8 xc7;                            // 0xc7
-    int xc8;                           // 0xc8
-    int xcc;                           // 0xcc
-    int xd0;                           // 0xd0
     // pretty sure map_var actually starts here? rofl
+    u16 xc4; // 0xc4
+    u8 xc6;  // 0xc6
+    u8 xc7;  // 0xc7
+    int xc8; // 0xc8
+    int xcc; // 0xcc
+    int xd0; // 0xd0
     int xd4; // 0xd4
     int xd8; // 0xd8
     int xdc; // 0xdc

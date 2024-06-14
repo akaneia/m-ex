@@ -2810,7 +2810,7 @@ struct Match // static match struct @ 8046b6a0
 
 static Match *stc_match = 0x8046b6a0;
 static MatchCamera *stc_matchcam = 0x80452c68;
-static MatchHUD *stc_matchhud = 0x804a0fd8; // 0x804a10c8;
+static MatchHUD *stc_matchhud = 0x804a0fd8;
 static MatchOffscreen *stc_match_offscreen = 0x804a1df0;
 static ExclamData *stc_exclam_data = 0x803f9628; // 8 of these
 static HSD_Archive **stc_ifall_archive = 0x804d6d5c;

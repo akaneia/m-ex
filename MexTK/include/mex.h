@@ -197,6 +197,12 @@ typedef struct MexStageTable
     MEXPlaylist *playlist_table;
 } MexStageTable;
 
+typedef struct MexSceneData
+{
+    MajorSceneDesc *major_desc_arr;
+    MinorSceneDesc *minor_desc_arr;
+} MexSceneData;
+
 typedef struct MexData
 {
     MexMetaData *metadata;

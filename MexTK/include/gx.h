@@ -30,6 +30,11 @@ struct GXRenderModeObj
     u8 vfilter[7];
 };
 
+struct GXTexObj
+{
+    u32 val[8];
+};
+
 struct GXPipe
 {
     union
@@ -471,6 +476,13 @@ typedef enum GXAttnFn
 
 } GXAttnFn;
 
+typedef enum GXAlphaReadMode
+{
+    GX_READ_00,
+    GX_READ_FF,
+    GX_READ_NONE
+} GXAlphaReadMode;
+
 typedef enum GXTevColorArg
 {
     GX_CC_CPREV,
@@ -566,6 +578,9 @@ void GXSetLineWidth(u8 width, int tex_offsets);
 void GXBegin(GXPrimitive type, GXVtxFmt vtxfmt, u16 nverts);
 void GXEnd();
 void GXPixModeSync();
+void GXInitTexObj(GXTexObj *obj, void *image_ptr, u16 width, u16 height, GXTexFmt format, GXTexWrapMode wrap_s, GXTexWrapMode wrap_t, GXBool mipmap);
+void GXLoadTexObj(GXTexObj *obj, GXTexMapID id);
+void GXSetTexCoordGen2(GXTexCoordID dst_coord, GXTexGenType func, GXTexGenSrc src_param, u32 mtx, GXBool normalize, u32 postmtx);
 void GXInvalidateTexAll();
 void GXInvalidateVtxCache();
 void GXSetAlphaCompare(
@@ -603,7 +618,11 @@ u32 GXGetTexBufferSize(u16 width, u16 height, u32 format, GXBool mipmap, u8 max_
 void GXSetTexCoordGen2(GXTexCoordID dst_coord, GXTexGenType func, GXTexGenSrc src_param, u32 mtx, GXBool normalize, u32 postmtx);
 void GXSetViewport(f32 xOrig, f32 yOrig, f32 wd, f32 ht, f32 nearZ, f32 farZ);
 void GXSetDispCopyGamma(GXGamma gamma);
-
+void GXSetCopyClear(GXColor clear_clr, u32 clear_z);               // 8033d8a0
+void GXCopyTex(void *dest, GXBool clear);                          // 8033dcbc
+void GXSetTexCopySrc(u16 left, u16 top, u16 wd, u16 ht);           // 8033d4c8
+void GXSetTexCopyDst(u16 wd, u16 ht, GXTexFmt fmt, GXBool mipmap); // 8033d5cc
+void GXSetDither(GXBool dither);
 void VIWaitForRetrace();
 void VIConfigure(GXRenderModeObj *rm);
 void VISetPostRetraceCallback(void *cb);

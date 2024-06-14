@@ -14,7 +14,7 @@ enum SCENE_HEAP_KIND
     SCENEHEAPKIND_UNK3, // shrinks main heap, enables fighter cache?
     SCENEHEAPKIND_UNK4,
 };
-enum MINOR_KIND
+typedef enum MinorKind
 {
     MNRKIND_TITLE,     // Title Screen
     MNRKIND_MNMA,      // Main Menu
@@ -62,8 +62,8 @@ enum MINOR_KIND
     MNRKIND_STAFF,     // credits
     MNRKIND_CAMWARN,   // camera mode memcard prompt
     MNRKIND_NULL,      // terminator
-};
-enum MAJOR_KIND
+} MinorKind;
+typedef enum MajorKind
 {
     MJRKIND_TITLE,        // Title Screen
     MJRKIND_MNMA,         // Main Menu
@@ -111,20 +111,31 @@ enum MAJOR_KIND
     MJRKIND_EVENT,        //
     MJRKIND_VSSNGLBTN,    //
     MJRKIND_NULL,         // terminator
-};
+} MajorKind;
 
-struct MajorScene
+struct MajorSceneDesc
 {
     u8 is_preload;
-    u8 major_id;
-    void *onLoad;
-    void *onExit;
-    void *onBoot;
-    void *MinorScene; // array of minor scenes
+    s8 major_id;
+    void (*cb_Load)();
+    void (*cb_Exit)();
+    void (*cb_Boot)();
+    MinorScene *minor_scene_arr; // array of minor scenes
+    char *file_name;             // m-ex specific, name of the file containing major scene code
 };
+
+struct MinorSceneDesc
+{
+    s8 id;
+    void (*cb_Think)();
+    void (*cb_Load)(void *data);
+    void (*cb_Exit)(void *data);
+    char *file_name; // m-ex specific, name of the file containing minor scene code
+};
+
 struct MinorScene
 {
-    u8 minor_id;        // is 255 for last entry
+    s8 minor_id;        // is -1 for last entry
     u8 heap_kind;       // heap behavior, (2)
     void *minor_prep;   // inits data for this minor (major exclusive)
     void *minor_decide; // decides next minor scene
@@ -172,6 +183,8 @@ SceneDecide: run either Scene_SetNextMinor to enter another minor, OR Scene_SetN
 */
 
 u8 Scene_GetCurrentMajor();
+MajorSceneDesc *Scene_GetMajorSceneDesc();
+MinorSceneDesc *Scene_GetMinorSceneDesc();
 u8 Scene_GetCurrentMinor();
 void Scene_SetNextMajor(int major_id); // run this in scene decide!
 void Scene_ExitMajor();                // run this to cause a major scene change, usually ran in scene decide!
