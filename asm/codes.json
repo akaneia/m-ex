@@ -157,7 +157,7 @@
       ]
     },
     {
-      "name": "!ADDITIONAL | TextTransparency",
+      "name": "!ADDITIONAL | TextModifications",
       "authors": [],
       "description": [],
       "build": [
@@ -165,13 +165,19 @@
           "type": "inject",
           "address": "803a9220",
           "annotation": "add alpha tev",
-          "sourceFile": "additional\\TextTransparency\\add alpha tev.asm"
+          "sourceFile": "Additional\\TextModifications\\add alpha tev.asm"
+        },
+        {
+          "type": "inject",
+          "address": "803a8840",
+          "annotation": "align background",
+          "sourceFile": "Additional\\TextModifications\\align background.asm"
         },
         {
           "type": "inject",
           "address": "803a8d90",
           "annotation": "copy alpha to 0x8c",
-          "sourceFile": "additional\\TextTransparency\\copy alpha to 0x8c.asm"
+          "sourceFile": "Additional\\TextModifications\\copy alpha to 0x8c.asm"
         }
       ]
     },
