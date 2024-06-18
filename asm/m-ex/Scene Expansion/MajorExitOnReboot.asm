@@ -2,10 +2,21 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
+.set REG_MinorData, 26
+
 # normally, the major exit isn't executed on a reboot. instead, the reboot 
 # re-initializes every major scene like on startup. this normally isn't an issue,
 # but if a major wants to modify data for the duration of the major and cleanup
 # upon leaving, rebooting will bypass this cleanup.
+
+# Execute the minor scene's exit function first
+  lwz r12,0xC(REG_MinorData)
+  cmpwi r12,0
+  beq SkipMinorExit
+  lwz	r3, 0x0008 (r25)
+  mtlr r12
+  blrl
+SkipMinorExit:
 
 # get major scene data
 .set REG_CurrMajor,12
@@ -28,7 +39,7 @@ MajorSearch_LoopInc:
   b MajorSearch_Loop
 MajorSearch_LoopEnd:
 
-# exec func
+# Execute function to clean up major scene
   lwz r12,0x8(REG_MajorDesc)
   cmpwi r12,0
   beq Exit
