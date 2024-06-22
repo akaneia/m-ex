@@ -725,7 +725,7 @@ void JOBJ_RemoveAll(JOBJ *joint);
 void JOBJ_Remove(JOBJ *joint);
 void JOBJ_GetChild(JOBJ *joint, JOBJ **ptr, int index, ...);
 void JOBJ_AddChild(JOBJ *parent, JOBJ *child);
-void JOBJ_AddNext(JOBJ *next, JOBJ *prev);
+void JOBJ_AddNext(JOBJ *parent, JOBJ *child);
 float JOBJ_GetCurrentMatAnimFrame(JOBJ *joint);
 void JOBJ_SetFlags(JOBJ *joint, int flags);
 void JOBJ_SetFlagsAll(JOBJ *joint, int flags);

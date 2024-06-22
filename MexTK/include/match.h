@@ -2860,7 +2860,7 @@ void Match_StoreGoCallback(GOBJ *gobj, void *cb);
 void Match_CreateExclamation(int exclam, int is_play_sfx, int sfx, int r6, void *cb, void *cb2);
 void Match_AdjustSoundOnPause(int is_pause);
 Vec3 *Match_GetPlayerHUDPos(int ply);
-COBJ *Match_GetCObj();
+GOBJ *Match_GetCObj();
 float Match_GetDamageRatio();
 void Match_CreateGOExclamation();
 void Match_EnableFighterInputs();

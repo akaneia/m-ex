@@ -3271,6 +3271,7 @@ int Fighter_GetCostumeID(int ply);
 int Fighter_GetHandicap(int ply);
 float Fighter_GetBaseScale(FighterData *fighter);
 void Fighter_SetScale(GOBJ *fighter, float scale);
+void Fighter_InitDynamics(FighterData *fighter_data);
 void Fighter_ProcDynamics(GOBJ *fighter);
 void Fighter_CheckToEnableDynamics(FighterData *fp, u16 *dynamics_data);
 void Fighter_FreeAllDynamics(FighterData *fighter_data);
@@ -3338,6 +3339,7 @@ void Fighter_ThrownRelease_NoUpdateUnk(GOBJ *thrower, GOBJ *victim);
 void Fighter_ThrownRelease(GOBJ *thrower, GOBJ *victim, int is_update_unk);
 void Fighter_ThrownApplyKnockback(GOBJ *victim, GOBJ *hit_exception, int is_enter_dmgflytop);
 void Fighter_ThrownApplyKnockbackNoTDI(GOBJ *victim, float frame);
+void Fighter_UpdateVictimPosition(GOBJ *f);
 void Fighter_AddStaleIncCombo(GOBJ *thrower, GOBJ *victim, float dmg); // 8007891c
 void Fighter_SetAllHurtboxState(GOBJ *f, int state);                   // 8007b0c0
 void Fighter_SetHurtboxState(GOBJ *f, int bone_index, int state);      // 8007b128
@@ -3358,6 +3360,7 @@ int Fighter_CheckGrabBreakout(FighterData *fp, float mash_amt); // returns 1 if 
 void Fighter_SetAnimRate(GOBJ *f, float rate);
 int Fighter_CheckJumpInput(GOBJ *f);
 void Fighter_SetEyeTexture(GOBJ *f, int material_index, float frame);
+void Fighter_SetEyeDamaged(GOBJ *f);
 void Fighter_GetECBCenter(GOBJ *f, Vec3 *center_pos);
 void Fighter_ApplyPartAnim(GOBJ *f, int part_id, int anim_id);
 void Fighter_SetHoldKind(GOBJ *f, int r4, int r5);

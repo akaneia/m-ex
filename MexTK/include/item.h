@@ -536,12 +536,8 @@ struct ItemData
     Vec3 vel_unk;                                       // 0x58 - 0x64
     Vec3 vel_unk2;                                      // 0x64 - 0x70
     Vec3 vel_nudge;                                     // 0x70 - 0x7C
-    int x7c;                                            // 0x7c
-    int x80;                                            // 0x80
-    int x84;                                            // 0x84
-    int x88;                                            // 0x88
-    int x8c;                                            // 0x8c
-    int x90;                                            // 0x90
+    Vec3 x7c;                                           // 0x7c
+    Vec3 x88;                                           // 0x88
     int x94;                                            // 0x94
     int x98;                                            // 0x98
     int x9c;                                            // 0x9c
@@ -798,7 +794,8 @@ struct ItemData
     u16 can_hold : 1;                                   // 0xdca 0x04
     u16 xdca7 : 1;                                      // 0xdca 0x02
     u16 rotate_axis : 3;                                // 0xdcb, 0x18
-    u16 flags4 : 2;                                     // 0xdcb, 0x30
+    u16 xdcb_x20 : 1;                                   // 0xdcb, 0x20
+    u16 xdcb_x10 : 1;                                   // 0xdcb, 0x10
     u16 can_nudge : 1;                                  // 0xdcb, 0x08
     u16 xdcb_5 : 2;                                     // 0xdcb, 0x06
     u16 xdcb_7 : 1;                                     // 0xdcb, 0x01
