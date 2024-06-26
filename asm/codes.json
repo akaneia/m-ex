@@ -165,19 +165,19 @@
           "type": "inject",
           "address": "803a9220",
           "annotation": "add alpha tev",
-          "sourceFile": "Additional\\TextModifications\\add alpha tev.asm"
+          "sourceFile": "additional\\TextModifications\\add alpha tev.asm"
         },
         {
           "type": "inject",
           "address": "803a8840",
           "annotation": "align background",
-          "sourceFile": "Additional\\TextModifications\\align background.asm"
+          "sourceFile": "additional\\TextModifications\\align background.asm"
         },
         {
           "type": "inject",
           "address": "803a8d90",
           "annotation": "copy alpha to 0x8c",
-          "sourceFile": "Additional\\TextModifications\\copy alpha to 0x8c.asm"
+          "sourceFile": "additional\\TextModifications\\copy alpha to 0x8c.asm"
         }
       ]
     },
@@ -731,15 +731,15 @@
       ]
     },
     {
-      "name": "!MENU | Hold A\u002BB for Salty Runback \u002B Hold A\u002BX for Random Stage \u002B Skip Result Screen",
+      "name": "!MENU | Hold A\u002BB for Salty Runback \u002B Hold A\u002BX for Random Stage",
       "authors": [],
       "description": [],
       "build": [
         {
           "type": "inject",
           "address": "801a5b14",
-          "annotation": "Hold A\u002BB for Salty Runback \u002B Hold A\u002BX for Random Stage \u002B Skip Result Screen",
-          "sourceFile": "menu\\Hold A\u002BB for Salty Runback \u002B Hold A\u002BX for Random Stage \u002B Skip Result Screen.asm"
+          "annotation": "Hold A\u002BB for Salty Runback \u002B Hold A\u002BX for Random Stage",
+          "sourceFile": "menu\\Hold A\u002BB for Salty Runback \u002B Hold A\u002BX for Random Stage.asm"
         }
       ]
     },
@@ -953,6 +953,19 @@
           "address": "802641B0",
           "annotation": "Faster CSS Load",
           "sourceFile": "qol\\Faster CSS Load.asm"
+        }
+      ]
+    },
+    {
+      "name": "!QOL | Skip Result Screen",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "801a5b00",
+          "annotation": "Skip Result Screen",
+          "sourceFile": "qol\\Skip Result Screen.asm"
         }
       ]
     },
