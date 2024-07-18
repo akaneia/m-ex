@@ -698,22 +698,22 @@
       "build": [
         {
           "type": "inject",
-          "address": "8026336c",
+          "address": "80263374",
           "annotation": "CSSBackgroundAnimLoop",
           "sourceFile": "menu\\CSSBackgroundAnimLoop.asm"
         }
       ]
     },
     {
-      "name": "!MENU | DPad Down to Random Stage",
+      "name": "!MENU | Disable Rumble on Unplug",
       "authors": [],
       "description": [],
       "build": [
         {
           "type": "inject",
-          "address": "8026325c",
-          "annotation": "DPad Down to Random Stage",
-          "sourceFile": "menu\\DPad Down to Random Stage.asm"
+          "address": "803775a4",
+          "annotation": "Disable Rumble on Unplug",
+          "sourceFile": "menu\\Disable Rumble on Unplug.asm"
         }
       ]
     },
