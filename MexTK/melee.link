@@ -373,6 +373,7 @@
 80074a74:Fighter_GetVisGroupDefault
 80074a8c:Fighter_RevertAllVisGroups
 80074acc:Fighter_HideAllVisGroups
+80086ed0:Fighter_CheckVisible
 80074b0c:Fighter_SetVisGroupCurrent
 800948a8:Fighter_GiveItem
 8003e998:Fighter_ReleaseItemUnk
@@ -715,6 +716,7 @@
 80365678:LObj_AnimAll
 80366654:LObj_DeleteCurrentAll
 80366bd4:LObj_RemoveAll
+8016ae38:Match_GetMatchData
 80024E84:Match_AdjustSoundOnPause
 8016B094:Match_CheckIfStock
 8016B168:Match_CheckIfTeams
@@ -750,6 +752,9 @@
 800868a4:Match_EnableFighterInputs
 80021c48:Match_ApplyScreenColAnim
 800310a0:Match_SetStageRenderFlags
+802f36a4:Match_ShowHUDDevelop
+802f3698:Match_HideHUDDevelop
+802f36b0:Match_IsHUDHiddenDevelop
 8037E708:MatToQuat
 8001B6F8:Memcard_CheckStatus
 8001BB48:Memcard_ReqSaveCreate
@@ -960,6 +965,7 @@
 80325B24:strtoul
 80323588:tolower
 8006EBA4:Fighter_AdvanceScript
+803261bc:tan
 803A6B98:Text_AddSubtext
 803A5798:Text_Alloc
 803A67EC:Text_ConvertToMenuText

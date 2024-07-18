@@ -124,6 +124,16 @@
 #define LOBJ_DIFF_DIRTY (1 << 7)
 #define LOBJ_SPEC_DIRTY (1 << 8)
 
+// COBJ flags
+#define COBJ_UP_VECTOR_UNK (1 << 0) // 0x00000001, related to initing the up vector on cobj load (8036a440)
+#define COBJ_MTX_DIRTY (1 << 1)     // 0x00000002, updates the view mtx when this flag is lowered during COBJSetCurrent @ 80368564
+#define COBJ_40000000 (1 << 30)     // 0x40000000, is checked during CObjMtxIsDirty (8036959c)
+#define COBJ_80000000 (1 << 31)     // 0x80000000, is raised when the COBJSetCurrent returns
+
+#define PROJ_PERSPECTIVE 1
+#define PROJ_FRUSTRUM 2
+#define PROJ_ORTHO 3
+
 // Macro
 #define JOBJ_PauseOnFrame(jobj, child_index, flags, frame)                    \
     {                                                                         \
@@ -195,38 +205,13 @@ struct GOBJProc
     char s_link;     // 0xC
     char x0d_80 : 1; // 0xD
     char x0d_40 : 1;
-    char proc_index : 2;
+    char update_idx : 2;
     char x0d_08 : 1;
     char x0d_04 : 1;
     char x0d_02 : 1;
     char x0d_01 : 1;
     GOBJ *parentGOBJ;       // 0x10
     void (*cb)(GOBJ *gobj); // function callback
-};
-
-struct GOBJList
-{
-    // pointed to @ -0x3e74(r13)
-    // indexed by p_link
-    GOBJ *x0;
-    GOBJ *x4;
-    GOBJ *x8;
-    GOBJ *xc;
-    GOBJ *x10;
-    GOBJ *cobj;
-    GOBJ *x18;
-    GOBJ *x1c;
-    GOBJ *fighter;
-    GOBJ *item;
-    GOBJ *x28;
-    GOBJ *effect; // 0x2c
-    GOBJ *ptcl;   // 0x30, used for blastzone effect
-    GOBJ *x34;
-    GOBJ *x38;
-    GOBJ *x3c;
-    GOBJ *x40;
-    GOBJ *x44;
-    GOBJ *match_cam; // 0x48, used for the match camera and shake gobjs
 };
 
 struct GXList
@@ -333,23 +318,31 @@ struct AnimJointDesc
     int flags2;
 };
 
+struct WOBJDesc
+{
+    char *class_name;
+    Vec3 pos;                       // 0x04
+    struct _HSD_RObjDesc *robjdesc; // 0x10
+    WOBJDesc *next;
+};
+
 struct COBJDesc
 {
-    char *class_name;                    // 0x00
-    u16 flags;                           // 0x04
-    u16 projection_type;                 // 0x06
-    u16 viewport_left;                   // 0x08
-    u16 viewport_right;                  // 0x0A
-    u16 viewport_top;                    // 0x0C
-    u16 viewport_bottom;                 // 0x0E
-    u32 scissor_lr;                      // 0x10
-    u32 scissor_tb;                      // 0x14
-    struct _HSD_WObjDesc *eye_desc;      // 0x18
-    struct _HSD_WObjDesc *interest_desc; // 0x1C
-    f32 roll;                            // 0x20
-    Vec3 *vector;                        // 0x24
-    f32 near;                            // 0x28
-    f32 far;                             // 0x2C
+    char *class_name;        // 0x00
+    u16 flags;               // 0x04
+    u16 projection_type;     // 0x06
+    u16 viewport_left;       // 0x08
+    u16 viewport_right;      // 0x0A
+    u16 viewport_top;        // 0x0C
+    u16 viewport_bottom;     // 0x0E
+    u32 scissor_lr;          // 0x10
+    u32 scissor_tb;          // 0x14
+    WOBJDesc *eye_desc;      // 0x18
+    WOBJDesc *interest_desc; // 0x1C
+    f32 roll;                // 0x20
+    Vec3 *vector;            // 0x24
+    f32 near;                // 0x28
+    f32 far;                 // 0x2C
     union
     {
         struct
@@ -476,7 +469,7 @@ struct COBJ
     u16 scissor_right;   // 0x1E
     u16 scissor_top;     // 0x20
     u16 scissor_bottom;  // 0x22
-    WOBJ *eye_position;  // 0x24
+    WOBJ *eye;           // 0x24
     WOBJ *interest;      // 0x28
     union
     {
@@ -703,11 +696,12 @@ struct HSD_SObjDesc
 };
 
 /*** Static Variables ***/
-static GOBJList **stc_gobj_list = R13 + (-0x3E74);
-static GOBJ ***stc_gobj_lookup = R13 + (-0x3E74);
-static u8 *stc_gobj_proc_num = 0x804ce382;            // number of elements in the below array
-static GOBJProc ***stc_gobjproc_lookup = 0x804D7840;  // array of gobj procs ptrs
-static GOBJProc **stc_gobjproc_cur = (R13 + -0x3E68); // current gobj proc being processed
+static GOBJList **stc_gobj_list = R13 + (-0x3E74);   // array indexed by p_link, if in a match, reference the MATCHPLINK_ enums
+static GOBJ ***stc_gobj_lookup = R13 + (-0x3E74);    //
+static u8 *stc_gobj_proc_num = 0x804ce382;           // number of elements in the below array
+static GOBJProc ***stc_gobjproc_lookup = 0x804D7840; // array of gobj procs ptrs
+static GOBJProc **stc_gobjproc_cur = 0x804d7838;     // current gobj proc being processed
+static u32 *stc_gobjproc_updateidx_cur = 0x804d783c; // update index of the current gobj proc being processed. this is compared to
 static u8 *objkind_sobj = R13 + -(0x3D40);
 static u8 *objkind_cobj = R13 + -(0x3E55);
 static u8 *objkind_lobj = R13 + -(0x3E56);

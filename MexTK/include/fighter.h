@@ -1819,7 +1819,7 @@ struct ftCommonData
     float x7b8;                                // 0x7b8
     float x7bc;                                // 0x7bc
     float x7c0;                                // 0x7c0
-    float kb_multiplier_smashcharge;           // 0x7c4
+    float kb_reduction_smashcharge;            // 0x7c4
     float x7c8;                                // 0x7c8
     float x7cc;                                // 0x7cc
     float x7d0;                                // 0x7d0
@@ -2443,8 +2443,8 @@ struct FighterData
     Vec3 thrown_origin;                   // 0x2174, offset of child from parent, used for placing the child when the grab breaks
     int x2180;                            // 0x2180
     int x2184;                            // 0x2184
-    int x2188;                            // 0x2188
-    int x218c;                            // 0x218c
+    int screen_pixel_x;                   // 0x2188, current pixel the fighter occupies on screen
+    int screen_pixel_y;                   // 0x218c, current pixel the fighter occupies on screen
     struct cb
     {
         void (*OnGrabFighter_Self)(GOBJ *fighter);              // 0x2190
@@ -2573,7 +2573,7 @@ struct FighterData
         unsigned char x221e_8 : 1;                     // 0x1 - 0x221e
         unsigned char is_offscreen : 1;                // 0x80 - 0x221f
         unsigned char dead : 1;                        // 0x40 - 0x221f
-        unsigned char x221f_3 : 1;                     // 0x20 - 0x221f
+        unsigned char x221f_3 : 1;                     // 0x20 - 0x221f, hides player indicator
         unsigned char sleep : 1;                       // 0x10 - 0x221f
         unsigned char ms : 1;                          // 0x08 - 0x221f, ms = master/slave. is 1 when the player is a slave
         unsigned char x221f_6 : 1;
@@ -2895,6 +2895,10 @@ struct FtDead
     int timer;
 };
 
+struct FtEntry
+{
+    int delay_frames;
+};
 /** Script Structs **/
 struct FtScript
 {
@@ -3322,6 +3326,7 @@ void Fighter_SetVisGroupDefault(GOBJ *fighter, int vis_group, s8 index); // sets
 void Fighter_SetVisGroupCurrent(GOBJ *fighter, int vis_group, s8 index); // sets the current active value for this vis group (-1 = hide all)
 void Fighter_RevertAllVisGroups(GOBJ *fighter);                          // sets all vis groups to their default values (specified by Fighter_SetVisGroupDefault)
 void Fighter_HideAllVisGroups(GOBJ *fighter);                            // hides all dobjs in all vis group (sets default and current to -1)
+int Fighter_CheckVisible(GOBJ *fighter);
 void Fighter_GiveItem(GOBJ *fighter, GOBJ *item);
 void Fighter_ReleaseItemUnk(int ply, int ms, GOBJ *item);
 void Fighter_InitDamageVibrate(FighterData *fp, int dmg_attr, int dmg, float mult, int pre_hurt_state, int air_state);
