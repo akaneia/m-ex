@@ -692,15 +692,15 @@
       ]
     },
     {
-      "name": "!MENU | Disable Rumble on Unplug",
+      "name": "!MENU | CSSBackgroundAnimLoop",
       "authors": [],
       "description": [],
       "build": [
         {
           "type": "inject",
-          "address": "803775a4",
-          "annotation": "Disable Rumble on Unplug",
-          "sourceFile": "menu\\Disable Rumble on Unplug.asm"
+          "address": "8026336c",
+          "annotation": "CSSBackgroundAnimLoop",
+          "sourceFile": "menu\\CSSBackgroundAnimLoop.asm"
         }
       ]
     },
