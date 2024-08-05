@@ -5,6 +5,7 @@
 #include "datatypes.h"
 #include "obj.h"
 #include "fighter.h"
+#include "stage.h"
 #include "gx.h"
 
 // Match Data definitions
@@ -319,10 +320,10 @@ struct MatchHUD
     MatchHUDStock stock[6];          //
 };
 
-struct CameraBox
+struct CmSubject // internally CmSubject as evidenced by 80029074, formerly CameraBox
 {
     void *alloc;            // 0x0
-    CameraBox *next;        // 0x4
+    CmSubject *next;        // 0x4
     int kind;               // 0x8 1 = disabled, 2 = only focus if close to center
     u8 flags_x80 : 1;       // 0xC 0x80
     u8 is_disable : 1;      // 0xC 0x40
@@ -2819,17 +2820,20 @@ static MatchHUD *stc_matchhud = 0x804a0fd8;
 static MatchOffscreen *stc_match_offscreen = 0x804a1de0;
 static ExclamData *stc_exclam_data = 0x803f9628; // 8 of these
 static HSD_Archive **stc_ifall_archive = 0x804d6d5c;
-static CameraBox **stc_match_camera_box = 0x804d6468; // linked list of all camera boxes
+static CmSubject **stc_match_camera_subject = 0x804d6468; // linked list of all camera boxes
 static int *stc_match_canvas = 0x804a1f58;
 static GOBJ **stc_match_screencolor_gobj = 0x804d63e0;
 static u8 *stc_hud_is_hidden = 0x804D6D6C;
 static u8 *stc_develop_hide_hud = 0x804d6d58; //
 static float *stc_match_fgm_volume = R13 + -0x7dbc;
 static float *stc_match_bgm_volume = R13 + -0x7db8;
+static JOBJDesc **stc_intro_scene_data = R13 + -0x50a4;
+static HSD_Archive **stc_intro_archive = R13 + -0x50ac;
+static HSD_Archive **stc_viwait_archive = R13 + -0x474c;
 
 /*** Functions ***/
-CameraBox *CameraBox_Alloc();
-void CameraBox_Destroy(CameraBox *cam);
+CmSubject *CameraSubject_Alloc();
+void CameraSubject_Destroy(CmSubject *cam);
 void KOCount_Init(int updateCallback);
 void KOCount_Update(int KOs);
 void Stage_CameraLimitInitialization();
@@ -2868,7 +2872,7 @@ void Match_StoreGoCallback(GOBJ *gobj, void *cb);
 void Match_CreateExclamation(int exclam, int is_play_sfx, int sfx, int r6, void *cb, void *cb2);
 void Match_AdjustSoundOnPause(int is_pause);
 Vec3 *Match_GetPlayerHUDPos(int ply);
-GOBJ *Match_GetCObj();
+COBJ *Match_GetCObj();
 float Match_GetDamageRatio();
 void Match_CreateGOExclamation();
 void Match_EnableFighterInputs();
@@ -2878,4 +2882,15 @@ u8 Match_CheckHUDHiddenDevelop();
 void Match_ShowHUDDevelop();
 void Match_HideHUDDevelop();
 u8 Match_IsHUDHiddenDevelop();
+void Match_InitCameraSubjects(int unk);
+void Match_InitFighters(); // allocs hsd obj for fighterdata
+void Match_InitUnk1();
+void Match_InitUnk2();
+void Match_InitStage(int unk);
+void Match_LoadStage(GrExternal gr_kind, int unk);
+void Match_LoadCommonItems();
+void Match_InitItems(); // allocs hsd obj for itemdata
+void Match_CreateStage();
+void Match_InitEffects();
+void Match_IndexAuxAnim(CharacterKind c_kind, HSD_Archive *archive, int anim_kind);
 #endif

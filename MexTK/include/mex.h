@@ -189,7 +189,7 @@ typedef struct MexStageSound
 
 typedef struct MexStageTable
 {
-    void *id_table;
+    GrExtLookup *grkind_ext_desc;
     MexStageSound *sound_table;
     void *collision_table;
     void *item_table;
@@ -207,7 +207,35 @@ typedef struct MexData
 {
     MexMetaData *metadata;
     MexMenuData *menu;
-    void *fighter;
+    struct
+    {                                      //
+        char **names;                      // 0x0,
+        struct                             //
+        {                                  //
+            char *name;                    //
+            char *symbol;                  //
+        } *pl_file;                        // 0x4
+        u8 *insignia_idx;                  // 0x8
+        FtKindDesc *ft_kind_desc;          // 0xC, array of these
+        struct                             //
+        {                                  //
+            u8 num;                        //
+            u8 red_idx;                    //
+            u8 blue_idx;                   //
+            u8 green_idx;                  //
+        } *costume_info;                   // 0x10, array of these
+        struct                             //
+        {                                  //
+            struct                         //
+            {                              //
+                char *file_name;           //
+                char *joint_symbol;        //
+                char *matanim_symbol;      //
+                int visibility_lookup_idx; //
+            } *costume_symbol_table;       // array of these per costume
+        } *costume_file;                   // 0x14, array of these per character
+        // theres more im just lazy
+    } *fighter; // indexed by ft_kind
     void *fighter_function;
     void *ssm;
     MexMusicTable *music;

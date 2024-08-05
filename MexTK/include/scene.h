@@ -172,6 +172,35 @@ struct ScDataRst
     u8 unk[0x2278];                 // 0x?
 };
 
+struct ScDataIntro
+{
+    u8 x0;
+    u8 x1;
+    u8 x2;
+    u8 match_mode;       // 0x3
+    u8 x4;               //
+    u8 x5;               //
+    u8 x6;               //
+    u8 match_event_mode; // 0x7
+    u8 x8;               // 0x8
+    u8 nametag_idx;      // 0x9
+    u8 xa;
+    u8 left_num;
+    u8 right_num;
+    u8 p1_ckind;
+    u8 p2_ckind;
+    u8 p3_ckind;
+    u8 p4_ckind;
+    u8 p5_ckind;
+    u8 p6_ckind;
+    u8 p1_costume;
+    u8 p2_costume;
+    u8 p3_costume;
+    u8 p4_costume;
+    u8 p5_costume;
+    u8 p6_costume;
+};
+
 /*** Static Variables ***/
 static SceneInfo *stc_scene_info = 0x80479D30;
 

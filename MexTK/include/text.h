@@ -8,13 +8,20 @@
 
 /*** Structs ***/
 
-struct TextAllocInfo
+struct SISData
 {
-    u8 *next; // 0x0
-    u8 *prev; // 0x4,
-    int size; // 0x8 data remaining after this alloc?
+    u8 *image_data_arr;   // array of I4 image data for characters, stride is (32*32) / 2
+    u8 *kerning_data_arr; // array of kerning data for characters, stride is 0x2, kerning is at 0x0
+};
+
+struct TextCanvas
+{
+    TextCanvas *next; // 0x0
+    GOBJ *cam_gobj;   // 0x4,
+    u16 size;         // 0x8 data remaining after this alloc?
+    u16 canvas_idx;   // 0xa index of this canvas
     // data after this....
-    u8 xc;      // 0xC data ?
+    u8 p_link;  // 0xC
     u8 xd;      // 0xD
     u8 gx_link; // 0xE
     u8 gx_pri;  // 0xF
@@ -22,10 +29,12 @@ struct TextAllocInfo
 
 struct Text
 {
-    Vec3 trans;  // 0x0-0xC, affects entire viewport
-    Vec2 aspect; // 0xC-0x14 CHANGE THIS TO BOUND, affects entire viewport
-    float x14;
-    Vec3 x18;                                 // 0x18-0x24, acts as an offset for aspect? used @ 803a88e8 when x4e is enabled
+    Vec3 trans;                               // 0x0-0xC, affects entire viewport
+    Vec2 aspect;                              // 0xC-0x14 CHANGE THIS TO BOUND, affects entire viewport
+    float scissor_top;                        // 0x14, is_scissor must be enabled
+    float scissor_bot;                        // 0x18, is_scissor must be enabled
+    float scissor_left;                       // 0x1c, is_scissor must be enabled
+    float scissor_right;                      // 0x20, is_scissor must be enabled
     Vec2 viewport_scale;                      // 0x24-0x2C, scales entire viewport including text (was orignally scale)
     GXColor viewport_color;                   // 0x2c, if the alpha value is != 0, uses an additional GXSetTevAlphaIn call @ 803a87f8 if enabled. background is the size of the aspect
     GXColor color;                            // 0x30
@@ -34,20 +43,20 @@ struct Text
     float x40;                                // 0x40
     u16 x44;                                  // 0x44
     u16 x46;                                  // 0x46
-    u8 use_aspect;                            // 0x48
+    u8 use_aspect;                            // 0x48, will fit the text to the bounds defined in aspect
     u8 kerning;                               // 0x49
     u8 align;                                 // 0x4a
     u8 x4b;                                   //
     u8 is_depth_compare;                      // 0x4C, if set to 1, updates the depth buffer when rendering, uses GX_LEQUAL (803a85a0)
     u8 hidden;                                // 0x4D
-    u8 x4e;                                   // enables some alternate form of scaling? 803a88e8
+    u8 is_scissor;                            // 0x4E, crops the text within the bounding box 803a88e8
     u8 sis_id;                                // 0x4F, id of the premade text file to use
     void *x50;                                // some buffer alloc'd @ 803a5ba0
     GOBJ *gobj;                               // 0x54
     void (*render_callback)(GOBJ *text_gobj); // 0x58, read at 803a878c
     u8 *text_start;                           // 0x5C, start parsing text data at this ptr
     u8 *text_end;                             // 0x60, stops parsing text data at this ptr
-    TextAllocInfo *allocInfo;                 // 0x64
+    TextCanvas *allocInfo;                    // 0x64
     void *x68;                                // 0x68, some alloc used for dialogue?
     u16 x6c;                                  // 0x6c, flags of some kind
     u16 x6e;                                  // 0x6e
@@ -94,18 +103,18 @@ void Text_InitSisHeap();
 /*** Variables ***/
 // Text data
 static int *stc_textheap_size = (int *)(R13 + (-0x3d38));
-static TextAllocInfo **stc_textheap_start = (TextAllocInfo **)(R13 + (-0x3d34));
-static TextAllocInfo **stc_textheap_next = (TextAllocInfo **)(R13 + (-0x3d30));
-static TextAllocInfo **stc_textheap_first = (TextAllocInfo **)(R13 + (-0x3d2c));
+static TextCanvas **stc_textheap_start = (TextCanvas **)(R13 + (-0x3d34));
+static TextCanvas **stc_textheap_next = (TextCanvas **)(R13 + (-0x3d30));
+static TextCanvas **stc_textheap_first = (TextCanvas **)(R13 + (-0x3d2c));
 
 // Text object
-static TextAllocInfo **stc_textobj_first = (TextAllocInfo **)(R13 + (-0x3d28));
+static TextCanvas **stc_textobj_first = (TextCanvas **)(R13 + (-0x3d28));
 
 // Text canvas
-static TextAllocInfo **stc_textcanvas_first = (TextAllocInfo **)(R13 + (-0x3d24));
+static TextCanvas **stc_textcanvas_first = (TextCanvas **)(R13 + (-0x3d24));
 
 // Sis Library
 static HSD_Archive **stc_sis_archives = (HSD_Archive **)0x804d1110; // array of sis file archive pointers
-static void **stc_sis_data = (void **)0x804d1124;                   // array of loaded sis data
+static SISData **stc_sis_data = (void **)0x804d1124;                // array of currently loaded sis data, indexed by sis_id
 
 #endif

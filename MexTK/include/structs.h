@@ -62,6 +62,7 @@ typedef struct MOBJ MOBJ;
 typedef struct WOBJ WOBJ;
 typedef struct COBJ COBJ;
 typedef struct COBJDesc COBJDesc;
+typedef struct WOBJDesc WOBJDesc;
 typedef struct _HSD_ImageDesc _HSD_ImageDesc;
 typedef struct _HSD_Tlut _HSD_Tlut;
 typedef struct _HSD_TObjTev _HSD_TObjTev;
@@ -108,20 +109,22 @@ typedef struct MapGObjDesc MapGObjDesc;
 // Match
 typedef struct MatchInit MatchInit;
 typedef struct Match Match;
+typedef struct MatchLupe MatchLupe;
 typedef struct MatchOffscreen MatchOffscreen;
 typedef struct MatchHUD MatchHUD;
 typedef struct MatchHUDElement MatchHUDElement;
 typedef struct MatchHUDStock MatchHUDStock;
 typedef struct MatchCamera MatchCamera;
-typedef struct CameraBox CameraBox;
+typedef struct CmSubject CmSubject;
 typedef struct MatchStandings MatchStandings;
 typedef struct TeamStandings TeamStandings;
 typedef struct PlayerStandings PlayerStandings;
 typedef struct ExclamData ExclamData;
 
 // Text
+typedef struct SISData SISData;
 typedef struct Text Text;
-typedef struct TextAllocInfo TextAllocInfo;
+typedef struct TextCanvas TextCanvas;
 
 // DevText
 typedef struct DevText DevText;
@@ -161,6 +164,7 @@ typedef struct FighterData FighterData;
 typedef struct FighterBone FighterBone;
 typedef struct Playerblock Playerblock;
 typedef struct PlayerData PlayerData;
+typedef struct FtCreateDesc FtCreateDesc;
 typedef struct FtState FtState;
 typedef struct ftHit ftHit;
 typedef struct HitVictim HitVictim;
@@ -221,6 +225,7 @@ typedef struct FtCliffCatch FtCliffCatch;
 typedef struct FtDamage FtDamage;
 typedef struct FtLanding FtLanding;
 typedef struct FtDead FtDead;
+typedef struct FtEntry FtEntry;
 
 // CSS
 typedef struct CSSBackup CSSBackup;
@@ -278,6 +283,7 @@ typedef struct MinorScene MinorScene;
 typedef struct SceneInfo SceneInfo;
 typedef struct ScDataVS ScDataVS;
 typedef struct ScDataRst ScDataRst;
+typedef struct ScDataIntro ScDataIntro;
 
 // Preload
 typedef struct PreloadHeapLookup PreloadHeapLookup;

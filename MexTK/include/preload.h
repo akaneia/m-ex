@@ -114,7 +114,7 @@ struct PreloadEntry // scene changes wait for asyncronous disc reads to finish i
     int file_size;                 // 0xc
     PreloadAllocData *file_data;   // 0x10, this gets allocated @ 80017c00
     PreloadAllocData *header_data; // 0x14
-    int x18;
+    int x18;                       // 0x18
 };
 
 struct Preload
@@ -137,4 +137,6 @@ HSD_Archive *Preload_GetArchive_Init_ReturnSymbols(int unk, char *filename, void
 HSD_Archive *Preload_GetArchive(char *filename);                                                                                                        //
 HSD_Archive *Preload_GetArchiveByEntrynum(int entrynum);                                                                                                // will wait if the file isnt loaded yet
 int Preload_CheckFileStatus(int entrynum);                                                                                                              // 0 = not loading, 1 = loading, 2 = loaded
+void Preload_LoadFighter(CharacterKind c_kind, int costume);
+
 #endif

@@ -303,9 +303,7 @@ struct Stage
     float x50;                                                            // 0x50
     float x54;                                                            // 0x54
     float x58;                                                            // 0x58
-    float x5c;                                                            // 0x5c
-    float x60;                                                            // 0x60
-    float x64;                                                            // 0x64
+    Vec3 fixed_cam_pos;                                                   // 0x5c
     float x68;                                                            // 0x68
     float x6c;                                                            // 0x6c
     float x70;                                                            // 0x70

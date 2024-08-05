@@ -172,6 +172,7 @@ struct Particle // created at 80398c90. dont feel like labelling this, offsets a
 
 /*** Functions ***/
 
+void Effect_LoadFile(int eff_file_idx);
 Effect *Effect_SpawnSync(int gfx_id, ...);
 void Effect_SpawnAsync(GOBJ *fighter, Effect *ptr, int type, int gfx_id, ...);
 void Effect_SpawnAsyncLookup(GOBJ *gobj, int gfx_id, int bone, int unk, int destroy_on_leave, Vec3 *offset, Vec3 *range);

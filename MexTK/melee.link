@@ -23,8 +23,8 @@
 803230A4:blr2
 8021B2D8:bp
 803D706C:calloc
-80029020:CameraBox_Alloc
-800290D4:CameraBox_Destroy
+80029020:CameraSubject_Alloc
+800290D4:CameraSubject_Destroy
 80355F34:CARDCheckAsync
 803576AC:CARDClose
 80000000:CARDCreateAsync
@@ -47,7 +47,11 @@
 8034a0f0:SISetXY
 8034ddac:SISetSamplingRate
 8034a150:SIEnablePolling
-80030A50:Match_GetCObj
+803494dc:SIIsChanBusy
+8034a050:SIGetStatus
+8034a880:SIGetType
+8034a32c:SIGetResponse
+:Match_GetCObj
 8036a290:COBJ_Alloc
 8036A590:COBJ_LoadDesc
 80013B14:COBJ_LoadDescSetScissor
@@ -148,6 +152,7 @@
 8004b108:ECB_CollGround
 8004B21C:ECB_CollGround_PassLedge
 800436d8:ECB_StoreLedgeCheckDirection
+8006737c:Effect_LoadFile
 8005B880:Effect_DestroyAll
 8005BA40:Effect_PauseAll
 8005BAC4:Effect_ResumeAll
@@ -253,6 +258,8 @@
 80160980:Fighter_GetName
 80031724:Fighter_GetPlayerblock
 80034418:Fighter_Playerblock_UpdateDamage
+80036a08:Fighter_Playerblock_Init
+8003891c:Fighter_Playerblock_ResetStaleMoves
 80036538:Fighter_GetShieldColorIndex
 8003241C:Fighter_GetSlotType
 80036244:Fighter_GetStaleMoveTable
@@ -286,7 +293,6 @@
 80075650:Fighter_IndexFtPartsDObjs
 80068354:Fighter_InitData
 800867e8:Fighter_InitInputs
-8009CF84:Fighter_InitDynamics
 8007487C:Fighter_InitFtPartsModel
 80074148:Fighter_InitPObj
 80074170:Fighter_InitPObj2
@@ -390,7 +396,6 @@
 800de2a8:Fighter_ThrownRelease_UpdateUnk
 800de2cc:Fighter_ThrownRelease_NoUpdateUnk
 800ddde4:Fighter_ThrownRelease
-800db464:Fighter_UpdateVictimPosition
 800de7c0:Fighter_ThrownApplyKnockback
 8008e908:Fighter_ThrownApplyKnockbackNoTDI
 8007891c:Fighter_AddStaleIncCombo
@@ -414,7 +419,6 @@
 8006f190:Fighter_SetAnimRate
 800cae80:Fighter_CheckJumpInput
 800704f0:Fighter_SetEyeTexture
-8007f824:Fighter_SetEyeDamaged
 8026bb68:Fighter_GetECBCenter
 80070b88:Fighter_ApplyPartAnim
 80070fb4:Fighter_SetHoldKind
@@ -755,6 +759,18 @@
 802f36a4:Match_ShowHUDDevelop
 802f3698:Match_HideHUDDevelop
 802f36b0:Match_IsHUDHiddenDevelop
+800beb28:Match_InitFighters
+80028b9c:Match_InitCameraSubjects
+8000fcdc:Match_InitUnk1
+80041c78:Match_InitUnk2
+801c0378:Match_InitStage
+802251e8:Match_LoadStage
+8027870c:Match_LoadCommonItems
+80266fcc:Match_InitItems
+8022524c:Match_CreateStage
+8005b4b8:Match_InitEffects
+80036e20:Match_IndexAuxAnim
+800852b0:Match_ClearAuxAnim
 8037E708:MatToQuat
 8001B6F8:Memcard_CheckStatus
 8001BB48:Memcard_ReqSaveCreate
@@ -848,6 +864,7 @@
 80017040:Preload_GetArchive_Init_ReturnSymbols
 80017ebc:Preload_GetArchiveByEntrynum
 800187f4:Preload_CheckFileStatus
+80031cb0:Preload_LoadFighter
 80018254:Preload_Update
 800174bc:Preload_Invalidate
 80398614:Particle_InitFile

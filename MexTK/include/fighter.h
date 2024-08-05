@@ -587,6 +587,18 @@ enum FtStateNames
     ASID_THROWNCRAZYHAND,
     ASID_BARRELCANNONWAIT,
 };
+enum FtAuxillaryAnim
+{
+    FTAUXANIM_WIN1,
+    FTAUXANIM_WIN2,
+    FTAUXANIM_WIN3,
+    FTAUXANIM_3,
+    FTAUXANIM_4,
+    FTAUXANIM_INTROLEFT,
+    FTAUXANIM_INTRORIGHT,
+    FTAUXANIM_7,
+    FTAUXANIM_WAIT,
+};
 enum FtScriptCmd
 {
     FTSCRIPT_END,
@@ -776,8 +788,8 @@ typedef enum FtHurtKind
 struct Playerblock
 {
     int state;           // 0x00 = not present, 0x02 = HMN, 0x03 = CPU
-    int ckind;           // external ID
-    int pkind;           // (0x00 is HMN, 0x01 is CPU, 0x02 is Demo, 0x03 n/a)
+    int c_kind;          // external ID
+    int p_kind;          // (0x00 is HMN, 0x01 is CPU, 0x02 is Demo, 0x03 n/a)
     u8 isTransformed[2]; // 0xC, 1 indicates the fighter that is active
     Vec3 tagPos;         // 0x10
     Vec3 spawnPos;       // 0x1C
@@ -822,7 +834,7 @@ struct Playerblock
     u8 xad;               // 0xad
     u8 xae;               // 0xae
     u8 xaf;               // 0xaf
-    GOBJ *fp[2];          // 0xb0
+    GOBJ *gobj[2];        // 0xb0
     void *cb_subft_init;  // 0xb8, function executed on subfighter after creating them @ 80031c84
     struct                // 0xbc, stale moves
     {                     //
@@ -880,6 +892,15 @@ struct PlayerData
     float attack;       // 0x18
     float defense;      // 0x1C
     float scale;        // 0x20
+};
+
+struct FtCreateDesc //
+{
+    int ft_kind;  // 0x0
+    u8 ply;       // 0x4
+    int x8;       // 0x8
+    u8 xc_80 : 1; // 0xc
+    u8 xc_40 : 1; // 0xc
 };
 
 struct FighterBone
@@ -2136,7 +2157,7 @@ struct FighterData
     int x6E8;                                 // 0x6E8
     int x6EC;                                 // 0x6EC
     CollData coll_data;                       // 0x6F0 -> 0x88C
-    CameraBox *cameraBox;                     // 0x890
+    CmSubject *camera_subject;                // 0x890
     struct state
     {
         float frame;         // 0x894, current frame of the animation
@@ -3167,6 +3188,8 @@ GOBJ *Fighter_GetGObj(int ply);
 GOBJ *Fighter_GetSubcharGObj(int ply, int ms);
 Playerblock *Fighter_GetPlayerblock(int ply);
 void Fighter_Playerblock_UpdateDamage(int ply, int ms, int percent);
+void Fighter_Playerblock_Init(int ply);
+void Fighter_Playerblock_ResetStaleMoves(int ply);
 void Fighter_SetSlotType(int ply, int slot);
 int Fighter_GetControllerPort(int ply);
 int Fighter_GetTeam(int ply);
@@ -3275,7 +3298,6 @@ int Fighter_GetCostumeID(int ply);
 int Fighter_GetHandicap(int ply);
 float Fighter_GetBaseScale(FighterData *fighter);
 void Fighter_SetScale(GOBJ *fighter, float scale);
-void Fighter_InitDynamics(FighterData *fighter_data);
 void Fighter_ProcDynamics(GOBJ *fighter);
 void Fighter_CheckToEnableDynamics(FighterData *fp, u16 *dynamics_data);
 void Fighter_FreeAllDynamics(FighterData *fighter_data);
@@ -3344,7 +3366,6 @@ void Fighter_ThrownRelease_NoUpdateUnk(GOBJ *thrower, GOBJ *victim);
 void Fighter_ThrownRelease(GOBJ *thrower, GOBJ *victim, int is_update_unk);
 void Fighter_ThrownApplyKnockback(GOBJ *victim, GOBJ *hit_exception, int is_enter_dmgflytop);
 void Fighter_ThrownApplyKnockbackNoTDI(GOBJ *victim, float frame);
-void Fighter_UpdateVictimPosition(GOBJ *f);
 void Fighter_AddStaleIncCombo(GOBJ *thrower, GOBJ *victim, float dmg); // 8007891c
 void Fighter_SetAllHurtboxState(GOBJ *f, int state);                   // 8007b0c0
 void Fighter_SetHurtboxState(GOBJ *f, int bone_index, int state);      // 8007b128
@@ -3365,7 +3386,6 @@ int Fighter_CheckGrabBreakout(FighterData *fp, float mash_amt); // returns 1 if 
 void Fighter_SetAnimRate(GOBJ *f, float rate);
 int Fighter_CheckJumpInput(GOBJ *f);
 void Fighter_SetEyeTexture(GOBJ *f, int material_index, float frame);
-void Fighter_SetEyeDamaged(GOBJ *f);
 void Fighter_GetECBCenter(GOBJ *f, Vec3 *center_pos);
 void Fighter_ApplyPartAnim(GOBJ *f, int part_id, int anim_id);
 void Fighter_SetHoldKind(GOBJ *f, int r4, int r5);

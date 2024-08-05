@@ -52,11 +52,15 @@ enum DebugLevel
 
 typedef enum PauseKind
 {
-    PAUSEKIND_OFF,      // off
+    PAUSEKIND_NONE,     // not paused
     PAUSEKIND_SYS,      // debug pause (uses Z to frame advance)
     PAUSEKIND_GAME,     // match pause (i dont think any other scene uses this?) allows p_links 0(sys),2,16,18(matchcam),19(misccam),20(hudcam),21(coincam),22(screenflashcam),24(devtext)+ to run
     PAUSEKIND_3,        // unknown what uses this, it whitelists everything
     PAUSEKIND_MATCHEND, // is used when the match ends, it allows p_links 0(sys),2,12(effect2),13(mapmisc),14(misc),15(hud),16,17,18(matchcam),19,20,21,22,24+ to run
+    PAUSEKIND_5,        //
+    PAUSEKIND_6,        //
+    PAUSEKIND_7,        //
+    PAUSEKIND_8,        //
 } PauseKind;
 
 /*** Structs ***/
@@ -248,7 +252,7 @@ static GXPixelFmt *stc_hsd_pixelfmt = 0x804d76c8;
 /*** Functions ***/
 
 HSD_Archive *Archive_LoadFile(char *filename);
-void Archive_LoadInitReturnSymbol(char *filename, void *ptr, ...);                        // input each symbol name pointer sequentially and terminate with 0;
+HSD_Archive *Archive_LoadInitReturnSymbol(char *filename, void *ptr, ...);                // input each symbol name pointer sequentially and terminate with 0;
 void Archive_GetSections(HSD_Archive *archive, void *symbol_out, char *symbol_name, ...); // input each symbol name sequentially and terminate with 0;
 void *Archive_GetPublicAddress(HSD_Archive *archive, char *symbol);
 void Archive_Init(HSD_Archive *archive, void *file_data, int size);
@@ -294,7 +298,7 @@ void HSD_VICopyXFBASync(int unk);
 int HSD_VIGetDrawDoneWaitingFlag();
 int HSD_VIGetXFBDrawEnable();
 void HSD_VICopyEFB2XFBPtr(void *, int, int);
-void HSD_GXProject(COBJ *cobj, Vec3 *in, Vec3 *out, int unk);
+int HSD_GXProject(COBJ *cobj, Vec3 *in, Vec3 *out, int unk);
 void HSD_UpdateDiscAndCardStatus();
 void HSD_PadFlushQueue(int);
 void HSD_PadRenewStatus();

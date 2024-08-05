@@ -576,7 +576,7 @@ struct ItemData
     CollData coll_data;                                 // 0x378 -> 0x518
     GOBJ *fighter_gobj;                                 // 0x518
     int x51c;                                           // 0x51c
-    CameraBox *camerabox;                               // 0x520
+    CmSubject *camera_subject;                          // 0x520
     int x524;                                           // 0x524
     int x528;                                           // 0x528
     int *script_parse;                                  // 0x52c
