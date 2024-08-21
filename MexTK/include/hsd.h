@@ -65,10 +65,52 @@ typedef enum PauseKind
 
 /*** Structs ***/
 
+struct HSD_IDEntry
+{
+    struct HSD_IDEntry *next; // 0x00
+    u32 id;                   // 0x04
+    void *data;               // 0x08
+};
+
+struct HSD_IDTable
+{
+    struct HSD_IDEntry *table[101];
+};
+
+struct HSD_ClassInfoHead
+{
+    void (*info_init)();          // 0x00
+    u32 flags;                    // 0x04
+    char *library_name;           // 0x08
+    char *class_name;             // 0x0C
+    s16 obj_size;                 // 0x10
+    s16 info_size;                // 0x12
+    struct HSD_ClassInfo *parent; // 0x14
+    struct HSD_ClassInfo *next;   // 0x18
+    struct HSD_ClassInfo *child;  // 0x1C
+    u32 nb_exist;                 // 0x20
+    u32 nb_peak;                  // 0x24
+};
+
+struct HSD_ClassInfo
+{
+    struct HSD_ClassInfoHead head;
+    void *(*alloc)(struct HSD_ClassInfo *o);     // 0x28
+    void (*init)(struct _HSD_Class *o);          // 0x2C
+    void (*release)(struct _HSD_Class *o);       // 0x30
+    void (*destroy)(struct _HSD_Class *o);       // 0x34
+    void (*amnesia)(struct HSD_ClassInfo *info); // 0x38
+};
+
+typedef struct _HSD_ObjAllocLink
+{
+    struct _HSD_ObjAllocLink *next;
+} HSD_ObjAllocLink;
+
 struct HSD_ObjAllocData
 {
     u32 flags;                     // 0x00 - Technically 2 diff flags
-    void *freehead;                // 0x04
+    HSD_ObjAllocLink *freehead;    // 0x04
     u32 used;                      // 0x08
     u32 free;                      // 0x0C
     u32 peak;                      // 0x10
@@ -241,6 +283,7 @@ struct HSD_PollData // unofficial name, not sure what its actually called
 };
 
 /*** Static Variables ***/
+static HSD_IDTable *stc_hsd_default_table = 0x804C23EC;
 static HSD_VI *stc_HSD_VI = 0x8046b0f0;
 static HSD_Update *stc_hsd_update = 0x80479d58;
 static int **stc_rng_seed = 0x804D5F94;
@@ -257,6 +300,8 @@ void Archive_GetSections(HSD_Archive *archive, void *symbol_out, char *symbol_na
 void *Archive_GetPublicAddress(HSD_Archive *archive, char *symbol);
 void Archive_Init(HSD_Archive *archive, void *file_data, int size);
 void Archive_Free(HSD_Archive *archive);
+char *Archive_GetExtern(HSD_Archive *archive, int index);                   // gets name of the nth symbol in the dat file
+void Archive_LocateExtern(HSD_Archive *archive, char *symbols, void *addr); // relocates pointers to symbols
 HSD_Archive *File_GetPreloadedFile(char *filename);
 void Archive_LoadSync(char *filename, void *alloc, int *out_size);
 int HSD_Randi(int max);
@@ -316,4 +361,13 @@ u64 Pad_GetRapidHeld(int pad);
 u64 Pad_GetHeld(int pad);
 void Pad_Rumble(int pad, int unk, int strength, int duration); // make unk = 0
 void Pad_RumbleStopAll();
+void HSD_DumpHeapStat();                        // 80015df8
+void HSD_DumpClassStat(int r3, int r4, int r5); // 80382854
+void HSD_ObjDumpStat();                         // 803755f8
+HSD_ObjAllocData *HSD_IDGetAllocData();
+HSD_ObjAllocData *HSD_AObjGetAllocData();
+HSD_ObjAllocData *HSD_FObjGetAllocData();
+void HSD_IDInsertToTable(HSD_IDTable *id_table, u32 id, void *data);
+void HSD_IDRemoveByIDFromTable(HSD_IDTable *id_table, u32 id);
+void *HSD_IDGetDataFromTable(HSD_IDTable *id_table, u32 id, u8 *success);
 #endif

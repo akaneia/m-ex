@@ -96,6 +96,7 @@ typedef enum MapRenderKind
     MAP_RENDERKIND_FGTRANS, // foreground with transparency, rendered second
     MAP_RENDERKIND_BG,      // background, rendered first
     MAP_RENDERKIND_HIGHPRI, // rendered above everything (fighters effects stage etc)
+    MAP_RENDERKIND_NUM,
 } MapRenderKind;
 
 /*** Structs ***/
@@ -103,9 +104,9 @@ typedef enum MapRenderKind
 struct MapDesc
 {
     void (*onCreation)(GOBJ *map);
-    int (*onDeletion)(GOBJ *map);
+    int (*onUnk)(GOBJ *map);
     void (*onFrame)(GOBJ *map);
-    void (*onUnk)(GOBJ *map);
+    void (*onDeletion)(GOBJ *map);
     unsigned char is_lobj : 1; //  0x80
     unsigned char is_fog : 1;  //  0x40
     unsigned char is_cobj : 1; //  0x20

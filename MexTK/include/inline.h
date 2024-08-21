@@ -11,6 +11,7 @@
 #include "math.h"
 #include "useful.h"
 #include "scene.h"
+#include "preload.h"
 
 /*** Macros ***/
 #define GetElementsIn(arr) sizeof(arr) / sizeof(arr[0])
@@ -24,6 +25,46 @@
 //     else
 //         return x;
 // }
+
+static int Preload_GetEntryIndexFromEntrynum(int entry_num)
+{
+    Preload *preload = Preload_GetTable();
+    for (int i = 0; i < GetElementsIn(preload->entry); i++)
+    {
+        PreloadEntry *this_entry = &preload->entry[i];
+
+        // if this preload entry is in use and contains our file
+        if (this_entry->load_state > 0 &&
+            this_entry->file_entry_num == entry_num)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+static PreloadEntry *Preload_GetEntryFromEntrynum(int entry_num)
+{
+    int preload_idx = Preload_GetEntryIndexFromEntrynum(entry_num);
+
+    if (preload_idx != -1)
+        return &Preload_GetTable()->entry[preload_idx];
+
+    return 0;
+}
+
+void AOBJ_CheckEnded(AOBJ *a, int *is_done)
+{
+    if (a->flags != AOBJ_NO_ANIM)
+        *is_done = 0;
+}
+static inline int JOBJ_CheckAnimEnded(JOBJ *j)
+{
+    int is_anim_done = 1;
+    JOBJ_ForEachAnim(j, 6, 0xffff, AOBJ_CheckEnded, 2, &is_anim_done);
+
+    return is_anim_done;
+}
 
 static inline MinorKind Scene_GetCurrentMinorKind()
 {
@@ -67,20 +108,23 @@ static inline GOBJ *GOBJ_EZCreator(int entity_class, int p_link, int flags, int 
     if (obj_desc)
     {
         void *obj;
-        if (obj_kind == *objkind_jobj)
+        if (obj_kind == HSD_OBJKIND_JOBJ)
             obj = JOBJ_LoadJoint(obj_desc);
-        else if (obj_kind == *objkind_fog)
+        else if (obj_kind == HSD_OBJKIND_FOG)
             obj = Fog_LoadDesc(obj_desc);
-        else if (obj_kind == *objkind_lobj)
+        else if (obj_kind == HSD_OBJKIND_LOBJ)
             obj = LObj_LoadDesc(obj_desc);
-        else if (obj_kind == *objkind_cobj)
+        else if (obj_kind == HSD_OBJKIND_COBJ)
             obj = COBJ_LoadDescSetScissor(obj_desc);
 
         GObj_AddObject(g, obj_kind, obj);
 
-        if (obj_kind == *objkind_cobj)
+        if (obj_kind == HSD_OBJKIND_COBJ)
+        {
             GOBJ_InitCamera(g, gx_cb, gx_pri);
-        else if (obj_kind == *objkind_jobj)
+            g->cobj_links = gx_link;
+        }
+        else if (obj_kind == HSD_OBJKIND_JOBJ)
             GObj_AddGXLink(g, gx_cb, gx_link, gx_pri);
     }
     else if (gx_cb)
@@ -255,6 +299,22 @@ static HSD_Pad *PadGet(int playerIndex, int padType)
         return 0;
 
     return (&pads->pad[playerIndex]);
+}
+static int Pad_GetDownSys(int pad_idx)
+{
+    HSD_Pad *pads = (HSD_Pads *)0x804c1fac;
+
+    int down;
+
+    if (pad_idx < 4)
+        down = pads[pad_idx].down;
+    else
+    {
+        for (int i = 0; i < 4; i++)
+            down |= pads[i].down;
+    }
+
+    return down;
 }
 
 static float JOBJ_GetAnimFrame(JOBJ *joint)

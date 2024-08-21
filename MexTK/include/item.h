@@ -172,7 +172,9 @@ enum ItemID
     ITEM_VENUSAUR,
 
     // stage
-    ITEM_TARGET = 209,
+    ITEM_OLDGOOMBA = 208,
+    ITEM_TARGET,
+    ITEM_BIRDOEGG = 236,
 };
 
 // ItemStateChange Flags

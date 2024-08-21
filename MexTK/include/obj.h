@@ -166,6 +166,15 @@
         JOBJ_GetWorldPosition(this_jobj, 0, pos);             \
     }
 
+typedef enum HSD_ObjKind
+{
+    HSD_OBJKIND_NONE = 0,
+    HSD_OBJKIND_COBJ,
+    HSD_OBJKIND_LOBJ,
+    HSD_OBJKIND_JOBJ,
+    HSD_OBJKIND_FOG
+} HSD_ObjKind;
+
 /*** Structs ***/
 
 struct HSD_Obj
@@ -250,6 +259,14 @@ struct TOBJ
     u32 coord;                        // GXTexCoordID
     struct _HSD_TObjTev *tev;
 };
+
+typedef struct _HSD_AObjDesc
+{
+    u32 flags;                      // 0x00
+    f32 end_frame;                  // 0x04
+    struct _HSD_FObjDesc *fobjdesc; // 0x08
+    u32 obj_id;                     // 0x0C
+} HSD_AObjDesc;
 
 struct AOBJ
 {
@@ -425,13 +442,12 @@ struct DOBJ
 
 struct JOBJ
 {
-    int hsd_info;     // 0x0
-    int class_parent; // 0x4
-    JOBJ *sibling;    // 0x08
-    JOBJ *parent;     // 0x0C
-    JOBJ *child;      // 0x10
-    int flags;        // 0x14
-    DOBJ *dobj;       // 0x18
+    HSD_Obj object; // 0x0
+    JOBJ *sibling;  // 0x08 (this is actually called next)
+    JOBJ *parent;   // 0x0C (this is actually called prev)
+    JOBJ *child;    // 0x10
+    int flags;      // 0x14
+    DOBJ *dobj;     // 0x18
     //  union {        // 0x18
     //     void* ptcl;
     //     DOBJ* dobj;
@@ -671,12 +687,12 @@ struct HSD_Fog
 
 struct HSD_FogDesc
 {
-    u8 type;               // 0x00
-    HSD_FogDesc *fog_adj;  // 0x04
-    f32 start;             // 0x08
-    f32 end;               // 0x0C
-    GXColor color;         // 0x10
-    struct AOBJDesc *aobj; // 0x14
+    u8 type;                    // 0x00
+    HSD_FogDesc *fog_adj;       // 0x04
+    f32 start;                  // 0x08
+    f32 end;                    // 0x0C
+    GXColor color;              // 0x10
+    struct _HSD_AObjDesc *aobj; // 0x14
 };
 
 struct JOBJSet
@@ -696,7 +712,7 @@ struct HSD_SObjDesc
 };
 
 /*** Static Variables ***/
-static GOBJList **stc_gobj_list = R13 + (-0x3E74);   // array indexed by p_link, if in a match, reference the MATCHPLINK_ enums
+// static GOBJ ***stc_gobj_gx_lookup = R13 + (-0x3E7C);
 static GOBJ ***stc_gobj_lookup = R13 + (-0x3E74);    //
 static u8 *stc_gobj_proc_num = 0x804ce382;           // number of elements in the below array
 static GOBJProc ***stc_gobjproc_lookup = 0x804D7840; // array of gobj procs ptrs

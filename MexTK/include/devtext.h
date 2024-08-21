@@ -45,6 +45,7 @@ struct DevText
 
 DevText *DevelopText_CreateDataTable(int unk1, int x, int y, int width, int height, void *alloc);
 void DevelopText_Activate(void *unk, DevText *text);
+void DevelopText_Deactivate(void *unk);
 void DevelopText_AddString(DevText *text, ...);
 void DevelopText_EraseAllText(DevText *text);
 void DevelopText_ResetCursorXY(DevText *text, int x, int y);

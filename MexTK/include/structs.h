@@ -46,7 +46,6 @@ typedef struct AXLive AXLive;
 typedef struct HSD_Obj HSD_Obj;
 typedef struct GOBJ GOBJ;
 typedef struct GOBJProc GOBJProc;
-typedef struct GOBJList GOBJList;
 typedef struct GXList GXList;
 typedef struct JOBJ JOBJ;
 typedef struct JOBJDesc JOBJDesc;
@@ -273,6 +272,10 @@ typedef struct HSD_Pad HSD_Pad;
 typedef struct HSD_Pads HSD_Pads;
 typedef struct HSD_Update HSD_Update;
 typedef struct HSD_VI HSD_VI;
+typedef struct HSD_ClassInfoHead HSD_ClassInfoHead;
+typedef struct HSD_ClassInfo HSD_ClassInfo;
+typedef struct HSD_IDEntry HSD_IDEntry;
+typedef struct HSD_IDTable HSD_IDTable;
 typedef struct HSD_ObjAllocData HSD_ObjAllocData;
 typedef struct HSD_PollData HSD_PollData;
 

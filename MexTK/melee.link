@@ -130,6 +130,7 @@
 80225754:Develop_UpdateMatchHotkeys
 80302A3C:DevelopText_ResetCursorXY
 80302810:DevelopText_Activate
+803020fc:DevelopText_Deactivate
 80302D4C:DevelopText_AddString
 80302834:DevelopText_CreateDataTable
 80302BB0:DevelopText_EraseAllText
@@ -446,6 +447,8 @@
 80016af0:Archive_GetSections
 80016a54:Archive_Init
 80016efc:Archive_Free
+803803fc:Archive_GetExtern
+80380434:Archive_LocateExtern
 80380358:Archive_GetPublicAddress
 8001819c:File_GetPreloadedFile
 8001668c:Archive_LoadSync
@@ -599,6 +602,16 @@
 80375e60:HSD_VIGetDrawDoneWaitingFlag
 80375e70:HSD_VIGetXFBDrawEnable
 80375f74:HSD_VICopyEFB2XFBPtr
+80015df8:HSD_DumpHeapStat
+80382854:HSD_DumpClassStat
+803755f8:HSD_ObjDumpStat
+8037cd80:HSD_IDGetAllocData
+80363ff8:HSD_AObjGetAllocData
+8036a938:HSD_FObjGetAllocData
+8037cd80:HSD_IDGetAllocData
+8037CDEC:HSD_IDInsertToTable
+8037CEE8:HSD_IDRemoveByIDFromTable
+8037CF98:HSD_IDGetDataFromTable
 8026b40c:Item_IndexStageItem
 80094818:Item_Catch
 80266F3C:Item_CheckIfEnabled
@@ -771,6 +784,7 @@
 8005b4b8:Match_InitEffects
 80036e20:Match_IndexAuxAnim
 800852b0:Match_ClearAuxAnim
+8031c99c:Match_GetVIWaitFilename
 8037E708:MatToQuat
 8001B6F8:Memcard_CheckStatus
 8001BB48:Memcard_ReqSaveCreate
@@ -864,12 +878,16 @@
 80017040:Preload_GetArchive_Init_ReturnSymbols
 80017ebc:Preload_GetArchiveByEntrynum
 800187f4:Preload_CheckFileStatus
+80018a2c:Preload_CheckIfFilesAreLoading
+80018c2c:Preload_Wait
+80017700:Preload_FreeUnneededInitializedArchivesInHeap
 80031cb0:Preload_LoadFighter
 80018254:Preload_Update
 800174bc:Preload_Invalidate
 80398614:Particle_InitFile
 8039D048:psDeletePntJObjwithParticle
 8039D3AC:psKillGenerator
+8039d4dc:psKillGeneratorEZ
 803984f4:psInitDataBanks
 803421D0:PSMTXCopy
 803421a4:PSMTXIdentity
@@ -1024,6 +1042,7 @@
 8000fd48:Dynamics_InitBones
 80011710:Dynamics_InitParams
 8001044c:Dynamics_UpdateBoneset
+8000fd18:Dynamics_FreeBones
 803F0A48:stc_css_data
 804D6CB0:stc_css_minorscene
 804D6CF8:stc_css_regtagnum

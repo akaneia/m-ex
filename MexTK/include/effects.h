@@ -193,6 +193,7 @@ GeneratorAppSRT *psAddGeneratorAppSRT(ptclGen *ptcl_gen, int unk);
 int psRemoveParticleAppSRT(Particle *ptcl);
 void psDeletePntJObjwithParticle(Particle *ptcl);
 ptclGen *psKillGenerator(ptclGen *gen, ptclGen *unk);
+ptclGen *psKillGeneratorEZ(ptclGen *gen);
 void psInitDataBanks(int bank_no, void *ptcl, void *texg, int r6, int r7);
 
 static u16 *stc_ptclnum = R13 + (-0x3DBE);      // number of pctls alive

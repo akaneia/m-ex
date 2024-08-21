@@ -289,6 +289,6 @@ static CollGroup **stc_collgroup = R13 + (-0x51E0);
 static CollLine **stc_collline = R13 + (-0x51E4);
 static CollVert **stc_collvert = R13 + (-0x51E8);
 static CollDataStage **stc_colldata = R13 + (-0x51EC);
-static CollLineConnection **stc_first_line_connect = 0x80458e88;
+static CollLineConnection **stc_first_line_connect = 0x80458e88; // array of 9
 
 #endif

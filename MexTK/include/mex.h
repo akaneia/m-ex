@@ -117,6 +117,12 @@ typedef struct MEXDebugSymbol
     char *symbol;     // 0x8
 } MEXDebugSymbol;
 
+typedef struct MEXFunctionLookup
+{
+    int num;
+    void *function[30];
+} MEXFunctionLookup;
+
 typedef struct MEXFunction
 {
     u8 *code;                                     // 0x0
@@ -189,7 +195,7 @@ typedef struct MexStageSound
 
 typedef struct MexStageTable
 {
-    GrExtLookup *grkind_ext_desc;
+    GrExtLookup *grkind_ext_desc; // indexed by GrKindExt (external ID)
     MexStageSound *sound_table;
     void *collision_table;
     void *item_table;
@@ -244,10 +250,12 @@ typedef struct MexData
     void *kirby;
     void *kirby_function;
     MexStageTable *stage;
-    void *stage_function;
+    GrDesc **stage_desc; // indexed by GrKind (internal ID)
     void *scene;
     void *misc;
 } MexData;
+
+static MEXFunctionLookup **stc_mexfunction_lookup = 0x804dfad8;
 
 /*** Functions ***/
 HSD_Archive *MEX_LoadRelArchive(char *file, void *functions, char *symbol);

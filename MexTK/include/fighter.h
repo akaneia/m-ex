@@ -898,6 +898,8 @@ struct FtCreateDesc //
 {
     int ft_kind;  // 0x0
     u8 ply;       // 0x4
+    u8 x5;        // 0x5
+    u8 ms;        // 0x6
     int x8;       // 0x8
     u8 xc_80 : 1; // 0xc
     u8 xc_40 : 1; // 0xc
@@ -2880,7 +2882,7 @@ struct FtDatNameLookup
     char *filename;
     char *symbol;
 };
-struct FtKindDesc
+struct FtKindDesc // this is really CKindDesc...?
 {
     s8 ft_main;           // main fighter ft_kind
     s8 ft_sub;            // sub fighter ft_kind, -1 if none

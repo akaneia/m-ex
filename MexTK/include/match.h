@@ -352,7 +352,7 @@ struct MatchCamera
     Vec3 x20;                              // 0x20
     Vec3 x2c;                              // 0x2c
     Vec3 x38;                              // 0x38
-    float x44;                             // 0x44
+    float normalcam_fov;                   // 0x44
     float x48;                             // 0x48
     Vec3 x4c;                              // 0x4c
     Vec3 x58;                              // 0x58
@@ -637,60 +637,58 @@ struct ExclamData
 
 struct PlayerStandings
 {
-    u8 pkind;          // 0x58
-    u8 ckind;          // 0x59
-    u8 ftkind;         // 0x5a
-    u8 costume : 6;    // 0x5b costume id
-    u8 is_rumble : 1;  // 0x5b rumble flag
-    u8 is_stamina : 1; // 0x5b stamina flag
-    u8 nametag;        // 0x5c
-    u8 placement;      // 0x5d, (0 = 1st, 1 = 2nd, etc)
-    u8 x5e;            // 0x5e, placement again?
-    u8 team;           // 0x5f, index of this players team
-    u8 stock_num;      // 0x60
-    u8 hp;             // 0x61
-    u8 sd_num;         // 0x62
-    u8 fall_num;       // 0x63
-    u16 dmg_num;       // 0x64
-    u16 xe;            // 0x66
-    int x68;           // 0x68
-    int x6c;           // 0x6c
-    int x70;           // 0x70
-    int coins;         // 0x74
-    int x78;           // 0x78
-    int x7c;           // 0x7c
-    int frames_alive;  // 0x80
-    int death_time;    // 0x84, Time Player Lost All Stocks (Seconds), is 0x1 if player was the last survivor.
-    int x88;           // 0x88
-    int x8c;           // 0x8c
-    int hits_landed;   // 0x90
-    int attack_num;    // 0x94
-    int x98;           // 0x98
-    int x9c;           // 0x9c
-    int xa0;           // 0xa0
-    int xa4;           // 0xa4
-    int xa8;           // 0xa8
-    int xac;           // 0xac
-    int xb0;           // 0xb0
-    int xb4;           // 0xb4
-    int xb8;           // 0xb8
-    int xbc;           // 0xbc
-    int xc0;           // 0xc0
-    int xc4;           // 0xc4
-    int xc8;           // 0xc8
-    int xcc;           // 0xcc
-    int xd0;           // 0xd0
-    int xd4;           // 0xd4
-    int xd8;           // 0xd8
-    int xdc;           // 0xdc
-    int xe0;           // 0xe0
-    int ledgegrab_num; // 0xe4
-    int xe8;           // 0xe8
-    int xec;           // 0xec
-    int xf0;           // 0xf0
-    int xf4;           // 0xf4
-    int xf8;           // 0xf8
-    int xfc;           // 0xfc
+    u8 pkind;                 // 0x58
+    u8 ckind;                 // 0x59
+    u8 ftkind;                // 0x5a
+    u8 costume : 6;           // 0x5b costume id
+    u8 is_rumble : 1;         // 0x5b rumble flag
+    u8 is_stamina : 1;        // 0x5b stamina flag
+    u8 nametag;               // 0x5c
+    u8 placement;             // 0x5d, (0 = 1st, 1 = 2nd, etc)
+    u8 x5e;                   // 0x5e, placement again?
+    u8 team;                  // 0x5f, index of this players team
+    u8 stock_num;             // 0x60
+    u8 hp;                    // 0x61
+    u8 sd_num;                // 0x62
+    u8 fall_num;              // 0x63
+    u16 dmg_num;              // 0x64
+    u16 joystick_inputs;      // 0x66, this is weird, its multiplied by 0.9 and then 0.031. results in the number of times you inputted 28 joystick directions
+    u16 kos[6];               // 0x68, indexed per ply
+    int coins;                // 0x74
+    int x78;                  // 0x78
+    int x7c;                  // 0x7c
+    int frames_alive;         // 0x80
+    int death_time;           // 0x84, Time Player Lost All Stocks (Seconds), is 0x1 if player was the last survivor.
+    int x88;                  // 0x88
+    int x8c;                  // 0x8c
+    int hits_landed;          // 0x90, total
+    int attack_num;           // 0x94, total
+    int dmg_dealt;            // 0x98, total
+    int dmg_taken;            // 0x9c, total
+    int xa0;                  // 0xa0
+    int max_dmg_taken;        // 0xa4, per stock
+    int dist_traveled_ground; // 0xa8, only updated when player is actionable
+    int dist_traveled_air;    // 0xac, only updated when player is actionable
+    int dist_fallen;          // 0xb0
+    int dist_hit;             // 0xb4
+    int coins_collected;      // 0xb8
+    int xbc;                  // 0xbc
+    int xc0;                  // 0xc0
+    int seconds_grounded;     // 0xc4
+    int seconds_airborne;     // 0xc8
+    int xcc;                  // 0xcc
+    int xd0;                  // 0xd0
+    int xd4;                  // 0xd4
+    int xd8;                  // 0xd8
+    int xdc;                  // 0xdc
+    int xe0;                  // 0xe0
+    int ledgegrab_num;        // 0xe4
+    int xe8;                  // 0xe8
+    int xec;                  // 0xec
+    int xf0;                  // 0xf0
+    int xf4;                  // 0xf4
+    int xf8;                  // 0xf8
+    int xfc;                  // 0xfc
 };
 
 struct TeamStandings
@@ -2816,6 +2814,7 @@ struct Match // static match struct @ 8046b6a0
 
 static Match *stc_match = 0x8046b6a0;
 static MatchCamera *stc_matchcam = 0x80452c68;
+static COBJ **stc_matchcam_cobj = R13 + -0x523c;
 static MatchHUD *stc_matchhud = 0x804a0fd8;
 static MatchOffscreen *stc_match_offscreen = 0x804a1de0;
 static ExclamData *stc_exclam_data = 0x803f9628; // 8 of these
@@ -2886,11 +2885,12 @@ void Match_InitCameraSubjects(int unk);
 void Match_InitFighters(); // allocs hsd obj for fighterdata
 void Match_InitUnk1();
 void Match_InitUnk2();
-void Match_InitStage(int unk);
+void Match_InitStage();
 void Match_LoadStage(GrExternal gr_kind, int unk);
 void Match_LoadCommonItems();
 void Match_InitItems(); // allocs hsd obj for itemdata
 void Match_CreateStage();
 void Match_InitEffects();
 void Match_IndexAuxAnim(CharacterKind c_kind, HSD_Archive *archive, int anim_kind);
+char *Match_GetVIWaitFilename(CharacterKind c_kind);
 #endif
