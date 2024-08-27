@@ -52,6 +52,12 @@ typedef enum GrInternal
     GRKIND_ADVTE,
     GRKIND_BATTLE,
     GRKIND_FD,
+    // target test stages in between this
+    GRKIND_ALLSTARHEAL = 66,
+    GRKIND_HOMERUN,
+    GRKIND_TROPHY1,
+    GRKIND_TROPHY2,
+    GRKIND_TROPHY3,
 } GrInternal;
 typedef enum GrExternal
 {
@@ -139,9 +145,7 @@ struct MapData
     ColorOverlay color;                // 0x40
     int xc0;                           // 0xc0
     // pretty sure map_var actually starts here? rofl
-    u16 xc4; // 0xc4
-    u8 xc6;  // 0xc6
-    u8 xc7;  // 0xc7
+    int xc4; // 0xc4
     int xc8; // 0xc8
     int xcc; // 0xcc
     int xd0; // 0xd0

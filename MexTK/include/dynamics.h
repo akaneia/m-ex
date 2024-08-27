@@ -68,9 +68,36 @@ struct DynamicHit
     int bone_index; // 0x1694, 0x24
 };
 
+struct DynamicForceDesc
+{
+    u8 x0;        // 0x0
+    u8 x1;        // 0x1
+    float x4;     // 0x4
+    Vec3 pos;     // 0x8
+    float x14;    // 0x14
+    float x18;    // 0x18
+    float x1c;    // 0x1c
+    float radius; // 0x20
+    float decay;  // 0x24
+    int lifetime; // 0x28, is decremented
+    float x2c;    // 0x2c
+};
+
+struct DynamicForce
+{
+    DynamicForceDesc desc; // 0x0
+    int timer;             // 0x30, counts up
+    DynamicForce *next;    // 0x34
+};
+
+static DynamicForce **stc_dynamic_force = 0x804d63b0;            // -0x52f0
+static DynamicForce **stc_dynamic_force_next_alloc = 0x804d63ac; // -0x52f4
+
 void Dynamics_InitBones(JOBJ *joint, DynamicBoneset *boneset, int bone_num);
 void Dynamics_InitParams(void *dyn_desc_params, DynamicBoneset *boneset);
 void Dynamics_UpdateBoneset(DynamicBoneset *boneset, float f1, DynamicHit *dynamics_hit, int dynamics_hit_num, int r6, int r7, int r8, int r9); // 8001044c
 void Dynamics_FreeBones(DynamicBoneset *boneset);
+void Dynamics_InitForce();
+DynamicForce *Dynamics_CreateForce(DynamicForceDesc *);
 void Dynamics_DecayWind();
 #endif

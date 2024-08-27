@@ -774,7 +774,6 @@
 802f36b0:Match_IsHUDHiddenDevelop
 800beb28:Match_InitFighters
 80028b9c:Match_InitCameraSubjects
-8000fcdc:Match_InitUnk1
 80041c78:Match_InitUnk2
 801c0378:Match_InitStage
 802251e8:Match_LoadStage
@@ -1016,7 +1015,8 @@
 803A746C:Text_SetPosition
 803A7548:Text_SetScale
 803A6368:Text_SetSisText
-803a5da0:Text_DestroySisCanvas
+803a5da0:Text_DestroyAllSisCanvas
+803a594c:Text_DestroyCanvas
 803a6048:Text_InitSisHeap
 803A70A0:Text_SetText
 80328F50:TRK_FlushCache
@@ -1043,6 +1043,7 @@
 80011710:Dynamics_InitParams
 8001044c:Dynamics_UpdateBoneset
 8000fd18:Dynamics_FreeBones
+8000fcdc:Dynamics_InitForce
 803F0A48:stc_css_data
 804D6CB0:stc_css_minorscene
 804D6CF8:stc_css_regtagnum

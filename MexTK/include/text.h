@@ -19,7 +19,7 @@ struct TextCanvas
     TextCanvas *next; // 0x0
     GOBJ *cam_gobj;   // 0x4,
     u16 size;         // 0x8 data remaining after this alloc?
-    u16 canvas_idx;   // 0xa index of this canvas
+    u16 sis_idx;      // 0xa sis group this canvas belongs to
     // data after this....
     u8 p_link;  // 0xC
     u8 xd;      // 0xD
@@ -97,7 +97,8 @@ int Text_ConvertToMenuText(char *out, char *in);
 void Text_GX(GOBJ *gobj, int pass);
 void Text_LoadSdFile(int index, char *filename, char *symbol);
 void Text_SetSisText(Text *text, int text_index);
-void Text_DestroySisCanvas(int canvas_id);
+void Text_DestroyAllSisCanvas(int sis_id);
+void Text_DestroyCanvas(TextCanvas *);
 void Text_InitSisHeap();
 
 /*** Variables ***/
@@ -108,7 +109,7 @@ static TextCanvas **stc_textheap_next = (TextCanvas **)(R13 + (-0x3d30));
 static TextCanvas **stc_textheap_first = (TextCanvas **)(R13 + (-0x3d2c));
 
 // Text object
-static TextCanvas **stc_textobj_first = (TextCanvas **)(R13 + (-0x3d28));
+static Text **stc_text_first = (TextCanvas **)(R13 + (-0x3d28));
 
 // Text canvas
 static TextCanvas **stc_textcanvas_first = (TextCanvas **)(R13 + (-0x3d24));

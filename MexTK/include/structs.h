@@ -203,6 +203,8 @@ typedef struct DynamicHit DynamicHit;
 typedef struct DynamicsDesc DynamicsDesc;
 typedef struct DynamicsHitDesc DynamicsHitDesc;
 typedef struct DynamicsBehave DynamicsBehave;
+typedef struct DynamicForceDesc DynamicForceDesc;
+typedef struct DynamicForce DynamicForce;
 typedef struct IKParam IKParam;
 typedef struct FtVis FtVis;
 typedef struct ftDynamics ftDynamics;

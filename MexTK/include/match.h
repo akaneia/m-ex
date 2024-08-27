@@ -346,8 +346,8 @@ struct MatchCamera
     GOBJ *gobj;                            // 0x0
     int cam_kind;                          // 0x4
     GXColor erase_color;                   // 0x8
-    float zoom;                            // 0xc
-    float dist_to_bg;                      // 0x10
+    float near;                            // 0xc
+    float far;                             // 0x10
     Vec3 x14;                              // 0x14
     Vec3 x20;                              // 0x20
     Vec3 x2c;                              // 0x2c
