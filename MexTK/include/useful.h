@@ -619,7 +619,7 @@ void HSD_SetHeapID(int heap);
 // unsigned long int strtoul(const char *str, char **endptr, int base);
 // int tolower(char in);
 
-void Wind_StageCreate(Vec3 *pos, int duration, float radius, float lifetime, float angle);
+void Wind_StageCreate(Vec3 *pos, int duration, float radius, float lifetime, float angle, float left, float right, float top, float bottom);
 void Wind_FighterCreate(Vec3 *pos, int duration, float radius, float lifetime, float angle);
 
 int Pause_CheckStatus(int type);

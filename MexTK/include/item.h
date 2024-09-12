@@ -590,17 +590,20 @@ struct ItemData
     int x544;                                           // 0x544
     ColorOverlay color;                                 // 0x548
     int x5c8;                                           // 0x5c8
-    int x5cc;                                           // 0x5cc
-    int x5d0;                                           // 0x5d0
+    float current_frame;                                // 0x5cc
+    float framerate;                                    // 0x5d0
     itHit hitbox[4];                                    // 0x5d4
     int hit_exception_id;                               // 0xac4, cannot hit items with a matching index
     int hurt_num;                                       // 0xac8
     ItHurt it_hurt[2];                                  // 0xacc
-    int xb54;                                           // 0xb54
-    int xb58;                                           // 0xb58
-    int xb5c;                                           // 0xb5c
-    int xb60;                                           // 0xb60
-    int xb64;                                           // 0xb64
+    struct 
+    {
+        int xb54;                                       // 0xb54
+        int xb58;                                       // 0xb58
+        float x1;                                       // 0xb5c
+        float x2;                                       // 0xb60
+        float y;                                        // 0xb64
+    } footstool;
     int dynamics_xb68;                                  // 0xb68, dynamic_hit_num?
     int xb6c;                                           // 0xb6c, dynamic hit
     int xb70;                                           // 0xb70
@@ -795,7 +798,8 @@ struct ItemData
     u16 xdca5 : 1;                                      // 0xdca 0x08
     u16 can_hold : 1;                                   // 0xdca 0x04
     u16 xdca7 : 1;                                      // 0xdca 0x02
-    u16 rotate_axis : 3;                                // 0xdcb, 0x18
+    u16 rotate_axis : 2;                                // 0xdca, 0x180
+    u16 rotate_axis_enable : 1;                         // 0xdcb, 0x40
     u16 xdcb_x20 : 1;                                   // 0xdcb, 0x20
     u16 xdcb_x10 : 1;                                   // 0xdcb, 0x10
     u16 can_nudge : 1;                                  // 0xdcb, 0x08
@@ -836,7 +840,7 @@ struct ItemData
     unsigned char xdd0_x40 : 1;                         // 0xdd0, 0x40
     unsigned char xdd0_x20 : 1;                         // 0xdd0, 0x20
     unsigned char xdd0_x10 : 1;                         // 0xdd0, 0x10
-    unsigned char xdd0_x08 : 1;                         // 0xdd0, 0x08
+    unsigned char is_grabbable : 1;                     // 0xdd0, 0x08
     unsigned char xdd0_x04 : 1;                         // 0xdd0, 0x04
     unsigned char xdd0_x02 : 1;                         // 0xdd0, 0x02
     unsigned char xdd0_x01 : 1;                         // 0xdd0, 0x01
