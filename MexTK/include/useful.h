@@ -24,7 +24,7 @@ char *strrchr(const char *, int);
 #define BitCheck(num, bit) !!((num) & (1 << (bit))) // returns 0 or 1
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
 #define assert(msg) __assert(__FILENAME__, __LINE__, msg)
-#define divide_roundup(dividend, divisor) ((dividend + (divisor / 2)) / divisor)
+#define divide_roundup(dividend, divisor) (ceil((float)dividend / (float)divisor))
 #define MTXDegToRad(a) ((a) * 0.01745329252f)
 #define MTXRadToDeg(a) ((a) * 57.29577951f)
 #define SYS_BASE_CACHED (0x80000000)
@@ -559,7 +559,7 @@ int DVDClose(DVDFileInfo *dvdFileInfo);
 int DVDWaitForRead();
 int File_Read(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index, void *cb, int cb_arg2); // just use 0x21 for flags if dram, 0x23 if aram, 1 for unk_index
 int File_ReadSync(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index);                    // just use 0x21 for flags if dram, 0x23 if aram, 1 for unk_index
-int File_GetSize(s32 entrynum);
+int File_GetSize(char *file_name);
 // void memcpy(void *dest, void *source, int size);
 // void memset(void *dest, int fill, int size);
 s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat *stat);

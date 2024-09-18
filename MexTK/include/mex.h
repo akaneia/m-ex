@@ -241,11 +241,23 @@ typedef struct MexData
             } *costume_symbol_table;       // array of these per costume
         } *costume_file;                   // 0x14, array of these per character
         // theres more im just lazy
+        void *ftdemo_filenames;
+        void *anim_filenames;
+        void *anim_num;
+        u8 *effect_index;
     } *fighter; // indexed by ft_kind
     void *fighter_function;
     void *ssm;
     MexMusicTable *music;
-    void *effect;
+    struct
+    {
+        struct
+        {
+            char *dat_name;
+            char *symbol_name;
+            void *particle_data_runtime; // this pointer is shifed back by (effect_idx_start * 4)!
+        } *files;
+    } *effect;
     void *item;
     void *kirby;
     void *kirby_function;
@@ -268,6 +280,7 @@ int MEX_GetSSMID(SSMKind ssm_kind, int kind); // ssm_kind, 0 = fighter, 1 = stag
 void MEX_RelocRelArchive(void *xFunction);
 int SFX_PlayStageSFX(int sfx_id); // use index relative to the ssm (start at 0)
 void *calloc(int size);
+void bp();
 MEXPlaylist *MEX_GetPlaylist();
 // void KirbyStateChange(GOBJ *fighter, int state, float startFrame, float animSpeed, float animBlend);
 void KirbyStateChange(float anim_start_frame, float anim_rate, float anim_blend, GOBJ *f, int state_id, int flags, GOBJ *alt_state_source);

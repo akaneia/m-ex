@@ -79,22 +79,22 @@ struct HSD_IDTable
 
 struct HSD_ClassInfoHead
 {
-    void (*info_init)();          // 0x00
-    u32 flags;                    // 0x04
-    char *library_name;           // 0x08
-    char *class_name;             // 0x0C
-    s16 obj_size;                 // 0x10
-    s16 info_size;                // 0x12
-    struct HSD_ClassInfo *parent; // 0x14
-    struct HSD_ClassInfo *next;   // 0x18
-    struct HSD_ClassInfo *child;  // 0x1C
-    u32 nb_exist;                 // 0x20
-    u32 nb_peak;                  // 0x24
+    void (*info_init)();   // 0x00
+    u32 flags;             // 0x04, 0x01 = is initialized
+    char *library_name;    // 0x08
+    char *class_name;      // 0x0C
+    s16 obj_size;          // 0x10
+    s16 info_size;         // 0x12
+    HSD_ClassInfo *parent; // 0x14
+    HSD_ClassInfo *next;   // 0x18
+    HSD_ClassInfo *child;  // 0x1C
+    u32 nb_exist;          // 0x20
+    u32 nb_peak;           // 0x24
 };
 
 struct HSD_ClassInfo
 {
-    struct HSD_ClassInfoHead head;
+    HSD_ClassInfoHead head;
     void *(*alloc)(struct HSD_ClassInfo *o);     // 0x28
     void (*init)(struct _HSD_Class *o);          // 0x2C
     void (*release)(struct _HSD_Class *o);       // 0x30
@@ -304,6 +304,7 @@ char *Archive_GetExtern(HSD_Archive *archive, int index);                   // g
 void Archive_LocateExtern(HSD_Archive *archive, char *symbols, void *addr); // relocates pointers to symbols
 HSD_Archive *File_GetPreloadedFile(char *filename);
 void Archive_LoadSync(char *filename, void *alloc, int *out_size);
+char *Archive_AppendExtension(char *filename);
 int HSD_Randi(int max);
 float HSD_Randf();
 void *HSD_MemAlloc(int size);

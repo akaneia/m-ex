@@ -43,10 +43,6 @@
 #define JOBJ_31 (1 << 31)                  // 0x80000000
 
 // MObj Flags
-#define JOBJ_ANIM 0x1
-#define MOBJ_ANIM 0x4
-#define TOBJ_ANIM 0x10
-#define ALL_ANIM 0x7FF
 #define HSD_A_M_AMBIENT_R 1
 #define HSD_A_M_AMBIENT_G 2
 #define HSD_A_M_AMBIENT_B 3
@@ -134,6 +130,12 @@
 #define PROJ_FRUSTRUM 2
 #define PROJ_ORTHO 3
 
+// Anim flags
+#define JOBJ_ANIM 0x1
+#define MOBJ_ANIM 0x80
+#define TOBJ_ANIM 0x400
+#define ALL_ANIM 0x7FF
+
 // Macro
 #define JOBJ_PauseOnFrame(jobj, child_index, flags, frame)                    \
     {                                                                         \
@@ -179,9 +181,9 @@ typedef enum HSD_ObjKind
 
 struct HSD_Obj
 {
-    void *parent;
-    s16 ref_count;
-    s16 ref_count_individual;
+    HSD_ClassInfo *parent;    // 0x0
+    s16 ref_count;            // 0x4
+    s16 ref_count_individual; // 0x6
 };
 
 struct GOBJ
@@ -319,11 +321,19 @@ struct JOBJDesc
     struct _HSD_RObjDesc *robjdesc; // 0x3C
 };
 
+struct MatAnimDesc
+{
+    MatAnimDesc *next;
+    HSD_AObjDesc *material_aobj;
+    void *texture_anim;
+    int is_render_anim;
+};
+
 struct MatAnimJointDesc
 {
     MatAnimJointDesc *child;
     MatAnimJointDesc *next;
-    void *matanim;
+    MatAnimDesc *matanim;
 };
 
 struct AnimJointDesc
@@ -453,15 +463,15 @@ struct JOBJ
     //     DOBJ* dobj;
     //     HSD_Spline* spline;
     // } u;
-    Vec4 rot;   // 0x1C 0x20 0x24 0x28
-    Vec3 scale; // 0x2C
-    Vec3 trans; // 0x38
-    Mtx rotMtx; // 0x44
-    Vec3 *VEC;  // 0x6C
-    Mtx *MTX;   // 0x78
-    AOBJ *aobj; // 0x7C
-    int *RObj;
-    JOBJDesc *desc;
+    Vec4 rot;       // 0x1C 0x20 0x24 0x28
+    Vec3 scale;     // 0x2C
+    Vec3 trans;     // 0x38
+    Mtx rotMtx;     // 0x44
+    Vec3 *VEC;      // 0x74
+    Mtx *MTX;       // 0x78
+    AOBJ *aobj;     // 0x7C
+    int *RObj;      // 0x80
+    JOBJDesc *desc; // 0x84
 };
 
 struct WOBJ
@@ -774,6 +784,7 @@ void AOBJ_ClearFlags(AOBJ *aobj, int flags);
 void DOBJ_SetFlags(DOBJ *dobj, int flags);
 void DOBJ_ClearFlags(DOBJ *dobj, int flags);
 void DOBJ_AddAnimAll(DOBJ *dobj, void *matanim, void *textureanim);
+void TOBJ_AddAnim(TOBJ *tobj, void *textureanim);
 COBJ *COBJ_Alloc();
 COBJ *COBJ_LoadDesc(COBJDesc *cobj);
 COBJ *COBJ_LoadDescSetScissor(COBJDesc *cobj);
@@ -822,7 +833,7 @@ int GX_LookupRenderPass(int pass);
 void GXLink_LObj(GOBJ *gobj, int pass);
 void GXLink_Fog(GOBJ *gobj, int pass);
 LOBJ *LObj_LoadDesc(void *lobjdesc);
-LOBJ *LObj_LoadAll(void **lobjdesc);
+LOBJ *LObj_CreateAll(void **lobjdesc);
 int LObj_GetPosition(LOBJ *lobj, Vec3 *pos);
 void LObj_SetPosition(LOBJ *lobj, Vec3 *pos);
 int LObj_GetInterest(LOBJ *lobj, Vec3 *pos);
@@ -831,7 +842,7 @@ void LObj_ReqAnimAll(LOBJ *lobj, float frame);
 void LObj_AnimAll(LOBJ *lobj);
 void LObj_DeleteCurrentAll(int unk);
 void LObj_RemoveAll(LOBJ *lobj);
-HSD_Fog *Fog_LoadDesc(void *fogdesc);
+HSD_Fog *Fog_LoadDesc(HSD_FogDesc *fogdesc);
 void Fog_Set(HSD_Fog *fog);
 void Fog_Release(HSD_Fog *fog);
 DOBJ *JOBJ_GetDObj(JOBJ *jobj);

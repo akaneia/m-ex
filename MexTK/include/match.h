@@ -348,18 +348,18 @@ struct MatchCamera
     GXColor erase_color;                   // 0x8
     float near;                            // 0xc
     float far;                             // 0x10
-    Vec3 x14;                              // 0x14
-    Vec3 x20;                              // 0x20
-    Vec3 x2c;                              // 0x2c
-    Vec3 x38;                              // 0x38
+    Vec3 x14_current;                      // 0x14
+    Vec3 x20_projected;                    // 0x20
+    Vec3 x2c_current;                      // 0x2c
+    Vec3 x38_projected;                    // 0x38
     float normalcam_fov;                   // 0x44
-    float x48;                             // 0x48
-    Vec3 x4c;                              // 0x4c
-    Vec3 x58;                              // 0x58
-    Vec3 x64;                              // 0x64
-    Vec3 x70;                              // 0x70
-    float x7c;                             // 0x7c
-    float x80;                             // 0x80
+    float x48_projected;                   // 0x48
+    Vec3 x4c_current;                      // 0x4c
+    Vec3 x58_projected;                    // 0x58
+    Vec3 x64_current;                      // 0x64
+    Vec3 x70_projected;                    // 0x70
+    float x7c_current;                     // 0x7c
+    float x80_projected;                   // 0x80
     int x84;                               // 0x84
     int x88;                               // 0x88
     int x8c;                               // 0x8c
@@ -2888,9 +2888,15 @@ void Match_InitUnk2();
 void Match_InitStage();
 void Match_LoadStage(GrExternal gr_kind, int unk);
 void Match_LoadCommonItems();
+void Match_LoadPdPm();
+void Match_InitCrowdReact();
 void Match_InitItems(); // allocs hsd obj for itemdata
 void Match_CreateStage();
+void Match_CreateCamera();
+void Match_CameraThink();
+void Match_CameraSetFOV(float fov);
 void Match_InitEffects();
 void Match_IndexAuxAnim(CharacterKind c_kind, HSD_Archive *archive, int anim_kind);
+void Match_ClearAuxAnim();
 char *Match_GetVIWaitFilename(CharacterKind c_kind);
 #endif

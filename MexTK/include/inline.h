@@ -150,29 +150,30 @@ static inline float lerp(float start, float end, float t)
 static inline DOBJ *JOBJ_GetDObjIndex(JOBJ *root, int joint_idx, int dobj_idx)
 {
     JOBJ *this_joint = root;
-    int this_joint_id = 0;
-    while (this_joint_id < joint_idx)
+    for (int this_idx = 0; this_idx < joint_idx; this_idx++)
     {
-        if (this_joint->sibling)
-            this_joint = this_joint->sibling;
-        else if (this_joint->child)
+        if (this_joint->child)
             this_joint = this_joint->child;
+
+        else if (this_joint->sibling)
+            this_joint = this_joint->sibling;
+
         else
             return 0;
-
-        this_joint_id++;
     }
 
     DOBJ *this_dobj = this_joint->dobj;
-    int this_dobj_id = 0;
-    while (this_dobj_id < dobj_idx)
+
+    if (!this_dobj)
+        return 0;
+
+    for (int this_idx = 0; this_idx < dobj_idx; this_idx++)
     {
         if (this_dobj->next)
             this_dobj = this_dobj->next;
+
         else
             return 0;
-
-        this_dobj_id++;
     }
 
     return this_dobj;
@@ -477,6 +478,44 @@ static DOBJ *JOBJ_GetDObjChild(JOBJ *joint, int dobj_index)
     }
 
     return dobj;
+}
+
+static TOBJ *JOBJ_FindTOBJFromImageDesc(JOBJ *root, _HSD_ImageDesc *image_desc)
+{
+
+    JOBJ *this_j = root;
+
+    // check this level of jobjs
+    while (this_j)
+    {
+        // check this jobj
+        DOBJ *this_d = this_j->dobj;
+        while (this_d)
+        {
+            if (this_d->mobj &&
+                this_d->mobj->tobj &&
+                this_d->mobj->tobj->imagedesc == image_desc)
+                return this_d->mobj->tobj;
+
+            this_d = this_d->next;
+        }
+
+        // check any children before moving onto next sibling
+        if (this_j->child)
+        {
+            // check child for the tobj
+            TOBJ *tobj = JOBJ_FindTOBJFromImageDesc(this_j->child, image_desc);
+
+            // if found return it
+            if (tobj)
+                return tobj;
+        }
+
+        // go next sibling
+        this_j = this_j->sibling;
+    }
+
+    return 0;
 }
 
 static float Math_Vec2Angle(Vec2 *a, Vec2 *b)

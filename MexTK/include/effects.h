@@ -9,6 +9,48 @@
 
 /*** Structs ***/
 
+struct EffectModelDesc
+{
+    float frame_num;
+    JOBJSet jobjset;
+};
+
+struct PtclDesc
+{
+    u16 x0;
+    u16 x2;
+    int effect_idx_start;
+    int gen_num;
+    struct
+    {
+        int x0;
+        int x4;
+        int flags; // 0x8
+    } *gen[]
+};
+
+struct TexGDesc
+{
+    int num;
+    struct
+    {
+        int img_num;
+        GXTexFmt img_fmt;
+        int x8;
+        int width;
+        int height;
+        int x14;
+        void *img_ptr[];
+    } *data[];
+};
+
+struct EffectDataTable // exists in the dat
+{
+    PtclDesc *particle;
+    TexGDesc *texg;
+    EffectModelDesc model_desc[];
+};
+
 struct Effect
 {
     GOBJ *child;

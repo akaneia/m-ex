@@ -144,6 +144,7 @@
 8035DDD0:DOBJ_ClearFlags
 8035DDB8:DOBJ_SetFlags
 8035dea0:DOBJ_AddAnimAll
+8035e5c0:TOBJ_AddAnim
 800115F4:Dynamics_DecayWind
 80048654:ECB_CollGround3
 800475F4:ECB_CollAir
@@ -452,6 +453,7 @@
 80380358:Archive_GetPublicAddress
 8001819c:File_GetPreloadedFile
 8001668c:Archive_LoadSync
+80016204:Archive_AppendExtension
 8037DC38:Fog_LoadDesc
 8037d970:Fog_Set
 8037e04c:Fog_Release
@@ -724,7 +726,7 @@
 802FA5BC:KOCount_Init
 802FA2D0:KOCount_Update
 803672DC:LObj_LoadDesc
-80011ac4:LObj_LoadAll
+80011ac4:LObj_CreateAll
 80366d70:LObj_GetPosition
 80366ce8:LObj_SetPosition
 80366e38:LObj_GetInterest
@@ -778,8 +780,13 @@
 801c0378:Match_InitStage
 802251e8:Match_LoadStage
 8027870c:Match_LoadCommonItems
+80036dd8:Match_LoadPdPm
+80321900:Match_InitCrowdReact
 80266fcc:Match_InitItems
 8022524c:Match_CreateStage
+80030688:Match_CreateCamera
+8002f360:Match_CameraThink
+80030730:Match_CameraSetFOV
 8005b4b8:Match_InitEffects
 80036e20:Match_IndexAuxAnim
 800852b0:Match_ClearAuxAnim
@@ -881,6 +888,8 @@
 80018c2c:Preload_Wait
 80017700:Preload_FreeUnneededInitializedArchivesInHeap
 80031cb0:Preload_LoadFighter
+80015bd0:Preload_AllocFromHeap
+80015ca8:Preload_FreeToHeap
 80018254:Preload_Update
 800174bc:Preload_Invalidate
 80398614:Particle_InitFile

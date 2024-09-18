@@ -49,6 +49,7 @@ typedef struct GOBJProc GOBJProc;
 typedef struct GXList GXList;
 typedef struct JOBJ JOBJ;
 typedef struct JOBJDesc JOBJDesc;
+typedef struct MatAnimDesc MatAnimDesc;
 typedef struct MatAnimJointDesc MatAnimJointDesc;
 typedef struct AnimJointDesc AnimJointDesc;
 typedef struct HSD_VtxDescList HSD_VtxDescList;
@@ -129,6 +130,10 @@ typedef struct TextCanvas TextCanvas;
 typedef struct DevText DevText;
 
 // Effects
+typedef struct EffectModelDesc EffectModelDesc;
+typedef struct PtclDesc PtclDesc;
+typedef struct TexGDesc TexGDesc;
+typedef struct EffectDataTable EffectDataTable;
 typedef struct Effect Effect;
 typedef struct Particle Particle;
 typedef struct ptclGen ptclGen;

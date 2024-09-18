@@ -580,6 +580,7 @@ static int *ftchkdevice_dmgnum = R13 + (-0x5130);
 static int *stc_gr_ext_cur = 0x804d49e8;
 static GrExtLookup *stc_gr_lookup_cur = 0x804d49ec;
 static LineRange *stc_line_range = 0x80458868;
+static GOBJ **stc_stage_hud_gobj = 0x804d6d80; // points to a gobj that gets rendered to the hud camera
 
 /*** Functions ***/
 int Stage_GetRandomExternalID();
