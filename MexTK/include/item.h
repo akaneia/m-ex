@@ -405,6 +405,25 @@ struct ItemState
     void *collCallback;
 };
 
+struct ItemLogic
+{
+    ItemState *item_states;                         // 0x0
+    void (*OnCreate)(GOBJ *item);                   // 0x4
+    void (*OnDestroy)(GOBJ *item);                  // 0x8
+    void (*OnPickup)(GOBJ *item);                   // 0xC
+    void (*OnDrop)(GOBJ *item);                     // 0x10
+    void (*OnThrow)(GOBJ *item);                    // 0x14
+    int (*OnGiveDamage)(GOBJ *item);                // 0x18, returns isDestroy
+    int (*OnTakeDamage)(GOBJ *item);                // 0x1c, returns isDestroy
+    void (*OnEnterAir)(GOBJ *item);                 // 0x20
+    void (*OnReflect)(GOBJ *item);                  // 0x24
+    void (*OnClank)(GOBJ *item);                    // 0x28
+    void (*OnAbsorb)(GOBJ *item);                   // 0x2c
+    int (*OnShieldBounce)(GOBJ *item);              // 0x30, returns isDestroy
+    int (*OnShieldHit)(GOBJ *item);                 // 0x34, returns isDestroy
+    void (*OnUnkEvent)(GOBJ *item);                 // 0x38
+};
+
 struct SpawnItem
 {
     GOBJ *parent_gobj;                  // 0x0
@@ -549,24 +568,7 @@ struct ItemData
     int xac;                                            // 0xac
     int xb0;                                            // 0xb0
     int xb4;                                            // 0xb4
-    struct                                              //
-    {                                                   //
-        ItemState *item_states;                         // 0x0
-        void (*OnCreate)(GOBJ *item);                   // 0x4
-        void (*OnDestroy)(GOBJ *item);                  // 0x8
-        void (*OnPickup)(GOBJ *item);                   // 0xC
-        void (*OnDrop)(GOBJ *item);                     // 0x10
-        void (*OnThrow)(GOBJ *item);                    // 0x14
-        int (*OnGiveDamage)(GOBJ *item);                // 0x18, returns isDestroy
-        int (*OnTakeDamage)(GOBJ *item);                // 0x1c, returns isDestroy
-        void (*OnEnterAir)(GOBJ *item);                 // 0x20
-        void (*OnReflect)(GOBJ *item);                  // 0x24
-        void (*x28)(GOBJ *item);                        // 0x28
-        void (*x2c)(GOBJ *item);                        // 0x2c
-        int (*OnShieldBounce)(GOBJ *item);              // 0x30, returns isDestroy
-        int (*OnShieldHit)(GOBJ *item);                 // 0x34, returns isDestroy
-        void (*x38)(GOBJ *item);                        // 0x38
-    } *it_func;                                         // 0xb8, persistent item callbacks
+    ItemLogic *item_logic;                              // 0xb8, persistent item callbacks
     ItemState *item_states;                             // 0xbc
     int air_state;                                      // 0xc0
     itData *itData;                                     // 0xc4
@@ -981,8 +983,11 @@ struct ItemData
 
 /*** static reference ***/
 
-static itPublicData **stc_itPublicData = (R13 + -0x4978);
-static ItemDesc **stc_itdesc_enemies = (R13 + -0x4968);
+static itPublicData **stc_itPublicData = (R13 + -0x4978);            // 0x804d6d28
+static ItemDesc **stc_itdesc_enemies = (R13 + -0x4968);              // 0x804d6d38
+static ItemLogic *stc_itemlogic_common_items =  (R13 + -0xea1dc);    // 0x803f14c4
+static ItemLogic *stc_itemlogic_character_items =  (R13 + -0xe85a0); // 0x803f3100
+static ItemLogic *stc_itemlogic_pokemon_items =  (R13 + -0xe92d4);   // 0x803f23cc
 
 /*** Functions ***/
 void Item_IndexStageItem(ItemDesc *item_desc, int index);
