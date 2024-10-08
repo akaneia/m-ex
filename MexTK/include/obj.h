@@ -130,10 +130,10 @@
 #define PROJ_FRUSTRUM 2
 #define PROJ_ORTHO 3
 
-// Anim flags
+// Anim flags (used for JOBJ_XByFlags)
 #define JOBJ_ANIM 0x1
-#define MOBJ_ANIM 0x80
-#define TOBJ_ANIM 0x400
+#define MOBJ_ANIM 0x4
+#define TOBJ_ANIM 0x10
 #define ALL_ANIM 0x7FF
 
 // Macro
@@ -167,6 +167,14 @@
             this_jobj = jobj;                                 \
         JOBJ_GetWorldPosition(this_jobj, 0, pos);             \
     }
+
+typedef enum ForEachAnimFlag //  (used for JOBJ_ForEachAnim)
+{
+    AOBJFLAG_JOBJ = 0x1,
+    AOBJFLAG_MOBJ = 0x80,
+    AOBJFLAG_TOBJ = 0x400,
+    AOBJFLAG_ALL = 0x7FF,
+} ForEachAnimFlag;
 
 typedef enum HSD_ObjKind
 {
@@ -752,7 +760,7 @@ void JOBJ_SetFlagsAll(JOBJ *joint, int flags);
 void JOBJ_ClearFlags(JOBJ *joint, int flags);
 void JOBJ_ClearFlagsAll(JOBJ *joint, int flags);
 void JOBJ_BillBoard(JOBJ *joint, Mtx *m, Mtx *mx);
-void JOBJ_ForEachAnim(JOBJ *joint, int unk, u16 flags, void *cb, int argkind, ...); // flags: 0x400 matanim, 0x20 jointanim, argkind specifies how to pop args off the va_list
+void JOBJ_ForEachAnim(JOBJ *joint, int unk, ForEachAnimFlag flags, void *cb, int argkind, ...); // flags: 0x400 matanim, 0x20 jointanim, argkind specifies how to pop args off the va_list
 void JOBJ_Anim(JOBJ *joint);
 void JOBJ_AnimAll(JOBJ *joint);
 void JOBJ_AddAnimAll(JOBJ *joint, void *animjoint, void *matanimjoint, void *shapeanimjoint);
