@@ -656,9 +656,7 @@ struct ItemData
         int xc4c;                                       // 0xc4c
         int xc50;                                       // 0xc50
         float shield_hit_angle;                         // 0xc54, angle at which the projectile touched the shield? 80077854
-        float shield_hit_xc58;                          // 0xc58
-        float shield_hit_xc5c;                          // 0xc5c
-        float shield_hit_xc60;                          // 0xc60
+        Vec3 shield_hit_xc58;                          // 0xc58 - 0xc60
         GOBJ *reflect;                                  // 0xc64, pointer to the gobj that reflected this item, is removed after processing the reflection
         float xc68;                                     // 0xc68
         int xc6c;                                       // 0xc6c

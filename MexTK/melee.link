@@ -197,6 +197,7 @@
 8008403c:Fighter_CollGround_PassLedgeCB
 80084104:Fighter_CollGround_StopLedge_EnterFall
 800827A0:Fighter_CollGround_StopLedge
+80082888:Fighter_CollGround_DefineECB
 80096cc8:Fighter_Coll_CheckToPass
 80081dd4:Fighter_Coll_DamageState
 800C0200:Fighter_ColAnim_Remove
@@ -292,6 +293,8 @@
 800C97A8:Fighter_IASACheck_Turn
 8008A4D4:Fighter_IASACheck_AllGrounded
 800CCAAC:Fighter_IASACheck_AllAerial
+8008cd68:Fighter_IASACheck_AirAttack
+80099a58:Fighter_IASACheck_AirEscape
 80075650:Fighter_IndexFtPartsDObjs
 80068354:Fighter_InitData
 800867e8:Fighter_InitInputs
@@ -316,6 +319,7 @@
 8007C930:Fighter_PhysGround_ApplyCustomFriction
 80084F3C:Fighter_PhysGround_ApplyFriction
 8007CB74:Fighter_PhysGround_ApplyVelocity
+8007c98c:Fighter_PhysGround_CalculateVelocity
 80088148:Fighter_PlayPositionalSFX
 800881D8:Fighter_PlayVoiceSFX
 80088328:Fighter_PlayVoiceSFX2
@@ -439,6 +443,7 @@
 8008e5a4:Fighter_TDI
 80090718:Fighter_PlayQueuedDamageSounds
 80160968:Fighter_GetPlyHUDColor
+800a2040:Fighter_CheckToProcessCPU
 8026ac74:Item_Throw
 80272c90:Item_GetHeldBone
 80272db0:Item_BounceOffVictim
@@ -470,6 +475,7 @@
 8039063C:GObj_GXReorder
 8039075C:GOBJ_InitCamera
 8038FED4:GObj_RemoveProc
+8038FE24:GOBJ_DeleteProc
 8001cec0:GObj_Anim
 8001f624:GObj_AddRenderObject
 80390cd4:GObj_ProcUnk
@@ -1053,6 +1059,16 @@
 8001044c:Dynamics_UpdateBoneset
 8000fd18:Dynamics_FreeBones
 8000fcdc:Dynamics_InitForce
+800b462c:CPU_ResetCmd
+800b463c:CPU_AddCmd1
+800b46b8:CPU_AddCmd2
+800b4778:CPU_AddCmd3
+800b49f4:CPU_EndCmd
+800b33b0:CPU_UpdateCollisionData
+800b2afc:CPU_ProcessAIType
+800b2790:CPU_ProcessScenario
+800b3e04:CPU_ProcessCommandBuffer
+800b4ab0:CPU_TryChooseAttackScript
 803F0A48:stc_css_data
 804D6CB0:stc_css_minorscene
 804D6CF8:stc_css_regtagnum

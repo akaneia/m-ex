@@ -218,7 +218,7 @@ struct GOBJ
 
 struct GOBJProc
 {
-    GOBJ *parent;
+    GOBJProc *child;
     GOBJProc *next;
     GOBJProc *prev;
     char s_link;     // 0xC
@@ -825,7 +825,12 @@ void GObj_AddGXLink(GOBJ *gobj, void *cb, int gx_link, int gx_pri);
 void GObj_DestroyGXLink(GOBJ *gobj);
 void GObj_GXReorder(GOBJ *gobj, int unk);
 GOBJProc *GObj_AddProc(GOBJ *gobj, void *callback, int priority);
+/// @brief Removes all procs for GObj
+/// @param gobj 
 void GObj_RemoveProc(GOBJ *gobj);
+/// @brief Removes and deletes specific GObjProc
+/// @param proc 
+void GOBJ_DeleteProc(GOBJProc *proc);
 void GObj_AddObject(GOBJ *gobj, u8 obj_kind, void *object);
 void GObj_FreeObject(GOBJ *gobj);
 void GObj_AddUserData(GOBJ *gobj, int userDataKind, void *destructor, void *userData);

@@ -539,14 +539,24 @@ static float Math_Vec2Angle(Vec2 *a, Vec2 *b)
     return angle;
 }
 
+static float Math_Vec2DistanceSquared(Vec2 *a, Vec2 *b)
+{
+    return pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2);
+}
+
 static float Math_Vec2Distance(Vec2 *a, Vec2 *b)
 {
-    return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2));
+    return sqrtf(Math_Vec2Distance(a, b));
+}
+
+static float Math_Vec3DistanceSquared(Vec3 *a, Vec3 *b)
+{
+    return pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2) + pow((a->Z - b->Z), 2);
 }
 
 static float Math_Vec3Distance(Vec3 *a, Vec3 *b)
 {
-    return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2) + pow((a->Z - b->Z), 2));
+    return sqrtf(Math_Vec3DistanceSquared(a, b));
 }
 
 // float fmin(float a, float b)
