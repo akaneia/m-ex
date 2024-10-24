@@ -72,7 +72,7 @@ typedef struct CpuAttack
     float chance;       // chance this attack will be selected
     int frame_interval; // the interval, in frames, at which this attack can occur
     int min_cpu_level;  // minimum cpu Level for this attack to occur
-} CpuAttack;
+};
 
 typedef struct PlCoCpuTable
 {
@@ -86,7 +86,7 @@ typedef struct PlCoCpuTable
     CpuAttack **offstage;
     float *attack_radius;
     float *item_radius;
-} PlCoCpuTable;
+};
 
 typedef struct MexCpuData
 {
@@ -99,7 +99,7 @@ typedef struct MexCpuData
     CpuAttack *item;                // used when fighter has a (throwable?) item
     CpuAttack *batteringitem;       // used when fighter has a battering item  0x18 (ITEM_FAN), 0x17 (ITEM_LIPSSTICK), 0x16 (ITEM_STARROD), 0xC (ITEM_BEAMSWORD), 0xB (ITEM_HOMERUNBAT), 0xD (ITEM_PARASOL)
     CpuAttack *offstage;            // used when target fighter is off stage
-} MexCpuData;
+};
 
 static PlCoCpuTable **plco_cpu_table = 0x804d64fc;  // TODO: should this go in the link file?
 void *Fighter_CPUProc = 0x8006aba0;                 // TODO: should this go in the link file?

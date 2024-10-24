@@ -1279,8 +1279,7 @@ struct CPU
     void *x48;                   // 0x48
     float x4c;                   // 0x4c
     ItemData *target_item;       // 0x50
-    float target_x;              // 0x54
-    float target_y;              // 0x58
+    Vec2 target_pos;             // 0x54
     float target_distance;       // 0x5c
     int x60;                     // 0x60
     float ground_x;              // 0x64
