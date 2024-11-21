@@ -152,6 +152,7 @@ typedef struct itPublicData itPublicData;
 typedef struct ItemStateDesc ItemStateDesc;
 typedef struct ItemData ItemData;
 typedef struct ItemState ItemState;
+typedef struct ItemLogic ItemLogic;
 typedef struct SpawnItem SpawnItem;
 typedef struct itData itData;
 typedef struct itCommonAttr itCommonAttr;

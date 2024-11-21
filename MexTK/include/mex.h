@@ -255,7 +255,7 @@ typedef struct MexData
         {
             char *dat_name;
             char *symbol_name;
-            void *particle_data_runtime; // this pointer is shifed back by (effect_idx_start * 4)!
+            void *particle_data_runtime; // this pointer is shifted back by (effect_idx_start * 4)!
         } *files;
     } *effect;
     void *item;
