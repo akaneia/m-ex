@@ -4,7 +4,7 @@
 #include "structs.h"
 #include "fighter.h"
 #include "obj.h"
-#include "mex.h"
+#include "mxdt.h"
 #include "datatypes.h"
 #include "gx.h"
 #include "hsd.h"
@@ -53,7 +53,7 @@ static PreloadEntry *Preload_GetEntryFromEntrynum(int entry_num)
     return 0;
 }
 
-void AOBJ_CheckEnded(AOBJ *a, int *is_done)
+static void AOBJ_CheckEnded(AOBJ *a, int *is_done)
 {
     if (a->flags != AOBJ_NO_ANIM)
         *is_done = 0;
