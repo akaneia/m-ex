@@ -2,5 +2,4 @@
 .include "../../../Globals.s"
 .include "../../Header.s"
 
-lwz r5,OFST_Metadata_CSSIconCount(rtoc)
-addi r0,r5,1
+lwz r0,OFST_Metadata_FtExtNum(rtoc)

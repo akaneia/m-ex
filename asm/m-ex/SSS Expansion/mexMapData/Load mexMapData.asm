@@ -1,13 +1,28 @@
 #To be inserted @ 8025aca0
 .include "../../../Globals.s"
 .include "../../Header.s"
+
+/*
+mexMapData Layout: 
+0x00 JObjDesc *iconmodel
+0x04 AnimJoint *icon_animjoint
+0x08 MatAnim_Joint *icon_matanim_joint
+0x0CJObjDesc *position_model
+0x10 AnimJoint *position_animjoint
+0x14 MatAnim_Joint stagename_matanim_joint
+
+// new 
+0x18 pages
+*/
+
 #Check for mexMapData
-  lwz	r3, -0x4A0C (r13)
+  lwz	r3, -0x4A0C (r13) # MnSlMap Archive
   bl  mexMapData
   mflr  r4
   branchl r12,0x80380358
   cmpwi r3,0
   beq Original
+  
 #Store pointer
   stw r3,OFST_mexMapData(r13)
 
@@ -40,6 +55,15 @@ InitPositionsModel:
     lwz r3,0xC(REG_mexMapData)
     branchl r12,0x80370e44
     mr  REG_PositionsJObj,r3
+
+  #Check if Pages is setup and store jobj
+    lwz r3,0x18(REG_mexMapData)
+    cmpwi r3,0
+    beq SkipPages
+    stw REG_PositionsJObj,0x00(r3)
+
+    SkipPages:
+
   #Store object pointer
     mr  r3,REG_GObj
     lbz	r4, -0x3E57 (r13)
@@ -61,45 +85,14 @@ InitPositionsModel:
     lwz r4,0x10(REG_mexMapData)
     li  r5,0
     li  r6,0
-    branchl r12,0x8036fb5c
-  #Animate All Children
-  .set  REG_ThisJObj,22
-    lwz  REG_ThisJObj,0x10(REG_PositionsJObj)    #get child
-  InitPositionsModel_Loop:
-    mr  r3,REG_ThisJObj
+    branchl r12,0x8036fb5c # JOBJ_AddAnimAll
+  #Request anim
+    mr  r3,REG_PositionsJObj
     lfs	f1, -0x3640 (rtoc)
-    branchl r12,0x8036f8bc
-    mr  r3,REG_ThisJObj
-    branchl r12,0x80370928
-  InitPositionsModel_IncLoop:
-    lwz  REG_ThisJObj,0x8(REG_ThisJObj)    #get sibling
-    cmpwi REG_ThisJObj,0
-    bne InitPositionsModel_Loop
-
-InitStageUnlock:
-  .set  REG_IconData,20
-  .set  REG_Count,21
-  lwz REG_IconData,OFST_Menu_SSS(rtoc)
-  li  REG_Count,0
-  InitStageUnlock_Loop:
-  #Check if unlocked
-    lwz	r3, 0x1C (REG_IconData)
-    branchl r12,0x80164430
-    cmpwi r3,0
-    beq InitStageUnlock_Locked
-  InitStageUnlock_Unlocked:
-    li  r0,2
-    b InitStageUnlock_Store
-  InitStageUnlock_Locked:
-    li  r0,1
-  InitStageUnlock_Store:
-    stb r0,0x8(REG_IconData)
-  #Inc Loop
-    addi  REG_IconData,REG_IconData,SSS_Stride
-    addi  REG_Count,REG_Count,1
-    lwz r3,OFST_Metadata_SSSIconCount(rtoc)
-    cmpw REG_Count,r3
-    blt InitStageUnlock_Loop
+    branchl r12,0x8036f8bc # JOBJ_ReqAnimAll
+  #Apply anim
+    mr  r3,REG_PositionsJObj
+    branchl r12,0x80370928 # JOBJ_AnimAll
 
 InitIconsModel:
   .set  REG_GObj,20
@@ -107,26 +100,37 @@ InitIconsModel:
   .set  REG_Count,22
   .set  REG_IconData,23
   .set  REG_ThisPosJoint,24
+
   li  REG_Count,0
   lwz REG_IconData,OFST_Menu_SSS(rtoc)
   lwz REG_ThisPosJoint,0x10(REG_PositionsJObj)
+
   InitIconsModel_Loop:
-  #Skip random icon
-    lwz r3,OFST_Metadata_SSSIconCount(rtoc)
-    subi  r3,r3,1
-    cmpw REG_Count,r3
-    beq InitIconsModel_IncLoop
-  #Create GObj
+  # Create Icon GObj
     li  r3,4
     li  r4,5
     li  r5,128
     branchl r12,0x803901f0
     mr  REG_GObj,r3
-  #Load joint
+
+  #Check if random
+    lbz r3,0x8(REG_IconData)
+    cmpwi r3,3
+    bne LoadCommonIcon
+
+  LoadRandomIcon:
+    lwz	r3, -0x4A08 (r13)
+    lwz	r3, 0x0010 (r3)
+    branchl r12,0x80370e44
+    mr  REG_JObj,r3
+    b StoreJObjPointer
+
+  LoadCommonIcon:
     lwz r3,0x0(REG_mexMapData)
     branchl r12,0x80370e44
     mr  REG_JObj,r3
-  #Store object pointer
+
+  StoreJObjPointer:
     mr  r3,REG_GObj
     lbz	r4, -0x3E57 (r13)
     mr  r5,REG_JObj
@@ -154,24 +158,21 @@ InitIconsModel:
     bl  JOBjAttach
   #Store to icon data
     stw REG_JObj,0x0(REG_IconData)
+
   #Animate based on icon status
     lbz r0,0x8(REG_IconData)
     cmpwi r0,1
-    beq InitIconsModel_Invisible
+    beq InitIconsModel_Locked
     blt InitIconsModel_Hidden
+
   InitIconsModel_Shown:
-  #Anim
-    mr  r3,REG_JObj
-    lbz r4,0x9(REG_IconData)
-    lfs	f1, -0x3640 (rtoc)
-    branchl r12,0x8036f8bc
-  #Model Preview Unk
-    /*
-    lbz r3,0x9(REG_IconData)
-    subi  r3,r3,22
-    xoris r3,r3,0x8000
-    */
     addi  r3,REG_Count,2
+    b InitIconAnimation
+
+  InitIconsModel_Locked:
+    li r3,1
+
+  InitIconAnimation:
     xoris r3,r3,0x8000
     stw r3,0x84(sp)
     lis r3,0x4330
@@ -194,12 +195,7 @@ InitIconsModel:
     crclr 6
     branchl r12,0x80364c08
     b InitIconsModel_IncLoop
-  InitIconsModel_Invisible:
-  #Set as invisible
-    li  r0,0
-    stb r0,0x8(REG_IconData)
   InitIconsModel_Hidden:
-  #Can still select?
     mr  r3,REG_JObj
     li  r4,16
     branchl r12,0x80371d9c
@@ -210,81 +206,6 @@ InitIconsModel:
     lwz REG_ThisPosJoint,0x8(REG_ThisPosJoint)
     cmpwi REG_ThisPosJoint,0
     bne InitIconsModel_Loop
-
-InitRandomIcon:
-  .set  REG_GObj,20
-  .set  REG_JObj,21
-  #Create GObj
-    li  r3,4
-    li  r4,5
-    li  r5,128
-    branchl r12,0x803901f0
-    mr  REG_GObj,r3
-  #Load joint
-    lwz	r3, -0x4A08 (r13)
-    lwz	r3, 0x0010 (r3)
-    branchl r12,0x80370e44
-    mr  REG_JObj,r3
-  #Store object pointer
-    mr  r3,REG_GObj
-    lbz	r4, -0x3E57 (r13)
-    mr  r5,REG_JObj
-    branchl r12,0x80390a70
-  #Add GX Link
-    mr  r3,REG_GObj
-    load  r4,0x80391070
-    li  r5,4
-    li  r6,131
-    branchl r12,0x8039069c
-  #Add proc
-    mr  r3,REG_GObj
-    load  r4,0x8022eae0
-    li  r5,4
-    branchl r12,0x8038fd54
-  #Add anim
-    mr  r3,REG_JObj
-    li  r4,0
-    li  r5,0
-    li  r6,0
-    branchl r12,0x8036fb5c
-  #Get last position model jobj
-    mr  r3,REG_PositionsJObj
-    addi  r4,sp,0x80
-    lwz r5,OFST_Metadata_SSSIconCount(rtoc)
-    #li  r5,7
-    li  r6,-1
-    crclr 6
-    branchl r12,0x80011e24
-  #Attach
-    mr  r3,REG_JObj
-    lwz r4,0x80(sp)
-    bl  JOBjAttach
-  #Anim
-    mr  r3,REG_JObj
-    lfs	f1, -0x3640 (rtoc)
-    branchl r12,0x8036f8bc
-    mr  r3,REG_JObj
-    li  r4,16
-    lfs	f1, -0x3608 (rtoc)
-    branchl r12,0x8036f7b0
-    mr  r3,REG_JObj
-    branchl r12,0x80370928
-  #Anim2
-    mr  r3,REG_JObj
-    li  r4,6
-    li  r5,1024
-    load  r6,0x8036414c
-    li  r7,0
-    li  r8,0
-    li  r9,0
-    crclr 6
-    branchl r12,0x80364c08
-  #Store joint to icon data
-    lwz r3,OFST_Menu_SSS(rtoc)
-    lwz r4,OFST_Metadata_SSSIconCount(rtoc)
-    subi  r4,r4,1
-    mulli r4,r4,SSS_Stride
-    stwx REG_JObj,r4,r3
 
 #Skip original icon init
   restore
@@ -326,15 +247,6 @@ Original:
 #Store null pointer to mexMapData
   li  r3,0
   stw r3,OFST_mexMapData(r13)
-
-/*
-# Use original SSS Struct
-  load  r3,0x803f06d0
-  stw r3,OFST_Menu_SSS(rtoc)
-# Use original Stage Icon count
-  load  r3,29
-  stw r3,OFST_Metadata_SSSIconCount(rtoc)
-*/
 
 #Orig codeline
   li	r3, 4

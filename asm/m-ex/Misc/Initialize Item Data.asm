@@ -1,5 +1,5 @@
 #To be inserted at 80268754
-.include "../Globals.s"
+.include "../../Globals.s"
 
 .set REG_ItemData,31
 

@@ -11,11 +11,14 @@ blt CastToFloat
 cmpwi r4, 7
 beq IsSheik
 
+cmpwi r3, 18
+beq CastToFloat
+
 subi r3,r3,1
 b CastToFloat
 
 IsSheik:
-li r3, 0x25
+li r3, 25
 
 # cast to float
 CastToFloat:

@@ -1,32 +1,6 @@
 {
   "codes": [
     {
-      "name": "!ADDITIONAL | Initialize Item Data",
-      "authors": [],
-      "description": [],
-      "build": [
-        {
-          "type": "inject",
-          "address": "80268754",
-          "annotation": "Initialize Item Data",
-          "sourceFile": "additional\\Initialize Item Data.asm"
-        }
-      ]
-    },
-    {
-      "name": "!ADDITIONAL | Initialize Stage Data",
-      "authors": [],
-      "description": [],
-      "build": [
-        {
-          "type": "inject",
-          "address": "801c154c",
-          "annotation": "Initialize Stage Data",
-          "sourceFile": "additional\\Initialize Stage Data.asm"
-        }
-      ]
-    },
-    {
       "name": "!ADDITIONAL | Use Save Banner #1",
       "authors": [],
       "description": [],

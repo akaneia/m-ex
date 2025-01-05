@@ -1,5 +1,5 @@
 #To be inserted at 801c154c
-.include "../Globals.s"
+.include "../../Globals.s"
 
 #Initialize data
   li  r4,516
