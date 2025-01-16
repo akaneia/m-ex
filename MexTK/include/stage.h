@@ -573,14 +573,14 @@ struct MapItemDesc
     ItemDesc *desc;
 };
 
-static Stage *stc_stage = 0x8049e6c8;
-static int *ftchkdevice_windnum = R13 + (-0x5128);
-static int *ftchkdevice_grabnum = R13 + (-0x512C);
-static int *ftchkdevice_dmgnum = R13 + (-0x5130);
-static int *stc_gr_ext_cur = 0x804d49e8;
-static GrExtLookup *stc_gr_lookup_cur = 0x804d49ec;
-static LineRange *stc_line_range = 0x80458868;
-static GOBJ **stc_stage_hud_gobj = 0x804d6d80; // points to a gobj that gets rendered to the hud camera
+static Stage *stc_stage = (void*)0x8049e6c8;
+static int *ftchkdevice_windnum = R13_OFFSET(-0x5128);
+static int *ftchkdevice_grabnum = R13_OFFSET(-0x512C);
+static int *ftchkdevice_dmgnum = R13_OFFSET(-0x5130);
+static int *stc_gr_ext_cur = (void*)0x804d49e8;
+static GrExtLookup *stc_gr_lookup_cur = (void*)0x804d49ec;
+static LineRange *stc_line_range = (void*)0x80458868;
+static GOBJ **stc_stage_hud_gobj = (void*)0x804d6d80; // points to a gobj that gets rendered to the hud camera
 
 /*** Functions ***/
 int Stage_GetRandomExternalID();

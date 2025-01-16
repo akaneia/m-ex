@@ -267,7 +267,7 @@ typedef struct MexData
     void *misc;
 } MexData;
 
-static MEXFunctionLookup **stc_mexfunction_lookup = 0x804dfad8;
+static MEXFunctionLookup **stc_mexfunction_lookup = (void*)0x804dfad8;
 
 /*** Functions ***/
 HSD_Archive *MEX_LoadRelArchive(char *file, void *functions, char *symbol);
@@ -298,7 +298,7 @@ static void MEX_InitRELDAT(HSD_Archive *archive, char *symbol_name, int *return_
     for (int i = 0; i < mex_function->func_reloc_table_num; i++)
     {
         MEXFunctionTable *this_func = &mex_function->func_reloc_table[i];
-        return_func_array[i] = &mex_function->code[this_func->code_offset];
+        return_func_array[i] = (int)&mex_function->code[this_func->code_offset];
     }
 }
 /// @brief
@@ -311,7 +311,7 @@ static float MEX_GetStockIconFrame(Stc_icns *stc_icns, int c_kind, int costume_i
     FtKindDesc *ftkind_desc = MEX_GetData(MXDT_FTKINDDESC);
     int ft_kind = ftkind_desc[c_kind].ft_main;
 
-    int ftkind_num = MEX_GetData(MXDT_FTINTNUM);
+    int ftkind_num = (int)MEX_GetData(MXDT_FTINTNUM);
     float stock_frame;
 
     // check for special fighter

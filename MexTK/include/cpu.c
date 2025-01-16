@@ -1,6 +1,6 @@
 #include "mex.h"
 
-static void *Fighter_CPUProc = 0x8006aba0; // TODO: should this go in the link file?
+static void *Fighter_CPUProc = (void*)0x8006aba0; // TODO: should this go in the link file?
 
 /// Each fighter module can only have 1 mexcpu_data
 static int mexcpu_spoof;

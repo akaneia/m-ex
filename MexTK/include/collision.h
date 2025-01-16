@@ -283,12 +283,12 @@ int GrColl_GetLineInfo(int line_index, Vec3 *r4, void *r5, int *flags, Vec3 *ret
 void GrColl_GetLineSlope(int line_index, Vec3 *return_slope);
 int GrColl_CheckIfLineEnabled(int line_index);
 
-static int *stc_colltest = R13 + (COLL_TEST);
-static CollGroup **stc_firstcollgroup = R13 + (-0x51DC);
-static CollGroup **stc_collgroup = R13 + (-0x51E0);
-static CollLine **stc_collline = R13 + (-0x51E4);
-static CollVert **stc_collvert = R13 + (-0x51E8);
-static CollDataStage **stc_colldata = R13 + (-0x51EC);
-static CollLineConnection **stc_first_line_connect = 0x80458e88; // array of 9
+static int *stc_colltest = R13_OFFSET(COLL_TEST);
+static CollGroup **stc_firstcollgroup = R13_OFFSET(-0x51DC);
+static CollGroup **stc_collgroup = R13_OFFSET(-0x51E0);
+static CollLine **stc_collline = R13_OFFSET(-0x51E4);
+static CollVert **stc_collvert = R13_OFFSET(-0x51E8);
+static CollDataStage **stc_colldata = R13_OFFSET(-0x51EC);
+static CollLineConnection **stc_first_line_connect = (void*)0x80458e88; // array of 9
 
 #endif

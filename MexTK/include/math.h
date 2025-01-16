@@ -44,6 +44,7 @@ inline float Vec2_Magnitude(Vec2 *v)
 float atan2(float y, float x);
 float sin(float x);
 float cos(float x);
+float pow(float x, int i);
 void MTXOrtho(Mtx44 m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 f); //
 void MTXLookAt(Mtx *dest, Vec3 *eye, Vec3 *up, Vec3 *target);
 void MTXRotAxisRad(Mtx *m, Vec3 *axis, float rad); // Sets a matrix for rotation about an arbitrary axis whose ( x, y, z ) components are specified by axis.
