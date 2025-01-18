@@ -29,7 +29,7 @@
 static int Preload_GetEntryIndexFromEntrynum(int entry_num)
 {
     Preload *preload = Preload_GetTable();
-    for (int i = 0; i < GetElementsIn(preload->entry); i++)
+    for (unsigned int i = 0; i < GetElementsIn(preload->entry); i++)
     {
         PreloadEntry *this_entry = &preload->entry[i];
 
@@ -288,22 +288,22 @@ static void C_QUATMtx(Vec4 *r, Mtx m)
 
 static HSD_Pad *PadGet(int playerIndex, int padType)
 {
-    HSD_Pads *pads = 0;
+    HSD_Pad *pads = 0;
 
     // get the correct pad
     if (padType == PADGET_MASTER)
-        pads = (HSD_Pads *)0x804c1fac;
+        pads = (HSD_Pad *)0x804c1fac;
     else if (padType == PADGET_ENGINE)
-        pads = (HSD_Pads *)0x804c21cc;
+        pads = (HSD_Pad *)0x804c21cc;
 
     if (pads == 0)
         return 0;
 
-    return (&pads->pad[playerIndex]);
+    return &pads[playerIndex];
 }
 static int Pad_GetDownSys(int pad_idx)
 {
-    HSD_Pad *pads = (HSD_Pads *)0x804c1fac;
+    HSD_Pad *pads = (HSD_Pad *)0x804c1fac;
 
     int down;
 
@@ -539,19 +539,23 @@ static float Math_Vec2Angle(Vec2 *a, Vec2 *b)
     return angle;
 }
 
+static float square(float f) {
+    return f*f;
+}
+
 static float Math_Vec2DistanceSquared(Vec2 *a, Vec2 *b)
 {
-    return pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2);
+    return square(a->X - b->X) + square(a->Y - b->Y);
 }
 
 static float Math_Vec2Distance(Vec2 *a, Vec2 *b)
 {
-    return sqrtf(Math_Vec2Distance(a, b));
+    return sqrtf(Math_Vec2DistanceSquared(a, b));
 }
 
 static float Math_Vec3DistanceSquared(Vec3 *a, Vec3 *b)
 {
-    return pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2) + pow((a->Z - b->Z), 2);
+    return square(a->X - b->X) + square(a->Y - b->Y) + square(a->Z - b->Z);
 }
 
 static float Math_Vec3Distance(Vec3 *a, Vec3 *b)

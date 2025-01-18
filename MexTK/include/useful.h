@@ -527,12 +527,12 @@ typedef struct SIXYLookup
 } SIXYLookup;
 
 /*** Static Vars ***/
-static OSInfo *os_info = 0x80000000;
-static int *stc_fst_totalentrynum = 0x804D7284;
-static FSTEntry **stc_fst_entries = 0x804D727C; // -0x4424, indexed by entrynum (0 is always the root directory)
-static char **stc_fst_filenames = 0x804D7280;   // use FSTEntry.filename_offset to find an entrynums name
-static int *stc_si_sampling_rate = 0x804D740C;
-static SIXYLookup *stc_si_xy = 0x80402ca0;
+static OSInfo *os_info = (void*)0x80000000;
+static int *stc_fst_totalentrynum = (void*)0x804D7284;
+static FSTEntry **stc_fst_entries = (void*)0x804D727C; // -0x4424, indexed by entrynum (0 is always the root directory)
+static char **stc_fst_filenames = (void*)0x804D7280;   // use FSTEntry.filename_offset to find an entrynums name
+static int *stc_si_sampling_rate = (void*)0x804D740C;
+static SIXYLookup *stc_si_xy = (void*)0x80402ca0;
 
 /*** OS Library ***/
 int OSGetTick();
@@ -561,7 +561,7 @@ int File_Read(int entrynum, int file_offset, void *buffer, int read_size, int fl
 int File_ReadSync(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index);                    // just use 0x21 for flags if dram, 0x23 if aram, 1 for unk_index
 int File_GetSize(char *file_name);
 // void memcpy(void *dest, void *source, int size);
-// void memset(void *dest, int fill, int size);
+void memset(void *dest, int fill, int size);
 s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat *stat);
 s32 CARDMountAsync(s32 chan, void *workArea, void *detachCallback, void *attachCallback);
 s32 CARDUnmount(s32 chan);

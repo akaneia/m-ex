@@ -2575,7 +2575,7 @@ struct FighterData
         unsigned char x221c_5 : 1;                     // 0x8 - 0x221c
         unsigned char x221c_6 : 1;                     // 0x4 - 0x221c
         unsigned char hitstun : 1;                     // 0x2 - 0x221c
-        unsigned char ik_orientation : 1;              // 0x1 = 0x221c
+        unsigned char ik_orientation : 1;              // 0x1 - 0x221c
         unsigned char ik_rfoot : 1;                    // 0x80 - 0x221d
         unsigned char ik_lfoot : 1;                    // 0x40 - 0x221d
         unsigned char ftvis_reqrevert : 1;             // 0x20 - 0x221d, request all ftvis revert to default next state change
@@ -3135,13 +3135,13 @@ struct FtScriptIK
 */
 
 /** Static Variables **/
-static ftCommonBone ***stc_ftbone = (R13 + -0x515C);
-static ftCommonData **stc_ftcommon = (R13 + -0x514C);
-static ColAnimDesc **stc_plco_colanimdesc = 0x804D653C;
-static GXColor **stc_shieldcolors = (R13 + -0x5194);
-static FtDmgVibrateDesc **stc_dmg_vibrate_desc = (R13 + -0x5170);
-static int *stc_ft_hitlog = (R13 + -0x5148); // used as semi-local variables remembering if a solid hit occured @ 8006cbc4
-static int *stc_ft_tiplog = (R13 + -0x5144); // used as semi-local variables remembering if a tip hit occured @ 8006cbc4
+static ftCommonBone ***stc_ftbone = R13_OFFSET(-0x515C);
+static ftCommonData **stc_ftcommon = R13_OFFSET(-0x514C);
+static ColAnimDesc **stc_plco_colanimdesc = (void*)0x804D653C;
+static GXColor **stc_shieldcolors = R13_OFFSET(-0x5194);
+static FtDmgVibrateDesc **stc_dmg_vibrate_desc = R13_OFFSET(-0x5170);
+static int *stc_ft_hitlog = R13_OFFSET(-0x5148); // used as semi-local variables remembering if a solid hit occured @ 8006cbc4
+static int *stc_ft_tiplog = R13_OFFSET(-0x5144); // used as semi-local variables remembering if a tip hit occured @ 8006cbc4
 
 /*** Functions ***/
 GOBJ *Fighter_Create(PlayerData *pd);

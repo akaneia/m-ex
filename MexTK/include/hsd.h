@@ -92,6 +92,8 @@ struct HSD_ClassInfoHead
     u32 nb_peak;           // 0x24
 };
 
+struct _HSD_Class;
+
 struct HSD_ClassInfo
 {
     HSD_ClassInfoHead head;
@@ -155,11 +157,6 @@ struct HSD_Pad
     float x3c;           // 0x3c
     u8 x40;              // 0x40
     s8 status;           // 0x41   0 = plugged, -1 = unplugged
-};
-
-struct HSD_Pads
-{
-    HSD_Pad pad[4];
 };
 
 struct HSD_Update
@@ -283,14 +280,14 @@ struct HSD_PollData // unofficial name, not sure what its actually called
 };
 
 /*** Static Variables ***/
-static HSD_IDTable *stc_hsd_default_table = 0x804C23EC;
-static HSD_VI *stc_HSD_VI = 0x8046b0f0;
-static HSD_Update *stc_hsd_update = 0x80479d58;
-static int **stc_rng_seed = 0x804D5F94;
+static HSD_IDTable *stc_hsd_default_table = (void*)0x804C23EC;
+static HSD_VI *stc_HSD_VI = (void*)0x8046b0f0;
+static HSD_Update *stc_hsd_update = (void*)0x80479d58;
+static int **stc_rng_seed = (void*)0x804D5F94;
 static HSD_Pad *stc_engine_pads = (HSD_Pad *)0x804c21cc;
-static u64 *stc_pause_plink_whitelists = 0x803da888; // array of u64 bitfields defining which gobj p_links should run for the corresponding PauseKind
-static HSD_PollData *stc_hsd_polldata = 0x804c1f78;
-static GXPixelFmt *stc_hsd_pixelfmt = 0x804d76c8;
+static u64 *stc_pause_plink_whitelists = (void*)0x803da888; // array of u64 bitfields defining which gobj p_links should run for the corresponding PauseKind
+static HSD_PollData *stc_hsd_polldata = (void*)0x804c1f78;
+static GXPixelFmt *stc_hsd_pixelfmt = (void*)0x804d76c8;
 
 /*** Functions ***/
 

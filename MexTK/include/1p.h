@@ -22,11 +22,11 @@ struct ClassicLineup // array of these @
 };
 
 // variables
-static ClassicLineup *stc_clsc_lineup = 0x803ddec8;
-static u8 *stc_clsc_shuffledorder1 = 0x80490900; // 9 elements
-static u8 *stc_clsc_shuffledorder2 = 0x804908f4; // 10 elements
-static u8 *stc_clsc_shuffledorder3 = 0x804908d4; // 27 elements
-static u8 *stc_clsc_shuffledorder4 = 0x804908ac; // 38 elements
+static ClassicLineup *stc_clsc_lineup = (void*)0x803ddec8;
+static u8 *stc_clsc_shuffledorder1 = (void*)0x80490900; // 9 elements
+static u8 *stc_clsc_shuffledorder2 = (void*)0x804908f4; // 10 elements
+static u8 *stc_clsc_shuffledorder3 = (void*)0x804908d4; // 27 elements
+static u8 *stc_clsc_shuffledorder4 = (void*)0x804908ac; // 38 elements
 
 // functions
 ClassicLineupDesc *ClassicMode_GetNextNonDuplicateLineupDesc(ClassicLineupDesc *lineupdesc, s8 *shuffled_order, ClassicLineup *final_lineup); // finds and returns a ptr to the first lineupdesc without a character that matches p1. checks in the order of shuffled order

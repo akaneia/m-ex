@@ -2,6 +2,8 @@
 #define MEX_H_OFFSETS
 
 #define R13 0x804db6a0
+#define R13_OFFSET(A) ((void*)(0x804db6a0 + A))
+
 #define STAGE_CONST -0x4C08 // this is an offset used on dreamland, should be safe to use for custom stages
 #define MEMCARD -0x77C0
 #define PLCO_SHIELDCOLORS -0x5190
