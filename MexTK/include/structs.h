@@ -111,6 +111,7 @@ typedef struct MatchInit MatchInit;
 typedef struct Match Match;
 typedef struct MatchLupe MatchLupe;
 typedef struct MatchOffscreen MatchOffscreen;
+typedef struct MatchOffscreenArrows MatchOffscreenArrows;
 typedef struct MatchNametags MatchNametags;
 typedef struct MatchHUD MatchHUD;
 typedef struct MatchHUDElement MatchHUDElement;
