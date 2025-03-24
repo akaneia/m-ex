@@ -569,6 +569,88 @@ struct VIUnknown
     int idx;
 };
 
+typedef enum GXIndirectTexStageID
+{
+    GX_INDTEXSTAGE0 = 0,
+    GX_INDTEXSTAGE1,
+    GX_INDTEXSTAGE2,
+    GX_INDTEXSTAGE3,
+    GX_MAX_INDTEXSTAGE
+} GXIndirectTexStageID;
+
+typedef enum GXIndTexFmt
+{
+    GX_ITF_8 = 0,
+    GX_ITF_5,
+    GX_ITF_4,
+    GX_ITF_3,
+    GX_MAX_ITFORMAT
+} GXIndTexFmt;
+
+typedef enum GXIndTexBias
+{
+    GX_ITB_NONE = 0,
+    GX_ITB_S,
+    GX_ITB_T,
+    GX_ITB_ST,
+    GX_ITB_U,
+    GX_ITB_SU,
+    GX_ITB_TU,
+    GX_ITB_STU,
+    GX_MAX_ITBIAS
+} GXIndTexBias;
+
+typedef enum GXIndMtxID
+{
+    GX_ITM_OFF = 0,
+    GX_ITM_0,
+    GX_ITM_1,
+    GX_ITM_2,
+    GX_ITM_3,
+    GX_ITM_S0,
+    GX_ITM_S1,
+    GX_ITM_S2,
+    GX_ITM_S3,
+    GX_ITM_T0,
+    GX_ITM_T1,
+    GX_ITM_T2,
+} GXIndMtxID;
+
+typedef enum GXIndWrapMode
+{
+    GX_ITW_OFF = 0,
+    GX_ITW_256,
+    GX_ITW_128,
+    GX_ITW_64,
+    GX_ITW_32,
+    GX_ITW_16,
+    GX_ITW_0,
+    GX_MAX_ITWRAP
+} GXIndWrapMode;
+
+typedef enum GXIndTexBumpAlpha
+{
+    GX_ITBA_OFF = 0,
+    GX_ITBA_S,
+    GX_ITBA_T,
+    GX_ITBA_U,
+    GX_MAX_ITBALPHA
+} GXIndTexBumpAlpha;
+
+typedef enum GXIndTexScale
+{
+    GX_ITS_1 = 0,
+    GX_ITS_2,
+    GX_ITS_4,
+    GX_ITS_8,
+    GX_ITS_16,
+    GX_ITS_32,
+    GX_ITS_64,
+    GX_ITS_128,
+    GX_ITS_256,
+    GX_MAX_ITSCALE
+} GXIndTexScale;
+
 static volatile GXPipe *gx_pipe = 0xCC008000;
 static VIUnknown *_p = 0x804c0980;
 
@@ -599,6 +681,20 @@ void GXSetChanAmbColor(GXChannelID chan, GXColor *amb_color);
 void GXSetNumTexGens(u8 nTexGens);
 void GX_blr(int, int);
 void GXSetNumTevStages(u8 stages);
+void GXSetTevIndirect(GXTevStageID tevstage,
+    GXIndirectTexStageID indtexid,
+    GXIndTexFmt format,
+    GXIndTexBias bias,
+    GXIndMtxID mtxid,
+    GXIndWrapMode wrap_s,
+    GXIndWrapMode wrap_t,
+    GXBool addprev,
+    GXBool utclod,
+    GXIndTexBumpAlpha a);
+void GXSetNumIndStages(u8 nstages);
+void GXSetIndTexMtx(u8 indtexmtx, f32 offset_mtx[2][3], s8 scale_exp);
+void GXSetIndTexOrder(GXIndirectTexStageID indtexstage, GXTexCoordID texcoord, GXTexMapID texmap);
+void GXSetIndTexCoordScale(GXIndirectTexStageID indtexid, GXIndTexScale scale_s, GXIndTexScale scale_t);
 void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map, GXChannelID color);
 void GXSetTevColor(GXTevRegID id, GXColor *color);
 void GXSetTevColorIn(GXTevStageID stage, GXTevColorArg a, GXTevColorArg b, GXTevColorArg c, GXTevColorArg d);

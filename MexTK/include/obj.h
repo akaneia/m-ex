@@ -764,7 +764,9 @@ void JOBJ_ForEachAnim(JOBJ *joint, int unk, ForEachAnimFlag flags, void *cb, int
 void JOBJ_Anim(JOBJ *joint);
 void JOBJ_AnimAll(JOBJ *joint);
 void JOBJ_AddAnimAll(JOBJ *joint, void *animjoint, void *matanimjoint, void *shapeanimjoint);
+void JOBJ_AddAnim(JOBJ *joint, void *animjoint, void *matanimjoint, void *shapeanimjoint);
 void JOBJ_RemoveAnimAll(JOBJ *joint);
+void JOBJ_RemoveAnim(JOBJ *joint);
 void JOBJ_ReqAnim(JOBJ *joint, float frame);
 void JOBJ_ReqAnimByFlags(JOBJ *joint, int flags, float frame);
 void JOBJ_ReqAnimAll(JOBJ *joint, float unk);
@@ -789,6 +791,8 @@ void AOBJ_StopAnim(AOBJ *aobj);
 void AOBJ_SetRate(AOBJ *aobj, float rate);
 void AOBJ_SetFlags(AOBJ *aobj, int flags);
 void AOBJ_ClearFlags(AOBJ *aobj, int flags);
+AOBJ *AOBJ_LoadDesc(int *desc);
+void AOBJ_InterpretAnim(AOBJ *anim, int *object, int *callback);
 void DOBJ_SetFlags(DOBJ *dobj, int flags);
 void DOBJ_ClearFlags(DOBJ *dobj, int flags);
 void DOBJ_AddAnimAll(DOBJ *dobj, void *matanim, void *textureanim);
@@ -864,4 +868,8 @@ void MOBJ_SetToonTextureImage(_HSD_ImageDesc *);
 void MOBJ_ReqAnim(MOBJ *, float frame);
 void MObj_Anim(MOBJ *);
 void GObj_CopyGXPri(GOBJ *target, GOBJ *source);
+_HSD_ImageDesc *AllocImageDesc();
+void FreeImageDesc(_HSD_ImageDesc *);
+_HSD_Tlut *AllocTlut();
+void FreeTlut(_HSD_Tlut *);
 #endif

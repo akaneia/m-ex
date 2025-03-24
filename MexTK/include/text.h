@@ -39,7 +39,7 @@ struct Text
     GXColor viewport_color;                   // 0x2c, if the alpha value is != 0, uses an additional GXSetTevAlphaIn call @ 803a87f8 if enabled. background is the size of the aspect
     GXColor color;                            // 0x30
     Vec2 scale;                               // 0x34-0x3C scales just the text. (was originally stretch)
-    float x3c;                                // 0x3c
+    float x3C;                                // 0x3c
     float x40;                                // 0x40
     u16 x44;                                  // 0x44
     u16 x46;                                  // 0x46

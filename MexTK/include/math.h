@@ -54,6 +54,7 @@ void VECScale(Vec3 *src, Vec3 *dst, float scale);
 void VECAdd(Vec3 *a, Vec3 *b, Vec3 *ab);
 void VECSubtract(Vec3 *a, Vec3 *b, Vec3 *a_b);
 void PSMTXIdentity(Mtx *dest);
+void PSMTXInverse(Mtx *src, Mtx *dest);
 void PSMTXCopy(Mtx *src, Mtx *dest);
 void PSMTXConcat(Mtx *a, Mtx *b, Mtx *ab);
 void VECMultAndAdd(Vec3 *a, Vec3 *b);
