@@ -1,18 +1,16 @@
-#To be inserted @ 80088548
+#To be inserted @ 80087d28
 .include "../../../Globals.s"
 .include "../../Header.s"
 
 #r5,REG_Temp+ are free
-.set  REG_FighterData,29
 .set  REG_SFXID,4
-.set  REG_MagicNum,5
+.set  REG_FighterData,29
+.set  REG_MagicNum,3
 
 .set  REG_Temp,9
 .set  REG_Temp2,10
 .set  REG_Temp3,11
 .set  REG_Temp4,12
-
-addi	REG_FighterData, r3, 0
 
 #Check if ssm ID is 0
   load  REG_MagicNum,0x68db8bad
@@ -93,7 +91,6 @@ GetSSMID:
   add REG_SFXID,REG_Temp,REG_SFXID
   b Exit
 
-
 Original:
 Exit:
-  mr	r3, r29
+  addi r3,REG_SFXID,0
