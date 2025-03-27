@@ -187,9 +187,8 @@ struct Particle // created at 80398c90. dont feel like labelling this, offsets a
     u16 rotateCount;       // 0x5E
     float sizeTarget;      // 0x60
     float rotateTarget;    // 0x64
-    float rotateAcc;       // 0x68
-    u16 primColRemain;     // 0x6C
-    u16 envColRemain;      // 0x6E
+    u16 primColRemain;     // 0x68
+    u16 envColRemain;      // 0x6C
     GXColor primColTarget; // 0x70
     GXColor envColTarget;  // 0x74
     u16 matColRemain;      // 0x78
@@ -201,10 +200,10 @@ struct Particle // created at 80398c90. dont feel like labelling this, offsets a
     u8 matA;               // 0x80
     u8 ambRGB;             // 0x81
     u8 ambA;               // 0x82
-    // u8 matRGBTarget;         // 0x83
-    // u8 matATarget;           // 0x84
-    // u8 ambRGBTarget;         // 0x85
-    // u8 ambATarget;           // 0x86
+    u8 matRGBTarget;         // 0x83
+    u8 matATarget;           // 0x84
+    u8 ambRGBTarget;         // 0x85
+    u8 ambATarget;           // 0x86
     float trail;             // 0x84
     ptclGen *gen;            // 0x88
     GeneratorAppSRT *appsrt; // 0x8C
