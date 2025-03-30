@@ -30,6 +30,10 @@ beq Exit
   cmpwi REG_PAGE,0
   beq Exit
 
+# play page change sfx
+  li r3,2
+  branchl r12,0x80024030 #play sfx common
+
 # advance page index
   lwz r3,0x08(REG_PAGE) # current page
   lwz r4,0x04(REG_PAGE) # max pages
@@ -58,10 +62,10 @@ SkipOverflow:
   stw r3,0x08(REG_PAGE)
 
 # display test message
-  bl  test_message            
-  mflr  r3
-  lwz r4,0x08(REG_PAGE) # current page
-  branchl r12,OSReport
+#  bl  test_message
+#  mflr  r3
+#  lwz r4,0x08(REG_PAGE) # current page
+#  branchl r12,OSReport
 
 # get animation
   lwz r3,0x08(REG_PAGE)
@@ -94,10 +98,10 @@ SkipOverflow:
 
 b Exit
 
-test_message:
-blrl
-.string "Current Page %d\n"
-.align 2
+#test_message:
+#  blrl
+#  .string "Current Page %d\n"
+#  .align 2
 
 Exit:
 lbz r0,-0x49f1(r13)         # continue original operation

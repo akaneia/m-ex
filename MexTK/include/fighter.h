@@ -3408,7 +3408,6 @@ void SFX_StopAllFighterSFX(FighterData *fighter_data);
 void Fighter_EnterFallOrWait(GOBJ *fighter_gobj);
 void Fighter_EnterTech(GOBJ *gobj);
 int Fighter_CheckTechInput(GOBJ *f);
-void Fighter_SpawnWallHitGFX(GOBJ *, Vec3 *position);
 void Fighter_EnterSpecialFallLoseJumps(GOBJ *fighter_gobj, int can_fastfall, int can_not_noimpactland, int can_not_interrupt, float aerial_drift_mult, float landing_lag, float blend);
 void Fighter_RumbleController(GOBJ *f, int unk1, int unk2);
 void Fighter_GetLeftStick(GOBJ *fighter_gobj, float *stick_x, float *stick_y);

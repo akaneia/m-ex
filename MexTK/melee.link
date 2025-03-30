@@ -492,7 +492,7 @@
 800DFC70:Fighter_CheckWalkInput
 800EEEC4:Kirby_ExecuteAbilityLossFunction
 800F190C:Kirby_ResetCopyCharVars
-800F1F1C:Fighter_SpawnWallHitGFX
+800F1F1C:Kirby_CheckSpawnWallGFX
 8015CC34:Memcard_GetRules1
 8015CC58:Memcard_GetRules4
 8015ECB0:BGM_GetMenuBGM

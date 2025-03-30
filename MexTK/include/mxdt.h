@@ -209,6 +209,32 @@ typedef struct MexSceneData
     MinorSceneDesc *minor_desc_arr;
 } MexSceneData;
 
+typedef struct MexKirbyData
+{
+    struct {
+        char *filename;
+        char *symbol;
+    } *capfiles;
+    void *capruntime;
+    void *costumes;
+    void *costumeruntime;
+    void *effectids;
+    FtAction **ftcmd;
+} MexKirbyData;
+
+typedef struct MexKirbyFunction
+{
+    void *OnAbilityGain;
+    void *OnAbilityLose;
+    void *OnSpecialN;
+    void *OnSpecialAirN;
+    void *OnHit;
+    void *OnItemInit;
+    FtState **move_logic;
+    void *OnDeath;
+    void *OnFrame;
+} MexKirbyFunction;
+
 typedef struct MexData
 {
     MexMetaData *metadata;
@@ -259,8 +285,8 @@ typedef struct MexData
         } *files;
     } *effect;
     void *item;
-    void *kirby;
-    void *kirby_function;
+    MexKirbyData *kirby_data;
+    MexKirbyFunction *kirby_function;
     MexStageTable *stage;
     GrDesc **stage_desc; // indexed by GrKind (internal ID)
     void *scene;

@@ -69,10 +69,12 @@ struct Effect
     char x29;
 };
 
+// this seems to be used for creating and processing custom userdata for particles?
 struct ptclGenCallback
 {
-    void (*cbSpawnParticle)(Particle *);   // x00
-    void (*cbDestroyParticle)(Particle *); // x04
+    void (*cbSpawnParticle)(Particle *);        // x00
+    void (*cbDestroyParticle)(Particle *);      // x04
+    void (*cbProcessCMD)(Particle *, byte cmd); // x08
 };
 
 struct ptclGen // allocated at 8039d9c8
