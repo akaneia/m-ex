@@ -492,7 +492,7 @@
 800DFC70:Fighter_CheckWalkInput
 800EEEC4:Kirby_ExecuteAbilityLossFunction
 800F190C:Kirby_ResetCopyCharVars
-800F1F1C:Fighter_SpawnWallHitGFX
+800F1F1C:Kirby_CheckSpawnWallGFX
 8015CC34:Memcard_GetRules1
 8015CC58:Memcard_GetRules4
 8015ECB0:BGM_GetMenuBGM
@@ -962,7 +962,7 @@
 8036FB5C:JOBJ_AddAnimAll
 80370780:JOBJ_Anim
 80370928:JOBJ_AnimAll
-803709DC:JObj_DispAll
+803709DC:JOBJ_DispAll
 80370E44:JOBJ_LoadJoint
 80371370:JOBJ_Remove
 80371590:JOBJ_RemoveAll
@@ -978,6 +978,7 @@
 803732E8:JOBJ_SetMtxDirtySub
 803738D0:HSD_StateInitDirect
 803740E8:JOBJ_BillBoard
+803749B0:JOBJ_Disp
 80374A88:CObj_SetEraseColor
 80375404:HSD_GetHeapID
 8037540C:HSD_SetHeapID

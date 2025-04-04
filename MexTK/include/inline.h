@@ -208,7 +208,7 @@ static float ceil(float x)
     }
 }
 
-static void enterKnockback(GOBJ *fighter, int angle, float mag)
+static inline void enterKnockback(GOBJ *fighter, int angle, float mag)
 {
     FighterData *fighter_data = ((FighterData *)fighter->userdata);
 
