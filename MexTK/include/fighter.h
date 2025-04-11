@@ -1403,7 +1403,7 @@ struct ftCommonData
     float x7c;                                 // 0x7c
     float x80;                                 // 0x80
     float x84;                                 // 0x84
-    float x88;                                 // 0x88
+    float lstick_fastfall;                     // 0x88
     float x8c;                                 // 0x8c
     float lstick_rebirthfall;                  // 0x90
     float x94;                                 // 0x94
@@ -3288,7 +3288,7 @@ void Fighter_PhysAir_LimitXVelocity(FighterData *fighter);
 void Fighter_Phys_UseAnimYVelocity(GOBJ *fighter);
 void Fighter_Phys_UseAnimPos(GOBJ *fighter);
 void Fighter_Phys_UseAnimPosAndStick(GOBJ *fighter);
-void Fighter_PhysGround_CalculateVelocity(FighterData * fd, float accel, float terminal, float friction);
+void Fighter_PhysGround_CalculateVelocity(FighterData *fd, float accel, float terminal, float friction);
 int Fighter_CollGround_DefineECB(GOBJ *f, ECBSize *ecb);
 void Fighter_SetGrounded(FighterData *fighter);
 void Fighter_SetGrounded2(FighterData *fighter);
