@@ -114,40 +114,40 @@ struct ptclGen // allocated at 8039d9c8
 
 struct GeneratorAppSRT // allocated at 803a42b0
 {
-    int x0;     // x0
-    int x4;     // x4
-    Vec3 pos;   // x8
-    Vec4 rot;   // x14
-    Vec3 scale; // x24
-    int x30;    // x30
-    int x34;    // x34
-    int x38;    // x38
-    int x3c;    // x3c
-    int x40;    // x40
-    int x44;    // x44
-    int x48;    // x48
-    int x4c;    // x4c
-    int x50;    // x50
-    int x54;    // x54
-    int x58;    // x58
-    int x5c;    // x5c
-    int x60;    // x60
-    int x64;    // x64
-    int x68;    // x68
-    int x6c;    // x6c
-    int x70;    // x70
-    int x74;    // x74
-    int x78;    // x78
-    int x7c;    // x7c
-    int x80;    // x80
-    int x84;    // x84
-    int x88;    // x88
-    int x8c;    // x8c
-    int x90;    // x90
-    int x94;    // x94
-    int x98;    // x98
-    int x9c;    // x9c
-    int xa0;    // xa0
+    int x0;         // x0
+    ptclGen *gen;   // x4
+    Vec3 pos;       // x8
+    Vec4 rot;       // x14
+    Vec3 scale;     // x24
+    int x30;        // x30
+    int x34;        // x34
+    int x38;        // x38
+    int x3c;        // x3c
+    int x40;        // x40
+    int x44;        // x44
+    int x48;        // x48
+    int x4c;        // x4c
+    int x50;        // x50
+    int x54;        // x54
+    int x58;        // x58
+    int x5c;        // x5c
+    int x60;        // x60
+    int x64;        // x64
+    int x68;        // x68
+    int x6c;        // x6c
+    int x70;        // x70
+    int x74;        // x74
+    int x78;        // x78
+    int x7c;        // x7c
+    int x80;        // x80
+    int x84;        // x84
+    int x88;        // x88
+    int x8c;        // x8c
+    int x90;        // x90
+    int x94;        // x94
+    int x98;        // x98
+    int x9c;        // x9c
+    int xa0;        // xa0
     u16 xa2;
 };
 

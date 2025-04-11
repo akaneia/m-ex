@@ -587,6 +587,23 @@ enum FtStateNames
     ASID_THROWNCRAZYHAND,
     ASID_BARRELCANNONWAIT,
 };
+enum FtDemoStateNames
+{
+    ASDEMO_WIN1,
+    ASDEMO_WIN1WAIT,
+    ASDEMO_WIN2,
+    ASDEMO_WIN2WAIT,
+    ASDEMO_NULL,
+    ASDEMO_WIN3,
+    ASDEMO_WIN3WAIT,
+    ASDEMO_SELECTED,
+    ASDEMO_SELECTEDWAIT,
+    ASDEMO_LOSE,
+    ASDEMO_INTROL,
+    ASDEMO_INTROR,
+    ASDEMO_ENDING,
+    ASDEMO_WAIT,
+};
 enum FtAuxillaryAnim
 {
     FTAUXANIM_WIN1,
@@ -3436,6 +3453,8 @@ void Fighter_UpdateModelShift(GOBJ *f);                     // updates the offse
 void Fighter_GivePersistentIntangibility(GOBJ *f, int frames);
 void Fighter_TDI(FighterData *fp);
 void Fighter_PlayQueuedDamageSounds(FighterData *fp);
+void Fighter_UpdateVictimPosition(GOBJ *fighter);
+void Fighter_SetEyeDamaged(GOBJ *fighter);
 GXColor Fighter_GetPlyHUDColor(int ply); // used for lupe, pokemon stadium text color, results viewport border
 /// @brief Checks if fighter should process CPU events for this frame
 /// @param  FighterData pointer
