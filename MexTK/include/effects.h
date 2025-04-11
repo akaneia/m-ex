@@ -34,13 +34,14 @@ struct TexGDesc
     int num;
     struct
     {
-        int img_num;
-        GXTexFmt img_fmt;
-        int x8;
-        int width;
-        int height;
-        int x14;
-        void *img_ptr[];
+        int img_num;      // 0x0
+        GXTexFmt img_fmt; // 0x4
+        int palette_fmt;  // 0x8
+        int width;        // 0xC
+        int height;       // 0x10
+        u16 x14;          // 0x14
+        u16 flags;        // 0x16
+        void *img_ptr[];  // 0x18
     } *data[];
 };
 

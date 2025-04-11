@@ -1073,7 +1073,8 @@
 803A5DA0:Text_DestroyAllSisCanvas
 803A5E70:MainMenu_DestroyAllTextCanvases
 803A5FBC:CSS_FreeText
-803A6048:Text_InitSisHeap
+803a6048:Text_InitSisHeap
+803a5fbc:Text_DestroySisHeap
 803A611C:Text_CreateCanvas
 803A62A0:Text_LoadSdFile
 803A6368:Text_SetSisText

@@ -333,7 +333,6 @@ int MainMenu_GetPadDown(int controller_index);  // returns HSD_BUTTON vals
 u64 MainMenu_GetPadRapid(int controller_index); // returns HSD_BUTTON vals
 int MainMenu_CheckForLRA();
 void MainMenu_DestroyAllTextCanvases(); // destroys all SIS canvases
-void CSS_FreeText();                    //
 int CSS_GetNametagRumble(int player, u8 tag);
 void CSS_InitPlayerData(PlayerData *player);
 void CSS_MenuModelThink(GOBJ *gobj);

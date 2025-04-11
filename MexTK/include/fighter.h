@@ -669,7 +669,7 @@ enum FtScriptCmd
 #define ASID_JUMPS 1004
 #define ASID_FALLS 1005
 
-enum Ft_AttackKind
+typedef enum Ft_AttackKind
 {
     ATKKIND_0,
     ATKKIND_NONE,
@@ -759,7 +759,7 @@ enum Ft_AttackKind
     ATKKIND_85,
     ATKKIND_86,
     ATKKIND_87,
-};
+} Ft_AttackKind;
 typedef enum FtStateKind
 {
     FTSTATEKIND_FREE,        // generally actionable states, like wait, run, jump
@@ -2402,7 +2402,7 @@ struct FighterData
     u8 x2071_x0f : 4;                     // 0x2071, 0x0f
     u8 x2072;                             // 0x2072
     u8 x2073;                             // 0x2073
-    int x2074;                            // 0x2074, this is the start of some struct... present in items as well @ 0xd94
+    int x2074;                            // 0x2074, marth's multi hit side b sets this to his percent. this is the start of some struct... present in items as well @ 0xd94
     int x2078;                            // 0x2078
     int x207c;                            // 0x207c
     int x2080;                            // 0x2080
@@ -2579,8 +2579,8 @@ struct FighterData
         unsigned char ik_rfoot : 1;                    // 0x80 - 0x221d
         unsigned char ik_lfoot : 1;                    // 0x40 - 0x221d
         unsigned char ftvis_reqrevert : 1;             // 0x20 - 0x221d, request all ftvis revert to default next state change
-        unsigned char input_enable : 1;                // 0x10 - 0x221d
-        unsigned char x221d_5 : 1;                     // 0x8 - 0x221d
+        unsigned char input_update_history : 1;        // 0x10 - 0x221d, will update input history
+        unsigned char input_disable : 1;               // 0x8 - 0x221d, disables new inputs from being read
         unsigned char nudge_disable : 1;               // 0x4 - 0x221d
         unsigned char ground_ignore : 1;               // 0x2 - 0x221d
         unsigned char x221d_8 : 1;                     // 0x1 - 0x221d

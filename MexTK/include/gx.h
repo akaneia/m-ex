@@ -247,6 +247,8 @@ typedef enum GXTexFmt
     GX_TF_RGB565,
     GX_TF_RGB5A3,
     GX_TF_RGBA8,
+    GX_TF_CI4 = 8,
+    GX_TF_CI8,
     GX_TF_CMPR = 14,
     GX_CTF_R4 = 32,
     GX_CTF_RA4 = 34,

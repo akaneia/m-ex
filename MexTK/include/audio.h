@@ -4,6 +4,16 @@
 #include "structs.h"
 #include "datatypes.h"
 
+typedef enum BGMKind
+{
+    BGM_HOWTOPLAY = 37,
+    BGM_MENU1 = 52,
+    BGM_TROPHY,
+    BGM_MENU2,
+    BGM_TOU1 = 93,
+    BGM_TOU2 = 94,
+} BGMKind;
+
 typedef enum FGMGroup
 {
     FGMGROUP_PERSIST,   // main, pokemon, nr_name, end
@@ -27,6 +37,14 @@ typedef enum FGM_Main
     FGMMAIN_CS_ERASE_CAUTION1 = 188,
     FGMMAIN_CS_ERASE_CAUTION2,
 } FGM_Main;
+
+typedef enum FGM_Narrator_Select
+{
+
+    FGMNRSELECT_MULTIMAN = 30000,
+    FGMNRSELECT_CHOOSECHAR = 30004,
+    FGMNRSELECT_MELEE,
+} FGM_Narrator_Select;
 
 enum FGMID
 {
@@ -374,7 +392,8 @@ void BGM_Play(int hpsID);
 void BGM_Stop();
 void BGM_Pause();
 void BGM_Resume();
-void BGM_SetVolume(float volume); // 0 - 1
+int BGM_GetPreferredVolume();   // 0 - > 127, derived from sound options in main menu
+void BGM_SetVolume(int volume); // 0 - > 127
 int FGM_CheckActive(u32 fgm_id);
 void FGM_Stop(u32 fgm_id);
 int FGM_SetVolume(u32 sfxid, u8 volume);
