@@ -2291,9 +2291,9 @@ struct FighterData
         int x1950;                     // 0x1950
         float x1954;                   // 0x1954,
         float hitlag_env_frames;       // 0x1958, Environment Hitlag Counter (used for peachs castle switches)
-        float hitlag_frames;           // 0x195c
+        float hitlag_frames;           // 0x195c, remaining hitlag frames
         float vibrate_mult;            // 0x1960
-        float x1964;                   // 0x1964
+        float hitlag_set;              // 0x1964, temp variable, when using a shield with set hitlag, it stores it here (marth counter)
     } dmg;                             //
     struct jump                        // 0x1968
     {                                  //
@@ -2326,8 +2326,8 @@ struct FighterData
         GOBJ *dmg_source;      // 0x19a8, points to the entity that hit the shield
         float hit_direction;   // 0x19ac
         int hit_attr;          // 0x19b0, attribute of the hitbox that collided
-        float x19b4;           // 0x19b4
-        float x19b8;           // 0x19b8
+        float hitlag_set;      // 0x19b4, set amount of hitlag all hits should incur
+        float hitlag_set2;     // 0x19b8
         int dmg_taken3;        // 0x19bc, seems to be the most recent amount of damage taken
     } shield;
     struct shield_bubble // 0x19c0
@@ -2578,9 +2578,9 @@ struct FighterData
         unsigned char x221a_7 : 1;                     // 0x2 - 0x221a
         unsigned char gfx_persist : 1;                 // 0x1 - 0x221a
         unsigned char shield_enable : 1;               // 0x80 - 0x221b
-        unsigned char shield_x40 : 1;                  // 0x40 - 0x221b
+        unsigned char shield_always_refract : 1;       // 0x40 - 0x221b
         unsigned char shield_x20 : 1;                  // 0x20 - 0x221b
-        unsigned char shield_x10 : 1;                  // 0x10 - 0x221b
+        unsigned char shield_x10 : 1;                  // 0x10 - 0x221b, unk peach toad enables this
         unsigned char shield_x8 : 1;                   //  0x8 - 0x221b
         unsigned char x221b_grab : 1;                  // 0x4 - 0x221b, is checked at 80079304, skips some logic
         unsigned char x221b_7 : 1;                     // 0x2 - 0x221b

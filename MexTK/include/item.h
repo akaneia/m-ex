@@ -290,7 +290,7 @@ struct itCommonData
     float xD4;
     int xD8;
     int xDC;
-    float xE0;
+    float shield_refract_arc_begin; // refracts occur between 90 degrees and this angle
     float xE4;
     float xE8;
     float xEC;
@@ -596,14 +596,14 @@ struct ItemData
     int hit_exception_id;                               // 0xac4, cannot hit items with a matching index
     int hurt_num;                                       // 0xac8
     ItHurt it_hurt[2];                                  // 0xacc
-    struct 
-    {
+    struct                                              //
+    {                                                   //
         int xb54;                                       // 0xb54
         int xb58;                                       // 0xb58
         float x1;                                       // 0xb5c
         float x2;                                       // 0xb60
         float y;                                        // 0xb64
-    } footstool;
+    } footstool;                                        //
     int dynamics_xb68;                                  // 0xb68, dynamic_hit_num?
     int xb6c;                                           // 0xb6c, dynamic hit
     int xb70;                                           // 0xb70
@@ -655,8 +655,12 @@ struct ItemData
         int xc48;                                       // 0xc48
         int xc4c;                                       // 0xc4c
         int xc50;                                       // 0xc50
-        float shield_hit_angle;                         // 0xc54, angle at which the projectile touched the shield? 80077854
-        Vec3 shield_hit_xc58;                          // 0xc58 - 0xc60
+        struct                                          //
+        {                                               //
+            float angle_rad;                            // 0xc54, angle at which the projectile touched the shield. angle 0 is side opposite at which the projectile hit
+            Vec2 angle_vec;                             // 0xc58
+            float xc60;                                 // 0xc60
+        } shield;                                       //
         GOBJ *reflect;                                  // 0xc64, pointer to the gobj that reflected this item, is removed after processing the reflection
         float xc68;                                     // 0xc68
         int xc6c;                                       // 0xc6c
@@ -679,8 +683,8 @@ struct ItemData
         int source_ply;                                 // 0xcb0, damage source ply number
         int xcb4;                                       // 0xcb4
         float givedmg_direction;                        // 0xcb8, updated @ 80078184
-        float hitlag_frames;                            // 0xcbc, hitlag frames remaining
-        int xcc0;                                       // 0xcc0
+        float hitlag_remaining;                         // 0xcbc, hitlag frames left, decremented each frame
+        float hitlag_requested;                         // 0xcc0, temp variable, is checked every frame. when > 0 the item will incur hitlag.
         int xcc4;                                       // 0xcc4
         float kb;                                       // 0xcc8
         float takedmg_direction;                        // 0xccc
@@ -788,7 +792,10 @@ struct ItemData
     u8 is_hitlag : 1;                                   // 0xdc9, 0x40
     u8 freeze : 1;                                      // 0xdc9, 0x20
     u8 xdc9_10 : 1;                                     // 0xdc9, 0x10
-    u8 xdc9_f : 4;                                      // 0xdc9, 0xF
+    u8 xdc9_08 : 1;                                     // 0xdc9, 0x08
+    u8 xdc9_04 : 1;                                     // 0xdc9, 0x04
+    u8 xdc9_02 : 1;                                     // 0xdc9, 0x02
+    u8 xdc9_01 : 1;                                     // 0xdc9, 0x01
     u16 xdca1 : 1;                                      // 0xdca 0x80
     u16 xdca2 : 1;                                      // 0xdca 0x40
     u16 xdca3 : 1;                                      // 0xdca 0x20
@@ -822,7 +829,7 @@ struct ItemData
     unsigned char xdce2 : 1;                            // 0xdce, 0x40
     unsigned char xdce3 : 1;                            // 0xdce, 0x20
     unsigned char xdce4 : 1;                            // 0xdce, 0x10
-    unsigned char xdce5 : 1;                            // 0xdce, 0x08
+    unsigned char is_always_shield_refract : 1;         // 0xdce, 0x08, this is enabled @ ?. when enabled all shield hits will refract
     unsigned char xdce6 : 1;                            // 0xdce, 0x04, is checked when determining if an item should bounce off a shield 80269df0
     unsigned char is_detect : 1;                        // 0xdce, 0x02, is flipped when a detect hitbox comes in contact with a hurtbox
     unsigned char xdce8 : 1;                            // 0xdce, 0x01
