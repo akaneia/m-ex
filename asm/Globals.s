@@ -57,8 +57,8 @@
 .set Stage_PositionHazardCount,-0x5128
 .set Stage_GrabHazardCount,-0x512C
 .set Stage_DamageHazardCount,-0x5130
-.set Audio_NextAreaInSSMHeap,-0x5258
-.set Audio_UnkConstant,-0x5250
+.set Audio_HeapLoadedFilesSize,-0x5258
+.set Audio_HeapPendingFilesSize,-0x5250
 .set Audio_TotalSSMMemory,-0x5268
 .set GObj_Lists,-0x3E74
 

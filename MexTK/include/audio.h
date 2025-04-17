@@ -372,6 +372,8 @@ static u8 *stc_bgm_isLoadingHPSChunk = R13 + -0x3f28;              // flag that 
 static int *stc_bgm_aramAlloc = R13 + -0x3f20;                     // start of the 3 hps chunk circular buffer
 static int *stc_fgm_tick = R13 + -0x3f14;                          // how many times fgm audio has been updated (incremented @ 8038ad44)
 static FGMLive *stc_last_fgmlive = R13 + -0x3f0c;                  // points to the most recently created FGMLive struct
+static int *stc_audioheap_loaded_size = 0x804d6448;                // -0x5258, size of the files loaded into the audio heap
+static int *stc_audioheap_pending_size = 0x804d6450;               // -0x5250, size of the files pending
 
 int SFX_Play(int sfxID);
 int SFX_PlayRaw(int sfx, int volume, int pan, int instance_slot, int fgm_kind); // any instance_slot other than 0 will remember the current instance and destroy it if another is requested to play with that slot

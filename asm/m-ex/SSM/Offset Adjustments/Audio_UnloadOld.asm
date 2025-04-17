@@ -8,7 +8,10 @@
 #852 / 0x354 = SSM_IsLoadedCopy_OFST
 #    / 0x424 = Footer
 
-.set  REG_Offset,25
+.set  REG_SSMStruct,25
 
-lwz REG_Offset,OFST_SSMStruct(rtoc)
-lwz REG_Offset,Arch_SSMRuntimeStruct_IsLoadedCopy(REG_Offset)
+lwz REG_SSMStruct, OFST_SSMStruct(rtoc)
+
+lwz r28, Arch_SSMRuntimeStruct_IsLoadedOrig(REG_SSMStruct)
+lwz r26, Arch_SSMRuntimeStruct_ToLoadCopy(REG_SSMStruct)
+lwz r25, Arch_SSMRuntimeStruct_IsLoadedCopy(REG_SSMStruct)
