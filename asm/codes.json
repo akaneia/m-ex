@@ -1014,6 +1014,19 @@
       ]
     },
     {
+      "name": "!QOL | CustomSaveData",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "803bac68",
+          "annotation": "Part1",
+          "sourceFile": "qol\\CustomSaveData\\Part1.asm"
+        }
+      ]
+    },
+    {
       "name": "!QOL | Default Tournament Settings",
       "authors": [],
       "description": [],
