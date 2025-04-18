@@ -273,15 +273,15 @@ struct grGroundParam
     u16 item_rates[35];         // 0x6a
     void *bgm_data;             // 0xb0
     int bgm_num;                // 0xb4
-    int xb8;                    // 0xb8
-    int xbc;                    // 0xbc
-    int xc0;                    // 0xc0
-    int xc4;                    // 0xc4
-    int xc8;                    // 0xc8
-    int xcc;                    // 0xcc
-    int xd0;                    // 0xd0
-    int xd4;                    // 0xd4
-    int xd8;                    // 0xd8
+    GXColor bubble_top_left;    // 0xb8
+    GXColor bubble_top_center;  // 0xbc
+    GXColor bubble_top_right;   // 0xc0
+    GXColor bubble_mid_left;    // 0xc4
+    GXColor bubble_mid_center;  // 0xc8
+    GXColor bubble_mid_right;   // 0xcc
+    GXColor bubble_bot_left;    // 0xd0
+    GXColor bubble_bot_center;  // 0xd4
+    GXColor bubble_bot_right;   // 0xd8
 };
 
 struct Stage
