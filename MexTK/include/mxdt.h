@@ -267,10 +267,35 @@ typedef struct MexData
             } *costume_symbol_table;       // array of these per costume
         } *costume_file;                   // 0x14, array of these per character
         // theres more im just lazy
-        void *ftdemo_filenames;
-        void *anim_filenames;
+        struct                             //
+        {                                  //
+            char *result;
+            char *intro;
+            char *ending;
+            char *wait;
+        } **ftdemo;                   // 0x18, array of these per character
+        void *anim_filenames;         // 0x1C
         void *anim_num;
         u8 *effect_index;
+        char **result_file;
+        float *result_scale;
+        int *victory_theme;
+        int *announcer_call;
+        void *ssm_files;
+        void *costume_pointers;
+        void *x40;
+        u8 *walljump;
+        void *rst_runtime;
+        void *item_lookup;
+        u16 *target_test_lookup;
+        void *fighter_music;
+        void *vi_files;
+        char **endclassicfiles;
+        char **endadventurefiles;
+        char **endallstarfiles;
+        char **endmoviefiles;
+        int *race_to_finish;
+        int *demo_params;
     } *fighter; // indexed by ft_kind
     void *fighter_function;
     void *ssm;

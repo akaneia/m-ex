@@ -11,6 +11,7 @@
 8000B09C:JOBJ_CheckAObjEnd
 8000B1CC:JOBJ_GetWorldPosition
 8000B804:JOBJ_ResetFromDesc
+8000BA0C:JOBJ_SetAnimationRate
 8000BDB4:JOBJ_GetJointAnimCurrFrame
 8000BDB4:JOBJ_GetJointAnimNextFrame
 8000BE40:JOBJ_GetJointAnimFrameTotal

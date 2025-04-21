@@ -743,6 +743,7 @@ static u8 *objkind_jobj = R13 + -(0x3E57);
 static u8 *objkind_fog = R13 + -(0x3E58);
 
 /*** Functions ***/
+void JOBJ_SetAnimationRate(JOBJ *jobj, float rate);
 int JOBJ_GetWorldPosition(JOBJ *source, Vec3 *add, Vec3 *dest);
 void JOBJ_SetMtxDirtySub(JOBJ *jobj);
 void JOBJ_SetupMtxSub(JOBJ *jobj);
