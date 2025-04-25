@@ -32,6 +32,16 @@ backup
   branchl r12,0x80016c64
   mr REG_Archive,r3
 
+# check for function
+  bl  MenuFunctionSymbolName
+  mflr  r4
+  branchl r12,0x80380358
+
+  cmpwi r3,0
+  beq SkipLoadFunction
+  branchl r12,Reloc
+
+SkipLoadFunction:
 # store pointer to symbol
   lwz REG_mexMenu,0x80(sp)
   stw REG_mexMenu,OFST_mexMenu(r13)
@@ -186,6 +196,15 @@ SymbolName:
 blrl
 .string "mexMenu"
 .align 2
+
+MenuFunctionSymbolName:
+blrl
+.string "menuFunction"
+.align 2
+
+MenuFunction:
+blrl
+.long 0
 
 ##############################################
 
