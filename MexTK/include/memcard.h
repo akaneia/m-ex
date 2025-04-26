@@ -2769,15 +2769,31 @@ struct Rules1
     u8 x1;
     u8 match_kind;      // 0x2
     u8 time;            // 0x3
+
     u8 stock_num;       // 0x4
     u8 handicap;        // 0x5
     u8 dmg_ratio;       // 0x6
     u8 stage_selection; // 0x7
+
     u8 stock_time;      // 0x8
     u8 friendly_fire;   // 0x9
     u8 pause;           // 0xa
     u8 score_display;   // 0xb
+
     u8 self_destruct;   // 0xc
+    u8 x0d;             // 0xd
+    u8 x0e;             // 0xe
+    u8 x0f;             // 0xf
+
+    u8 x10;             // 0x10
+    u8 x11;             // 0x11
+    u8 x12;             // 0x12
+    u8 x13;             // 0x13
+
+    u8 x14;             // 0x14
+    u8 x15;             // 0x15
+    u8 x16;             // 0x16
+    u8 x17;             // 0x17
 };
 
 struct Rules4

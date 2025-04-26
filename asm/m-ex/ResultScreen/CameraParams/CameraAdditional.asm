@@ -5,7 +5,8 @@
 cmpwi r23,0
 beq Original
 
-subi r0,r23,0x90
+add r3,r23,r5
+subi r0,r3,0x690
 b Exit
 
 Original:
