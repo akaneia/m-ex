@@ -796,8 +796,7 @@ struct ItemData
     u8 xdc9_04 : 1;                                     // 0xdc9, 0x04
     u8 xdc9_02 : 1;                                     // 0xdc9, 0x02
     u8 xdc9_01 : 1;                                     // 0xdc9, 0x01
-    u16 xdca1 : 1;                                      // 0xdca 0x80
-    u16 xdca2 : 1;                                      // 0xdca 0x40
+    u16 xdca1 : 2;                                      // 0xdca 0x80
     u16 xdca3 : 1;                                      // 0xdca 0x20
     u16 xdca4 : 1;                                      // 0xdca 0x10
     u16 xdca5 : 1;                                      // 0xdca 0x08
