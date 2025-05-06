@@ -1116,6 +1116,55 @@
       ]
     },
     {
+      "name": "!QOL | ReduceResultScreenLag",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "801799b0",
+          "annotation": "clapping",
+          "sourceFile": "qol\\ReduceResultScreenLag\\clapping.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80179de0",
+          "annotation": "rewrite_prologue",
+          "sourceFile": "qol\\ReduceResultScreenLag\\rewrite_prologue.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80179dcc",
+          "annotation": "slot1",
+          "sourceFile": "qol\\ReduceResultScreenLag\\slot1.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80179dd0",
+          "annotation": "slot1_",
+          "sourceFile": "qol\\ReduceResultScreenLag\\slot1_.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80179e34",
+          "annotation": "slot2",
+          "sourceFile": "qol\\ReduceResultScreenLag\\slot2.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80179e9c",
+          "annotation": "slot3",
+          "sourceFile": "qol\\ReduceResultScreenLag\\slot3.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80179f04",
+          "annotation": "slot4",
+          "sourceFile": "qol\\ReduceResultScreenLag\\slot4.asm"
+        }
+      ]
+    },
+    {
       "name": "!QOL | UCF 0",
       "authors": [],
       "description": [],

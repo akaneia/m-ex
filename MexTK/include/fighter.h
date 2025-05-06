@@ -2304,8 +2304,8 @@ struct FighterData
     int x1970;                         // 0x1970
     GOBJ *item_held;                   // 0x1974
     GOBJ *x1978;                       // 0x1978
-    int x197c;                         // 0x197c
-    GOBJ *item_head;                   // 0x1980
+    GOBJ *bunny_hood;                  // 0x197c
+    GOBJ *lip_flower;                  // 0x1980
     GOBJ *item_held_spec;              // 0x1984, special held item
     struct hurt                        // 0x1988
     {                                  //
