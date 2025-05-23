@@ -129,13 +129,13 @@ CreateHat:
   branchl r12,0x8037abc8
   stw r3,0x2244(REG_FighterData)
 
+# Init PObj
+  branchl r12,0x80074148
+
 # Instantiate JObj
   mr r3,REG_HatSymbol
   branchl r12,0x80370e44
   stw r3,0x223C(REG_FighterData)
-
-# Init PObj
-  branchl r12,0x80074148
 
 # Set model addition flag
   li r3,1

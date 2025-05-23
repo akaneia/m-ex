@@ -63,6 +63,9 @@ ModelAddDescArr_Loop:
             branchl r12,0x8037abc8
             stw r3,mdAdd_DOBJLookup + mdAdd_dobjarr(REG_FtModelAdd)
 
+            # Init PObj
+            branchl r12,0x80074148
+
             # Instantiate JObj
             lwz r3,mdAddDesc_JOBJ(REG_ModelAddDesc)
             branchl r12,HSD_JObjLoadJoint
@@ -71,9 +74,6 @@ ModelAddDescArr_Loop:
             # Save attach bone
             lwz r0,mdAddDesc_attachbone(REG_ModelAddDesc)
             stw r0,mdAdd_attachbone(REG_FtModelAdd)
-
-            # Init PObj
-            branchl r12,0x80074148
 
             # Unk PObj
             branchl r12,0x80074170
