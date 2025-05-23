@@ -297,7 +297,22 @@ typedef struct MexData
         int *race_to_finish;
         int *demo_params;
     } *fighter; // indexed by ft_kind
-    void *fighter_function;
+    struct
+    {
+        void (**OnLoad)(GOBJ *fighter);
+        void (**OnDeath)(GOBJ *fighter);
+        void (**OnUnk)(GOBJ *fighter);
+        FtState **move_logic;
+        void (**SpecialN)(GOBJ *fighter);
+        void (**SpecialNAir)(GOBJ *fighter);
+        void (**SpecialS)(GOBJ *fighter);
+        void (**SpecialSAir)(GOBJ *fighter);
+        void (**SpecialHi)(GOBJ *fighter);
+        void (**SpecialHiAir)(GOBJ *fighter);
+        void (**SpecialLw)(GOBJ *fighter);
+        void (**SpecialLwAir)(GOBJ *fighter);
+        // ... and various more
+    } *fighter_function;
     void *ssm;
     MexMusicTable *music;
     struct
