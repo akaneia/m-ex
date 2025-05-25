@@ -33,91 +33,6 @@
       ]
     },
     {
-      "name": "!ADDITIONAL | On Crash",
-      "authors": [],
-      "description": [],
-      "build": [
-        {
-          "type": "inject",
-          "address": "80160154",
-          "annotation": "Clear Bootup OSReports",
-          "sourceFile": "additional\\On Crash\\Clear Bootup OSReports.asm"
-        },
-        {
-          "type": "inject",
-          "address": "801fe738",
-          "annotation": "Disable Brinstar OSReport",
-          "sourceFile": "additional\\On Crash\\Disable Brinstar OSReport.asm"
-        },
-        {
-          "type": "inject",
-          "address": "800a0080",
-          "annotation": "Disable Effect AnimList OSReport",
-          "sourceFile": "additional\\On Crash\\Disable Effect AnimList OSReport.asm"
-        },
-        {
-          "type": "inject",
-          "address": "801f3500",
-          "annotation": "Disable Fourside OSReport",
-          "sourceFile": "additional\\On Crash\\Disable Fourside OSReport.asm"
-        },
-        {
-          "type": "inject",
-          "address": "801f35c0",
-          "annotation": "Disable Fourside OSReport2",
-          "sourceFile": "additional\\On Crash\\Disable Fourside OSReport2.asm"
-        },
-        {
-          "type": "inject",
-          "address": "801c3a84",
-          "annotation": "Disable PS OSReport",
-          "sourceFile": "additional\\On Crash\\Disable PS OSReport.asm"
-        },
-        {
-          "type": "inject",
-          "address": "80202a40",
-          "annotation": "Disable YoshisIsland OSReport",
-          "sourceFile": "additional\\On Crash\\Disable YoshisIsland OSReport.asm"
-        },
-        {
-          "type": "inject",
-          "address": "80394a6c",
-          "annotation": "Display Tweet Message And Version Number",
-          "sourceFile": "additional\\On Crash\\Display Tweet Message And Version Number.asm"
-        },
-        {
-          "type": "inject",
-          "address": "80228aec",
-          "annotation": "Dont Output Compile Date on Assert",
-          "sourceFile": "additional\\On Crash\\Dont Output Compile Date on Assert.asm"
-        },
-        {
-          "type": "inject",
-          "address": "80228bf0",
-          "annotation": "Dont Output Compile Date on Invalid Read",
-          "sourceFile": "additional\\On Crash\\Dont Output Compile Date on Invalid Read.asm"
-        },
-        {
-          "type": "inject",
-          "address": "80397878",
-          "annotation": "Enable OSReport Print to Screen",
-          "sourceFile": "additional\\On Crash\\Enable OSReport Print to Screen.asm"
-        },
-        {
-          "type": "inject",
-          "address": "80394afc",
-          "annotation": "Only Show First 8 Lines of Stack",
-          "sourceFile": "additional\\On Crash\\Only Show First 8 Lines of Stack.asm"
-        },
-        {
-          "type": "inject",
-          "address": "80397c10",
-          "annotation": "Reboot With LRAStart",
-          "sourceFile": "additional\\On Crash\\Reboot With LRAStart.asm"
-        }
-      ]
-    },
-    {
       "name": "!ADDITIONAL | Skip Memcard Prompt",
       "authors": [],
       "description": [],
@@ -1010,19 +925,6 @@
           "address": "8002c5f0",
           "annotation": "Pause Camera Snaps To Off Screen Players",
           "sourceFile": "qol\\Better Camera [Achilles,UnclePunch]\\Pause Camera Snaps To Off Screen Players\\Pause Camera Snaps To Off Screen Players.asm"
-        }
-      ]
-    },
-    {
-      "name": "!QOL | CustomSaveData",
-      "authors": [],
-      "description": [],
-      "build": [
-        {
-          "type": "inject",
-          "address": "803bac68",
-          "annotation": "Part1",
-          "sourceFile": "qol\\CustomSaveData\\Part1.asm"
         }
       ]
     },

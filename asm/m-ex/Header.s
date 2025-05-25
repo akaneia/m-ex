@@ -28,6 +28,7 @@
 .set  GetStockFrame,0x803d7060
 .set  MenuThink,0x803d7090
 .set  FtModelAdd_DObjToggle,0x803d7098
+.set GetSaveFileName,0x803d70a8
 
 #Custom Static Variables
 .set  PersistHeapNum, 5 + 2
