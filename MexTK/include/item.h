@@ -572,7 +572,7 @@ struct ItemData
     ItemState *item_states;                             // 0xbc
     int air_state;                                      // 0xc0
     itData *itData;                                     // 0xc4
-    JOBJ *joint;                                        // 0xc8
+    JOBJ *joint;                                        // 0xc8, is this a JOBJDesc instead??
     itCommonAttr *common_attr;                          // 0xcc
     int xd0;                                            // 0xd0
     ItDynamicBoneset dynamics_boneset[24];              // 0xd4
@@ -714,7 +714,7 @@ struct ItemData
         void (*anim)(GOBJ *item);                       // 0xd14
         void (*phys)(GOBJ *item);                       // 0xd18
         void (*coll)(GOBJ *item);                       // 0xd1c
-        void (*accessory)(GOBJ *item);                  // 0xd20
+        void (*accessory)(GOBJ *item);                  // 0xd20, reset upon item state change (only runs if is_hitlag == 0?)
         void (*on_detect)(GOBJ *item);                  // 0xd24
         void (*on_enter_hitlag)(GOBJ *item);            // 0xd28, runs after applying hitlag in damage apply proc 8026a62c
         void (*on_exit_hitlag)(GOBJ *item);             // 0xd2c, runs after exiting hitlag in hitlag update proc 8026a200
@@ -726,7 +726,7 @@ struct ItemData
     int xd40;                                           // 0xd40
     float lifetime;                                     // 0xd44
     int xd48;                                           // 0xd48
-    int xd4c;                                           // 0xd4c
+    int xd4c;                                           // 0xd4c, used as ammo counter for lgun
     int land_num;                                       // 0xd50
     int throw_num;                                      // 0xd54
     int xd58;                                           // 0xd58
