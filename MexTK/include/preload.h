@@ -151,7 +151,6 @@ int Preload_CheckFileStatus(int entrynum);                                      
 int Preload_CheckIfFilesAreLoading(int preload_flags);                                                                                                               // use PRELOADFLAG_ definitions
 void Preload_FreeUnneededInitializedArchivesInHeap(PreloadHeapKind heap_kind);                                                                                       // arg is heap_kind in PreloadEntry
 void Preload_Wait(int preload_flags);                                                                                                                                // will wait until all preload entries with the flags specified are finished loading before returning, use PRELOADFLAG_ definitions
-void Preload_LoadFighter(CharacterKind c_kind, int costume);
 void *Preload_AllocFromHeap(PreloadHeapKind heap_kind, int size);
 void Preload_FreeToHeap(void *ptr, int size);
 #endif

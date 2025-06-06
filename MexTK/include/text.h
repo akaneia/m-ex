@@ -99,7 +99,8 @@ void Text_LoadSdFile(int index, char *filename, char *symbol);
 void Text_SetSisText(Text *text, int text_index);
 void Text_DestroyAllSisCanvas(int sis_id);
 void Text_DestroyCanvas(TextCanvas *);
-void Text_InitSisHeap();
+void Text_InitSisHeap(int size);
+void Text_DestroySisHeap();
 
 /*** Variables ***/
 // Text data

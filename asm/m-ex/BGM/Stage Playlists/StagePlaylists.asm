@@ -14,6 +14,19 @@
   mr  REG_Arg3,r5
 #Check if this stage has a playlist
   mr  r3,REG_StageExtID
+
+# check if vs mode stage
+  cmpwi r3,32
+  ble UsePlaylist
+
+# check if mex stage
+  cmpwi r3, 288
+  bge UsePlaylist
+
+  b Original
+
+UsePlaylist:
+# get internal id
   branchl r12,0x8022519c
   lwz r4,OFST_mexData(rtoc)
   lwz r4,Arch_Map(r4)

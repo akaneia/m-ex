@@ -130,10 +130,10 @@
 #define PROJ_FRUSTRUM 2
 #define PROJ_ORTHO 3
 
-// Anim flags
+// Anim flags (used for JOBJ_XByFlags)
 #define JOBJ_ANIM 0x1
-#define MOBJ_ANIM 0x80
-#define TOBJ_ANIM 0x400
+#define MOBJ_ANIM 0x4
+#define TOBJ_ANIM 0x10
 #define ALL_ANIM 0x7FF
 
 // Macro
@@ -167,6 +167,14 @@
             this_jobj = jobj;                                 \
         JOBJ_GetWorldPosition(this_jobj, 0, pos);             \
     }
+
+typedef enum ForEachAnimFlag //  (used for JOBJ_ForEachAnim)
+{
+    AOBJFLAG_JOBJ = 0x1,
+    AOBJFLAG_MOBJ = 0x80,
+    AOBJFLAG_TOBJ = 0x400,
+    AOBJFLAG_ALL = 0x7FF,
+} ForEachAnimFlag;
 
 typedef enum HSD_ObjKind
 {
@@ -210,7 +218,7 @@ struct GOBJ
 
 struct GOBJProc
 {
-    GOBJ *parent;
+    GOBJProc *child;
     GOBJProc *next;
     GOBJProc *prev;
     char s_link;     // 0xC
@@ -735,6 +743,7 @@ static u8 *objkind_jobj = R13 + -(0x3E57);
 static u8 *objkind_fog = R13 + -(0x3E58);
 
 /*** Functions ***/
+void JOBJ_SetAnimationRate(JOBJ *jobj, float rate);
 int JOBJ_GetWorldPosition(JOBJ *source, Vec3 *add, Vec3 *dest);
 void JOBJ_SetMtxDirtySub(JOBJ *jobj);
 void JOBJ_SetupMtxSub(JOBJ *jobj);
@@ -752,11 +761,13 @@ void JOBJ_SetFlagsAll(JOBJ *joint, int flags);
 void JOBJ_ClearFlags(JOBJ *joint, int flags);
 void JOBJ_ClearFlagsAll(JOBJ *joint, int flags);
 void JOBJ_BillBoard(JOBJ *joint, Mtx *m, Mtx *mx);
-void JOBJ_ForEachAnim(JOBJ *joint, int unk, u16 flags, void *cb, int argkind, ...); // flags: 0x400 matanim, 0x20 jointanim, argkind specifies how to pop args off the va_list
+void JOBJ_ForEachAnim(JOBJ *joint, int unk, ForEachAnimFlag flags, void *cb, int argkind, ...); // argkind specifies how to pop args off the va_list
 void JOBJ_Anim(JOBJ *joint);
 void JOBJ_AnimAll(JOBJ *joint);
 void JOBJ_AddAnimAll(JOBJ *joint, void *animjoint, void *matanimjoint, void *shapeanimjoint);
+void JOBJ_AddAnim(JOBJ *joint, void *animjoint, void *matanimjoint, void *shapeanimjoint);
 void JOBJ_RemoveAnimAll(JOBJ *joint);
+void JOBJ_RemoveAnim(JOBJ *joint);
 void JOBJ_ReqAnim(JOBJ *joint, float frame);
 void JOBJ_ReqAnimByFlags(JOBJ *joint, int flags, float frame);
 void JOBJ_ReqAnimAll(JOBJ *joint, float unk);
@@ -768,7 +779,8 @@ void JOBJ_SetAllMOBJFlags(JOBJ *joint, int flags);
 void JOBJ_SetFlagAllMOBJ(JOBJ *joint, int flags); // enables this flag for all mobjs
 int JOBJ_CheckAObjEnd(JOBJ *joint);
 void JOBJ_CompileTEVAllMOBJ(JOBJ *joint);
-void JObj_DispAll(JOBJ *joint, Mtx *vmtx, int rendermode, int mobj_flags);
+void JOBJ_DispAll(JOBJ *joint, Mtx *vmtx, int rendermode, int mobj_flags);
+void JOBJ_Disp(JOBJ *joint, Mtx *vmtx, int rendermode, int mobj_flags);
 void JOBJ_AttachPosition(JOBJ *to_attach, JOBJ *attach_to);
 void JOBJ_AttachPositionRotation(JOBJ *to_attach, JOBJ *attach_to);
 GOBJ *JOBJ_LoadSet(int is_hidden, JOBJSet *set, int anim_id, float frame, int p_link, int gx_link, int is_add_anim, void *cb); // 8019035c
@@ -781,6 +793,8 @@ void AOBJ_StopAnim(AOBJ *aobj);
 void AOBJ_SetRate(AOBJ *aobj, float rate);
 void AOBJ_SetFlags(AOBJ *aobj, int flags);
 void AOBJ_ClearFlags(AOBJ *aobj, int flags);
+AOBJ *AOBJ_LoadDesc(int *desc);
+void AOBJ_InterpretAnim(AOBJ *anim, int *object, int *callback);
 void DOBJ_SetFlags(DOBJ *dobj, int flags);
 void DOBJ_ClearFlags(DOBJ *dobj, int flags);
 void DOBJ_AddAnimAll(DOBJ *dobj, void *matanim, void *textureanim);
@@ -817,7 +831,12 @@ void GObj_AddGXLink(GOBJ *gobj, void *cb, int gx_link, int gx_pri);
 void GObj_DestroyGXLink(GOBJ *gobj);
 void GObj_GXReorder(GOBJ *gobj, int unk);
 GOBJProc *GObj_AddProc(GOBJ *gobj, void *callback, int priority);
+/// @brief Removes all procs for GObj
+/// @param gobj 
 void GObj_RemoveProc(GOBJ *gobj);
+/// @brief Removes and deletes specific GObjProc
+/// @param proc 
+void GOBJ_DeleteProc(GOBJProc *proc);
 void GObj_AddObject(GOBJ *gobj, u8 obj_kind, void *object);
 void GObj_FreeObject(GOBJ *gobj);
 void GObj_AddUserData(GOBJ *gobj, int userDataKind, void *destructor, void *userData);
@@ -851,4 +870,8 @@ void MOBJ_SetToonTextureImage(_HSD_ImageDesc *);
 void MOBJ_ReqAnim(MOBJ *, float frame);
 void MObj_Anim(MOBJ *);
 void GObj_CopyGXPri(GOBJ *target, GOBJ *source);
+_HSD_ImageDesc *AllocImageDesc();
+void FreeImageDesc(_HSD_ImageDesc *);
+_HSD_Tlut *AllocTlut();
+void FreeTlut(_HSD_Tlut *);
 #endif

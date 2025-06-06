@@ -1,32 +1,6 @@
 {
   "codes": [
     {
-      "name": "!ADDITIONAL | Initialize Item Data",
-      "authors": [],
-      "description": [],
-      "build": [
-        {
-          "type": "inject",
-          "address": "80268754",
-          "annotation": "Initialize Item Data",
-          "sourceFile": "additional\\Initialize Item Data.asm"
-        }
-      ]
-    },
-    {
-      "name": "!ADDITIONAL | Initialize Stage Data",
-      "authors": [],
-      "description": [],
-      "build": [
-        {
-          "type": "inject",
-          "address": "801c154c",
-          "annotation": "Initialize Stage Data",
-          "sourceFile": "additional\\Initialize Stage Data.asm"
-        }
-      ]
-    },
-    {
       "name": "!ADDITIONAL | Use Save Banner #1",
       "authors": [],
       "description": [],
@@ -55,91 +29,6 @@
           "address": "80172898",
           "annotation": "Disable Trophy Messages",
           "sourceFile": "additional\\Disable Special Records\\Disable Trophy Messages.asm"
-        }
-      ]
-    },
-    {
-      "name": "!ADDITIONAL | On Crash",
-      "authors": [],
-      "description": [],
-      "build": [
-        {
-          "type": "inject",
-          "address": "80160154",
-          "annotation": "Clear Bootup OSReports",
-          "sourceFile": "additional\\On Crash\\Clear Bootup OSReports.asm"
-        },
-        {
-          "type": "inject",
-          "address": "801fe738",
-          "annotation": "Disable Brinstar OSReport",
-          "sourceFile": "additional\\On Crash\\Disable Brinstar OSReport.asm"
-        },
-        {
-          "type": "inject",
-          "address": "800a0080",
-          "annotation": "Disable Effect AnimList OSReport",
-          "sourceFile": "additional\\On Crash\\Disable Effect AnimList OSReport.asm"
-        },
-        {
-          "type": "inject",
-          "address": "801f3500",
-          "annotation": "Disable Fourside OSReport",
-          "sourceFile": "additional\\On Crash\\Disable Fourside OSReport.asm"
-        },
-        {
-          "type": "inject",
-          "address": "801f35c0",
-          "annotation": "Disable Fourside OSReport2",
-          "sourceFile": "additional\\On Crash\\Disable Fourside OSReport2.asm"
-        },
-        {
-          "type": "inject",
-          "address": "801c3a84",
-          "annotation": "Disable PS OSReport",
-          "sourceFile": "additional\\On Crash\\Disable PS OSReport.asm"
-        },
-        {
-          "type": "inject",
-          "address": "80202a40",
-          "annotation": "Disable YoshisIsland OSReport",
-          "sourceFile": "additional\\On Crash\\Disable YoshisIsland OSReport.asm"
-        },
-        {
-          "type": "inject",
-          "address": "80394a6c",
-          "annotation": "Display Tweet Message And Version Number",
-          "sourceFile": "additional\\On Crash\\Display Tweet Message And Version Number.asm"
-        },
-        {
-          "type": "inject",
-          "address": "80228aec",
-          "annotation": "Dont Output Compile Date on Assert",
-          "sourceFile": "additional\\On Crash\\Dont Output Compile Date on Assert.asm"
-        },
-        {
-          "type": "inject",
-          "address": "80228bf0",
-          "annotation": "Dont Output Compile Date on Invalid Read",
-          "sourceFile": "additional\\On Crash\\Dont Output Compile Date on Invalid Read.asm"
-        },
-        {
-          "type": "inject",
-          "address": "80397878",
-          "annotation": "Enable OSReport Print to Screen",
-          "sourceFile": "additional\\On Crash\\Enable OSReport Print to Screen.asm"
-        },
-        {
-          "type": "inject",
-          "address": "80394afc",
-          "annotation": "Only Show First 8 Lines of Stack",
-          "sourceFile": "additional\\On Crash\\Only Show First 8 Lines of Stack.asm"
-        },
-        {
-          "type": "inject",
-          "address": "80397c10",
-          "annotation": "Reboot With LRAStart",
-          "sourceFile": "additional\\On Crash\\Reboot With LRAStart.asm"
         }
       ]
     },
@@ -1125,6 +1014,55 @@
           "address": "8016ded4",
           "annotation": "costume id",
           "sourceFile": "qol\\Limit Costume ID\\costume id.asm"
+        }
+      ]
+    },
+    {
+      "name": "!QOL | ReduceResultScreenLag",
+      "authors": [],
+      "description": [],
+      "build": [
+        {
+          "type": "inject",
+          "address": "801799b0",
+          "annotation": "clapping",
+          "sourceFile": "qol\\ReduceResultScreenLag\\clapping.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80179de0",
+          "annotation": "rewrite_prologue",
+          "sourceFile": "qol\\ReduceResultScreenLag\\rewrite_prologue.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80179dcc",
+          "annotation": "slot1",
+          "sourceFile": "qol\\ReduceResultScreenLag\\slot1.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80179dd0",
+          "annotation": "slot1_",
+          "sourceFile": "qol\\ReduceResultScreenLag\\slot1_.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80179e34",
+          "annotation": "slot2",
+          "sourceFile": "qol\\ReduceResultScreenLag\\slot2.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80179e9c",
+          "annotation": "slot3",
+          "sourceFile": "qol\\ReduceResultScreenLag\\slot3.asm"
+        },
+        {
+          "type": "inject",
+          "address": "80179f04",
+          "annotation": "slot4",
+          "sourceFile": "qol\\ReduceResultScreenLag\\slot4.asm"
         }
       ]
     },

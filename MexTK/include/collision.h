@@ -282,6 +282,13 @@ int GrColl_GetPosDifference(int line_index, Vec3 *pos, Vec3 *return_pos);
 int GrColl_GetLineInfo(int line_index, Vec3 *r4, void *r5, int *flags, Vec3 *return_slope);
 void GrColl_GetLineSlope(int line_index, Vec3 *return_slope);
 int GrColl_CheckIfLineEnabled(int line_index);
+void GrColl_UpdateVertexPosition(int index, float x, float y);
+CollGroup *GrColl_GetJoints();
+void GrColl_EnableGroup(int group_id);
+void GrColl_RecalculateRange(int group_id);
+void GrColl_InitMovingGroup(int group_id, JOBJ *jobj, int child_index);
+void GrColl_UpdateMovingGroup(int group_id);
+void GrColl_SetupMovingGroup(int group_id);
 
 static int *stc_colltest = R13 + (COLL_TEST);
 static CollGroup **stc_firstcollgroup = R13 + (-0x51DC);

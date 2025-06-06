@@ -34,13 +34,14 @@ struct TexGDesc
     int num;
     struct
     {
-        int img_num;
-        GXTexFmt img_fmt;
-        int x8;
-        int width;
-        int height;
-        int x14;
-        void *img_ptr[];
+        int img_num;      // 0x0
+        GXTexFmt img_fmt; // 0x4
+        int palette_fmt;  // 0x8
+        int width;        // 0xC
+        int height;       // 0x10
+        u16 x14;          // 0x14
+        u16 flags;        // 0x16
+        void *img_ptr[];  // 0x18
     } *data[];
 };
 
@@ -69,10 +70,12 @@ struct Effect
     char x29;
 };
 
+// this seems to be used for creating and processing custom userdata for particles?
 struct ptclGenCallback
 {
-    void (*cbSpawnParticle)(Particle *);   // x00
-    void (*cbDestroyParticle)(Particle *); // x04
+    void (*cbSpawnParticle)(Particle *);        // x00
+    void (*cbDestroyParticle)(Particle *);      // x04
+    void (*cbProcessCMD)(Particle *, byte cmd); // x08
 };
 
 struct ptclGen // allocated at 8039d9c8
@@ -111,40 +114,40 @@ struct ptclGen // allocated at 8039d9c8
 
 struct GeneratorAppSRT // allocated at 803a42b0
 {
-    int x0;     // x0
-    int x4;     // x4
-    Vec3 pos;   // x8
-    Vec4 rot;   // x14
-    Vec3 scale; // x24
-    int x30;    // x30
-    int x34;    // x34
-    int x38;    // x38
-    int x3c;    // x3c
-    int x40;    // x40
-    int x44;    // x44
-    int x48;    // x48
-    int x4c;    // x4c
-    int x50;    // x50
-    int x54;    // x54
-    int x58;    // x58
-    int x5c;    // x5c
-    int x60;    // x60
-    int x64;    // x64
-    int x68;    // x68
-    int x6c;    // x6c
-    int x70;    // x70
-    int x74;    // x74
-    int x78;    // x78
-    int x7c;    // x7c
-    int x80;    // x80
-    int x84;    // x84
-    int x88;    // x88
-    int x8c;    // x8c
-    int x90;    // x90
-    int x94;    // x94
-    int x98;    // x98
-    int x9c;    // x9c
-    int xa0;    // xa0
+    int x0;         // x0
+    ptclGen *gen;   // x4
+    Vec3 pos;       // x8
+    Vec4 rot;       // x14
+    Vec3 scale;     // x24
+    int x30;        // x30
+    int x34;        // x34
+    int x38;        // x38
+    int x3c;        // x3c
+    int x40;        // x40
+    int x44;        // x44
+    int x48;        // x48
+    int x4c;        // x4c
+    int x50;        // x50
+    int x54;        // x54
+    int x58;        // x58
+    int x5c;        // x5c
+    int x60;        // x60
+    int x64;        // x64
+    int x68;        // x68
+    int x6c;        // x6c
+    int x70;        // x70
+    int x74;        // x74
+    int x78;        // x78
+    int x7c;        // x7c
+    int x80;        // x80
+    int x84;        // x84
+    int x88;        // x88
+    int x8c;        // x8c
+    int x90;        // x90
+    int x94;        // x94
+    int x98;        // x98
+    int x9c;        // x9c
+    int xa0;        // xa0
     u16 xa2;
 };
 
@@ -187,9 +190,8 @@ struct Particle // created at 80398c90. dont feel like labelling this, offsets a
     u16 rotateCount;       // 0x5E
     float sizeTarget;      // 0x60
     float rotateTarget;    // 0x64
-    float rotateAcc;       // 0x68
-    u16 primColRemain;     // 0x6C
-    u16 envColRemain;      // 0x6E
+    u16 primColRemain;     // 0x68
+    u16 envColRemain;      // 0x6C
     GXColor primColTarget; // 0x70
     GXColor envColTarget;  // 0x74
     u16 matColRemain;      // 0x78
@@ -201,10 +203,10 @@ struct Particle // created at 80398c90. dont feel like labelling this, offsets a
     u8 matA;               // 0x80
     u8 ambRGB;             // 0x81
     u8 ambA;               // 0x82
-    // u8 matRGBTarget;         // 0x83
-    // u8 matATarget;           // 0x84
-    // u8 ambRGBTarget;         // 0x85
-    // u8 ambATarget;           // 0x86
+    u8 matRGBTarget;         // 0x83
+    u8 matATarget;           // 0x84
+    u8 ambRGBTarget;         // 0x85
+    u8 ambATarget;           // 0x86
     float trail;             // 0x84
     ptclGen *gen;            // 0x88
     GeneratorAppSRT *appsrt; // 0x8C

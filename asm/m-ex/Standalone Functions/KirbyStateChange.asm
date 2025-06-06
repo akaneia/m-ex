@@ -56,7 +56,7 @@
 # Enter Dummy State
   mr  r3,REG_GObj 
   li  r4,0XEF        # dummy state id
-  lis  r5,0x2000  # no anim update
+  lis r5,0x2000  # no anim update
   li  r6,0        # no source gobj
   fmr f1,REG_Frame
   fmr f2,REG_Speed

@@ -29,5 +29,6 @@
 #include "include/scene.h"
 #include "include/stage.h"
 #include "include/text.h"
+#include "include/cpu.h"
 
 #endif

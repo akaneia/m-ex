@@ -587,6 +587,23 @@ enum FtStateNames
     ASID_THROWNCRAZYHAND,
     ASID_BARRELCANNONWAIT,
 };
+enum FtDemoStateNames
+{
+    ASDEMO_WIN1,
+    ASDEMO_WIN1WAIT,
+    ASDEMO_WIN2,
+    ASDEMO_WIN2WAIT,
+    ASDEMO_NULL,
+    ASDEMO_WIN3,
+    ASDEMO_WIN3WAIT,
+    ASDEMO_SELECTED,
+    ASDEMO_SELECTEDWAIT,
+    ASDEMO_LOSE,
+    ASDEMO_INTROL,
+    ASDEMO_INTROR,
+    ASDEMO_ENDING,
+    ASDEMO_WAIT,
+};
 enum FtAuxillaryAnim
 {
     FTAUXANIM_WIN1,
@@ -669,7 +686,7 @@ enum FtScriptCmd
 #define ASID_JUMPS 1004
 #define ASID_FALLS 1005
 
-enum Ft_AttackKind
+typedef enum Ft_AttackKind
 {
     ATKKIND_0,
     ATKKIND_NONE,
@@ -759,7 +776,7 @@ enum Ft_AttackKind
     ATKKIND_85,
     ATKKIND_86,
     ATKKIND_87,
-};
+} Ft_AttackKind;
 typedef enum FtStateKind
 {
     FTSTATEKIND_FREE,        // generally actionable states, like wait, run, jump
@@ -1265,8 +1282,8 @@ struct CPU
     int level;                   // 0x10
     int x14;                     // 0x14
     int scenario_id;             // 0x18
-    int x1c;                     // 0x1c
-    int x20;                     // 0x20
+    int default_scenario_id;     // 0x1c
+    int alt_scenario_id;         // 0x20
     int x24;                     // 0x24
     int x28;                     // 0x28
     int x2c;                     // 0x2c
@@ -1275,31 +1292,28 @@ struct CPU
     float x38;                   // 0x38
     float x3c;                   // 0x3c
     float x40;                   // 0x40
-    void *x44;                   // 0x44
+    FighterData *target_fighter; // 0x44
     void *x48;                   // 0x48
-    int x4c;                     // 0x4c
-    int x50;                     // 0x50
-    float x54;                   // 0x54
-    float x58;                   // 0x58
-    float x5c;                   // 0x5c
+    float x4c;                   // 0x4c
+    ItemData *target_item;       // 0x50
+    Vec2 target_pos;             // 0x54
+    float target_distance;       // 0x5c
     int x60;                     // 0x60
-    int x64;                     // 0x64
-    int x68;                     // 0x68
-    int x6c;                     // 0x6c
-    int x70;                     // 0x70
-    int x74;                     // 0x74
-    int proc_num;                // 0x78, number of times it updated CPU logic in any capacity
-    int scenario_check_num;      // 0x7c, number of times it tried to update CPU scenario
-    int x80;                     // 0x80
+    float ground_x;              // 0x64
+    float ground_y;              // 0x68
+    float atk_range_front;       // 0x6c
+    float atk_range_top;         // 0x70
+    float atk_range_back;        // 0x74
+    float atk_range_bottom;      // 0x78
+    int cpu_frame;               // 0x7c, number of times it updated CPU logic in any capacity
+    int senario_timer;           // 0x80, number of times it tried to update CPU scenario
     int x84;                     // 0x84
     int x88;                     // 0x88
     int x8c;                     // 0x8c
     int x90;                     // 0x90
-    int x94;                     // 0x94
-    int x98;                     // 0x98
-    int x9c;                     // 0x9c
-    int xa0;                     // 0xa0
-    int xa4;                     // 0xa4
+    int num_of_pummels;          // 0x94
+    Vec3 x98;                    // 0x98
+    int pending_plco_command;    // 0xa4
     int xa8;                     // 0xa8
     int xac;                     // 0xac
     int xb0;                     // 0xb0
@@ -1320,14 +1334,24 @@ struct CPU
     u8 xec;                      // 0xec
     int xf0;                     // 0xf0
     int xf4;                     // 0xf4
-    int xf8;                     // 0xf8, flags | 0x00000100 is the "isCopy" flag (uses leaders inputs)
+    u8 xf8;                      // xf8 flags
+    u8 xf9;                      // xf9 flags
+    u8 xfa;                      // xfa flags 0x01 is the "isCopy" flag (uses leaders inputs)
+    u8 xfb;                      // xfb flags
     CPULeaderLog leader_log[30]; // 0xfc, contains a log of per frame data about the followers leader
-    void *unk_curr;              // 0x444
-    void *scenario_curr;         // 0x448, cpu scenario not updated if this contains a pointer @ 800b27b8
-    void *scenario_curr2;        // 0x44c, cpu scenario not updated if this contains a pointer @ 800b27c4
-    void *x450;                  // 0x450
+    CPULeaderLog *curr_unk;      // 0x444
+    CPULeaderLog *curr_unk2;     // 0x448, cpu scenario not updated if this contains a pointer @ 800b27b8
+    int cmd_wait;                // 0x44c, cpu scenario not updated if this contains a pointer @ 800b27c4
+    void *csP;                   // 0x450
     u8 cmdscript_queue[256];     // 0x454, list of command ids for the follower to execute
     void *cmdscript_curr;        // 0x554, points to a command in the cmdscript queue
+    float x558;                  // 0x558
+    float detect_back;           // 0x55C
+    float detect_front;          // 0x560
+    float detect_center;         // 0x564
+    float detect_height;         // 0x568
+    float x56c;                  // 0x56C
+    Vec3 x570;                   // 0x570
 };
 
 struct FtDmgVibrateDesc
@@ -1379,7 +1403,7 @@ struct ftCommonData
     float x7c;                                 // 0x7c
     float x80;                                 // 0x80
     float x84;                                 // 0x84
-    float x88;                                 // 0x88
+    float lstick_fastfall;                     // 0x88
     float x8c;                                 // 0x8c
     float lstick_rebirthfall;                  // 0x90
     float x94;                                 // 0x94
@@ -2267,9 +2291,9 @@ struct FighterData
         int x1950;                     // 0x1950
         float x1954;                   // 0x1954,
         float hitlag_env_frames;       // 0x1958, Environment Hitlag Counter (used for peachs castle switches)
-        float hitlag_frames;           // 0x195c
+        float hitlag_frames;           // 0x195c, remaining hitlag frames
         float vibrate_mult;            // 0x1960
-        float x1964;                   // 0x1964
+        float hitlag_set;              // 0x1964, temp variable, when using a shield with set hitlag, it stores it here (marth counter)
     } dmg;                             //
     struct jump                        // 0x1968
     {                                  //
@@ -2280,8 +2304,8 @@ struct FighterData
     int x1970;                         // 0x1970
     GOBJ *item_held;                   // 0x1974
     GOBJ *x1978;                       // 0x1978, second held item (new picked up items stored here if 'item_held' already has a value)
-    GOBJ *x197c;                       // 0x197c
-    GOBJ *item_head;                   // 0x1980
+    GOBJ *bunny_hood;                  // 0x197c
+    GOBJ *lip_flower;                  // 0x1980
     GOBJ *item_held_spec;              // 0x1984, special held item
     struct hurt                        // 0x1988
     {                                  //
@@ -2302,8 +2326,8 @@ struct FighterData
         GOBJ *dmg_source;      // 0x19a8, points to the entity that hit the shield
         float hit_direction;   // 0x19ac
         int hit_attr;          // 0x19b0, attribute of the hitbox that collided
-        float x19b4;           // 0x19b4
-        float x19b8;           // 0x19b8
+        float hitlag_set;      // 0x19b4, set amount of hitlag all hits should incur
+        float hitlag_set2;     // 0x19b8
         int dmg_taken3;        // 0x19bc, seems to be the most recent amount of damage taken
     } shield;
     struct shield_bubble // 0x19c0
@@ -2363,15 +2387,6 @@ struct FighterData
         int x1a84;                        // 0x1a84
     } grab;                               //
     CPU cpu;                              // 0x1a88
-    int x1fe0;                            // 0x1fe0
-    int x1fe4;                            // 0x1fe4
-    int x1fe8;                            // 0x1fe8
-    int x1fec;                            // 0x1fec
-    int x1ff0;                            // 0x1ff0
-    int x1ff4;                            // 0x1ff4
-    int x1ff8;                            // 0x1ff8
-    int x1ffc;                            // 0x1ffc
-    int x2000;                            // 0x2000
     int x2004;                            // 0x2004
     int x2008;                            // 0x2008
     int x200c;                            // 0x200c
@@ -2404,7 +2419,7 @@ struct FighterData
     u8 x2071_x0f : 4;                     // 0x2071, 0x0f
     u8 x2072;                             // 0x2072
     u8 x2073;                             // 0x2073
-    int x2074;                            // 0x2074, this is the start of some struct... present in items as well @ 0xd94
+    int x2074;                            // 0x2074, marth's multi hit side b sets this to his percent. this is the start of some struct... present in items as well @ 0xd94
     int x2078;                            // 0x2078
     int x207c;                            // 0x207c
     int x2080;                            // 0x2080
@@ -2563,9 +2578,9 @@ struct FighterData
         unsigned char x221a_7 : 1;                     // 0x2 - 0x221a
         unsigned char gfx_persist : 1;                 // 0x1 - 0x221a
         unsigned char shield_enable : 1;               // 0x80 - 0x221b
-        unsigned char shield_x40 : 1;                  // 0x40 - 0x221b
+        unsigned char shield_always_refract : 1;       // 0x40 - 0x221b
         unsigned char shield_x20 : 1;                  // 0x20 - 0x221b
-        unsigned char shield_x10 : 1;                  // 0x10 - 0x221b
+        unsigned char shield_x10 : 1;                  // 0x10 - 0x221b, unk peach toad enables this
         unsigned char shield_x8 : 1;                   //  0x8 - 0x221b
         unsigned char x221b_grab : 1;                  // 0x4 - 0x221b, is checked at 80079304, skips some logic
         unsigned char x221b_7 : 1;                     // 0x2 - 0x221b
@@ -2581,8 +2596,8 @@ struct FighterData
         unsigned char ik_rfoot : 1;                    // 0x80 - 0x221d
         unsigned char ik_lfoot : 1;                    // 0x40 - 0x221d
         unsigned char ftvis_reqrevert : 1;             // 0x20 - 0x221d, request all ftvis revert to default next state change
-        unsigned char input_enable : 1;                // 0x10 - 0x221d
-        unsigned char x221d_5 : 1;                     // 0x8 - 0x221d
+        unsigned char input_update_history : 1;        // 0x10 - 0x221d, will update input history
+        unsigned char input_disable : 1;               // 0x8 - 0x221d, disables new inputs from being read
         unsigned char nudge_disable : 1;               // 0x4 - 0x221d
         unsigned char ground_ignore : 1;               // 0x2 - 0x221d
         unsigned char x221d_8 : 1;                     // 0x1 - 0x221d
@@ -3164,6 +3179,7 @@ void Fighter_EnterLightThrow(GOBJ *fighter, int stateID);
 void Fighter_EnterDamageFall(GOBJ *fighter);
 void Fighter_EnterWait(GOBJ *fighter);
 void Fighter_EnterAirCatch(GOBJ *fighter);
+void Fighter_EnterJump(GOBJ *fighter);
 void Fighter_EnterFall(GOBJ *fighter);
 void Fighter_EnterFallAerial(GOBJ *fighter);
 void Fighter_EnterSpecialFall(GOBJ *fighter, int can_fastfall, int no_soft_landing, int can_interrupt_landing, float air_drift_multiplier, float landing_frames);
@@ -3177,6 +3193,7 @@ void Fighter_EnterDeadDown(GOBJ *f);
 void Fighter_EnterDeadUp(GOBJ *f);
 void Fighter_EnterDeadLeft(GOBJ *f);
 void Fighter_EnterDeadRight(GOBJ *f);
+void Fighter_EnterDeadUpStar(GOBJ *f);
 int Fighter_CheckNearbyLedges(GOBJ *fighter);
 int Fighter_CheckForOtherFighterOnLedge(GOBJ *fighter);
 void Fighter_EnterCliffCatch(GOBJ *fighter);
@@ -3212,8 +3229,9 @@ int Fighter_GetStaminaHP(int ply);
 void Fighter_SetStaminaHP(int ply, int hp);
 int Fighter_CheckStaminaMode(int ply);
 void Fighter_SetStaminaMode(int ply, int is_stamina);
-void Fighter_SetFallNum(int index, int ms, int falls);
-int Fighter_GetFallNum(int index, int ms);
+void Fighter_SetFallNum(int ply, int ms, int falls);
+int Player_GetNameTabSlotNumber(int ply);
+int Fighter_GetFallNum(int ply, int ms);
 void Fighter_EnableCollUpdate(FighterData *fighter);
 void Fighter_EnterDamageState(GOBJ *fighter, int stateID, float new_facing_dir); // new_facing_dir = 0 to use current
 s8 Fighter_BoneLookup(FighterData *fighter, int boneID);
@@ -3236,6 +3254,7 @@ void Fighter_CollAir_IgnoreLedge(GOBJ *fighter, void *callback);
 int Fighter_CollAir_IgnoreLedge_NoCB(GOBJ *fighter);
 int Fighter_CollAir_SoftLanding(GOBJ *fighter);
 int Fighter_CollAir_DefineECB(GOBJ *fighter, ECBSize *ecb);
+void Fighter_CollGround_StopLedge_Ottotto(GOBJ *fighter);
 int Fighter_Coll_DamageState(GOBJ *fighter);
 int Fighter_Coll_CheckToPass(GOBJ *fighter, int floor_type); // usually used as a callback, pass = fall through platform
 int Fighter_IASACheck_CliffCatch(GOBJ *fighter);
@@ -3252,6 +3271,8 @@ int Fighter_IASACheck_PassConditions(GOBJ *fighter);
 int Fighter_IASACheck_Turn(GOBJ *fighter);
 int Fighter_IASACheck_AllGrounded(GOBJ *fighter);
 int Fighter_IASACheck_AllAerial(GOBJ *fighter);
+int Fighter_IASACheck_AirAttack(GOBJ *fighter);
+int Fighter_IASACheck_AirEscape(GOBJ *fighter);
 void Fighter_PhysGround_ApplyFriction(GOBJ *fighter);
 void Fighter_PhysGround_ApplyCustomFriction(FighterData *fighter, float friction);
 void Fighter_PhysGround_ApplyVelocity(GOBJ *fighter);
@@ -3267,6 +3288,8 @@ void Fighter_PhysAir_LimitXVelocity(FighterData *fighter);
 void Fighter_Phys_UseAnimYVelocity(GOBJ *fighter);
 void Fighter_Phys_UseAnimPos(GOBJ *fighter);
 void Fighter_Phys_UseAnimPosAndStick(GOBJ *fighter);
+void Fighter_PhysGround_CalculateVelocity(FighterData *fd, float accel, float terminal, float friction);
+int Fighter_CollGround_DefineECB(GOBJ *f, ECBSize *ecb);
 void Fighter_SetGrounded(FighterData *fighter);
 void Fighter_SetGrounded2(FighterData *fighter);
 void Fighter_SetAirborne(FighterData *fighter);             // locks ecb for 10 frames
@@ -3389,7 +3412,7 @@ void Fighter_SetAnimRate(GOBJ *f, float rate);
 int Fighter_CheckJumpInput(GOBJ *f);
 void Fighter_SetEyeTexture(GOBJ *f, int material_index, float frame);
 void Fighter_GetECBCenter(GOBJ *f, Vec3 *center_pos);
-void Fighter_ApplyPartAnim(GOBJ *f, int part_id, int anim_id);
+void Fighter_ApplyPartAnim(GOBJ *f, int part_id, int anim_id, float frame);
 void Fighter_SetHoldKind(GOBJ *f, int r4, int r5);
 void Fighter_ApplyHandAnim(GOBJ *f, int r4);
 void Fighter_CheckToRespawn(int ply, int ms);
@@ -3430,5 +3453,12 @@ void Fighter_UpdateModelShift(GOBJ *f);                     // updates the offse
 void Fighter_GivePersistentIntangibility(GOBJ *f, int frames);
 void Fighter_TDI(FighterData *fp);
 void Fighter_PlayQueuedDamageSounds(FighterData *fp);
-GXColor Fighter_GetPlyHUDColor(int ply); // used for lupe, pokemon stadium text color, results viewport broder
+void Fighter_UpdateVictimPosition(GOBJ *fighter);
+void Fighter_SetEyeDamaged(GOBJ *fighter);
+GXColor Fighter_GetPlyHUDColor(int ply); // used for lupe, pokemon stadium text color, results viewport border
+/// @brief Checks if fighter should process CPU events for this frame
+/// @param  FighterData pointer
+/// @return 1 if cpu should be processed this frame and 0 otherwise
+int Fighter_CheckToProcessCPU(FighterData *);
+
 #endif

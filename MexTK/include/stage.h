@@ -273,15 +273,15 @@ struct grGroundParam
     u16 item_rates[35];         // 0x6a
     void *bgm_data;             // 0xb0
     int bgm_num;                // 0xb4
-    int xb8;                    // 0xb8
-    int xbc;                    // 0xbc
-    int xc0;                    // 0xc0
-    int xc4;                    // 0xc4
-    int xc8;                    // 0xc8
-    int xcc;                    // 0xcc
-    int xd0;                    // 0xd0
-    int xd4;                    // 0xd4
-    int xd8;                    // 0xd8
+    GXColor bubble_top_left;    // 0xb8
+    GXColor bubble_top_center;  // 0xbc
+    GXColor bubble_top_right;   // 0xc0
+    GXColor bubble_mid_left;    // 0xc4
+    GXColor bubble_mid_center;  // 0xc8
+    GXColor bubble_mid_right;   // 0xcc
+    GXColor bubble_bot_left;    // 0xd0
+    GXColor bubble_bot_center;  // 0xd4
+    GXColor bubble_bot_right;   // 0xd8
 };
 
 struct Stage
@@ -590,6 +590,15 @@ void Stage_AddFtChkDevice(GOBJ *map, int hazard_kind, void *check);
 void Stage_SetChkDevicePos(float y_pos);
 void Stage_GetChkDevicePos(float *y_pos, float *y_delta);
 float Stage_GetScale();
+void Stage_SetBubbleColorTopLeft(float *value);
+void Stage_SetBubbleColorTopRight(float *value);
+void Stage_SetBubbleColorBottomLeft(float *value);
+void Stage_SetBubbleColorBottomRight(float *value);
+void Stage_SetBubbleColorMiddleLeft(float *value);
+void Stage_SetBubbleColorMiddleRight(float *value);
+void Stage_SetBubbleColorBottomCenter(float *value);
+void Stage_SetBubbleColorTopCenter(float *value);
+void Stage_SetBubbleColorMiddleCenter(float *value);
 int *Stage_GetYakumonoParam();
 void Stage_SetMapJOBJAnim(GOBJ *map, int jobj_index, int flags, int anim_id, float start_frame, float rate);
 void Stage_MapStateChange(GOBJ *map, int map_gobjID, int anim_id);
@@ -645,4 +654,5 @@ void Stage_ApplyColAnim(GOBJ *map, ColAnimDesc *colanim);
 void Stage_DisableColAnim(GOBJ *map);
 int Stage_GetExternalID();
 int Stage_ExternalToInternal(int ext_id);
+int Stage_GetBGM();
 #endif

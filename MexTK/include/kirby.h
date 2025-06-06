@@ -23,8 +23,9 @@ struct FtVarKirby
 };
 
 void AS_CaptureWaitKirbyItem(GOBJ *item);
-void AS_CaptureWaitKirby(GOBJ *);
+void AS_CaptureWaitKirby(GOBJ *fighter);
 void Kirby_ResetCopyCharVars(GOBJ *fighter, int ft_kind);
 void Kirby_ExecuteAbilityLossFunction(GOBJ *fighter, int ft_kind);
+void Kirby_CheckSpawnWallGFX(GOBJ *fighter, Vec3 *position);
 
 #endif

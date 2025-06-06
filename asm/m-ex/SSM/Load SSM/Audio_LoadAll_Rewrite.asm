@@ -33,7 +33,7 @@ Multispawn_Loop:
   branchl r12,0x80169370
   lwz r4,OFST_Metadata_FtExtNum(rtoc)
   cmpw  r3,r4
-  bgt Multispawn_IncLoop
+  beq Multispawn_IncLoop
 # load this fighter's ssm
   lwz  r4,OFST_MnSlChrSSMFileIDs(rtoc)
   mulli r3,r3,0x10

@@ -7,8 +7,11 @@
   cmpw r3,r12
   beq Null
 #Check for random
-  subi  r12,r12,1
-  cmpw r3,r12
+  slwi r4, r3, 5
+  addi r4,r4,8
+  lwz r12,OFST_Menu_SSS(rtoc)
+  lbzx r12,r4,r12
+  cmpwi r12,3
   beq Random
 
 Icon:

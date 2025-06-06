@@ -4,7 +4,7 @@
 #include "structs.h"
 #include "fighter.h"
 #include "obj.h"
-#include "mex.h"
+#include "mxdt.h"
 #include "datatypes.h"
 #include "gx.h"
 #include "hsd.h"
@@ -53,7 +53,7 @@ static PreloadEntry *Preload_GetEntryFromEntrynum(int entry_num)
     return 0;
 }
 
-void AOBJ_CheckEnded(AOBJ *a, int *is_done)
+static void AOBJ_CheckEnded(AOBJ *a, int *is_done)
 {
     if (a->flags != AOBJ_NO_ANIM)
         *is_done = 0;
@@ -208,7 +208,7 @@ static float ceil(float x)
     }
 }
 
-static void enterKnockback(GOBJ *fighter, int angle, float mag)
+static inline void enterKnockback(GOBJ *fighter, int angle, float mag)
 {
     FighterData *fighter_data = ((FighterData *)fighter->userdata);
 
@@ -539,14 +539,24 @@ static float Math_Vec2Angle(Vec2 *a, Vec2 *b)
     return angle;
 }
 
+static float Math_Vec2DistanceSquared(Vec2 *a, Vec2 *b)
+{
+    return pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2);
+}
+
 static float Math_Vec2Distance(Vec2 *a, Vec2 *b)
 {
-    return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2));
+    return sqrtf(Math_Vec2Distance(a, b));
+}
+
+static float Math_Vec3DistanceSquared(Vec3 *a, Vec3 *b)
+{
+    return pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2) + pow((a->Z - b->Z), 2);
 }
 
 static float Math_Vec3Distance(Vec3 *a, Vec3 *b)
 {
-    return sqrtf(pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2) + pow((a->Z - b->Z), 2));
+    return sqrtf(Math_Vec3DistanceSquared(a, b));
 }
 
 // float fmin(float a, float b)

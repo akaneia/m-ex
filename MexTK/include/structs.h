@@ -313,6 +313,11 @@ typedef struct ClassicLineup ClassicLineup;
 // Kirby
 typedef struct FtVarKirby FtVarKirby;
 
+// CPU
+typedef struct CpuAttack CpuAttack;
+typedef struct PlCoCpuTable PlCoCpuTable;
+typedef struct MexCpuData MexCpuData;
+
 // Custom
 typedef struct Stc_icns Stc_icns;
 typedef struct MEXPlaylist MEXPlaylist;
