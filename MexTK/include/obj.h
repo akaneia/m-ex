@@ -787,6 +787,7 @@ GOBJ *JOBJ_LoadSet(int is_hidden, JOBJSet *set, int anim_id, float frame, int p_
 void JOBJ_AddSetAnim(JOBJ *jobj, JOBJSet *set, int anim_id);                                                                   // 8016895c
 void JOBJ_Detach(JOBJ *to_attach);
 void JOBJ_ResetFromDesc(JOBJ *, JOBJDesc *);
+void JOBJ_Blend(JOBJ *from, JOBJ *to, JOBJ *target, float blend_from, float blend_to);
 void JOBJ_RemoveAnimByFlags(JOBJ *, int);
 void AOBJ_ReqAnim(int *aobj, float unk);
 void AOBJ_StopAnim(AOBJ *aobj);

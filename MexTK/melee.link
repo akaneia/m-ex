@@ -18,6 +18,7 @@
 8000C1C0:JOBJ_AttachPosition
 8000C2F8:JOBJ_AttachPositionRotation
 8000C390:JOBJ_Detach
+8000C490:JOBJ_Blend
 8000D2EC:Vec3_Normalize
 8000D3B0:Vec2_Normalize
 8000D4A0:Vec2_Add
