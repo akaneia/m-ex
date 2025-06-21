@@ -546,7 +546,7 @@ static float Math_Vec2DistanceSquared(Vec2 *a, Vec2 *b)
 
 static float Math_Vec2Distance(Vec2 *a, Vec2 *b)
 {
-    return sqrtf(Math_Vec2Distance(a, b));
+    return sqrtf(Math_Vec2DistanceSquared(a, b));
 }
 
 static float Math_Vec3DistanceSquared(Vec3 *a, Vec3 *b)
