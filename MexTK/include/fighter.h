@@ -122,7 +122,7 @@ enum CPUType
     CPTP_ITEM,
 };
 
-// fighter callback priorities
+// fighter callback priorities (see 8000FD48)
 enum FtPri
 {
     FTPRI_HITLAG,
@@ -133,8 +133,8 @@ enum FtPri
     FTPRI_5, // nothing
     FTPRI_ENVCOLL,
     FTPRI_IK,
-    FTPRI_ACCESSORY,
-    FTPRI_GFX, // appears to also control accessory4 callbacks and the subsequent accessory animation
+    FTPRI_ACCESSORY, // controls the first 3 accessory callbacks
+    FTPRI_GFX, // also controls accessory4 callback and the subsequent accessory jobj animation
     FTPRI_10,
     FTPRI_11,
     FTPRI_GRABCOLL,

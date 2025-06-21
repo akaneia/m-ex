@@ -177,6 +177,34 @@ enum ItemID
     ITEM_BIRDOEGG = 236,
 };
 
+// item callback priorities (see 8026862C)
+enum ItPri
+{
+    ITPRI_HITLAG,
+    ITPRI_ANIM,
+    ITPRI_2,
+    ITPRI_3,
+    ITPRI_PHYS,
+    ITPRI_COLL,
+    ITPRI_6,
+    ITPRI_7,
+    ITPRI_8,
+    ITPRI_ACCESSORY,
+    ITPRI_10,
+    ITPRI_PLAYERCOLL,
+    ITPRI_GRABCOLL,
+    ITPRI_HITCOLL,
+    ITPRI_DMGAPPLY,
+    ITPRI_15,
+    ITPRI_DYNAMICS,
+    ITPRI_17,
+    ITPRI_18,
+    ITPRI_19,
+    ITPRI_20,
+    ITPRI_21,
+    ITPRI_22,
+};
+
 // ItemStateChange Flags
 #define ITEMSTATE_UPDATEANIM 0x2
 #define ITEMSTATE_GRAB 0x4
@@ -578,7 +606,7 @@ struct ItemData
     ItDynamicBoneset dynamics_boneset[24];              // 0xd4
     int dynamics_num;                                   // 0x374
     CollData coll_data;                                 // 0x378 -> 0x518
-    GOBJ *fighter_gobj;                                 // 0x518
+    GOBJ *fighter_gobj;                                 // 0x518, should be owner_gobj (as it can be an item or other type of GOBJ too)
     int x51c;                                           // 0x51c
     CmSubject *camera_subject;                          // 0x520
     int x524;                                           // 0x524
@@ -987,11 +1015,20 @@ struct ItemData
 
 /*** static reference ***/
 
+static ItemLogic *stc_itemlogic_common_items =  (R13 + -0xea1dc);    // 0x803f14c4
+static ItemLogic *stc_itemlogic_pokemon_items =  (R13 + -0xe92d4);   // 0x803f23cc
+static ItemLogic *stc_itemlogic_character_items =  (R13 + -0xe85a0); // 0x803f3100
+static ItemLogic *stc_itemlogic_stage_items =  (R13 + -0xe6980);     // 0x803f4d20
+
+static itData **stc_itdata_stage_items =  (R13 + -0x3a740);          // 0x804a0f60
+
 static itPublicData **stc_itPublicData = (R13 + -0x4978);            // 0x804d6d28
 static ItemDesc **stc_itdesc_enemies = (R13 + -0x4968);              // 0x804d6d38
-static ItemLogic *stc_itemlogic_common_items =  (R13 + -0xea1dc);    // 0x803f14c4
-static ItemLogic *stc_itemlogic_character_items =  (R13 + -0xe85a0); // 0x803f3100
-static ItemLogic *stc_itemlogic_pokemon_items =  (R13 + -0xe92d4);   // 0x803f23cc
+
+static itData **stc_itdata_common_items =  (R13 + -0x497c);          // 0x804d6d24
+static itCommonData **stc_itCommonData = (R13 + -0x4978);            // 0x804d6d28, loaded in from ItCo.dat/usd
+static itData **stc_itdata_pokemon_items =  (R13 + -0x4970);         // 0x804d6d30
+static itData **stc_itdata_character_items =  (R13 + -0x4968);       // 0x804d6d38
 
 /*** Functions ***/
 void Item_IndexStageItem(ItemDesc *item_desc, int index);
