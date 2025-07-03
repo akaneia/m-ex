@@ -2229,9 +2229,9 @@ struct FighterData
     FtCoin coinbox[2];                 // 0x1614
     int dynamics_hit_num;              // 0x166c
     DynamicHit dynamics_hit[11];       // 0x1670
-    float x1828;                       // 0x1828
     struct dmg                         // 0x182c
     {                                  //
+        int x1828;                     // 0x1828
         int behavior;                  // 0x182c
         float percent;                 // 0x1830
         int x1834;                     // 0x1834

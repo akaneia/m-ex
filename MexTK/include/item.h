@@ -377,7 +377,7 @@ struct itCommonAttr
     float ecb_left;             // 0x4c
     float weight;               // 0x50
     int x54;                    // 0x54
-    int x58;                    // 0x58
+    float bounce_friction;      // 0x58
     int x5c;                    // 0x5c
     float scale;                // 0x60, does not affect hitboxes
     int destroy_gfx;            // 0x64, ID of a gfx to play on destroy
@@ -522,7 +522,7 @@ struct ItemData
     int x8;                                             // 0x8
     int spawn_kind;                                     // 0xC
     int kind;                                           // 0x10
-    int x14;                                            // 0x14
+    int hold_kind;                                      // 0x14
     int x18;                                            // 0x18
     int x1c;                                            // 0x1c
     u8 team_id;                                         // 0x20

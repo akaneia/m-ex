@@ -31,31 +31,23 @@ struct DynamicBoneData
     Vec4 rot;              // 0x4 quaternion
     Vec3 trans;            // 0x14
     Vec3 scale;            // 0x20
-    Vec3 rot_global;       // 0x2C, copied from 0x50, 0x60, 0x70 of jobj
-    float x38;             // 0x38, initialized to 1 @ 8000ff30
-    float x3c;             // 0x3c, initialized to 0 @ 8000ff34
-    float x40;             // 0x40, initialized to 0 @ 8000ff38
-    float x44;             // 0x44, initialized to 0 @ 8000ff3c
-    float x48;             // x48, initialized to 0 @ 8000ff44
+    Vec3 world_position;   // 0x2C, copied from 0x50, 0x60, 0x70 of jobj
+    Vec3 rot_axis;         // 0x40, initialized to 0 @ 8000ff38
+    float rot_momentum;    // 0x44, initialized to 0 @ 8000ff3c
+    float length;          // x48, initialized to 0 @ 8000ff44
+
     float x4c;             // x4c, THIS IS THE START OF A STRUCTURE, bunch of floats from the dynamicdesc. stored @ 80011744
     float x50;             // 0x3c
-    float x54;             // 0x40
-    float x58;             // 0x44
-    float x5c;             // x048
-    float x60;             // 0x38
-    float x64;             // 0x3c
-    float x68;             // 0x40
-    float x6c;             // 0x44
-    float x70;             // x048
-    float x74;             // 0x38
-    float x78;             // 0x3c
-    float x7c;             // 0x40
-    float x80;             // 0x44
+    int direction;         // 0x40
+    Vec4 rot_orig;         // 0x58
+    float rot_limit;       // 0x40
+    Vec3 max_rot;          // 0x44
+    Vec3 min_rot;         // 0x3c
     float x84;             // x048
     float x88;             // 0x38
     float x8c;             // 0x3c
     DynamicBoneData *next; // 0x90
-    float x94;             // 0x44
+    int x94;               // 0x44
 };
 
 struct DynamicHit
