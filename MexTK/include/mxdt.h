@@ -283,7 +283,11 @@ typedef struct MexData
         int *announcer_call;
         void *ssm_files;
         void *costume_pointers;
-        void *x40;
+        struct
+        {
+            void *x00;
+            HSD_Archive *archive;
+        } *ft_archives;
         u8 *walljump;
         void *rst_runtime;
         void *item_lookup;

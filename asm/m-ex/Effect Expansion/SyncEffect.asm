@@ -687,10 +687,13 @@ EffectNames:
   .string "ptclgen"
 ###############################################
 NoSymbol:
+# skip spawning an effect for kirby
+  lwz r4,0x4(REG_FighterData)
+  cmpwi r4, 4
+  beq KirbySkip
 #OSReport
   bl  ErrorString_Symbol
   mflr  r3
-  lwz r4,0x4(REG_FighterData)
   branchl r12,0x803456a8
 #Assert
   bl  Assert_Name
@@ -704,7 +707,10 @@ ErrorString_Symbol:
   .align 2
 ###############################################
 
-
+KirbySkip:
+  restore
+  li r3, 0
+  branch r12,0x80061d40
 
 Injection_Exit:
   restore
