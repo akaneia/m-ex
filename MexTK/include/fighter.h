@@ -122,7 +122,7 @@ enum CPUType
     CPTP_ITEM,
 };
 
-// fighter callback priorities
+// fighter callback priorities (see 8000FD48)
 enum FtPri
 {
     FTPRI_HITLAG,
@@ -133,8 +133,8 @@ enum FtPri
     FTPRI_5, // nothing
     FTPRI_ENVCOLL,
     FTPRI_IK,
-    FTPRI_ACCESSORY,
-    FTPRI_GFX,
+    FTPRI_ACCESSORY, // controls the first 3 accessory callbacks
+    FTPRI_GFX, // also controls accessory4 callback and the subsequent accessory jobj animation
     FTPRI_10,
     FTPRI_11,
     FTPRI_GRABCOLL,
@@ -2303,7 +2303,7 @@ struct FighterData
     float hitlag_mult;                 // 0x196c
     int x1970;                         // 0x1970
     GOBJ *item_held;                   // 0x1974
-    GOBJ *x1978;                       // 0x1978
+    GOBJ *x1978;                       // 0x1978, second held item (new picked up items stored here if 'item_held' already has a value)
     GOBJ *bunny_hood;                  // 0x197c
     GOBJ *lip_flower;                  // 0x1980
     GOBJ *item_held_spec;              // 0x1984, special held item
@@ -2431,7 +2431,7 @@ struct FighterData
     u16 x2098;                            // 0x2098
     u16 is_hide_player_indicator;         // 0x209a
     int x209c;                            // 0x209c
-    JOBJ *accessory;                      // 0x20a0
+    JOBJ *accessory;                      // 0x20a0, reset on state changes unless persist flag is set
     int x20a4;                            // 0x20a4
     void *shadow;                         // 0x20a8, ASSERTS @ 8037f7b8, describes multiple struct members
     int x20ac;                            // 0x20ac
@@ -2493,10 +2493,10 @@ struct FighterData
         void (*Phys)(GOBJ *fighter);                            // 0x21a4
         void (*Coll)(GOBJ *fighter);                            // 0x21a8
         void (*Cam)(GOBJ *fighter);                             // 0x21ac
-        void (*Accessory1)(GOBJ *fighter);                      // 0x21b0
+        void (*Accessory1)(GOBJ *fighter);                      // 0x21b0, reset after state change
         void (*Accessory_Persist)(GOBJ *fighter);               // 0x21b4, persists across states while the fighter is alive, death clears this ptr, so re-init on Respawn cb. phys position is copied to tonp and fighter jobj matrices are updated after this cb runs
         void (*Accessory_Freeze)(GOBJ *fighter);                // 0x21b8, only runs during hitlag
-        void (*Accessory4)(GOBJ *fighter);                      // 0x21bc
+        void (*Accessory4)(GOBJ *fighter);                      // 0x21bc, reset after state change
         void (*OnGiveDamage)(GOBJ *fighter);                    // 0x21c0
         void (*OnShieldHit)(GOBJ *fighter);                     // 0x21c4
         void (*OnReflectHit)(GOBJ *fighter);                    // 0x21c8
@@ -2614,7 +2614,7 @@ struct FighterData
         unsigned char x221f_3 : 1;                     // 0x20 - 0x221f, hides player indicator
         unsigned char sleep : 1;                       // 0x10 - 0x221f
         unsigned char ms : 1;                          // 0x08 - 0x221f, ms = master/slave. is 1 when the player is a slave
-        unsigned char x221f_6 : 1;
+        unsigned char x221f_6 : 1;                     // 0x04 - 0x221f, is in hitlag?
         unsigned char x221f_7 : 1;
         unsigned char x221f_8 : 1;
         char can_input_multijump;                 // 0x2220
