@@ -23,12 +23,12 @@ CODE_START:
   beq EXIT
 
 # check if we're coming from the SSS
-  lwz r0, 0x4(sp)
+  lwz REG_LR, 0x4(sp)
   load r3, 0x8025a9dc
-  cmpw r0, r3
+  cmpw REG_LR, r3
   beq SKIP_SSS
   load r3, 0x8025a9ec
-  cmpw r0, r3
+  cmpw REG_LR, r3
   beq SKIP_SSS
   b EXIT
 
