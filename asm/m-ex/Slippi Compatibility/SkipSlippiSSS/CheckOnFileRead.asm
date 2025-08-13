@@ -1,10 +1,11 @@
+#To be inserted @800166b4
 ################################################################################
 # Address: 0x800166b4
 # Skips Slippi's TransferFile
 ################################################################################
 
-.include "../../Globals.s"
-.include "../Header.s"
+.include "../../../Globals.s"
+.include "../../Header.s"
 
 .set Archive_GetLocalizedFilename, 0x80016204
 .set REG_FILENAME, 30

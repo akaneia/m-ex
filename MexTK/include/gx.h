@@ -415,8 +415,8 @@ typedef enum GXTexMtxType
 
 typedef enum GXColorSrc
 {
-    Register,
-    Vertex
+    GXColorSrc_Register,
+    GXColorSrc_Vertex,
 } GXColorSrc;
 
 typedef enum GXGamma

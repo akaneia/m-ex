@@ -7,6 +7,8 @@
 
 #define DB_FLAG 0
 
+#define IS_SLIPPI (Scene_GetCurrentMajor() == 0x08 && Scene_GetCurrentMinor() == 0x01)
+
 enum MEX_GETDATA
 {
     MXDT_FTINTNUM,
@@ -128,8 +130,8 @@ typedef struct MEXFunction
     u8 *code;                                     // 0x0
     MEXInstructionTable *instruction_reloc_table; // 0x4
     int instruction_reloc_table_num;              // 0x8
-    MEXFunctionTable *func_reloc_table;           // 0xC
-    int func_reloc_table_num;                     // 0x10
+    MEXFunctionTable *func_table;           // 0xC
+    int func_table_num;                     // 0x10
     int code_size;                                // 0x14
     int debug_symbol_num;                         // 0x18
     MEXDebugSymbol *debug_symbol;                 // 0x1c
@@ -159,7 +161,10 @@ typedef struct MexMetaData
 typedef struct MnSlMapIcon
 {
     JOBJ *runtime_joint;
-    int flags;
+    u8 state;
+    u8 model_preview;
+    u8 random_select;
+    u8 old_external_id; // unused by mex
     byte icon_state;
     byte preview_id;
     byte random_select_stage_id;
@@ -357,19 +362,56 @@ void KirbyStateChange(float anim_start_frame, float anim_rate, float anim_blend,
 void *MEX_GetKirbyCpData(int copy_id);
 void *MEX_GetData(int index);
 
-static void MEX_InitRELDAT(HSD_Archive *archive, char *symbol_name, int *return_func_array)
+/// @brief 
+/// @return 
+inline MexData *MEX_GetMexData()
+{
+    return MEX_GetData(MXDT_MEXDATA);
+}
+
+/// @brief 
+/// @param func 
+/// @param symbol 
+/// @return 
+u8 *MEXFunction_GetAddrFromSymbol(MEXFunction *func, char *symbol)
+{
+    for (int i = 0; i < func->debug_symbol_num; i++)
+    {
+        if (strcmp(func->debug_symbol[i].symbol, symbol) == 0)
+        {
+            return func->code + func->debug_symbol[i].code_offset;
+        }
+    }
+    return 0;
+}
+/// @brief 
+/// @param archive 
+/// @param symbol_name 
+/// @param return_func_array 
+static MEXFunction *MEX_InitRELDAT(HSD_Archive *archive, char *symbol_name, int *return_func_array)
 {
     MEXFunction *mex_function = Archive_GetPublicAddress(archive, symbol_name);
+
+    if (mex_function <= 0)
+        return 0;
 
     // reloc instructions
     MEX_RelocRelArchive(mex_function);
 
+    // flush instruction cache so code can be run from this file
+    TRK_FlushCache(mex_function->code, mex_function->code_size);
+
     // reloc function pointers
-    for (int i = 0; i < mex_function->func_reloc_table_num; i++)
+    if (return_func_array != 0)
     {
-        MEXFunctionTable *this_func = &mex_function->func_reloc_table[i];
-        return_func_array[i] = &mex_function->code[this_func->code_offset];
+        for (int i = 0; i < mex_function->func_table_num; i++)
+        {
+            MEXFunctionTable *this_func = &mex_function->func_table[i];
+            return_func_array[this_func->index] = &mex_function->code[this_func->code_offset];
+        }
     }
+
+    return mex_function;
 }
 /// @brief
 /// @param stc_icns

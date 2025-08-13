@@ -1,10 +1,11 @@
+#To be inserted @800163f8
 ################################################################################
 # Address: 0x800163f8
 # Skips Slippi's GetFileSize
 ################################################################################
 
-.include "../../Globals.s"
-.include "../Header.s"
+.include "../../../Globals.s"
+.include "../../Header.s"
 
 .set Archive_GetLocalizedFilename, 0x80016204
 .set REG_FILENAME, 30

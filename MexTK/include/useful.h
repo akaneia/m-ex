@@ -546,7 +546,7 @@ void OSReport(char *, ...);
 void __assert(char *file, int line, char *assert);
 int OSCreateHeap(void *heap_lo, void *heap_hi);
 void OSDestroyHeap(int heap_id);
-void *OSAllocFromHeap(int heap_id);
+int OSAllocFromHeap(int heap_id);
 void OSFreeToHeap(void *alloc);
 int OSCheckHeap(int heap);
 int OSGetConsoleType();

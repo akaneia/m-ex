@@ -18,6 +18,7 @@
 8000C1C0:JOBJ_AttachPosition
 8000C2F8:JOBJ_AttachPositionRotation
 8000C390:JOBJ_Detach
+8000C490:JOBJ_Blend
 8000D2EC:Vec3_Normalize
 8000D3B0:Vec2_Normalize
 8000D4A0:Vec2_Add
@@ -334,6 +335,7 @@
 8007EE0C:Fighter_DamageRumble
 8007EFC8:Fighter_Transform
 8007F694:Fighter_GetBaseScale
+8007F824:Fighter_SetEyeDamaged
 8008021C:Fighter_UpdateModelShift
 80080E18:GXLink_Fighter
 80081298:Fighter_IASACheck_CliffCatch
@@ -481,6 +483,7 @@
 800D5CB0:Fighter_EnterSpecialLanding
 800DA698:Fighter_EnterCatchCut
 800DB368:Fighter_ThrownAttach
+800DB464:Fighter_UpdateVictimPosition
 800DC750:Fighter_EnterCaptureCut
 800DC920:Fighter_BreakGrab
 800DCFD4:Fighter_BreakGrabUnk

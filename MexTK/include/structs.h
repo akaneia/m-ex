@@ -86,7 +86,6 @@ typedef struct HSD_ArchiveHeader HSD_ArchiveHeader;
 typedef struct HSD_ArchiveRelocationInfo HSD_ArchiveRelocationInfo;
 typedef struct HSD_ArchivePublicInfo HSD_ArchivePublicInfo;
 typedef struct HSD_ArchiveExternInfo HSD_ArchiveExternInfo;
-typedef struct HSD_Archive HSD_Archive;
 typedef struct MapHead MapHead;
 
 // Stage
