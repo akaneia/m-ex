@@ -5,7 +5,6 @@
 .include "../../Globals.s"
 .include "../Header.s"
 
-.set STRNCMP, 0x803258a8
 .set Archive_GetLocalizedFilename, 0x80016204
 .set REG_FILENAME, 30
 .set REG_LR, 20
