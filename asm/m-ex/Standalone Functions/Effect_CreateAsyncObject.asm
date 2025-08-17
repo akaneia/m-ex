@@ -212,9 +212,11 @@ EffectNames:
 ###############################################
 NoSymbol:
 #OSReport
+  lwz r4,0x4(REG_FighterData)
+  cmpwi r4,4
+  beq KirbyExit
   bl  ErrorString_Symbol
   mflr  r3
-  lwz r4,0x4(REG_FighterData)
   branchl r12,0x803456a8
 #Assert
   bl  Assert_Name
@@ -226,4 +228,6 @@ ErrorString_Symbol:
   blrl
   .string "Error: fighter %d does not have effBehaviorTable\n"
   .align 2
+KirbyExit:
+  blr
 ###############################################

@@ -1,4 +1,4 @@
-#To be inserted @ 8016e148
+#To be inserted @ 8016e5a4
 .include "../../Globals.s"
 .include "../Header.s"
 
@@ -31,6 +31,6 @@ LoopInc:
 
 Exit:
   restore
-  li  r0,-1
-  stw	r0, 0x0010 (sp)
+
+  branchl r12,0x8016e124
 
