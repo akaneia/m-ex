@@ -2,5 +2,4 @@
 .include "../../../Globals.s"
 .include "../../Header.s"
 
-lwz r12,OFST_Metadata_FtExtNum(rtoc)
-cmpw	r26, r12
+cmpwi r26,0x1A

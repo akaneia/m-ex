@@ -9,6 +9,11 @@
   cmpwi  REG_SSMID,55
   beq Exit
 
+#Check if null ssm ID
+  lwz r4,OFST_Metadata_SSMCount(rtoc)
+  cmpw  REG_SSMID,r4
+  bge Exit
+
 #Get Disposable Orig
   lwz REG_ToLoadOrig,OFST_SSMStruct(rtoc)
   lwz REG_ToLoadOrig,Arch_SSMRuntimeStruct_ToLoadOrig(REG_ToLoadOrig)
