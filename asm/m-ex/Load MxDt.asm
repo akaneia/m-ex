@@ -15,6 +15,9 @@
 
 backup
 
+.include "LoadSlippiPatches.s"
+
+LoadMXDT:
 #Check if file exists
   bl  FileName
   mflr  r3

@@ -672,25 +672,6 @@
       ]
     },
     {
-      "name": "!MENU | BGM Display",
-      "authors": [],
-      "description": [],
-      "build": [
-        {
-          "type": "inject",
-          "address": "802f3a48",
-          "annotation": "Create Text Canvas",
-          "sourceFile": "menu\\BGM Display\\Create Text Canvas.asm"
-        },
-        {
-          "type": "inject",
-          "address": "8016e980",
-          "annotation": "Create",
-          "sourceFile": "menu\\BGM Display\\Create.asm"
-        }
-      ]
-    },
-    {
       "name": "!MENU | Longer Nametags",
       "authors": [],
       "description": [],

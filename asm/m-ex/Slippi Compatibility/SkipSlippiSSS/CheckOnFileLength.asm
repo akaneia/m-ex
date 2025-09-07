@@ -16,13 +16,6 @@ CODE_START:
   mr REG_FILENAME, r3
   backup
 
-# If not slippi, continue as normal
-  load r3, 0x801a5014
-  lwz r3, 0x0(r3)
-  load r4, 0x40820010
-  cmpw r3, r4
-  beq EXIT
-
 # check if we're coming from the SSS
   lwz r3, 0(sp) # traverse stack
   lwz r3, 0(r3)
