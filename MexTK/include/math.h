@@ -35,7 +35,7 @@ inline float sign(float v)
 /// @return the magnitude of the vector
 inline float Vec2_Magnitude(Vec2 *v)
 {
-    return fabs(v->X) + fabs(v->Y);
+    return sqrtf(v->X * v->X + v->Y * v->Y);
 }
 
 /*** Functions ***/

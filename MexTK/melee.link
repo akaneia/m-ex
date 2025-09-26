@@ -659,7 +659,8 @@
 802694CC:Item_AnimateAndUpdateSubactions
 8026A8EC:Item_Destroy
 8026AB54:Item_Hold
-8026AC74:Item_Throw
+8026AC74:Item_Drop
+8026ad20:Item_Throw
 8026AE60:Item_GenerateHitExceptionID
 8026AE84:Item_PlayOnDestroySFXAgain
 8026B2B4:Item_CheckHeavy

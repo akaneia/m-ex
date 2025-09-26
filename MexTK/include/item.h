@@ -664,7 +664,7 @@ struct ItemData
         GOBJ *reflect;                                  // 0xc64, pointer to the gobj that reflected this item, is removed after processing the reflection
         float xc68;                                     // 0xc68
         int xc6c;                                       // 0xc6c
-        int xc70;                                       // 0xc70
+        float reflect_multiplier;                       // 0xc70
         int xc74;                                       // 0xc74
         int xc78;                                       // 0xc78
         int xc7c;                                       // 0xc7c
@@ -725,7 +725,7 @@ struct ItemData
     float spin_speed;                                   // 0xd3c
     int xd40;                                           // 0xd40
     float lifetime;                                     // 0xd44
-    int xd48;                                           // 0xd48
+    float initial_lifetime;                             // 0xd48
     int xd4c;                                           // 0xd4c
     int land_num;                                       // 0xd50
     int throw_num;                                      // 0xd54
@@ -1032,6 +1032,7 @@ void Item_AnimateAndUpdateSubactions(GOBJ *item);
 void Barrel_EnterBreak(GOBJ *item);
 void Item_EnableHitlagFlag(GOBJ *item);
 void Item_ReflectVelocity(GOBJ *item);
+void Item_Drop(GOBJ *item, float unk, Vec3 *pos, Vec3 *vel);
 void Item_Throw(GOBJ *item, float unk, Vec3 *pos, Vec3 *vel);
 JOBJ *Item_GetHeldBone(GOBJ *item);
 void Item_BounceOffVictim(GOBJ *item);

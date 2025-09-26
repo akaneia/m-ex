@@ -286,7 +286,13 @@ typedef struct MexData
         float *result_scale;
         int *victory_theme;
         int *announcer_call;
-        void *ssm_files;
+        struct
+        {
+            u8 ssm_id;
+            int x04;
+            int x08;
+            int x0C;
+        } *ssm_files;
         void *costume_pointers;
         struct
         {

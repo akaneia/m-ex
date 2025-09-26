@@ -1087,11 +1087,11 @@ struct FtState
     int flags;
     char move_id;
     char bitflags1;
-    void *animation_callback;
-    void *iasa_callback;
-    void *physics_callback;
-    void *collision_callback;
-    void *camera_callback;
+    void (*animation_callback)(GOBJ *fighter);
+    void (*iasa_callback)(GOBJ *fighter);
+    void (*physics_callback)(GOBJ *fighter);
+    void (*collision_callback)(GOBJ *fighter);
+    void (*camera_callback)(GOBJ *fighter);
 };
 
 struct FtAction
