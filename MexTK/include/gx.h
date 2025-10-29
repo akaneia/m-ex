@@ -653,6 +653,116 @@ typedef enum GXIndTexScale
     GX_MAX_ITSCALE
 } GXIndTexScale;
 
+typedef enum GXTevKColorSel
+{
+    GX_TEV_KCSEL_1             = 0x00,  // constant 1.0
+    GX_TEV_KCSEL_7_8           = 0x01,  // constant 7/8
+    GX_TEV_KCSEL_3_4           = 0x02,  // constant 3/4
+    GX_TEV_KCSEL_5_8           = 0x03,  // constant 5/8
+    GX_TEV_KCSEL_1_2           = 0x04,  // constant 1/2
+    GX_TEV_KCSEL_3_8           = 0x05,  // constant 3/8
+    GX_TEV_KCSEL_1_4           = 0x06,  // constant 1/4
+    GX_TEV_KCSEL_1_8           = 0x07,  // constant 1/8
+
+    GX_TEV_KCSEL_K0            = 0x0C,  // K0 RGB
+    GX_TEV_KCSEL_K1            = 0x0D,  // K1 RGB
+    GX_TEV_KCSEL_K2            = 0x0E,  // K2 RGB
+    GX_TEV_KCSEL_K3            = 0x0F,  // K3 RGB
+
+    GX_TEV_KCSEL_K0_R          = 0x10,  // K0 red replicated to RGB
+    GX_TEV_KCSEL_K1_R          = 0x11,
+    GX_TEV_KCSEL_K2_R          = 0x12,
+    GX_TEV_KCSEL_K3_R          = 0x13,
+
+    GX_TEV_KCSEL_K0_G          = 0x14,  // K0 green replicated to RGB
+    GX_TEV_KCSEL_K1_G          = 0x15,
+    GX_TEV_KCSEL_K2_G          = 0x16,
+    GX_TEV_KCSEL_K3_G          = 0x17,
+
+    GX_TEV_KCSEL_K0_B          = 0x18,  // K0 blue replicated to RGB
+    GX_TEV_KCSEL_K1_B          = 0x19,
+    GX_TEV_KCSEL_K2_B          = 0x1A,
+    GX_TEV_KCSEL_K3_B          = 0x1B,
+
+    GX_TEV_KCSEL_K0_A          = 0x1C,  // K0 alpha replicated to RGB
+    GX_TEV_KCSEL_K1_A          = 0x1D,
+    GX_TEV_KCSEL_K2_A          = 0x1E,
+    GX_TEV_KCSEL_K3_A          = 0x1F
+} GXTevKColorSel;
+
+typedef enum _GXTevKAlphaSel
+{
+    GX_TEV_KASEL_1       = 0x00,  // constant 1.0
+    GX_TEV_KASEL_7_8     = 0x01,  // constant 7/8
+    GX_TEV_KASEL_3_4     = 0x02,  // constant 3/4
+    GX_TEV_KASEL_5_8     = 0x03,  // constant 5/8
+    GX_TEV_KASEL_1_2     = 0x04,  // constant 1/2
+    GX_TEV_KASEL_3_8     = 0x05,  // constant 3/8
+    GX_TEV_KASEL_1_4     = 0x06,  // constant 1/4
+    GX_TEV_KASEL_1_8     = 0x07,  // constant 1/8
+
+    GX_TEV_KASEL_K0_R    = 0x10,  // K0 red
+    GX_TEV_KASEL_K1_R    = 0x11,
+    GX_TEV_KASEL_K2_R    = 0x12,
+    GX_TEV_KASEL_K3_R    = 0x13,
+
+    GX_TEV_KASEL_K0_G    = 0x14,  // K0 green
+    GX_TEV_KASEL_K1_G    = 0x15,
+    GX_TEV_KASEL_K2_G    = 0x16,
+    GX_TEV_KASEL_K3_G    = 0x17,
+
+    GX_TEV_KASEL_K0_B    = 0x18,  // K0 blue
+    GX_TEV_KASEL_K1_B    = 0x19,
+    GX_TEV_KASEL_K2_B    = 0x1A,
+    GX_TEV_KASEL_K3_B    = 0x1B,
+
+    GX_TEV_KASEL_K0_A    = 0x1C,  // K0 alpha
+    GX_TEV_KASEL_K1_A    = 0x1D,
+    GX_TEV_KASEL_K2_A    = 0x1E,
+    GX_TEV_KASEL_K3_A    = 0x1F
+} GXTevKAlphaSel;
+
+typedef enum _GXTevSwapSel
+{
+    GX_TEV_SWAP0 = 0,
+    GX_TEV_SWAP1 = 1,
+    GX_TEV_SWAP2 = 2,
+    GX_TEV_SWAP3 = 3
+} GXTevSwapSel;
+
+typedef enum _GXTevColorChan
+{
+    GX_CH_RED   = 0,
+    GX_CH_GREEN = 1,
+    GX_CH_BLUE  = 2,
+    GX_CH_ALPHA = 3
+} GXTevColorChan;
+
+typedef enum _GXTevKColorID
+{
+    GX_KCOLOR0 = 0,
+    GX_KCOLOR1 = 1,
+    GX_KCOLOR2 = 2,
+    GX_KCOLOR3 = 3
+} GXTevKColorID;
+
+typedef enum _GXTexFilter
+{
+    GX_NEAR             = 0,  // nearest neighbor, no mipmap
+    GX_LINEAR           = 1,  // linear filter, no mipmap
+    GX_NEAR_MIP_NEAR    = 2,  // nearest filter, nearest mipmap
+    GX_LIN_MIP_NEAR     = 3,  // linear filter, nearest mipmap
+    GX_NEAR_MIP_LIN     = 4,  // nearest filter, linear mipmap
+    GX_LIN_MIP_LIN      = 5   // linear filter, linear mipmap
+} GXTexFilter;
+
+typedef enum _GXAnisotropy
+{
+    GX_ANISO_1          = 0,  // no anisotropic filtering
+    GX_ANISO_2          = 1,  // 2× anisotropy
+    GX_ANISO_4          = 2   // 4× anisotropy
+} GXAnisotropy;
+
 static volatile GXPipe *gx_pipe = 0xCC008000;
 static VIUnknown *_p = 0x804c0980;
 
@@ -664,6 +774,17 @@ void GXEnd();
 void GXPixModeSync();
 void GXInitTexObj(GXTexObj *obj, void *image_ptr, u16 width, u16 height, GXTexFmt format, GXTexWrapMode wrap_s, GXTexWrapMode wrap_t, GXBool mipmap);
 void GXLoadTexObj(GXTexObj *obj, GXTexMapID id);
+void GXInitTexObjLOD(
+    GXTexObj *texobj,
+    GXTexFilter min_filter,
+    GXTexFilter mag_filter,
+    float minLOD,
+    float maxLOD,
+    float lod_bias,
+    int bias_clamp,
+    int do_edge_lod,
+    GXAnisotropy aniso_filter
+    );
 void GXSetTexCoordGen2(GXTexCoordID dst_coord, GXTexGenType func, GXTexGenSrc src_param, u32 mtx, GXBool normalize, u32 postmtx);
 void GXInvalidateTexAll();
 void GXInvalidateVtxCache();
@@ -707,7 +828,13 @@ void GXSetTevOp(GXTevStageID stage, GXTevMode mode);
 void GXSetNumChans(u8 nChans);
 void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorSrc mat_src, GXLightID light_mask, GXDiffuseFn diff_fn, GXAttnFn attn_fn);
 void GXSetCullMode(GXCullMode cull_mode);
+void GXSetTevSwapMode( GXTevStageID stage, GXTevSwapSel ras_sel, GXTevSwapSel tex_sel );
+void GXSetTevSwapModeTable( GXTevSwapSel table, GXTevColorChan red, GXTevColorChan green, GXTevColorChan blue, GXTevColorChan alpha);
+void GXSetTevKColor( GXTevKColorID id, GXColor *color );
 void GXClearVtxDesc();
+void GXSetTevColorS10( GXTevRegID id, int color ); // GXColorS10
+void GXSetTevKColorSel( GXTevStageID stage, GXTevKColorSel sel );
+void GXSetTevKAlphaSel( GXTevStageID stage, GXTevKAlphaSel sel );
 void GXSetVtxAttrFmt(GXVtxFmt vtxfmt, GXAttribute attribute, GXComponentContents contents, GXComponentType type, u8 fracBits);
 void GXSetVtxDesc(GXAttribute attribute, GXAttributeType type);
 void GXLoadPosMtxImm(Mtx, GXPosNormMtx);
@@ -721,9 +848,6 @@ void GXCopyTex(void *dest, GXBool clear);                          // 8033dcbc
 void GXSetTexCopySrc(u16 left, u16 top, u16 wd, u16 ht);           // 8033d4c8
 void GXSetTexCopyDst(u16 wd, u16 ht, GXTexFmt fmt, GXBool mipmap); // 8033d5cc
 void GXSetDither(GXBool dither);
-void VIWaitForRetrace();
-void VIConfigure(GXRenderModeObj *rm);
-void VISetPostRetraceCallback(void *cb);
 void GXWaitDrawDone();
 void GXSetDrawDone();
 

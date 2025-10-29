@@ -7,8 +7,21 @@
 #include "datatypes.h"
 
 typedef s64 OSTime;
+typedef s32 OSPriority;
 
 char *strrchr(const char *, int);
+
+/* Priority range */
+#define OS_PRIORITY_MIN      0     // Highest possible priority
+#define OS_PRIORITY_MAX      31    // Lowest possible priority
+
+/* Common priorities */
+#define OS_PRIORITY_IDLE     31    // Idle thread (background)
+#define OS_PRIORITY_DEFAULT  10    // Default thread priority
+
+#define OS_TRUE   1
+#define OS_FALSE  0
+#define OS_THREAD_ATTR_DETACHED  (1u << 0)
 
 // OS Macros
 #define OSRoundUp32B(x) (((u32)(x) + 32 - 1) & ~(32 - 1))
@@ -173,6 +186,21 @@ char *strrchr(const char *, int);
 #define VI_TVMODE_DEBUG_PAL_INT VI_TVMODE(VI_DEBUG_PAL, VI_INTERLACE)
 #define VI_TVMODE_DEBUG_PAL_DS VI_TVMODE(VI_DEBUG_PAL, VI_NON_INTERLACE)
 
+#define DVD_STATE_FATAL_ERROR   -1
+#define DVD_STATE_END           0
+#define DVD_STATE_BUSY          1
+#define DVD_STATE_WAITING       2
+#define DVD_STATE_COVER_CLOSED  3
+#define DVD_STATE_NO_DISK       4
+#define DVD_STATE_COVER_OPEN    5
+#define DVD_STATE_WRONG_DISK    6
+#define DVD_STATE_MOTOR_STOPPED 7
+
+#define VI_FIELD_ABOVE   1
+#define VI_FIELD_BELOW   0
+
+#define ALIGN64(x) (((x) + 0x3F) & ~0x3F)
+
 /*** Structs ***/
 struct OSInfo
 {
@@ -286,6 +314,44 @@ struct OSContext
     u16 state;               // 0x1a2; last bit means OSSaveFPUContext was called, second last bit means the GPRs were saved by the exception handler
     u64 gqrs[4];             // 0x1a4
     u64 pairedSingles[0x20]; // starting at 0x1c8
+};
+struct OSThreadQueue {
+	struct OSThread *head;
+	struct OSThread *tail;
+};
+struct OSThreadLink {
+	struct OSThread *next;
+	struct OSThread *prev;
+};
+struct OSMutex {
+	struct OSThreadQueue waitingQueue;
+	struct OSThread *holder;
+	u32 timesLocked; // used if a mutex is locked multiple times by the same thread
+	struct OSMutex *next;
+	struct OSMutex *prev;
+};
+struct OSMutexQueue {
+	struct OSMutex *head;
+	struct OSMutex *tail;
+};
+struct OSThread {
+    struct OSContext ctx;
+    u16 state;                      // 0x2c8; 0 = stopped, 1 = inactive, 2 = active, 4 = sleeping, 8 = returned result?
+    u16 detached;                   // 0x2ca; zero = false, nonzero = true
+    u32 suspend;                    // seems to be a balancing counter. 0 = active, 1 = suspended
+    u32 priority;                   // 0x2d0; can range from 0-31
+    u32 basePriority;               // 0x2d4
+    u32 returnValue;                // 0x2d8
+    struct OSThreadQueue *queue;    // 0x2dc
+    struct OSThreadLink linkQueue;  // 0x2e0
+    struct OSThreadQueue queueJoin; // 0x2e8
+    struct OSMutex *mutex;          // 0x2f0; mutex currently waiting for; used for deadlock detection
+    struct OSMutexQueue queueMutex; // 0x2f4
+    struct OSThreadLink linkActive; // 0x2fc
+    void *stackStart;               // 0x304
+    void *stackEnd;                 // 0x308
+    u32 unknown;                    // 0x30c
+    u32 threadSpecifics[2];         // 0x310
 };
 
 struct CARDStat
@@ -498,6 +564,8 @@ struct DVDDirEntry
     char *name;
 };
 
+typedef void (*DVDCallback)(s32 result, DVDFileInfo* fileInfo);
+
 typedef struct PADStatus
 {
     u16 button;      // 0x0, Or-ed PAD_BUTTON_* and PAD_TRIGGER_* bits
@@ -535,6 +603,7 @@ static int *stc_si_sampling_rate = 0x804D740C;
 static SIXYLookup *stc_si_xy = 0x80402ca0;
 
 /*** OS Library ***/
+void OSPanic(const char* file, int line, const char* msg, ...);
 int OSGetTick();
 u64 OSGetTime();
 void OSTicksToCalendarTime(u64 time, OSCalendarTime *td);
@@ -551,12 +620,27 @@ void OSFreeToHeap(void *alloc);
 int OSCheckHeap(int heap);
 int OSGetConsoleType();
 int OSDisableInterrupts(void);
+int OSEnableInterrupts(void);
 int OSRestoreInterrupts(int enable);
 void OSClearContext(OSContext *ctx);
+void OSSleepThread(OSThreadQueue *waitingQueue);
+int OSCreateThread(OSThread *thread, void (*main)(void *arg), void *arg, void *stackPtr, int stackSize, int priority, int detached);
+int OSResumeThread(OSThreadQueue *waitingQueue);
+int OSWakeupThread(OSThreadQueue *waitingQueue);
+int OSEnableInterrupts(void);
 int DVDConvertPathToEntrynum(char *file);
 int DVDFastOpen(s32 entrynum, DVDFileInfo *dvdFileInfo);
 int DVDClose(DVDFileInfo *dvdFileInfo);
 int DVDWaitForRead();
+int DVDReadAsyncPrio(
+    DVDFileInfo* fileInfo,
+    void* addr,
+    s32 length,
+    s32 offset,
+    DVDCallback callback,
+    s32 prio
+);
+int DVDCancel(DVDCommandBlock* block);
 int File_Read(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index, void *cb, int cb_arg2); // just use 0x21 for flags if dram, 0x23 if aram, 1 for unk_index
 int File_ReadSync(int entrynum, int file_offset, void *buffer, int read_size, int flags, int unk_index);                    // just use 0x21 for flags if dram, 0x23 if aram, 1 for unk_index
 int File_GetSize(char *file_name);
@@ -589,6 +673,7 @@ int SIGetStatus(s32 chan);
 int SIGetType(s32 chan);
 int SIGetResponse(s32 chan, void *out);
 void DCFlushRange(void *startAddr, u32 nBytes);
+void DCFlushRangeNoSync(void *startAddr, u32 nBytes);
 void DCInvalidateRange(void *startAddr, u32 nBytes);
 void TRK_FlushCache(void *startAddr, u32 nBytes);
 // int memcmp(void *buf1, void *buf2, u32 nBytes);
@@ -605,6 +690,13 @@ int MTH_CheckEnd();
 /*** HSD Library ***/
 int HSD_GetHeapID();
 void HSD_SetHeapID(int heap);
+
+/*** VI ***/
+u32 VIGetNextField();
+u32 VIGetTvFormat();
+void VIWaitForRetrace();
+void VIConfigure(GXRenderModeObj *rm);
+void VISetPostRetraceCallback(void *cb);
 
 /** String Library **/
 #define vsprintf(buffer, format, args) _vsprintf(buffer, -1, format, args)

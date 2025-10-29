@@ -40,7 +40,6 @@ typedef enum FGM_Main
 
 typedef enum FGM_Narrator_Select
 {
-
     FGMNRSELECT_MULTIMAN = 30000,
     FGMNRSELECT_CHOOSECHAR = 30004,
     FGMNRSELECT_MELEE,
@@ -105,6 +104,63 @@ enum FGMID
     FGM_END,
     FGM_NULL,
 };
+
+typedef enum
+{
+    AX_PCM_FORMAT_L8      = 0x00, // 8-bit PCM (unsigned)
+    AX_PCM_FORMAT_L16     = 0x01, // 16-bit PCM (little endian)
+    AX_ADPCM_FORMAT       = 0x02, // Nintendo ADPCM
+    AX_ADPCM_LOOP_FORMAT  = 0x03, // Nintendo ADPCM w/ loop context
+    AX_PCM_FORMAT_L8S     = 0x04, // 8-bit signed PCM (rare)
+    AX_PCM_FORMAT_L16S    = 0x05, // 16-bit signed PCM
+    AX_STREAM_FORMAT      = 0x0A, // streaming from ARAM (used for AI / HVQM)
+    AX_SRC_FORMAT         = 0x19  // internal resampling source (for SRC test)
+} AXPBFormat;
+
+typedef enum _AXVCBState
+{
+    AX_PB_STATE_STOP        = 0,  // voice is stopped
+    AX_PB_STATE_RUN         = 1,  // voice is playing
+    AX_PB_STATE_PAUSE       = 2   // voice is paused
+} AXVCBState;
+
+typedef enum _AXVPBType
+{
+    AX_PB_TYPE_ADPCM        = 0,
+    AX_PB_TYPE_STREAM       = 1,
+    AX_PB_TYPE_NORMAL       = 2
+} AXVPBType;
+
+typedef enum _AXVCBRate
+{
+    AX_SAMPLERATE_32KHZ     = 0,
+    AX_SAMPLERATE_48KHZ     = 1,
+    AX_SAMPLERATE_16KHZ     = 2  
+} AXVCBRate;
+
+typedef enum _AXVPBSrcType
+{
+    AX_SRC_TYPE_NONE     = 0,   // No interpolation
+    AX_SRC_TYPE_LINEAR   = 1,   // Linear interpolation
+    AX_SRC_TYPE_6TAP_FIR = 2,   // 6-tap Hermite interpolation
+    AX_SRC_TYPE_4TAP_FIR = 3    // 4-tap FIR filter interpolation (rarely used)
+} AXVPBSrcType;
+
+typedef enum AXPBUpdateFlag {
+    AX_PB_UPDATE_PITCH    = 0x00000004,  // playback pitch / srcRatio changed
+    AX_PB_UPDATE_FORMAT   = 0x00000008,  // sample format changed
+    AX_PB_UPDATE_CALLBACK = 0x00000010,  // callback pointer changed
+    AX_PB_UPDATE_FILTER   = 0x00000100,  // low-pass / filter / mixer settings changed
+    AX_PB_UPDATE_VOL      = 0x00000200,  // volume/envelope (VE) changed
+    AX_PB_UPDATE_SRC      = 0x00001000,  // interpolation type (srcSelect / coefSelect) changed
+    AX_PB_UPDATE_ADDR     = 0x00002000,  // source buffer start/end addresses changed
+    AX_PB_UPDATE_LOOP     = 0x00004000   // loop-points or loop-flag changed
+} AXPBUpdateFlag;
+
+typedef struct ARQRequest
+{
+    u8 dummy[0x20];
+} ARQRequest;
 
 typedef struct _AXPBADDR
 {
@@ -173,7 +229,7 @@ typedef struct _AXPBDPOP
 
 typedef struct _AXPBVE
 {
-    u16 currentVolume; // .15 volume at start of frame
+    s16 currentVolume; // .15 volume at start of frame
     s16 currentDelta;  // signed per sample delta delta
 } AXPBVE;
 
@@ -338,10 +394,18 @@ struct VPB
     u8 is_updated_prev;     // 0x26, raised when prev is set @ 8038b33c
     u8 x27;                 // 0x27
     float volume_x28;       // 0x28, is used to calculate x24 @ 8038b194
-    u8 x2c[0x8];            // 0x2c
+    float volume_x2C;       // 0x2c
+    float volume_x30;       // 0x30
     float volume_x34;       // 0x34, is used to calculate x24 @ 8038b194
     float volume_x38;       // 0x38 (gets ignored completely?)
-    u8 x3c[0x14];           // 0x3c
+    float x3C;              // 0x3C
+    u8 x40;                 // 0x40
+    u8 x41;                 // 0x41
+    u8 x42;                 // 0x42
+    u8 x43;                 // 0x43
+    float x44;              // 0x44
+    float x48;              // 0x48
+    float x4C;              // 0x4C
 };
 
 struct AXLive
@@ -352,6 +416,8 @@ struct AXLive
     BGMData bgm_data_lookup[263];        // 0x1844, array of BGMData corresponding to SFX that were played with an instance_slot param > 0 when calling SFX_PlayRaw. this is used to stop previous instances when playing the same sfx
     HPSChunkHeader hps_chunk_headers[3]; // 0x1c60, circular buffer of 3 most recent hps headers
 };
+
+typedef void (*ARQCallback)(ARQRequest* req);
 
 static FGMLive *fgm_live = 0x804c45a0; // points to an array of ? FGMLive structs
 static AXLive *ax_live = 0x804c28e0;
@@ -375,6 +441,36 @@ static FGMLive *stc_last_fgmlive = R13 + -0x3f0c;                  // points to 
 static int *stc_audioheap_loaded_size = 0x804d6448;                // -0x5258, size of the files loaded into the audio heap
 static int *stc_audioheap_pending_size = 0x804d6450;               // -0x5250, size of the files pending
 
+/* AR */
+void* ARAlloc(u32 length);
+void  ARFree(u32* length);
+s32 ARQPostRequest(
+    ARQRequest* req, 
+    u32 owner,
+    u32 type,
+    u32 priority,
+    u32 sourceAddr,
+    u32 destAddr,
+    u32 length,
+    ARQCallback callback
+);
+
+/* Voice setup */
+AXVPB * AXAcquireVoice(u32 priority, void *callback, u32 userContext);
+void    AXFreeVoice(AXVPB* p);
+void    AXSetVoiceState(AXVPB* p, u32 state);
+
+/* Voice parameters */
+void    AXSetVoiceMix(AXVPB* p, const AXPBMIX* mix);
+void    AXSetVoiceAddr(AXVPB* p, const AXPBADDR* addr);
+void    AXSetVoiceVe(AXVPB* p, const AXPBVE* ve);
+void    AXSetVoiceLoop(AXVPB* p, u32 loopFlag);
+void    AXSetVoiceEndAddr(AXVPB* p, void* endAddr);
+void    AXSetVoiceSrcRatio(AXVPB* p, f32 ratio);
+
+/* Global AX callback */
+void    AXRegisterCallback(void (*callback)(void));
+
 int SFX_Play(int sfxID);
 int SFX_PlayRaw(int sfx, int volume, int pan, int instance_slot, int fgm_kind); // any instance_slot other than 0 will remember the current instance and destroy it if another is requested to play with that slot
 int SFX_PlayCommon(int sfxID);
@@ -382,6 +478,7 @@ int SFX_PlayCrowd(int sfxID);
 void SFX_StopCrowd();
 
 char *Nametag_GetText(int tag_index);
+void Audio_AXCallback();
 void Audio_ResetCache(int group_index);
 void Audio_QueueFileLoad(int group_index, u64 ssm_index);
 void Audio_UpdateCache();
@@ -402,7 +499,5 @@ int FGM_SetVolume(u32 sfxid, u8 volume);
 int FGM_SetPanning(u32 sfxid, u8 panning);
 void FGM_PauseKind(int kind); // pausing in-game pauses kinds 5,6,7,8
 void FGM_ResumeKind(int kind);
-
-AXVPB *AXAcquireVoice(u32 priority, void *callback, u32 userContext);
 
 #endif

@@ -780,6 +780,8 @@
 8033796C:DVDConvertPathToEntrynum
 80337C60:DVDFastOpen
 80337CD4:DVDClose
+80337CF8:DVDReadAsyncPrio
+80339E78:DVDCancel
 8033BF00:GXSetVtxDesc
 8033C3C8:GXClearVtxDesc
 8033C414:GXSetVtxAttrFmt
@@ -803,6 +805,7 @@
 8033E5A8:GXSetChanCtrl
 8033E78C:GXGetTexBufferSize
 8033E9B0:GXInitTexObj
+8033EC6C:GXInitTexObjLOD
 8033EFD0:GXLoadTexObj
 8033F270:GXInvalidateTexAll
 8033F758:GXSetTevIndirect
@@ -816,6 +819,12 @@
 8034006C:GXSetTevColorOp
 8034012C:GXSetTevAlphaOp
 803401EC:GXSetTevColor
+80340260:GXSetTevColorS10
+803402D4:GXSetTevKColor
+80340348:GXSetTevKColorSel
+803403B4:GXSetTevKAlphaSel
+80340420:GXSetTevSwapMode
+80340478:GXSetTevSwapModeTable
 80340518:GX_blr
 8034051C:GXSetAlphaCompare
 803405F0:GXSetTevOrder
@@ -861,6 +870,9 @@
 8034480C:DCFlushRange
 80345254:OSClearContext
 803456A8:OSReport
+80345728:OSPanic
+80344874:DCFlushRangeNoSync
+80347378:OSEnableInterrupts
 80347364:OSDisableInterrupts
 8034738C:OSRestoreInterrupts
 803494DC:SIIsChanBusy
@@ -869,6 +881,10 @@
 8034A150:SIEnablePolling
 8034A32C:SIGetResponse
 8034A880:SIGetType
+8034B25C:OSCreateThread
+8034B61C:OSResumeThread
+8034BA14:OSSleepThread
+8034bb00:OSWakeupThread
 8034C3F0:OSGetTime
 8034C408:OSGetTick
 8034C668:OSTicksToCalendarTime
@@ -878,6 +894,11 @@
 8034EBD0:VISetPostRetraceCallback
 8034F314:VIWaitForRetrace
 8034F7DC:VIConfigure
+803501EC:VIGetNextField
+8035032C:VIGetTvFormat
+80350DC0:ARAlloc
+80350E28:ARFree
+80352114:ARQPostRequest
 803532D4:CARDFreeBlocks
 803549A0:CARDGetXferredBytes
 80355F34:CARDCheckAsync
@@ -894,6 +915,16 @@
 803582F0:CARDDeleteAsync
 803585F8:CARDGetStatus
 80358724:CARDSetStatusAsync
+80358CF4:AXFreeVoice
+80358D74:AXAcquireVoice
+8035ADC4:AXSetVoiceState
+8035AE20:AXSetVoiceMix
+8035B1E0:AXSetVoiceAddr
+8035B13C:AXSetVoiceVe
+8035B2F0:AXSetVoiceLoop
+8035B390:AXSetVoiceEndAddr
+8035B574:AXSetVoiceSrcRatio
+80359D84:AXRegisterCallback
 8035DDB8:DOBJ_SetFlags
 8035DDD0:DOBJ_ClearFlags
 8035DEA0:DOBJ_AddAnimAll
@@ -1034,6 +1065,7 @@
 80382228:HSD_ClassDestroy
 80382854:HSD_DumpClassStat
 80388220:__assert
+8038ABD4:Audio_AXCallback
 8038B81C:BGM_SetVolume
 8038CFF4:SFX_PlayRaw
 8038D2B4:FGM_SetPanning
@@ -1119,6 +1151,7 @@
 804A0BD0:stc_css_pucks
 804C20BC:stc_css_pad
 804D50C8:stc_css_unkarr
+804D6018:__OSCurrHeap
 804D6598:stc_menu_singeplyport
 804D68C0:stc_css_singeplyport
 804D6BC4:stc_css_cobjdesc

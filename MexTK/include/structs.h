@@ -29,6 +29,12 @@ typedef struct DVDDir DVDDir;
 typedef struct DVDDirEntry DVDDirEntry;
 typedef struct FSTEntry FSTEntry;
 typedef struct FileReadParam FileReadParam;
+typedef struct OSThread OSThread;
+typedef struct OSThreadQueue OSThreadQueue;
+typedef struct OSThreadLink OSThreadLink;
+typedef struct OSMutex OSMutex;
+typedef struct OSMutexQueue OSMutexQueue;
+typedef struct OSThreadInfo OSThreadInfo;
 
 // GX
 typedef struct GXColor GXColor;
