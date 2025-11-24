@@ -6,17 +6,21 @@
 #include "fighter.h"
 #include "scene.h"
 
-#define MENU_BUTTON_UP 0x1
-#define MENU_BUTTON_DOWN 0x2
-#define MENU_BUTTON_LEFT 0x4
-#define MENU_BUTTON_RIGHT 0x8
-#define MENU_BUTTON_A 0x10
-#define MENU_BUTTON_B 0x20
-#define MENU_BUTTON_L 0x40
-#define MENU_BUTTON_R 0x80
-#define MENU_BUTTON_START 0x100
-#define MENU_BUTTON_X 0x400
-#define MENU_BUTTON_Y 0x800
+typedef enum MENU_BUTTON
+{
+    MENU_BUTTON_UP      = 0x01,
+    MENU_BUTTON_DOWN    = 0x02,
+    MENU_BUTTON_LEFT    = 0x04,
+    MENU_BUTTON_RIGHT   = 0x08,
+    MENU_BUTTON_A       = 0x10,
+    MENU_BUTTON_B       = 0x20,
+    MENU_BUTTON_L       = 0x40,
+    MENU_BUTTON_R       = 0x80,
+    MENU_BUTTON_START   = 0x100,
+    MENU_BUTTON_SELECT  = 0x200,
+    MENU_BUTTON_X       = 0x400,
+    MENU_BUTTON_Y       = 0x800,
+} MENU_BUTTON;
 
 enum CSSKind
 {
@@ -329,7 +333,7 @@ static u8 *stc_css_unkarr = 0x804D50C8;                       // 0x804d50c8
 
 /*** Functions ***/
 void MainMenu_CamRotateThink(GOBJ *gobj);
-int MainMenu_GetPadDown(int controller_index);  // returns HSD_BUTTON vals
+MENU_BUTTON MainMenu_GetPadDown(int controller_index);  
 u64 MainMenu_GetPadRapid(int controller_index); // returns HSD_BUTTON vals
 int MainMenu_CheckForLRA();
 void MainMenu_DestroyAllTextCanvases(); // destroys all SIS canvases

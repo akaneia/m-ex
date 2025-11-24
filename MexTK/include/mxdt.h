@@ -460,4 +460,13 @@ static int MEX_PlayStageSoundRaw(int sfxid, int volume, int panning)
     return SFX_PlayRaw(bank + sfxid, volume, panning, 0, 6);
 }
 
+/// @brief 
+/// @return 
+inline int MEX_GetStageBankIndex()
+{
+    MexData *md = MEX_GetData(MXDT_MEXDATA);
+    int internal_id = Stage_ExternalToInternal(Stage_GetExternalID());
+    return md->stage->sound_table[internal_id].ssmid * 10000;
+}
+
 #endif
