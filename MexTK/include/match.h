@@ -611,6 +611,18 @@ struct MatchOffscreen
     GXColor lupe_color[4]; // 0x4
     MatchLupe lupe[6];
 };
+struct MatchOffscreenArrows
+{
+    JOBJSet *rarwmdls_jobjset;
+    GOBJ *gobjs[4];
+};
+
+struct MatchNametags {
+    JOBJSet nametag_jobjset;
+    // initialized in HUD_InitNametag (802fcf38)
+    // GOBJs for the nametags / player indicators
+    GOBJ *gobjs[6];             // 0x10 all are non-null
+};
 
 struct ExclamData
 {
@@ -2817,6 +2829,8 @@ static MatchCamera *stc_matchcam = 0x80452c68;
 static COBJ **stc_matchcam_cobj = R13 + -0x523c;
 static MatchHUD *stc_matchhud = 0x804a0fd8;
 static MatchOffscreen *stc_match_offscreen = 0x804a1de0;
+static MatchOffscreenArrows *stc_match_offscreen_arrows = 0x804a1f10;
+static MatchNametags *stc_match_nametags = 0x804a1ed0;
 static ExclamData *stc_exclam_data = 0x803f9628; // 8 of these
 static HSD_Archive **stc_ifall_archive = 0x804d6d5c;
 static CmSubject **stc_match_camera_subject = 0x804d6468; // linked list of all camera boxes
