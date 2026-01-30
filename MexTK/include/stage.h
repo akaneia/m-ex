@@ -474,7 +474,7 @@ struct MapHead
     int general_points_num;                 // 0x4
     MapGObjDesc *map_gobj_desc;             // 0x8, pointer to array of map_gobj_desc's
     int map_gobj_desc_num;                  // 0xC
-    void *splines;                          // 0x10
+    HSD_Spline **splines;                   // 0x10
     int splines_num;                        // 0x14
     void *lights;                           // 0x18
     int lights_num;                         // 0x1C
@@ -605,6 +605,7 @@ void Stage_MapStateChange(GOBJ *map, int map_gobjID, int anim_id);
 int Stage_CheckAnimEnd(GOBJ *map, int jobj_index, int flags);  // 0x1 = unk aobj, 0x2 = material aobj, 0x4 = unk aobj
 int Stage_CheckAnimEnd2(GOBJ *map, int jobj_index, int flags); // 0x1 = unk aobj, 0x2 = material aobj, 0x4 = unk aobj
 void Stage_PlaySFX(MapData *map, int live_index, int sfx_id);
+void Stage_StopSFX(MapData *map, int live_index);
 int Stage_CheckSFX(MapData *map, int live_index);
 GOBJ *Stage_CreateMapGObj(int mapgobjID);
 GOBJ *Stage_CreateMapGObjDefineIndex(JOBJ *jobjdesc, int map_index);

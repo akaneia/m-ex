@@ -10,6 +10,7 @@
 #include "match.h"
 #include "collision.h"
 #include "dynamics.h"
+#include <stdbool.h>
 
 typedef enum FighterKind
 {
@@ -3455,6 +3456,13 @@ void Fighter_TDI(FighterData *fp);
 void Fighter_PlayQueuedDamageSounds(FighterData *fp);
 void Fighter_UpdateVictimPosition(GOBJ *fighter);
 void Fighter_SetEyeDamaged(GOBJ *fighter);
+void Fighter_ApplyPoisonMushroom(GOBJ *fighter);
+void Fighter_ApplySuperMushroom(GOBJ *fighter);
+void Fighter_ApplyStarMan(FighterData *fighter, int duration);
+void Fighter_ApplyCloaking(GOBJ *fighter, int duration, bool add); // add determines if the duration is added rather than set
+int Fighter_CalculatePlacing(GOBJ *fighter);
+bool Player_CheckIfSleep(int ply);
+int Player_DetermineColorSlot(byte ply, byte team, char team_enabled, char slot_type);
 GXColor Fighter_GetPlyHUDColor(int ply); // used for lupe, pokemon stadium text color, results viewport border
 /// @brief Checks if fighter should process CPU events for this frame
 /// @param  FighterData pointer

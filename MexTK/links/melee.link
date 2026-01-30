@@ -100,6 +100,7 @@
 80021C48:Match_ApplyScreenColAnim
 80021C48:ScreenFlash_Create
 80022C30:atan2
+80022DBC:asin
 80022E68:atan
 800236B8:FGM_Stop
 800236DC:BGM_Stop
@@ -129,6 +130,7 @@
 800311DC:Match_SetNearClip
 80031724:Fighter_GetPlayerblock
 80031CB0:Preload_LoadFighter
+8003219C:Player_CheckIfSleep
 80032330:Fighter_GetExternalID
 8003241C:Fighter_GetSlotType
 8003254C:Fighter_SetSlotType
@@ -295,6 +297,7 @@
 8007B62C:Fighter_SetScriptHurtStatus
 8007B760:Fighter_ApplyIntang
 8007B7A4:Fighter_GivePersistentIntangibility
+8007B7FC:Fighter_ApplyStarMan
 8007B868:Fighter_GetIntangibleFrames
 8007B8CC:Fighter_AddPlayerException
 8007C930:Fighter_PhysGround_ApplyCustomFriction
@@ -458,6 +461,7 @@
 800C3A14:Fighter_CheckNearbyLedges
 800C3BE8:Fighter_EnterAirCatch
 800C61B0:Fighter_EnterEntry
+800C88D4:Fighter_ApplyCloaking
 800C97A8:Fighter_IASACheck_Turn
 800CAE80:Fighter_CheckJumpInput
 800CAED0:Fighter_IASACheck_JumpF
@@ -469,6 +473,8 @@
 800CCAAC:Fighter_IASACheck_AllAerial
 800CCDA8:Fighter_EnterFallAerial
 800D0EC8:Fighter_GetSoftLandVelocity
+800D14E4:Fighter_ApplySuperMushroom
+800D1E80:Fighter_ApplyPoisonMushroom
 800D331C:Fighter_RunOnDeathCallbacks
 800D34E0:Fighter_DeathLogic
 800D3680:Fighter_EnterDeadLeft
@@ -501,6 +507,7 @@
 8015CC58:Memcard_GetRules4
 8015ECB0:BGM_GetMenuBGM
 8015ECBC:BGM_DecideMenuBGM
+80160854:Player_DetermineColorSlot
 80160968:Fighter_GetPlyHUDColor
 80160980:Fighter_GetName
 80164840:Fighter_CheckUnlocked
@@ -531,6 +538,7 @@
 8016B364:Match_SetPostMatchSFX
 8016B558:Fighter_CountPlayers
 8016B7F8:Match_CreateGOExclamation
+8016C6C0:Fighter_CalculatePlacing
 8016C7F0:Match_EndVS
 8016F088:Match_SetNametags
 8018F640:Pad_GetDown
@@ -583,6 +591,7 @@
 801C4A08:Stage_DestroyMapGObj
 801C53EC:SFX_Play
 801C5440:Stage_PlaySFX
+801C5544:Stage_StopSFX
 801C54DC:Stage_CheckSFX
 801C5A94:Stage_GetBGM
 801C5DB0:GXLink_Stage
@@ -1042,6 +1051,8 @@
 80377B54:HSD_PadRenewUpdateStruct
 80377CE8:HSD_PadRenewStatus
 803786F0:HSD_PadRumbleInterpret
+80378A94:HSD_SplineGetPoint
+803792C8:HSD_SplineGetArcLengthPoint
 80379C24:HSD_MtxGetRotation
 80379F6C:HSD_MtxGetTranslate
 80379F88:HSD_MtxGetScale

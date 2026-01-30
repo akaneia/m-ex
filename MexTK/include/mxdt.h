@@ -379,7 +379,7 @@ inline MexData *MEX_GetMexData()
 /// @param func 
 /// @param symbol 
 /// @return 
-u8 *MEXFunction_GetAddrFromSymbol(MEXFunction *func, char *symbol)
+inline u8 *MEXFunction_GetAddrFromSymbol(MEXFunction *func, char *symbol)
 {
     for (int i = 0; i < func->debug_symbol_num; i++)
     {

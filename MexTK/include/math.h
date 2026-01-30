@@ -10,6 +10,17 @@
 #define M_1DEGREE (0.0174533)
 #define M_NAN ((float)(INFINITY * 0.0F))
 
+struct HSD_Spline
+{
+    u8 type;
+    u16 numcv;
+    float tension;
+    Vec3 *cv;
+    float total_length;
+    float *seg_length;
+    float *seg_poly;
+};
+
 /// @brief
 /// @param v
 /// @return the absolute value of a given float
@@ -39,9 +50,10 @@ inline float Vec2_Magnitude(Vec2 *v)
 }
 
 /*** Functions ***/
-// float fmod(float a, float b);
-// float atan(float in);
+float fmod(float a, float b);
+float atan(float in);
 float atan2(float y, float x);
+float asin(float x);
 float sin(float x);
 float cos(float x);
 void MTXOrtho(Mtx44 m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 f); //
@@ -65,6 +77,8 @@ float Vec3_Normalize(Vec3 *v);
 void Vec2_Add(Vec2 *a, Vec2 *b);
 Vec3 *Vec3_CrossDirection(Vec3 *a, Vec3 *b, Vec3 *axb);
 // void MTXQuat(Mtx *m, Vec4 *dest);           // quat to matrix
+void HSD_SplineGetPoint(float value, Vec3 *out, HSD_Spline *spline);
+void HSD_SplineGetArcLengthPoint(float value, Vec3 *out, HSD_Spline *spline);
 void HSD_MkRotationMtx(Mtx *dest, Vec4 *v); // quat to rot matrix
 void HSD_MtxGetScale(Mtx *m, Vec3 *dest);
 void HSD_MtxGetRotation(Mtx *m, Vec3 *dest);

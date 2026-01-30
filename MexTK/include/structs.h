@@ -85,6 +85,7 @@ typedef struct HSD_Fog HSD_Fog;
 typedef struct HSD_FogDesc HSD_FogDesc;
 typedef struct HSD_SObjDesc HSD_SObjDesc;
 typedef struct JOBJSet JOBJSet;
+typedef struct HSD_Spline HSD_Spline;
 
 // Archive
 typedef struct HSD_Archive HSD_Archive;
