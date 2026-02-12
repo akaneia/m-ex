@@ -24,6 +24,11 @@
 #define PAD_BUTTON_LEFT 0x40000
 #define PAD_BUTTON_RIGHT 0x80000
 
+#define PAD_CSTICK_UP       0x100000
+#define PAD_CSTICK_DOWN     0x200000
+#define PAD_CSTICK_LEFT     0x400000
+#define PAD_CSTICK_RIGHT    0x800000
+
 #define HSD_BUTTON_DPAD_LEFT 0x0001
 #define HSD_BUTTON_DPAD_RIGHT 0x0002
 #define HSD_BUTTON_DPAD_DOWN 0x0004
@@ -314,6 +319,10 @@ void HSD_ObjFree(HSD_ObjAllocData *obj_def, void *obj);
 void HSD_ClassDestroy(void *hsd_class);
 void HSD_ImageDescCopyFromEFB(_HSD_ImageDesc *image_desc, int left, int top, int clear_efb); // must be called from a cobj callback!
 void HSD_StartRender(int unk);
+void HSD_EndRender();
+void HSD_SetupChannelAll(void *);
+void HSD_SetupTevStageAll(void *);
+void HSD_SetupPEMode(uint param_1, byte *param_2);
 void HSD_SetSpeed(u64 speed);
 void HSD_SetSpeedEasy(float mult);
 void HSD_StateInvalidate(int flags);

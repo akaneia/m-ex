@@ -850,6 +850,7 @@ void GXSetTexCopyDst(u16 wd, u16 ht, GXTexFmt fmt, GXBool mipmap); // 8033d5cc
 void GXSetDither(GXBool dither);
 void GXWaitDrawDone();
 void GXSetDrawDone();
+void GXSetScissor(int left, int top, int width, int height);
 
 /*
 ######################

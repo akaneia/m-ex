@@ -408,7 +408,7 @@ struct ItemState
 struct SpawnItem
 {
     GOBJ *parent_gobj;                  // 0x0
-    GOBJ *parent_gobj2;                 // 0x4
+    GOBJ *parent_gobj2;                 // 0x4 (Copies move id from this gobj)
     int it_kind;                        // 0x8, id of the item to spawn
     int hold_kind;                      // 0xC, defines the behavior of the item, such as thrown and pickup. 0 = capsule
     int unk2;                           // 0x10

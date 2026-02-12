@@ -146,7 +146,7 @@ struct GeneratorAppSRT // allocated at 803a42b0
     int x90;        // x90
     int x94;        // x94
     int x98;        // x98
-    int x9c;        // x9c
+    void (*onDestroy)(GeneratorAppSRT *app);        // x9c
     int xa0;        // xa0
     u16 xa2;
 };
@@ -230,6 +230,7 @@ void Effect_CheckQueue(GOBJ *g, Effect **gfx);
 void Particle_InitFile(void *ptcl, void *texg, int r5);
 ptclGen *psCreateGeneratorID(int linkno, int bank_no, int ptcl_index);                 // 8039f05c
 ptclGen *psCreateGeneratorIDJObj(int linkno, int bank_no, int ptcl_index, JOBJ *jobj); // 8039efac
+void psInterpretParticle0(ptclGen *ptcl);
 void psInterpretParticles(u32 blacklist_link_nos);                                     // input is a bitfield, shifted left by 16 bits!
 void psExecGenerator(u32 blacklist_link_nos);                                          // input is a bitfield, shifted left by 16 bits!
 void psDispParticles(u32 whitelist_link_nos, int pass);                                // input is a bitfield

@@ -2866,6 +2866,7 @@ void Match_HideScoreDisplay();
 void Match_ShowScoreDisplay();
 void Match_SetNearClip(float value);
 void Match_SetFarClip(float value);
+int Match_CheckRenderFlags();
 void DevCam_AdjustRotate(COBJ *cobj, Vec3 *wobjpos, Vec3 *rotate, float stickX, float stickY);
 void DevCam_AdjustPan(COBJ *cobj, float stickX, float stickY);
 void DevCam_AdjustZoom(COBJ *cobj, float stickY);

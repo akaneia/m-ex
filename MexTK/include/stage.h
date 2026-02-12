@@ -590,6 +590,7 @@ void Stage_AddFtChkDevice(GOBJ *map, int hazard_kind, void *check);
 void Stage_SetChkDevicePos(float y_pos);
 void Stage_GetChkDevicePos(float *y_pos, float *y_delta);
 float Stage_GetScale();
+byte Stage_GetShadowTransparency();
 void Stage_SetBubbleColorTopLeft(float *value);
 void Stage_SetBubbleColorTopRight(float *value);
 void Stage_SetBubbleColorBottomLeft(float *value);

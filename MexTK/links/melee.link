@@ -22,6 +22,8 @@
 8000D2EC:Vec3_Normalize
 8000D3B0:Vec2_Normalize
 8000D4A0:Vec2_Add
+8000D4C4:Vec3_SubtractSelf
+8000D4F8:Vec3_Subtract
 8000D530:Vec3_CrossDirection
 8000D5BC:sqrtf
 8000D620:Vec3_CalculateAngle
@@ -29,6 +31,8 @@
 8000D8F4:Vec3_RotateAboutUnitAxis
 8000DC6C:VECMultAndAdd
 8000E210:HSD_GXProject
+8000ED54:Shadow_InitJoint
+8000F214:Shadow_DrawQuad
 8000FCDC:Dynamics_InitForce
 8000FD18:Dynamics_FreeBones
 8000FD48:Fighter_CreateDynamicsBoneset
@@ -126,6 +130,7 @@
 80030a50:Match_GetCamera
 80030E44:ScreenRumble_Execute
 800310A0:Match_SetStageRenderFlags
+8003108C:Match_CheckRenderFlags
 800311CC:Match_SetFarClip
 800311DC:Match_SetNearClip
 80031724:Fighter_GetPlayerblock
@@ -383,6 +388,7 @@
 80086A8C:Fighter_UpdateOnscreenBool
 80086D40:Fighter_RumbleController
 80086ED0:Fighter_CheckVisible
+800872BC:Fighter_CheckToRenderShadow
 80088148:Fighter_PlayPositionalSFX
 800881D8:Fighter_PlayVoiceSFX
 80088328:Fighter_PlayVoiceSFX2
@@ -567,6 +573,7 @@
 801B2BA4:ClassicMode_GetNextNonDuplicateLineupDesc
 801C0378:Match_InitStage
 801C0498:Stage_GetScale
+801C0508:Stage_GetShadowTransparency
 801C052C:Stage_SetBubbleColorTopLeft
 801C0544:Stage_SetBubbleColorTopRight
 801C055C:Stage_SetBubbleColorBottomLeft
@@ -848,6 +855,7 @@
 80341494:GXLoadPosMtxImm
 80341510:GXSetCurrentMtx
 803416EC:GXSetViewport
+8034175C:GXSetScissor
 803421A4:PSMTXIdentity
 803421D0:PSMTXCopy
 80342204:PSMTXConcat
@@ -944,6 +952,7 @@
 80361274:Tlut_Free
 803612F8:ImageDesc_Alloc
 80361350:ImageDesc_Free
+80361778:HSD_SetupPEMode
 80361A74:HSD_StateSetLineWidth
 80361AD8:HSD_StateSetCullMode
 80361B18:HSD_StateSetBlendMode
@@ -958,9 +967,11 @@
 80361FC4:HSD_StateInvalidate
 803620A4:HSD_SetupChannel
 803623D0:HSD_StateSetNumChans
+80362400:HSD_SetupChannelAll
 803624A8:HSD_StateSetNumTexGens
 803624D8:HSD_StateInitTev
 80362518:HSD_StateSetNumTevStages
+80362640:HSD_SetupTevStageAll
 80362E98:MOBJ_ReqAnim
 803630FC:MOBJ_Anim
 80363B8C:MOBJ_SetToonTextureImage
@@ -993,6 +1004,7 @@
 803687F0:CObj_SetEyePosition
 8036885C:COBJ_GetEyeVector
 80368A08:COBJ_GetEyeDistance
+803690B4:COBJ_SetUpVector
 803695F0:COBJ_GetViewingMtx
 80369688:COBJ_SetupViewingMtx
 803699C0:CObj_SetRoll
@@ -1039,6 +1051,7 @@
 80375404:HSD_GetHeapID
 8037540C:HSD_SetHeapID
 80375538:HSD_StartRender
+803755A8:HSD_EndRender
 803755F8:HSD_ObjDumpStat
 80375C34:HSD_VIPostRetraceCallback
 80375E60:HSD_VIGetDrawDoneWaitingFlag
@@ -1052,6 +1065,7 @@
 80377CE8:HSD_PadRenewStatus
 803786F0:HSD_PadRumbleInterpret
 80378A94:HSD_SplineGetPoint
+80378F38:HSD_SplineArcLengthGetParameter
 803792C8:HSD_SplineGetArcLengthPoint
 80379C24:HSD_MtxGetRotation
 80379F6C:HSD_MtxGetTranslate
@@ -1070,6 +1084,16 @@
 8037E708:MatToQuat
 8037F1B0:HSD_Free
 8037F1E4:HSD_MemAlloc
+8037F490:Shadow_Init
+8037F500:Shadow_SetSize
+8037F65C:Shadow_ClearTexture
+8037F7A0:Shadow_Setup
+8037F91C:Shadow_End
+8037F9A4:Shadow_SetActive
+8037FCAC:Shadow_SetViewingRect
+8037FEDC:Shadow_ComputeSmoothingMatrix
+8037FFB4:Shadow_CheckSmoothingEdge
+8038001C:Shadow_SmoothEdges
 80380358:Archive_GetPublicAddress
 803803FC:Archive_GetExtern
 80380434:Archive_LocateExtern
@@ -1112,6 +1136,7 @@
 80391120:CObj_Destroy
 803984F4:psInitDataBanks
 80398614:Particle_InitFile
+8039930C:psInterpretParticle0
 8039CEAC:psInterpretParticles
 8039D048:psDeletePntJObjwithParticle
 8039D3AC:psKillGenerator

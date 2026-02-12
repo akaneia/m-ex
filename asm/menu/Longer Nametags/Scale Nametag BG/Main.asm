@@ -16,6 +16,8 @@
   beq Exit
 #Get nametag text
   branchl r12,Nametag_LoadNametagSlotText #0x8023754c
+  cmpwi r3, 0
+  beq Exit
 
 #Count letters
   subi  r3,r3,2

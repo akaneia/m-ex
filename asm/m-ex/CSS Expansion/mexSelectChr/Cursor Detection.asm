@@ -50,6 +50,11 @@ Loop:
   mulli r3,REG_Count,28
   add REG_ThisIcon,r3,REG_IconData
 
+
+#Check if unlocked?
+  lbz	r0, 0x0002 (REG_ThisIcon)
+  cmpwi r0,2
+  blt IncLoop
 /*
 #Get this icons joint
   lwz	r3, OFST_mexSelectChr_IconJoint (r13)
@@ -117,12 +122,6 @@ Loop:
   fcmpo cr0,REG_CursorY,REG_TopBound                 #compare
   bge IncLoop
 
-/*
-#Check if unlocked?
-  lbz	r0, 0x0002 (REG_ThisIcon)
-  cmpwi r0,2
-  blt IncLoop
-*/
 #Display CSP
   mr  r3,REG_Count
   restore
