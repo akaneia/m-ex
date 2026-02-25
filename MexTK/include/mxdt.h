@@ -177,7 +177,11 @@ typedef struct MnSlMapIcon
 typedef struct MexMenuData
 {
     int *params;
-    MnSlChrIcon *css_icons;
+    struct {
+        u8 GaWName[0x1C];              // 0x0
+        MnSlChrKindData kind_data[24]; // 0x1c
+        MnSlChrIcon icons[1];          // 0xDC
+    } *css_icons;
     MnSlMapIcon *sss_icons;
     void *sss_bitfields;
 } MexMenuData;
