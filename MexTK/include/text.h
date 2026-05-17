@@ -117,6 +117,6 @@ static TextCanvas **stc_textcanvas_first = (TextCanvas **)(R13 + (-0x3d24));
 
 // Sis Library
 static HSD_Archive **stc_sis_archives = (HSD_Archive **)0x804d1110; // array of sis file archive pointers
-static SISData **stc_sis_data = (void **)0x804d1124;                // array of currently loaded sis data, indexed by sis_id
+static SISData **stc_sis_data = (SISData **)0x804d1124;                // array of currently loaded sis data, indexed by sis_id
 
 #endif

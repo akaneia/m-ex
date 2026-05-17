@@ -539,6 +539,21 @@ static float Math_Vec2Angle(Vec2 *a, Vec2 *b)
     return angle;
 }
 
+static double pow(double x, int y) {
+    double temp;
+    if (y == 0)
+        return 1;
+    temp = pow(x, y / 2);
+    if (y % 2 == 0)
+        return temp * temp;
+    else {
+        if (y > 0)
+            return x * temp * temp;
+        else
+            return (temp * temp) / x; // Handles negative exponents
+    }
+}
+
 static float Math_Vec2DistanceSquared(Vec2 *a, Vec2 *b)
 {
     return pow((a->X - b->X), 2) + pow((a->Y - b->Y), 2);

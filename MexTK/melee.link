@@ -995,6 +995,7 @@
 80366DB0:LObj_SetInterest
 80366E38:LObj_GetInterest
 803672DC:LObj_LoadDesc
+803673D8:LObj_AddAnim
 803676F8:CObj_EraseScreen
 80368458:CObj_SetCurrent
 80368608:CObj_EndCurrent

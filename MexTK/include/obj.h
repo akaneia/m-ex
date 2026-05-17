@@ -289,13 +289,28 @@ struct AOBJ
     struct _HSD_Obj *hsd_obj; // 0x18, points to spline data
 };
 
+struct _HSD_PEDesc {
+    u8 flags;
+    u8 ref0;
+    u8 ref1;
+    u8 dst_alpha;
+    u8 type;
+    u8 src_factor;
+    u8 dst_factor;
+    u8 logic_op;
+    u8 z_comp;
+    u8 alpha_comp0;
+    u8 alpha_op;
+    u8 alpha_comp1;
+};
+
 struct MOBJ
 {
     int *parent;
     u32 rendermode;
     TOBJ *tobj;             // 0x8
     HSD_Material *mat;      // 0xC
-    struct _HSD_PEDesc *pe; // 0x10
+    struct HSD_PEDesc *pe; // 0x10
     AOBJ *aobj;             // 0x14
     /*
     struct _HSD_TObj *ambient_tobj;
@@ -856,6 +871,7 @@ int GX_LookupRenderPass(int pass);
 void GXLink_LObj(GOBJ *gobj, int pass);
 void GXLink_Fog(GOBJ *gobj, int pass);
 LOBJ *LObj_LoadDesc(void *lobjdesc);
+void LObj_AddAnim(LOBJ *lobj, LightAnim *anim);
 LOBJ *LObj_CreateAll(void **lobjdesc);
 int LObj_GetPosition(LOBJ *lobj, Vec3 *pos);
 void LObj_SetPosition(LOBJ *lobj, Vec3 *pos);

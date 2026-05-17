@@ -101,7 +101,7 @@ typedef struct MexCpuData
     CpuAttack *offstage;            // used when target fighter is off stage
 };
 
-static PlCoCpuTable **plco_cpu_table = 0x804d64fc;  // TODO: should this go in the link file?
+static PlCoCpuTable **plco_cpu_table = (PlCoCpuTable **)0x804d64fc;  // TODO: should this go in the link file?
 
 /// @brief Resets the current cpu input buffer but resetting the cpu->pointer to cpu->buffer
 void CPU_ResetCmd(FighterData *);

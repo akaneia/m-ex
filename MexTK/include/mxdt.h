@@ -315,6 +315,10 @@ typedef struct MexData
         char **endmoviefiles;
         int *race_to_finish;
         int *demo_params;
+        u16 *classic_trophy_id;
+        u16 *adventure_trophy_id;
+        u16 *allstar_trophy_id;
+        float *ending_fall_scale;
     } *fighter; // indexed by ft_kind
     struct
     {

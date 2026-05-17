@@ -208,7 +208,7 @@ enum ItUnkKind
 
 struct ItemModelDesc
 {
-    JOBJ *model;
+    JOBJDesc *model;
     int bone_count;
     int bone_attach_id;
     int bit_field;

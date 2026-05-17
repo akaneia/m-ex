@@ -67,7 +67,7 @@ struct Effect
     char x26;
     char x27;
     char x28; // if this is == 2, the effect is not updated
-    char x29;
+    char x29; // has parent gobj
 };
 
 // this seems to be used for creating and processing custom userdata for particles?

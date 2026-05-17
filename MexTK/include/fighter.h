@@ -1064,6 +1064,7 @@ struct ftData
     int x50;
     int x54;
     IKParam *ik_param;
+    JOBJDesc *metal_model;
 };
 
 struct ftChkDevice // 80459a68

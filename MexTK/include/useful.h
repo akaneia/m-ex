@@ -715,4 +715,9 @@ void Wind_StageCreate(Vec3 *pos, int duration, float radius, float lifetime, flo
 void Wind_FighterCreate(Vec3 *pos, int duration, float radius, float lifetime, float angle);
 
 int Pause_CheckStatus(int type);
+
+int strcmp(const char *str1, const char *str2);
+void memset(void *dst, int c, int size);
+void memcpy(void *dst, void *src, int size);
+float sqrtf(float v);
 #endif
